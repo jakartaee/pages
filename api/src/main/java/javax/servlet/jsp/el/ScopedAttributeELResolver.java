@@ -285,13 +285,13 @@ public class ScopedAttributeELResolver extends ELResolver {
     public Iterator<FeatureDescriptor> getFeatureDescriptors(
                                           ELContext context,
                                           Object base) {
-        Enumeration attrs;
+        Enumeration<String> attrs;
         ArrayList<FeatureDescriptor> list = new ArrayList<>();
         PageContext ctxt = (PageContext) context.getContext(JspContext.class);
 
         attrs = ctxt.getAttributeNamesInScope(PageContext.PAGE_SCOPE);
         while (attrs.hasMoreElements()) {
-            String name = (String) attrs.nextElement();
+            String name = attrs.nextElement();
             Object value = ctxt.getAttribute(name, PageContext.PAGE_SCOPE);
             FeatureDescriptor descriptor = new FeatureDescriptor();
             descriptor.setName(name);
@@ -307,7 +307,7 @@ public class ScopedAttributeELResolver extends ELResolver {
 
         attrs = ctxt.getAttributeNamesInScope(PageContext.REQUEST_SCOPE);
         while (attrs.hasMoreElements()) {
-            String name = (String) attrs.nextElement();
+            String name = attrs.nextElement();
             Object value = ctxt.getAttribute(name, PageContext.REQUEST_SCOPE);
             FeatureDescriptor descriptor = new FeatureDescriptor();
             descriptor.setName(name);
@@ -323,7 +323,7 @@ public class ScopedAttributeELResolver extends ELResolver {
 
         attrs = ctxt.getAttributeNamesInScope(PageContext.SESSION_SCOPE);
         while (attrs.hasMoreElements()) {
-            String name = (String) attrs.nextElement();
+            String name = attrs.nextElement();
             Object value = ctxt.getAttribute(name, PageContext.SESSION_SCOPE);
             FeatureDescriptor descriptor = new FeatureDescriptor();
             descriptor.setName(name);
@@ -339,7 +339,7 @@ public class ScopedAttributeELResolver extends ELResolver {
 
         attrs = ctxt.getAttributeNamesInScope(PageContext.APPLICATION_SCOPE);
         while (attrs.hasMoreElements()) {
-            String name = (String) attrs.nextElement();
+            String name = attrs.nextElement();
             Object value = ctxt.getAttribute(name, PageContext.APPLICATION_SCOPE);
             FeatureDescriptor descriptor = new FeatureDescriptor();
             descriptor.setName(name);
