@@ -106,10 +106,6 @@ public class ImplicitObjectELResolver extends ELResolver {
      *     <code>ELContext</code> was set to <code>true</code>, then
      *     the implicit object; otherwise undefined.
      * @throws NullPointerException if context is <code>null</code>
-     * @throws ELException if an exception was thrown while performing
-     *     the property or variable resolution. The thrown exception
-     *     must be included as the cause property of this exception, if
-     *     available.
      */
     @Override
     public Object getValue(ELContext context,
@@ -194,10 +190,6 @@ public class ImplicitObjectELResolver extends ELResolver {
      *     <code>ELContext</code> was set to <code>true</code>, then
      *     <code>null</code>; otherwise undefined.
      * @throws NullPointerException if context is <code>null</code>
-     * @throws ELException if an exception was thrown while performing
-     *     the property or variable resolution. The thrown exception
-     *     must be included as the cause property of this exception, if
-     *     available.
      */
     @Override
     public Class<?> getType(ELContext context,
@@ -244,10 +236,6 @@ public class ImplicitObjectELResolver extends ELResolver {
      * @throws NullPointerException if context is <code>null</code>.
      * @throws PropertyNotWritableException always thrown, if the 
      *     implicit object name is recognized by this resolver.
-     * @throws ELException if an exception was thrown while performing
-     *     the property or variable resolution. The thrown exception
-     *     must be included as the cause property of this exception, if
-     *     available.
      */
     @Override
     public void  setValue(ELContext context,
@@ -293,10 +281,6 @@ public class ImplicitObjectELResolver extends ELResolver {
      *     <code>ELContext</code> was set to <code>true</code>, then
      *     <code>true</code>; otherwise undefined.
      * @throws NullPointerException if context is <code>null</code>.
-     * @throws ELException if an exception was thrown while performing
-     *     the property or variable resolution. The thrown exception
-     *     must be included as the cause property of this exception, if
-     *     available.
      */
     @Override
     public boolean isReadOnly(ELContext context,
