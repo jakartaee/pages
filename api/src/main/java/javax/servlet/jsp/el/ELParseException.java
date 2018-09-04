@@ -41,7 +41,7 @@ public class ELParseException extends ELException {
      * Creates an ELParseException with the provided detail message.
      *
      * @param pMessage the detail message
-     **/
+     */
     public ELParseException(String pMessage) {
         super(pMessage);
     }

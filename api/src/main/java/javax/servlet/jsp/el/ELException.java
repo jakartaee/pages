@@ -36,7 +36,7 @@ public class ELException extends Exception {
     // -------------------------------------
     /**
      * Creates an ELException with no detail message.
-     **/
+     */
     public ELException() {
         super();
     }
@@ -46,7 +46,7 @@ public class ELException extends Exception {
      * Creates an ELException with the provided detail message.
      *
      * @param pMessage the detail message
-     **/
+     */
     public ELException(String pMessage) {
         super(pMessage);
     }
@@ -56,7 +56,7 @@ public class ELException extends Exception {
      * Creates an ELException with the given root cause.
      *
      * @param pRootCause the originating cause of this exception
-     **/
+     */
     public ELException(Throwable pRootCause) {
         super(pRootCause.getLocalizedMessage());
         mRootCause = pRootCause;
@@ -68,7 +68,7 @@ public class ELException extends Exception {
      *
      * @param pMessage   the detail message
      * @param pRootCause the originating cause of this exception
-     **/
+     */
     public ELException(String pMessage, Throwable pRootCause) {
         super(pMessage);
         mRootCause = pRootCause;

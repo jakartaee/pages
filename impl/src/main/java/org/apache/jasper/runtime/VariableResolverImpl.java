@@ -31,7 +31,7 @@ import javax.servlet.jsp.el.VariableResolver;
  * 
  * @author Kin-man Chung
  * @version $Change: 181177 $$DateTime: 2001/06/26 08:45:09 $$Author: kchung $
- **/
+ */
 
 public class VariableResolverImpl
     implements VariableResolver
@@ -41,7 +41,7 @@ public class VariableResolverImpl
     //-------------------------------------
     /**
      * Constructor
-     **/
+     */
     public VariableResolverImpl (PageContext pageContext) {
         this.pageContext = pageContext;
     }
@@ -50,7 +50,7 @@ public class VariableResolverImpl
     /**
      * Resolves the specified variable within the given context.
      * Returns null if the variable is not found.
-     **/
+     */
     public Object resolveVariable (String pName)
             throws javax.servlet.jsp.el.ELException {
 

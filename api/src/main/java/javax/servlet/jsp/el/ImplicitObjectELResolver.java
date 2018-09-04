@@ -450,7 +450,7 @@ public class ImplicitObjectELResolver extends ELResolver {
      * It also returns the correct implicit object for a given implicit object name.
      * 
      * @author Nathan Abramson - Art Technology Group
-     **/
+     */
     private static class ImplicitObjects {
         // -------------------------------------
         // Constants
@@ -482,7 +482,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          * Constructor
          * 
          * @param pContext The PageContext for which this instance is to be constructed
-         **/
+         */
         public ImplicitObjects(PageContext pContext) {
             mContext = pContext;
         }
@@ -492,7 +492,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          *
          * @param pContext The PageContext for which the ImplicitObjects instance is required
          * @return the ImplicitObjects associated with the PageContext, creating it if it doesn't yet exist.
-         **/
+         */
         public static ImplicitObjects getImplicitObjects(PageContext pContext) {
             ImplicitObjects objs = (ImplicitObjects) pContext.getAttribute(sAttributeName, PageContext.PAGE_SCOPE);
             if (objs == null) {
@@ -506,7 +506,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         /**
          *
          * @return the Map that "wraps" page-scoped attributes
-         **/
+         */
         public Map<String, Object> getPageScopeMap() {
             if (mPage == null) {
                 mPage = createPageScopeMap(mContext);
@@ -518,7 +518,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         /**
          *
          * @return the Map that "wraps" request-scoped attributes
-         **/
+         */
         public Map<String, Object> getRequestScopeMap() {
             if (mRequest == null) {
                 mRequest = createRequestScopeMap(mContext);
@@ -530,7 +530,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         /**
          *
          * @return the Map that "wraps" session-scoped attributes
-         **/
+         */
         public Map<String, Object> getSessionScopeMap() {
             if (mSession == null) {
                 mSession = createSessionScopeMap(mContext);
@@ -542,7 +542,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         /**
          *
          * @return the Map that "wraps" application-scoped attributes
-         **/
+         */
         public Map<String, Object> getApplicationScopeMap() {
             if (mApplication == null) {
                 mApplication = createApplicationScopeMap(mContext);
@@ -554,7 +554,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         /**
          *
          * @return the Map that maps parameter name to a single parameter values.
-         **/
+         */
         public Map<String, String> getParamMap() {
             if (mParam == null) {
                 mParam = createParamMap(mContext);
@@ -566,7 +566,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         /**
          *
          * @return the Map that maps parameter name to an array of parameter values.
-         **/
+         */
         public Map<String, String[]> getParamsMap() {
             if (mParams == null) {
                 mParams = createParamsMap(mContext);
@@ -578,7 +578,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         /**
          *
          * @return the Map that maps header name to a single header values.
-         **/
+         */
         public Map<String, String> getHeaderMap() {
             if (mHeader == null) {
                 mHeader = createHeaderMap(mContext);
@@ -590,7 +590,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         /**
          *
          * @return the Map that maps header name to an array of header values.
-         **/
+         */
         public Map<String, String[]> getHeadersMap() {
             if (mHeaders == null) {
                 mHeaders = createHeadersMap(mContext);
@@ -602,7 +602,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         /**
          *
          * @return the Map that maps init parameter name to a single init parameter values.
-         **/
+         */
         public Map<String, String> getInitParamMap() {
             if (mInitParam == null) {
                 mInitParam = createInitParamMap(mContext);
@@ -614,7 +614,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         /**
          *
          * @return the Map that maps cookie name to the first matching Cookie in request.getCookies().
-         **/
+         */
         public Map<String, Cookie> getCookieMap() {
             if (mCookie == null) {
                 mCookie = createCookieMap(mContext);
@@ -632,7 +632,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          * @param pContext The PageContext for which the Map should be produced
          * 
          * @return the Map that "wraps" page-scoped attributes
-         **/
+         */
         public static Map<String, Object> createPageScopeMap(PageContext pContext) {
             final PageContext context = pContext;
             return new EnumeratedMap<String, Object>() {
@@ -665,7 +665,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          * @param pContext The PageContext for which the Map should be produced
          * 
          * @return the Map that "wraps" request-scoped attributes
-         **/
+         */
         public static Map<String, Object> createRequestScopeMap(PageContext pContext) {
             final PageContext context = pContext;
             return new EnumeratedMap<String, Object>() {
@@ -698,7 +698,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          * @param pContext The PageContext for which the Map should be produced
          * 
          * @return the Map that "wraps" session-scoped attributes
-         **/
+         */
         public static Map<String, Object> createSessionScopeMap(PageContext pContext) {
             final PageContext context = pContext;
             return new EnumeratedMap<String, Object>() {
@@ -731,7 +731,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          * @param pContext The PageContext for which the Map should be produced
          * 
          * @return the Map that "wraps" application-scoped attributes
-         **/
+         */
         public static Map<String, Object> createApplicationScopeMap(PageContext pContext) {
             final PageContext context = pContext;
             return new EnumeratedMap<String, Object>() {
@@ -764,7 +764,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          * @param pContext The PageContext for which the Map should be produced
          * 
          * @return the Map that maps parameter name to single parameter value
-         **/
+         */
         public static Map<String, String> createParamMap(PageContext pContext) {
             final HttpServletRequest request = (HttpServletRequest) pContext.getRequest();
             return new EnumeratedMap<String, String>() {
@@ -797,7 +797,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          * @param pContext The PageContext for which the Map should be produced
          * 
          * @return the Map that maps parameter name to an array of parameter values.
-         **/
+         */
         public static Map<String, String[]> createParamsMap(PageContext pContext) {
             final HttpServletRequest request = (HttpServletRequest) pContext.getRequest();
             return new EnumeratedMap<String, String[]>() {
@@ -830,7 +830,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          * @param pContext The PageContext for which the Map should be produced
          * 
          * @return the Map that maps header name to single header value
-         **/
+         */
         public static Map<String, String> createHeaderMap(PageContext pContext) {
             final HttpServletRequest request = (HttpServletRequest) pContext.getRequest();
             return new EnumeratedMap<String, String>() {
@@ -863,7 +863,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          * @param pContext The PageContext for which the Map should be produced
          * 
          * @return the Map that maps header name to an array of header values
-         **/
+         */
         public static Map<String, String[]> createHeadersMap(PageContext pContext) {
             final HttpServletRequest request = (HttpServletRequest) pContext.getRequest();
             return new EnumeratedMap<String, String[]>() {
@@ -904,7 +904,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          * @param pContext The PageContext for which the Map should be produced
          * 
          * @return the Map that maps init parameter name to single init parameter value.
-         **/
+         */
         public static Map<String, String> createInitParamMap(PageContext pContext) {
             final ServletContext context = pContext.getServletContext();
             return new EnumeratedMap<String, String>() {
@@ -937,7 +937,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          * @param pContext The PageContext for which the Map should be produced
          * 
          * @return the Map that maps cookie name to the first matching Cookie in request.getCookies().
-         **/
+         */
         public static Map<String, Cookie> createCookieMap(PageContext pContext) {
             // Read all the cookies and construct the entire map
             HttpServletRequest request = (HttpServletRequest) pContext.getRequest();
@@ -972,7 +972,7 @@ public class ImplicitObjectELResolver extends ELResolver {
      * immutable.
      * 
      * @author Nathan Abramson - Art Technology Group
-     **/
+     */
     private static abstract class EnumeratedMap<K, V> implements Map<K, V> {
         // -------------------------------------
         // Member variables
@@ -1058,14 +1058,14 @@ public class ImplicitObjectELResolver extends ELResolver {
         /**
          *
          * @return an enumeration of the keys
-         **/
+         */
         public abstract Enumeration<K> enumerateKeys();
 
         // -------------------------------------
         /**
          *
          * @return true if it is possible for this data source to change
-         **/
+         */
         public abstract boolean isMutable();
 
         // -------------------------------------
@@ -1073,7 +1073,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          *
          * @param pKey The key for which the value should be obtained
          * @return the value associated with the given key, or null if not found.
-         **/
+         */
         public abstract V getValue(Object pKey);
 
         // -------------------------------------
@@ -1082,7 +1082,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          * Converts the MapSource to a Map. If the map is not mutable, this is cached
          * 
          * @return A Map created from the source Enumeration
-         **/
+         */
         public Map<K, V> getAsMap() {
             if (mMap != null) {
                 return mMap;
@@ -1099,7 +1099,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         /**
          *
          * Converts to a Map
-         **/
+         */
         Map<K, V> convertToMap() {
             Map<K, V> ret = new HashMap<>();
             for (Enumeration<K> e = enumerateKeys(); e.hasMoreElements();) {
