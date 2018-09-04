@@ -18,8 +18,7 @@
 package javax.servlet.jsp;
 
 /**
- * A generic exception known to the JSP engine; uncaught
- * JspExceptions will result in an invocation of the errorpage
+ * A generic exception known to the JSP engine; uncaught JspExceptions will result in an invocation of the errorpage
  * machinery.
  */
 
@@ -27,66 +26,54 @@ public class JspException extends Exception {
 
     private static final long serialVersionUID = -724329986255528641L;
 
-
     /**
      * Construct a JspException.
      */
     public JspException() {
     }
 
-
     /**
-     * Constructs a new JSP exception with the
-     * specified message. The message can be written 
-     * to the server log and/or displayed for the user. 
+     * Constructs a new JSP exception with the specified message. The message can be written to the server log and/or
+     * displayed for the user.
      *
-     * @param msg 		a <code>String</code> 
-     *				specifying the text of 
-     *				the exception message
+     * @param msg a <code>String</code> specifying the text of the exception message
      *
      */
     public JspException(String msg) {
-	super(msg);
+        super(msg);
     }
 
-
     /**
-     * Constructs a new <code>JspException</code> with the specified detail
-     * message and cause.
+     * Constructs a new <code>JspException</code> with the specified detail message and cause.
      *
-     * The cause is saved for later retrieval by the
-     * {@link #getCause()} and {@link #getRootCause()} methods.
+     * The cause is saved for later retrieval by the {@link #getCause()} and {@link #getRootCause()} methods.
      *
      * @see java.lang.Exception#Exception(String, Throwable)
      */
     public JspException(String message, Throwable cause) {
-	super(message, cause);
+        super(message, cause);
     }
-
 
     /**
      * Constructs a new <code>JspException</code> with the specified cause.
      *
-     * The cause is saved for later retrieval by the
-     * {@link #getCause()} and {@link #getRootCause()} methods.
+     * The cause is saved for later retrieval by the {@link #getCause()} and {@link #getRootCause()} methods.
      *
      * @see java.lang.Exception#Exception(Throwable)
      */
     public JspException(Throwable cause) {
-	super(cause);
+        super(cause);
     }
 
-    
     /**
      * Returns the exception that caused this JSP exception.
      *
-     * @return			the <code>Throwable</code> 
-     *				that caused this JSP exception
+     * @return the <code>Throwable</code> that caused this JSP exception
      *
      * @deprecated As of JSP 2.1, replaced by {@link #getCause()}
      */
     @Deprecated
     public Throwable getRootCause() {
-	return getCause();
+        return getCause();
     }
 }
