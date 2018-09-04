@@ -28,13 +28,12 @@ package javax.servlet.jsp.tagext;
  * This should have been designed as an interface. Every time we change the TLD, we need to add a new constructor to
  * this class (not good). This class should only be instantiated by container implementations (not by JSP developers).
  */
-
 public class TagAttributeInfo {
+
     /**
      * "id" is wired in to be ID. There is no real benefit in having it be something else IDREFs are not handled any
      * differently.
      */
-
     public static final String ID = "id";
 
     /**
@@ -46,7 +45,6 @@ public class TagAttributeInfo {
      * @param type     The name of the type of the attribute.
      * @param reqTime  Whether this attribute holds a request-time Attribute.
      */
-
     public TagAttributeInfo(String name, boolean required, String type, boolean reqTime) {
         this.name = name;
         this.required = required;
@@ -106,7 +104,6 @@ public class TagAttributeInfo {
      *
      * @return the name of the attribute
      */
-
     public String getName() {
         return name;
     }
@@ -124,7 +121,6 @@ public class TagAttributeInfo {
      *
      * @return the type of the attribute
      */
-
     public String getTypeName() {
         return type;
     }
@@ -135,7 +131,6 @@ public class TagAttributeInfo {
      *
      * @return true if the attribute has been specified in the TLD as rtexprvalue
      */
-
     public boolean canBeRequestTime() {
         return reqTime;
     }
@@ -180,7 +175,6 @@ public class TagAttributeInfo {
      *
      * @return the description string of this tag attribute
      */
-
     public String getDescription() {
         return description;
     }

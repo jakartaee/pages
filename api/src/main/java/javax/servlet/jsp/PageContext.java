@@ -84,7 +84,6 @@ import javax.servlet.jsp.tagext.BodyContent;
  * The following methods provide support for <B>forwarding, inclusion and error handling</B>: <code>forward()</code>,
  * <code>include()</code>, and <code>handlePageException()</code>.
  */
-
 abstract public class PageContext extends JspContext {
 
     /**
@@ -97,80 +96,67 @@ abstract public class PageContext extends JspContext {
      * Page scope: (this is the default) the named reference remains available in this PageContext until the return from
      * the current Servlet.service() invocation.
      */
-
     public static final int PAGE_SCOPE = 1;
 
     /**
      * Request scope: the named reference remains available from the ServletRequest associated with the Servlet until
      * the current request is completed.
      */
-
     public static final int REQUEST_SCOPE = 2;
 
     /**
      * Session scope (only valid if this page participates in a session): the named reference remains available from the
      * HttpSession (if any) associated with the Servlet until the HttpSession is invalidated.
      */
-
     public static final int SESSION_SCOPE = 3;
 
     /**
      * Application scope: named reference remains available in the ServletContext until it is reclaimed.
      */
-
     public static final int APPLICATION_SCOPE = 4;
 
     /**
      * Name used to store the Servlet in this PageContext's nametables.
      */
-
     public static final String PAGE = "javax.servlet.jsp.jspPage";
 
     /**
      * Name used to store this PageContext in it's own name table.
      */
-
     public static final String PAGECONTEXT = "javax.servlet.jsp.jspPageContext";
 
     /**
      * Name used to store ServletRequest in PageContext name table.
      */
-
     public static final String REQUEST = "javax.servlet.jsp.jspRequest";
 
     /**
      * Name used to store ServletResponse in PageContext name table.
      */
-
     public static final String RESPONSE = "javax.servlet.jsp.jspResponse";
 
     /**
      * Name used to store ServletConfig in PageContext name table.
      */
-
     public static final String CONFIG = "javax.servlet.jsp.jspConfig";
 
     /**
      * Name used to store HttpSession in PageContext name table.
      */
-
     public static final String SESSION = "javax.servlet.jsp.jspSession";
     /**
      * Name used to store current JspWriter in PageContext name table.
      */
-
     public static final String OUT = "javax.servlet.jsp.jspOut";
 
     /**
      * Name used to store ServletContext in PageContext name table.
      */
-
     public static final String APPLICATION = "javax.servlet.jsp.jspApplication";
 
     /**
      * Name used to store uncaught exception in ServletRequest attribute list and PageContext name table.
      */
-
     public static final String EXCEPTION = "javax.servlet.jsp.jspException";
 
     /**
@@ -200,7 +186,6 @@ abstract public class PageContext extends JspContext {
      * @throws IllegalStateException    if out not correctly initialized
      * @throws IllegalArgumentException If one of the given parameters is invalid
      */
-
     abstract public void initialize(Servlet servlet, ServletRequest request, ServletResponse response,
             String errorPageURL, boolean needsSession, int bufferSize, boolean autoFlush)
             throws IOException, IllegalStateException, IllegalArgumentException;
@@ -218,7 +203,6 @@ abstract public class PageContext extends JspContext {
      * This method should not be used by page or tag library authors.
      *
      */
-
     abstract public void release();
 
     /**
@@ -226,7 +210,6 @@ abstract public class PageContext extends JspContext {
      *
      * @return the HttpSession for this PageContext or null
      */
-
     abstract public HttpSession getSession();
 
     /**
@@ -234,7 +217,6 @@ abstract public class PageContext extends JspContext {
      *
      * @return the Page implementation class instance associated with this PageContext
      */
-
     abstract public Object getPage();
 
     /**
@@ -242,7 +224,6 @@ abstract public class PageContext extends JspContext {
      *
      * @return The ServletRequest for this PageContext
      */
-
     abstract public ServletRequest getRequest();
 
     /**
@@ -250,7 +231,6 @@ abstract public class PageContext extends JspContext {
      *
      * @return the ServletResponse for this PageContext
      */
-
     abstract public ServletResponse getResponse();
 
     /**
@@ -258,7 +238,6 @@ abstract public class PageContext extends JspContext {
      *
      * @return any exception passed to this as an errorpage
      */
-
     abstract public Exception getException();
 
     /**
@@ -266,7 +245,6 @@ abstract public class PageContext extends JspContext {
      *
      * @return the ServletConfig for this PageContext
      */
-
     abstract public ServletConfig getServletConfig();
 
     /**
@@ -274,7 +252,6 @@ abstract public class PageContext extends JspContext {
      * 
      * @return the ServletContext for this PageContext
      */
-
     abstract public ServletContext getServletContext();
 
     /**
@@ -305,7 +282,6 @@ abstract public class PageContext extends JspContext {
      * @throws ServletException      if the page that was forwarded to throws a ServletException
      * @throws IOException           if an I/O error occurred while forwarding
      */
-
     abstract public void forward(String relativeUrlPath) throws ServletException, IOException;
 
     /**
@@ -392,7 +368,6 @@ abstract public class PageContext extends JspContext {
      *
      * @see #handlePageException(Throwable)
      */
-
     abstract public void handlePageException(Exception e) throws ServletException, IOException;
 
     /**
@@ -423,7 +398,6 @@ abstract public class PageContext extends JspContext {
      *
      * @see #handlePageException(Exception)
      */
-
     abstract public void handlePageException(Throwable t) throws ServletException, IOException;
 
     /**
@@ -432,7 +406,6 @@ abstract public class PageContext extends JspContext {
      *
      * @return the new BodyContent
      */
-
     public BodyContent pushBody() {
         return null; // XXX to implement
     }

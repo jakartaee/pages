@@ -26,7 +26,6 @@ import javax.servlet.jsp.tagext.TagFileInfo;
  * Most of the information is directly from the TLD, except for the prefix and the uri values used in the taglib
  * directive
  */
-
 abstract public class TagLibraryInfo {
 
     /**
@@ -47,7 +46,6 @@ abstract public class TagLibraryInfo {
      *
      * @return the value of the uri attribute
      */
-
     public String getURI() {
         return uri;
     }
@@ -57,7 +55,6 @@ abstract public class TagLibraryInfo {
      *
      * @return the prefix assigned to this taglib from the taglib directive
      */
-
     public String getPrefixString() {
         return prefix;
     }
@@ -89,7 +86,6 @@ abstract public class TagLibraryInfo {
      *
      * @return the info string for this tag lib
      */
-
     public String getInfoString() {
         return info;
     }
@@ -100,7 +96,6 @@ abstract public class TagLibraryInfo {
      * @return the (minimal) required version of the JSP container.
      * @see javax.servlet.jsp.JspEngineInfo
      */
-
     public String getRequiredVersion() {
         return jspversion;
     }
@@ -132,7 +127,6 @@ abstract public class TagLibraryInfo {
      * @param shortname The short name (no prefix) of the tag
      * @return the TagInfo for the tag with the specified short name, or null if no such tag is found
      */
-
     public TagInfo getTag(String shortname) {
         TagInfo tags[] = getTags();
 

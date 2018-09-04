@@ -49,7 +49,6 @@ package javax.servlet.jsp.tagext;
  *
  * @since JSP 2.1
  */
-
 public interface JspIdConsumer {
 
     /**

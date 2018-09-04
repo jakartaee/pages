@@ -25,7 +25,6 @@ package javax.servlet.jsp;
  * @see PageContext#getErrorData
  * @since JSP 2.0
  */
-
 public final class ErrorData {
 
     private Throwable throwable;

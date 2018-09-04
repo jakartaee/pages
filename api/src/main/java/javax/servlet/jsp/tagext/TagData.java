@@ -26,14 +26,12 @@ import java.util.Hashtable;
  * TagData is only used as an argument to the isValid, validate, and getVariableInfo methods of TagExtraInfo, which are
  * invoked at translation time.
  */
-
 public class TagData implements Cloneable {
 
     /**
      * Distinguished value for an attribute to indicate its value is a request-time expression (which is not yet
      * available because TagData instances are used at translation-time).
      */
-
     public static final Object REQUEST_TIME_VALUE = new Object();
 
     /**
@@ -81,7 +79,6 @@ public class TagData implements Cloneable {
      *
      * @return the value of the tag's id attribute, or null if no such attribute was specified.
      */
-
     public String getId() {
         return getAttributeString(TagAttributeInfo.ID);
     }
@@ -97,7 +94,6 @@ public class TagData implements Cloneable {
      * @param attName the name of the attribute
      * @return the attribute's value
      */
-
     public Object getAttribute(String attName) {
         return attributes.get(attName);
     }
@@ -119,7 +115,6 @@ public class TagData implements Cloneable {
      * @return the attribute value string
      * @throws ClassCastException if attribute value is not a String
      */
-
     public String getAttributeString(String attName) {
         Object o = attributes.get(attName);
         if (o == null) {

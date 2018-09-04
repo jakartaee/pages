@@ -46,7 +46,6 @@ import javax.servlet.jsp.*;
  * A BodyContent is made available to a BodyTag through a setBodyContent() call. The tag handler can use the object
  * until after the call to doEndTag().
  */
-
 public abstract class BodyContent extends JspWriter {
 
     /**
@@ -56,7 +55,6 @@ public abstract class BodyContent extends JspWriter {
      *
      * @param e the enclosing JspWriter
      */
-
     protected BodyContent(JspWriter e) {
         super(UNBOUNDED_BUFFER, false);
         this.enclosingWriter = e;
@@ -70,7 +68,6 @@ public abstract class BodyContent extends JspWriter {
      *
      * @throws IOException always thrown
      */
-
     @Override
     public void flush() throws IOException {
         throw new IOException("Illegal to flush within a custom tag");
@@ -79,7 +76,6 @@ public abstract class BodyContent extends JspWriter {
     /**
      * Clear the body without throwing any exceptions.
      */
-
     public void clearBody() {
         try {
             this.clear();
@@ -109,7 +105,6 @@ public abstract class BodyContent extends JspWriter {
      * @param out The writer into which to place the contents of this body evaluation
      * @throws IOException if an I/O error occurred while writing the contents of this BodyContent to the given Writer
      */
-
     public abstract void writeOut(Writer out) throws IOException;
 
     /**
@@ -117,7 +112,6 @@ public abstract class BodyContent extends JspWriter {
      *
      * @return the enclosing JspWriter passed at construction time
      */
-
     public JspWriter getEnclosingWriter() {
         return enclosingWriter;
     }

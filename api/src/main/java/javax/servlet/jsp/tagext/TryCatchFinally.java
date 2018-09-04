@@ -50,7 +50,6 @@ package javax.servlet.jsp.tagext;
  * h.release();  // release long-term resources
  * </pre>
  */
-
 public interface TryCatchFinally {
 
     /**
@@ -70,7 +69,6 @@ public interface TryCatchFinally {
      * @param t The throwable exception navigating through this tag.
      * @throws Throwable if the exception is to be rethrown further up the nest chain.
      */
-
     void doCatch(Throwable t) throws Throwable;
 
     /**
@@ -87,6 +85,5 @@ public interface TryCatchFinally {
      * <p>
      * This method is intended to maintain per-invocation data integrity and resource management actions.
      */
-
     void doFinally();
 }

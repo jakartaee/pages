@@ -21,7 +21,6 @@ package javax.servlet.jsp;
  * Exception to be used by a Tag Handler to indicate some unrecoverable error. This error is to be caught by the top
  * level of the JSP page and will result in an error page.
  */
-
 public class JspTagException extends JspException {
 
     private static final long serialVersionUID = 1546743964929435607L;
@@ -74,7 +73,6 @@ public class JspTagException extends JspException {
      *
      * @since JSP 2.0
      */
-
     public JspTagException(Throwable rootCause) {
         super(rootCause);
     }
