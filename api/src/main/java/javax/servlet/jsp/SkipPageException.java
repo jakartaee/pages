@@ -37,6 +37,8 @@ package javax.servlet.jsp;
 public class SkipPageException
     extends JspException
 {
+    private static final long serialVersionUID = -7223157500637139188L;
+
     /**
      * Creates a SkipPageException with no message.
      */

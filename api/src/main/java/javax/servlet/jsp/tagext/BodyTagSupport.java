@@ -35,6 +35,8 @@ import javax.servlet.jsp.JspWriter;
 
 public class BodyTagSupport extends TagSupport implements BodyTag {
 
+    private static final long serialVersionUID = -7235752615580319833L;
+
     /**
      * Default constructor, all subclasses are required to only define
      * a public constructor with the same signature, and to call the
