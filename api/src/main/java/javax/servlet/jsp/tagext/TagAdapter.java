@@ -66,6 +66,7 @@ public class TagAdapter
      * @param pc ignored.
      * @throws UnsupportedOperationException Must not be called
      */
+    @Override
     public void setPageContext(PageContext pc) {
         throw new UnsupportedOperationException( 
             "Illegal to invoke setPageContext() on TagAdapter wrapper" );
@@ -79,6 +80,7 @@ public class TagAdapter
      * @param parentTag ignored.
      * @throws UnsupportedOperationException Must not be called.
      */
+    @Override
     public void setParent( Tag parentTag ) {
         throw new UnsupportedOperationException( 
             "Illegal to invoke setParent() on TagAdapter wrapper" );
@@ -95,6 +97,7 @@ public class TagAdapter
      *
      * @return The parent of the tag being adapted.
      */
+    @Override
     public Tag getParent() {
 	if (!parentDetermined) {
 	    JspTag adapteeParent = simpleTagAdaptee.getParent();
@@ -130,6 +133,7 @@ public class TagAdapter
      * @throws UnsupportedOperationException Must not be called
      * @throws JspException never thrown
      */
+    @Override
     public int doStartTag() throws JspException {
         throw new UnsupportedOperationException( 
             "Illegal to invoke doStartTag() on TagAdapter wrapper" );
@@ -142,6 +146,7 @@ public class TagAdapter
      * @throws UnsupportedOperationException Must not be called
      * @throws JspException never thrown
      */
+    @Override
     public int doEndTag() throws JspException {
         throw new UnsupportedOperationException( 
             "Illegal to invoke doEndTag() on TagAdapter wrapper" );
@@ -152,6 +157,7 @@ public class TagAdapter
      *
      * @throws UnsupportedOperationException Must not be called
      */
+    @Override
     public void release() {
         throw new UnsupportedOperationException( 
             "Illegal to invoke release() on TagAdapter wrapper" );

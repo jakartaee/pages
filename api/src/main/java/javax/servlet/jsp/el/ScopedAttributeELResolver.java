@@ -70,6 +70,7 @@ public class ScopedAttributeELResolver extends ELResolver {
      *     must be included as the cause property of this exception, if
      *     available.
      */
+    @Override
     public Object getValue(ELContext context,
                            Object base,
                            Object property) {
@@ -134,6 +135,7 @@ public class ScopedAttributeELResolver extends ELResolver {
      *     must be included as the cause property of this exception, if
      *     available.
      */
+    @Override
     public Class<Object> getType(ELContext context,
                          Object base,
                          Object property) {
@@ -178,6 +180,7 @@ public class ScopedAttributeELResolver extends ELResolver {
      *     must be included as the cause property of this exception, if
      *     available.
      */
+    @Override
     public void  setValue(ELContext context,
                           Object base,
                           Object property,
@@ -228,6 +231,7 @@ public class ScopedAttributeELResolver extends ELResolver {
      *     must be included as the cause property of this exception, if
      *     available.
      */
+    @Override
     public boolean isReadOnly(ELContext context,
                            Object base,
                            Object property) {
@@ -277,6 +281,7 @@ public class ScopedAttributeELResolver extends ELResolver {
      *     <code>FeatureDescriptor</code> object for each scoped attribute, or
      *     <code>null</code> if <code>base</code> is not <code>null</code>.
      */
+    @Override
     public Iterator<FeatureDescriptor> getFeatureDescriptors(
                                           ELContext context,
                                           Object base) {
@@ -360,6 +365,7 @@ public class ScopedAttributeELResolver extends ELResolver {
      * @return <code>null</code> if base is not <code>null</code>; otherwise
      *     <code>String.class</code>.
      */
+    @Override
     public Class<String> getCommonPropertyType(ELContext context,
                                        Object base) {
         if (base == null) {

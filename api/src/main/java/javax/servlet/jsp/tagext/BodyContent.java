@@ -77,6 +77,7 @@ public abstract class BodyContent extends JspWriter {
      * @throws IOException always thrown
      */
 
+    @Override
     public void flush() throws IOException {
 	throw new IOException("Illegal to flush within a custom tag");
     }

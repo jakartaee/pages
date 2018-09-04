@@ -111,6 +111,7 @@ public class ImplicitObjectELResolver extends ELResolver {
      *     must be included as the cause property of this exception, if
      *     available.
      */
+    @Override
     public Object getValue(ELContext context,
                            Object base,
                            Object property) {
@@ -198,6 +199,7 @@ public class ImplicitObjectELResolver extends ELResolver {
      *     must be included as the cause property of this exception, if
      *     available.
      */
+    @Override
     public Class getType(ELContext context,
                          Object base,
                          Object property) {
@@ -247,6 +249,7 @@ public class ImplicitObjectELResolver extends ELResolver {
      *     must be included as the cause property of this exception, if
      *     available.
      */
+    @Override
     public void  setValue(ELContext context,
                           Object base,
                           Object property,
@@ -295,6 +298,7 @@ public class ImplicitObjectELResolver extends ELResolver {
      *     must be included as the cause property of this exception, if
      *     available.
      */
+    @Override
     public boolean isReadOnly(ELContext context,
                               Object base,
                               Object property) {
@@ -353,6 +357,7 @@ public class ImplicitObjectELResolver extends ELResolver {
      *     <code>FeatureDescriptor</code> object for each implicit object, or
      *     <code>null</code> if <code>base</code> is not <code>null</code>.
      */
+    @Override
     public Iterator<FeatureDescriptor> getFeatureDescriptors(
                                             ELContext context,
                                             Object base) {
@@ -504,6 +509,7 @@ public class ImplicitObjectELResolver extends ELResolver {
      * @return <code>null</code> if base is not <code>null</code>; otherwise
      *     <code>String.class</code>.
      */
+    @Override
     public Class<String> getCommonPropertyType(ELContext context,
                                        Object base) {
         if (base == null) {
@@ -729,12 +735,14 @@ public class ImplicitObjectELResolver extends ELResolver {
         final PageContext context = pContext;
         return new EnumeratedMap<String, Object> ()
           {
+            @Override
             public Enumeration<String> enumerateKeys () 
             {
               return context.getAttributeNamesInScope
                 (PageContext.PAGE_SCOPE);
             }
 
+            @Override
             public Object getValue (Object pKey) 
             {
                if (pKey instanceof String) {
@@ -747,6 +755,7 @@ public class ImplicitObjectELResolver extends ELResolver {
                }
             }
 
+            @Override
             public boolean isMutable ()
             {
               return true;
@@ -764,12 +773,14 @@ public class ImplicitObjectELResolver extends ELResolver {
         final PageContext context = pContext;
         return new EnumeratedMap<String, Object> ()
           {
+            @Override
             public Enumeration<String> enumerateKeys () 
             {
               return context.getAttributeNamesInScope
                 (PageContext.REQUEST_SCOPE);
             }
 
+            @Override
             public Object getValue (Object pKey) 
             {
               if (pKey instanceof String) {
@@ -782,6 +793,7 @@ public class ImplicitObjectELResolver extends ELResolver {
               }
             }
 
+            @Override
             public boolean isMutable ()
             {
               return true;
@@ -799,12 +811,14 @@ public class ImplicitObjectELResolver extends ELResolver {
         final PageContext context = pContext;
         return new EnumeratedMap<String, Object> ()
           {
+            @Override
             public Enumeration<String> enumerateKeys () 
             {
               return context.getAttributeNamesInScope
                 (PageContext.SESSION_SCOPE);
             }
 
+            @Override
             public Object getValue (Object pKey) 
             {
               if (pKey instanceof String) {
@@ -817,6 +831,7 @@ public class ImplicitObjectELResolver extends ELResolver {
               }
             }
 
+            @Override
             public boolean isMutable ()
             {
               return true;
@@ -834,12 +849,14 @@ public class ImplicitObjectELResolver extends ELResolver {
         final PageContext context = pContext;
         return new EnumeratedMap<String, Object> ()
           {
+            @Override
             public Enumeration<String> enumerateKeys () 
             {
               return context.getAttributeNamesInScope
                 (PageContext.APPLICATION_SCOPE);
             }
 
+            @Override
             public Object getValue (Object pKey) 
             {
               if (pKey instanceof String) {
@@ -852,6 +869,7 @@ public class ImplicitObjectELResolver extends ELResolver {
               }
             }
 
+            @Override
             public boolean isMutable ()
             {
               return true;
@@ -871,11 +889,13 @@ public class ImplicitObjectELResolver extends ELResolver {
           (HttpServletRequest) pContext.getRequest ();
         return new EnumeratedMap<String, String> ()
           {
+            @Override
             public Enumeration<String> enumerateKeys () 
             {
               return request.getParameterNames ();
             }
 
+            @Override
             public String getValue (Object pKey) 
             {
               if (pKey instanceof String) {
@@ -886,6 +906,7 @@ public class ImplicitObjectELResolver extends ELResolver {
               }
             }
 
+            @Override
             public boolean isMutable ()
             {
               return false;
@@ -905,11 +926,13 @@ public class ImplicitObjectELResolver extends ELResolver {
           (HttpServletRequest) pContext.getRequest ();
         return new EnumeratedMap<String, String[]> ()
           {
+            @Override
             public Enumeration<String> enumerateKeys () 
             {
               return request.getParameterNames ();
             }
 
+            @Override
             public String[] getValue (Object pKey) 
             {
               if (pKey instanceof String) {
@@ -920,6 +943,7 @@ public class ImplicitObjectELResolver extends ELResolver {
               }
             }
 
+            @Override
             public boolean isMutable ()
             {
               return false;
@@ -939,11 +963,13 @@ public class ImplicitObjectELResolver extends ELResolver {
           (HttpServletRequest) pContext.getRequest ();
         return new EnumeratedMap<String, String> ()
           {
+            @Override
             public Enumeration<String> enumerateKeys () 
             {
               return request.getHeaderNames ();
             }
 
+            @Override
             public String getValue (Object pKey) 
             {
               if (pKey instanceof String) {
@@ -954,6 +980,7 @@ public class ImplicitObjectELResolver extends ELResolver {
               }
             }
 
+            @Override
             public boolean isMutable ()
             {
               return false;
@@ -973,11 +1000,13 @@ public class ImplicitObjectELResolver extends ELResolver {
           (HttpServletRequest) pContext.getRequest ();
         return new EnumeratedMap<String, String[]> ()
           {
+            @Override
             public Enumeration<String> enumerateKeys () 
             {
               return request.getHeaderNames ();
             }
 
+            @Override
             public String[] getValue (Object pKey) 
             {
               if (pKey instanceof String) {
@@ -996,6 +1025,7 @@ public class ImplicitObjectELResolver extends ELResolver {
               }
             }
 
+            @Override
             public boolean isMutable ()
             {
               return false;
@@ -1014,11 +1044,13 @@ public class ImplicitObjectELResolver extends ELResolver {
         final ServletContext context = pContext.getServletContext ();
         return new EnumeratedMap<String, String> ()
           {
+            @Override
             public Enumeration<String> enumerateKeys () 
             {
               return context.getInitParameterNames ();
             }
 
+            @Override
             public String getValue (Object pKey) 
             {
               if (pKey instanceof String) {
@@ -1029,6 +1061,7 @@ public class ImplicitObjectELResolver extends ELResolver {
               }
             }
 
+            @Override
             public boolean isMutable ()
             {
               return false;
@@ -1088,73 +1121,85 @@ public class ImplicitObjectELResolver extends ELResolver {
       Map<K, V> mMap;
 
       //-------------------------------------
-      public void clear ()
+      @Override
+    public void clear ()
       {
         throw new UnsupportedOperationException ();
       }
 
       //-------------------------------------
-      public boolean containsKey (Object pKey)
+      @Override
+    public boolean containsKey (Object pKey)
       {
         return getValue (pKey) != null;
       }
 
       //-------------------------------------
-      public boolean containsValue (Object pValue)
+      @Override
+    public boolean containsValue (Object pValue)
       {
         return getAsMap ().containsValue (pValue);
       }
 
       //-------------------------------------
-      public Set<Map.Entry<K, V>> entrySet ()
+      @Override
+    public Set<Map.Entry<K, V>> entrySet ()
       {
         return getAsMap ().entrySet ();
       }
 
       //-------------------------------------
-      public V get (Object pKey)
+      @Override
+    public V get (Object pKey)
       {
         return getValue (pKey);
       }
 
       //-------------------------------------
-      public boolean isEmpty ()
+      @Override
+    public boolean isEmpty ()
       {
         return !enumerateKeys ().hasMoreElements ();
       }
 
       //-------------------------------------
-      public Set<K> keySet ()
+      @Override
+    public Set<K> keySet ()
       {
         return getAsMap ().keySet ();
       }
 
       //-------------------------------------
-      public V put (K pKey, V pValue)
+      @Override
+    public V put (K pKey, V pValue)
       {
         throw new UnsupportedOperationException ();
       }
 
       //-------------------------------------
-      public void putAll (Map<? extends K, ? extends V> pMap)
+      @Override
+    public void putAll (Map<? extends K, ? extends V> pMap)
       {
         throw new UnsupportedOperationException ();
       }
 
       //-------------------------------------
-      public V remove (Object pKey)
+      @Override
+    public V remove (Object pKey)
       {
         throw new UnsupportedOperationException ();
       }
 
       //-------------------------------------
-      public int size ()
+      @Override
+    public int size ()
       {
         return getAsMap ().size ();
       }
 
       //-------------------------------------
-      public Collection<V> values ()
+      @Override
+    public Collection<V> values ()
       {
         return getAsMap ().values ();
       }
