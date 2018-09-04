@@ -175,7 +175,7 @@ public final class ProtectedFunctionMapper extends FunctionMapper {
      * @param prefix the prefix of the function
      * @param localName the short name of the function
      * @return the result of the method mapping.  Null means no entry found.
-     **/
+     */
     public Method resolveFunction(String prefix, String localName) {
         if (this.fnmap != null) {
             return this.fnmap.get(prefix + ":" + localName);

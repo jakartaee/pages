@@ -38,6 +38,6 @@ public interface FunctionMapper {
      * @param prefix    the prefix of the function, or "" if no prefix.
      * @param localName the short name of the function
      * @return the result of the method mapping. Null means no entry found.
-     **/
+     */
     public java.lang.reflect.Method resolveFunction(String prefix, String localName);
 }
