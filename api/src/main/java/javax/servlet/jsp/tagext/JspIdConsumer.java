@@ -40,7 +40,7 @@ package javax.servlet.jsp.tagext;
  * not related.
  * The <code>jsp:id</code> attribute is available only at translation time,
  * and the <code>jspId</code>
- * attribute is avalable only at request time.
+ * attribute is available only at request time.
  * </p>
  * <p>
  * The JSP container must provide a value for <code>jspId</code> that
