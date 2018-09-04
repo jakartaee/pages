@@ -34,7 +34,7 @@ package javax.servlet.jsp.el;
  */
 @Deprecated
 public interface VariableResolver {
-    // -------------------------------------
+
     /**
      * Resolves the specified variable. Returns null if the variable is not found.
      * 
@@ -44,6 +44,4 @@ public interface VariableResolver {
      * @throws ELException if a failure occurred while trying to resolve the given variable
      */
     public Object resolveVariable(String pName) throws ELException;
-
-    // -------------------------------------
 }

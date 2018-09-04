@@ -28,7 +28,6 @@ public class ELParseException extends ELException {
 
     private static final long serialVersionUID = 3521581805886060118L;
 
-    // -------------------------------------
     /**
      * Creates an ELParseException with no detail message.
      */
@@ -36,7 +35,6 @@ public class ELParseException extends ELException {
         super();
     }
 
-    // -------------------------------------
     /**
      * Creates an ELParseException with the provided detail message.
      *
@@ -45,6 +43,4 @@ public class ELParseException extends ELException {
     public ELParseException(String pMessage) {
         super(pMessage);
     }
-
-    // -------------------------------------
 }

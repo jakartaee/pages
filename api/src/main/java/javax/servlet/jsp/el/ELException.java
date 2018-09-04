@@ -33,7 +33,7 @@ public class ELException extends Exception {
 
     private Throwable mRootCause;
 
-    // -------------------------------------
+
     /**
      * Creates an ELException with no detail message.
      */
@@ -41,7 +41,7 @@ public class ELException extends Exception {
         super();
     }
 
-    // -------------------------------------
+
     /**
      * Creates an ELException with the provided detail message.
      *
@@ -51,7 +51,7 @@ public class ELException extends Exception {
         super(pMessage);
     }
 
-    // -------------------------------------
+
     /**
      * Creates an ELException with the given root cause.
      *
@@ -62,7 +62,7 @@ public class ELException extends Exception {
         mRootCause = pRootCause;
     }
 
-    // -------------------------------------
+
     /**
      * Creates an ELException with the given detail message and root cause.
      *
@@ -74,7 +74,7 @@ public class ELException extends Exception {
         mRootCause = pRootCause;
     }
 
-    // -------------------------------------
+
     /**
      * Returns the root cause.
      *
