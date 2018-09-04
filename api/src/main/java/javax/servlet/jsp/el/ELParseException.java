@@ -17,7 +17,6 @@
 
 package javax.servlet.jsp.el;
 
-
 /**
  * Represents a parsing error encountered while parsing an EL expression.
  *
@@ -29,25 +28,23 @@ public class ELParseException extends ELException {
 
     private static final long serialVersionUID = 3521581805886060118L;
 
-  //-------------------------------------
-  /**
-   * Creates an ELParseException with no detail message.
-   */
-  public ELParseException ()
-  {
-    super ();
-  }
+    // -------------------------------------
+    /**
+     * Creates an ELParseException with no detail message.
+     */
+    public ELParseException() {
+        super();
+    }
 
-  //-------------------------------------
-  /**
-   * Creates an ELParseException with the provided detail message.
-   *
-   * @param pMessage the detail message
-   **/
-  public ELParseException (String pMessage)
-  {
-    super (pMessage);
-  }
+    // -------------------------------------
+    /**
+     * Creates an ELParseException with the provided detail message.
+     *
+     * @param pMessage the detail message
+     **/
+    public ELParseException(String pMessage) {
+        super(pMessage);
+    }
 
-  //-------------------------------------
+    // -------------------------------------
 }

@@ -18,8 +18,7 @@
 package javax.servlet.jsp.tagext;
 
 /**
- * Information for a function in a Tag Library.
- * This class is instantiated from the Tag Library Descriptor file (TLD)
+ * Information for a function in a Tag Library. This class is instantiated from the Tag Library Descriptor file (TLD)
  * and is available only at translation time.
  * 
  * @since JSP 2.0
@@ -29,14 +28,14 @@ public class FunctionInfo {
     /**
      * Constructor for FunctionInfo.
      *
-     * @param name The name of the function
-     * @param klass The class of the function
+     * @param name      The name of the function
+     * @param klass     The class of the function
      * @param signature The signature of the function
      */
 
     public FunctionInfo(String name, String klass, String signature) {
 
-	this.name = name;
+        this.name = name;
         this.functionClass = klass;
         this.functionSignature = signature;
     }
@@ -48,7 +47,7 @@ public class FunctionInfo {
      */
 
     public String getName() {
-	return name;
+        return name;
     }
 
     /**
