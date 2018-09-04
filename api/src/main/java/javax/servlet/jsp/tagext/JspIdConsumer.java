@@ -68,6 +68,8 @@ public interface JspIdConsumer {
      * Called by the container generated code to set a value for the
      * jspId attribute.  An unique identification string, relative to
      * this page, is generated at translation time.
+     * 
+     * @param id The value to use for the jspId attribute 
      */
     public void setJspId(String id);
 }
