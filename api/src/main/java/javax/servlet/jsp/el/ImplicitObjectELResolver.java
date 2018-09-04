@@ -200,7 +200,7 @@ public class ImplicitObjectELResolver extends ELResolver {
      *     available.
      */
     @Override
-    public Class getType(ELContext context,
+    public Class<?> getType(ELContext context,
                          Object base,
                          Object property) {
 

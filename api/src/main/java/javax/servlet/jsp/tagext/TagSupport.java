@@ -73,12 +73,7 @@ public class TagSupport implements IterationTag, Serializable {
      * @return the nearest ancestor that implements the interface
      * or is an instance of the class specified
      */
-
-    // The type for klass should be Class<?>.  Unfortunately, fixing that is
-    // a change in the API signature, which cannot be modified without a spec
-    // change
-    @SuppressWarnings("unchecked")
-    public static final Tag findAncestorWithClass(Tag from, Class klass) {
+    public static final Tag findAncestorWithClass(Tag from, Class<?> klass) {
 	boolean isInterface = false;
 
 	if (from == null ||
