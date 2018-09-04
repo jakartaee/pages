@@ -361,8 +361,8 @@ public class ImplicitObjectELResolver extends ELResolver {
     public Iterator<FeatureDescriptor> getFeatureDescriptors(
                                             ELContext context,
                                             Object base) {
-        ArrayList<FeatureDescriptor> list =
-                                        new ArrayList<FeatureDescriptor>(11);
+        
+        ArrayList<FeatureDescriptor> list = new ArrayList<>(11);
 
         // pageContext
         FeatureDescriptor descriptor = new FeatureDescriptor();
@@ -1011,7 +1011,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             {
               if (pKey instanceof String) {
                 // Drain the header enumeration
-                List<String> l = new ArrayList<String> ();
+                List<String> l = new ArrayList<> ();
                 Enumeration<String> e = request.getHeaders ((String) pKey);
                 if (e != null) {
                   while (e.hasMoreElements ()) {
@@ -1080,7 +1080,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         // Read all the cookies and construct the entire map
         HttpServletRequest request = (HttpServletRequest) pContext.getRequest ();
         Cookie [] cookies = request.getCookies ();
-        Map<String, Cookie> ret = new HashMap<String, Cookie> ();
+        Map<String, Cookie> ret = new HashMap<> ();
         for (int i = 0; cookies != null && i < cookies.length; i++) {
           Cookie cookie = cookies [i];
           if (cookie != null) {
@@ -1255,7 +1255,7 @@ public class ImplicitObjectELResolver extends ELResolver {
        **/
       Map<K, V> convertToMap ()
       {
-        Map<K, V> ret = new HashMap<K, V> ();
+        Map<K, V> ret = new HashMap<> ();
         for (Enumeration<K> e = enumerateKeys (); e.hasMoreElements (); ) {
           K key = e.nextElement ();
           V value = getValue (key);

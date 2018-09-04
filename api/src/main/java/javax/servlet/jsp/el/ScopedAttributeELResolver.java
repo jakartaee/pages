@@ -286,7 +286,7 @@ public class ScopedAttributeELResolver extends ELResolver {
                                           ELContext context,
                                           Object base) {
         Enumeration attrs;
-        ArrayList<FeatureDescriptor> list = new ArrayList<FeatureDescriptor>();
+        ArrayList<FeatureDescriptor> list = new ArrayList<>();
         PageContext ctxt = (PageContext) context.getContext(JspContext.class);
 
         attrs = ctxt.getAttributeNamesInScope(PageContext.PAGE_SCOPE);
