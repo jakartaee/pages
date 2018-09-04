@@ -27,7 +27,9 @@ package javax.servlet.jsp.el;
 @Deprecated
 public class ELParseException extends ELException {
 
- //-------------------------------------
+    private static final long serialVersionUID = 3521581805886060118L;
+
+  //-------------------------------------
   /**
    * Creates an ELParseException with no detail message.
    */

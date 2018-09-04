@@ -29,6 +29,8 @@ package javax.servlet.jsp.el;
 public class ELException
   extends Exception
 {
+    private static final long serialVersionUID = -3920470039225321534L;
+    
   //-------------------------------------
   // Member variables
   //-------------------------------------

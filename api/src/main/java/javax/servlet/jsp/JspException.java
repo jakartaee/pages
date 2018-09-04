@@ -25,6 +25,9 @@ package javax.servlet.jsp;
 
 public class JspException extends Exception {
 
+    private static final long serialVersionUID = -724329986255528641L;
+
+
     /**
      * Construct a JspException.
      */
