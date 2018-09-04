@@ -227,6 +227,7 @@ public abstract class JspContext {
      * @return A valid instance of an ExpressionEvaluator.
      * @since JSP 2.0
      */
+    @Deprecated
     public abstract ExpressionEvaluator getExpressionEvaluator();
     
     /**
@@ -240,6 +241,7 @@ public abstract class JspContext {
      * @return A valid instance of a VariableResolver.
      * @since JSP 2.0
      */
+    @Deprecated
     public abstract VariableResolver getVariableResolver();
     
     /**

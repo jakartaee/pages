@@ -31,6 +31,7 @@ package javax.servlet.jsp.el;
  * @deprecated As of JSP 2.1, replaced by {@link javax.el.ValueExpression}
  * @since JSP 2.0
  */
+@Deprecated
 public abstract class Expression {
 
     /** 
