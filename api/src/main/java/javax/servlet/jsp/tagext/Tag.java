@@ -95,31 +95,26 @@ import javax.servlet.jsp.*;
  * If EVAL_BODY_INCLUDE is returned, the body is evaluated and "passed through" to the current out.
  * </p>
  */
-
 public interface Tag extends JspTag {
 
     /**
      * Skip body evaluation. Valid return value for doStartTag and doAfterBody.
      */
-
     public final static int SKIP_BODY = 0;
 
     /**
      * Evaluate body into existing out stream. Valid return value for doStartTag.
      */
-
     public final static int EVAL_BODY_INCLUDE = 1;
 
     /**
      * Skip the rest of the page. Valid return value for doEndTag.
      */
-
     public final static int SKIP_PAGE = 5;
 
     /**
      * Continue evaluating the page. Valid return value for doEndTag().
      */
-
     public final static int EVAL_PAGE = 6;
 
     // Setters for Tag handler data
@@ -132,7 +127,6 @@ public interface Tag extends JspTag {
      *
      * @param pc The page context for this tag handler.
      */
-
     void setPageContext(PageContext pc);
 
     /**
@@ -143,7 +137,6 @@ public interface Tag extends JspTag {
      *
      * @param t The parent tag, or null.
      */
-
     void setParent(Tag t);
 
     /**
@@ -165,7 +158,6 @@ public interface Tag extends JspTag {
      * @return the current parent, or null if none.
      * @see TagSupport#findAncestorWithClass
      */
-
     Tag getParent();
 
     // Actions for basic start/end processing.
@@ -198,7 +190,6 @@ public interface Tag extends JspTag {
      * @throws JspException if an error occurred while processing this tag
      * @see BodyTag
      */
-
     int doStartTag() throws JspException;
 
     /**
@@ -222,7 +213,6 @@ public interface Tag extends JspTag {
      * @return indication of whether to continue evaluating the JSP page.
      * @throws JspException if an error occurred while processing this tag
      */
-
     int doEndTag() throws JspException;
 
     /**
@@ -230,7 +220,5 @@ public interface Tag extends JspTag {
      * invoke this method on all tag handlers, but there may be multiple invocations on doStartTag and doEndTag in
      * between.
      */
-
     void release();
-
 }

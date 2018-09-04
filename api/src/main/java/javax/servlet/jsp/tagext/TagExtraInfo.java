@@ -44,7 +44,6 @@ package javax.servlet.jsp.tagext;
  * to have an associated TagExtraInfo implementation that returns a VariableInfo array with one or more elements from a
  * call to getVariableInfo().
  */
-
 public abstract class TagExtraInfo {
 
     /**
@@ -74,7 +73,6 @@ public abstract class TagExtraInfo {
      * @return Whether this tag instance is valid.
      * @see TagExtraInfo#validate
      */
-
     public boolean isValid(TagData data) {
         return true;
     }

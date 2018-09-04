@@ -32,7 +32,6 @@ public class FunctionInfo {
      * @param klass     The class of the function
      * @param signature The signature of the function
      */
-
     public FunctionInfo(String name, String klass, String signature) {
 
         this.name = name;
@@ -45,7 +44,6 @@ public class FunctionInfo {
      *
      * @return The name of the function
      */
-
     public String getName() {
         return name;
     }
@@ -55,7 +53,6 @@ public class FunctionInfo {
      *
      * @return The class of the function
      */
-
     public String getFunctionClass() {
         return functionClass;
     }
@@ -65,7 +62,6 @@ public class FunctionInfo {
      *
      * @return The signature of the function
      */
-
     public String getFunctionSignature() {
         return functionSignature;
     }

@@ -58,7 +58,6 @@ import javax.el.ELContext;
  *
  * @since JSP 2.0
  */
-
 public abstract class JspContext {
 
     /**
@@ -75,7 +74,6 @@ public abstract class JspContext {
      * @param value the value to associate with the name, or null if the attribute is to be removed from the page scope.
      * @throws NullPointerException if the name is null
      */
-
     abstract public void setAttribute(String name, Object value);
 
     /**
@@ -92,7 +90,6 @@ public abstract class JspContext {
      * @throws IllegalStateException    if the scope is PageContext.SESSION_SCOPE but the page that was requested does
      *                                  not participate in a session or the session has been invalidated.
      */
-
     abstract public void setAttribute(String name, Object value, int scope);
 
     /**
@@ -103,7 +100,6 @@ public abstract class JspContext {
      * 
      * @throws NullPointerException if the name is null
      */
-
     abstract public Object getAttribute(String name);
 
     /**
@@ -118,7 +114,6 @@ public abstract class JspContext {
      * @throws IllegalStateException    if the scope is PageContext.SESSION_SCOPE but the page that was requested does
      *                                  not participate in a session or the session has been invalidated.
      */
-
     abstract public Object getAttribute(String name, int scope);
 
     /**
@@ -129,7 +124,6 @@ public abstract class JspContext {
      * @return the value associated or null
      * @throws NullPointerException if the name is null
      */
-
     abstract public Object findAttribute(String name);
 
     /**
@@ -139,7 +133,6 @@ public abstract class JspContext {
      * @param name The name of the object to remove.
      * @throws NullPointerException if the name is null
      */
-
     abstract public void removeAttribute(String name);
 
     /**
@@ -153,7 +146,6 @@ public abstract class JspContext {
      *                                  not participate in a session or the session has been invalidated.
      * @throws NullPointerException     if the name is null
      */
-
     abstract public void removeAttribute(String name, int scope);
 
     /**
@@ -163,7 +155,6 @@ public abstract class JspContext {
      * @return the scope of the object associated with the name specified or 0
      * @throws NullPointerException if the name is null
      */
-
     abstract public int getAttributesScope(String name);
 
     /**
@@ -175,7 +166,6 @@ public abstract class JspContext {
      * @throws IllegalStateException    if the scope is PageContext.SESSION_SCOPE but the page that was requested does
      *                                  not participate in a session or the session has been invalidated.
      */
-
     abstract public Enumeration<String> getAttributeNamesInScope(int scope);
 
     /**

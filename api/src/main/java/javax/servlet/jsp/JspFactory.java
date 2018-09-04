@@ -37,7 +37,6 @@ import javax.servlet.jsp.PageContext;
  * <p>
  * With the exception of JspApplicationContext, JspFactory objects should not be used by JSP application developers.
  */
-
 public abstract class JspFactory {
 
     private static volatile JspFactory deflt = null;
@@ -56,7 +55,6 @@ public abstract class JspFactory {
      *
      * @param deflt The default factory implementation
      */
-
     public static void setDefaultFactory(JspFactory deflt) {
         JspFactory.deflt = deflt;
     }
@@ -66,7 +64,6 @@ public abstract class JspFactory {
      *
      * @return the default factory for this implementation
      */
-
     public static JspFactory getDefaultFactory() {
         return deflt;
     }
@@ -102,7 +99,6 @@ public abstract class JspFactory {
      *
      * @see javax.servlet.jsp.PageContext
      */
-
     public abstract PageContext getPageContext(Servlet servlet, ServletRequest request, ServletResponse response,
             String errorPageURL, boolean needsSession, int buffer, boolean autoflush);
 
@@ -114,7 +110,6 @@ public abstract class JspFactory {
      *
      * @param pc A PageContext previously obtained by getPageContext()
      */
-
     public abstract void releasePageContext(PageContext pc);
 
     /**
@@ -124,7 +119,6 @@ public abstract class JspFactory {
      *
      * @return a JspEngineInfo object describing the current JSP engine
      */
-
     public abstract JspEngineInfo getEngineInfo();
 
     /**

@@ -42,7 +42,6 @@ import javax.el.ELException;
  * @see javax.el.ELResolver
  * @since JSP 2.1
  */
-
 public class ScopedAttributeELResolver extends ELResolver {
 
     /**

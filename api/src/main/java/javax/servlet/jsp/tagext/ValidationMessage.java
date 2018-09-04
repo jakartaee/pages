@@ -31,7 +31,6 @@ package javax.servlet.jsp.tagext;
  * namespace <code>http://java.sun.com/JSP/Page</code>. A TagLibraryValidator implementation must rely on the uri, not
  * the prefix, of the <code>id</code> attribute.
  */
-
 public class ValidationMessage {
 
     /**

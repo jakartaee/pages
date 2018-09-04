@@ -54,7 +54,6 @@ import javax.servlet.*;
  *        throws ServletException, IOException;
  * </pre>
  */
-
 public interface JspPage extends Servlet {
 
     /**

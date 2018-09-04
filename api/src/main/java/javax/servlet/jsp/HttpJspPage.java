@@ -31,7 +31,6 @@ import java.io.IOException;
  * 
  * @see JspPage
  */
-
 public interface HttpJspPage extends JspPage {
 
     /**

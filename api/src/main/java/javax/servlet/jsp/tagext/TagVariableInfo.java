@@ -25,7 +25,6 @@ package javax.servlet.jsp.tagext;
  *
  * This information is only available in JSP 1.2 format TLDs or above.
  */
-
 public class TagVariableInfo {
 
     /**
@@ -50,7 +49,6 @@ public class TagVariableInfo {
      *
      * @return The variable name as a constant
      */
-
     public String getNameGiven() {
         return nameGiven;
     }
@@ -61,7 +59,6 @@ public class TagVariableInfo {
      *
      * @return The attribute whose value defines the variable name
      */
-
     public String getNameFromAttribute() {
         return nameFromAttribute;
     }
@@ -71,7 +68,6 @@ public class TagVariableInfo {
      *
      * @return The name of the class of the variable or 'java.lang.String' if not defined in the TLD.
      */
-
     public String getClassName() {
         return className;
     }
@@ -81,7 +77,6 @@ public class TagVariableInfo {
      *
      * @return Whether the variable is to be declared or not. If not defined in the TLD, 'true' will be returned.
      */
-
     public boolean getDeclare() {
         return declare;
     }
@@ -91,7 +86,6 @@ public class TagVariableInfo {
      *
      * @return The scope to give the variable. NESTED scope will be returned if not defined in the TLD.
      */
-
     public int getScope() {
         return scope;
     }

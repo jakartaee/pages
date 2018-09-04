@@ -164,7 +164,6 @@ package javax.servlet.jsp.tagext;
  * Scripting variable information can also be encoded directly for most cases into the Tag Library Descriptor using the
  * &lt;variable&gt; subelement of the &lt;tag&gt; element. See the JSP specification.
  */
-
 public class VariableInfo {
 
     /**
@@ -190,7 +189,6 @@ public class VariableInfo {
      * @param declare   If true, it is a new variable (in some languages this will require a declaration)
      * @param scope     Indication on the lexical scope of the variable
      */
-
     public VariableInfo(String varName, String className, boolean declare, int scope) {
         this.varName = varName;
         this.className = className;

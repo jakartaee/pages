@@ -94,7 +94,6 @@ import javax.servlet.jsp.*;
  * doInitBody() is invoked, the body is evaluated, doAfterBody() is invoked, and then, after zero or more iterations,
  * doEndTag() is invoked. If the custom action element is empty, only doStart() and doEndTag() are invoked.
  */
-
 public interface BodyTag extends IterationTag {
 
     /**
@@ -103,7 +102,6 @@ public interface BodyTag extends IterationTag {
      *
      * @deprecated As of Java JSP API 1.2, use BodyTag.EVAL_BODY_BUFFERED or IterationTag.EVAL_BODY_AGAIN.
      */
-
     @Deprecated
     public final static int EVAL_BODY_TAG = 2;
 
@@ -113,7 +111,6 @@ public interface BodyTag extends IterationTag {
      * Returned from doStartTag when it implements BodyTag. This is an illegal return value for doStartTag when the
      * class does not implement BodyTag.
      */
-
     public final static int EVAL_BODY_BUFFERED = 2;
 
     /**
@@ -134,7 +131,6 @@ public interface BodyTag extends IterationTag {
      * @see #doInitBody
      * @see #doAfterBody
      */
-
     void setBodyContent(BodyContent b);
 
     /**
@@ -149,7 +145,5 @@ public interface BodyTag extends IterationTag {
      * @throws JspException if an error occurred while processing this tag
      * @see #doAfterBody
      */
-
     void doInitBody() throws JspException;
-
 }
