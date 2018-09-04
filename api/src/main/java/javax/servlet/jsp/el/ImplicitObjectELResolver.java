@@ -544,6 +544,8 @@ public class ImplicitObjectELResolver extends ELResolver {
       /**
        *
        * Constructor
+       * @param pContext The PageContext for which this instance is to be
+       *                 constructed 
        **/
       public ImplicitObjects (PageContext pContext)
       {
@@ -553,7 +555,9 @@ public class ImplicitObjectELResolver extends ELResolver {
       //-------------------------------------
       /**
        *
-       * Finds the ImplicitObjects associated with the PageContext,
+       * @param pContext The PageContext for which the ImplicitObjects instance
+       *                 is required 
+       * @return the ImplicitObjects associated with the PageContext,
        * creating it if it doesn't yet exist.
        **/
       public static ImplicitObjects getImplicitObjects (PageContext pContext)
@@ -574,7 +578,7 @@ public class ImplicitObjectELResolver extends ELResolver {
       //-------------------------------------
       /**
        *
-       * Returns the Map that "wraps" page-scoped attributes
+       * @return the Map that "wraps" page-scoped attributes
        **/
       public Map<String, Object> getPageScopeMap ()
       {
@@ -587,7 +591,7 @@ public class ImplicitObjectELResolver extends ELResolver {
       //-------------------------------------
       /**
        *
-       * Returns the Map that "wraps" request-scoped attributes
+       * @return the Map that "wraps" request-scoped attributes
        **/
       public Map<String, Object> getRequestScopeMap ()
       {
@@ -600,7 +604,7 @@ public class ImplicitObjectELResolver extends ELResolver {
       //-------------------------------------
       /**
        *
-       * Returns the Map that "wraps" session-scoped attributes
+       * @return the Map that "wraps" session-scoped attributes
        **/
       public Map<String, Object> getSessionScopeMap ()
       {
@@ -613,7 +617,7 @@ public class ImplicitObjectELResolver extends ELResolver {
       //-------------------------------------
       /**
        *
-       * Returns the Map that "wraps" application-scoped attributes
+       * @return the Map that "wraps" application-scoped attributes
        **/
       public Map<String, Object> getApplicationScopeMap ()
       {
@@ -626,7 +630,7 @@ public class ImplicitObjectELResolver extends ELResolver {
       //-------------------------------------
       /**
        *
-       * Returns the Map that maps parameter name to a single parameter
+       * @return the Map that maps parameter name to a single parameter
        * values.
        **/
       public Map<String, String> getParamMap ()
@@ -640,7 +644,7 @@ public class ImplicitObjectELResolver extends ELResolver {
       //-------------------------------------
       /**
        *
-       * Returns the Map that maps parameter name to an array of parameter
+       * @return the Map that maps parameter name to an array of parameter
        * values.
        **/
       public Map<String, String[]> getParamsMap ()
@@ -654,7 +658,7 @@ public class ImplicitObjectELResolver extends ELResolver {
       //-------------------------------------
       /**
        *
-       * Returns the Map that maps header name to a single header
+       * @return the Map that maps header name to a single header
        * values.
        **/
       public Map<String, String> getHeaderMap ()
@@ -668,7 +672,7 @@ public class ImplicitObjectELResolver extends ELResolver {
       //-------------------------------------
       /**
        *
-       * Returns the Map that maps header name to an array of header
+       * @return the Map that maps header name to an array of header
        * values.
        **/
       public Map<String, String[]> getHeadersMap ()
@@ -682,7 +686,7 @@ public class ImplicitObjectELResolver extends ELResolver {
       //-------------------------------------
       /**
        *
-       * Returns the Map that maps init parameter name to a single init
+       * @return the Map that maps init parameter name to a single init
        * parameter values.
        **/
       public Map<String, String> getInitParamMap ()
@@ -696,7 +700,7 @@ public class ImplicitObjectELResolver extends ELResolver {
       //-------------------------------------
       /**
        *
-       * Returns the Map that maps cookie name to the first matching
+       * @return the Map that maps cookie name to the first matching
        * Cookie in request.getCookies().
        **/
       public Map<String, Cookie> getCookieMap ()
@@ -713,6 +717,10 @@ public class ImplicitObjectELResolver extends ELResolver {
       /**
        *
        * Creates the Map that "wraps" page-scoped attributes
+       * 
+       * @param pContext The PageContext for which the Map should be produced
+       * 
+       * @return the Map that "wraps" page-scoped attributes
        **/
       public static Map<String, Object> createPageScopeMap(PageContext pContext)
       {
@@ -751,6 +759,10 @@ public class ImplicitObjectELResolver extends ELResolver {
       /**
        *
        * Creates the Map that "wraps" request-scoped attributes
+       * 
+       * @param pContext The PageContext for which the Map should be produced
+       * 
+       * @return the Map that "wraps" request-scoped attributes
        **/
       public static Map<String, Object> createRequestScopeMap (PageContext pContext)
       {
@@ -789,6 +801,10 @@ public class ImplicitObjectELResolver extends ELResolver {
       /**
        *
        * Creates the Map that "wraps" session-scoped attributes
+       * 
+       * @param pContext The PageContext for which the Map should be produced
+       * 
+       * @return the Map that "wraps" session-scoped attributes
        **/
       public static Map<String, Object> createSessionScopeMap (PageContext pContext)
       {
@@ -827,6 +843,10 @@ public class ImplicitObjectELResolver extends ELResolver {
       /**
        *
        * Creates the Map that "wraps" application-scoped attributes
+       * 
+       * @param pContext The PageContext for which the Map should be produced
+       * 
+       * @return the Map that "wraps" application-scoped attributes
        **/
       public static Map<String, Object> createApplicationScopeMap (PageContext pContext)
       {
@@ -866,6 +886,10 @@ public class ImplicitObjectELResolver extends ELResolver {
        *
        * Creates the Map that maps parameter name to single parameter
        * value.
+       * 
+       * @param pContext The PageContext for which the Map should be produced
+       * 
+       * @return the Map that maps parameter name to single parameter value
        **/
       public static Map<String, String> createParamMap (PageContext pContext)
       {
@@ -903,6 +927,10 @@ public class ImplicitObjectELResolver extends ELResolver {
        *
        * Creates the Map that maps parameter name to an array of parameter
        * values.
+       * 
+       * @param pContext The PageContext for which the Map should be produced
+       * 
+       * @return the Map that maps parameter name to an array of parameter values.
        **/
       public static Map<String, String[]> createParamsMap (PageContext pContext)
       {
@@ -940,6 +968,10 @@ public class ImplicitObjectELResolver extends ELResolver {
        *
        * Creates the Map that maps header name to single header
        * value.
+       * 
+       * @param pContext The PageContext for which the Map should be produced
+       * 
+       * @return the Map that maps header name to single header value 
        **/
       public static Map<String, String> createHeaderMap (PageContext pContext)
       {
@@ -977,6 +1009,10 @@ public class ImplicitObjectELResolver extends ELResolver {
        *
        * Creates the Map that maps header name to an array of header
        * values.
+       * 
+       * @param pContext The PageContext for which the Map should be produced
+       * 
+       * @return the Map that maps header name to an array of header values
        **/
       public static Map<String, String[]> createHeadersMap (PageContext pContext)
       {
@@ -1022,6 +1058,10 @@ public class ImplicitObjectELResolver extends ELResolver {
        *
        * Creates the Map that maps init parameter name to single init
        * parameter value.
+       * 
+       * @param pContext The PageContext for which the Map should be produced
+       * 
+       * @return the Map that maps init parameter name to single init parameter value.
        **/
       public static Map<String, String> createInitParamMap(PageContext pContext)
       {
@@ -1058,6 +1098,11 @@ public class ImplicitObjectELResolver extends ELResolver {
        *
        * Creates the Map that maps cookie name to the first matching
        * Cookie in request.getCookies().
+       * 
+       * @param pContext The PageContext for which the Map should be produced
+       * 
+       * @return the Map that maps cookie name to the first matching Cookie in
+       *         request.getCookies().
        **/
       public static Map<String, Cookie> createCookieMap (PageContext pContext)
       {
@@ -1193,21 +1238,22 @@ public class ImplicitObjectELResolver extends ELResolver {
       //-------------------------------------
       /**
        *
-       * Returns an enumeration of the keys
+       * @return an enumeration of the keys
        **/
       public abstract Enumeration<K> enumerateKeys ();
 
       //-------------------------------------
       /**
        *
-       * Returns true if it is possible for this data source to change
+       * @return true if it is possible for this data source to change
        **/
       public abstract boolean isMutable ();
 
       //-------------------------------------
       /**
        *
-       * Returns the value associated with the given key, or null if not
+       * @param pKey The key for which the value should be obtained 
+       * @return the value associated with the given key, or null if not
        * found.
        **/
       public abstract V getValue (Object pKey);
@@ -1217,6 +1263,8 @@ public class ImplicitObjectELResolver extends ELResolver {
        *
        * Converts the MapSource to a Map.  If the map is not mutable, this
        * is cached
+       * 
+       * @return A Map created from the source Enumeration
        **/
       public Map<K, V> getAsMap ()
       {
