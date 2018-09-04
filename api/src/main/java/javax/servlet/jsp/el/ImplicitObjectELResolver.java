@@ -476,7 +476,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         Map<String, String> mInitParam;
         Map<String, Cookie> mCookie;
 
-        // -------------------------------------
+        
         /**
          *
          * Constructor
@@ -487,7 +487,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             mContext = pContext;
         }
 
-        // -------------------------------------
+
         /**
          *
          * @param pContext The PageContext for which the ImplicitObjects instance is required
@@ -502,7 +502,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             return objs;
         }
 
-        // -------------------------------------
+
         /**
          *
          * @return the Map that "wraps" page-scoped attributes
@@ -514,7 +514,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             return mPage;
         }
 
-        // -------------------------------------
+
         /**
          *
          * @return the Map that "wraps" request-scoped attributes
@@ -526,7 +526,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             return mRequest;
         }
 
-        // -------------------------------------
+
         /**
          *
          * @return the Map that "wraps" session-scoped attributes
@@ -538,7 +538,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             return mSession;
         }
 
-        // -------------------------------------
+
         /**
          *
          * @return the Map that "wraps" application-scoped attributes
@@ -550,7 +550,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             return mApplication;
         }
 
-        // -------------------------------------
+
         /**
          *
          * @return the Map that maps parameter name to a single parameter values.
@@ -562,7 +562,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             return mParam;
         }
 
-        // -------------------------------------
+
         /**
          *
          * @return the Map that maps parameter name to an array of parameter values.
@@ -574,7 +574,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             return mParams;
         }
 
-        // -------------------------------------
+
         /**
          *
          * @return the Map that maps header name to a single header values.
@@ -586,7 +586,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             return mHeader;
         }
 
-        // -------------------------------------
+
         /**
          *
          * @return the Map that maps header name to an array of header values.
@@ -598,7 +598,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             return mHeaders;
         }
 
-        // -------------------------------------
+
         /**
          *
          * @return the Map that maps init parameter name to a single init parameter values.
@@ -610,7 +610,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             return mInitParam;
         }
 
-        // -------------------------------------
+
         /**
          *
          * @return the Map that maps cookie name to the first matching Cookie in request.getCookies().
@@ -657,7 +657,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             };
         }
 
-        // -------------------------------------
+
         /**
          *
          * Creates the Map that "wraps" request-scoped attributes
@@ -690,7 +690,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             };
         }
 
-        // -------------------------------------
+
         /**
          *
          * Creates the Map that "wraps" session-scoped attributes
@@ -723,7 +723,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             };
         }
 
-        // -------------------------------------
+
         /**
          *
          * Creates the Map that "wraps" application-scoped attributes
@@ -756,7 +756,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             };
         }
 
-        // -------------------------------------
+
         /**
          *
          * Creates the Map that maps parameter name to single parameter value.
@@ -789,7 +789,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             };
         }
 
-        // -------------------------------------
+
         /**
          *
          * Creates the Map that maps parameter name to an array of parameter values.
@@ -822,7 +822,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             };
         }
 
-        // -------------------------------------
+
         /**
          *
          * Creates the Map that maps header name to single header value.
@@ -855,7 +855,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             };
         }
 
-        // -------------------------------------
+
         /**
          *
          * Creates the Map that maps header name to an array of header values.
@@ -896,7 +896,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             };
         }
 
-        // -------------------------------------
+
         /**
          *
          * Creates the Map that maps init parameter name to single init parameter value.
@@ -929,7 +929,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             };
         }
 
-        // -------------------------------------
+
         /**
          *
          * Creates the Map that maps cookie name to the first matching Cookie in request.getCookies().
@@ -954,8 +954,6 @@ public class ImplicitObjectELResolver extends ELResolver {
             }
             return ret;
         }
-
-        // -------------------------------------
     }
 
     // XXX - I moved this class from commons-el to an inner class here
@@ -980,73 +978,73 @@ public class ImplicitObjectELResolver extends ELResolver {
 
         Map<K, V> mMap;
 
-        // -------------------------------------
+
         @Override
         public void clear() {
             throw new UnsupportedOperationException();
         }
 
-        // -------------------------------------
+
         @Override
         public boolean containsKey(Object pKey) {
             return getValue(pKey) != null;
         }
 
-        // -------------------------------------
+
         @Override
         public boolean containsValue(Object pValue) {
             return getAsMap().containsValue(pValue);
         }
 
-        // -------------------------------------
+
         @Override
         public Set<Map.Entry<K, V>> entrySet() {
             return getAsMap().entrySet();
         }
 
-        // -------------------------------------
+
         @Override
         public V get(Object pKey) {
             return getValue(pKey);
         }
 
-        // -------------------------------------
+
         @Override
         public boolean isEmpty() {
             return !enumerateKeys().hasMoreElements();
         }
 
-        // -------------------------------------
+
         @Override
         public Set<K> keySet() {
             return getAsMap().keySet();
         }
 
-        // -------------------------------------
+
         @Override
         public V put(K pKey, V pValue) {
             throw new UnsupportedOperationException();
         }
 
-        // -------------------------------------
+
         @Override
         public void putAll(Map<? extends K, ? extends V> pMap) {
             throw new UnsupportedOperationException();
         }
 
-        // -------------------------------------
+
         @Override
         public V remove(Object pKey) {
             throw new UnsupportedOperationException();
         }
 
-        // -------------------------------------
+
         @Override
         public int size() {
             return getAsMap().size();
         }
 
-        // -------------------------------------
+
         @Override
         public Collection<V> values() {
             return getAsMap().values();
@@ -1061,14 +1059,14 @@ public class ImplicitObjectELResolver extends ELResolver {
          */
         public abstract Enumeration<K> enumerateKeys();
 
-        // -------------------------------------
+
         /**
          *
          * @return true if it is possible for this data source to change
          */
         public abstract boolean isMutable();
 
-        // -------------------------------------
+
         /**
          *
          * @param pKey The key for which the value should be obtained
@@ -1076,7 +1074,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          */
         public abstract V getValue(Object pKey);
 
-        // -------------------------------------
+
         /**
          *
          * Converts the MapSource to a Map. If the map is not mutable, this is cached
@@ -1095,7 +1093,7 @@ public class ImplicitObjectELResolver extends ELResolver {
             }
         }
 
-        // -------------------------------------
+
         /**
          *
          * Converts to a Map
@@ -1109,7 +1107,5 @@ public class ImplicitObjectELResolver extends ELResolver {
             }
             return ret;
         }
-
-        // -------------------------------------
     }
 }
