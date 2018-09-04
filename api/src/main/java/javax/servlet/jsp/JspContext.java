@@ -19,9 +19,6 @@ package javax.servlet.jsp;
 
 import java.util.Enumeration;
 
-import javax.servlet.jsp.el.ExpressionEvaluator;
-import javax.servlet.jsp.el.VariableResolver;
-
 import javax.el.ELContext;
 
 /**
@@ -228,7 +225,7 @@ public abstract class JspContext {
      * @since JSP 2.0
      */
     @Deprecated
-    public abstract ExpressionEvaluator getExpressionEvaluator();
+    public abstract javax.servlet.jsp.el.ExpressionEvaluator getExpressionEvaluator();
     
     /**
      * Returns an instance of a VariableResolver that provides access to the
@@ -242,7 +239,7 @@ public abstract class JspContext {
      * @since JSP 2.0
      */
     @Deprecated
-    public abstract VariableResolver getVariableResolver();
+    public abstract javax.servlet.jsp.el.VariableResolver getVariableResolver();
     
     /**
      * Returns the <code>ELContext</code> associated with this 
