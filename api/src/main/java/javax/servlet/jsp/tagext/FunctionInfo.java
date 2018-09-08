@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates and others.
+ * All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,8 +19,7 @@
 package javax.servlet.jsp.tagext;
 
 /**
- * Information for a function in a Tag Library.
- * This class is instantiated from the Tag Library Descriptor file (TLD)
+ * Information for a function in a Tag Library. This class is instantiated from the Tag Library Descriptor file (TLD)
  * and is available only at translation time.
  * 
  * @since JSP 2.0
@@ -29,14 +29,13 @@ public class FunctionInfo {
     /**
      * Constructor for FunctionInfo.
      *
-     * @param name The name of the function
-     * @param klass The class of the function
+     * @param name      The name of the function
+     * @param klass     The class of the function
      * @param signature The signature of the function
      */
-
     public FunctionInfo(String name, String klass, String signature) {
 
-	this.name = name;
+        this.name = name;
         this.functionClass = klass;
         this.functionSignature = signature;
     }
@@ -46,9 +45,8 @@ public class FunctionInfo {
      *
      * @return The name of the function
      */
-
     public String getName() {
-	return name;
+        return name;
     }
 
     /**
@@ -56,7 +54,6 @@ public class FunctionInfo {
      *
      * @return The class of the function
      */
-
     public String getFunctionClass() {
         return functionClass;
     }
@@ -66,7 +63,6 @@ public class FunctionInfo {
      *
      * @return The signature of the function
      */
-
     public String getFunctionSignature() {
         return functionSignature;
     }

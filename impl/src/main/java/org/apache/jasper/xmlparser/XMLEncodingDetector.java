@@ -592,11 +592,11 @@ public class XMLEncodingDetector {
 			fCurrentEntity.position++;
 			offset++;
 		    }
-		    /*** NEWLINE NORMALIZATION ***/
+		    /*** NEWLINE NORMALIZATION **/
 		    else {
 			newlines++;
 		    }
-		    /***/
+		    /**/
 		}
 		else if (c == '\n') {
 		    newlines++;
@@ -615,7 +615,7 @@ public class XMLEncodingDetector {
 			 fCurrentEntity.position++;
 			 offset++;
 			 }
-			 /***/
+			 /**/
 		}
 		else {
 		    fCurrentEntity.position--;
@@ -747,7 +747,7 @@ public class XMLEncodingDetector {
 			    fCurrentEntity.position++;
 			    offset++;
 			}
-			/*** NEWLINE NORMALIZATION ***/
+			/*** NEWLINE NORMALIZATION **/
 			else {
 			    newlines++;
 			}
@@ -935,7 +935,7 @@ public class XMLEncodingDetector {
 			 fCurrentEntity.position++;
 			 }
 			 }
-			 /***/
+			 /**/
 		}
 		else {
 		    fCurrentEntity.columnNumber++;

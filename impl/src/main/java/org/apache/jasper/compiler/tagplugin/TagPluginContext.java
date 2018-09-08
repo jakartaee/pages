@@ -57,7 +57,7 @@ public interface TagPluginContext {
      *           invoked with the same id more than once in the translation
      *           unit, only the first declaration will be taken.
      * @param text The text of the declaration.
-     **/
+     */
     void generateDeclaration(String id, String text);
 
     /**

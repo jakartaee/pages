@@ -31,14 +31,14 @@ import javax.el.ValueExpression;
  * 
  * @author Kin-man Chung
  * @version $Change: 181177 $$DateTime: 2001/06/26 08:45:09 $$Author: kchung $
- **/
+ */
 
 public class VariableMapperImpl extends VariableMapper
 {
     //-------------------------------------
     /**
      * Constructor
-     **/
+     */
     public VariableMapperImpl () {
         map = new HashMap<String, ValueExpression>();
     }
@@ -47,7 +47,7 @@ public class VariableMapperImpl extends VariableMapper
     /**
      * Resolves the specified variable within the given context.
      * Returns null if the variable is not found.
-     **/
+     */
     public ValueExpression resolveVariable (String variable) {
         return map.get(variable);
     }

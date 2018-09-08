@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates and others.
+ * All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,8 +19,7 @@
 package javax.servlet.jsp.tagext;
 
 /**
- * Serves as a base class for Tag and SimpleTag.  
- * This is mostly for organizational and type-safety purposes.
+ * Serves as a base class for Tag and SimpleTag. This is mostly for organizational and type-safety purposes.
  *
  * @since JSP 2.0
  */
