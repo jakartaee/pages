@@ -25,8 +25,8 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>javax.servlet.jsp</groupId>
-    <artifactId>javax.servlet.jsp-api</artifactId>
+    <groupId>jakarta.servlet.jsp</groupId>
+    <artifactId>jakarta.servlet.jsp-api</artifactId>
     <version>2.3.4-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>JavaServer Pages(TM) API</name>
