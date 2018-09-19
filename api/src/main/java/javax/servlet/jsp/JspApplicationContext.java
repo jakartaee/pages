@@ -38,6 +38,7 @@ import javax.el.ELContextListener;
  *
  * <p>
  * The <code>JspApplicationContext</code> provides the following services to JSP applications:
+ * </p>
  * <ul>
  * <li>Allows registration of <code>ELResolver</code>s, which are used to resolve variables in EL expressions contained
  * in JSP pages and tag files.</li>
@@ -47,7 +48,6 @@ import javax.el.ELContextListener;
  * <code>ELContext</code> is created. This is necessary when an application wishes to make custom context objects
  * available to their pluggable <code>ELResolver</code>s.</li>
  * </ul>
- * </p>
  *
  * @see javax.servlet.ServletContext
  * @see JspFactory
@@ -70,6 +70,7 @@ public interface JspApplicationContext {
      * <p>
      * When evaluating an expression, the JSP container will consult a set of standard resolvers as well as any
      * resolvers registered via this method. The set of resolvers are consulted in the following order:
+     * </p>
      * <ul>
      * <li>{@link javax.servlet.jsp.el.ImplicitObjectELResolver}</li>
      * <li><code>ELResolver</code>s registered via this method, in the order in which they are registered.</li>
@@ -79,13 +80,13 @@ public interface JspApplicationContext {
      * <li>{@link javax.el.BeanELResolver}</li>
      * <li>{@link javax.servlet.jsp.el.ScopedAttributeELResolver}</li>
      * </ul>
-     * </p>
      *
      * <p>
      * It is illegal to register an <code>ELResolver</code> after the application has received any request from the
      * client. If an attempt is made to register an <code>ELResolver</code> after that time, an
      * <code>IllegalStateException</code> is thrown.
      * </p>
+     * <p>
      * This restriction is in place to allow the JSP container to optimize for the common case where no additional
      * <code>ELResolver</code>s are in the chain, aside from the standard ones. It is permissible to add
      * <code>ELResolver</code>s before or after initialization to a <code>CompositeELResolver</code> that is already in

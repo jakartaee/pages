@@ -47,7 +47,7 @@ import javax.servlet.jsp.*;
  * handler implements the TryCatchFinally interface; see that interface for details.
  *
  * <p>
- * <IMG src="doc-files/IterationTagProtocol.gif" alt="Lifecycle Details Transition Diagram for IterationTag"/>
+ * <IMG src="doc-files/IterationTagProtocol.gif" alt="Lifecycle Details Transition Diagram for IterationTag">
  *
  * <p>
  * <B>Empty and Non-Empty Action</B>

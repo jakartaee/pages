@@ -43,6 +43,7 @@ import javax.el.ELResolver;
  * 
  * <p>
  * The following variables are resolved by this <code>ELResolver</code>, as per the JSP specification:
+ * </p>
  * <ul>
  * <li><code>pageContext</code> - the <code>PageContext</code> object.</li>
  * <li><code>pageScope</code> - a <code>Map</code> that maps page-scoped attribute names to their values.</li>
@@ -51,7 +52,7 @@ import javax.el.ELResolver;
  * <li><code>applicationScope</code> - a <code>Map</code> that maps application-scoped attribute names to their
  * values.</li>
  * <li><code>param</code> - a <code>Map</code> that maps parameter names to a single String parameter value (obtained by
- * calling <code>ServletRequest.getParameter(String name)).</li>
+ * calling <code>ServletRequest.getParameter(String name)</code>).</li>
  *   <li><code>paramValues</code> - a <code>Map</code> that maps parameter names to a <code>String[]</code> of all
  * values for that parameter (obtained by calling <code>ServletRequest.getParameterValues(String name))</code>.</li>
  * <li><code>header</code> - a <code>Map</code> that maps header names to a single String header value (obtained by
@@ -66,7 +67,6 @@ import javax.el.ELResolver;
  * <li><code>initParam</code> - a <code>Map</code> that maps context initialization parameter names to their String
  * parameter value (obtained by calling <code>ServletContext.getInitParameter(String name))</code>.</li>
  * </ul>
- * </p>
  *
  * @see javax.el.ELResolver
  * @since JSP 2.1
@@ -265,20 +265,20 @@ public class ImplicitObjectELResolver extends ELResolver {
      * The <code>Iterator</code> returned must contain one instance of {@link java.beans.FeatureDescriptor} for each of
      * the EL implicit objects defined by the JSP spec. Each info object contains information about a single implicit
      * object, and is initialized as follows:
+     * </p>
      * <dl>
-     * <li>displayName - The name of the implicit object.</li>
-     * <li>name - Same as displayName property.</li>
-     * <li>shortDescription - A suitable description for the implicit object. Will vary by implementation.</li>
-     * <li>expert - <code>false</code></li>
-     * <li>hidden - <code>false</code></li>
-     * <li>preferred - <code>true</code></li>
+     * <dt>displayName</dt><dd>- The name of the implicit object.</dd>
+     * <dt>name</dt><dd>- Same as displayName property.</dd>
+     * <dt>shortDescription</dt><dd>- A suitable description for the implicit object. Will vary by implementation.</dd>
+     * <dt>expert</dt><dd>- <code>false</code></dd>
+     * <dt>hidden</dt><dd>- <code>false</code></dd>
+     * <dt>preferred</dt><dd>- <code>true</code></dd>
      * </dl>
      * In addition, the following named attributes must be set in the returned <code>FeatureDescriptor</code>s:
      * <dl>
-     * <li>{@link ELResolver#TYPE} - The runtime type of the implicit object.</li>
-     * <li>{@link ELResolver#RESOLVABLE_AT_DESIGN_TIME} - <code>true</code>.</li>
+     * <dt>{@link ELResolver#TYPE}</dt><dd>- The runtime type of the implicit object.</dd>
+     * <dt>{@link ELResolver#RESOLVABLE_AT_DESIGN_TIME}</dt><dd>- <code>true</code>.</dd>
      * </dl>
-     * </p>
      *
      * @param context The context of this evaluation.
      * @param base    Only <code>null</code> is handled by this resolver. Other values will result in a
