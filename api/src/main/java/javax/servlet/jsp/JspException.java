@@ -46,7 +46,9 @@ public class JspException extends Exception {
     /**
      * Constructs a new <code>JspException</code> with the specified detail message and cause.
      *
-     * The cause is saved for later retrieval by the {@link #getCause()} and {@link #getRootCause()} methods.
+     * @param message a <code>String</code> specifying the text of the exception message
+     * @param cause   the cause which is saved for later retrieval by the {@link #getCause()} and
+     *                {@link #getRootCause()} methods.
      *
      * @see java.lang.Exception#Exception(String, Throwable)
      */
@@ -57,7 +59,8 @@ public class JspException extends Exception {
     /**
      * Constructs a new <code>JspException</code> with the specified cause.
      *
-     * The cause is saved for later retrieval by the {@link #getCause()} and {@link #getRootCause()} methods.
+     * @param cause the cause which is saved for later retrieval by the {@link #getCause()} and {@link #getRootCause()}
+     *              methods.
      *
      * @see java.lang.Exception#Exception(Throwable)
      */
