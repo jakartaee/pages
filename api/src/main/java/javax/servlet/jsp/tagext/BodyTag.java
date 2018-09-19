@@ -68,7 +68,7 @@ import javax.servlet.jsp.*;
  * doStartTag(), setBodyContent(), doInitBody(), BODY, doAfterBody() interrupt the execution sequence and are propagated
  * up the stack, unless the tag handler implements the TryCatchFinally interface; see that interface for details.
  * <p>
- * <IMG src="doc-files/BodyTagProtocol.gif" alt="Lifecycle Details Transition Diagram for BodyTag"/>
+ * <IMG src="doc-files/BodyTagProtocol.gif" alt="Lifecycle Details Transition Diagram for BodyTag">
  *
  * <p>
  * <B>Empty and Non-Empty Action</B>

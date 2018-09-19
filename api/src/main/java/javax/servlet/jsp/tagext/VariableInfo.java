@@ -66,7 +66,7 @@ package javax.servlet.jsp.tagext;
  * is best described through a picture:
  *
  * <p>
- * <IMG src="doc-files/VariableInfo-1.gif" alt="NESTED, AT_BEGIN and AT_END Variable Scopes"/>
+ * <IMG src="doc-files/VariableInfo-1.gif" alt="NESTED, AT_BEGIN and AT_END Variable Scopes">
  *
  * <p>
  * The JSP 2.0 specification defines the interpretation of 3 values:

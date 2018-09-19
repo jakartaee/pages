@@ -231,22 +231,22 @@ public class ScopedAttributeELResolver extends ELResolver {
      * The <code>Iterator</code> returned must contain one instance of {@link java.beans.FeatureDescriptor} for each
      * scoped attribute found in any scope. Each info object contains information about a single scoped attribute, and
      * is initialized as follows:
+     * </p>
      *
      * <dl>
-     * <li>displayName - The name of the scoped attribute.</li>
-     * <li>name - Same as displayName property.</li>
-     * <li>shortDescription - A suitable description for the scoped attribute. Should include the attribute's current
-     * scope (page, request, session, application). Will vary by implementation.</li>
-     * <li>expert - <code>false</code></li>
-     * <li>hidden - <code>false</code></li>
-     * <li>preferred - <code>true</code></li>
+     * <dt>displayName</dt><dd>- The name of the scoped attribute.</dd>
+     * <dt>name</dt><dd>- Same as displayName property.</dd>
+     * <dt>shortDescription</dt><dd>- A suitable description for the scoped attribute. Should include the attribute's current
+     * scope (page, request, session, application). Will vary by implementation.</dd>
+     * <dt>expert</dt><dd>- <code>false</code></dd>
+     * <dt>hidden</dt><dd>- <code>false</code></dd>
+     * <dt>preferred</dt><dd>- <code>true</code></dd>
      * </dl>
      * In addition, the following named attributes must be set in the returned <code>FeatureDescriptor</code>s:
      * <dl>
-     * <li>{@link ELResolver#TYPE} - The current runtime type of the scoped attribute.</li>
-     * <li>{@link ELResolver#RESOLVABLE_AT_DESIGN_TIME} - <code>true</code>.</li>
+     * <dt>{@link ELResolver#TYPE}</dt><dd>- The current runtime type of the scoped attribute.</dd>
+     * <dt>{@link ELResolver#RESOLVABLE_AT_DESIGN_TIME}</dt><dd>- <code>true</code>.</dd>
      * </dl>
-     * </p>
      * 
      * @param context The context of this evaluation.
      * @param base    Only <code>null</code> is handled by this resolver. Other values will result in a

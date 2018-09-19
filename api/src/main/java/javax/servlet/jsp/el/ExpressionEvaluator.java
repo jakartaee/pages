@@ -44,13 +44,13 @@ package javax.servlet.jsp.el;
  *
  * <p>
  * The following are examples of syntactically legal EL expressions:
+ * </p>
  *
  * <ul>
  * <li><code>${person.lastName}</code></li>
  * <li><code>${8 * 8}</code></li>
  * <li><code>${my:reverse('hello')}</code></li>
  * </ul>
- * </p>
  *
  * @deprecated As of JSP 2.1, replaced by {@link javax.el.ExpressionFactory}
  * @since JSP 2.0
