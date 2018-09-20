@@ -35,12 +35,10 @@ with separate start and end tags, and one where the start and
 end tags are combined. The two following examples are identical:
 </p>
 <blockquote>
-<code>
 <pre>
-&lt;x:foo att="myObject"&gt;&lt/foo&gt;
+&lt;x:foo att="myObject"&gt;&lt;/foo&gt;
 &lt;x:foo att="myObject"/&gt;
 </pre>
-</code>
 </blockquote>
 
 <p>
@@ -48,13 +46,11 @@ A non-empty tag has a start tag, a body, and an end tag.  A
 prototypical example is of the form:
 </p>
 <blockquote>
-<code>
 <pre>
 &lt;x:foo att="myObject" &gt;
   BODY
 &lt;/x:foo/&gt;
 </pre>
-</code>
 </blockquote>
 
 
@@ -85,9 +81,7 @@ A JSP tag library contains
   <li><a href="#translation">Translation-time Classes</a></li>
 </ol>
 
-<a name="classic">
-<h2>1. Classic Tag Handlers</h2>
-</a>
+<h2><a name="classic">1. Classic Tag Handlers</a></h2>
 This section introduces the notion of a tag handler and describes the
 classic types of tag handler.
 
@@ -220,9 +214,7 @@ non-empty actions using that tag will produce a translation error.
 <p>
 A non-empty action has a body.  
 
-<a name="tag interface">
-<h3>The Tag Interface</h3>
-</a>   
+<h3><a name="tag_interface">The Tag Interface</a></h3>
 
 <p> A Tag handler that does not want to process its body can implement
 just the Tag interface.  A tag handler may not want to process its
@@ -245,9 +237,8 @@ be evaluated or not.
 body of a tag, its doEndTag method will not be evaluated.  See the
 TryCatchFinally tag for methods that are guaranteed to be evaluated.
 
-<a name="iterationtag interface">
-<h3>The IterationTag Interface</h3>
-</a>   
+<h3><a name="iterationtag_interface">The IterationTag Interface</a></h3>
+
 
 <p> The IterationTag interface is used to repeatedly reevaluate
 the body of a custom action.  The interface has one method:
@@ -272,9 +263,8 @@ within the page.
 implementing the Tag or IterationTag interfaces.
 
 
-<a name="bodycontent">
-<h2>2. Tag Handlers that want Access to their Body Content</h2>
-</a>
+<h2><a name="bodycontent">2. Tag Handlers that want Access to their Body
+Content</a></h2>
 
 <p>The evaluation of a body is delivered into a <code>BodyContent</code>
 object.  This is then made available to tag handlers that implement
@@ -316,9 +306,7 @@ that was valid when the start tag was encountered (that is available
 from the PageContext object passed to the handler in setPageContext).
 
 
-<a name="dynamic">
-<h2>3. Dynamic Attributes</h2>
-</a>
+<h2><a name="dynamic">3. Dynamic Attributes</a></h2>
 
 <p>Any tag handler can optionally extend the <code>DynamicAttributes</code>
 interface to indicate that it supports dynamic attributes.  In addition 
@@ -398,9 +386,7 @@ The attributes are set using the calls:
 &lt;/jsp:root&gt;
 </pre>
 
-<a name="thmgmt">
-<h2>4. Annotated Tag Handler Management Example</h2>
-</a>
+<h2><a name="thmgmt">4. Annotated Tag Handler Management Example</a></h2>
 
 Below is a somewhat complete example of the way one JSP container
 could choose to do some tag handler management.  There are many
@@ -561,9 +547,7 @@ try {
 }
 </pre>
 
-<a name="coop">
-<h2>5. Cooperating Actions</h2>
-</a>
+<h2><a name="coop">5. Cooperating Actions</a></h2>
 
 Actions can cooperate with other actions and with scripting code
 in a number of ways.
@@ -587,17 +571,15 @@ Then the <code>bar</code>
 action might access that server-side object and take some action.
 
 <blockquote>
-<code>
 <pre>
 &lt;x:foo id="myObject" /&gt;
 &lt;x:bar ref="myObjet" /&gt;
 </pre>
-</code>
 </blockquote>
 
 <p>
 
-In a JSP implementation, the mapping "name"->value is kept by the
+In a JSP implementation, the mapping "name"-&gt;value is kept by the
 implicit object
 <code>pageContext</code>.
 
@@ -621,13 +603,11 @@ it is found because the specific <code>foo</code> element is the
 closest enclosing instance of a known element type.
 
 <blockquote>
-<code>
 <pre>
 &lt;foo&gt;
    &lt;bar/&gt;
 &lt;/foo&gt;
 </pre>
-</code>
 </blockquote>
 
 <p>
@@ -636,9 +616,7 @@ This functionality is supported through the
 which uses a reference to parent tag kept by each Tag instance,
 which effectively provides a run-time execution stack.
 
-<a name="simple">
-<h2>6. Simple Tag Handlers</h2>
-</a>
+<h2><a name="simple">6. Simple Tag Handlers</a></h2>
 
 <p> This section presents the API to implement Simple Tag Handlers.  
 Simple Tag Handlers present a much simpler invocation 
@@ -773,9 +751,7 @@ section, the semantics default to that of a classic tag handler.</p>
   classic tag handlers.</li>
 </ol>
 
-<a name="fragment">
-<h2>7. JSP Fragments</h2>
-</a>
+<h2><a name="fragment">7. JSP Fragments</a></h2>
 
 <p>JSP Fragments are represented in Java by an instance of the 
 <code>javax.servlet.jsp.tagext.JspFragment abstract class</code>.
@@ -932,9 +908,7 @@ recursively invoke itself, indirectly.</p>
 
 </ol>
 
-<a name="sths">
-<h2>8. Example Simple Tag Handler Scenario</h2>
-</a>
+<h2><a name="sths">8. Example Simple Tag Handler Scenario</a></h2>
 
 <p>The following non-normative example is intended to help solidify 
 some of the concepts relating to Tag Files, JSP Fragments and Simple
@@ -1287,9 +1261,7 @@ public class MySimpleTag
 
 </pre>
 
-<a name="translation">
-<h2>9. Translation-time Classes</h2>
-</a>
+<h2><a name="translation">9. Translation-time Classes</a></h2>
 
 The following classes are used at translation time.
 
