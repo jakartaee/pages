@@ -37,12 +37,12 @@ package javax.servlet.jsp.tagext;
  * </p>
  * <p>
  * The JSP container must provide a value for <code>jspId</code> that conforms to the following rules:
+ * </p>
  * <ul>
  * <li>It must start with a letter (as defined by the <code>Character.isLetter()</code> method) or underscore ('_').
  * <li>Subsequent characters may be letters (as defined by the <code>Character.isLetter()</code> method), digits (as
  * defined by the <code>Character.isDigit()</code> method), dashes ('-'), or underscores ('_')
  * </ul>
- * </p>
  * <p>
  * Note that the rules exclude colons ':' in a <code>jspId</code>, and that they are the same rules used for a component
  * ID in JavaServer Faces.

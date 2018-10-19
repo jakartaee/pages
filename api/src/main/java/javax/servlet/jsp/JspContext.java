@@ -222,13 +222,13 @@ public abstract class JspContext {
      * updates the value of the "out" attribute in the page scope attribute namespace of the JspContext.
      * <p>
      * The returned JspWriter must implement all methods and behave as though it were unbuffered. More specifically:
+     * </p>
      * <ul>
      * <li>clear() must throw an IOException</li>
      * <li>clearBuffer() does nothing</li>
      * <li>getBufferSize() always returns 0</li>
      * <li>getRemaining() always returns 0</li>
      * </ul>
-     * </p>
      *
      * @param writer The Writer for the returned JspWriter to send output to.
      * @return a new JspWriter that writes to the given Writer.

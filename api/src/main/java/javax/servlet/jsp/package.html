@@ -66,9 +66,9 @@ The {@link javax.servlet.jsp.JspException} class is the base class for all JSP
 exceptions.  The {@link javax.servlet.jsp.JspTagException} and 
 {@link javax.servlet.jsp.SkipPageException} exceptions are used by the
 tag extension mechanism.</p>
+<p>
 For JSP error pages, the {@link javax.servlet.jsp.ErrorData} class encapsulates information 
 about the error.
-
 </p>
 
 <h2>An Implementation Example</h2>
@@ -81,12 +81,10 @@ implementation default {@link javax.servlet.jsp.JspFactory}.
 
 <p>Here is one example of how to use these classes
 
-<p>
-<code>
 <pre>
- public class foo implements Servlet {
+public class foo implements Servlet {
 
- // ...
+// ...
 
 public void _jspService(HttpServletRequest request,
 			HttpServletResponse response)
@@ -120,7 +118,6 @@ public void _jspService(HttpServletRequest request,
     }
 }
 </pre>
-</code>
 
 </body>
 </html>
