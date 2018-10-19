@@ -548,7 +548,7 @@ public class JspRuntimeLibrary {
 	    throw new JasperException(ex);
 	}
     }
-**/
+*/
     public static void handleSetPropertyExpression(Object bean,
         String prop, String expression, PageContext pageContext,
 	ProtectedFunctionMapper functionMapper )

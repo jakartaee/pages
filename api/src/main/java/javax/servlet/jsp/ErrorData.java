@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates and others.
+ * All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,16 +19,13 @@
 package javax.servlet.jsp;
 
 /**
- * Contains information about an error, for error pages.
- * The information contained in this instance is meaningless if not used
- * in the context of an error page.  To indicate a JSP is an error page,
- * the page author must set the isErrorPage attribute of the page directive
- * to "true".
+ * Contains information about an error, for error pages. The information contained in this instance is meaningless if
+ * not used in the context of an error page. To indicate a JSP is an error page, the page author must set the
+ * isErrorPage attribute of the page directive to "true".
  *
  * @see PageContext#getErrorData
  * @since JSP 2.0
  */
-
 public final class ErrorData {
 
     private Throwable throwable;
@@ -38,18 +36,16 @@ public final class ErrorData {
     /**
      * Creates a new ErrorData object.
      *
-     * @param throwable The Throwable that is the cause of the error
-     * @param statusCode The status code of the error
-     * @param uri The request URI
+     * @param throwable   The Throwable that is the cause of the error
+     * @param statusCode  The status code of the error
+     * @param uri         The request URI
      * @param servletName The name of the servlet invoked
      */
-    public ErrorData( Throwable throwable, int statusCode, String uri, 
-	String servletName )
-    {
-	this.throwable = throwable;
-	this.statusCode = statusCode;
-	this.uri = uri;
-	this.servletName = servletName;
+    public ErrorData(Throwable throwable, int statusCode, String uri, String servletName) {
+        this.throwable = throwable;
+        this.statusCode = statusCode;
+        this.uri = uri;
+        this.servletName = servletName;
     }
 
     /**
@@ -58,7 +54,7 @@ public final class ErrorData {
      * @return The Throwable that caused the error
      */
     public Throwable getThrowable() {
-	return this.throwable;
+        return this.throwable;
     }
 
     /**
@@ -67,7 +63,7 @@ public final class ErrorData {
      * @return The status code of the error
      */
     public int getStatusCode() {
-	return this.statusCode;
+        return this.statusCode;
     }
 
     /**
@@ -76,7 +72,7 @@ public final class ErrorData {
      * @return The request URI
      */
     public String getRequestURI() {
-	return this.uri;
+        return this.uri;
     }
 
     /**
@@ -85,6 +81,6 @@ public final class ErrorData {
      * @return The name of the servlet invoked
      */
     public String getServletName() {
-	return this.servletName;
+        return this.servletName;
     }
 }

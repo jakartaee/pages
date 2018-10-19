@@ -37,7 +37,7 @@ import javax.servlet.jsp.el.VariableResolver;
  * 
  * @author Kin-man Chung
  * @version $Change: 181177 $$DateTime: 2001/06/26 08:45:09 $$Author: kchung $
- **/
+ */
 
 public class ExpressionEvaluatorImpl extends ExpressionEvaluator
 {
@@ -46,7 +46,7 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
     //-------------------------------------
     /**
      * Constructor
-     **/
+     */
     public ExpressionEvaluatorImpl (PageContext pageContext) {
         this.pageContext = pageContext;
     }
