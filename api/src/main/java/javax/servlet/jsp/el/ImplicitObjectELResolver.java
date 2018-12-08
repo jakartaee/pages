@@ -171,7 +171,7 @@ public class ImplicitObjectELResolver extends ELResolver {
      * @throws NullPointerException if context is <code>null</code>
      */
     @Override
-    public Class<?> getType(ELContext context, Object base, Object property) {
+    public Class getType(ELContext context, Object base, Object property) {
 
         if (context == null) {
             throw new NullPointerException();

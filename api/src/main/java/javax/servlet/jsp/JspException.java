@@ -75,7 +75,6 @@ public class JspException extends Exception {
      *
      * @deprecated As of JSP 2.1, replaced by {@link #getCause()}
      */
-    @Deprecated
     public Throwable getRootCause() {
         return getCause();
     }
