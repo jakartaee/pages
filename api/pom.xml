@@ -96,11 +96,15 @@
     </scm>
     
     <dependencies>
+        <!--
+            Note, must reference javax here and not jakarta. 
+            JSP 2.3 depends on Servlet 3, which in only available under the javax namespace.
+        -->
         <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>3.0.1</version>
-            <scope>provided</scope>
+            <groupId>javax.servlet</groupId>		
+            <artifactId>javax.servlet-api</artifactId>		
+            <version>3.0.1</version>		
+            <scope>provided</scope>		
         </dependency>
         <dependency>
             <groupId>jakarta.el</groupId>
@@ -108,7 +112,7 @@
             <version>3.0.2</version>
             <scope>provided</scope>
         </dependency>
-   </dependencies>
+    </dependencies>
 
     <build>
         <plugins>
