@@ -18,19 +18,20 @@
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
     </parent>
-
-    <modelVersion>4.0.0</modelVersion>
+    
     <groupId>jakarta.servlet.jsp</groupId>
     <artifactId>jakarta.servlet.jsp-api</artifactId>
     <version>2.3.4-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    
     <name>JavaServer Pages(TM) API</name>
-
     <description>JavaServer Pages API</description>
     <url>https://projects.eclipse.org/projects/ee4j.jsp</url>
     
@@ -71,10 +72,12 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    
     <issueManagement>
         <system>github</system>
         <url>https://github.com/eclipse-ee4j/jsp-api/issues</url>
     </issueManagement>
+    
     <mailingLists>
         <mailingList>
           <name>JSTL dev mailing list</name>
@@ -83,13 +86,33 @@
           <unsubscribe>https://dev.eclipse.org/mailman/listinfo/jsp-dev</unsubscribe>
           <archive>https://dev.eclipse.org/mhonarc/lists/jsp-dev</archive>
         </mailingList>
-    </mailingLists> 
+    </mailingLists>
+    
     <scm>
         <connection>scm:git:https://github.com/eclipse-ee4j/jsp-api.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/eclipse-ee4j/jsp-api.git</developerConnection>
         <url>https://github.com/eclipse-ee4j/jsp-api</url>
         <tag>HEAD</tag>
     </scm>
+    
+    <dependencies>
+        <!--
+            Note, must reference javax here and not jakarta. 
+            JSP 2.3 depends on Servlet 3, which in only available under the javax namespace.
+        -->
+        <dependency>
+            <groupId>javax.servlet</groupId>		
+            <artifactId>javax.servlet-api</artifactId>		
+            <version>3.0.1</version>		
+            <scope>provided</scope>		
+        </dependency>
+        <dependency>
+            <groupId>jakarta.el</groupId>
+            <artifactId>jakarta.el-api</artifactId>
+            <version>3.0.2</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
@@ -227,6 +250,7 @@
             </resource>
         </resources>
     </build>
+    
     <reporting>
         <plugins>
             <plugin>
@@ -241,18 +265,4 @@
         </plugins>
     </reporting>
 
-    <dependencies>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.el</groupId>
-            <artifactId>jakarta.el-api</artifactId>
-            <version>3.0.2</version>
-            <scope>provided</scope>
-        </dependency>
-   </dependencies>
 </project>
