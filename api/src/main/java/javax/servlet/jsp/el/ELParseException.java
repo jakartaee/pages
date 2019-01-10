@@ -24,7 +24,6 @@ package javax.servlet.jsp.el;
  * @deprecated As of JSP 2.1, replaced by {@link javax.el.ELException}
  * @since JSP 2.0
  */
-@Deprecated
 public class ELParseException extends ELException {
 
     private static final long serialVersionUID = 3521581805886060118L;
