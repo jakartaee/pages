@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 1997, 2019 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0, which is available at
@@ -18,31 +18,32 @@
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    
+
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
         <version>1.0.5</version>
     </parent>
-    
+
     <groupId>jakarta.servlet.jsp</groupId>
     <artifactId>jakarta.servlet.jsp-api</artifactId>
     <version>2.3.4-SNAPSHOT</version>
-    
+
     <name>JavaServer Pages(TM) API</name>
     <description>JavaServer Pages API</description>
     <url>https://projects.eclipse.org/projects/ee4j.jsp</url>
-    
+
     <properties>
         <spec.version>2.3</spec.version>
         <extensionName>javax.servlet.jsp</extensionName>
-        <bundle.symbolicName>javax.servlet.jsp-api</bundle.symbolicName>
+        <bundle.symbolicName>jakarta.servlet.jsp-api</bundle.symbolicName>
         <vendorName>Eclipse Foundation</vendorName>
         <findbugs.version>2.5.2</findbugs.version>
         <findbugs.exclude />
         <findbugs.threshold>High</findbugs.threshold>
+        <legal.doc.source>${project.basedir}/..</legal.doc.source>
     </properties>
 
     <contributors>
@@ -50,7 +51,7 @@
             <name>Kin Man Chung</name>
         </contributor>
     </contributors>
-    
+
     <developers>
         <developer>
             <id>yaminikb</id>
@@ -72,12 +73,12 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-    
+
     <issueManagement>
         <system>github</system>
         <url>https://github.com/eclipse-ee4j/jsp-api/issues</url>
     </issueManagement>
-    
+
     <mailingLists>
         <mailingList>
           <name>JSTL dev mailing list</name>
@@ -87,24 +88,24 @@
           <archive>https://dev.eclipse.org/mhonarc/lists/jsp-dev</archive>
         </mailingList>
     </mailingLists>
-    
+
     <scm>
         <connection>scm:git:https://github.com/eclipse-ee4j/jsp-api.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/eclipse-ee4j/jsp-api.git</developerConnection>
         <url>https://github.com/eclipse-ee4j/jsp-api</url>
         <tag>HEAD</tag>
     </scm>
-    
+
     <dependencies>
         <!--
-            Note, must reference javax here and not jakarta. 
+            Note, must reference javax here and not jakarta.
             JSP 2.3 depends on Servlet 3, which in only available under the javax namespace.
         -->
         <dependency>
-            <groupId>javax.servlet</groupId>		
-            <artifactId>javax.servlet-api</artifactId>		
-            <version>3.0.1</version>		
-            <scope>provided</scope>		
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>jakarta.el</groupId>
@@ -116,6 +117,32 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>add-legal-resource</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>add-resource</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${legal.doc.source}</directory>
+                                    <includes>
+                                        <include>NOTICE.md</include>
+                                        <include>LICENSE.md</include>
+                                    </includes>
+                                    <targetPath>META-INF</targetPath>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -176,41 +203,17 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.1</version>
-                <configuration>
-                    <includePom>true</includePom>
-                </configuration>
-                <executions>
-                    <execution>
-                       <id>attach-sources</id>
-                       <goals>
-                           <goal>jar-no-fork</goal> 
-                       </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.1</version>
-                <executions>
-                  <execution>
-                    <id>attach-javadocs</id>
-                      <goals>
-                          <goal>jar</goal>
-                      </goals>
-                    <configuration>
-                      <groups>
+                <version>3.0.1</version>
+                <configuration>
+                    <groups>
                         <group>
-                          <title>JavaServer Pages API Documentation</title>
-                          <packages>javax.servlet.jsp</packages>
+                            <title>JavaServer Pages API Documentation</title>
+                            <packages>javax.servlet.jsp</packages>
                         </group>
-                      </groups>
-                    </configuration>
-                  </execution>
-                </executions>
-            </plugin>   
+                    </groups>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
@@ -222,24 +225,6 @@
                     <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>                           
-                <artifactId>maven-release-plugin</artifactId>                         
-                 <version>2.5.2</version>
-                <configuration>                                                       
-                    <mavenExecutorId>forked-path</mavenExecutorId>                
-                    <useReleaseProfile>false</useReleaseProfile>                  
-                    <tagNameFormat>@{project.version}</tagNameFormat>
-                    <arguments>${release.arguments}</arguments>
-                </configuration>                                                      
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.scm</groupId>
-                        <artifactId>maven-scm-provider-gitexe</artifactId>
-                        <version>1.9.4</version>
-                    </dependency>
-                </dependencies>
-            </plugin>                    
         </plugins>
         <resources>
             <resource>
@@ -250,7 +235,7 @@
             </resource>
         </resources>
     </build>
-    
+
     <reporting>
         <plugins>
             <plugin>
