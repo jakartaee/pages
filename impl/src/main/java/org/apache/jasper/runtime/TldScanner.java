@@ -403,10 +403,14 @@ public class TldScanner implements ServletContainerInitializer {
             try {
                 jarFile = conn.getJarFile();
                 if (tldNames != null) {
-                    for (String tldName : tldNames) {
-                        JarEntry entry = jarFile.getJarEntry(tldName);
-                        InputStream stream = jarFile.getInputStream(entry);
-                        tldInfoA.add(scanTld(resourcePath, tldName, stream));
+                    for (String tldName : tldNames) {                 	
+                        TldInfo tldinfo = null;
+                        synchronized (jarFile) {						
+                        	JarEntry entry = jarFile.getJarEntry(tldName);
+                        	InputStream stream = jarFile.getInputStream(entry);
+                        	tldinfo = scanTld(resourcePath, tldName, stream);
+                        }
+                        tldInfoA.add(tldinfo);	
                     }
                 } else {
                     Enumeration<JarEntry> entries = jarFile.entries();
