@@ -1,5 +1,46 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+ *
+ * Copyright (c) 1997-2010 Oracle and/or its affiliates. All rights reserved.
+ *
+ * The contents of this file are subject to the terms of either the GNU
+ * General Public License Version 2 only ("GPL") or the Common Development
+ * and Distribution License("CDDL") (collectively, the "License").  You
+ * may not use this file except in compliance with the License.  You can
+ * obtain a copy of the License at
+ * https://glassfish.dev.java.net/public/CDDL+GPL_1_1.html
+ * or packager/legal/LICENSE.txt.  See the License for the specific
+ * language governing permissions and limitations under the License.
+ *
+ * When distributing the software, include this License Header Notice in each
+ * file and include the License file at packager/legal/LICENSE.txt.
+ *
+ * GPL Classpath Exception:
+ * Oracle designates this particular file as subject to the "Classpath"
+ * exception as provided by Oracle in the GPL Version 2 section of the License
+ * file that accompanied this code.
+ *
+ * Modifications:
+ * If applicable, add the following below the License Header, with the fields
+ * enclosed by brackets [] replaced by your own identifying information:
+ * "Portions Copyright [year] [name of copyright owner]"
+ *
+ * Contributor(s):
+ * If you wish your version of this file to be governed by only the CDDL or
+ * only the GPL Version 2, indicate your decision by adding "[Contributor]
+ * elects to include this software in this distribution under the [CDDL or GPL
+ * Version 2] license."  If you don't indicate a single choice of license, a
+ * recipient has the option to distribute your version of this file under
+ * either the CDDL, the GPL Version 2 or to extend the choice of license to
+ * its licensees as provided above.  However, if you add GPL Version 2 code
+ * and therefore, elected the GPL Version 2 license, then the option applies
+ * only if the new code is made subject to such option by the copyright
+ * holder.
+ *
+ *
+ * This file incorporates work covered by the following copyright and
+ * permission notice:
+ *
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -397,64 +438,86 @@ public class TldScanner implements ServletContainerInitializer {
         }
 
         // scan the tld if the jar has not been cached.
-        if (tldInfos == null) {
-            JarFile jarFile = null;
-            ArrayList<TldInfo> tldInfoA = new ArrayList<TldInfo>();
-            try {
-                jarFile = conn.getJarFile();
-                if (tldNames != null) {
-                    for (String tldName : tldNames) {                 	
-                        TldInfo tldinfo = null;
-                        synchronized (jarFile) {						
-                        	JarEntry entry = jarFile.getJarEntry(tldName);
-                        	InputStream stream = jarFile.getInputStream(entry);
-                        	tldinfo = scanTld(resourcePath, tldName, stream);
-                        }
-                        tldInfoA.add(tldinfo);	
-                    }
-                } else {
-                    Enumeration<JarEntry> entries = jarFile.entries();
-                    while (entries.hasMoreElements()) {
-                        JarEntry entry = entries.nextElement();
-                        String name = entry.getName();
-                        if (!name.startsWith("META-INF/")) continue;
-                        if (!name.endsWith(".tld")) continue;
-                        InputStream stream = jarFile.getInputStream(entry);
-                        tldInfoA.add(scanTld(resourcePath, name, stream));
-                    }
+        JarFile jarFile = null;
+		try {
+			jarFile = conn.getJarFile();
+		} catch (IOException e) {
+			if (resourcePath.startsWith(FILE_PROTOCOL) &&
+                    !((new File(resourcePath)).exists())) {
+                if (log.isLoggable(Level.WARNING)) {
+                    log.log(Level.WARNING,
+                        Localizer.getMessage("jsp.warn.nojar",
+                                             resourcePath),
+                        e);
                 }
-            } catch (IOException ex) {
-                if (resourcePath.startsWith(FILE_PROTOCOL) &&
-                        !((new File(resourcePath)).exists())) {
-                    if (log.isLoggable(Level.WARNING)) {
-                        log.log(Level.WARNING,
-                            Localizer.getMessage("jsp.warn.nojar",
-                                                 resourcePath),
-                            ex);
-                    }
-                } else {
-                    throw new JasperException(
-                        Localizer.getMessage("jsp.error.jar.io", resourcePath),
-                        ex);
-                }
-            } finally {
-                if (jarFile != null) {
-                    try {
-                        jarFile.close();
-                    } catch (Throwable t) {
-                        // ignore
-                    }
-                }
+            } else {
+                throw new JasperException(
+                    Localizer.getMessage("jsp.error.jar.io", resourcePath),
+                    e);
             }
-            // Update the jar TLD cache
-            tldInfos = tldInfoA.toArray(new TldInfo[tldInfoA.size()]);
-            jarTldCacheLocal.put(resourcePath, tldInfos);
-            if (!isLocal) {
-                // Also update the global cache;
-                jarTldCache.put(resourcePath, tldInfos);
+        } finally {
+            if (jarFile != null) {
+                try {
+                    jarFile.close();
+                } catch (Throwable t) {
+                    // ignore
+                }
             }
         }
-
+		
+        synchronized (jarFile) {
+            if (tldInfos == null) {            
+                ArrayList<TldInfo> tldInfoA = new ArrayList<TldInfo>();
+                try {
+                    if (tldNames != null) {
+                        for (String tldName : tldNames) {
+                            JarEntry entry = jarFile.getJarEntry(tldName);
+                            InputStream stream = jarFile.getInputStream(entry);
+                            tldInfoA.add(scanTld(resourcePath, tldName, stream));
+                        }
+                    } else {
+                        Enumeration<JarEntry> entries = jarFile.entries();
+                        while (entries.hasMoreElements()) {
+                            JarEntry entry = entries.nextElement();
+                            String name = entry.getName();
+                            if (!name.startsWith("META-INF/")) continue;
+                            if (!name.endsWith(".tld")) continue;
+                            InputStream stream = jarFile.getInputStream(entry);
+                            tldInfoA.add(scanTld(resourcePath, name, stream));
+                        }
+                    }
+                } catch (IOException ex) {
+                    if (resourcePath.startsWith(FILE_PROTOCOL) &&
+                            !((new File(resourcePath)).exists())) {
+                        if (log.isLoggable(Level.WARNING)) {
+                            log.log(Level.WARNING,
+                                Localizer.getMessage("jsp.warn.nojar",
+                                                     resourcePath),
+                                ex);
+                        }
+                    } else {
+                        throw new JasperException(
+                            Localizer.getMessage("jsp.error.jar.io", resourcePath),
+                            ex);
+                    }
+                } finally {
+                    if (jarFile != null) {
+                        try {
+                            jarFile.close();
+                        } catch (Throwable t) {
+                            // ignore
+                        }
+                    }
+                }
+                // Update the jar TLD cache
+                tldInfos = tldInfoA.toArray(new TldInfo[tldInfoA.size()]);
+                jarTldCacheLocal.put(resourcePath, tldInfos);
+                if (!isLocal) {
+                    // Also update the global cache;
+                    jarTldCache.put(resourcePath, tldInfos);
+                }
+            }
+        }
         // Iterate over tldinfos to add listeners or to map tldlocations
         for (TldInfo tldInfo: tldInfos) {
             if (scanListeners) {
