@@ -1,10 +1,10 @@
-# Contributing to Eclipse Project for JSP
+# Contributing to Eclipse Project for Jakarta Server Pages
 
 Thanks for your interest in this project.
 
 ## Project description
 
-JavaServer Pages (JSP) is a technology that helps software developers create
+Jakarta Server Pages is a technology that helps software developers create
 dynamically generated web pages based on HTML, XML, or other document types.
 
 * https://projects.eclipse.org/projects/ee4j.jsp

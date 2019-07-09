@@ -30,7 +30,7 @@
     <packaging>jar</packaging>
     <name>JSP implementation</name>
 
-    <description>JavaServer Pages API</description>
+    <description>Jakarta Server Pages API</description>
     <url>https://projects.eclipse.org/projects/ee4j.jsp</url>
 
     <properties>
@@ -192,7 +192,7 @@
                     <configuration>
                       <groups>
                         <group>
-                          <title>JavaServer Pages API Documentation</title>
+                          <title>Jakarta Pages API Documentation</title>
                           <packages>javax.servlet.jsp</packages>
                         </group>
                       </groups>                      

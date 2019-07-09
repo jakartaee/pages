@@ -1,4 +1,4 @@
-# Notices for Eclipse Project for JSP
+# Notices for Eclipse Project for Jakarta Server Pages
 
 This content is produced and maintained by the Eclipse Project for JSP project.
 
@@ -6,7 +6,7 @@ This content is produced and maintained by the Eclipse Project for JSP project.
 
 ## Trademarks
 
-Eclipse Project for JSP is a trademark of the Eclipse Foundation.
+Eclipse Project for Jakarta Server Pages is a trademark of the Eclipse Foundation.
 
 ## Copyright
 
