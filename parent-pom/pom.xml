@@ -29,9 +29,9 @@
     <artifactId>jsp</artifactId>
     <packaging>pom</packaging>
     <version>2.2.1-SNAPSHOT</version>
-    <name>JavaServer Pages modules</name>
+    <name>Jakarta Server Pages modules</name>
 
-    <description>JavaServer Pages API</description>
+    <description>Jarkata Server Pages API</description>
     <url>https://projects.eclipse.org/projects/ee4j.jsp</url>
 
     <contributors>
