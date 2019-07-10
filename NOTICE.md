@@ -1,4 +1,4 @@
-# Notices for Eclipse Project for JSP
+# Notices for Eclipse Project for Jakarta Server Pages
 
 This content is produced and maintained by the Eclipse Project for JSP project.
 
@@ -46,4 +46,9 @@ another country, of encryption software. BEFORE using any encryption software,
 please check the country's laws, regulations and policies concerning the import,
 possession, or use, and re-export of encryption software, to see if this is
 permitted.
+
+## Note
+
+References in this document to JSP refer to the Jakarta Server Pages unless otherwise
+noted.
 
