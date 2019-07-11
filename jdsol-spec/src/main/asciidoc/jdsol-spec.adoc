@@ -1,0 +1,9 @@
+== Introduction
+
+Jakarta Debugging Support for Other Languages defines API. 
+
+=== Picture
+
+Just an example of how images appear in the project.
+
+image:jdsol-1.png[image]
