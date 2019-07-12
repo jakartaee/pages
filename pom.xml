@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+            Note, must reference javax here and not jakarta.
+            JSP 2.3 depends on Servlet 3, which in only available under the javax namespace.
+        -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.eclipse.ee4j</groupId>
+        <artifactId>project</artifactId>
+        <version>1.0.5</version>
+    </parent>
+
+    <groupId>org.eclipse.ee4j.jsp</groupId>
+    <artifactId>jsp-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>2.3.4-SNAPSHOT</version>
+    <name>JavaServer Pages(TM) API</name>
+    <description>JavaServer Pages API</description>
+    <url>https://projects.eclipse.org/projects/ee4j.jsp</url>
+
+    <scm>
+        <connection>scm:git:https://github.com/eclipse-ee4j/jsp-api.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/eclipse-ee4j/jsp-api.git</developerConnection>
+        <url>https://github.com/eclipse-ee4j/jsp-api</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <spec.version>2.3</spec.version>
+        <extensionName>javax.servlet.jsp</extensionName>
+        <bundle.symbolicName>jakarta.servlet.jsp-api</bundle.symbolicName>
+        <vendorName>Eclipse Foundation</vendorName>
+        <findbugs.version>2.5.2</findbugs.version>
+        <findbugs.exclude />
+        <findbugs.threshold>High</findbugs.threshold>
+        <legal.doc.source>${project.basedir}/..</legal.doc.source>
+    </properties>
+
+    <modules>
+        <module>api</module>
+    </modules>
+
+    <licenses>
+        <license>
+            <name>EPL 2.0</name>
+            <url>http://www.eclipse.org/legal/epl-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+        <license>
+            <name>GPL2 w/ CPE</name>
+            <url>https://www.gnu.org/software/classpath/license.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+</project>
