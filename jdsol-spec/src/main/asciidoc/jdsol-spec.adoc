@@ -2,8 +2,5 @@
 
 Jakarta Debugging Support for Other Languages defines API. 
 
-=== Picture
+This specification provides a mechanism by which programs executed under the JavaTM virtual machine but written in languages other than the Java programming language, can be debugged with references to the original source (for example, source file and line number references). 
 
-Just an example of how images appear in the project.
-
-image:jdsol-1.png[image]
