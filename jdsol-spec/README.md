@@ -1,4 +1,4 @@
-Jakarta Wombat Specification
+Jakarta Debugging Support for Other Languages Specification
 ============================
 
 This project generates the Jakarta Debugging Support for Other Languages.
