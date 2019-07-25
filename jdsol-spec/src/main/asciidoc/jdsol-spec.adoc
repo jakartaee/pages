@@ -1,12 +1,28 @@
-== Introduction
+//
+// Copyright (c) 2017, 2019 Oracle and/or its affiliates. All rights reserved.
+//
 
-The specification of Jakarta Debugging Support for Other Languages provides a mechanism by which 
-programs executed under the JavaTM virtual machine but written in languages other than the Java 
-programming language, can be debugged with references to the original source (for example, source 
-file and line number references). 
+= Jakarta Debugging Support for Other Languages
+:authors: Jakarta Debugging Support for Other Languages Team, https://projects.eclipse.org/projects/ee4j.jdsol
+:email: https://dev.eclipse.org/mailman/listinfo/jdsol-dev
+:version-label!:
+:doctype: book
+:license: Eclipse Foundation Specification License v1.0
+:source-highlighter: coderay
+:toc: left
+:toclevels: 4
+:sectnumlevels: 4
+:sectanchors:
+ifdef::backend-pdf[]
+:pagenums:
+:numbered:
+:title-logo-image: image:jakarta_ee_logo_schooner_color_stacked_default.png[pdfwidth=4.25in,align=right]
+endif::[]
 
-=== Picture
+// == License
+:sectnums!:
+include::license-efsl.adoc[]
 
-Just an example of how images appear in the project.
-
-image:jdsol-1.png[image]
+// == Mail
+:sectnums:
+include::jdsol.adoc[]
