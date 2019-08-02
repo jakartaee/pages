@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates and others.
+ * Copyright (c) 1997, 2019 Oracle and/or its affiliates and others.
  * All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
@@ -49,7 +49,7 @@ package javax.servlet.jsp.tagext;
  * <p>
  * Frequently a fully qualified class name will refer to a class that is known to the tag library and thus, delivered in
  * the same JAR file as the tag handlers. In most other remaining cases it will refer to a class that is in the platform
- * on which the JSP processor is built (like Java EE). Using fully qualified class names in this manner makes the usage
+ * on which the JSP processor is built (like Jakarta EE). Using fully qualified class names in this manner makes the usage
  * relatively resistant to configuration errors.
  *
  * <p>
