@@ -717,7 +717,6 @@ public class TldScanner implements ServletContainerInitializer {
             }
         }
     }
-//Signed-Off-By fnst-zhou
 
     /*
      * Add the jars in the manifest Class-Path to the list "jars"
