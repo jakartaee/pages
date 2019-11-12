@@ -22,6 +22,8 @@ import java.beans.FeatureDescriptor;
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.JspContext;
@@ -44,6 +46,16 @@ import javax.el.ELException;
  * @since JSP 2.1
  */
 public class ScopedAttributeELResolver extends ELResolver {
+
+    /**
+     * Cache to speed up the class resolution for static imports.
+     */
+    private final Map<String, Object> classCache = new ConcurrentHashMap<>();
+
+    /**
+     * Marker for null class to also improve null results.
+     */
+    private static final Object NULL_MARKER = new Object();
 
     /**
      * If the base object is <code>null</code>, searches the page, request, session and application scopes for an
@@ -90,11 +102,21 @@ public class ScopedAttributeELResolver extends ELResolver {
                 if (value == null) {
                     // check to see if the property is an imported class
                     if (context.getImportHandler() != null) {
-                        Class<?> c = context.getImportHandler().resolveClass(attribute);
-                        if (c != null) {
-                            value = new ELClass(c);
-                            // A possible optimization is to set the ELClass
-                            // instance in an attribute map.
+                        Object cacheResult = classCache.get(attribute);
+                        if (cacheResult != null) {
+                            // the class is inside the cache, assign if not the null marker
+                            if (cacheResult != NULL_MARKER) {
+                                value = new ELClass((Class) cacheResult);
+                            }
+                        } else {
+                            // search for the class normally using the importer
+                            Class<?> c = context.getImportHandler().resolveClass(attribute);
+                            if (c != null) {
+                                value = new ELClass(c);
+                                classCache.put(attribute, c);
+                            } else {
+                                classCache.put(attribute, NULL_MARKER);
+                            }
                         }
                     }
                 }
