@@ -134,10 +134,6 @@
                             <!-- This is only used by AntJavaCompiler -->
                             org/apache/jasper/util/SystemLogHandler.java
                         </exclude>
-                        <exclude>
-                            <!-- We keep the source just in case -->
-                            org/apache/jasper/runtime/PerThreadTagHandlerPool.java
-                        </exclude>
                     </excludes>
                 </configuration>
             </plugin>
