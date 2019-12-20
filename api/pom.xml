@@ -27,7 +27,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jakarta.servlet.jsp</groupId>
     <artifactId>jakarta.servlet.jsp-api</artifactId>
-    <version>2.3.4-SNAPSHOT</version>
+    <version>3.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Jakarta Server Pages API</name>
 
@@ -35,7 +35,7 @@
     <url>https://projects.eclipse.org/projects/ee4j.jsp</url>
 
     <properties>
-        <spec.version>2.3</spec.version>
+        <spec.version>3.0</spec.version>
         <extensionName>javax.servlet.jsp</extensionName>
         <bundle.symbolicName>javax.servlet.jsp-api</bundle.symbolicName>
         <vendorName>Eclipse Foundation</vendorName>
