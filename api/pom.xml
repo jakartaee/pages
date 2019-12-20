@@ -36,8 +36,8 @@
 
     <properties>
         <spec.version>3.0</spec.version>
-        <extensionName>javax.servlet.jsp</extensionName>
-        <bundle.symbolicName>javax.servlet.jsp-api</bundle.symbolicName>
+        <extensionName>jakarta.servlet.jsp</extensionName>
+        <bundle.symbolicName>jakarta.servlet.jsp-api</bundle.symbolicName>
         <vendorName>Eclipse Foundation</vendorName>
         <findbugs.version>2.5.2</findbugs.version>
         <findbugs.exclude />
@@ -167,7 +167,7 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                     <groups>
                         <group>
                             <title>Jakarta Server Pages API Documentation</title>
-                            <packages>javax.servlet.jsp*</packages>
+                            <packages>jakarta.servlet.jsp*</packages>
                         </group>
                     </groups>
                 </configuration>
