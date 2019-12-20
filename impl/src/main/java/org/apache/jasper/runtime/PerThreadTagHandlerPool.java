@@ -22,8 +22,8 @@ import java.util.Hashtable;
 import java.util.Vector;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.JspTag;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.tagext.JspTag;
 
 import org.apache.jasper.Constants;
 

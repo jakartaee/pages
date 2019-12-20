@@ -21,7 +21,7 @@ import java.util.*;
 
 import org.apache.jasper.Constants;
 import org.apache.jasper.JasperException;
-import javax.servlet.jsp.tagext.TagLibraryInfo;
+import jakarta.servlet.jsp.tagext.TagLibraryInfo;
 
 /**
  * A repository for various info about the translation unit under compilation.
@@ -38,7 +38,7 @@ public class PageInfo {
     private static final String[] STANDARD_IMPORTS = { 
 	"javax.servlet.*", 
 	"javax.servlet.http.*", 
-	"javax.servlet.jsp.*"
+	"jakarta.servlet.jsp.*"
     };
 
     private List<String> imports;

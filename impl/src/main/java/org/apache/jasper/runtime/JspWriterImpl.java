@@ -23,7 +23,7 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 
 import javax.servlet.ServletResponse;
-import javax.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.JspWriter;
 
 import org.apache.jasper.Constants;
 import org.apache.jasper.compiler.Localizer;

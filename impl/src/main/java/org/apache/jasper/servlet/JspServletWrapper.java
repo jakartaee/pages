@@ -34,7 +34,7 @@ import javax.servlet.SingleThreadModel;
 import javax.servlet.UnavailableException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.tagext.TagInfo;
+import jakarta.servlet.jsp.tagext.TagInfo;
 
 import org.glassfish.jsp.api.JspProbeEmitter;
 

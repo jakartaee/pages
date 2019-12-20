@@ -27,7 +27,7 @@ import java.util.List;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
-import javax.servlet.jsp.*;
+import jakarta.servlet.jsp.*;
 
 import org.apache.jasper.JasperException;
 import org.apache.jasper.compiler.Localizer;

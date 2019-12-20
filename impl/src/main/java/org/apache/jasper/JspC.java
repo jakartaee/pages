@@ -40,7 +40,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 // START GlassFish 750
-import javax.servlet.jsp.tagext.TagLibraryInfo;
+import jakarta.servlet.jsp.tagext.TagLibraryInfo;
 // END GlassFish 750
 
 import org.apache.jasper.compiler.Compiler;

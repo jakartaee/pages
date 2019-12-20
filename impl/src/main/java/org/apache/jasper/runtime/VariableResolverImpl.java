@@ -19,8 +19,8 @@ package org.apache.jasper.runtime;
 
 import javax.el.ELContext;
 import javax.el.ELResolver;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.el.VariableResolver;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.el.VariableResolver;
 
 
 /**
@@ -52,14 +52,14 @@ public class VariableResolverImpl
      * Returns null if the variable is not found.
      */
     public Object resolveVariable (String pName)
-            throws javax.servlet.jsp.el.ELException {
+            throws jakarta.servlet.jsp.el.ELException {
 
         ELContext elContext = pageContext.getELContext();
         ELResolver elResolver = elContext.getELResolver();
         try {
             return elResolver.getValue(elContext, null, pName);
         } catch (javax.el.ELException ex) {
-            throw new javax.servlet.jsp.el.ELException();
+            throw new jakarta.servlet.jsp.el.ELException();
         }
     }
 }
