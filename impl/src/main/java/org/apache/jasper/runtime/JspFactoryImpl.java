@@ -27,10 +27,10 @@ import javax.servlet.Servlet;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.ServletContext;
-import javax.servlet.jsp.JspFactory;
-import javax.servlet.jsp.JspEngineInfo;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.JspApplicationContext;
+import jakarta.servlet.jsp.JspFactory;
+import jakarta.servlet.jsp.JspEngineInfo;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.JspApplicationContext;
 
 import org.apache.jasper.Constants;
 

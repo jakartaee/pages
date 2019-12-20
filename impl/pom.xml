@@ -25,7 +25,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.glassfish.web</groupId>
-    <artifactId>javax.servlet.jsp</artifactId>
+    <artifactId>jakarta.servlet.jsp</artifactId>
     <version>3.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>JSP implementation</name>
@@ -35,8 +35,8 @@
 
     <properties>
         <spec.version>3.0</spec.version>
-        <extensionName>javax.servlet.jsp</extensionName>
-        <bundle.symbolicName>org.glassfish.web.javax.servlet.jsp</bundle.symbolicName>
+        <extensionName>jakarta.servlet.jsp</extensionName>
+        <bundle.symbolicName>org.glassfish.web.jakarta.servlet.jsp</bundle.symbolicName>
         <vendorName>Eclipse Foundation</vendorName>
         <findbugs.version>2.5.2</findbugs.version>
         <findbugs.exclude />
@@ -193,7 +193,7 @@
                       <groups>
                         <group>
                           <title>JavaServer Pages API Documentation</title>
-                          <packages>javax.servlet.jsp</packages>
+                          <packages>jakarta.servlet.jsp</packages>
                         </group>
                       </groups>                      
                     </configuration>
@@ -305,8 +305,8 @@
             <version>[3.0.1-b10,)</version>
         </dependency>
         <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
             <version>3.0-SNAPSHOT</version>
         </dependency>
 

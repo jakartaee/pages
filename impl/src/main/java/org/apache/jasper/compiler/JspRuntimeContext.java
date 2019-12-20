@@ -40,7 +40,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import javax.servlet.ServletContext;
-import javax.servlet.jsp.JspFactory;
+import jakarta.servlet.jsp.JspFactory;
 import javax.tools.JavaFileObject;
 
 import org.apache.jasper.Constants;

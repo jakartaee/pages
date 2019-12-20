@@ -36,13 +36,13 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.JspContext;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.BodyContent;
-import javax.servlet.jsp.tagext.VariableInfo;
-import javax.servlet.jsp.el.VariableResolver;
-import javax.servlet.jsp.el.ExpressionEvaluator;
+import jakarta.servlet.jsp.JspContext;
+import jakarta.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.tagext.BodyContent;
+import jakarta.servlet.jsp.tagext.VariableInfo;
+import jakarta.servlet.jsp.el.VariableResolver;
+import jakarta.servlet.jsp.el.ExpressionEvaluator;
 
 import org.apache.jasper.compiler.Localizer;
 
@@ -286,7 +286,7 @@ public class JspContextWrapper extends PageContext {
             PageContextImpl pci = (PageContextImpl) pc;
             elContext = pci.getJspApplicationContext().createELContext(
                               invokingJspCtxt.getELContext().getELResolver());
-            elContext.putContext(javax.servlet.jsp.JspContext.class, this);
+            elContext.putContext(jakarta.servlet.jsp.JspContext.class, this);
             ((ELContextImpl)elContext).setVariableMapper(
                 new VariableMapperImpl());
         }

@@ -25,15 +25,15 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import javax.el.FunctionMapper;
-import javax.servlet.jsp.tagext.FunctionInfo;
-import javax.servlet.jsp.tagext.JspFragment;
-import javax.servlet.jsp.tagext.PageData;
-import javax.servlet.jsp.tagext.TagAttributeInfo;
-import javax.servlet.jsp.tagext.TagData;
-import javax.servlet.jsp.tagext.TagExtraInfo;
-import javax.servlet.jsp.tagext.TagInfo;
-import javax.servlet.jsp.tagext.TagLibraryInfo;
-import javax.servlet.jsp.tagext.ValidationMessage;
+import jakarta.servlet.jsp.tagext.FunctionInfo;
+import jakarta.servlet.jsp.tagext.JspFragment;
+import jakarta.servlet.jsp.tagext.PageData;
+import jakarta.servlet.jsp.tagext.TagAttributeInfo;
+import jakarta.servlet.jsp.tagext.TagData;
+import jakarta.servlet.jsp.tagext.TagExtraInfo;
+import jakarta.servlet.jsp.tagext.TagInfo;
+import jakarta.servlet.jsp.tagext.TagLibraryInfo;
+import jakarta.servlet.jsp.tagext.ValidationMessage;
 
 import org.apache.jasper.Constants;
 import org.apache.jasper.JasperException;

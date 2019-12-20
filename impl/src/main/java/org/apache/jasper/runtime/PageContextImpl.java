@@ -40,16 +40,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspFactory;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.JspApplicationContext;
-import javax.servlet.jsp.tagext.BodyContent;
-import javax.servlet.jsp.el.ExpressionEvaluator;
-import javax.servlet.jsp.el.VariableResolver;
-import javax.servlet.jsp.el.ImplicitObjectELResolver;
-import javax.servlet.jsp.el.ScopedAttributeELResolver;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.JspFactory;
+import jakarta.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.JspApplicationContext;
+import jakarta.servlet.jsp.tagext.BodyContent;
+import jakarta.servlet.jsp.el.ExpressionEvaluator;
+import jakarta.servlet.jsp.el.VariableResolver;
+import jakarta.servlet.jsp.el.ImplicitObjectELResolver;
+import jakarta.servlet.jsp.el.ScopedAttributeELResolver;
 
 import javax.el.ELException;
 import javax.el.ELResolver;
@@ -699,7 +699,7 @@ public class PageContextImpl extends PageContext {
         if (elContext == null) {
             elContext = getJspApplicationContext().createELContext(
                             getELResolver());
-            elContext.putContext(javax.servlet.jsp.JspContext.class, this);
+            elContext.putContext(jakarta.servlet.jsp.JspContext.class, this);
             ((ELContextImpl)elContext).setVariableMapper(
                 new VariableMapperImpl());
         }
@@ -861,7 +861,7 @@ public class PageContextImpl extends PageContext {
              * throwing it if the response has not been committed (the response
              * will have been committed if the error page is a JSP page).
              */
-            request.setAttribute("javax.servlet.jsp.jspException", t);
+            request.setAttribute("jakarta.servlet.jsp.jspException", t);
             request.setAttribute("javax.servlet.error.status_code",
                 Integer.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
             request.setAttribute("javax.servlet.error.request_uri",
@@ -887,7 +887,7 @@ public class PageContextImpl extends PageContext {
             // now clear the error code - to prevent double handling.
             request.removeAttribute("javax.servlet.error.status_code");
             request.removeAttribute("javax.servlet.error.request_uri");
-            request.removeAttribute("javax.servlet.jsp.jspException");
+            request.removeAttribute("jakarta.servlet.jsp.jspException");
 
         } else {
 

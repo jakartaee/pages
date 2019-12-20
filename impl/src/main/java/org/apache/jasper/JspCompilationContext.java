@@ -26,8 +26,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
-import javax.servlet.jsp.tagext.TagInfo;
-import javax.servlet.jsp.tagext.TagLibraryInfo;
+import jakarta.servlet.jsp.tagext.TagInfo;
+import jakarta.servlet.jsp.tagext.TagLibraryInfo;
 
 import org.apache.jasper.compiler.Compiler;
 import org.apache.jasper.compiler.JspRuntimeContext;

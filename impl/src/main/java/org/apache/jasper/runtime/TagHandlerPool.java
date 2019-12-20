@@ -17,9 +17,9 @@
 
 package org.apache.jasper.runtime;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.JspTag;
-import javax.servlet.jsp.tagext.Tag;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.tagext.JspTag;
+import jakarta.servlet.jsp.tagext.Tag;
 import javax.servlet.ServletConfig;
 import org.apache.jasper.Constants;
 import org.glassfish.jsp.api.ResourceInjector;

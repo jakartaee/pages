@@ -18,7 +18,7 @@
 package org.apache.jasper.runtime;
 
 /**
- * Implements javax.servlet.jsp.JspApplication
+ * Implements jakarta.servlet.jsp.JspApplication
  */
 
 import java.util.List;
@@ -29,7 +29,7 @@ import java.util.Iterator;
 import java.util.Collections;
 
 import javax.servlet.ServletContext;
-import javax.servlet.jsp.JspApplicationContext;
+import jakarta.servlet.jsp.JspApplicationContext;
 
 import javax.el.ELException;
 import javax.el.ELResolver;

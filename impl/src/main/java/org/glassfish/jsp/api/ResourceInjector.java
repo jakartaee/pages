@@ -16,7 +16,7 @@
 
 package org.glassfish.jsp.api;
 
-import javax.servlet.jsp.tagext.JspTag;
+import jakarta.servlet.jsp.tagext.JspTag;
 
 /**
  * Interface for injecting injectable resources into tag handler instances.

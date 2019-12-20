@@ -18,7 +18,7 @@
 package org.apache.jasper.compiler;
 
 import java.util.*;
-import javax.servlet.jsp.tagext.*;
+import jakarta.servlet.jsp.tagext.*;
 import org.apache.jasper.JasperException;
 
 /**

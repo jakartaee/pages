@@ -30,9 +30,9 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.BodyContent;
+import jakarta.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.PageContext;
+import jakarta.servlet.jsp.tagext.BodyContent;
 
 import org.apache.jasper.JasperException;
 import org.apache.jasper.compiler.Localizer;
@@ -54,12 +54,12 @@ public class JspRuntimeLibrary {
     private static final String SERVLET_EXCEPTION
 	= "javax.servlet.error.exception";
     private static final String JSP_EXCEPTION
-	= "javax.servlet.jsp.jspException";
+	= "jakarta.servlet.jsp.jspException";
 
     /**
      * Returns the value of the javax.servlet.error.exception request
      * attribute value, if present, otherwise the value of the
-     * javax.servlet.jsp.jspException request attribute value.
+     * jakarta.servlet.jsp.jspException request attribute value.
      *
      * This method is called at the beginning of the generated servlet code
      * for a JSP error page, when the "exception" implicit scripting language

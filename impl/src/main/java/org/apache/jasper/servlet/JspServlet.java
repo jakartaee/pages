@@ -43,7 +43,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 // START GlassFish 750
-import javax.servlet.jsp.tagext.TagLibraryInfo;
+import jakarta.servlet.jsp.tagext.TagLibraryInfo;
 // END GlassFish 750
 
 import java.util.logging.Logger;
