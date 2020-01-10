@@ -29,7 +29,7 @@
     <groupId>org.eclipse.ee4j.jsp</groupId>
     <artifactId>jsp-parent</artifactId>
     <packaging>pom</packaging>
-    <version>3.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <name>Jakarta Server Pages API</name>
     <description>Jakarta Server Pages API</description>
     <url>https://projects.eclipse.org/projects/ee4j.jsp</url>
