@@ -26,10 +26,10 @@ import java.util.Enumeration;
 import jakarta.servlet.jsp.PageContext;
 import jakarta.servlet.jsp.JspContext;
 
-import javax.el.ELContext;
-import javax.el.ELClass;
-import javax.el.ELResolver;
-import javax.el.ELException;
+import jakarta.el.ELContext;
+import jakarta.el.ELClass;
+import jakarta.el.ELResolver;
+import jakarta.el.ELException;
 
 /**
  * Defines variable resolution behavior for scoped attributes.
@@ -40,7 +40,7 @@ import javax.el.ELException;
  * in the case of <code>setValue</code> it will create a new attribute in the page scope with the given name.
  * </p>
  *
- * @see javax.el.ELResolver
+ * @see jakarta.el.ELResolver
  * @since JSP 2.1
  */
 public class ScopedAttributeELResolver extends ELResolver {

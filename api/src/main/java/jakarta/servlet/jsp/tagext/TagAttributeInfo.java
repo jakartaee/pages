@@ -113,9 +113,9 @@ public class TagAttributeInfo {
      * The type (as a String) of this attribute.
      *
      * <p>
-     * This method must return <code>"javax.el.ValueExpression"</code> if <code>isDeferredValue()</code> returns
+     * This method must return <code>"jakarta.el.ValueExpression"</code> if <code>isDeferredValue()</code> returns
      * <code>true</code> and <code>canBeRequestTime()</code> returns <code>false</code>. It must return
-     * <code>"javax.el.MethodExpression"</code> if <code>isDeferredMethod()</code> returns <code>true</code>. It must
+     * <code>"jakarta.el.MethodExpression"</code> if <code>isDeferredMethod()</code> returns <code>true</code>. It must
      * return <code>"java.lang.Object"</code> if <code>isDeferredValue()</code> returns <code>true</code> and
      * <code>canBeRequestTime()</code> returns <code>true</code>.
      * </p>
@@ -186,7 +186,7 @@ public class TagAttributeInfo {
      *
      * <p>
      * If this method returns <code>true</code>, then <code>getTypeName()</code> must return
-     * <code>"javax.el.ValueExpression"</code>.
+     * <code>"jakarta.el.ValueExpression"</code>.
      * </p>
      *
      * <p>
@@ -208,7 +208,7 @@ public class TagAttributeInfo {
      *
      * <p>
      * If this method returns <code>true</code>, then <code>getTypeName()</code> must return
-     * <code>"javax.el.MethodExpression"</code>.
+     * <code>"jakarta.el.MethodExpression"</code>.
      * </p>
      *
      * <p>

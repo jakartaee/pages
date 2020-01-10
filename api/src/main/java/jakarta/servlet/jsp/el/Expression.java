@@ -32,7 +32,7 @@ package jakarta.servlet.jsp.el;
  * should be ready for the case where ELParseException exceptions are raised.
  * </p>
  *
- * @deprecated As of JSP 2.1, replaced by {@link javax.el.ValueExpression}
+ * @deprecated As of JSP 2.1, replaced by {@link jakarta.el.ValueExpression}
  * @since JSP 2.0
  */
 public abstract class Expression {

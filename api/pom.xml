@@ -210,7 +210,7 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
         <dependency>
             <groupId>jakarta.el</groupId>
             <artifactId>jakarta.el-api</artifactId>
-            <version>3.0.2</version>
+            <version>4.0.0.M1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

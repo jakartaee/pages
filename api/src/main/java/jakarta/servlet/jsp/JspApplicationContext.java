@@ -18,9 +18,9 @@
 
 package jakarta.servlet.jsp;
 
-import javax.el.ELResolver;
-import javax.el.ExpressionFactory;
-import javax.el.ELContextListener;
+import jakarta.el.ELResolver;
+import jakarta.el.ExpressionFactory;
+import jakarta.el.ELContextListener;
 
 /**
  * Stores application-scoped information relevant to JSP containers.
@@ -51,9 +51,9 @@ import javax.el.ELContextListener;
  *
  * @see javax.servlet.ServletContext
  * @see JspFactory
- * @see javax.el.ELResolver
- * @see javax.el.ExpressionFactory
- * @see javax.el.ELContextListener
+ * @see jakarta.el.ELResolver
+ * @see jakarta.el.ExpressionFactory
+ * @see jakarta.el.ELContextListener
  * @since JSP 2.1
  */
 public interface JspApplicationContext {
@@ -74,10 +74,10 @@ public interface JspApplicationContext {
      * <ul>
      * <li>{@link jakarta.servlet.jsp.el.ImplicitObjectELResolver}</li>
      * <li><code>ELResolver</code>s registered via this method, in the order in which they are registered.</li>
-     * <li>{@link javax.el.MapELResolver}</li>
-     * <li>{@link javax.el.ListELResolver}</li>
-     * <li>{@link javax.el.ArrayELResolver}</li>
-     * <li>{@link javax.el.BeanELResolver}</li>
+     * <li>{@link jakarta.el.MapELResolver}</li>
+     * <li>{@link jakarta.el.ListELResolver}</li>
+     * <li>{@link jakarta.el.ArrayELResolver}</li>
+     * <li>{@link jakarta.el.BeanELResolver}</li>
      * <li>{@link jakarta.servlet.jsp.el.ScopedAttributeELResolver}</li>
      * </ul>
      *

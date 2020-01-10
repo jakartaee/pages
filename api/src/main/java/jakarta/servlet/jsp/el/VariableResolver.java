@@ -30,7 +30,7 @@ package jakarta.servlet.jsp.el;
  * An instance of this class includes the context against which resolution will happen
  * </p>
  *
- * @deprecated As of JSP 2.1, replaced by {@link javax.el.ELResolver}
+ * @deprecated As of JSP 2.1, replaced by {@link jakarta.el.ELResolver}
  * @since JSP 2.0
  */
 public interface VariableResolver {

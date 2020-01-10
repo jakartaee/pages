@@ -34,9 +34,9 @@ import javax.servlet.http.HttpServletRequest;
 import jakarta.servlet.jsp.PageContext;
 import jakarta.servlet.jsp.JspContext;
 
-import javax.el.PropertyNotWritableException;
-import javax.el.ELContext;
-import javax.el.ELResolver;
+import jakarta.el.PropertyNotWritableException;
+import jakarta.el.ELContext;
+import jakarta.el.ELResolver;
 
 /**
  * Defines variable resolution behavior for the EL implicit objects defined in the JSP specification.
@@ -68,7 +68,7 @@ import javax.el.ELResolver;
  * parameter value (obtained by calling <code>ServletContext.getInitParameter(String name))</code>.</li>
  * </ul>
  *
- * @see javax.el.ELResolver
+ * @see jakarta.el.ELResolver
  * @since JSP 2.1
  */
 public class ImplicitObjectELResolver extends ELResolver {
