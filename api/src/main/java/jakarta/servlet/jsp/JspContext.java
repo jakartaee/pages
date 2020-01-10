@@ -20,7 +20,7 @@ package jakarta.servlet.jsp;
 
 import java.util.Enumeration;
 
-import javax.el.ELContext;
+import jakarta.el.ELContext;
 
 /**
  * <p>

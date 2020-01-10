@@ -52,7 +52,7 @@ package jakarta.servlet.jsp.el;
  * <li><code>${my:reverse('hello')}</code></li>
  * </ul>
  *
- * @deprecated As of JSP 2.1, replaced by {@link javax.el.ExpressionFactory}
+ * @deprecated As of JSP 2.1, replaced by {@link jakarta.el.ExpressionFactory}
  * @since JSP 2.0
  */
 public abstract class ExpressionEvaluator {

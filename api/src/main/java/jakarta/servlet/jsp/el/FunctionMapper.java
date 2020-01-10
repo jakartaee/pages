@@ -27,7 +27,7 @@ package jakarta.servlet.jsp.el;
  * Classes implementing this interface may, for instance, consult tag library information to resolve the map.
  * </p>
  *
- * @deprecated As of JSP 2.1, replaced by {@link javax.el.FunctionMapper}
+ * @deprecated As of JSP 2.1, replaced by {@link jakarta.el.FunctionMapper}
  * @since JSP 2.0
  */
 public interface FunctionMapper {

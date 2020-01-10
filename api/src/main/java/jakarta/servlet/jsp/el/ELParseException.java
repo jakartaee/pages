@@ -21,7 +21,7 @@ package jakarta.servlet.jsp.el;
 /**
  * Represents a parsing error encountered while parsing an EL expression.
  *
- * @deprecated As of JSP 2.1, replaced by {@link javax.el.ELException}
+ * @deprecated As of JSP 2.1, replaced by {@link jakarta.el.ELException}
  * @since JSP 2.0
  */
 public class ELParseException extends ELException {
