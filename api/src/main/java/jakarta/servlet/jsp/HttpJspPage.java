@@ -18,9 +18,9 @@
 
 package jakarta.servlet.jsp;
 
-import javax.servlet.http.*;
+import jakarta.servlet.http.*;
 import java.io.IOException;
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletException;
 
 /**
  * The HttpJspPage interface describes the interaction that a JSP Page Implementation Class must satisfy when using the

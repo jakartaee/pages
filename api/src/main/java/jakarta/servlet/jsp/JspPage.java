@@ -18,7 +18,7 @@
 
 package jakarta.servlet.jsp;
 
-import javax.servlet.Servlet;
+import jakarta.servlet.Servlet;
 
 /**
  * The JspPage interface describes the generic interaction that a JSP Page Implementation class must satisfy; pages that
