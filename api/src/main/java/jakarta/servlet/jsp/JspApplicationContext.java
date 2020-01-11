@@ -49,7 +49,7 @@ import jakarta.el.ELContextListener;
  * available to their pluggable <code>ELResolver</code>s.</li>
  * </ul>
  *
- * @see javax.servlet.ServletContext
+ * @see jakarta.servlet.ServletContext
  * @see JspFactory
  * @see jakarta.el.ELResolver
  * @see jakarta.el.ExpressionFactory

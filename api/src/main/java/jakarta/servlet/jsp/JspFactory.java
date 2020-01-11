@@ -18,10 +18,10 @@
 
 package jakarta.servlet.jsp;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.ServletContext;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.jsp.PageContext;
 
 /**

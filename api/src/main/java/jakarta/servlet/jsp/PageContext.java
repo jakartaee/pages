@@ -20,14 +20,14 @@ package jakarta.servlet.jsp;
 
 import java.io.IOException;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import jakarta.servlet.jsp.tagext.BodyContent;
 
@@ -214,7 +214,7 @@ abstract public class PageContext extends JspContext {
     abstract public HttpSession getSession();
 
     /**
-     * The current value of the page object (In a Servlet environment, this is an instance of javax.servlet.Servlet).
+     * The current value of the page object (In a Servlet environment, this is an instance of jakarta.servlet.Servlet).
      *
      * @return the Page implementation class instance associated with this PageContext
      */
@@ -421,10 +421,10 @@ abstract public class PageContext extends JspContext {
      * @since JSP 2.0
      */
     public ErrorData getErrorData() {
-        return new ErrorData((Throwable) getRequest().getAttribute("javax.servlet.error.exception"),
-                ((Integer) getRequest().getAttribute("javax.servlet.error.status_code")).intValue(),
-                (String) getRequest().getAttribute("javax.servlet.error.request_uri"),
-                (String) getRequest().getAttribute("javax.servlet.error.servlet_name"));
+        return new ErrorData((Throwable) getRequest().getAttribute("jakarta.servlet.error.exception"),
+                ((Integer) getRequest().getAttribute("jakarta.servlet.error.status_code")).intValue(),
+                (String) getRequest().getAttribute("jakarta.servlet.error.request_uri"),
+                (String) getRequest().getAttribute("jakarta.servlet.error.servlet_name"));
     }
 
 }

@@ -224,7 +224,7 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
                                 <group>
                                     <title>Jakarta Server Pages API Documentation</title>
                                     <packages>
-                                        javax.servlet.jsp*
+                                        jakarta.servlet.jsp*
                                     </packages>
                                 </group>
                             </groups>
@@ -277,7 +277,7 @@ Use is subject to <a href="{@docRoot}/doc-files/speclicense.html" target="_top">
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>4.0.2</version>
+            <version>5.0.0-M1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
