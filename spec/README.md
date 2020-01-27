@@ -1,5 +1,5 @@
 Jakarta Server Pages Specification
-============================
+==================================
 
 This project generates the Jakarta Server Pages Specification.
 
