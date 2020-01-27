@@ -23,7 +23,7 @@
         <version>3.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>pages-spec</artifactId>
+    <artifactId>server-pages-spec</artifactId>
     <version>3.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Jakarta Server Pages Specification</name>
@@ -95,7 +95,7 @@
                         </goals>
                         <configuration>
                             <backend>html5</backend>
-                            <outputFile>${project.build.directory}/generated-docs/pages-spec-${project.version}.html</outputFile>
+                            <outputFile>${project.build.directory}/generated-docs/server-pages-spec-${project.version}.html</outputFile>
                             <attributes>
                                 <doctype>book</doctype>
                                 <status>${status}</status>
@@ -118,7 +118,7 @@
                         </goals>
                         <configuration>
                             <backend>pdf</backend>
-                            <outputFile>${project.build.directory}/generated-docs/pages-spec-${project.version}.pdf</outputFile>
+                            <outputFile>${project.build.directory}/generated-docs/server-pages-spec-${project.version}.pdf</outputFile>
                             <attributes>
                                 <pdf-stylesdir>${project.basedir}/src/main/theme</pdf-stylesdir>
                                 <pdf-style>jakartaee</pdf-style>
@@ -139,7 +139,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <sourceDocumentName>pages-spec.adoc</sourceDocumentName>
+                    <sourceDocumentName>server-pages-spec.adoc</sourceDocumentName>
                     <sourceHighlighter>coderay</sourceHighlighter>
                     <attributes>
                         <revnumber>${project.version}</revnumber>

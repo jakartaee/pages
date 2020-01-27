@@ -16,7 +16,7 @@ Run the full build:
 `mvn install`
 
 Locate the html files:
-- `target/generated-docs/pages-spec-<version>.html`
+- `target/generated-docs/server-pages-spec-<version>.html`
 
 Locate the PDF files:
-- `target/generated-docs/pages-spec-<version>.pdf`
+- `target/generated-docs/server-pages-spec-<version>.pdf`

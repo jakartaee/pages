@@ -22,7 +22,7 @@
     <formats>
     <format>zip</format>
     </formats>
-    <baseDirectory>pages-spec</baseDirectory>
+    <baseDirectory>server-pages-spec</baseDirectory>
     <fileSets>
         <fileSet>
             <directory>target/generated-docs</directory>
