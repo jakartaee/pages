@@ -299,7 +299,7 @@ public class ImplicitObjectELResolver extends ELResolver {
         descriptor.setExpert(false);
         descriptor.setHidden(false);
         descriptor.setPreferred(true);
-        descriptor.setValue("type", jakarta.servlet.jsp.PageContext.class);
+        descriptor.setValue("type", PageContext.class);
         descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
         list.add(descriptor);
 
