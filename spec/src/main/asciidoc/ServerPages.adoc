@@ -64,10 +64,9 @@ Community Process as part of JSR 245.
 
 == Overview
 
-=== The JavaServer Pages™ Technology
+=== The Jakarta Server Pages Technology
 
-JavaServer™ Pages (JSP) is the Java™
-Platform, Enterprise Edition (Java EE) technology for building
+Jakarta Server Pages (JSP) is the Jakarta EE technology for building
 applications for generating dynamic web content, such as HTML, DHTML,
 XHTML, and XML. JSP technology enables the easy authoring of web pages
 that create dynamic content with maximum power and flexibility.
@@ -78,40 +77,35 @@ JSP technology provides the means for textual
 specification of the creation of a dynamic response to a request. The
 technology builds on the following concepts:
 
-*  _Template Data_
-
+*  _Template Data_ +
 A substantial portion of most dynamic content
 is fixed or _template_ content. Text or XML fragments are typical
 template data. JSP technology supports natural manipulation of template
 data.
 
-*  _Addition of Dynamic Data_
-
+*  _Addition of Dynamic Data_ +
 JSP technology provides a simple, yet
 powerful, way to add dynamic data to template data.
 
-*  _Encapsulation of Functionality_
-
+*  _Encapsulation of Functionality_ +
 JSP technology provides two related
 mechanisms for the encapsulation of functionality: JavaBeans™ component
 architecture, and tag libraries delivering custom actions, functions,
 listener classes, and validation.
 
-*  _Good Tool Support_
-
+*  _Good Tool Support_ +
 Good tool support leads to significantly
 improved productivity. Accordingly, JSP technology has features that
-enable the creation of good authoring tools. +
- +
+enable the creation of good authoring tools.
+
 Careful development of these concepts yields a flexible and powerful
 server-side technology.
 
-=== Benefits of JavaServer Pages Technology
+=== Benefits of Jakarta Server Pages Technology
 
 JSP technology offers the following benefits:
 
-*  _Write Once, Run Anywhere_ ™ _properties_
-
+*  _Write Once, Run Anywhere properties_ +
 JSP technology is platform independent in its
 dynamic web pages, its web servers, and its underlying server
 components. JSP pages may be authored on any platform, run on any web
@@ -119,33 +113,28 @@ server or web enabled application server, and accessed from any web
 browser. Server components can be built on any platform and run on any
 server.
 
-*  _High quality tool support_
-
+*  _High quality tool support_ +
 Platform independence allows the JSP user to
 choose best-of-breed tools. Additionally, an explicit goal of the
-JavaServer Pages design is to enable the creation of high quality
+Jakarta Server Pages design is to enable the creation of high quality
 portable tools.
 
-*  _Separation of Roles_
-
+*  _Separation of Roles_ +
 JSP supports the separation of developer and
 author roles. Developers write components that interact with server-side
 objects. Authors put static data and dynamic content together to create
-presentations suited for their intended audience.
-
+presentations suited for their intended audience. +
 Each group may do their job without knowing
 the job of the other. Each role emphasizes different abilities and,
 although these abilities may be present in the same individual, they
 most commonly will not be. Separation allows a natural division of
-labor.
-
+labor. +
 A subset of the developer community may be
 engaged in developing reusable components intended to be used by
 authors.
 
-*  _Reuse of components and tag libraries_
-
-JavaServer Pages technology emphasizes the
+*  _Reuse of components and tag libraries_ +
+Jakarta Server Pages technology emphasizes the
 use of reusable components such as JavaBeans components, Enterprise
 JavaBeans™ components, and tag libraries. These components can be used
 with interactive tools for component development and page composition,
@@ -153,43 +142,35 @@ yielding considerable development time savings. In addition, they
 provide the cross-platform power and flexibility of the Java programming
 language or other scripting languages.
 
-*  _Separation of dynamic and static content_
-
-JavaServer Pages technology enables the
+*  _Separation of dynamic and static content_ +
+Jakarta Server Pages technology enables the
 separation of static content in a template from dynamic content that is
 inserted into the static template. This greatly simplifies the creation
 of content. The separation is supported by beans specifically designed
 for the interaction with server-side objects, and by the tag extension
 mechanism.
 
-*  _Support for actions, expressions, and
-scripting_
-
-JavaServer Pages technology supports
+*  _Support for actions, expressions, and scripting_ +
+Jakarta Server Pages technology supports
 scripting elements as well as actions. Actions encapsulate useful
 functionality in a convenient form that can be manipulated by tools.
 Expressions are used to access data. Scripts can be used to glue
-together this functionality in a per-page manner.
-
-The JSP 2.0 specification added a simple
-expression language (EL) to Java-based scripts. Expressions in the EL
+together this functionality in a per-page manner. +
+Expressions in the EL
 directly express page author concepts like properties in beans and
 provide more controlled access to the Web Application data. Functions
-defined through the tag library mechanism can be accessed in the EL.
-
-The JSP 2.0 specification also added a
-mechanism by which page authors can write actions using the JSP
+defined through the tag library mechanism can be accessed in the EL. +
+Page authors can write actions using the JSP
 technology directly. This greatly increases the ease with which action
 abstractions can be created.
 
 *  _Web access layer for N-tier enterprise
-application architecture(s)_
-
-JavaServer Pages technology is an integral
-part of Java EE. The Java EE platform brings Java technology to
+application architecture(s)_ +
+Jakarta Server Pages technology is an integral
+part of Jakarta EE. The Jakarta EE platform brings Java technology to
 enterprise computing. One can now develop powerful middle-tier server
-applications that include a web site using JavaServer Pages technology
-as a front end to Enterprise JavaBeans components in a Java EE compliant
+applications that include a web site using Jakarta Server Pages technology
+as a front end to Enterprise JavaBeans components in a Jakarta EE compliant
 environment.
 
 === Basic Concepts
@@ -203,7 +184,7 @@ A JSP page is a text-based document that
 describes how to process a request to create a response. The description
 intermixes template data with dynamic actions and leverages the Java
 Platform. JSP technology supports a number of different paradigms for
-authoring dynamic content. The key features of JavaServer Pages are:
+authoring dynamic content. The key features of Jakarta Server Pages are:
 
 * Standard directives
 * Standard actions
@@ -231,10 +212,10 @@ components, and arbitrary Java class files
 * Java Runtime Environment(s) running in
 client(s) (downloadable via the Plugin and Java™ Web Start technology)
 
-The JavaServer Pages specification inherits
+The Jakarta Server Pages specification inherits
 from the servlet specification the concepts of web applications,
-_ServletContexts_ , sessions, and requests and responses. See the Java
-Servlet 2.5 specification for more details.
+_ServletContexts_ , sessions, and requests and responses. See the Jakarta
+Servlet specification for more details.
 
 === Components and Containers
 
@@ -280,28 +261,28 @@ include page encoding information, EL evaluation activation, automatic
 includes before and after pages, and whether scripting is enabled in a
 given page.
 
-=== Role in the Java Platform, Enterprise Edition
+=== Role in Jakarta EE
 
 With a few exceptions, integration of JSP
-pages within the Java EE 6.0 platform is inherited from the Servlet 2.5
+pages within Jakarta EE is inherited from the Servlet
 specification since translation turns JSPs into servlets.
 
-=== Users of JavaServer Pages
+=== Users of Jakarta Server Pages
 
 There are six classes of users that interact
-with JavaServer Pages technology. This section describes each class of
+with Jakarta Server Pages technology. This section describes each class of
 user, enumerates the technologies each must be familiar with, and
 identifies which sections of this specification are most relevant to
-each user class. The intent is to ensure that JavaServer Pages remains a
+each user class. The intent is to ensure that Jakarta Server Pages remains a
 practical and easy-to-use technology for each class of user, even as the
 language continues to grow.
 
 === Page Authors
 
 Page Authors are application component
-providers that use JavaServer Pages to develop the presentation
+providers that use Jakarta Server Pages to develop the presentation
 component of a web application. It is expected that they will not make
-use of the scripting capabilities of JavaServer Pages, but rather limit
+use of the scripting capabilities of Jakarta Server Pages, but rather limit
 their use to standard and custom actions. Therefore, it is assumed that
 they know the target language, such as HTML or XML, and basic XML
 concepts, but they need not know Java at all.
@@ -336,7 +317,7 @@ link:jsp.html#a6526[See Glossary.].
 === Advanced Page Authors
 
 Like Page Authors, Advanced Page Authors are
-also application component providers that use JavaServer Pages to
+also application component providers that use Jakarta Server Pages to
 develop the presentation component of a web application. These authors
 have a better understanding of XML and also know Java. Though they are
 recommended to avoid it where possible, these authors do have scripting
@@ -423,11 +404,11 @@ Container.]
 === Container Developers and Tool Vendors
 
 Container Developers develop containers that
-host JavaServer Pages. Tool Vendors write development tools to assist
+host Jakarta Server Pages. Tool Vendors write development tools to assist
 Page Authors, Advanced Page Authors, Tag Library Developers, and
 Deployers. Both Container Developers and Tool Vendors must know XML and
 Java, and must know all the requirements and technical details of
-JavaServer Pages. Therefore, this entire specification is relevant to
+Jakarta Server Pages. Therefore, this entire specification is relevant to
 both classes of user.
 
 '''''
@@ -463,7 +444,7 @@ The chapters of this part are:
 === [[a204]]Core Syntax and Semantics
 
 This chapter describes the core syntax
-and semantics for the JavaServer Pages 2.2 specification (JSP 2.2).
+and semantics for the Jakarta Server Pages 2.2 specification (JSP 2.2).
 
 === [[a206]]What Is a JSP Page
 
@@ -624,7 +605,7 @@ extension, and to modify the default interpretation for _.jspx_ .
 
 A JSP page is packaged as one or more JSP
 files, often in a web application, and delivered to a tool like a JSP
-container, a Java EE container, or an IDE. A complete JSP page may be
+container, a Jakarta EE container, or an IDE. A complete JSP page may be
 contained in a single file. In other cases, the top file will include
 other files that contain complete JSP pages, or included segments of
 pages.
@@ -760,7 +741,7 @@ link:jsp.html#a864[See The taglib Directive.]).
 
 JSP 2.2 supports portable packaging and
 deployment of web applications through the Servlet 2.5 specification.
-The JavaServer Pages specification inherits from the servlet
+The Jakarta Server Pages specification inherits from the servlet
 specification the concepts of applications, _ServletContexts_ ,
 Sessions, Requests and Responses.
 
@@ -1018,7 +999,7 @@ specification). The names for attributes must follow the conventions
 described in the JavaBeans specification.
 
 Attribute names that start with _jsp_ ,
-__jsp_ , _java_ , or _sun_ are reserved in this specification.
+__jsp_ , _jakarta_ are reserved in this specification.
 
 === [[a333]]White Space
 
@@ -2443,7 +2424,7 @@ available within EL expressions. Implicit objects are available to tag
 handlers through the pageContext object, see below.
 
 Each implicit object has a class or interface
-type defined in a core Java technology or Java Servlet API package, as
+type defined in a core Java technology or Jakarta Servlet API package, as
 shown in _link:jsp.html#a705[See Implicit Objects Available in
 JSP Pages.]_ .
 
@@ -2766,8 +2747,8 @@ shall be imported by the translated JSP page implementation and is thus
 available to the scripting environment.
 
 Packages java.lang.*, jakarta.servlet.*,
-jakarta.servlet.jsp.*, and jakarta.servlet.http.* are imported implicitely
-by the JSP container. No other packages may be part of this implicitely
+jakarta.servlet.jsp.*, and jakarta.servlet.http.* are imported implicitly
+by the JSP container. No other packages may be part of this implicitly
 imported list. Page authors may use the include-prelude feature (see
 link:jsp.html#a1299[See Defining Implicit Includes.]) in order
 to have additional packages imported transparently into their pages.
@@ -3081,7 +3062,7 @@ _<prefix>:<tagname>_ that is used to distinguish a custom action, e.g
 _<myPrefix:myTag>_ .
 
 Prefixes starting with _jsp:_ , _jspx:_ ,
-_java:_ , _jakarta:_ , _servlet:_ , _sun:_ , and _sunw:_ are reserved.
+_java:_ , _jakarta:_ and _servlet:_  are reserved.
 
 A prefix must follow the naming convention
 specified in the XML namespaces specification.
@@ -4701,11 +4682,11 @@ JSP page.
 === [[a1339]]Internationalization Issues
 
 This chapter describes requirements for
-internationalization with JavaServer Pages.
+internationalization with Jakarta Server Pages.
 
 The JSP specification by itself does not
 provide a complete platform for internationalization. It is complemented
-by functionality provided by the underlying Java Standard Edition
+by functionality provided by the underlying Java
 platform, the Servlet APIs, and by tag libraries such as the JSP
 Standard Tag Library (JSTL) with its collection of internationalization
 and formatting actions. For complete information, see the respective
@@ -4722,23 +4703,10 @@ however, many other character encodings are used. The J2SE platform
 therefore also supports character conversion to and from other character
 encodings. Any Java runtime must support the Unicode transformations
 UTF-8, UTF-16BE, and UTF-16LE as well as the ISO-8859-1 (Latin-1)
-character encoding, but most implementations support many more. The
-character encodings supported by Sun’s Java 2 Runtime Environment
-version 1.3 and version 1.4 respectively are described at:
-
-
-
-http://java.sun.com/j2se/1.3/docs/guide/intl/encoding.doc.html
-
-http://java.sun.com/j2se/1.4/docs/guide/intl/encoding.doc.html
-
-
-
+character encoding, but most implementations support many more.
 In JSP pages and in JSP configuration
 elements, character encodings are named using the names defined in the
 IANA charset registry:
-
-
 
 http://www.iana.org/assignments/character-sets
 
@@ -4961,7 +4929,7 @@ Combinations of these approaches also make sense.
 === [[a1403]]Standard Actions
 
 This chapter describes the standard
-actions of JavaServer Pages 2.2 (JSP 2.2). Standard actions are
+actions of Jakarta Server Pages 2.2 (JSP 2.2). Standard actions are
 represented using XML elements with a prefix of _jsp_ (though that
 prefix can be redefined in the XML syntax). A translation error will
 result if the JSP prefix is used for an element that is not a standard
@@ -5545,7 +5513,7 @@ _true_ , the buffer is flushed now. The default value is _false_ .
 
 A _<jsp:forward page=”urlSpec” />_ action
 allows the runtime dispatch of the current request to a static resource,
-a JSP page or a Java servlet class in the same context as the current
+a JSP page or a servlet in the same context as the current
 page. A _jsp:forward_ effectively terminates the execution of the
 current page. The relative _urlSpec_ is as in
 link:jsp.html#a274[See Relative URL Specifications.].
@@ -7842,12 +7810,12 @@ functionality. See section JSP.13.4 for more details.
 The Java Metadata specification (JSR-175),
 which is part of J2SE 5.0 and greater, provides a means of specifying
 configuration data in Java code. Metadata in Java code is also referred
-to as annotations. In Java EE, annotations are used to declare
+to as annotations. In Jakarta EE, annotations are used to declare
 dependencies on external resources and configuration data in Java code
 without the need to define that data in a configuration file.
 
 Section SRV.14.5 of the Servlet Specification
-describes the behavior of annotations and resource injection in Java EE
+describes the behavior of annotations and resource injection in Jakarta EE
 technology compliant web containers.
 
 In the JSP specification, tag handlers which
@@ -7874,7 +7842,7 @@ The annotations supported are:
 Please see Section SRV.14.5 of the servlet
 specification for more details on these annotations.
 
-A JSP container that is not part of a Java EE
+A JSP container that is not part of a Jakarta EE
 technology-compliant implementation is encouraged, but not required, to
 support resource injection.
 
@@ -7984,7 +7952,7 @@ accept request-time expressions, and additional information.
 A TLD file is useful for providing
 information on a tag library. It can be read by tools without
 instantiating objects or loader classes. Our approach conforms to the
-conventions used in other Java EE technologies.
+conventions used in other Jakarta EE technologies.
 
 As of JSP 2.0, the format for the Tag Library
 Descriptor is represented in XML Schema. This allows for a more
@@ -8045,10 +8013,10 @@ The following order of precedence applies
 (from highest to lowest) when building the taglib map (see the following
 sections for details):
 
-. If the container is Java EE platform
+. If the container is Jakarta EE platform
 compliant, the Map Entries for the tag libraries that are part of the
-Java EE platform. This currently includes the JavaServer Pages Standard
-Tag Library libraries and the JavaServer Faces libraries.
+Jakarta EE platform. This currently includes the Jakarta Server Pages Standard
+Tag Library libraries and the Jakarta Server Faces libraries.
 . Taglib Map in web.xml
 . Implicit Map Entries from TLDs
 . TLDs in JAR files in WEB-INF/lib
@@ -8278,11 +8246,6 @@ Extension Elements provide extension information at the tag level, and
 are specified by adding a _<tag-extension>_ element as a child of
 _<tag>_ . To use these elements, an XML namespace must first be defined
 and the namespace must be imported into the TLD.
-
-There are efforts under way in the JCP (Java
-Community Process) to define standard extensions for enhanced tool
-support for JSP page authoring. Such standard extensions should be used
-where appropriate.
 
 === Example
 
@@ -8626,7 +8589,7 @@ dependency in making these objects available. For example, they may be
 providing access to some functionality that exists only in a particular
 implementation. This can be done by having the tag extension class test
 at run-time for the existence of some implementation dependent feature
-and raise a run-time error (this, of course, makes the page not Java EE
+and raise a run-time error (this, of course, makes the page not Jakarta EE
 compliant).
 
 This mechanism, together with the access to
@@ -8777,7 +8740,7 @@ evaluation of the deferred expression. Secondly, since the
 _VariableMapper_ is used to resolve variables at EL parse time, a
 deferred expression such as _#\{attr1.foo}_ is not dependent on _attr1_
 anymore, so that it can be evaluated long after the end of life of the
-tag file's pageContext. This is very useful for JavaServer Faces
+tag file's pageContext. This is very useful for Jakarta Server Faces
 applications. +
  +
 Since the EL syntax does not allow for invokation of the method in a
@@ -9476,7 +9439,7 @@ declared implicitly at the beginning of the tag handler implementation.
 All scripting languages are required to provide access to these objects.
 
 Each implicit object has a class or interface
-type defined in a core Java technology or Java Servlet API package, as
+type defined in a core Java technology or Jakarta Servlet API package, as
 shown in _link:jsp.html#a2504[See Implicit Objects Available in
 Tag Files.]_ .
 
@@ -9860,7 +9823,7 @@ link:jsp.html#a2611[See The transformations described in this
 chapter need not be performed literally. An implementation may implement
 things differently to provide better performance, lower memory
 footprint, or other implementation attributes..]
-link:jsp.html#a2612[See Structure of the JavaProgramming
+link:jsp.html#a2612[See Structure of the Java Programming
 Language Class.] (after applying all include directives), together with
 any other classes defined by the JSP container, is a valid program for
 the given Java Platform, and if it passes the validation methods for all
@@ -9880,7 +9843,7 @@ need not be performed literally. An implementation may implement things
 differently to provide better performance, lower memory footprint, or
 other implementation attributes.[[a2611]]
 
-=== [[a2612]]Structure of the JavaProgramming Language Class
+=== [[a2612]]Structure of the Java Programming Language Class
 
 Optional imports clause as indicated via
 _jsp_ directive
@@ -11719,7 +11682,7 @@ web-app_3_0.xsd
 
 
 
- The following conventions apply to all Java
+ The following conventions apply to all Jakarta
 EE
 
  deployment descriptor elements unless
@@ -13570,7 +13533,7 @@ describing a Tag Library Descriptor in a JSP 2.1 format. This is the
 same XSD as
 _http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd_ , except
 for some formatting changes to extract comments and make them more
-readable. Some of the types used in this XSD are defined in the Java EE
+readable. Some of the types used in this XSD are defined in the Jakarta EE
 Platform Specification (see Related Documents in the Preface for a link
 to this specification).
 
@@ -13696,7 +13659,7 @@ published
  version of the schema using
 xsi:schemaLocation attribute
 
- for Java EE namespace with the following
+ for Jakarta EE namespace with the following
 location:
 
  
@@ -17459,7 +17422,7 @@ Library Descriptor file in JSP 1.2 format. This is the same DTD as
 formatting changes to extract comments and make them more readable: __
 
 <!-- +
-This is the DTD defining the JavaServer Pages 1.2 Tag Library descriptor
+This is the DTD defining the Jakarta Server Pages 1.2 Tag Library descriptor
 (.tld) (XML) file format/syntax. +
 A Tag Library is a JAR file containing a valid instance of a Tag Library
 Descriptor file, along with the appropriate implementation classes and
@@ -17878,7 +17841,7 @@ _http://java.sun.com/dtd/web-jsptaglibrary_1_1.dtd_ , except for some
 formatting changes to extract comments and make them more readable:
 
 <!-- +
-This is the DTD defining the JavaServer Pages 1.1 Tag Library descriptor
+This is the DTD defining the Jakarta Server Pages 1.1 Tag Library descriptor
 (.tld) (XML) file format/syntax. +
  +
 A Tag Library is a JAR file containing a valid instance of a Tag Library
@@ -18238,7 +18201,7 @@ described in appendix F.1 of the XML 1.0 specification.
 [[a5908]]Changes
 
 This appendix lists the changes in the
-JavaServer Pages specification. This appendix is non-normative.
+Jakarta Server Pages specification. This appendix is non-normative.
 
 === Changes between JSP 3.0 and JSR 245
 
@@ -18359,7 +18322,7 @@ objects are _pageContext_ , _pageScope_ , _requestScope_ ,
 _sessionScope_ , _applicationScope_ , _param_ , _paramValues_ , _header_
 , _headerValues_ , _cookie_ and _initParam_ for EL expressions _._
 
-===  _JavaServer Pages technology_
+===  _Jakarta Server Pages technology_
 
 An extensible Web technology that uses
 template data, custom elements, scripting languages, and server-side
@@ -18502,7 +18465,7 @@ __ _element._
 
  _A person who deploys a Web application in a
 Web container, specifying at least the root prefix for the Web
-application, and in a Java EE environment, the security and resource
+application, and in a Jakarta EE environment, the security and resource
 mappings._
 
 ===  _web component_
