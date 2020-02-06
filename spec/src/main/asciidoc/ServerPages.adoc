@@ -474,7 +474,7 @@ and/or using other objects.
 
 A JSP page defines a JSP page implementation
 class that implements the semantics of the JSP page. This class
-implements the _javax.servlet.Servlet_ interface (see
+implements the _jakarta.servlet.Servlet_ interface (see
 /C:/jspspec/JSP_Engine.html#57518[] for details). At request time a
 request intended for the JSP page is delivered to the JSP page
 implementation object for processing.
@@ -2095,10 +2095,10 @@ request and uncaught exception to the errorPage URL specified by the JSP
 page (or the implementation default behavior, if none is specified).
 
 Information about the error is passed as
-_javax.servlet.ServletRequest_ attributes to the error handler, with the
+_jakarta.servlet.ServletRequest_ attributes to the error handler, with the
 same attributes as specified by the Servlet specification. Names
-starting with the prefixe _javax_ are reserved by the
-different specifications of the Jakarta EE platform. The _javax.servlet_
+starting with the prefixe _jakarta_ are reserved by the
+different specifications of the Jakarta EE platform. The _jakarta.servlet_
 prefix is reserved and used by the servlet and JSP specifications.
 
 === [[a614]]Using JSPs as Error Pages
@@ -2108,9 +2108,9 @@ the _page_ directive’s _isErrorPage_ attribute to _true_ . If a page has
 _isErrorPage_ set to _true_ , then the “exception” implicit scripting
 language variable (see link:jsp.html#a748[See Implicit Objects
 Available in Error Pages.]) of that page is initialized. The variable is
-set to the value of the _javax.servlet.error.exception request_
+set to the value of the _jakarta.servlet.error.exception request_
 attribute value if present, otherwise to the value of the
-_javax.servlet.jsp.jspException_ request attribute value (for backwards
+_jakarta.servlet.jsp.jspException_ request attribute value (for backwards
 compatibility for JSP pages pre-compiled with a JSP 1.2 compiler).
 
 In addition, an _ErrorData_ instance must be
@@ -2120,7 +2120,7 @@ _PageContext_ to the page. This has the effect of providing easy access
 to the error information via the Expression Language. For example, an
 Error Page can access the status code using the syntax
 _$\{pageContext.errorData.statusCode}_ . See
-/C:/jspspec/javax.servlet.jsp.html#91781[] for details.
+/C:/jspspec/jakarta.servlet.jsp.html#91781[] for details.
 
 By default, a JSP error page sets the status
 code of the response to the value of
@@ -2460,11 +2460,11 @@ Semantics & Scope
  __ 
 
 protocol dependent subtype of:
-_javax.servlet.ServletRequest_
+_jakarta.servlet.ServletRequest_
 
 e.g:
 
- _javax.servlet.http.HttpServletRequest_
+ _jakarta.servlet.http.HttpServletRequest_
 
 The request triggering the service
 invocation.
@@ -2474,9 +2474,9 @@ invocation.
  _response_
 
 protocol dependent subtype of:
-_javax.servlet.ServletResponse,_ e.g:
+_jakarta.servlet.ServletResponse,_ e.g:
 
- _javax.servlet.http.HttpServletResponse_
+ _jakarta.servlet.http.HttpServletResponse_
 
 The response to the request.
 
@@ -2484,7 +2484,7 @@ The response to the request.
 
  _pageContext_
 
- _javax.servlet.jsp.PageContext_
+ _jakarta.servlet.jsp.PageContext_
 
 The page context for this JSP page.
 
@@ -2492,7 +2492,7 @@ The page context for this JSP page.
 
  _session_
 
- _javax.servlet.http.HttpSession_
+ _jakarta.servlet.http.HttpSession_
 
 The session object created for the requesting
 client (if any).
@@ -2504,7 +2504,7 @@ protocols.
 
  _application_
 
- _javax.servlet.ServletContext_
+ _jakarta.servlet.ServletContext_
 
 The servlet context obtained from the servlet
 configuration object
@@ -2516,7 +2516,7 @@ getContext()_ )
 
  _out_
 
- _javax.servlet.jsp.JspWriter_
+ _jakarta.servlet.jsp.JspWriter_
 
 An object that writes into the output stream.
 
@@ -2524,7 +2524,7 @@ An object that writes into the output stream.
 
  _config_ __
 
- _javax.servlet.ServletConfig_
+ _jakarta.servlet.ServletConfig_
 
 The _ServletConfig_ for this JSP page
 
@@ -2580,7 +2580,7 @@ in any compliant JSP container while taking advantage of
 implementation-specific improvements like high performance _JspWriters_
 .
 
-See /C:/jspspec/javax.servlet.jsp.html#91781[]
+See /C:/jspspec/jakarta.servlet.jsp.html#91781[]
 for more details.
 
 === Template Text Semantics
@@ -2765,8 +2765,8 @@ denoting all the public types declared in that package. The import list
 shall be imported by the translated JSP page implementation and is thus
 available to the scripting environment.
 
-Packages java.lang.*, javax.servlet.*,
-javax.servlet.jsp.*, and javax.servlet.http.* are imported implicitely
+Packages java.lang.*, jakarta.servlet.*,
+jakarta.servlet.jsp.*, and jakarta.servlet.http.* are imported implicitely
 by the JSP container. No other packages may be part of this implicitely
 imported list. Page authors may use the include-prelude feature (see
 link:jsp.html#a1299[See Defining Implicit Includes.]) in order
@@ -2781,7 +2781,7 @@ Indicates that the page requires
 participation in an (HTTP) session.
 
 If _true_ then the implicit script language
-variable named _session_ of type _javax.servlet.http.HttpSession_
+variable named _session_ of type _jakarta.servlet.http.HttpSession_
 references the current/new session for the page.
 
 If _false_ then the page does not participate
@@ -2898,8 +2898,8 @@ the throwing page implementation to the error page implementation by
 saving the object reference on the common _ServletRequest_ object using
 the _setAttribute_ method, with a name of
 
- _javax.servlet.jsp.jspException_ (for
-backwards-compatibility) and also _javax.servlet.error.exception_ (for
+ _jakarta.servlet.jsp.jspException_ (for
+backwards-compatibility) and also _jakarta.servlet.error.exception_ (for
 compatibility with the servlet specification). See
 link:jsp.html#a614[See Using JSPs as Error Pages.] for more
 details).
@@ -3081,7 +3081,7 @@ _<prefix>:<tagname>_ that is used to distinguish a custom action, e.g
 _<myPrefix:myTag>_ .
 
 Prefixes starting with _jsp:_ , _jspx:_ ,
-_java:_ , _javax:_ , _servlet:_ , _sun:_ , and _sunw:_ are reserved.
+_java:_ , _jakarta:_ , _servlet:_ , _sun:_ , and _sunw:_ are reserved.
 
 A prefix must follow the naming convention
 specified in the XML namespaces specification.
@@ -3473,7 +3473,7 @@ containers; these actions are described in
 
 New actions are defined according to the
 mechanisms described in /C:/jspspec/JSP_Tag_Extensions.html#43756[] and
-/C:/jspspec/javax.servlet.jsp.tagext.html#20465[] and are introduced
+/C:/jspspec/jakarta.servlet.jsp.tagext.html#20465[] and are introduced
 using the _taglib_ directive.
 
 The syntax for action elements is based on
@@ -3820,7 +3820,7 @@ expression using the _#\{}_ syntax.
 _ExpressionFactory.createMethodExpression() (_ with a method signature
 equal to the method signature specified in the TLD). The result of
 parsing the expression is passed directly to the setter method of the
-tag attribute, whose argument type must be _javax.el.MethodExpression_ .
+tag attribute, whose argument type must be _jakarta.el.MethodExpression_ .
 This allows for deferred processing of EL expressions that identify a
 method to be invoked on an Object.
 * A String literal can be provided, as long
@@ -4022,7 +4022,7 @@ rules that govern the resolution of variables and object properties.
 The _ELResolver_ shown in
 link:jsp.html#a1178[See JSP Resolvers Hierarchy.] is passed to
 all EL expressions that appear in a JSP page or tag file. It is an
-instance of _javax.el.CompositeELResolver_ that contains the following
+instance of _jakarta.el.CompositeELResolver_ that contains the following
 component _ELResolver_ s, in order:
 
 .  _jsp.ImplicitObjectELResolver_ +
@@ -4037,15 +4037,15 @@ This itself can take the form of a _el.CompositeELResolver_ . This will
 include the _ELResolver_ registered by Faces.
 . [[a1169]]The ELresolver returned
 by ExpressionFactory.getStreamELResolver().
-. [[a1170]]javax.el.StaticFieldResolver
-.  _javax.el.MapELResolver_ - constructed in
+. [[a1170]]jakarta.el.StaticFieldResolver
+.  _jakarta.el.MapELResolver_ - constructed in
 read/write mode.
-. javax.el.ResourceBundleELResolver
-.  _javax.el.ListELResolver_ - constructed in
+. jakarta.el.ResourceBundleELResolver
+.  _jakarta.el.ListELResolver_ - constructed in
 read/write mode.
-.  _javax.el.ArrayELResolver_ - constructed
+.  _jakarta.el.ArrayELResolver_ - constructed
 in read/write mode.
-.  _javax.el.BeanELResolver_ - constructed in
+.  _jakarta.el.BeanELResolver_ - constructed in
 read/write mode. +
  +
 Handles all cases where _base != null_
@@ -4867,7 +4867,7 @@ error if an unsupported page character encoding is requested.
 The response character encoding is the
 character encoding of the response generated from a JSP page, if that
 response is in the form of text. It is primarily managed as the
-_javax.servlet.ServletResponse_ object’s _characterEncoding_ property.
+_jakarta.servlet.ServletResponse_ object’s _characterEncoding_ property.
 
 {empty}The JSP container determines an
 initial response character encoding along with the initial content type
@@ -5832,7 +5832,7 @@ does not apply to the _<jsp:element>_ action itself, but rather to the
 output of the element. That is, _<jsp:attribute>_ cannot be used to
 specify the _name_ attribute of the _<jsp:element>_ action.
 * For custom action attributes of type
-_javax.servlet.jsp.tagext.JspFragment_ , the container must create a
+_jakarta.servlet.jsp.tagext.JspFragment_ , the container must create a
 _JspFragment_ out of the body of the _<jsp:attribute>_ action and pass
 it to the tag handler. This applies for both Classic Tag Handlers and
 Simple Tag Handlers. A translation error must result if the body of the
@@ -7367,7 +7367,7 @@ Java programming language.
 This chapter also provides an overview of the
 tag library concept. It describes the Tag Library Descriptor, and the
 _taglib_ directive. A detailed description of the APIs involved follows
-in link:javax.servlet.jsp.tagext.html#UNKNOWN[].
+in link:jakarta.servlet.jsp.tagext.html#UNKNOWN[].
 
 === Introduction
 
@@ -7494,7 +7494,7 @@ the run-time representation of a custom action.
 The JSP page implementation class
 instantiates a tag handler object, or reuses an existing tag handler
 object, for each action in the JSP page. The handler object is a Java
-object that implements the _javax.servlet.jsp.tagext.Tag_ interface. The
+object that implements the _jakarta.servlet.jsp.tagext.Tag_ interface. The
 handler object is responsible for the interaction between the JSP page
 and additional server-side objects.
 
@@ -7656,11 +7656,11 @@ type of tag extension called a Simple Tag Extension. Simple Tag
 Extensions can be written in one of two ways:
 
 * In Java, by defining a class that
-implements the _javax.servlet.jsp.tagext.SimpleTag_ interface. This
+implements the _jakarta.servlet.jsp.tagext.SimpleTag_ interface. This
 class is intended for use by advanced page authors and tag library
 developers who need the flexibility of the Java language in order to
 write their tag handlers. The
-_javax.servlet.jsp.tagext.SimpleTagSupport_ class provides a default
+_jakarta.servlet.jsp.tagext.SimpleTagSupport_ class provides a default
 implementation for all methods in _SimpleTag_ .
 * In JSP, using tag files. This method can be
 used by page authors who do not know Java. It can also be used by
@@ -7704,7 +7704,7 @@ implements the SimpleTag interface and whose <body-content> is equal to
 
 During the translation phase, various pieces
 of the page are translated into implementations of the
-_javax.servlet.jsp.tagext.JspFragment_ abstract class, before being
+_jakarta.servlet.jsp.tagext.JspFragment_ abstract class, before being
 passed to a tag handler. This is done automatically for any JSP code in
 the body of a named attribute (one that is defined by _<jsp:attribute>_
 ) that is declared to be a fragment, or of type _JspFragment_ , in the
@@ -7721,7 +7721,7 @@ A translation error must occur if a piece of
 JSP code that is to be translated into a JSP Fragment contains
 scriptlets or scriptlet expressions.
 
-See link:javax.servlet.jsp.tagext.html#UNKNOWN[]
+See link:jakarta.servlet.jsp.tagext.html#UNKNOWN[]
 for more details on the _JspFragment_ abstract class.
 
 === Simple Examples of Simple Tag Handlers
@@ -7787,7 +7787,7 @@ object of type _Tag_ , tag collaboration becomes more difficult when
 classic tag handlers are nested inside _SimpleTag_ custom actions.
 
 To make things easier, the
-_javax.servlet.jsp.tagext.TagAdapter_ class can wrap any _SimpleTag_ and
+_jakarta.servlet.jsp.tagext.TagAdapter_ class can wrap any _SimpleTag_ and
 expose it as if it were a _Tag_ instace. The original _JspTag_ can be
 retrieved through its _getAdaptee_ method. Whenever calling the
 _setParent_ method on a classic _Tag_ in a case where the outer tag does
@@ -7795,7 +7795,7 @@ not implement _Tag_ , the JSP Container must construct a new
 _TagAdapter_ and call _setParent_ on the classic _Tag_ passing in the
 adapter.
 
-See link:javax.servlet.jsp.tagext.html#UNKNOWN[]
+See link:jakarta.servlet.jsp.tagext.html#UNKNOWN[]
 for more details on these APIs.
 
 === [[a2091]]Attributes With Dynamic Names
@@ -7811,8 +7811,8 @@ to pass to a tag that mimics an HTML element.
 New to JSP 2.0 is the ability to declare that
 a tag handler accepts additional attributes with dynamic names. This is
 done by having the tag handler implement the
-_javax.servlet.jsp.tagext.DynamicAttributes_ interface. See
-link:javax.servlet.jsp.tagext.html#UNKNOWN[] for more details on this
+_jakarta.servlet.jsp.tagext.DynamicAttributes_ interface. See
+link:jakarta.servlet.jsp.tagext.html#UNKNOWN[] for more details on this
 interface.
 
 === [[a2094]]Event Listeners
@@ -7834,7 +7834,7 @@ start.
 
 Sometimes it may be useful to provide unique
 identifications for tag handlers. A tag handler can implement the
-interface _javax.servlet.jsp.tagext.JspIdConsumer_ for such
+interface _jakarta.servlet.jsp.tagext.JspIdConsumer_ for such
 functionality. See section JSP.13.4 for more details.
 
 === Resource Injection
@@ -7851,8 +7851,8 @@ describes the behavior of annotations and resource injection in Java EE
 technology compliant web containers.
 
 In the JSP specification, tag handlers which
-implement interfaces _javax.servlet.jsp.tagext.Tag_ and
-_javax.servlet.jsp.tagext.SimpleTag_ may be annotated for injection. In
+implement interfaces _jakarta.servlet.jsp.tagext.Tag_ and
+_jakarta.servlet.jsp.tagext.SimpleTag_ may be annotated for injection. In
 both cases, injection occurs immediately after an instance of the tag
 handler is constructed, and before any of the tag properties are
 initialized.
@@ -8799,7 +8799,7 @@ page via the _<jsp:forward>_ standard action. Just as for JSP pages, the
 forward is handled through the request dispatcher. Upon return from the
 _RequestDispatcher.forward_ method, the generated tag handler must stop
 processing of the tag file and throw
-_javax.servlet.jsp.SkipPageException_ . Similarly, if a tag file invokes
+_jakarta.servlet.jsp.SkipPageException_ . Similarly, if a tag file invokes
 a Classic Tag Handler which returns _SKIP_PAGE_ from the _doEndTag_
 method, or if it invokes a Simple Tag Handler which throws
 _SkipPageException_ in the _doTag_ method, the generated tag handler
@@ -9120,7 +9120,7 @@ other value is used. Defaults to _scriptless_ .
 (optional) The presence of this attribute
 indicates this tag supports additional attributes with dynamic names. If
 present, the generated tag handler must implement the
-_javax.servlet.jsp.tagext.DynamicAttributes_ interface, and the
+_jakarta.servlet.jsp.tagext.DynamicAttributes_ interface, and the
 container must treat the tag as if its corresponding TLD entry contained
 _<dynamic-attributes>true</dynamic-attributes>_ . The implementation
 must not reject any attribute names. The value identifies a page scoped
@@ -9491,11 +9491,11 @@ Semantics & Scope
  _request_
 
 protocol dependent subtype of:
-_javax.servlet.ServletRequest_
+_jakarta.servlet.ServletRequest_
 
 e.g:
 
- _javax.servlet.http.HttpServletRequest_
+ _jakarta.servlet.http.HttpServletRequest_
 
 The request triggering the service
 invocation.
@@ -9505,9 +9505,9 @@ invocation.
  _response_
 
 protocol dependent subtype of:
-_javax.servlet.ServletResponse,_ e.g:
+_jakarta.servlet.ServletResponse,_ e.g:
 
- _javax.servlet.http.HttpServletResponse_
+ _jakarta.servlet.http.HttpServletResponse_
 
 The response to the request.
 
@@ -9515,7 +9515,7 @@ The response to the request.
 
 jspContext
 
-javax.servlet.jsp.JspContext
+jakarta.servlet.jsp.JspContext
 
 The _JspContext_ for this tag file.
 
@@ -9523,7 +9523,7 @@ page scope.
 
  _session_
 
- _javax.servlet.http.HttpSession_
+ _jakarta.servlet.http.HttpSession_
 
 The session object created for the requesting
 client (if any).
@@ -9535,7 +9535,7 @@ protocols.
 
  _application_
 
- _javax.servlet.ServletContext_
+ _jakarta.servlet.ServletContext_
 
 The servlet context obtained from the servlet
 configuration object
@@ -9547,7 +9547,7 @@ getContext()_ )
 
  _out_
 
- _javax.servlet.jsp.JspWriter_
+ _jakarta.servlet.jsp.JspWriter_
 
 An object that writes into the output stream.
 
@@ -9555,7 +9555,7 @@ An object that writes into the output stream.
 
  _config_ __
 
- _javax.servlet.ServletConfig_
+ _jakarta.servlet.ServletConfig_
 
 The _ServletConfig_ for this JSP page
 
@@ -10438,7 +10438,7 @@ prefix for the _id_ attribute need not be " _jsp_ " but it must map to
 the namespace _http://java.sun.com/JSP/Page_ . In the case where the
 page author has redefined the _jsp_ prefix, an alternative prefix must
 be used by the container. See
-/C:/jspspec/javax.servlet.jsp.tagext.html#20465[] for more details.
+/C:/jspspec/jakarta.servlet.jsp.tagext.html#20465[] for more details.
 
 === [[a2819]]The tag Directive
 
@@ -10792,8 +10792,8 @@ __jspx_ , in any combination of upper and lower case.
 The enforcement of the contract between the
 JSP container and the JSP page author is aided by the requirement that
 the _Servlet_ class corresponding to the JSP page must implement the
-_javax.servlet.jsp.HttpJspPage_ interface (or the
-_javax.servlet.jsp.JspPage_ interface if the protocol is not HTTP).
+_jakarta.servlet.jsp.HttpJspPage_ interface (or the
+_jakarta.servlet.jsp.JspPage_ interface if the protocol is not HTTP).
 
 === 
 
@@ -10840,7 +10840,7 @@ decisions that a JSP container can make. It may restrict efforts to
 improve performance, for example.
 
 The JSP page implementation class will
-implement _javax.servlet.Servlet_ and requests are delivered to the
+implement _jakarta.servlet.Servlet_ and requests are delivered to the
 class as per the rules in the Servlet 2.5 specification.
 
 A JSP page implementation class may depend on
@@ -10916,21 +10916,21 @@ and the JSP page require request and response parameters.
 
 The formal type of the request parameter
 (which this specification calls _<_ _ServletRequestSubtype_ _>_ ) is an
-interface that extends _javax.servlet.ServletRequest_ . The interface
+interface that extends _jakarta.servlet.ServletRequest_ . The interface
 must define a protocol-dependent request contract between the JSP
 container and the class that implements the JSP page.
 
 Likewise, the formal type of the response
 parameter (which this specification calls _<_ _ServletResponseSubtype_
-_>_ ) is an interface that extends _javax.servlet.ServletResponse_ . The
+_>_ ) is an interface that extends _jakarta.servlet.ServletResponse_ . The
 interface must define a protocol-dependent response contract between the
 JSP container and the class that implements the JSP page.
 
 The request and response interfaces together
 describe a protocol-dependent contract between the JSP container and the
 class that implements the JSP page. The HTTP contract is defined by the
-_javax.servlet.http.HttpServletRequest_ and
-_javax.servlet.http.HttpServletResponse_ interfaces.
+_jakarta.servlet.http.HttpServletRequest_ and
+_jakarta.servlet.http.HttpServletResponse_ interfaces.
 
 The _JspPage_ interface refers to these
 methods, but cannot describe syntactically the methods involving the
@@ -10970,9 +10970,9 @@ simplifies the implementation.
 
 === [[a2942]]A Generic HTTP Superclass
 
-imports javax.servlet.*; +
-imports javax.servlet.http.*; +
-imports javax.servlet.jsp.*; +
+imports jakarta.servlet.*; +
+imports jakarta.servlet.http.*; +
+imports jakarta.servlet.jsp.*; +
  +
 /** +
 * An example of a superclass for an HTTP JSP class +
@@ -11036,9 +11036,9 @@ HttpServletResponse response) throws ServletException, IOException;
 
 === [[a2949]]The Java Class Generated From a JSP Page
 
-imports javax.servlet.*; +
-imports javax.servlet.http.*; +
-imports javax.servlet.jsp.*; +
+imports jakarta.servlet.*; +
+imports jakarta.servlet.http.*; +
+imports jakarta.servlet.jsp.*; +
  +
 /** +
 * An example of a class generated for a JSP. +
@@ -11116,11 +11116,11 @@ _sendRedirect_ , or error methods, up until the flush method is executed
 and the headers are sent. After that point, these methods become
 invalid, as per the Servlet specification.
 
-The _javax.servlet.jsp.JspWriter_ __ class
+The _jakarta.servlet.jsp.JspWriter_ __ class
 buffers and sends output. The _JspWriter_ class is used in the
 __jspService_ __ method as in the following example:
 
- _import javax.servlet.jsp.JspWriter; +
+ _import jakarta.servlet.jsp.JspWriter; +
  +
 static JspFactory _jspFactory = JspFactory.getDefaultFactory(); +
  +
@@ -11143,8 +11143,8 @@ out.flush(); +
 }_
 
 The complete listing of
-_javax.servlet.jsp.JspWriter_ can be found in
-link:javax.servlet.jsp.html#UNKNOWN[].
+_jakarta.servlet.jsp.JspWriter_ can be found in
+link:jakarta.servlet.jsp.html#UNKNOWN[].
 
 With buffering turned on, a redirect method
 can still be used in a scriptlet in a _.jsp_ file, by invoking
@@ -11424,9 +11424,9 @@ follows:
 
 package com.acme; +
  +
-import javax.servlet.*; +
-import javax.servlet.http.*; +
-import javax.servlet.jsp.*;
+import jakarta.servlet.*; +
+import jakarta.servlet.http.*; +
+import jakarta.servlet.jsp.*;
 
 public class _jsp_HelloWorld_XXX_Impl +
 extends PlatformDependent_Jsp_Super_Impl +
@@ -14320,13 +14320,13 @@ to be
 
  tag-class The tag handler class implementing
 
- javax.servlet.jsp.tagext.JspTag
+ jakarta.servlet.jsp.tagext.JspTag
 
  
 
  tei-class An optional subclass of
 
- javax.servlet.jsp.tagext.TagExtraInfo
+ jakarta.servlet.jsp.tagext.TagExtraInfo
 
  
 
@@ -14353,7 +14353,7 @@ additional
 
  true, the tag-class must implement the
 
- javax.servlet.jsp.tagext.DynamicAttributes
+ jakarta.servlet.jsp.tagext.DynamicAttributes
 
  interface. Defaults to false.
 
@@ -14393,7 +14393,7 @@ provide extra
 ===  <xsd:documentation>
 
  Defines the subclass of
-javax.serlvet.jsp.tagext.JspTag
+jakarta.serlvet.jsp.tagext.JspTag
 
  that implements the request time semantics
 for
@@ -14417,7 +14417,7 @@ for
 ===  <xsd:documentation>
 
  Defines the subclass of
-javax.servlet.jsp.tagext.TagExtraInfo
+jakarta.servlet.jsp.tagext.TagExtraInfo
 
  for this tag. (optional)
 
@@ -14583,14 +14583,14 @@ fragment
  deferred-value present if this attribute is
 to be parsed as a
 
- javax.el.ValueExpression
+ jakarta.el.ValueExpression
 
  
 
  deferred-method present if this attribute is
 to be parsed as a
 
- javax.el.MethodExpression
+ jakarta.el.MethodExpression
 
 ===  </xsd:documentation>
 
@@ -14717,7 +14717,7 @@ to be
 
  passed to the tag handler as a
 
- javax.el.ValueExpression. This allows for
+ jakarta.el.ValueExpression. This allows for
 deferred
 
  evaluation of EL expressions. An optional
@@ -14753,7 +14753,7 @@ to be
 
  passed to the tag handler as a
 
- javax.el.MethodExpression. This allows for
+ jakarta.el.MethodExpression. This allows for
 deferred
 
  evaluation of an EL expression that
@@ -14791,7 +14791,7 @@ method()"
 
  "true" if this attribute is of type
 
- javax.jsp.tagext.JspFragment, representing
+ jakarta.jsp.tagext.JspFragment, representing
 dynamic
 
  content that can be re-evaluated as many
@@ -14859,7 +14859,7 @@ base="javaee:xsdNMTOKENType"/>
 value for a
 
  tag handler attribute that accepts a
-javax.el.MethodExpression.
+jakarta.el.MethodExpression.
 
  
 
@@ -14896,7 +14896,7 @@ in the Java
  Provides the expected signature of the
 method identified
 
- by the javax.el.MethodExpression.
+ by the jakarta.el.MethodExpression.
 
  
 
@@ -14955,7 +14955,7 @@ purposes only
 value for a
 
  tag handler attribute that accepts a
-javax.el.ValueExpression.
+jakarta.el.ValueExpression.
 
  
 
@@ -16380,13 +16380,13 @@ to be
 
  tag-class The tag handler class implementing
 
- javax.servlet.jsp.tagext.JspTag
+ jakarta.servlet.jsp.tagext.JspTag
 
  
 
  tei-class An optional subclass of
 
- javax.servlet.jsp.tagext.TagExtraInfo
+ jakarta.servlet.jsp.tagext.TagExtraInfo
 
  
 
@@ -16413,7 +16413,7 @@ additional
 
  true, the tag-class must implement the
 
- javax.servlet.jsp.tagext.DynamicAttributes
+ jakarta.servlet.jsp.tagext.DynamicAttributes
 
  interface. Defaults to false.
 
@@ -16453,7 +16453,7 @@ provide extra
 ===  <xsd:documentation>
 
  Defines the subclass of
-javax.serlvet.jsp.tagext.JspTag
+jakarta.serlvet.jsp.tagext.JspTag
 
  that implements the request time semantics
 for
@@ -16477,7 +16477,7 @@ for
 ===  <xsd:documentation>
 
  Defines the subclass of
-javax.servlet.jsp.tagext.TagExtraInfo
+jakarta.servlet.jsp.tagext.TagExtraInfo
 
  for this tag. (optional)
 
@@ -16760,7 +16760,7 @@ translation time)
 
  "true" if this attribute is of type
 
- javax.jsp.tagext.JspFragment, representing
+ jakarta.jsp.tagext.JspFragment, representing
 dynamic
 
  content that can be re-evaluated as many
@@ -17618,9 +17618,9 @@ has one attribute, id. +
 The tag element may have several subelements defining: +
 name The unique action name +
 tag-class The tag handler class implementing
-javax.servlet.jsp.tagext.Tag +
+jakarta.servlet.jsp.tagext.Tag +
 tei-class An optional subclass of
-javax.servlet.jsp.tagext.TagExtraInfo +
+jakarta.servlet.jsp.tagext.TagExtraInfo +
 body-content The body content type +
 display-name A short name that is intended to be displayed by tools +
 small-icon Optional small-icon that can be used by tools +
@@ -17638,7 +17638,7 @@ variable*, attribute*, example?) >
 
 <!-- +
 The tag-class element indicates the subclass of
-javax.serlvet.jsp.tagext.Tag that implements the request time semantics
+jakarta.serlvet.jsp.tagext.Tag that implements the request time semantics
 for this tag. This element is required. +
  +
 #PCDATA ::= fully qualified Java class name +
@@ -17648,7 +17648,7 @@ for this tag. This element is required. +
 
 <!-- +
 The tei-class element indicates the subclass of
-javax.servlet.jsp.tagext.TagExtraInfo for this tag. The class is
+jakarta.servlet.jsp.tagext.TagExtraInfo for this tag. The class is
 instantiated at translation time. This element is optional. +
  +
 #PCDATA ::= fully qualified Java class name +
@@ -17954,8 +17954,8 @@ Defines an arbitrary text string descirbing the tag library +
 <!-- +
 The tag defines a unique tag in this tag library, defining: +
 - the unique tag/element name +
-- the subclass of javax.servlet.jsp.tagext.Tag implementation class +
-- an optional subclass of javax.servlet.jsp.tagext.TagExtraInfo +
+- the subclass of jakarta.servlet.jsp.tagext.Tag implementation class +
+- an optional subclass of jakarta.servlet.jsp.tagext.TagExtraInfo +
 - the body content type (hint) +
 - optional tag-specific information +
 - any attributes +
@@ -17965,7 +17965,7 @@ The tag defines a unique tag in this tag library, defining: +
 bodycontent?, info?, attribute*) >
 
 <!-- +
-Defines the subclass of javax.serlvet.jsp.tagext.Tag that implements the
+Defines the subclass of jakarta.serlvet.jsp.tagext.Tag that implements the
 request time semantics for this tag. (required) +
  +
 #PCDATA ::= fully qualified Java class name +
@@ -17974,7 +17974,7 @@ request time semantics for this tag. (required) +
 <!ELEMENT tagclass (#PCDATA) >
 
 <!-- +
-Defines the subclass of javax.servlet.jsp.tagext.TagExtraInfo for this
+Defines the subclass of jakarta.servlet.jsp.tagext.TagExtraInfo for this
 tag. (optional) +
  +
 If this is not given, the class is not consulted at translation time. +
@@ -18287,7 +18287,7 @@ deployable Web application.
 ===  _classic tag handler_
 
  _A tag handler that implements the_
-_javax.servlet.jsp.tagext.Tag_ _interface._
+_jakarta.servlet.jsp.tagext.Tag_ _interface._
 
 ===  _component contract_
 
@@ -18388,7 +18388,7 @@ well._
 ===  _JSP fragment_
 
  _A portion of JSP code, translated into an
-implementation of the_ _javax.servlet.jsp.JspFragment_ _abstract class._
+implementation of the_ _jakarta.servlet.jsp.JspFragment_ _abstract class._
 
 ===  _JSP page_
 
@@ -18458,7 +18458,7 @@ scriptlet is delimited by the_ _<%_ _and_ _%>_ _characters._
 ===  _simple tag handler_
 
  _A tag handler that implements the_
-_javax.servlet.jsp.tagext.SimpleTag_ _interface._
+_jakarta.servlet.jsp.tagext.SimpleTag_ _interface._
 
 ===  _tag_ __
 
