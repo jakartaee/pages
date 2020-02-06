@@ -33,6 +33,7 @@ package jakarta.servlet.jsp.el;
  * @deprecated As of JSP 2.1, replaced by {@link jakarta.el.ELResolver}
  * @since JSP 2.0
  */
+@Deprecated
 public interface VariableResolver {
 
     /**
