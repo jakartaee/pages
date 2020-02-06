@@ -1,184 +1,37 @@
-:sectnums:
-= Jakarta Server Pages Specification, Version 2.3
+:sectnums!:
+== Jakarta Server Pages Specification, Version 3.0
 
-Copyright (c) 2013, 2019 Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2013, 2019 Oracle and/or its affiliates and others.
+All rights reserved.
 
-Oracle and Java are registered trademarks of Oracle and/or its 
-affiliates. Other names may be trademarks of their respective owners. 
+Eclipse is a registered trademark of the Eclipse Foundation. Jakarta
+is a trademark of the Eclipse Foundation. Oracle and Java are
+registered trademarks of Oracle and/or its affiliates. Other names
+may be trademarks of their respective owners. 
 
-=== [[a1]]Status
+The Jakarta Server Pages Team - {revdate}
 
-This is JSP 2.3 (Maintenance Release 3of JSP
-2.1). JSP 2.1 was developed by the expert group JSR-245 under the Java
-Community Process (more details at http://jcp.org/jsr/detail/245.jsp).
+Comments to: jsp-dev@eclipse.org
 
-=== The Java Community Process
+== Preface
 
-The JCP produces a specification using three
-communities: an expert community (the expert group), the participants of
-the JCP, and the public-at-large. The expert group is responsible for
-the authoring of the specification through a collection of drafts.
-Specification drafts move from the expert community, through the
-participants, to the public, gaining in detail and completeness, always
-feeding received comments back to the expert group. The final draft is
-submitted for approval by the Executive Committee. The expert group lead
-is responsible for facilitating the workings of the expert group, for
-authoring the specification, and for delivering the reference
-implementation and the conformance test suite.
-
-=== The JCP and This Specification
-
-The JCP is designed to be a very flexible
-process so each expert group can address the requirements of the
-specific communities it serves.
-
-This specification includes chapters that are
-derived directly from the Javadoc comments in the API classes, but, were
-there to be any discrepancies, this specification has precedence over
-the Javadoc comments.
-
-The JCP process provides a mechanism for
-updating the specification through a maintenance process using erratas.
-If available, the erratas will have precedence over this specification.
-
-
-
-
-
-=== [[a11]]Preface
-
-This document is the JavaServer™ Pages
-2.3 Specification (JSP 2.3). This specification is being developed
-following the Java Community Process (JCP).
-
-=== [[a13]]JSP 2.3 Relation to JSP 2.2
-
-JSP 2.3 is a mantenance release for JSP 2.2.
-
-* JSP 2.3 specification uses Servlet 3.1
-specification for its web semantics.
-* JSP 2.3 specification is a component of
-Java™ Platform, Enterprise Edition 7(Java EE 7) specification.
-* JSP 2.3 specification requires the Java™
-Platform, Standard Edition 7(Java SE 7), or later.
-
-=== JSP 2.2 Relation to JSP 2.1
-
-JSP 2.2 is a mantenance release for JSP 2.1.
-
-* JSP 2.2 specification uses Servlet 3.0
-specification for its web semantics.
-* JSP 2.2 specification is a component of
-Java™ Platform, Enterprise Edition 6 (Java EE 6) specification.
-* JSP 2.2 specification requires the Java™
-Platform, Standard Edition 6 (Java SE 6), or later.
-
-=== JSP 2.1 Relation To JSP 2.0
-
-JSP 2.1 extends the JavaServer Pages 2.0
-Specification (JSP 2.0) in the following ways:
-
-* The JSP specification now features a
-_unified_ expression language, which is the result of the integration of
-the expression languages defined in the JSP 2.0 and Faces 1.1
-specifications. The new unified expression language is defined in its
-own specification document, delivered along with the JSP 2.1
-specification.
-* The JSP 2.1 specification uses the Servlet
-2.5 specification for its web semantics.
-* The JSP 2.1 specification requires the
-Java™ 2 Platform, Standard Edition version 5.0 or later.
-
-=== [[a28]]Backwards Compatibility with JSP 2.0
-
-As of JSP 2.1, the character sequence _#\{_
-is reserved for EL expressions.
-
-
-
-When used as a tag attribute value, the
-_#\{expr}_ syntax is evaluated by the container only if the the
-jsp-version element specified in the TLD has the value 2.1 or higher. If
-the version specified is less than 2.1, then the _\{expr}_ syntax is
-simply processed as a String literal.
-
-When used in template text in a JSP page, the
-_#\{_ character sequence triggers a translation error, unless
-specifically allowed through a configuration setup. This is because the
-_#\{}_ syntax is associated exclusively with deferred-evaluation in JSP
-2.1 and does not make sense in the context of template text (only
-immediate evaluation using the _$\{expr}_ syntax makes sense in template
-text).
-
-In a tag file, #\{expr} in template text is
-handled according to the tag file’s JSP version: If the tag file’s JSP
-version is 2.0 or less, #\{expr} in template text will not cause any
-error. If the tag file’s JSP version is equal to or greater than 2.1,
-#\{expr} in template text must cause an error, unless it has been
-escaped or the tag file contains a deferredSyntaxAllowedAsLiteral tag
-directive attribute set to TRUE. See link:jsp.html#a2352[See
-Packaging in a JAR.], and link:jsp.html#a2356[See Packaging
-Directly in a Web Application.], for how the JSP version of a tag file
-is determined.
-
-Similarly, the _#\{_ character sequence
-triggers a translation error if used for a tag attribute of a tag
-library where the jsp-version is greater than or equal to 2.1, and for
-which the attribute is not marked as a deferred expression in the TLD.
-
-A web-application developed for a JSP version
-that is prior to JSP 2.1 may therefore suffer from the following
-backwards incompatibilities:
-
-* If _#\{_ is used in template text as a
-String literal, it must be escaped using _\#\{_ , or through a
-configuration setup (described below).
-* When a tag library is upgraded to a
-jsp-version that is greater than or equal to 2.1, then String literals
-specified as attribute values that include the sequence _#\{_ will need
-to be escaped using _\#\{_ , or through a configuration setup (described
-below).
-
-=== Configuration setup to allow the #\{ character sequence as String literal
-
-It is possible to allow the use of the _#\{_
-character sequence as a String literal (in template text of JSP 2.1+
-containers or as an attribute value for a tag-library where jsp-version
-is 2.1+) through the property _deferred-syntax-allowed-as-literal_ of
-JSP Property Groups (See link:jsp.html#a1312[See Deferred Syntax
-(character sequence #\{).]) or the page/tag-file directive attribute
-deferredSyntaxAllowedAsStringLiteral (See
-link:jsp.html#a770[See The page Directive.] and
-link:jsp.html#a2399[See The tag Directive.]).
-
-=== What this means for a JSP/Faces developer
-
-You can run all your JSP 2.0 webapps as-is
-(well, _almost_ as-islink:#a6611[1]) on the latest and greatest
-JSP 2.1 containers! However, please be aware of the following if your
-web-application uses third party tag libraries that are based on Faces
-1.1 or earlier.
-
-* Some new features provided by JSP 2.1 and
-Faces 1.2 can only be used with Faces 1.2-based tag libraries. For
-example, while EL functions may now be used in the Faces 1.2 core and
-html tag libraries, they cannot be used with third party tag libraries
-that are based on Faces 1.1 and earlier.
-
-=== Licensing of Specification
-
-Details on the conditions under which this
-document is distributed are described in the license agreement on
-link:jsp.html#UNKNOWN[].
+This is the Server Pages specification
+version 3.0, developed by the Jakarta Server Pages Team under the Eclipse
+Foundation Specification Process.
 
 === Who Should Read This Document
 
-This document is the authoritative JSP 2.3
+This document is the authoritative JSP 3.0
 specification. It is intended to provide requirements for
 implementations of JSP page processing, and support by web containers in
 web servers and application servers. As an authoritative document, it
 covers material pertaining to a wide audience, including Page Authors,
 Tag Library Developers, Deployers, Container Vendors, and Tool Vendors.
+
+This specification includes chapters that are
+derived directly from the Javadoc comments in the API classes, but, were
+there to be any discrepancies, this specification has precedence over
+the Javadoc comments.
 
 This document is not intended to be a user’s
 guide. We expect other documents will be created that will cater to
@@ -206,156 +59,10 @@ III.] contains all the appendices.
 
 === Historical Note
 
-The following individuals were pioneers who
-did ground-breaking work on the Java platform areas related to this
-specification. James Gosling’s work on a Web Server in Java in 1994/1995
-became the foundation for servlets. A larger project emerged in 1996
-with Pavani Diwanji as lead engineer and with many other key members
-listed below. From this project came Sun’s Java Web Server product.
+Prior to version 3.0, this specification was developed in the Java
+Community Process as part of JSR 245.
 
-Things started to move quickly in 1999. The
-servlet expert group, with James Davidson as lead, delivered the Servlet
-2.1 specification in January and the Servlet 2.2 specification in
-December, while the JSP group, with Larry Cable and Eduardo
-Pelegri-Llopart as leads, delivered JSP 1.0 in June and JSP 1.1 in
-December.
-
-The year 2000 saw a lot of activity, with
-many implementations of containers, tools, books, and training that
-target JSP 1.1, Servlet 2.2, and the Java 2 Platform, Enterprise
-Edition. Tag libraries were an area of intense development, as were
-varying approaches to organizing all these features together. The
-adoption of JSP technology has continued in the year 2001, with many
-talks at the “Web, Services and beyond” track at JavaOne being dedicated
-to the technology.
-
-The JSP 1.2 specification went final in 2001.
-JSP 1.2 provided a number of fine-tunings of the spec. It also added the
-ability for validating JSP pages through the XML views of a JSP page.
-JSP 1.2 also introduced a normative XML syntax for JSP pages, but its
-adoption was handicaped by several specification shortcomings.
-
-JSP 2.0 brought a major revision of the JSP
-language. Key new features included the simple Expression Language (EL),
-tag files, substantial simplifications for writing tag handlers in Java
-and the notion of JSP fragments. JSP 2.0 also included a revision of the
-XML syntax that addresses most of the problems in JSP 1.2.
-
-The primary goal of JSP 2.1 is to unify the
-Expression Language used by JSP and JSF pages. The Expression language
-is therefore defined in its own specification document making it clear
-that it has general applicability and does not carry a dependency on any
-specific technology.
-
-In JSP 2.3, Expression Language(EL) is
-formerly removed from the JSP specification. JSP 2.3 supports and
-depends on EL 3.0.
-
-=== Acknowledgments for JSP 2.1
-
-Many thanks to all the individuals who have
-contributed to this version of the specification.
-
-We want to thank members of the Expert Group:
-Shawn Bayern, Hans Bergsten, Paul Bonfanti (New Atlanta Communications),
-Elaine Chien, Kin-Man Chung, Bill Dudney, Satish Duggana (Pramati
-Technologies), Jayson Falkner, Kjeld Froberg (Trifork Technologies),
-Sumathi Gopalakrishnan (Oracle), Geoffrey Greene (Macromedia), Randal
-Hanford (Boeing), Andy Hedges (Cap Gemini), Larry Isaacs (SA Institute),
-Scott Johnson (IBM), Kevin Jones (DevelopMentor), Vishy Kasar (Borland),
-Serge Knystautas (Apache Software Foundation), Changshin Lee (Tmax
-Soft), Felipe Leme, Kito Mann, Eddie O'Neil (BEA), John Rousseau
-(Novell), Kris Schneider, Nicholas Shulman (BEA), Sue Spielman, Hani
-Suleiman (Ironflare AB), Srinagesh Susarla (BEA), Sivasundaram Umapathy,
-Ana von Klopp.
-
-Special mention is due to Hani Suleiman,
-Felipe Leme, Scott Johnson, and Sumathi Gopalakrishnan for their overall
-active participation to the expert group discussions.
-
-The editors also want to give special thanks
-to the individuals within the Java Enterprise Edition platform team at
-Sun Microsystems, and especially to Bill Shannon, Eduardo
-Pellegri-Llopart, Jim Driscoll, Karen Schaffer, Kin-Man Chung, Nick
-Rodin, Sheri Shen, Jean-Francois Arcand, Jennifer Ball, Tony Ng, Ed
-Burns, Jayashri Visvanathan, Roger Kitain, Ryan Lubke, Dhiru Pandey,
-Greg Murray, and Norbert Lindenberg.
-
-=== Acknowledgments for JSP 2.0
-
-Many people contributed to the JavaServer
-Pages specifications. The success of the Java Platform depends on the
-Java Community Process used to define and evolve it. This process, which
-involves many individuals and corporations, promotes the development of
-high quality specifications in Internet time.
-
-Although it is impossible to list all the
-individuals who have contributed to this version of the specification,
-we would like to give thanks to all the members in our expert group. We
-have the benefit of a very large, active and enthusiastic expert group,
-without which the JSP specifications would not have succeeded.
-
-We want to thank:
-
-Nathan Abramson (Individual), Tim Ampe
-(Persistence Software Inc.), Shawn Bayern (Individual), Hans Bergsten
-(Individual), Paul Bonfanti (New Atlanta Communications Inc.), Prasad BV
-(Pramati Technologies), Bjorn Carlson (America Online), Murthy
-Chintalapati (Sun Microsystems, Inc.), Kin-Man Chung (Sun Microsystems,
-Inc.), Bill de hOra (InterX PLC), Ciaran Dynes (IONA Technologies PLC),
-Jayson Falkner (Individual), James Goodwill (Individual), Kouros Gorgani
-(Sybase), Randal Hanford (Boeing), Larry Isaacs (SAS Institute Inc.),
-Kevin R. Jones (Developmentor), Francois Jouaux (Apple Computer Inc.),
-Vishy Kasar (Borland Software Corporation), Ana Von Klopp (Sun
-Microsystems, Inc.), Matt LaMantia (Art Technology Group, Inc.), Bart
-Leeten (EDS), Geir Magnusson Jr. (Apache Software Foundation), Jason
-McGee (IBM), Brian McKellar (SAP AG), Shawn McMurdo (Lutris
-Technologies), Charles Morehead (Art Technology Group Inc.), Lars Oleson
-(SeeBeyond Technology Corp.), Jeff Plager (Sybase), Boris Pruessmann
-(Adobe Systems, Inc.), Tom Reilly (Macromedia, Inc.), Ricardo Rocha
-(Apache Software Foundation), John Rousseau (Novell, Inc.), James
-Strachan (Individual), Srinagesh Susarla (BEA Systems), Alex Yiu
-(Oracle).
-
-We want to thank the community that
-implemented the reference implementation, and the vendors that have
-implemented the spec, the authoring tools, and the tag libraries.
-
-Special mention is due to: Hans Bergsten for
-his numerous thorough reviews and technical accuracy, Shawn Bayern for
-his tireless help with the EL and RI, Alex Yiu for his thorough analysis
-on the invocation protocol and I18N, Nathan Abramson for his in-depth
-technical expertise and ideas, Norbert Lindenberg for his overhaul of
-the I18N chapter, Jan Luehe and Kin-Man Chung for keeping the RI more
-than up-to-date with the specification allowing for real-time feedback,
-Ana von Klopp for her help with JSR-45 debugging and keeping the tools
-perspective fresh in our minds, and Umit Yalcinalp for her conversion of
-the TLD and deployment descriptors into XML Schema.
-
-We want to thank all the authors of books on
-JSP technology, and the creators of the web sites that are tracking and
-facilitating the creation of the JSP community.
-
-The editors want to give special thanks to
-many individuals within the Java 2 Enterprise Edition team, and
-especially to Jean-Francois Arcand, Jennifer Ball, Stephanie Bodoff,
-Pierre Delisle, Jim Driscoll, Cheng Fang, Robert Field, Justyna Horwat,
-Dianne Jiao, Norbert Lindenberg, Ryan Lubke, Jan Luehe, Craig
-McClanahan, Bill Shannon, Prasad Subramanian, Norman Walsh, Yutaka
-Yoshida, Kathleen Zelony, and to Ian Evans for his editorial work.
-
-Lastly, but most importantly, we thank the
-software developers, web authors and members of the general public who
-have read this specification, used the reference implementation, and
-shared their experience. You are the reason the JavaServer Pages
-technology exists!
-
-=== 
-
-=== [[a77]]Overview
-
-This is an overview of the JavaServer
-Pages technology.
+== Overview
 
 === The JavaServer Pages™ Technology
 
