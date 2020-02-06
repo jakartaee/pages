@@ -69,7 +69,7 @@
 
     <mailingLists>
         <mailingList>
-            <name>JSTL dev mailing list</name>
+            <name>JSP dev mailing list</name>
             <post>jsp-dev@eclipse.org</post>
             <subscribe>https://dev.eclipse.org/mailman/listinfo/jsp-dev</subscribe>
             <unsubscribe>https://dev.eclipse.org/mailman/listinfo/jsp-dev</unsubscribe>
