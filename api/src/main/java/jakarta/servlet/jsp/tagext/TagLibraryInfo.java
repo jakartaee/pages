@@ -18,9 +18,6 @@
 
 package jakarta.servlet.jsp.tagext;
 
-import jakarta.servlet.jsp.tagext.TagInfo;
-import jakarta.servlet.jsp.tagext.TagFileInfo;
-
 /**
  * Translation-time information associated with a taglib directive, and its underlying TLD file.
  *
