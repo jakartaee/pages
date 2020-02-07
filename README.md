@@ -1,3 +1,3 @@
 # Prerequisites
 
-Oracle JDK 1.7 
+JDK 1.8
