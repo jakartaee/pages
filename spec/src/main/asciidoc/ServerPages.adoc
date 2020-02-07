@@ -3378,17 +3378,17 @@ standard and custom actions and within template text.
 This chapter describes how the expression
 language is integrated within the JSP 2.1 environment.
 
-=== Syntax of expressions in JSP pages: $\{} vs #\{}
+=== Syntax of expressions in JSP pages: ${} vs #{}
 
 There are two constructs to represent EL
-expressions: `$\{expr}` and `#\{expr}` . While the EL parses and
-evaluates `$\{}` and `#\{}` the same way, additional restrictions are
+expressions: `$\{expr}` and `\#{expr}` . While the EL parses and
+evaluates `${}` and `#{}` the same way, additional restrictions are
 placed on the usage of these delimiters in JSP pages.
 
 An EL expression that is evaluated
-immediately is represented in JSP with the syntax `$\{}` , while an EL
+immediately is represented in JSP with the syntax `${}` , while an EL
 expression whose evaluation is deferred is represented with the syntax
-`#\{}` .
+`#{}` .
 
 === Expressions and Template Text
 
@@ -3398,9 +3398,9 @@ text outside of any action.Exceptions are if the body of the tag is
 `tagdependent` , or if EL is turned off (usually for compatibility
 issues) explicitly through a directive or implicitly; see below.
 
-Only the `$\{}` syntax is allowed for
-expressions in template text. A translation error will result if `#\{}`
-is used in template text unless `#\{}` is turned off via a backwards
+Only the `${}` syntax is allowed for
+expressions in template text. A translation error will result if `\#{}`
+is used in template text unless `#{}` is turned off via a backwards
 compatibility mechanism.
 
 All EL expressions in JSP template text are
@@ -3413,14 +3413,14 @@ the current output. In cases where escaping is desired (for example, to
 help prevent cross-site scripting attacks), the JSTL core tag `<c:out>`
 can be used. For example:
 
-<c:out value=”$\{anELexpression}” />
+ <c:out value=”${anELexpression}” />
 
 The following shows a custom action where two
 EL expressions are used to access bean properties:
 
-<c:wombat> +
-One value is $\{bean1.a} and another is $\{bean2.a.c} +
-</c:wombat>
+ <c:wombat> +
+ One value is ${bean1.a} and another is ${bean2.a.c}
+ </c:wombat>
 
 === [[a1071]]Expressions and Attribute Values
 
@@ -3435,9 +3435,9 @@ For example, the following shows a
 conditional action that uses the EL to test whether a property of a bean
 is less than 3.
 
-<c:if test="$\{bean1.a < 3}"> +
-... +
-</c:if>
+ <c:if test="$\{bean1.a < 3}">
+ ...
+ </c:if>
 
 Note that the normal JSP coercion mechanism
 already allows for:
@@ -3448,7 +3448,7 @@ An EL expression that appears in an attribute
 value is processed differently depending on the attribute’s type
 category defined in the TLD. Details are provided in the sections below.
 
-=== [[a1078]]Static Attribute
+==== [[a1078]]Static Attribute
 
 * Defined in the TLD through element
 `<rtexprvalue>` set to `false` .
@@ -3461,7 +3461,7 @@ handler) using the conversions defined in
 link:jsp.html#a1025[See Conversions from string values to target
 type.].
 
-=== [[a1083]]Dynamic Attribute
+==== [[a1083]]Dynamic Attribute
 
 * Defined in the TLD through element
 `<rtexprvalue>` set to `true` .
@@ -3477,7 +3477,7 @@ expression takes place immediately by calling method `getValue()` on the
 coerced to the expected type. The resulting value is passed in to the
 setter method for the tag attribute.
 
-=== [[a1088]]Deferred Value
+==== [[a1088]]Deferred Value
 
 * Defined in the TLD through element
 `<deferred-value>` .
@@ -3496,7 +3496,7 @@ value is coerced to the expected type. If a static value is provided, it
 is converted to a `ValueExpression` where `isLiteralText()` returns
 `true`
 
-=== [[a1093]]Deferred Method
+==== [[a1093]]Deferred Method
 
 * Defined in the TLD through element
 `<deferred-method>` .
@@ -3520,7 +3520,7 @@ translation error occurs if the return type is void or if the string
 literal cannot be coerced to the return type of the deferred method
 signature.
 
-=== Dynamic Attribute or Deferred Expression
+==== Dynamic Attribute or Deferred Expression
 
 * Defined in the TLD through elements
 `<rtexprvalue>` (see link:jsp.html#a1083[See Dynamic
@@ -3538,7 +3538,7 @@ setter method argument must be of type `java.lang.Object` . The setter
 method will normally use `instanceof` to discriminate whether the
 attribute value is a dynamic attribute or a deferred value.
 
-=== Examples of Using $\{} and #\{}
+==== Examples of Using $\{} and #\{}
 
 As an example, assume a tag with the
 following three attributes:
@@ -3550,52 +3550,46 @@ type=java.lang.String`
 *  deferred - `rtexprvalue=true,
 type=java.lang.ValueExpression`
 
- `` 
 
 The following tags would yield the following
 results:
 
-=== Examples of Using $\{} and #\{}
+Examples of Using $\{} and #\{}
 
-Expression
+[cols="50,05",options="header"]
+|===
 
-=== Result
+|Expression
+|Result
 
- `<my:tag static="xyz" />`
+|`<my:tag static="xyz" />`
+|OK
 
-OK
+|`<my:tag static="$\{x[y]}" />`
+|ERROR
 
- `<my:tag static="$\{x[y]}" />`
+|`<my:tag static="#\{x[y]}" />`
+|ERROR
 
-ERROR
+|`<my:tag dynamic="xyz" />`
+|OK
 
- `<my:tag static="#\{x[y]}" />`
+|`<my:tag dynamic="$\{x[y]}" />`
+|OK
 
-ERROR
+|`<my:tag dynamic="#\{x[y]}" />`
+|ERROR
 
- `<my:tag dynamic="xyz" />`
+|`<my:tag deferred="xyz" />`
+|OK
 
-OK
+|`<my:tag deferred="$\{x[y]}" />`
+|ERROR
 
- `<my:tag dynamic="$\{x[y]}" />`
+|`<my:tag deferred="#\{x[y]}" />`
+|OK
 
-OK
-
- `<my:tag dynamic="#\{x[y]}" />`
-
-ERROR
-
- `<my:tag deferred="xyz" />`
-
-OK
-
- `<my:tag deferred="$\{x[y]}" />`
-
-ERROR
-
- `<my:tag deferred="#\{x[y]}" />`
-
-OK
+|===
 
 === [[a1131]]Implicit Objects
 
@@ -3639,31 +3633,31 @@ initialization parameter names to their `String` parameter value
 The following table shows some examples of
 using these implicit objects:
 
-=== Examples of Using Implicit Objects
+Examples of Using Implicit Objects
 
-Expression
+[cols="50,50",options="header"]
+|===
 
-=== Result
+|Expression
+|Result
 
- `$\{pageContext.request.requestURI}`
-
-The request's URI (obtained from
+|`$\{pageContext.request.requestURI}`
+|The request's URI (obtained from
 `HttpServletRequest` )
 
- `$\{sessionScope.profile}`
-
-The session-scoped attribute named `profile`
+|`$\{sessionScope.profile}`
+|The session-scoped attribute named `profile`
 (null if not found)
 
- `$\{param.productId}`
-
-The `String` value of the `productId`
+|`$\{param.productId}`
+|The `String` value of the `productId`
 parameter, or null if not found
 
- `$\{paramValues.productId}`
-
-The `String[]` containing all values of the
+|`$\{paramValues.productId}`
+|The `String[]` containing all values of the
 `productId` parameter, or null if not found
+
+|===
 
 === [[a1156]]Deactivating EL Evaluation
 
@@ -3751,9 +3745,7 @@ This expression will look for the attribute named `product` , searching
 the page, request, session, and application scopes, and will return its
 value. If the attribute is not found, null is returned.
 
-=== 
-
-=== [[a1178]]JSP Resolvers Hierarchy
+_[[a1178]]JSP Resolvers Hierarchy_
 
 image:sp-2.png[image]
 
@@ -3769,7 +3761,7 @@ the `ValueExpression` or `MethodExpression` at parse-time and is
 serialized along with the state of the expression. No function mapper
 needs to be provided at evaluation time.
 
-=== Invocation Syntax
+==== Invocation Syntax
 
 The full syntax is that of qualified n-ary
 functions:
@@ -3788,23 +3780,21 @@ namespace is used (this is only possible in JSP documents).
 In the following standard syntax example,
 `func1` is associated with `some-taglib` :
 
- <%@ taglib prefix=”some”
-uri=”http://acme.com/some-taglib” %> +
-$\{some:func1(true)}
+ <%@ taglib prefix=”some” uri=”http://acme.com/some-taglib” %>
+ ${some:func1(true)}
 
 In the following JSP document example, both
 `func2` and `func3` are associated with `default-taglib` :
 
- <some:tag
-xmlns=”http://acme.com/default-taglib” +
-xmlns:some=”http://acme.com/some-taglib” +
-xmlns:jsp=”http://java.sun.com/JSP/Page”> +
-<some:other value=”$\{func2(true)}”> +
-$\{func3(true)} +
-</some:other> +
-</some:tag>
+ <some:tag xmlns=”http://acme.com/default-taglib”
+           xmlns:some=”http://acme.com/some-taglib”
+           xmlns:jsp=”http://java.sun.com/JSP/Page”>
+   <some:other value=”$\{func2(true)}”>
+       ${func3(true)}
+   </some:other>
+ </some:tag>
 
-=== Tag Library Descriptor Information
+==== Tag Library Descriptor Information
 
 Each tag library may include zero or more `n`
 -ary (static) functions. The Tag Library Descriptor (TLD) associated
@@ -3831,29 +3821,29 @@ Reference the `function` element in
 /C:/jspspec/JSP`TLD.html#70854[] for how to specify a function in the
 TLD.
 
-=== Example
+==== Example
 
 The following TLD fragment describes a
 function with name `nickname` that is intended to fetch the nickname of
 the user:
 
-<taglib> +
-... +
-<function> +
-<name>nickname</name> +
-<function-class>mypkg.MyFunctions</function-class> +
-<function-signature> +
-java.lang.String nickName(java.lang.String) +
-</function-signature> +
-</function> +
-</taglib>
+ <taglib>
+   ...
+   <function>
+     <name>nickname</name>
+     <function-class>mypkg.MyFunctions</function-class>
+     <function-signature>
+         java.lang.String nickName(java.lang.String)
+     </function-signature>
+   </function>
+ </taglib>
 
 The following EL fragment shows the
 invocation of the function:
 
-<h2>Dear $\{my:nickname(user)}</h2>
+ <h2>Dear ${my:nickname(user)}</h2>
 
-=== Semantics
+==== Semantics
 
 * If the function has no prefix, the default
 namespace is used. If the function has a prefix, assume the namespace as
@@ -3878,9 +3868,7 @@ resulting value is the value returned by the method evaluation, or
 is thrown during the method evaluation, the exception must be wrapped in
 an `ELException` and the `ELException` must be thrown.
 
-== CHAPTER 2 - 
-
-=== [[a1210]]JSP Configuration
+== [[a1210]]JSP Configuration
 
 This chapter describes the JSP
 configuration information, which is specified in the Web Application
