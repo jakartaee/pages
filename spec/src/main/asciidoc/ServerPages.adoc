@@ -3950,7 +3950,7 @@ resource is considered to be a JSP file, all `include-prelude` and
 elements with matching URL patterns (see link:jsp.html#a1299[See
 Defining Implicit Includes.]).
 
-=== [[a1225]]JSP Property Groups
+==== [[a1225]]JSP Property Groups
 
 A `jsp-property-group` is a subelement of
 `jsp-config` . The properties that can currently be described in a
@@ -3973,7 +3973,7 @@ text.
 * Control handling of undeclared namespaces
 in a JSP page.
 
-=== [[a1238]]Deactivating EL Evaluation
+==== [[a1238]]Deactivating EL Evaluation
 
 Since the syntactic pattern `$\{expr}` was
 not reserved in the JSP specifications before JSP 2.0, and the syntactic
@@ -4010,10 +4010,10 @@ For example, the following `web.xml` fragment
 defines a group that deactivates EL evaluation for all JSP pages
 delivered using the `.jsp` extension:
 
-<jsp-property-group> +
-<url-pattern>*.jsp</url-pattern> +
-<el-ignored>true</el-ignored> +
-</jsp-property-group>
+ <jsp-property-group>
+   <url-pattern>*.jsp</url-pattern>
+   <el-ignored>true</el-ignored>
+ </jsp-property-group>
 
 Page authors can override the default mode
 through the `isELIgnored` attribute of the page directive. For tag
@@ -4024,70 +4024,59 @@ link:jsp.html#a1248[See EL Evaluation
 Settings for JSP Pages.] summarizes the EL evaluation settings for JSP
 pages, and their meanings:
 
-=== [[a1248]]EL Evaluation Settings for JSP Pages
+_[[a1248]]EL Evaluation Settings for JSP Pages_
 
-JSP Configuration +
-<el-ignored>
+[cols="30,03,40",options="header"]
+|===
 
-Page Directive +
-isELIgnored
+|JSP Configuration <el-ignored>
+|Page Directive isELIgnored
+|EL Encountered
 
-EL Encountered
+|unspecified
+|unspecified
+|Ignored if <= 2.3 web.xml Evaluated otherwise.
 
-unspecified
+|false
+|unspecified
+|Evaluated
 
-unspecified
+|true
+|unspecified
+|Ignored
 
-Ignored if <= 2.3 web.xml
+|don’t care
+|false
+|Evaluated
 
-Evaluated otherwise.
+|don’t care
+|true
+|Ignored
 
-false
-
-unspecified
-
-Evaluated
-
-true
-
-unspecified
-
-Ignored
-
-don’t care
-
-false
-
-Evaluated
-
-don’t care
-
-true
-
-Ignored
+|===
 
 link:jsp.html#a1269[See EL Evaluation
 Settings for Tag Files.] summarizes the EL evaluation settings for tag
 files, and their meanings:
 
-=== [[a1269]]EL Evaluation Settings for Tag Files
+_[[a1269]]EL Evaluation Settings for Tag Files_
 
-Tag Directive +
-isELIgnored
+[cols="50,50",options="header"]
+|===
 
-EL Encountered
+|Tag Directive isELIgnored
+|EL Encountered
 
-unspecified
+|unspecified
+|Evaluated
 
-Evaluated
+|false
+|Evaluated
 
-false
+|true
+|Ignored
 
-Evaluated
-
-true
-
-Ignored
+|===
 
 The EL evaluation setting for a translation
 unit also affects whether the `\$` and `\#` quote sequences are enabled
@@ -4099,7 +4088,7 @@ link:jsp.html#a639[See Quoting and Escape Conventions.] and
 link:jsp.html#a1823[See Overview of Syntax of JSP Documents.]
 for details.
 
-=== Disabling Scripting Elements
+==== Disabling Scripting Elements
 
 With the addition of the EL, some JSP page
 authors, or page authoring groups, may want to follow a methodology
@@ -4119,34 +4108,34 @@ For example, the following `web.xml` fragment
 defines a group that disables scripting elements for all JSP pages
 delivered using the `.jsp` extension:
 
-<jsp-property-group> +
-<url-pattern>*.jsp</url-pattern> +
-<scripting-invalid>true</scripting-invalid> +
-</jsp-property-group>
+ <jsp-property-group>
+   <url-pattern>*.jsp</url-pattern>
+   <scripting-invalid>true</scripting-invalid>
+ </jsp-property-group>
 
 link:jsp.html#a1285[See Scripting
 Settings.] summarizes the scripting settings and their meanings:
 
-=== [[a1285]]Scripting Settings
+_[[a1285]]Scripting Settings_
 
-JSP Configuration +
-<scripting-invalid>
+[cols="50,50",options="header"]
+|===
 
-Scripting Encountered
+|JSP Configuration <scripting-invalid>
+|Scripting Encountered
 
-unspecified
+|unspecified
+|Valid
 
-Valid
+|false
+|Valid
 
-false
+|true
+|Translation Error
 
-Valid
+|===
 
-true
-
-Translation Error
-
-=== Declaring Page Encodings
+==== Declaring Page Encodings
 
 The JSP configuration element `page-encoding`
 can be used to easily set the `pageEncoding` property of a group of JSP
@@ -4170,12 +4159,12 @@ For example, the following `web.xml` fragment
 defines a group that explicitly assigns `Shift`JIS` to all JSP pages and
 included JSP segments in the `/ja` subdirectory of the web application:
 
-<jsp-property-group> +
-<url-pattern>/ja/*</url-pattern> +
-<page-encoding>Shift`JIS</page-encoding> +
-</jsp-property-group>
+ <jsp-property-group>
+   <url-pattern>/ja/*</url-pattern>
+   <page-encoding>Shift_JIS</page-encoding>
+ </jsp-property-group>
 
-=== [[a1299]]Defining Implicit Includes
+==== [[a1299]]Defining Implicit Includes
 
 The `include-prelude` element is an optional
 subelement of `jsp-property-group` . It has no subelements. Its value is
@@ -4216,19 +4205,18 @@ that order, while other `.jsp` files only have +
 `/WEB-INF/jspf/prelude1.jspf` at the beginning and
 `/WEB-INF/jspf/coda1.jspf` at the end.
 
-<jsp-property-group> +
-<url-pattern>*.jsp</url-pattern> +
-<include-prelude>/WEB-INF/jspf/prelude1.jspf</include-prelude> +
-<include-coda>/WEB-INF/jspf/coda1.jspf</include-coda> +
-</jsp-property-group>
+ <jsp-property-group>
+   <url-pattern>*.jsp</url-pattern>
+   <include-prelude>/WEB-INF/jspf/prelude1.jspf</include-prelude>
+   <include-coda>/WEB-INF/jspf/coda1.jspf</include-coda>
+ </jsp-property-group>
+ <jsp-property-group>
+   <url-pattern>/two/*</url-pattern>
+   <include-prelude>/WEB-INF/jspf/prelude2.jspf</include-prelude>
+   <include-coda>/WEB-INF/jspf/coda2.jspf</include-coda>
+ </jsp-property-group>
 
-<jsp-property-group> +
-<url-pattern>/two/*</url-pattern> +
-<include-prelude>/WEB-INF/jspf/prelude2.jspf</include-prelude> +
-<include-coda>/WEB-INF/jspf/coda2.jspf</include-coda> +
-</jsp-property-group>
-
-=== Denoting XML Documents
+==== Denoting XML Documents
 
 The JSP configuration element `is-xml` can be
 used to denote that a group of files are JSP documents, and thus must be
@@ -4250,21 +4238,20 @@ are instead just plain JSP pages. The last group indicates that files
 with extension `.svg` are actually JSP documents (which most likely are
 generating SVG files).
 
-<jsp-property-group> +
-<url-pattern>*.jspx</url-pattern> +
-<is-xml>false</is-xml> +
-</jsp-property-group>
+ <jsp-property-group>
+   <url-pattern>*.jspx</url-pattern>
+   <is-xml>false</is-xml>
+ </jsp-property-group>
+ <jsp-property-group>
+   <url-pattern>*.svg</url-pattern>
+   <is-xml>true</is-xml>
+ </jsp-property-group>
 
-<jsp-property-group> +
-<url-pattern>*.svg</url-pattern> +
-<is-xml>true</is-xml> +
-</jsp-property-group>
+==== [[a1312]]Deferred Syntax (character sequence `#{`)
 
-=== [[a1312]]Deferred Syntax (character sequence `#\{)`
-
-As of JSP 2.1, the character sequence `#\{`
+As of JSP 2.1, the character sequence `\#{`
 is reserved for EL expressions. Consequently, a translation error occurs
-if the `#\{` character sequence is used as a String literal (in template
+if the `#{` character sequence is used as a String literal (in template
 text of a JSP 2.1+ container or as an attribute value for a tag-library
 where jsp-version is 2.1+).
 
@@ -4283,7 +4270,7 @@ directive (see link:jsp.html#a763[See Directives.]). See also
 link:jsp-1.html#a28[See Backwards Compatibility with JSP 2.0.]
 for more information.
 
-=== [[a1316]]Removing whitespaces from template text
+==== [[a1316]]Removing whitespaces from template text
 
 Whitespaces in template text of a JSP page
 are preserved by default (See link:jsp.html#a333[See White
@@ -4293,16 +4280,15 @@ often make it into the response output.
 For example, the following code snippet
 (where `↵` represents the end-of-line character(s))
 
-<%@ taglib prefix=”c”
-uri=”http://java.sun.com/jsp/jstl/core” %> `↵` +
-<%@ taglib prefix=”x” uri=”http://java.sun.com/jsp/jstl/xml” %> `↵` +
-Hello World! `↵`
+ <%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %>↵
+ <%@ taglib prefix=”x” uri=”http://java.sun.com/jsp/jstl/xml” %>↵
+ Hello World!↵
 
 would generate the following output:
 
- `↵` +
-`↵` +
-Hello World! `↵`
+ ↵
+ ↵
+ Hello World!↵
 
 
 
@@ -4315,8 +4301,8 @@ that contains only whitespaces and would therefore be removed. `↵`
 HelloWorld! `↵` represents template text that does not contain only
 whitespaces and would therefore be preserved as-is.
 
- `↵` +
-Hello World! `↵`
+ ↵
+ Hello World!↵
 
 The `trim-directive-whitespaces` element is a
 subelement of `jsp-property-group` (See link:jsp.html#a1225[See
@@ -4329,7 +4315,7 @@ Page authors can override the default value
 through the `trimDirectiveWhitespaces` attribute of the page directive
 (see link:jsp.html#a763[See Directives.]).
 
-=== [[a1327]]Declaring Default Content Type
+==== [[a1327]]Declaring Default Content Type
 
 The JSP configuration element
 default-content-type can be used to specify the default contentType
@@ -4341,7 +4327,7 @@ element are those of the contentType attribute of the page directive. It
 specifies the default response contentType if the page directive does
 not include a contentType attribute.
 
-=== [[a1330]]Setting Default Buffer Size
+==== [[a1330]]Setting Default Buffer Size
 
 The JSP configuration element buffer can be
 used to specify the default buffering model for the initial out
@@ -4353,7 +4339,7 @@ those of the buffer attribute of the page directive. It can be used to
 specify if buffering should be used for the output to Response, and if
 so, the size of the buffer to use.
 
-=== Raising Errors for Undeclared Namespaces
+==== Raising Errors for Undeclared Namespaces
 
 The default behavior when a tag with unknown
 namespace is used in a JSP page is to silently ignore it. For most page
@@ -4372,9 +4358,7 @@ JSP page.
 
 
 
-== CHAPTER 3 - 
-
-=== [[a1339]]Internationalization Issues
+== [[a1339]]Internationalization Issues
 
 This chapter describes requirements for
 internationalization with Jakarta Server Pages.
