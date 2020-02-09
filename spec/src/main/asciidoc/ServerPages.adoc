@@ -4606,7 +4606,7 @@ action.
 
 === <jsp:useBean>
 
-A `` `jsp:useBean` action associates an
+A `jsp:useBean` action associates an
 instance of a Java programming language object defined within a given
 scope and available with a given `id` with a newly declared scripting
 variable of the same `id` .
@@ -4643,7 +4643,7 @@ as indicated in the semantics of the `instantiate` method will be
 raised. The value of this attribute can be a request-time attribute
 expression.
 
-=== The id Attribute
+_The id Attribute_
 
 The `id=”name”` attribute/value tuple in a
 `jsp:useBean` action has special meaning to a JSP container, at page
@@ -4675,30 +4675,32 @@ is `java` .
 An example of the scope rules just mentioned
 is shown next:
 
-<% \{ // introduce a new block %> +
-... +
-<jsp:useBean id=”customer” class=”com.myco.Customer” /> +
- +
-<% +
-/* +
-* the tag above creates or obtains the Customer Bean +
-* reference, associates it with the name “customer” in the +
-* PageContext, and declares a Java programming language +
-* variable of the same name initialized to the object reference +
-* in this block’s scope. +
-*/ +
-%> +
-... +
-<%= customer.getName(); %> +
-... +
-<% } // close the block %> +
- +
-<% +
-// the variable customer is out of scope now but +
-// the object is still valid (and accessible via pageContext) +
-%>
+....
+<% \{ // introduce a new block %>
+  ...
+<jsp:useBean id=”customer” class=”com.myco.Customer” />
 
-=== The scope Attribute
+<%
+/*
+* the tag above creates or obtains the Customer Bean
+* reference, associates it with the name “customer” in the
+* PageContext, and declares a Java programming language
+* variable of the same name initialized to the object reference
+* in this block’s scope.
+*/
+%>
+...
+<%= customer.getName(); %>
+...
+<% } // close the block %>
+
+<%
+// the variable customer is out of scope now but
+// the object is still valid (and accessible via pageContext)
+%>
+....
+
+_The scope Attribute_
 
 The
 `scope=”page|request|session|application”` attribute/value tuple is
@@ -4712,7 +4714,7 @@ new runtime type is a subset of the type(s) of the object previously so
 associated. See link:jsp.html#a692[See Objects and Scopes.] for
 details on the available scopes.
 
-=== Semantics
+_Semantics_
 
 The actions performed in a `jsp:useBean`
 action are:
@@ -4753,8 +4755,8 @@ defines a public no-args constructor, then the class is instantiated.
 The new object reference is associated with the scripting variable and
 with the specified name in the specified scope using the appropriate
 scope dependent association mechanism (see `PageContext` ). After this,
-step 8 is performed.
-. If the object is not found, and the `class`
+step 8 is performed. +
+If the object is not found, and the `class`
 is either abstract, an `interface` , or no public no-args constructor is
 defined therein, then a `java.lang.InstantiationException` shall occur.
 This completes the processing of this `jsp:useBean` action.
@@ -4777,23 +4779,21 @@ complete initializing the created instance. In that case the body will
 likely contain `jsp:setProperty` actions and scriptlets that are
 evaluated. This completes the processing of this `useBean` action.
 
-=== Examples
+_Examples_
 
 In the following example, a Bean with name
 `connection` of type `com.myco.myapp.Connection` is available after
 actions on this element, either because it was already created and
 found, or because it is newly created.
 
-<jsp:useBean id=”connection”
-class=”com.myco.myapp.Connection” />
+ <jsp:useBean id=”connection” class=”com.myco.myapp.Connection” />
 
 In the next example, the `timeout` property
 is set to 33 if the Bean was instantiated.
 
- `<jsp:useBean id=”connection”
-class=”com.myco.myapp.Connection”> +
-<jsp:setProperty name=”connection” property=”timeout” value=”33”> +
-</jsp:useBean>`
+ <jsp:useBean id=”connection” class=”com.myco.myapp.Connection”> +
+   <jsp:setProperty name=”connection” property=”timeout” value=”33”> +
+ </jsp:useBean>`
 
 In the final example, the object should have
 been present in the session. If so, it is given the local name `wombat`
@@ -4801,30 +4801,27 @@ with `WombatType` . A `ClassCastException` `` may be raised if the
 object is of the wrong class, and an `InstantiationException` may be
 raised if the object is not defined.
 
- `<jsp:useBean id=”wombat”
-type=”my.WombatType” scope=”session”/>`
+ <jsp:useBean id=”wombat” type=”my.WombatType” scope=”session”/>`
 
-=== Syntax
+_Syntax_
 
 This action may or not have a body. If the
 action has no body, it is of the form:
 
-<jsp:useBean id="name"
-scope="page|request|session|application" typeSpec />
+ <jsp:useBean id="name" scope="page|request|session|application" typeSpec />
 
-typeSpec ::= class=”className” | +
-class=”className” type=”typeName” | +
-type=”typeName” class=”className” | +
-beanName=”beanName” type=”typeName” | +
-type=”typeName” beanName=”beanName” | +
-type=”typeName”
+ typeSpec ::=   class=”className”
+              | class=”className” type=”typeName”
+              | type=”typeName” class=”className”
+              | beanName=”beanName” type=”typeName”
+              | type=”typeName” beanName=”beanName”
+              | type=”typeName”
 
 If the action has a body, it is of the form:
 
-<jsp:useBean id="name"
-scope="page|request|session|application" typeSpec > +
-body +
-</jsp:useBean>
+ <jsp:useBean id="name" scope="page|request|session|application" typeSpec >
+   body
+ </jsp:useBean>
 
 In this case, the body will be invoked if the
 Bean denoted by the action is created. Typically, the body will contain
@@ -4835,61 +4832,55 @@ restricted.
 The `<jsp:useBean>` tag has the following
 attributes:
 
-=== jsp:useBean Attributes
+_jsp:useBean Attributes_
 
- `id`
+[cols="20,80"]
+|===
 
-The name used to identify the object instance
+| `id`
+|The name used to identify the object instance
 in the specified scope’s namespace, and also the scripting variable name
 declared and initialized with that object reference. The name specified
 is case sensitive and shall conform to the current scripting language
 variable-naming conventions.
 
- `scope`
-
-The scope within which the reference is
+|`scope`
+|The scope within which the reference is
 available. The default value is `page` . See the description of the
 `scope` attribute defined earlier herein. A translation error must occur
 if scope is not one of “ `page` ”, “ `request` ”, “ `session` ” or “
 `application` ”.
 
- `class`
-
-The fully qualified name of the class that
+|`class`
+|The fully qualified name of the class that
 defines the implementation of the object. The class name is case
-sensitive.
-
+sensitive. +
 If the `class` and `beanName` attributes are
 not specified the object must be present in the given scope.
 
- `beanName`
-
-The name of a bean, as expected by the
-`instantiate` method of the `java.beans.Beans` `` class.
-
+|`beanName`
+|The name of a bean, as expected by the
+`instantiate` method of the `java.beans.Beans` class. +
 This attribute can accept a request-time
 attribute expression as a value.
 
- `type`
-
-If specified, it defines the type of the
-scripting variable defined.
-
+|`type`
+|If specified, it defines the type of the
+scripting variable defined. +
 This allows the type of the scripting
 variable to be distinct from, but related to, the type of the
-implementation class specified.
-
+implementation class specified. +
 The type is required to be either the class
 itself, a superclass of the class, or an interface implemented by the
-class specified.
-
+class specified. +
 The object referenced is required to be of
 this type, otherwise a `java.lang.ClassCastException` shall occur at
 request time when the assignment of the object referenced to the
-scripting variable is attempted.
-
+scripting variable is attempted. +
 If unspecified, the value is the same as the
 value of the `class` attribute.
+
+|===
 
 === <jsp:setProperty>
 
@@ -4934,56 +4925,55 @@ paragraph apply to the actions.
 A conversion failure leads to an error,
 whether at translation time or request-time.
 
-=== Examples
+_Examples_
 
 The following two actions set a value from
 the request parameter values.
 
- `<jsp:setProperty name=”request”
-property=”*” /> +
-<jsp:setProperty name=”user” property=”user” param=”username” />`
+ <jsp:setProperty name=”request” property=”*” />
+ <jsp:setProperty name=”user” property=”user” param=”username” />
 
-The following two elemenst set a property
+The following two elements set a property
 from a value
 
- `<jsp:setProperty name=”results”
-property=”col” value=”$\{i mod 4}”/> +
-<jsp:setProperty name=”results” property=”row” value=”<%= i/4 %>” />`
+ <jsp:setProperty name=”results” property=”col” value=”$\{i mod 4}”/>
+ <jsp:setProperty name=”results” property=”row” value=”<%= i/4 %>” />
 
-=== Syntax
+_Syntax_
 
-<jsp:setProperty name="beanName" prop`expr />
+ <jsp:setProperty name="beanName" prop_expr />
 
- `prop`expr ::= +
-property="*" | +
-property=”propertyName” | +
-property=”propertyName” param="parameterName" | +
-property=”propertyName” value=”propertyValue”`
+....
+prop_expr ::=   property="*"
+              | property=”propertyName”
+              | property=”propertyName” param="parameterName"
+              | property=”propertyName” value=”propertyValue”
 
 propertyValue ::= string
+....
 
 The value `propertyValue` can also be a
 request-time attribute value, as described in
 link:jsp.html#a1004[See Request Time Attribute Values.].
 
-{empty}propertyValue ::=
-expr`scriptletlink:#a6613[3]
+ propertyValue ::= expr_scriptlet
 
 The `<jsp:setProperty>` action has the
 following attributes:
 
-=== jsp:setProperty Attributes
+_jsp:setProperty Attributes_
 
- `name`
+[cols="20,80"]
+|===
 
-The name of a bean instance defined by a
+|`name`
+|The name of a bean instance defined by a
 `<jsp:useBean>` action or some other action. The bean instance must
 contain the property to be set. The `defining action` must appear before
 the `<jsp:setProperty>` action in the same file.
 
- `property`
-
-The name of the property whose value will be
+|`property`
+|The name of the property whose value will be
 set. `I` `f` `propertyName` `is set to` `*` `then the tag will iterate
 over the current` `ServletRequest` `parameters, matching paramet` er
 names and value type(s) to property names and setter method type(s),
@@ -4991,35 +4981,30 @@ setting each matched property to the value of the matching parameter. If
 a parameter has a value of `""` , the corresponding property is not
 modified.
 
- `param`
-
-The name of the request parameter whose value
+|`param`
+|The name of the request parameter whose value
 is given to a bean property. The name of the request parameter usually
-comes from a web form.
-
+comes from a web form. +
 If `param` is omitted, the request parameter
-name is assumed to be the same as the bean property name.
-
+name is assumed to be the same as the bean property name. +
 If the `param` is not set in the Request
 object, or if it has the value of `““` , the `jsp:setProperty` action
-has no effect (a noop).
-
+has no effect (a noop). +
 An action may not have both `param` and
 `value` attributes.
 
- `value`
-
-The value to assign to the given property.
-
+|`value`
+|The value to assign to the given property. +
 This attribute can accept a request-time
-attribute expression as a value.
-
+attribute expression as a value. +
 An action may not have both `param` and
 `value` attributes.
+
+|===
 
 === <jsp:getProperty>
 
-The `<` `jsp:getProperty` `>` action places
+The `<jsp:getProperty>` action places
 the value of a bean instance property, converted to a `String` , into
 the implicit `out` object, from which the value can be displayed as
 output. The bean instance must be defined as indicated in the `name`
@@ -5046,7 +5031,10 @@ implementation is recommended (but not required) to raise a translation
 error, since the page implementation is in violation of the
 specification.
 
-* 
+NOTE: A consequence of the previous paragraph is that objects that are stored
+in, say, the session by a front component are not automatically visible to jsp:set-
+Property and jsp:getProperty actions in that page unless a jsp:useBean action, or
+some other action, makes them visible.
 
 If the JSP processor can ascertain that there
 is an alternate way guaranteed to access the same object, it can use
@@ -5055,28 +5043,29 @@ must guarantee that no intervening code has invalidated the copy held by
 the scripting variable. The truth is always the value held by the
 `pageContext` object.
 
-=== Examples
+_Examples_
 
-<jsp:getProperty name=”user” property=”name”
-/>
+ <jsp:getProperty name=”user” property=”name” />
 
-=== Syntax
+_Syntax_
 
-<jsp:getProperty name=”name”
-property=”propertyName” />
+ <jsp:getProperty name=”name” property=”propertyName” />
 
 The attributes are:
 
-=== jsp:getProperty Attributes
+_jsp:getProperty Attributes_
 
- `name`
+[cols="20,80"]
+|===
 
-The name of the object instance from which
+|`name`
+|The name of the object instance from which
 the property is obtained.
 
- `property`
+|`property`
+|Names the property to get.
 
-Names the property to get.
+|===
 
 === <jsp:include>
 
@@ -5114,10 +5103,9 @@ given a true value, then the buffer is flushed prior to the inclusion,
 otherwise the buffer is not flushed. The default value for the flush
 attribute is `false` .
 
-=== Examples
+_Examples_
 
-<jsp:include
-page=”/templates/copyright.html”/>
+ <jsp:include page=”/templates/copyright.html”/>
 
 The above example is a simple inclusion of an
 object. The path is interpreted in the context of the Web Application.
@@ -5128,33 +5116,32 @@ For an example of a more complex set of
 inclusions, consider the following four situations built using four JSP
 files: `A.jsp` , `C.jsp` , `dir/B.jsp` and `dir/C.jsp` :
 
-*  `A.jsp` says `<%@ include
-file=”dir/B.jsp”%>` and `dir/B.jsp` says `<%@ include file=”C.jsp”%>` .
-In this case the relative specification `C.jsp` resolves to `dir/C.jsp`
-.
-*  `A.jsp` says `<jsp:include
-page=”dir/B.jsp”/>` and `dir/B.jsp` says `<jsp:include page=”C.jsp” />`
-. In this case the relative specification `C.jsp` resolves to
-`dir/C.jsp` .
-*  `A.jsp` says `<jsp:include
-page=”dir/B.jsp”/>` and `dir/B.jsp` says `<%@ include file=”C.jsp” %>` .
-In this case the relative specification `C.jsp` resolves to `dir/C.jsp`
-.
-*  `A.jsp` says `<%@ include
-file=”dir/B.jsp”%>` and `dir/B.jsp` says `<jsp:include page=”C.jsp”/>` .
-In this case the relative specification `C.jsp` resolves to `C.jsp` .
+*  `A.jsp` says `<%@ include file=”dir/B.jsp”%>` and `dir/B.jsp`
+says `<%@ include file=”C.jsp”%>`. In this case the relative
+specification `C.jsp` resolves to `dir/C.jsp`.
 
-=== Syntax
+*  `A.jsp` says `<jsp:include
+page=”dir/B.jsp”/>` and `dir/B.jsp` says `<jsp:include page=”C.jsp” />`.
+In this case the relative specification `C.jsp` resolves to
+`dir/C.jsp`.
 
-<jsp:include page=”urlSpec”
-flush="true|false"/>
+*  `A.jsp` says `<jsp:include
+page=”dir/B.jsp”/>` and `dir/B.jsp` says `<%@ include file=”C.jsp” %>`.
+In this case the relative specification `C.jsp` resolves to `dir/C.jsp`.
+
+*  `A.jsp` says `<%@ include
+file=”dir/B.jsp”%>` and `dir/B.jsp` says `<jsp:include page=”C.jsp”/>`.
+In this case the relative specification `C.jsp` resolves to `C.jsp`.
+
+_Syntax_
+
+ <jsp:include page=”urlSpec” flush="true|false"/>
 
 and
 
-<jsp:include page=”urlSpec”
-flush="true|false"> +
-\{ <jsp:param .... /> }* +
-</jsp:include>
+ <jsp:include page=”urlSpec” flush="true|false">
+   { <jsp:param .... /> }*
+ </jsp:include>
 
 The first syntax just does a request-time
 inclusion. In the second case, the values in the `param` subelements are
@@ -5162,21 +5149,23 @@ used to augment the request for the purposes of the inclusion.
 
 The valid attributes are:
 
-=== jsp:include Atrributes
+_jsp:include Atrributes_
 
- `page`
+[cols="20,80"]
+|===
 
-The URL is a relative `urlSpec` as in
+|`page`
+|The URL is a relative `urlSpec` as in
 link:jsp.html#a274[See Relative URL Specifications.]. Relative
-paths are interpreted relative to the current JSP page.
-
+paths are interpreted relative to the current JSP page. +
 Accepts a request-time attribute value (which
 must evaluate to a String that is a relative URL specification).
 
- `flush`
-
-Optional boolean attribute. If the value is
+| `flush`
+|Optional boolean attribute. If the value is
 `true` , the buffer is flushed now. The default value is `false` .
+
+|===
 
 === <jsp:forward>
 
@@ -5205,39 +5194,40 @@ If the page output was unbuffered and
 anything has been written to it, an attempt to forward the request will
 result in an `IllegalStateException` .
 
-=== Examples
+_Examples_
 
 The following action might be used to forward
 to a static page based on some dynamic condition.
 
-<% String whereTo = “/templates/”+someValue;
-%> +
-<jsp:forward page=’<%= whereTo %>’ />
+ <% String whereTo = “/templates/”+someValue; %>
+ <jsp:forward page=’<%= whereTo %>’ />
 
-=== Syntax
+_Syntax_
 
-<jsp:forward page=”relativeURLspec” />
+ <jsp:forward page="relativeURLspec" />
 
 and
 
-<jsp:forward page=”urlSpec”> +
-\{ <jsp:param .... /> }* +
-</jsp:forward>
+ <jsp:forward page=”urlSpec”>
+   { <jsp:param .... /> }*
+ </jsp:forward>
 
 This tag allows the page author to cause the
 current request processing to be affected by the specified attributes as
 follows:
 
-=== jsp:forward Attributes
+_jsp:forward Attributes_
 
- `page`
+[cols="20,80"]
+|===
 
- `The URL is a relative` `urlSpec` `` as in
-`` link:jsp.html#a274[See Relative URL Specifications.] `.`
-Relative paths are interpreted relative to the current JSP page.
-
- `Accepts a request-time attribute value
-(which must evaluate to a String that is a relative URL specification).`
+| `page`
+|The URL is a relative `urlSpec` as in
+link:jsp.html#a274[See Relative URL Specifications.].
+Relative paths are interpreted relative to the current JSP page. +
+Accepts a request-time attribute value
+(which must evaluate to a String that is a relative URL specification).
+|===
 
 === <jsp:param>
 
@@ -5270,9 +5260,9 @@ to append the parameters to the URL in the dispatched request, both the
 names and values must be encoded as per the content type
 `application/x-www-form-urlencoded` in the HTML specification.
 
-=== Syntax
+_Syntax_
 
-<jsp:param name="name" value="value" />
+ <jsp:param name="name" value="value" />
 
 This action has two mandatory attributes:
 `name` and `value` . `name` indicates the name of the parameter, and
@@ -5309,115 +5299,103 @@ with the JSP container and a reference to Sun’s plugin location can be
 used instead, although some vendors will choose to include the plugin
 for the benefit of their customers.
 
-=== Examples
+_Examples_
 
-<jsp:plugin type=”applet”
-code=”Molecule.class” codebase=”/html” > +
-<jsp:params> +
-<jsp:param +
-name=”molecule” +
-value=”molecules/benzene.mol”/> +
-</jsp:params> +
-<jsp:fallback> +
-<p> unable to start plugin </p> +
-</jsp:fallback> +
+ <jsp:plugin type="applet" code=”Molecule.class” codebase=”/html” >
+   <jsp:params>
+     <jsp:param
+         name=”molecule”
+         value=”molecules/benzene.mol”/>
+   </jsp:params>
+   <jsp:fallback>
+     <p> unable to start plugin </p>
+   </jsp:fallback>
+ </jsp:plugin>
+
+_Syntax_
+
+....
+<jsp:plugin type="bean|applet"
+    code="objectCode"
+    codebase="objectCodebase"
+    { align="alignment" }
+    { archive="archiveList" }
+    { height="height" }
+    { hspace="hspace" }
+    { jreversion="jreversion" }
+    { name="componentName" }
+    { vspace="vspace" }
+    { title=”title” }
+    { width="width" }
+    { nspluginurl="url" }
+    { iepluginurl="url" }
+    { mayscript=’true|false’ } >
+
+    { <jsp:params>
+        { <jsp:param name="paramName" value=”paramValue" /> }+
+      </jsp:params> }
+
+    { <jsp:fallback> arbitrary_text </jsp:fallback> }
 </jsp:plugin>
+....
 
-=== Syntax
+_jsp:plugin Attributes_
 
-<jsp:plugin type="bean|applet" +
-code="objectCode" +
-codebase="objectCodebase" +
-\{ align="alignment" } +
-\{ archive="archiveList" } +
-\{ height="height" } +
-\{ hspace="hspace" } +
-\{ jreversion="jreversion" } +
-\{ name="componentName" } +
-\{ vspace="vspace" } +
-\{ title=”title” } +
-\{ width="width" } +
-\{ nspluginurl="url" } +
-\{ iepluginurl="url" } +
-\{ mayscript=’true|false’ } >
+[cols="20,80"]
+|===
 
- `\{ <jsp:params> +
-\{ <jsp:param name="paramName" value=”paramValue" /> }+ +
-</jsp:params> }`
-
- `\{ <jsp:fallback> arbitrary`text
-</jsp:fallback> } +
-</jsp:plugin>`
-
-=== jsp:plugin Attributes
-
- `type`
-
-Identifies the type of the component; a bean,
+| `type`
+|Identifies the type of the component; a bean,
 or an Applet.
 
- `code`
+|`code`
+|As defined by HTML spec
 
-As defined by HTML spec
+|`codebase`
+|As defined by HTML spec
 
- `codebase`
+|`align`
+|As defined by HTML spec
 
-As defined by HTML spec
+|`archive`
+|As defined by HTML spec
 
- `align`
-
-As defined by HTML spec
-
- `archive`
-
-As defined by HTML spec
-
- `height`
-
-As defined by HTML spec.
-
+|`height`
+|As defined by HTML spec. +
 Accepts a run-time expression value.
 
- `hspace`
+|`hspace`
+|As defined by HTML spec.
 
-As defined by HTML spec.
-
- `jreversion`
-
-Identifies the spec version number of the JRE
+|`jreversion`
+|Identifies the spec version number of the JRE
 the component requires in order to operate; the default is: `1.2`
 
- `name`
+|`name`
+|As defined by HTML spec
 
-As defined by HTML spec
+|`vspace`
+|As defined by HTML spec
 
- `vspace`
+|`title`
+|As defined by the HTML spec
 
-As defined by HTML spec
-
- `title`
-
-As defined by the HTML spec
-
- `width`
-
-As defined by HTML spec.
-
+|`width`
+|As defined by HTML spec. +
 Accepts a run-time expression value.
 
- `nspluginurl`
-
-URL where JRE plugin can be downloaded for
+|`nspluginurl`
+|URL where JRE plugin can be downloaded for
 Netscape Navigator, default is implementation defined.
 
- `iepluginurl`
-
-URL where JRE plugin can be downloaded for
+|`iepluginurl`
+|URL where JRE plugin can be downloaded for
 IE, default is implementation defined.
 
- `mayscript`
+|`mayscript`
+|As defined by HTML spec.
 
-As defined by HTML spec.
+|===
 
 === <jsp:params>
 
@@ -5521,19 +5499,19 @@ evaluated by the container prior to the custom action invocation. This
 example assumes the name attribute is declared with type
 `java.lang.String` in the TLD.
 
- <mytag:highlight> +
-<jsp:attribute name=”text”> +
-Inline definition. +
-</jsp:attribute> +
-</mytag:highlight>
+ <mytag:highlight>
+   <jsp:attribute name=”text”>
+       Inline definition.
+   </jsp:attribute>
+ </mytag:highlight>
 
 The following is an example of using the
 `<jsp:attribute>` standard action within `<jsp:element>` , to define
 which attributes are to be output with that element:
 
  <jsp:element name=”firstname”> +
-<jsp:attribute name=”name”>Susan</jsp:attribute> +
-</jsp:element>
+     <jsp:attribute name=”name”>Susan</jsp:attribute> +
+ </jsp:element>
 
 This would produce the following output:
 
@@ -5545,43 +5523,43 @@ Syntax Grammar.] for the formal syntax definition of the
 
 The attributes are:
 
-=== Attributes for the `<jsp:attribute>` standard action
+_Attributes for the `<jsp:attribute>` standard action_
 
- `name`
+[cols="20,80"]
+|===
 
-(required) If not being used with
+|`name`
+|(required) If not being used with
 `<jsp:element>` , then if the action does not accept dynamic attributes,
 the name must match the name of an attribute for the action being
 invoked, as declared in the Tag Library Descriptor for a custom action,
 or as specified for a standard action, or a translation error will
 result. Except for when used with `<jsp:element>` , a translation error
 will result if both an XML element attribute and a `<jsp:attribute>`
-element are used to specify the value for the same attribute.
-
+element are used to specify the value for the same attribute. +
 The value of name can be a QName. If so, a
 translation error must occur if the prefix does not match that of the
 action it applies to, unless the action supports dynamic attributes, or
-unless the action is `<jsp:element>` .
-
+unless the action is `<jsp:element>`. +
 When used with `<jsp:element>` , this
 attribute specifies the name of the attribute to be included in the
 generated element.
 
- `trim`
-
-(optional) Valid values are `true` and
+|`trim`
+|(optional) Valid values are `true` and
 `false` . If `true` , the whitespace, including spaces, carriage
 returns, line feeds, and tabs, that appears at the beginning and at the
 end of the body of the `<jsp:attribute>` action will be ignored by the
 JSP compiler. If `false` the whitespace is not ignored. Defaults to
-`true` .
+`true`.
 
- `omit`
-
-(optional) Valid values are `true` and
+|`omit`
+|(optional) Valid values are `true` and
 `false` . If `true` , and when used with <jsp:element>, the attribute in
 the element being ouput is omitted. Ignored when used with a standard or
 custom action. Defaults to `false` .
+
+|===
 
 === [[a1654]]<jsp:body>
 
@@ -5616,7 +5594,7 @@ attribute that can be examined and manipulated. If the fragment
 identified by the given name is `null` , `<jsp:invoke>` will behave as
 though a fragment was passed in that produces no output.
 
-=== Basic Usage
+==== Basic Usage
 
 The most basic usage of this standard action
 will invoke a fragment with the given name with no parameters. The
@@ -5625,9 +5603,9 @@ in null for the `Writer` parameter so that the results will be sent to
 the `JspWriter` of the `JspContext` associated with the `JspFragment` .
 The following is an example of such a basic fragment invocation:
 
-<jsp:invoke fragment=”frag1”/>
+ <jsp:invoke fragment=”frag1”/>
 
-=== Storing Fragment Output
+==== Storing Fragment Output
 
 It is also possible to invoke the fragment
 and send the results to a scoped attribute for further examination and
@@ -5658,13 +5636,11 @@ scope of the resulting scoped variable.
 The following is an example of using `var` or
 `varReader` and the `scope` attribute:
 
- <jsp:invoke fragment=”frag2”
-var=”resultString” scope=”session”/>
+ <jsp:invoke fragment=”frag2” var=”resultString” scope=”session”/>
 
- <jsp:invoke fragment=”frag3”
-varReader=”resultReader” scope=”page”/>
+ <jsp:invoke fragment=”frag3” varReader=”resultReader” scope=”page”/>
 
-=== Providing a Fragment Access to Variables
+==== Providing a Fragment Access to Variables
 
 JSP fragments have access to the same page
 scope variables as the page or tag file in which they were defined (in
@@ -5684,11 +5660,10 @@ link:jsp.html#a2542[See Variable Synchronization.].
 The following is an example of a tag file
 providing a fragment access to a variable:
 
-<%@ variable name-given=”x” scope=”NESTED”
-%> +
-... +
-<c:set var=”x” value=”1”/> +
-<jsp:invoke fragment=”frag4”/>
+ <%@ variable name-given=”x” scope=”NESTED” %>
+ ...
+ <c:set var=”x” value=”1”/>
+ <jsp:invoke fragment=”frag4”/>
 
 A translation error shall result if the
 `<jsp:invoke>` action contains a non-empty body.
@@ -5699,33 +5674,32 @@ standard action.
 
 The attributes are:
 
-=== Attributes for the `<jsp:invoke>` standard action
+_Attributes for the `<jsp:invoke>` standard action_
 
- `fragment`
+[cols="20,80"]
+|===
 
-(required) The name used to identify this
+|`fragment`
+|(required) The name used to identify this
 fragment during this tag invocation.
 
- `var`
-
-(optional) The name of a scoped attribute to
+|`var`
+|(optional) The name of a scoped attribute to
 store the result of the fragment invocation in, as a `java.lang.String`
 object. A translation error must occur if both `var` and `varReader` are
 specified. If neither `var` nor `varReader` are specified, the result of
 the fragment goes directly to the `JspWriter` , as described above.
 
- `varReader`
-
-(optional) The name of a scoped attribute to
+|`varReader`
+|(optional) The name of a scoped attribute to
 store the result of the fragment invocation in, as a `java.io.Reader`
 object. A translation error must occur if both `var` and `varReader` are
 specified. If neither `var` nor `varReader` is specified, the result of
 the fragment invocation goes directly to the `JspWriter` , as described
 above.
 
- `scope`
-
-(optional) The scope in which to store the
+|`scope`
+|(optional) The scope in which to store the
 resulting variable. A translation error must result if the value is not
 one of `page` , `request` , `session` , or `application` . A translation
 error will result if this attribute appears without specifying either
@@ -5735,9 +5709,11 @@ participating in a session. A container must throw an
 `IllegalStateException` at runtime if `scope` is `session` and the
 calling page does not participate in a session. Defaults to `page` .
 
+|===
+
 === <jsp:doBody>
 
-The `<jsp:doBody>` `` standard action can
+The `<jsp:doBody>` standard action can
 only be used in tag files (see link:jsp.html#a2322[See Tag
 Files.]), and must result in a translation error if used in a JSP. It
 invokes the body of the tag, sending the output of the result to the
@@ -5767,28 +5743,28 @@ standard action.
 
 The attributes are:
 
-=== Attributes for the `<jsp:doBody>` standard action
+_Attributes for the `<jsp:doBody>` standard action_
 
- `var`
+[cols="20,80"]
+|===
 
-(optional) The name of a scoped attribute to
+|`var`
+|(optional) The name of a scoped attribute to
 store the result of the body invocation in, as a `java.lang.String`
 object. A translation error must occur if both `var` and `varReader` are
 specified. If neither `var` nor `varReader` are specified, the result of
 the body goes directly to the `JspWriter` , as described above.
 
- `varReader`
-
-(optional) The name of a scoped attribute to
+|`varReader`
+|(optional) The name of a scoped attribute to
 store the result of the body invocation in, as a `java.io.Reader`
 object. A translation error must occur if both `var` and `varReader` are
 specified. If neither `var` nor `varReader` is specified, the result of
 the body invocation goes directly to the `JspWriter` , as described
 above.
 
- `scope`
-
-(optional) The scope in which to store the
+|`scope`
+|(optional) The scope in which to store the
 resulting variable. A translation error must result if the value is not
 one of `page` , `request` , `session` , or `application` . A translation
 error will result if this attribute appears without specifying either
@@ -5797,6 +5773,8 @@ the `var` or `varReader` attribute as well. Note that a value of
 participating in a session. A container must throw an
 `IllegalStateException` at runtime if `scope` is `session` and the
 calling page does not participate in a session. Defaults to `page` .
+
+|===
 
 === [[a1702]]<jsp:element>
 
@@ -5810,7 +5788,7 @@ A `jsp:element` action has one mandatory
 attribute, name, of type `String` . The value of the attribute is used
 as that of the tag of the element generated.
 
-=== Examples
+_Examples_
 
 The following example generates an XML
 element whose name depends on the result of an EL expression,
@@ -5818,36 +5796,36 @@ content.headerName. The element has an attribute, lang, and the value of
 the attribute is that of the expression content.lang. The body of the
 element is the value of the expression content.body.
 
-<jsp:element +
-name=”$\{content.headerName}” +
-xmlns:jsp=” `http://java.sun.com/JSP/Page”` > +
-<jsp:attribute name=”lang”>$\{content.lang}</jsp:attribute> +
-<jsp:body>$\{content.body}</jsp:body> +
-</jsp:element>
+ <jsp:element
+       name=”${content.headerName}”
+       xmlns:jsp="http://java.sun.com/JSP/Page" >
+   <jsp:attribute name=”lang”>${content.lang}</jsp:attribute>
+   <jsp:body>${content.body}</jsp:body>
+ </jsp:element>
 
 The next example fragment shows that
 `jsp:element` needs no children. The example generates an empty element
 with name that of the value of the expression myName.
 
-<jsp:element name=”$\{myName}”/>
+ <jsp:element name=”${myName}”/>
 
-=== Syntax
+_Syntax_
 
 The `jsp:element` action may have a body. Two
 forms are valid, depending on whether the element is to have attributes
 or not. In the first form, no attributes are present:
 
-<jsp:element name="name"> +
-optional body +
-</jsp:element>
+ <jsp:element name="name">
+   optional body
+ </jsp:element>
 
 In the second form, zero or more attributes
 are requested, using `jsp:attribute` and `jsp:body` , as appropriate.
 
-<jsp:element name="name"> +
-jsp:attribute* +
-jsp:body? +
-</jsp:element>
+ <jsp:element name="name">
+   jsp:attribute*
+   jsp:body?
+ </jsp:element>
 
 The one valid, mandatory, attribute of
 `jsp:element` is its name. Unlike other standard actions, the value of
@@ -5856,14 +5834,18 @@ be specified using `<jsp:attribute>` This is because `<jsp:attribute>`
 has a special meaning when used in the body of `<jsp:element>` . See
 link:jsp.html#a1626[See <jsp:attribute>.] for more details..
 
-=== Attributes for the `<jsp:element>` standard action
+_Attributes for the `<jsp:element>` standard action_
 
- `name`
+[cols="20,80"]
+|===
 
-(required) The value of name is that of the
+|`name`
+|(required) The value of name is that of the
 element genreated. The name can be a QName; JSP 2.0 places no
 constraints on this value: it is accepted as is. A request-time
 attribute value may be used for this attribute.
+
+|===
 
 === [[a1719]]<jsp:text>
 
@@ -5872,63 +5854,66 @@ template data in a JSP page, a JSP document, or a tag file. A `jsp:text`
 action has no attributes and can appear anywhere that template data can.
 Its syntax is:
 
-<jsp:text> template data </jsp:text>
+ <jsp:text> template data </jsp:text>
 
-=== The interpretation of a `jsp:text` element is to pass its content through to the current value of `out` . This is very similar to the XSLT `xsl:text` element.Examples
+The interpretation of a `jsp:text` element is to pass its content through to the current value of `out` .
+This is very similar to the XSLT `xsl:text` element.
+
+_Examples_
 
 The following example is a fragment that
 could be in both a JSP page or a JSP document.
 
-<jsp:text> +
-This is some content +
-</jsp:text>
+ <jsp:text>
+   This is some content
+ </jsp:text>
 
 Expressions may appear within `jsp:text` , as
 in the next example, where the expression foo.content is evaluated and
 the result is inserted.
 
-<jsp:text> +
-This is some content: $\{foo.content} +
-</jsp:text>
+ <jsp:text>
+   This is some content: ${foo.content}
+ </jsp:text>
 
 No subelements may appear within `jsp:text` ;
 for example the following fragment is invalid and must generate a
 translation error.
 
-<jsp:text> +
-This is some content: <jsp:text>foo</jsp:text> +
-</jsp:text>
+ <jsp:text>
+  This is some content: <jsp:text>foo</jsp:text>
+ </jsp:text>
 
 When within a JSP document, of course, the
 body content needs to additionally conform to the constraints of being a
 well-formed XML document, so the following example, although valid in a
 JSP page is invalid in a JSP document:
 
-<jsp:text> +
-This is some content: $\{foo.content > 3} +
-</jsp:text>
+ <jsp:text>
+   This is some content: ${foo.content > 3}
+ </jsp:text>
 
 The same example can be made legal, with no
-semantic changes, by using gt instead of > in the expression; i.e.
-$\{foo.content gt 3}.
+semantic changes, by using `gt` instead of `>` in the expression; i.e.
+`${foo.content gt 3}`.
 
 In an JSP document, CDATA sections can also
 be used to quote, uninterpreted, content, as in the following example:
 
-<jsp:text> +
-<![CDATA[<mumble></foobar>]]> +
-</jsp:text>
+ <jsp:text>
+   <![CDATA[<mumble></foobar>]]>
+ </jsp:text>
 
-=== Syntax
+_Syntax_
 
 The `jsp:text` action has no attributes. The
 action may have a body. The body may not have nested actions nor
 scripting elements. The body may have EL expressions. The syntax is of
 the form:
 
-<jsp:text> +
-optional body +
-</jsp:text>
+ <jsp:text>
+   optional body
+ </jsp:text>
 
 === [[a1737]]<jsp:output>
 
@@ -5962,12 +5947,11 @@ will emit an XML declaration as its first content.
 
 The generated XML declaration is of the form:
 
-<?xml version=”1.0” encoding=”encodingValue”
-?>
+ <?xml version=”1.0” encoding=”encodingValue” ?>
 
-Where encodingValue is the response character
+Where `encodingValue` is the response character
 encoding, as determined in link:jsp.html#a1384[See Response
-Character Encoding.] . +
+Character Encoding.].
 
 The `doctype-root-element` , `doctype-system`
 and `doctype-public` properties allow the page author to specify that a
@@ -5996,14 +5980,12 @@ document. The name following <!DOCTYPE must be the value of the
 `doctype-root-element` property. If a `doctype-public` property appears,
 then the format of the generated DOCTYPE is:
 
-<!DOCTYPE nameOfRootElement PUBLIC
-“doctypePublic” “doctypeSystem”>
+ <!DOCTYPE nameOfRootElement PUBLIC “doctypePublic” “doctypeSystem”>
 
 If a `doctype-public` property does not
 appear, then the format of the generated DOCTYPE is:
 
-<!DOCTYPE nameOfRootElement SYSTEM
-“doctypeSystem”>
+ <!DOCTYPE nameOfRootElement SYSTEM “doctypeSystem”>
 
 Where `nameOfRootElement` is the value of the
 `doctype-root-element` property, `doctypePublic` is the value of the
@@ -6017,119 +5999,120 @@ responsibility of the page author to provide a syntactically-valid URI
 as per the XML specification (see
 `http://www.w3.org/TR/REC-xml#dt-sysid` ).
 
-=== Examples
+_Examples_
 
 The following JSP document (with an extension
 of `.jspx` or with `<is-xml>` set to `true` in the JSP configuration):
 
-<?xml version=”1.0” encoding=”EUC-JP” ?> +
-<hello></hello>
+ <?xml version=”1.0” encoding=”EUC-JP” ?>
+ <hello></hello>
 
 generates an XML document as follows:
 
-<?xml version=”1.0” encoding=”UTF-8” ?> +
-<hello></hello>
+ <?xml version=”1.0” encoding=”UTF-8” ?>
+ <hello></hello>
 
 The following JSP document is like the
 previous one, except that the XML declaration is omited. A typical use
 would be where the XML fragment is to be included within another
 document.
 
-<?xml version=”1.0” encoding=”EUC-JP” ?> +
-<hello> +
-<jsp:output +
-xmlns:jsp=” `http://java.sun.com/JSP/Page” +
-` omit-xml-declaration=”true”/> +
-</hello>
+ <?xml version=”1.0” encoding=”EUC-JP” ?>
+ <hello>
+   <jsp:output
+       xmlns:jsp=” `http://java.sun.com/JSP/Page”
+       omit-xml-declaration=”true”/>
+ </hello>
 
 The following JSP document is equivalent but
 uses `jsp:root` instead of `jsp:output` .
 
-<?xml version=”1.0” encoding=”EUC-JP” ?> +
-<jsp:root xmlns:jsp=” `http://java.sun.com/JSP/Page” version=”2.0”` > +
-<hello></hello> +
-</jsp:root>
+ <?xml version=”1.0” encoding=”EUC-JP” ?>
+ <jsp:root xmlns:jsp=” `http://java.sun.com/JSP/Page” version=”2.0”` >
+   <hello></hello>
+ </jsp:root>
 
 The following JSP document specifies both a
 `doctype-public` and a `doctype-system` :
 
-<?xml version=”1.0” encoding=”UTF-8” ?> +
-<html xmlns:jsp=”http://java.sun.com/JSP/Page”> +
-<jsp:output doctype-root-element=”html” +
-doctype-public=”-//W3C//DTD XHTML Basic 1.0//EN” +
-doctype-system=”http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd” /> +
-<body> +
-<h1>Example XHTML Document</h1> +
-</body> +
-</html>
+ <?xml version=”1.0” encoding=”UTF-8” ?>
+ <html xmlns:jsp=”http://java.sun.com/JSP/Page”>
+   <jsp:output doctype-root-element=”html”
+       doctype-public=”-//W3C//DTD XHTML Basic 1.0//EN”
+       doctype-system=”http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd” />
+   <body>
+     <h1>Example XHTML Document</h1>
+   </body>
+ </html>
 
 and generates and XML document as follows:
 
-<?xml version=”1.0” encoding=”UTF-8” ?> +
-<!DOCTYPE html PUBLIC “-//W3C//DTD XHTML Basic 1.0//EN” +
-“http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd”> +
-<html><body><h1>Example XHTML Document</h1></body></html>
+ <?xml version=”1.0” encoding=”UTF-8” ?>
+ <!DOCTYPE html PUBLIC “-//W3C//DTD XHTML Basic 1.0//EN”
+ “http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd”>
+ <html><body><h1>Example XHTML Document</h1></body></html>
 
 The following JSP document omits the
 `doctype-public` and explicitly omits the XML declaration:
 
-<?xml version=”1.0” encoding=”UTF-8” ?> +
-<elementA> +
-<jsp:output omit-xml-declaration=”true” +
-doctype-root-element=”elementA” +
-doctype-system=”test.dtd” /> +
-Element body goes here. +
-</elementA>
+ <?xml version=”1.0” encoding=”UTF-8” ?>
+ <elementA>
+   <jsp:output omit-xml-declaration=”true”
+       doctype-root-element=”elementA”
+       doctype-system=”test.dtd” />
+   Element body goes here.
+ </elementA>
 
 and generates an XML document as follows:
 
-<!DOCTYPE elementA SYSTEM “test.dtd”> +
-<elementA>Element body goes here.</elementA>
+ <!DOCTYPE elementA SYSTEM “test.dtd”>
+ <elementA>Element body goes here.</elementA>
 
-=== Syntax
+_Syntax_
 
 The `jsp:output` action cannot have a body.
 The <jsp:output> action has the following syntax:
 
- `<jsp:output (
-omit-xml-declaration=”yes|no|true|false” ) \{ doctypeDecl } />`
+....
+<jsp:output ( omit-xml-declaration=”yes|no|true|false” ) { doctypeDecl } />`
 
- `doctypeDecl ::= (
-doctype-root-element=”rootElement” +
-` doctype-public=”PubidLiteral” +
-doctype-system=”SystemLiteral” ) +
-| ( doctype-root-element=”rootElement” +
-doctype-system=”SystemLiteral” )
+doctypeDecl ::=   ( doctype-root-element=”rootElement”
+                    doctype-public=”PubidLiteral”
+                    doctype-system=”SystemLiteral” )
+                | ( doctype-root-element=”rootElement”
+                    doctype-system=”SystemLiteral” )
+....
 
 The following are the valid attributes of
 jsp:output:
 
-=== Attribute for the `<jsp:output>` standard action
+_Attribute for the `<jsp:output>` standard action_
 
- `omit-xml-declaration`
+[cols="30,70"]
+|===
 
-(optional) Indicates whether to omit the
+|`omit-xml-declaration`
+|(optional) Indicates whether to omit the
 generation of an XML declaration. Acceptable values are “true”, “yes”,
 “false” and “no”.
 
- `doctype-root-element`
-
-(optional) Must be specified if and only if
+|`doctype-root-element`
+|(optional) Must be specified if and only if
 `doctype-system` is specified or a translation error must occur.
 Indicates the name that is to be output in the generated DOCTYPE
 declaration.
 
- `doctype-system`
-
-(optional) Specifies that a DOCTYPE
+|`doctype-system`
+|(optional) Specifies that a DOCTYPE
 declaration is to be generated and gives the value for the System
 Literal.
 
- `doctype-public`
-
-(optional) Must not be specified unless
+|`doctype-public`
+|(optional) Must not be specified unless
 `doctype-system` is specified. Gives the value for the Public ID for the
 generated DOCTYPE.
+
+|===
 
 === Other Standard Actions
 
@@ -6149,9 +6132,7 @@ link:jsp.html#a1902[See Scripting Elements.].
 
 
 
-== CHAPTER 5 - 
-
-=== [[a1794]]JSP Documents
+== [[a1794]]JSP Documents
 
 This chapter introduces two concepts
 related to XML and JSP: JSP documents and XML views. This chapter
