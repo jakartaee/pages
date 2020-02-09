@@ -6152,13 +6152,13 @@ generate dynamic content using the standard JSP semantics.
 
 Here is a simple JSP document:
 
-<table> +
-<c:forEach +
-xmlns:c="http://java.sun.com/jsp/jstl/core" +
-var="counter" begin="1" end="3"> +
-<row>$\{counter}</row> +
-</c:forEach> +
-</table>
+ <table>
+   <c:forEach
+       xmlns:c="http://java.sun.com/jsp/jstl/core"
+       var="counter" begin="1" end="3">
+     <row>${counter}</row>
+   </c:forEach> +
+ </table>
 
 This well-formed, namespace-aware XML
 document generates, using the JSP standard tag library, an XML document
@@ -6223,7 +6223,7 @@ produce responses.
 
 image:sp-4.png[image]
 
-=== [[a1812]]Relationship between JSP Pages and XML views of JSP pages.
+_Relationship between JSP Pages and XML views of JSP pages_
 
 JSP documents are used by JSP page authors.
 They can be authored directly, using a text editor, through an XML
@@ -6239,7 +6239,7 @@ A JSP document is a JSP page that is a
 namespace-aware XML document and that is identified as a JSP document to
 the JSP container.
 
-=== Identifying JSP Documents
+==== Identifying JSP Documents
 
 A JSP document can be identified as such in
 three ways:
@@ -6263,7 +6263,7 @@ namespace-aware, XML document.
 See link:jsp.html#a2492[See Tag Files
 in XML Syntax.] for details on identifying tag files in XML syntax.
 
-=== [[a1823]]Overview of Syntax of JSP Documents
+==== [[a1823]]Overview of Syntax of JSP Documents
 
 A JSP document may or not have a `<jsp:root>`
 as its top element; `<jsp:root>` was mandatory in JSP 1.2, but we expect
@@ -6323,8 +6323,8 @@ It should be noted that the equivalent JSP
 document form of +
 `<a href="<%= url %>">` , where ’a’ is not a custom action, is:
 
-<jsp:text><![CDATA[<a
-href="]]></jsp:text><jsp:expression>url</jsp:expression><jsp:text><![CDATA[">]]></jsp:text>
+ <jsp:text><![CDATA[<a href="]]></jsp:text><jsp:expression>url</jsp:expression>
+ <jsp:text><![CDATA[">]]></jsp:text>
 
 In the JSP document element `<a href="%= url
 %">` , `"%= url %"` does not represent a request-time attribute value.
@@ -6332,7 +6332,7 @@ That syntax only applies for custom action elements. This is in contrast
 to `<a href="$\{url}">` , where " `$\{url}` " represents an EL
 expression in both JSP pages and JSP documents.
 
-=== [[a1841]]Semantic Model
+==== [[a1841]]Semantic Model
 
 The semantic model of a JSP document is
 unchanged from that of a JSP page in JSP syntax: JSP pages generate a
@@ -6382,7 +6382,7 @@ an XML declaration to the output; the rules for this depend on the use
 of jsp:root and jsp:output; see link:jsp.html#a1888[See The
 jsp:output Element.].
 
-=== [[a1849]]JSP Document Validation
+==== [[a1849]]JSP Document Validation
 
 A JSP Document with a DOCTYPE declaration
 must be validated by the container in the translation phase. Validation
@@ -6405,31 +6405,23 @@ namespace, and the namespace prefix to which they are bound.
 
 For example, the following XML document:
 
-<?xml version="1.0"?> +
-<!DOCTYPE root PUBLIC "-//My Org//My DTD//EN" +
-"http://www.my.org/dtd/my.dtd"> +
-<root xmlns:jsp="http://java.sun.com/JSP/Page"/>
+ <?xml version="1.0"?>
+ <!DOCTYPE root PUBLIC "-//My Org//My DTD//EN"
+     "http://www.my.org/dtd/my.dtd">
+ <root xmlns:jsp="http://java.sun.com/JSP/Page"/>
 
 can only be validated against its DTD if the
-DTD makes special
-
-provision for both the attribute "xmlns:jsp"
-on the root element, and
-
-also for elements with a "jsp" namespace
-prefix. Even if the DTD
-
-provides for this, you must bind the
-namespace to the prefix that the
-
-DTD has chosen.
+DTD makes special provision for both the attribute "xmlns:jsp"
+on the root element, and also for elements with a "jsp" namespace
+prefix. Even if the DTD provides for this, you must bind the
+namespace to the prefix that the DTD has chosen.
 
 === Syntactic Elements in JSP Documents
 
 This section describes the elements in a JSP
 document.
 
-=== Namespaces, Standard Actions, and Tag Libraries
+==== Namespaces, Standard Actions, and Tag Libraries
 
 JSP documents and tag files in XML syntax use
 XML namespaces to identify the standard actions, the directives, and the
@@ -6469,7 +6461,7 @@ be generated if the given `uri` is not found in the taglib map. Instead,
 any actions in the namespace defined by the uri value must be treated as
 uninterpreted.
 
-=== [[a1870]]The jsp:root Element
+==== [[a1870]]The jsp:root Element
 
 The `jsp:root` element can only appear as the
 root element in a JSP document or in a tag file in XMLsyntax; otherwise
@@ -6497,66 +6489,66 @@ When `jsp:root` is used, the container will,
 by default, not insert an XML declaration; the default can be changed
 using the `jsp:output` element.
 
-=== Examples
+_Examples_
 
 The following example generates a sequence of
 two XML documents. No XML declaration is generated.
 
-<jsp:root xmlns:jsp=”
-`http://java.sun.com/JSP/Page”` version=”2.0"> +
-<table>foo</table> +
-<table>bar</table> +
-</jsp:root>
+ <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version=”2.0">
+   <table>foo</table>
+   <table>bar</table>
+ </jsp:root>
 
 The following example generates one XML
 document. An XML declaration is generated because of the use of
 `jsp:output` . The example is mostly instructional, as the same content
 could be generated dropping the `jsp:root` element.
 
-<jsp:root xmlns:jsp=”
-`http://java.sun.com/JSP/Page”` version=”2.0"> +
-<jsp:output omit-xml-declaration="no"/> +
-<table>foo</table> +
-</jsp:root>
+ <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version=”2.0">
+   <jsp:output omit-xml-declaration="no"/>
+   <table>foo</table>
+ </jsp:root>
 
-=== Syntax
+_Syntax_
 
 No other attributes are defined in this
 element.
 
-<jsp:root
-xmlns:jsp="http://java.sun.com/JSP/Page" body... +
-</jsp:root>
+ <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" body...
+ </jsp:root>
 
 The one valid, mandatory, attribute of
 jsp:root is the version of the JSP specification used:
 
-=== Attributes for the `<jsp:root>` standard action
+_Attributes for the `<jsp:root>` standard action_
 
- `version`
+[cols="20,80"]
+|===
 
-(required) The version of the JSP
+|`version`
+|(required) The version of the JSP
 specification used in this page. Valid values are "1.2", "2.0", and
 "2.1". It is a translation error if the container does not support the
 specified version.
 
-=== [[a1888]]The jsp:output Element
+|===
+
+==== [[a1888]]The jsp:output Element
 
 The jsp:output element can be used in JSP
 documents and in tag files in XML syntax. The jsp:output element is
 described in detail in link:jsp.html#a1737[See <jsp:output>.].
 
-=== The jsp:directive.page Element
+==== The jsp:directive.page Element
 
 The `jsp:directive.page` element defines a
 number of page dependent properties and communicates these to the JSP
 container. This element must be a child of the root element. Its syntax
 is:
 
-<jsp:directive.page page`directive`attr`list
-/>
+ <jsp:directive.page page_directive_attr_list />
 
-Where `page`directive`attr`list` is as
+Where `page_directive_attr_list` is as
 described in link:jsp.html#a770[See The page Directive.].
 
 The interpretation of a `jsp:directive.page`
@@ -6564,14 +6556,13 @@ element is as described in link:jsp.html#a770[See The page
 Directive.], and its scope is the JSP document and any fragments
 included through an include directive.
 
-=== The jsp:directive.include Element
+==== The jsp:directive.include Element
 
 The `jsp:directive.include` element is used to
 substitute text and/or code at JSP page translation-time. This element
 can appear anywhere within a JSP document. Its syntax is:
 
-<jsp:directive.include file="relativeURLspec”
-/>
+ <jsp:directive.include file="relativeURLspec” />
 
 The interpretation of a
 `jsp:directive.include` element is as in link:jsp.html#a894[See
@@ -6581,7 +6572,7 @@ The XML view of a JSP page does not contain
 `jsp:directive.include` elements, rather the included file is expanded
 in-place. This is done to simplify validation.
 
-=== Additional Directive Elements in Tag Files
+==== Additional Directive Elements in Tag Files
 
 link:jsp.html#a2322[See Tag Files.]
 describes the tag, attribute and variable directives, which can be used
@@ -6590,7 +6581,7 @@ XML view (see link:jsp.html#a2819[See The tag Directive.],
 link:jsp.html#a2825[See The attribute Directive.], and
 link:jsp.html#a2830[See The variable Directive.] for details).
 
-=== [[a1902]]Scripting Elements
+==== [[a1902]]Scripting Elements
 
 The usual scripting elements: declarations,
 scriptlets and expressions, can be used in JSP documents, but the only
@@ -6605,8 +6596,7 @@ its body is the declaration itself. The interpretation of a
 `jsp:declaration` element is as in link:jsp.html#a959[See
 Declarations.]. Its syntax is:
 
-<jsp:declaration> declaration goes here
-</jsp:declaration>
+ <jsp:declaration> declaration goes here </jsp:declaration>
 
 The `jsp:scriptlet` element is used to
 describe actions to be performed in response to some request. Scriptlets
@@ -6615,8 +6605,7 @@ its body is the program fragment that comprises the scriptlet. The
 interpretation of a `jsp:scriptlet` element is as in
 link:jsp.html#a971[See Scriptlets.]. Its syntax is:
 
-<jsp:scriptlet> code fragment goes here
-</jsp:scriptlet>
+ <jsp:scriptlet> code fragment goes here </jsp:scriptlet>
 
 The `jsp:expression` element is used to
 describe complete expressions in the scripting language that get
@@ -6625,17 +6614,16 @@ and its body is the expression. The interpretation of a `jsp:expression`
 element is as in link:jsp.html#a984[See Expressions.]. Its
 syntax is:
 
- `<jsp:expression> expression goes here
-</jsp:expression>`
+ <jsp:expression> expression goes here </jsp:expression>
 
-=== Other Standard Actions
+==== Other Standard Actions
 
 The standard actions of
 link:jsp.html#a1403[See Standard Actions.] use a syntax that is
 consistent with XML syntax and they can be used in JSP documents and in
 tag files in XML syntax.
 
-=== Template Content
+==== Template Content
 
 A JSP page has no structure on its template
 content, and, correspondingly, imposes no constraints on that content.
@@ -6659,53 +6647,53 @@ link:jsp.html#a1841[See Semantic Model.].
 For example, if the variable i has the value
 3, and the JSP document is of the form. :
 
-=== Example 1 - Input
+_Example 1 - Input_
 
-LineNo
+[cols="20,80",options="header"]
+|===
 
-Source Text
+|LineNo
+|Source Text
 
-=== 1
+|1
+|`<hello>`
 
-<hello>
+|2
+|` <hi>`
 
-=== 2
+|3
+| <jsp:text> hi you all
 
- <hi>
+|4
+| </jsp:text>$\{i}
 
-=== 3
+|5
+| </hi>
 
- <jsp:text> hi you all
+|6
+|</hello>
 
-=== 4
-
- </jsp:text>$\{i}
-
-=== 5
-
- </hi>
-
-=== 6
-
-</hello>
+|===
 
 The result is:
 
-=== Example 1 - Output
+_Example 1 - Output_
 
-LineNo
+[cols="20,80",options="header"]
+|===
 
-Output Text
+|LineNo
+|Output Text
 
-=== 1
+|1
+|`<hello><hi> hi you all`
 
-<hello><hi> hi you all
+|2
+|`` ```3</hi></hello>`
 
-=== 2
+|===
 
- 3</hi></hello>
-
-=== [[a1940]]Dynamic Template Content
+==== [[a1940]]Dynamic Template Content
 
 Custom actions can be used to generate any
 content, both structured and unstructured. Future versions of the JSP
@@ -6723,12 +6711,12 @@ link:jsp.html#a1626[See <jsp:attribute>.] and in
 link:jsp.html#a1654[See <jsp:body>.]. The following example is
 from that section
 
-<jsp:element +
-name=”$\{content.headerName}” +
-xmlns:jsp=” `http://java.sun.com/JSP/Page”` > +
-<jsp:attribute name=”lang”>$\{content.lang}</jsp:attribute> +
-<jsp:body>$\{content.body}</jsp:body> +
-</jsp:element>
+ <jsp:element
+     name=”${content.headerName}”
+     xmlns:jsp=” `http://java.sun.com/JSP/Page”` >
+   <jsp:attribute name=”lang”>$\{content.lang}</jsp:attribute>
+   <jsp:body>$\{content.body}</jsp:body>
+ </jsp:element>
 
 In some cases, the dynamic content that is
 generated can be described as simple substitutions on otherwise static
@@ -6737,28 +6725,28 @@ used as the values of the body or of attributes. For instance, the next
 example uses the expression table.indent as the value of an attribute,
 and the expression table.value as that for the body of an element:
 
-<table indent="$\{table.indent}"> +
-<row>$\{table.value}</row> +
-</table>
+ <table indent="${table.indent}">
+   <row>${table.value}</row>
+ </table>
 
 === [[a1946]]Examples of JSP Documents
 
 The following sections provide several
 annotated examples of JSP documents.
 
-=== Example: A simple JSP document
+==== Example: A simple JSP document
 
 This simple JSP document generates a table
 with 3 rows with numeric values 1, 2, 3. The JSP document uses template
 XML elements intermixed with actions from the JSP Standard Tag Library.
 
-<table size="$\{3}"> +
-<c:forEach +
-xmlns:c="http://java.sun.com/jsp/jstl/core" +
-var="counter" begin="1" end="$\{3}"> +
-<row>$\{counter}</row> +
-</c:forEach> +
-</table>
+ <table size="${3}">
+   <c:forEach
+       xmlns:c="http://java.sun.com/jsp/jstl/core"
+       var="counter" begin="1" end="${3}">
+     <row>${counter}</row>
+   </c:forEach>
+ </table>
 
 Some comments:
 
@@ -6783,17 +6771,17 @@ directing the container to do otherwise.
 The JSP document above does not generate an
 XML document that uses namespaces, but the next example does.
 
-=== Example: Generating Namespace-aware documents
+==== Example: Generating Namespace-aware documents
 
-<table +
-xmlns="http://table.com/Table1" +
-size="$\{3}"> +
-<c:forEach +
-xmlns:c="http://java.sun.com/jsp/jstl/core" +
-var="counter" begin="1" end="$\{3}"> +
-<row>$\{counter}</row> +
-</c:forEach> +
-</table>
+ <table
+     xmlns="http://table.com/Table1"
+     size="$\{3}">
+   <c:forEach
+       xmlns:c="http://java.sun.com/jsp/jstl/core"
+       var="counter" begin="1" end="$\{3}">
+     <row>$\{counter}</row>
+   </c:forEach>
+ </table>
 
 This example is essentially the same as the
 one above, except that a default namespace is introduced in the top
@@ -6808,17 +6796,17 @@ not really understand that the generated content is a well-formed XML
 document and, as the next example shows, a JSP document can generate
 other types of content.
 
-=== Example: Generating non-XML documents
+==== Example: Generating non-XML documents
 
-<jsp:root +
-xmlns:c="http://java.sun.com/jsp/jstl/core" +
-xmlns:jsp="http://java.sun.com/JSP/Page" +
-version="2.0"> +
-<c:forEach +
-var="counter" begin="1" end="$\{3}"> +
-<jsp:text>$\{counter}</jsp:text> +
-</c:forEach> +
-</jsp:root>
+ <jsp:root
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:jsp="http://java.sun.com/JSP/Page"
+     version="2.0">
+   <c:forEach
+       var="counter" begin="1" end="${3}">
+     <jsp:text>${counter}</jsp:text>
+   </c:forEach>
+ </jsp:root>
 
 This example just generates 123. There is no
 xml declaration generated because there is no <jsp:output> element to
@@ -6836,37 +6824,37 @@ namespace attribute.
 For example, the same output would be
 generated with the following modification of the previous example:
 
-<wombat:root +
-xmlns:c="http://java.sun.com/jsp/jstl/core" +
-xmlns:wombat="http://java.sun.com/JSP/Page" +
-version="2.0"> +
-<c:forEach +
-var="counter" begin="1" end="$\{3}"> +
-<wombat:text>$\{counter}</wombat:text> +
-</c:forEach> +
-</wombat:root>
+ <wombat:root
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:wombat="http://java.sun.com/JSP/Page"
+     version="2.0">
+   <c:forEach
+       var="counter" begin="1" end="$\{3}">
+     <wombat:text>$\{counter}</wombat:text>
+   </c:forEach>
+ </wombat:root>
 
 On the other hand, although the following
 example uses the jsp prefix the URI used in the namespace attribute is
 not the JSP URI and the JSP document will generate as output an XML
 document with root <jsp:root> using the URI
-"http://johnsonshippingproducts.com".
+`http://johnsonshippingproducts.com`.
 
-<jsp:root +
-xmlns:c="http://java.sun.com/jsp/jstl/core" +
-xmlns:jsp="http://johnsonshippingproducts.com" +
-version="2.0"> +
-<c:forEach +
-var="counter" begin="1" end="$\{3}"> +
-<jsp:text>$\{counter}</jsp:text> +
-</c:forEach> +
-</jsp:root>
+ <jsp:root
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:jsp="http://johnsonshippingproducts.com"
+     version="2.0">
+   <c:forEach
+       var="counter" begin="1" end="${3}">
+     <jsp:text>${counter}</jsp:text>
+   </c:forEach>
+ </jsp:root>
 
 Finally, note that, since a JSP document is a
 well-formed, namespace-aware document, prefixes, including jsp cannot be
 used without being introduced through a namespace attribute.
 
-=== [[a1971]]Example: Using Custom Actions and Tag Files
+==== [[a1971]]Example: Using Custom Actions and Tag Files
 
 Custom actions are frequently used within a
 JSP document to generate portions of XML content. The JSP specification
@@ -6878,23 +6866,23 @@ The following example generates an XHTML
 document using tag library abstractions for presentation and data
 access, made available through the prefixes u and data respectively.
 
-<html xmlns="http://www.w3.org/1999/xhtml" +
-xmlns:jsp="http://java.sun.com/JSP/Page" +
-xmlns:c="http://java.sun.com/jsp/jstl/core" +
-xmlns:u="urn:jsptagdir:/WEB-INF/tags/mylib/" +
-xmlns:data="http://acme.com/functions"> +
-<c:set var="title" value="Best Movies" /> +
-<u:headInfo title="$\{title}"/> +
-<body> +
-<h1>$\{title}</h1> +
-<h2>List of Best Movies</h2> +
-<ul> +
-<c:forEach var="m" varStatus="s" items="data:movieItems()"> +
-<li><a href="#EL$\{s.index}">$\{s.index}</a>$\{m.title}</li> +
-</c:forEach> +
-</ul> +
-</body> +
-</html>
+ <html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:jsp="http://java.sun.com/JSP/Page"
+       xmlns:c="http://java.sun.com/jsp/jstl/core"
+       xmlns:u="urn:jsptagdir:/WEB-INF/tags/mylib/"
+       xmlns:data="http://acme.com/functions">
+   <c:set var="title" value="Best Movies" />
+   <u:headInfo title="$\{title}"/>
+   <body>
+     <h1>$\{title}</h1>
+     <h2>List of Best Movies</h2>
+     <ul>
+       <c:forEach var="m" varStatus="s" items="data:movieItems()">
+         <li><a href="#EL${s.index}">${s.index}</a>${m.title}</li>
+       </c:forEach>
+     </ul>
+   </body>
+ </html>
 
 For convenience we use the <c:set> JSTL
 action, which defines variables and associates values with them. This
@@ -6913,19 +6901,19 @@ The action <u:headInfo> could be implemented
 either through a custom action or through a tag. For example, as a tag
 it could be defined by the following code:
 
- `<jsp:root
-xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"> +
-` <jsp:directive.tag /> +
-<jsp:directive.attribute name=”title” required="true" /> +
-`<head> +
-<meta http-equiv="content-type" +
-content="text/html;charset=$\{pageCharSet}" /> +
-<title>$\{title}</title> +
-</head> +
-</jsp:root>`
+....
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:directive.tag />
+  <jsp:directive.attribute name=”title” required="true" />
+  <head>
+    <meta http-equiv="content-type"
+          content="text/html;charset=$\{pageCharSet}" />
+    <title>$\{title}</title>
+  </head>
+</jsp:root>
 
- `where pageCharSet is a variable with a
-value as iso-8859-1.`
+where pageCharSet is a variable with a value as iso-8859-1.
+....
 
 Note that this tag is a JSP document (because
 of the jsp:root declaration), and, as such, it is validated by the
@@ -6941,7 +6929,7 @@ This section is non-normative. Two features
 are sketched briefly here to elicit input that could be used on future
 versions of the JSP specification.
 
-=== [[a1984]]Generating XML Content Natively
+==== [[a1984]]Generating XML Content Natively
 
 All JSP 2.0 content is textual, even when
 using JSP documents to generate XML content. This is quite acceptable,
@@ -6958,7 +6946,7 @@ parsed representation of the XML document. The JSP expert group has
 explored different approaches on how such XML-awareness could be added,
 and a future version of JSP could support this functionality.
 
-=== Schema and XInclude Support
+==== Schema and XInclude Support
 
 The current specification only requires DTD
 validation support for JSP documents. A more flexible schema language,
@@ -6968,9 +6956,7 @@ version of the JSP specification.
 Similarly, future versions of the
 specification may also consider support for XInclude.
 
-== CHAPTER 6 - 
-
-=== [[a1991]]Tag Extensions
+== [[a1991]]Tag Extensions
 
 This chapter describes the tag library
 facility for introducing new actions into a JSP page. The tag library
