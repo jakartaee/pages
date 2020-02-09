@@ -9287,7 +9287,7 @@ The expected output of this example is: 2 ‘1’ ‘’ 2
 == [[a2599]]Scripting
 
 This chapter describes the details of the
-Scripting Elements when the language directive value is `java` .
+Scripting Elements when the language directive value is `java`.
 
 The scripting language is based on the Java
 programming language (as specified by “The Java Language
@@ -9308,7 +9308,7 @@ are very specific to the scripting language used in the page. This is
 especially complex since scriptlets `are language` fragments, not
 complete language statements.
 
-=== [[a2605]]Valid JSP Page
+==== [[a2605]]Valid JSP Page
 
 A JSP page is valid for a Java Platform if and
 only if the JSP page implementation class defined by
@@ -9322,72 +9322,62 @@ any other classes defined by the JSP container, is a valid program for
 the given Java Platform, and if it passes the validation methods for all
 the tag libraries associated with the JSP page.
 
-=== [[a2607]]Reserved Names
+==== [[a2607]]Reserved Names
 
 Sun Microsystems reserves all names of the
-form `\{`}jsp`*` and `\{`}jspx`*` , in any combination of upper and
+form `{\_}jsp_*` and `{\_}jspx_*` , in any combination of upper and
 lower case, for the JSP specification. Names of this form that are not
-defined in this specification are reserved by Sun for future expansion.
+defined in this specification are reserved for future expansion.
 
-=== Implementation Flexibility
+==== Implementation Flexibility
 
 The transformations described in this chapter
 need not be performed literally. An implementation may implement things
 differently to provide better performance, lower memory footprint, or
 other implementation attributes.[[a2611]]
 
-=== [[a2612]]Structure of the Java Programming Language Class
+_[[a2612]]Structure of the Java Programming Language Class_
 
-Optional imports clause as indicated via
+[cols="25,75"]
+|===
+
+|Optional imports clause as indicated via
 `jsp` directive
+|`import name1`
 
- `import name1`
-
- `SuperClass` is either selected by the JSP
-container or by the JSP author via the `jsp` directive.
-
+|`SuperClass` is either selected by the JSP
+container or by the JSP author via the `jsp` directive. +
 Name of class ( ``jspXXX` ) is implementation
 dependent.
+|`class jspXXX extends SuperClass`
 
- `class `jspXXX extends SuperClass`
-
-Start of the body of a JSP page
+|Start of the body of a JSP page
 implementation class
+|`{`
 
- `\{`
+|(1) Declaration Section
+|`// declarations...`
 
-(1) Declaration Section
+|signature for generated method
+|`public void
+jspService(<ServletRequestSubtype> request,
+<ServletResponseSubtype> response)
+throws ServletException, IOException {`
 
- `// declarations...`
-
-signature for generated method
-
- `public void
-`jspService(<ServletRequestSubtype> request, +
-<ServletResponseSubtype> response) +
-throws ServletException, IOException \{`
-
- `` 
-
-(2) Implicit Objects Section
-
-
-
- `// code that defines and initializes
+|(2) Implicit Objects Section
+|`// code that defines and initializes
 request, response, page, pageContext etc.`
 
-(3) Main Section
+|(3) Main Section
+|`// code that defines request/response mapping`
 
- `// code that defines request/response
-mapping`
+|close of `jspService` method
+|`}`
 
-close of ``jspService` method
+|close of ``jspXXX`
+|`}`
 
- `}`
-
-close of ``jspXXX`
-
- `}`
+|===
 
 === Declarations Section
 
@@ -9416,7 +9406,7 @@ the page. The translation for each one is determined as indicated below,
 and its translation is inserted into this section. The translation
 depends on the element type:
 
-=== Template Data
+==== Template Data
 
 Template data is transformed into code that
 will place the template data into the stream named by the implicit
@@ -9425,30 +9415,34 @@ variable `out` when the code is executed. White space is preserved.
 Ignoring quotation issues and performance
 issues, this corresponds to a statement of the form:
 
-[width="100%",cols="50%,50%",]
+[cols="50%,50%",options="header"]
 |===
+
 |Original
 |Equivalent Text
 
-| `template` |
-`out.print(template)`
+|`template`
+|`out.print(template)`
+
 |===
 
-=== Scriptlets
+==== Scriptlets
 
 A scriptlet is transformed into its code
 fragment.:
 
-[width="100%",cols="50%,50%",]
+[cols="50%,50%",options="header"]
 |===
+
 |Original
 |Equivalent Text
 
-| `<% fragment %>`
-| `fragment`
+|`<% fragment %>`
+|`fragment`
+
 |===
 
-=== Expressions
+==== Expressions
 
 An expression is transformed into a Java
 statement to insert the value of the expression, converted to
@@ -9458,16 +9452,18 @@ variable `out` . No additional newlines or space is included.
 Ignoring quotation and performance issues,
 this corresponds to a statement of the form:
 
-[width="100%",cols="50%,50%",]
+[cols="50%,50%",options="header"]
 |===
+
 |Original
 |Equivalent Text
 
 | `<%= expression %>`
 | `out.print(expression)`
+
 |===
 
-=== Actions
+==== Actions
 
 An action defining one or more objects is
 transformed into one or more variable declarations for those objects,
@@ -9481,19 +9477,22 @@ specification that defines objects is the `jsp:useBean` action. The name
 of the variable introduced is the name of the `id` attribute and its
 type is the type of the `class` attribute.
 
-[width="100%",cols="50%,50%",]
+[cols="50%,50%",options="header"]
 |===
+
 |Original
 |Equivalent Text
 
-| `<x:tag> +
-foo +
-</x:tag>` | `declare AT_BEGIN variables +
-\{ +
+|`<x:tag> +
+  foo +
+</x:tag>`
+|`declare AT_BEGIN variables +
+{ +
 declare NESTED variables +
 transformation of foo +
 } +
 declare AT_END variables`
+
 |===
 
 Note that the value of the `scope` attribute
@@ -9501,9 +9500,7 @@ does not affect the visibility of the variables within the generated
 program. It affects where and thus for how long there will be additional
 references to the object denoted by the variable.
 
-== CHAPTER 9 - 
-
-=== [[a2670]]XML View
+== [[a2670]]XML View
 
 This chapter provides details on the XML
 view of a JSP page and tag files. The XML views are used to enable
