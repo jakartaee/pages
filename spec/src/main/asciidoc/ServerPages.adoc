@@ -9512,7 +9512,7 @@ This section describes the XML view of a JSP
 page or tag file: the mapping between a JSP page, JSP document or tag
 file, and an XML document describing it.
 
-=== JSP Documents and Tag Files in XML Syntax
+==== JSP Documents and Tag Files in XML Syntax
 
 The XML view of a JSP document or of a tag
 file written in XML syntax is very close to the original JSP page. Only
@@ -9535,7 +9535,7 @@ pass to `ServletResponse.setContentType()` , determined as described in
 * Add the `jsp:id` attribute (see
 link:jsp.html#a2816[See The jsp:id Attribute.]).
 
-=== JSP Pages or Tag Files in JSP Syntax
+==== JSP Pages or Tag Files in JSP Syntax
 
 The XML view of a JSP page or tag file
 written in standard syntax is defined by the following transformation:
@@ -9565,89 +9565,83 @@ Validating an XML View of a JSP page.].
 A quick overview of the transformation is
 shown in link:jsp.html#a2692[See XML View Transformations.]:
 
-=== [[a2692]]XML View Transformations
+_[[a2692]]XML View Transformations_
 
-JSP element
+[cols="30,70",options="header"]
+|===
 
-XML view
+|JSP element
+|XML view
 
- `<%-- comment --%>`
+|`<%-- comment --%>`
+|removed
 
-removed
+|`<%@ page ... %>`
+|`<jsp:directive.page ... />` . Add `jsp:id`
 
- `<%@ page ... %>`
+|`<%@ taglib ... %>`
 
- `<jsp:directive.page ... />` . Add `jsp:id`
+|`jsp:root` element is annotated with
+namespace information. Add `jsp:id`.
 
- `<%@ taglib ... %>`
+|`<%@ include ... %>`
+|`expanded in place`
 
- `jsp:root` element is annotated with
-namespace information. Add `jsp:id` .
+|`<%! ... %>`
 
- `<%@ include ... %>`
+|`<jsp:declaration> ... </jsp:declaration>`.
+Add `jsp:id`.
 
- `expanded in place`
+|`<% ... %>`
 
- `<%! ... %>`
+|`<jsp:scriptlet> ... </jsp:scriptlet>`.
+Add `jsp:id`.
 
- `<jsp:declaration> ... </jsp:declaration>` .
-Add `jsp:id` .
+|`<%= ... %>`
+|`<jsp:expression> ... </jsp:expression>`.
+Add `jsp:id`.
 
- `<% ... %>`
-
- `<jsp:scriptlet> ... </jsp:scriptlet>` `.`
-Add `` `jsp:id` `.`
-
- `<%= ... %>`
-
- `<jsp:expression> ... </jsp:expression>` `.`
-Add `` `jsp:id` `.`
-
-Standard action
-
-Replace with XML syntax (adjust request-time
+|Standard action
+|Replace with XML syntax (adjust request-time
 expressions; add `jsp:id` )
 
-Custom action
-
-As is (adjust request-time expressions; add
+|Custom action
+|As is (adjust request-time expressions; add
 `jsp:id` )
 
-template
+|template
+|Replace with `jsp:text`. Add `jsp:id`.
 
-Replace with `jsp:text` . Add `jsp:id` .
-
- `<%@ tag ... %>`
-
-{empty} `<jsp:directive.tag ... />` . Add
+|`<%@ tag ... %>`
+|`<jsp:directive.tag ... />`. Add
 `jsp:id.` [tag files only]
 
- `<%@ attribute ... %>`
-
-{empty} `<jsp:directive.attribute ... />` .
+|`<%@ attribute ... %>`
+|`<jsp:directive.attribute ... />`.
 Add `jsp:id.` [tag files only]
 
- `<%@ variable ... %>`
-
-{empty} `<jsp:directive.variable ... />` .
+|`<%@ variable ... %>`
+|`<jsp:directive.variable ... />` .
 Add `jsp:id.` [tag files only]
+
+|===
 
 In more detail:
 
-=== JSP Comments
+==== JSP Comments
 
-JSP comments (of the form `<%-- comment --%>`
-) are not passed through to the XML view of a JSP page.
+JSP comments (of the form `<%-- comment --%>`) are not
+passed through to the XML view of a JSP page.
 
-=== The page Directive
+==== The page Directive
 
 A `page` directive of the form:
 
-<%@ page \{ attr=”value” }* %>
+ <%@ page { attr=”value” }* %>
 
 is translated into an element of the form:
 
-<jsp:directive.page \{ attr=”value” }* />
+ <jsp:directive.page { attr=”value” }* />
 
 The value of the `pageEncoding` attribute is
 set to " `UTF-8` ". The value of the `contentType` attribute is set to
@@ -9656,12 +9650,11 @@ ServletResponse.setContentType(), determined as described in
 /C:/jspspec/JSP`I18N.html#52032[]. The `page` directive and both
 attributes are added if they don’t exist already.
 
-=== The taglib Directive
+==== The taglib Directive
 
 A taglib directive of the form
 
-<%@ taglib uri=” `uriValue` ” prefix=”
-`prefix` ” %>
+ <%@ taglib uri=”uriValue” prefix=”prefix” %>
 
 is translated into an `xmlns:prefix`
 attribute on the root of the JSP document, with a value that depends on
@@ -9670,66 +9663,62 @@ attribute on the root of the JSP document, with a value that depends on
 
 A taglib directive of the form
 
-<%@ taglib tagdir=” `tagDirValue` ” prefix=”
-`prefix` ” %>
+ <%@ taglib tagdir=”tagDirValue” prefix=”prefix” %>
 
 is translated into an `xmlns:prefix`
 attribute on the root of the JSP document, with a value of the form
-`urn:jsptagdir:` `tagDirValue` .
+`urn:jsptagdir:` `tagDirValue`.
 
-=== The include Directive
+==== The include Directive
 
 An include directive of the form
 
-<%@ include file=” `value` ” %>
+ <%@ include file=”value” %>
 
 is expanded into the JSP content indicated by
-`value` . This is done to allow for validation of the page.
+`value`. This is done to allow for validation of the page.
 
-=== Declarations
+==== Declarations
 
 Declarations are translated into a
 `jsp:declaration` element. For example, the second example from
 /C:/jspspec/JSP`Syntax.html#36319[]:
 
-<%! public String f(int i) \{ if (i<3)
-return(“...”); ... } %>
+ <%! public String f(int i) { if (i<3) return(“...”); ... } %>
 
 is translated into the following.
 
-<jsp:declaration> <![CDATA[ public String
-f(int i) \{ if (i<3) return(“...”); } ]]> </jsp:declaration>
+ <jsp:declaration> <![CDATA[ public String f(int i) \{ if (i<3) return(“...”); } ]]>
+ </jsp:declaration>
 
 Alternatively, we could use an `&lt;` and
 instead say:
 
-<jsp:declaration> public String f(int i) \{
-if (i&lt;3) return(“...”); } </jsp:declaration>
+ <jsp:declaration> public String f(int i) {if (i&lt;3) return(“...”); }
+ </jsp:declaration>
 
-=== Scriptlets
+==== Scriptlets
 
 Scriptlets are translated into a
 `jsp:scriptlet` element. In the XML document corresponding to JSP pages,
 directives are represented using the syntax:
 
-<jsp:scriptlet> code fragment goes here
-</jsp:scriptlet>
+ <jsp:scriptlet> code fragment goes her </jsp:scriptlet>
 
-=== Expressions
+==== Expressions
 
 In the XML document corresponding to JSP
 pages, directives are represented using the `jsp:expression` element:
 
-<jsp:expression> expression goes here
-</jsp:expression>
+ <jsp:expression> expression goes here </jsp:expression>
 
-=== Standard and Custom Actions
+==== Standard and Custom Actions
 
 The syntax for both standard and action
 elements is based on XML. The transformations needed are due to quoting
 conventions and the syntax of request-time attribute expressions.
 
-=== [[a2756]]Request-Time Attribute Expressions
+==== [[a2756]]Request-Time Attribute Expressions
 
 Request-time attribute expressions are of the
 form `<%= expression %>` . Although this syntax is consistent with the
@@ -9759,67 +9748,54 @@ an Escaped EL Expression in a Request-time Attribute Value.] illustrates
 these rules. Assume the EL expression `$\{foo}` evaluates to `[bar]` and
 that EL is enabled for this translation unit.
 
-=== [[a2764]]XML View of an Escaped EL Expression in a Request-time Attribute Value
+_[[a2764]]XML View of an Escaped EL Expression in a Request-time Attribute Value_
 
-Attribute Value
+[cols="30,30,30",options="header"]
+|===
 
-XML View
+|Attribute Value
+|XML View
+|Result
 
-Result
+|`${foo}`
+|`${foo}`
+|`[bar]`
 
- `$\{foo}`
+|`\${foo}`
+|`\${foo}`
+|`${foo}`
 
- `$\{foo}`
+|`\\$\{foo}`
+|`${’\\’}${foo}`
+|`\[bar]`
 
- `[bar]`
+|`\\\${foo}`
+|`\\${foo}`
+|`\${foo}`
 
- `\$\{foo}`
+|`\\\\${foo}`
+|`${’\\\\’}${foo}`
+|`\\[bar]`
 
- `\$\{foo}`
+|`\\\\\${foo}`
+|`\\\${foo}`
+|`\\${foo}`
 
- `$\{foo}`
+|`\\\\\\${foo}`
+|`${’\\\\\\’}${foo}`
+|`\\\[bar]`
 
- `\\$\{foo}`
+|...
+|...
+|...
 
- `$\{’\\’}$\{foo}`
-
- `\[bar]`
-
- `\\\$\{foo}`
-
- `\\$\{foo}`
-
- `\$\{foo}`
-
- `\\\\$\{foo}`
-
- `$\{’\\\\’}$\{foo}`
-
- `\\[bar]`
-
- `\\\\\$\{foo}`
-
- `\\\$\{foo}`
-
- `\\$\{foo}`
-
- `\\\\\\$\{foo}`
-
- `$\{’\\\\\\’}$\{foo}`
-
- `\\\[bar]`
-
-...
-
-...
-
-...
+|===
 
 The XML view of an escaped EL expression
-using the `#\{expr}` syntax follows the same rules as the `$\{expr}`
-syntax, where `$\{` is simply substituted with `#\{` .
+using the `\#{expr}` syntax follows the same rules as the `${expr}`
+syntax, where `${` is simply substituted with `#{` .
 
-=== [[a2793]]Template Text and XML Elements
+==== [[a2793]]Template Text and XML Elements
 
 All text that is uninterpreted by the JSP
 translator is converted into the body for a `jsp:text` element. As a
@@ -9839,45 +9815,38 @@ of an escaped EL expression is obtained. Assume the EL expression
 translation unit.The same rules apply for the #\{expr} syntax, where
 `$\{` is simply substituted with `#\{` .
 
-=== [[a2797]]XML View of an Escaped EL Expression in Template Text
+_[[a2797]]XML View of an Escaped EL Expression in Template Text_
 
-Attribute Value
+[cols="30,30,30",options="header"]
+|===
 
-XML View
+|Attribute Value
+|XML View
+|Result
 
-Result
+|`${foo}`
+|`${foo}`
+|`[bar]`
 
- `$\{foo}`
+|`\${foo}`
+|`\${foo}`
+|`${foo}`
 
- `$\{foo}`
+|`\\${foo}`
+|`\\${foo}`
+|`\${foo}`
 
- `[bar]`
+|`\\\${foo}`
+|`\\\${foo}`
+|`\\${foo}`
 
- `\$\{foo}`
+|...
+|...
+|...
 
- `\$\{foo}`
+|===
 
- `$\{foo}`
-
- `\\$\{foo}`
-
- `\\$\{foo}`
-
- `\$\{foo}`
-
- `\\\$\{foo}`
-
- `\\\$\{foo}`
-
- `\\$\{foo}`
-
-...
-
-...
-
-...
-
-=== [[a2816]]The jsp:id Attribute
+==== [[a2816]]The jsp:id Attribute
 
 A JSP container must support a `jsp:id`
 attribute. This attribute can only be present in the XML view of a JSP
@@ -9893,43 +9862,42 @@ page author has redefined the `jsp` prefix, an alternative prefix must
 be used by the container. See
 /C:/jspspec/jakarta.servlet.jsp.tagext.html#20465[] for more details.
 
-=== [[a2819]]The tag Directive
+==== [[a2819]]The tag Directive
 
 The `tag` directive is applicable to tag
 files only. A `tag` directive of the form:
 
-<%@ tag \{ attr=”value” }* %>
+ <%@ tag { attr=”value” }* %>
 
 is translated into an element of the form:
 
-<jsp:directive.tag \{ attr=”value” }* />
+ <jsp:directive.tag { attr=”value” }* />
 
 The value of the `pageEncoding` attribute is
 set to " `UTF-8` ". A `tag` directive and the `pageEncoding` attribute
 are added if they don’t exist already.
 
-=== [[a2825]]The attribute Directive
+==== [[a2825]]The attribute Directive
 
 The `attribute` directive is applicable to
 tag files only. An `attribute` directive of the form:
 
-<%@ attribute \{ attr=”value” }* %>
+ <%@ attribute { attr=”value” }* %>
 
 is translated into an element of the form:
 
-<jsp:directive.attribute \{ attr=”value” }*
-/>
+ <jsp:directive.attribute { attr=”value” }* />
 
-=== [[a2830]]The variable Directive
+==== [[a2830]]The variable Directive
 
 The `variable` directive is applicable to tag
 files only. A `variable` directive of the form:
 
-<%@ variable \{ attr=”value” }* %>
+ <%@ variable { attr=”value” }* %>
 
 is translated into an element of the form:
 
-<jsp:directive.variable \{ attr=”value” }* />
+ <jsp:directive.variable { attr=”value” }* />
 
 === [[a2835]]Validating an XML View of a JSP page
 
@@ -9961,183 +9929,198 @@ fragments. The second shows a JSP page in JSP syntax and its mapping to
 XML syntax. The three following examples illustrate the semantics of
 cross-syntax translation-time includes and the effect on the XML View.
 
-=== A JSP document
+==== A JSP document
 
 This is an example of a very simple JSP
 document that has some template XML elements. This particular example
 describes a table that is a collection of 3 rows, with numeric values 1,
 2, 3. The JSP Standard Tag Library is being used:
 
-<?xml version="1.0"?> +
-<table> +
-<c:forEach +
-xmlns:c="http://java.sun.com/jsp/jstl/core" +
-var="counter" begin="1" end="3"> +
-<row>$\{counter}</row> +
-</c:forEach> +
-</table>
+ <?xml version="1.0"?>
+ <table>
+   <c:forEach
+       xmlns:c="http://java.sun.com/jsp/jstl/core"
+       var="counter" begin="1" end="3">
+     <row>$\{counter}</row>
+   </c:forEach>
+ </table>
 
-=== A JSP page and its corresponding XML View
+==== A JSP page and its corresponding XML View
 
 Here is an example of mapping between JSP and
 XML syntax.
 
 For this JSP page:
 
-<html> +
-<title>positiveTagLib</title> +
-<body> +
- +
+....
+<html>
+<title>positiveTagLib</title>
+<body>
+
 <%@ taglib uri="http://java.apache.org/tomcat/examples-taglib"
-prefix="eg" %> +
-<%@ taglib uri="/tomcat/taglib" prefix="test" %> +
-<%@ taglib uri="WEB-INF/tlds/my.tld" prefix="temp" %> +
- +
-<eg:test toBrowser="true" att1="Working"> +
-Positive Test taglib directive </eg:test> +
-</body> +
+prefix="eg" %>
+<%@ taglib uri="/tomcat/taglib" prefix="test" %>
+<%@ taglib uri="WEB-INF/tlds/my.tld" prefix="temp" %>
+
+<eg:test toBrowser="true" att1="Working">
+Positive Test taglib directive </eg:test>
+</body>
 </html>
+....
 
 The XML View of the previous page is:
 
+....
 <jsp:root
-xmlns:jsp="http://java.sun.com/JSP/Page" +
-xmlns:eg="http://java.apache.org/tomcat/examples-taglib" +
-xmlns:test="urn:jsptld:/tomcat/taglib" +
-xmlns:temp="urn:jsptld:/WEB-INF/tlds/my.tld"> +
- +
-<jsp:text><![CDATA[<html> +
-<title>positiveTagLib</title> +
-<body> +
- +
- +
- +
- +
- +
-]]></jsp:text> +
-<eg:test toBrowser="true" att1="Working"> +
-<jsp:text>Positive test taglib directive</jsp:text> +
-</eg:test> +
-<jsp:text><![CDATA[ +
-</body> +
-</html> +
-]]></jsp:text> +
-</jsp:root>
+xmlns:jsp="http://java.sun.com/JSP/Page"
+xmlns:eg="http://java.apache.org/tomcat/examples-taglib"
+xmlns:test="urn:jsptld:/tomcat/taglib"
+xmlns:temp="urn:jsptld:/WEB-INF/tlds/my.tld">
 
-=== Clearing Out Default Namespace on Include
+<jsp:text><![CDATA[<html>
+<title>positiveTagLib</title>
+<body>
+
+
+
+
+
+]]></jsp:text>
+<eg:test toBrowser="true" att1="Working">
+<jsp:text>Positive test taglib directive</jsp:text>
+</eg:test>
+<jsp:text><![CDATA[
+</body>
+</html>
+]]></jsp:text>
+</jsp:root>
+....
+
+==== Clearing Out Default Namespace on Include
 
 This example illustrates the need to clear
 out the default namespace when doing a translation-time include of a JSP
 document:
 
-<!-- a.jspx --> +
-<elementA> +
-<tagB xmlns="http://namespace1"> +
-<jsp:directive.include file="b.jspx" +
-xmlns:jsp="http://java.sun.com/JSP/Page" /> +
-</tagB> +
+....
+<!-- a.jspx -->
+<elementA>
+  <tagB xmlns="http://namespace1">
+    <jsp:directive.include file="b.jspx"
+        xmlns:jsp="http://java.sun.com/JSP/Page" />
+  </tagB>
 </elementA>
 
-<!-- b.jspx --> +
+<!-- b.jspx -->
 <elementC />
+....
 
 The resulting XML View for these two JSP
 documents is:
 
-<jsp:root
-xmlns:jsp="http://java.sun.com/JSP/Page"> +
-<elementA> +
-<tagB xmlns="http://namespace1"> +
-<elementC /> +
-</tagB> +
-</elementA> +
+....
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page">
+  <elementA>
+    <tagB xmlns="http://namespace1">
+      <elementC />
+    </tagB>
+  </elementA>
 </jsp:root>
+....
 
-=== Taglib Direcive Adds to Global Namespace
+==== Taglib Direcive Adds to Global Namespace
 
 This example illustrates the effect of the
 taglib directive on the XML View. Notice how the taglib directive always
 affects the `<jsp:root>` element, independent of where it is
 encountered.
 
-<!-- c.jspx --> +
-<elementD xmlns:jsp="http://java.sun.com/JSP/Page"> +
-<jsp:directive.include file="d.jsp" /> +
-<jsp:directive.include file="e.jsp" /> +
+....
+<!-- c.jspx -->
+<elementD xmlns:jsp="http://java.sun.com/JSP/Page">
+  <jsp:directive.include file="d.jsp" />
+  <jsp:directive.include file="e.jsp" />
 </elementD>
 
-<%-- d.jsp --%> +
-<%@ taglib prefix="x" uri="http://namespace2" %> +
+<%-- d.jsp --%>
+<%@ taglib prefix="x" uri="http://namespace2" %>
 <x:tagE />
 
-<%-- e.jsp --%> +
+<%-- e.jsp --%>
 <x:tagE />
+....
 
 The resulting XML View of these documents and
 pages is:
 
-<jsp:root xmlns:x="http://namespace2" +
-xmlns:jsp="http://java.sun.com/JSP/Page" > +
-<elementD> +
-<x:tagE /> +
-<x:tagE /> +
-</elementD> +
+....
+<jsp:root xmlns:x="http://namespace2"
+    xmlns:jsp="http://java.sun.com/JSP/Page" >
+  <elementD>
+    <x:tagE />
+    <x:tagE />
+  </elementD>
 </jsp:root>
+....
 
-=== Collective Application of Inclusion Semantics
+==== Collective Application of Inclusion Semantics
 
 This example illustrates how the various
 translation-time include semantics are collectively applied:
 
-<%-- f.jsp --%> +
-<%@ taglib prefix="m" uri="http://namespace3" %> +
+....
+<%-- f.jsp --%>
+<%@ taglib prefix="m" uri="http://namespace3" %>
 <%@ include file="g.jspx" %>
 
-<!-- g.jspx --> +
-<tagF xmlns="http://namespace4" > +
-<y:tagG xmlns:y="http://namespace5"> +
-<tagH /> +
-<jsp:directive.include file="i.jspx" +
-xmlns:jsp="http://java.sun.com/JSP/Page" /> +
-</y:tagG> +
-<jsp:directive.include file="h.jsp" +
-xmlns:jsp="http://java.sun.com/JSP/Page" /> +
-<tagI /> +
+<!-- g.jspx -->
+<tagF xmlns="http://namespace4" >
+  <y:tagG xmlns:y="http://namespace5">
+    <tagH />
+    <jsp:directive.include file="i.jspx"
+        xmlns:jsp="http://java.sun.com/JSP/Page" />
+  </y:tagG>
+  <jsp:directive.include file="h.jsp"
+      xmlns:jsp="http://java.sun.com/JSP/Page" />
+  <tagI />
 </tagF>
 
-<%-- h.jsp --%> +
-<%@ taglib prefix="n" uri="http://namespace6" %> +
-<m:tagJ /> +
+<%-- h.jsp --%>
+<%@ taglib prefix="n" uri="http://namespace6" %>
+<m:tagJ />
 <n:tagK />
 
-<!-- i.jspx --> +
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"> +
-<y:tagL xmlns:y="http://namespace7"> +
-<elementM /> +
-<jsp:directive.include file="h.jsp" /> +
-</y:tagL> +
+<!-- i.jspx -->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page">
+  <y:tagL xmlns:y="http://namespace7">
+    <elementM />
+    <jsp:directive.include file="h.jsp" />
+  </y:tagL>
 </jsp:root>
+....
 
 The resulting XML View of these documents and
 pages is:
 
-<jsp:root xmlns:m="http://namespace3" +
-xmlns:n="http://namespace6" +
-xmlns:jsp="http://java.sun.com/JSP/Page" > +
-<tagF xmlns="http://namespace4"> +
-<y:tagG xmlns:y="http://namespace5"> +
-<tagH /> +
-<y:tagL xmlns="" xmlns:y="http://namespace7"> +
-<elementM /> +
-<m:tagJ /> +
-<n:tagK /> +
-</y:tagL> +
-</y:tagG> +
-<m:tagJ /> +
-<n:tagK /> +
-<tagI /> +
-</tagF> +
+....
+<jsp:root xmlns:m="http://namespace3"
+    xmlns:n="http://namespace6"
+    xmlns:jsp="http://java.sun.com/JSP/Page" >
+  <tagF xmlns="http://namespace4">
+    <y:tagG xmlns:y="http://namespace5">
+      <tagH />
+      <y:tagL xmlns="" xmlns:y="http://namespace7">
+        <elementM />
+        <m:tagJ />
+        <n:tagK />
+      </y:tagL>
+    </y:tagG>
+    <m:tagJ />
+    <n:tagK />
+    <tagI />
+  </tagF>
 </jsp:root>
+....
 
 === [[a2871]]Part II
 
