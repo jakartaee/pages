@@ -4400,7 +4400,7 @@ algorithm for determining the page character encoding of a JSP page or
 tag file can be found in link:jsp.html#a5854[See Page Encoding
 Detection.].
 
-=== Standard Syntax
+==== Standard Syntax
 
 For JSP pages in standard syntax, the page
 character encoding is determined from the following sources:
@@ -4434,40 +4434,32 @@ byte order and encoding form of unmarked plaintext files.
 The exact byte representation of the BOM
 depends on the particular encoding of the text file, as follows:
 
-=== Byte representations of the BOM
+_Byte representations of the BOM_
 
-[width="100%",cols="50%,50%",]
+[cols="50,50",options="header"]
 |===
-|Bytes |Encoding
-Form
 
-a|
-=== FE FF
+|Bytes
+|Encoding Form
 
+|`FE FF`
 |UTF-16, big-endian
 
-a|
-=== FF FE
-
+|`FF FE`
 |UTF-16, little-endian
 
-a|
-=== 00 00 FE FF
-
+|`00 00 FE FF`
 |UTF-32, big-endian
 
-a|
-=== FF FE 00 00
-
+|`FF FE 00 00`
 |UTF-32, little-endian
 
-a|
-=== EF BB BF
-
+|EF BB BF`
 |UTF-8
+
 |===
 
- The above byte sequences have been reserved
+The above byte sequences have been reserved
 to identify a BOM at the beginning of JSP pages in standard syntax, and
 will not appear in the page's output.
 
@@ -4487,7 +4479,7 @@ character encoding in a JSP configuration element page-encoding or a
 pageEncoding attribute of the page directive of the page, as long as
 they are consistent.
 
-=== XML Syntax
+==== XML Syntax
 
 For JSP documents and tag files in XML
 syntax, the page character encoding is determined as described in
@@ -4603,9 +4595,7 @@ Combinations of these approaches also make sense.
 
 
 
-== CHAPTER 4 - 
-
-=== [[a1403]]Standard Actions
+== [[a1403]]Standard Actions
 
 This chapter describes the standard
 actions of Jakarta Server Pages 2.2 (JSP 2.2). Standard actions are
