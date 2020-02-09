@@ -5651,7 +5651,7 @@ appears in the calling page, the JSP container provides a way to
 synchronize variables between the local page scope in the tag file and
 the page scope of the calling page. For each variable that is to be
 synchronized, the tag file author must declare the variable with a scope
-of either `AT`BEGIN` or `NESTED` . The container must then generate code
+of either `AT_BEGIN` or `NESTED` . The container must then generate code
 to synchronize the page scope values for the variable in the tag file
 with the page scope equivalent in the calling page or tag file. The
 details of how variables are synchronized can be found in
@@ -8258,24 +8258,22 @@ as optional and not specified, no variable is created. If the tag
 accepts dynamic attributes, then the names and values of those dynamic
 attributes must be exposed to the tag file as specified in
 link:jsp.html#a2408[See Details of tag directive attributes.]. +
- +
 If the attribute is a deferred-value, it is directly mapped. If the
 attribute is a deferred-method, it is wrapped in a `ValueExpression` ,
 and the resulting `ValueExpression` is mapped. +
- +
 There are two implications here. They are best illustrated by examples.
-Suppose we have a tag file +
- +
-tagf.tag: +
-`<%@ attribute name="attr1" deferredValue="true"/> +
-<%@ attribute name="attr2" deferredMethod="true"/> +
-<c:out value="$\{attr1.bar}"/> +
-<h:commandButton value="#\{attr1.foo}" action="#\{attr2}"/> +
-` +
-used in test.jsp +
-`<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%> +
-<my:tagf attr1="#\{someExpr}" attr2="#\{someMethod}"/> +
-` +
+Suppose we have a tag file tagf.tag:
+
+ <%@ attribute name="attr1" deferredValue="true"/>
+ <%@ attribute name="attr2" deferredMethod="true"/>
+ <c:out value="${attr1.bar}"/>
+ <h:commandButton value="#{attr1.foo}" action="#{attr2}"/>
+
+used in test.jsp
+
+ <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+ <my:tagf attr1="#{someExpr}" attr2="#{someMethod}"/>
+
 First, in `tagf.tag` , `$\{attr1.bar}` will cause the immediate
 evaluation of the deferred expression. Secondly, since the
 `VariableMapper` is used to resolve variables at EL parse time, a
@@ -8283,16 +8281,17 @@ deferred expression such as `#\{attr1.foo}` is not dependent on `attr1`
 anymore, so that it can be evaluated long after the end of life of the
 tag file's pageContext. This is very useful for Jakarta Server Faces
 applications. +
- +
 Since the EL syntax does not allow for invokation of the method in a
 `MethodExpression` , the only allowable use of `attr2` is to pass it to
 another tag that has a deferred-method attribute, in the form of "
 `#\{attr2}` ".
+
 * For all intents and purposes other than for
-synchronizing the `AT`BEGIN` , `NESTED` , and `AT`END` scripting
+synchronizing the `AT_BEGIN` , `NESTED` , and `AT_END` scripting
 variables, the effective `JspContext` for the tag file is the JSP
 Context Wrapper. For example, the `jspContext` scripting variable must
 point to the JSP Context Wrapper instead of the invoking JSP Context.
+
 * The tag handler must behave as though a tag
 library descriptor entry was defined for it, in accordance with the
 `tag` , `attribute` , and `variable` directives that appear in the tag
@@ -8343,7 +8342,7 @@ actions. The rules for packaging tag files are designed to make it very
 simple and fast to write simple tags, while still providing as much
 power and flexibility as classic tag handlers have.
 
-=== [[a2348]]Location of Tag Files
+==== [[a2348]]Location of Tag Files
 
 Tag extensions written in JSP using tag files
 can be placed in one of two locations. The first possibility is in the
@@ -8363,7 +8362,7 @@ are not considered tag extensions and must be ignored by the JSP
 container. For example, a tag file that appears in the root of a web
 application would be treated as content to be served.
 
-=== [[a2352]]Packaging in a JAR
+==== [[a2352]]Packaging in a JAR
 
 To be accessible, tag files bundled in a
 `JAR` require a Tag Library Descriptor. Tag files that appear in a JAR
@@ -8390,7 +8389,7 @@ considered invalid and must be rejected by the container if a
 a `<name>` subelement in a `<tag>` element. Any attempt to use an
 invalid tag library must trigger a translation error.
 
-=== [[a2356]]Packaging Directly in a Web Application
+==== [[a2356]]Packaging Directly in a Web Application
 
 Tag files placed in the `/WEB-INF/tags/`
 directory of the web application, or a subdirectory, are made easily
@@ -8407,13 +8406,13 @@ relationships between subdirectories - they are allowed simply for
 organizational purposes. For example, the following web application
 contains three tag libraries:
 
- /WEB-INF/tags/ +
-/WEB-INF/tags/a.tag +
-/WEB-INF/tags/b.tag +
-/WEB-INF/tags/foo/ +
-/WEB-INF/tags/foo/c.tagx +
-/WEB-INF/tags/bar/baz/ +
-/WEB-INF/tags/bar/baz/d.tag
+ /WEB-INF/tags/
+ /WEB-INF/tags/a.tag
+ /WEB-INF/tags/b.tag
+ /WEB-INF/tags/foo/
+ /WEB-INF/tags/foo/c.tagx
+ /WEB-INF/tags/bar/baz/
+ /WEB-INF/tags/bar/baz/d.tag
 
 The JSP container must generate an implicit
 tag library for each directory under and including `/WEB-INF/tags/` .
@@ -8442,14 +8441,14 @@ tag file, relative to the root of the web application.
 For the above example, the implicit Tag
 Library Descriptor for the `/WEB-INF/tags/bar/baz/` directory would be:
 
- <taglib> +
-<tlib-version>1.0</tlib-version> +
-<short-name>bar-baz</short-name> +
-<tag-file> +
-<name>d</name> +
-<path>/WEB-INF/tags/bar/baz/d.tag</path> +
-</tag-file> +
-</taglib>
+ <taglib>
+   <tlib-version>1.0</tlib-version>
+   <short-name>bar-baz</short-name>
+   <tag-file>
+     <name>d</name>
+     <path>/WEB-INF/tags/bar/baz/d.tag</path>
+   </tag-file>
+ </taglib>
 
 The JSP version of an implicit tag library
 defaults to 2.0.
@@ -8484,7 +8483,7 @@ file. In this case, the value of `<path>` must start with
 an implicit TLD, the JSP versions of the TLD and implicit TLD do not
 need to match.
 
-=== Packaging as Precompiled Tag Handlers
+==== Packaging as Precompiled Tag Handlers
 
 Tag files can also be compiled into Java
 classes and bundled as a tag library. This is useful for the situation
@@ -8501,58 +8500,50 @@ available within tag files, which define Simple Tag Handlers.
 link:jsp.html#a2377[See Directives available to tag files.]
 outlines which directives are available in tag files:
 
-=== [[a2377]]Directives available to tag files
+_[[a2377]]Directives available to tag files_
 
-Directive
+[cols="20,20,60",options="header"]
+|===
 
-Available?
+|Directive
+|Available?
+|Interpretation/Restrictions
 
-Interpretation/Restrictions
 
- `page`
-
-no
-
-A tag file is not a `page` . The `tag`
+|`page`
+|no
+|A tag file is not a `page` . The `tag`
 directive must be used instead. If this directive is used in a tag file,
 a translation error must result.
 
- `taglib`
+|`taglib`
+|yes
+|Identical to JSP pages.
 
-yes
-
-Identical to JSP pages.
-
- `include`
-
-yes
-
-Identical to JSP pages. Note that if the
+|`include`
+|yes
+|Identical to JSP pages. Note that if the
 included file contains syntax unsuitable for tag files, a translation
 error must occur.
 
- `tag`
-
-yes
-
-Only applicable to tag files. An attempt to
+|`tag`
+|yes
+|Only applicable to tag files. An attempt to
 use this directive in JSP pages will result in a translation error.
 
- `attribute`
-
-yes
-
-Only applicable to tag files. An attempt to
+|`attribute`
+|yes
+|Only applicable to tag files. An attempt to
 use this directive in JSP pages will result in a translation error.
 
- `variable`
-
-yes
-
-Only applicable to tag files. An attempt to
+|`variable`
+|yes
+|Only applicable to tag files. An attempt to
 use this directive in JSP pages will result in a translation error.
 
-=== [[a2399]]The tag Directive
+|===
+
+==== [[a2399]]The tag Directive
 
 The `tag` directive is similar to the `page`
 directive, but applies to tag files instead of JSPs. Like the `page`
@@ -8574,54 +8565,55 @@ use by this, and subsequent, JSP specification(s).
 Unrecognized attributes or values result in
 fatal translation errors.
 
-=== Examples
+_Examples_
 
-<%@ tag display-name=”Addition” +
-body-content=”scriptless” +
-dynamic-attributes=”dyn” +
-small-icon=”/WEB-INF/sample-small.jpg” +
-large-icon=”/WEB-INF/sample-large.jpg” +
-description=”Sample usage of tag directive” %>
+ <%@ tag display-name=”Addition”
+         body-content=”scriptless”
+         dynamic-attributes=”dyn”
+         small-icon=”/WEB-INF/sample-small.jpg”
+         large-icon=”/WEB-INF/sample-large.jpg”
+         description=”Sample usage of tag directive” %>
 
-=== Syntax
+_Syntax_
 
-<%@ tag tag`directive`attr`list %> +
- +
-tag`directive`attr`list ::= +
-\{ display-name=”display-name” } +
-\{ body-content=”scriptless|tagdependent|empty” } +
-\{ dynamic-attributes=”name” } +
-\{ small-icon=”small-icon” } +
-\{ large-icon=”large-icon” } +
-\{ description=”description” } +
-\{ example=”example” } +
-\{ language=”scriptingLanguage” } +
-\{ import=”importList” } +
-\{ pageEncoding=”peinfo” } +
-\{ isELIgnored=”true|false” } +
-\{ deferredSyntaxAllowedAsLiteral=”true|false” } +
-\{ trimDirectiveWhitespaces=”true|false” }
+....
+<%@ tag tag_directive_attr_list %>
+
+tag_directive_attr_list ::= { display-name=”display-name” }
+                            { body-content=”scriptless|tagdependent|empty” }
+                            { dynamic-attributes=”name” }
+                            { small-icon=”small-icon” }
+                            { large-icon=”large-icon” }
+                            { description=”description” }
+                            { example=”example” }
+                            { language=”scriptingLanguage” }
+                            { import=”importList” }
+                            { pageEncoding=”peinfo” }
+                            { isELIgnored=”true|false” }
+                            { deferredSyntaxAllowedAsLiteral=”true|false” }
+                            { trimDirectiveWhitespaces=”true|false” }
+....
 
 The details of the attributes are as follows:
 
-=== [[a2408]]Details of `tag` directive attributes
+_[[a2408]]Details of `tag` directive attributes_
 
- `display-name`
+[cols="20,80"]
+|===
 
-(optional) A short name that is intended to
+|`display-name`
+|(optional) A short name that is intended to
 be displayed by tools. Defaults to the name of the tag file, without the
 `.tag` extension.
 
- `body-content`
-
-(optional) Provides information on the
+|`body-content`
+|(optional) Provides information on the
 content of the body of this tag. Can be either `empty` , `tagdependent`
 , or `scriptless` . A translation error will result if `JSP` or any
 other value is used. Defaults to `scriptless` .
 
- `dynamic-attributes`
-
-(optional) The presence of this attribute
+|`dynamic-attributes`
+|(optional) The presence of this attribute
 indicates this tag supports additional attributes with dynamic names. If
 present, the generated tag handler must implement the
 `jakarta.servlet.jsp.tagext.DynamicAttributes` interface, and the
@@ -8639,112 +8631,104 @@ with a `dynamic-attributes` attribute equal to the value of a
 of a `name` attribute of an `attribute` directive in this translation
 unit.
 
- `small-icon`
-
-(optional) Either a context-relative path, or
+|`small-icon`
+|(optional) Either a context-relative path, or
 a path relative to the tag source file, of an image file containing a
 small icon that can be used by tools. Defaults to no small icon.
 
- `large-icon`
-
-(optional) Either a context-relative path, or
+|`large-icon`
+|(optional) Either a context-relative path, or
 a path relative to the tag source file, of an image file containing a
 large icon that can be used by tools. Defaults to no large icon.
 
- `description`
-
-(optional) Defines an arbitrary string that
+|`description`
+|(optional) Defines an arbitrary string that
 describes this tag. Defaults to no description.
 
- `example`
-
-(optional) Defines an arbitrary string that
+|`example`
+|(optional) Defines an arbitrary string that
 presents an informal description of an example of a use of this action.
 Defaults to no example.
 
- `language`
-
-(optional) Carries the same syntax and
+|`language`
+|(optional) Carries the same syntax and
 semantics of the language attribute of the page directive.
 
- `import`
-
-(optional) Carries the same syntax and
+|`import`
+|(optional) Carries the same syntax and
 semantics of the import attribute of the page directive.
 
- `pageEncoding`
-
-(optional) Carries the same syntax and
+|`pageEncoding`
+|(optional) Carries the same syntax and
 semantics of the `pageEncoding` attribute in the `page` directive.
 However, there is no corresponding global configuration element in
 `web.xml` . The `pageEncoding` attribute cannot be used in tag files in
 XML syntax.
 
- `isELIgnored`
-
-(optional) Carries the same syntax and
+|`isELIgnored`
+|(optional) Carries the same syntax and
 semantics of the `isELIgnored` attribute of the `page` directive.
 However, there is no corresponding global configuration element in
 `web.xml` .
 
-deferredSyntaxAllowedAsLiteral
-
-(optional) Carries the same syntax and
+|`deferredSyntaxAllowedAsLiteral`
+|(optional) Carries the same syntax and
 semantics of the deferredSyntaxAllowedAsLiteral attribute of the `page`
 directive. However, there is no corresponding global configuration
 element in `web.xml` . Causes a translation error if specified in a tag
 file with a JSP version less than 2.1.
 
-trimDirectiveWhitespaces ``
-
-(optional) Carries the same syntax and
+|`trimDirectiveWhitespaces`
+|(optional) Carries the same syntax and
 semantics of the trimDirectiveWhitespaces attribute of the `page`
 directive. However, there is no corresponding global configuration
-element in `web.xml` .
+element in `web.xml`.
 
-=== [[a2435]]The attribute Directive
+|===
+
+==== [[a2435]]The attribute Directive
 
 The `attribute` directive is analogous to the
 `<attribute>` element in the Tag Library Descriptor, and allows for the
 declaration of custom action attributes.
 
-=== Examples
+_Examples_
 
-<%@ attribute name=”x” required=”true”
-fragment=”false” +
-rtexprvalue=”false” type=”java.lang.Integer” +
-description=”The first operand” %>
+ <%@ attribute name=”x” required=”true” fragment=”false”
+               rtexprvalue=”false” type=”java.lang.Integer”
+               description=”The first operand” %>
 
-<%@ attribute name=”y”
-type=”java.lang.Integer” %>
+ <%@ attribute name=”y” type=”java.lang.Integer” %>
 
-<%@ attribute name=”prompt” fragment=”true”
-%>
+ <%@ attribute name=”prompt” fragment=”true” %>
 
-=== Syntax
+_Syntax_
 
-<%@ attribute attribute`directive`attr`list
-%> +
- +
-attribute`directive`attr`list ::= +
-name=”attribute-name” +
-\{ required=”true|false” } +
-\{ fragment=”true|false” } +
-\{ rtexprvalue=”true|false” } +
-\{ type=”type” } +
-\{ description=”description” } +
-\{ deferredValue=”true|false” } +
-\{ deferredValueType=”type” } +
-\{ deferredMethod=”true|false” } +
-\{ deferredMethodSignature=”signature” }
+....
+<%@ attribute attribute_directive_attr_list %>
+
+attribute_directive_attr_list ::= name=”attribute-name”
+                                  { required=”true|false” }
+                                  { fragment=”true|false” }
+                                  { rtexprvalue=”true|false” }
+                                  { type=”type” }
+                                  { description=”description” }
+                                  { deferredValue=”true|false” }
+                                  { deferredValueType=”type” }
+                                  { deferredMethod=”true|false” }
+                                  { deferredMethodSignature=”signature” }
+....
 
 The details of the attributes are as follows:
 
-=== Details of `attribute` directive attributes
+_Details of `attribute` directive attributes_
 
- `name`
+[cols="20,80"]
+|===
 
-(required) The unique name of the attribute
+
+|`name`
+|(required) The unique name of the attribute
 being declared. A translation error must result if more than one
 `attribute` directive appears in the same translation unit with the same
 `name` . A translation error will result if there is an `attribute`
@@ -8752,71 +8736,60 @@ directive with a `name` attribute equal to the value of the `name-given`
 attribute of a `variable` directive or the `dynamic-attributes`
 attribute of a `tag` directive in this translation unit.
 
- `required`
-
-(optional) Whether this attribute is required
+|`required`
+|(optional) Whether this attribute is required
 ( `true` ) or optional ( `false` ). Defaults to `false` if not
 specified.
 
- `fragment`
-
-(optional) Whether this attribute is a
+|`fragment`
+|(optional) Whether this attribute is a
 fragment to be evaluated by the tag handler ( `true` ) or a normal
 attribute to be evaluated by the container prior to being passed to the
 tag handler. If this attribute is `true` , the type attribute is fixed
-at `j` `avax.servlet.jsp.tagext.JspFragment` and a translation error
+at `jakarta.servlet.jsp.tagext.JspFragment` and a translation error
 will result if the `type` attribute is specified. Also, if this
 attribute is `true` , the `rtexprvalue` attribute is fixed at `true` and
 a translation error will result if the `rtexprvalue` attribute is
 specified. Defaults to `false` .
 
- `rtexprvalue`
-
-(optional) Whether the attribute’s value may
+|`rtexprvalue`
+|(optional) Whether the attribute’s value may
 be dynamically calculated at runtime by a scriptlet expression. Unlike
 the corresponding TLD element, this attribute defaults to `true` .
 
- `type`
-
-(optional) The runtime type of the
+|`type`
+|(optional) The runtime type of the
 attribute’s value. Defaults to `java.lang.String` if not specified. It
 is a translation error to specify a primitive type.
 
- `description`
-
-(optional) Description of the attribute.
+|`description`
+|(optional) Description of the attribute.
 Defaults to no description.
 
- `deferredValue`
-
-(optional) Whether the attribute's value
+|`deferredValue`
+|(optional) Whether the attribute's value
 represents a deferred value expression. Only one of `deferredValue` or
 `deferredMethod` may be true. If `deferredValueType` is specified,
 default is true, otherwise default is false. Causes a translation error
 if specified in a tag file with a JSP version less than 2.1.
 
- `deferredValueType`
-
-(optional) The expected type resulting from
+|`deferredValueType`
+|(optional) The expected type resulting from
 the evaluation of the attribute's value expression. If both
 `deferredValueType` and `deferredValue` are specified, `deferredValue`
 must be true. If `deferredValue` is true, default is `java.lang.Object`
 . Causes a translation error if specified in a tag file with a JSP
 version less than 2.1.
 
- `deferredMethod`
-
-(optional) Whether the attribute's value
+|`deferredMethod`
+|(optional) Whether the attribute's value
 represents a deferred method expression. Only one of `deferredValue` or
 `deferredMethod` may be true. If `deferredMethodSignature` is specified,
 default is true, otherwise default is false. Causes a translation error
 if specified in a tag file with a JSP version less than 2.1.
 
-
-
- `deferredMethodSignature`
-
-(optional) The signature, as defined in the
+|`deferredMethodSignature`
+|(optional) The signature, as defined in the
 Java Language Specification, of the method to be invoked in the
 attribute's method expression. If both `deferredMethod` and
 `deferredMethodSignature` are specified, `deferredMethod` must be true.
@@ -8824,9 +8797,10 @@ If `deferredMethod` is true and `deferredMethodSignature` is not
 specified, it defaults to `void methodname()` . Causes a translation
 error if specified in a tag file with a JSP version less than 2.1.
 
+|===
 
 
-=== The variable Directive
+==== The variable Directive
 
 The `variable` directive is analogous to the
 `<variable>` element in the Tag Library descriptor, and defines the
@@ -8835,44 +8809,45 @@ details of a variable exposed by the tag handler to the calling page.
 See link:jsp.html#a2053[See Actions
 Defining Scripting Variables.] for more details.
 
-=== Examples
+_Examples_
 
-<%@ variable name-given=”sum” +
-variable-class=”java.lang.Integer” +
-scope=”NESTED” +
-declare=”true” +
-description=”The sum of the two operands” %>
+ <%@ variable name-given=”sum”
+              variable-class=”java.lang.Integer”
+              scope=”NESTED”
+              declare=”true”
+              description=”The sum of the two operands” %>
 
-<%@ variable name-given=”op1” +
-variable-class=”java.lang.Integer” +
-description=”The first operand” %>
+ <%@ variable name-given=”op1”
+              variable-class=”java.lang.Integer”
+              description=”The first operand” %>
 
-<%@ variable name-from-attribute=”var”
-alias=”result” %>
+ <%@ variable name-from-attribute=”var” alias=”result” %>
 
-=== Syntax
+_Syntax_
 
-<%@ variable variable`directive`attr`list
-%> +
- +
-variable`directive`attr`list ::= +
-( name-given=”output-name” +
-| ( name-from-attribute=”attr-name” +
-alias=”local-name” +
-) +
-) +
-\{ variable-class=”output-type” } +
-\{ declare=”true|false” } +
-\{ scope=”AT`BEGIN|AT`END|NESTED” } +
-\{ description=”description” }
+....
+<%@ variable variable_directive_attr_list %>
+
+variable_directive_attr_list ::= (   name-given=”output-name”
+                                   | ( name-from-attribute=”attr-name”
+                                       alias=”local-name” +
+                                     )
+                                 )
+                                 { variable-class=”output-type” }
+                                 { declare=”true|false” }
+                                 { scope=”AT_BEGIN|AT_END|NESTED” }
+                                 { description=”description” }
+....
 
 The details of the attributes are as follows:
 
-=== Details of `variable` directive attributes
+_Details of `variable` directive attributes_
 
- `name-given`
+[cols="30,70"]
+|===
 
-Defines a scripting variable to be defined in
+|`name-given`
+|Defines a scripting variable to be defined in
 the page invoking this tag. Either the `name-given` attribute or the
 `name-from-attribute` attribute must be specified. Specifying neither or
 both will result in a translation error. A translation error will result
@@ -8882,9 +8857,8 @@ attribute equal to the value of the `name` attribute of an `attribute`
 directive or the `dynamic-attributes` attribute of a `tag` directive in
 this translation unit.
 
- `name-from-attribute`
-
-Defines a scripting variable to be defined in
+|`name-from-attribute`
+|Defines a scripting variable to be defined in
 the page invoking this tag. The specified name is the `name` of an
 attribute whose (translation-time) value at of the start of the tag
 invocation will give the name of the variable. A translation error will
@@ -8896,9 +8870,8 @@ Specifying neither or both will result in a translation error. A
 translation error will result if two variable directives have the same
 `name-from-attribute` .
 
- `alias`
-
-Defines a locally scoped attribute to hold
+|`alias`
+|Defines a locally scoped attribute to hold
 the value of this variable. The container will synchronize this value
 with the variable whose name is given in `name-from-attribute` .
 Required when `name-from-attribute` is specified. A translation error
@@ -8907,27 +8880,25 @@ must occur if the value of `alias` is the same as the value of a `name`
 attribute of an `attribute` directive or the `alias or name-given`
 attribute of a `variable` directive in the same translation unit.
 
- `variable-class`
-
-(optional) The name of the class of the
+|`variable-class`
+|(optional) The name of the class of the
 variable. The default is `java.lang.String` .
 
- `declare`
-
-(optional) Whether the variable is declared
+|`declare`
+|(optional) Whether the variable is declared
 or not in the calling page/tag file, after this tag invocation. `true`
 is the default.
 
- `scope`
-
-(optional) The scope of the scripting
-variable defined. Can be either `AT`BEGIN` , `AT`END` , or `NESTED` .
+|`scope`
+|(optional) The scope of the scripting
+variable defined. Can be either `AT_BEGIN` , `AT_END` , or `NESTED` .
 Defaults to `NESTED` .
 
- `description`
-
-(optional) An optional description of this
+|`description`
+|(optional) An optional description of this
 variable. Defaults to no description.
+
+|===
 
 === [[a2492]]Tag Files in XML Syntax
 
@@ -8984,86 +8955,61 @@ type defined in a core Java technology or Jakarta Servlet API package, as
 shown in `link:jsp.html#a2504[See Implicit Objects Available in
 Tag Files.]` .
 
-=== [[a2504]]Implicit Objects Available in Tag Files
+_[[a2504]]Implicit Objects Available in Tag Files_
 
-Variable Name
+[cols="20,50,30",options="header"]
+|===
 
-Type
+|Variable Name
+|Type
+|Semantics & Scope
 
-Semantics & Scope
+|`request`
+|protocol dependent subtype of: `jakarta.servlet.ServletRequest`
+e.g: `jakarta.servlet.http.HttpServletRequest`
 
- `request`
+|The request triggering the service
+invocation. +
+`request` scope.
 
-protocol dependent subtype of:
-`jakarta.servlet.ServletRequest`
-
-e.g:
-
- `jakarta.servlet.http.HttpServletRequest`
-
-The request triggering the service
-invocation.
-
- `request` scope.
-
- `response`
-
-protocol dependent subtype of:
+|`response`
+|protocol dependent subtype of:
 `jakarta.servlet.ServletResponse,` e.g:
+`jakarta.servlet.http.HttpServletResponse`
+|The response to the request. +
+`page` scope.
 
- `jakarta.servlet.http.HttpServletResponse`
+|jspContext
+|jakarta.servlet.jsp.JspContext
+|The `JspContext` for this tag file. +
+`page` scope.
 
-The response to the request.
-
- `page` scope.
-
-jspContext
-
-jakarta.servlet.jsp.JspContext
-
-The `JspContext` for this tag file.
-
-page scope.
-
- `session`
-
- `jakarta.servlet.http.HttpSession`
-
-The session object created for the requesting
-client (if any).
-
+|`session`
+|`jakarta.servlet.http.HttpSession`
+|The session object created for the requesting
+client (if any). +
 This variable is only valid for HTTP
-protocols.
+protocols. +
+`session` scope
 
- `session` scope
+|`application`
+|`jakarta.servlet.ServletContext`
+|The servlet context obtained from the servlet
+configuration object (as in the call
+`getServletConfig().getContext()`) +
+`application` scope
 
- `application`
+|`out`
+|`jakarta.servlet.jsp.JspWriter`
+|An object that writes into the output stream. +
+`page` scope
 
- `jakarta.servlet.ServletContext`
+|`config`
+|`jakarta.servlet.ServletConfig`
+|The `ServletConfig` for this JSP page +
+`page` scope
 
-The servlet context obtained from the servlet
-configuration object
-
-(as in the call `getServletConfig(). +
-getContext()` )
-
- `application` scope
-
- `out`
-
- `jakarta.servlet.jsp.JspWriter`
-
-An object that writes into the output stream.
-
- `page` scope
-
- `config` ``
-
- `jakarta.servlet.ServletConfig`
-
-The `ServletConfig` for this JSP page
-
- `page` scope
+|===
 
 Object names with prefixes `jsp` , ``jsp` ,
 `jspx` and ``jspx` , in any combination of upper and lower case, are
@@ -9096,23 +9042,23 @@ of the tag file. The page-scoped attribute is initialized to the value
 of the attribute when the tag is called. No further synchronization is
 performed.
 * OUT parameters - Use variables with scope
-`AT`BEGIN` or `AT`END` . For each `AT`BEGIN` or `AT`END` variable, a
+`AT_BEGIN` or `AT_END` . For each `AT_BEGIN` or `AT_END` variable, a
 page-scoped attribute is made available in the `JspContext` of the tag
 file. The scoped attribute is not initialized. Synchronization is
-performed at the end of the tag for `AT`BEGIN` and `AT`END` and also
-before the invocation of a fragment for `AT`BEGIN` . See
+performed at the end of the tag for `AT_BEGIN` and `AT_END` and also
+before the invocation of a fragment for `AT_BEGIN` . See
 link:jsp.html#a2550[See Variable synchronization behavior.] for
 details.
 * Nested parameters - Use variables with
-scope `AT`BEGIN` or `NESTED` . For each `AT`BEGIN` or `NESTED` variable,
+scope `AT_BEGIN` or `NESTED` . For each `AT_BEGIN` or `NESTED` variable,
 a page-scoped attribute is made available in the `JspContext` of the tag
 file. The scoped attribute is not initialized. Synchronization is
-performed before each fragment invocation for `AT`BEGIN` and `NESTED` ,
-and also after the end of the tag for `AT`BEGIN` . See
+performed before each fragment invocation for `AT_BEGIN` and `NESTED` ,
+and also after the end of the tag for `AT_BEGIN` . See
 link:jsp.html#a2550[See Variable synchronization behavior.] for
 details.
 
-=== Synchronization Points
+==== Synchronization Points
 
 The JSP container is required to generate
 code to handle the synchronization of each declared variable. The
@@ -9120,47 +9066,37 @@ details of how and when each variable is synchronized varies by the
 variable’s scope, as per link:jsp.html#a2550[See Variable
 synchronization behavior.].
 
-=== [[a2550]]Variable synchronization behavior
+_[[a2550]]Variable synchronization behavior_
 
+[cols="40,20,20,20",options="header"]
+|===
 
+|
+|AT_BEGIN
+|NESTED
+|AT_END
 
-AT`BEGIN
+|Beginning of tag file
+|do nothing
+|save
+|do nothing
 
-NESTED
+|Before any fragment
+|tag → page
+|tag → page
+|do nothing
+ 
+|After any fragment
+|do nothing
+|do nothing
+|do nothing
 
-AT`END
+|End of tag file
+|tag → page
+|restore
+|tag → page
 
-Beginning of tag file
-
-do nothing
-
-save
-
-do nothing
-
-Before any fragment
-
-image:sp-6.png[image] 
-
-image:sp-7.png[image] 
-
-do nothing
-
-After any fragment
-
-do nothing
-
-do nothing
-
-do nothing
-
-End of tag file
-
-image:sp-8.png[image] 
-
-restore
-
-image:sp-9.png[image] 
+|===
 
 The following list describes what each
 synchronization action means. If `name-given` is used, the name of the
@@ -9171,10 +9107,18 @@ name of P is equal to the value of the attribute (at the time the page
 was called) specified by the value of `name-from-attribute` and the name
 of T is equal to the value of the `alias` attribute.
 
-* 
+* tag → page - For this variable, if T exists in the tag file, create/update P in
+the calling page. If a T does not exist in the tag file, and P does exist in the
+calling page, P is removed from the calling page’s page scope. If the declare
+attribute for this variable is set to true , a corresponding scripting variable is
+declared in the calling page or tag file, as with any other tag handler. If this
+scripting variable would not be accessible in the context in which it is defined,
+the container need not declare the scripting variable (for example in a scriptless
+body).
 
 * save - For this variable, save the value of
 P, for later restoration. If P did not exist, remember that fact.
+
 * restore - For this variable, restore the
 value of P in the calling page, from the value saved earlier. If P did
 not exist before, ensure it does not exist now.
@@ -9185,154 +9129,162 @@ exception is thrown inside the tag file. All variable synchronization
 that occurs after the invocation of a fragment must occur regardless of
 whether an exception occured while invoking the fragment.
 
-=== Synchronization Examples
+==== Synchronization Examples
 
 The following examples help illustrate how
 variable synchronization works between a tag file and its calling page.
 
-=== Example of AT`BEGIN
+===== Example of AT_BEGIN
 
-In this example, the `AT`BEGIN` scope is used
+In this example, the `AT_BEGIN` scope is used
 to pass a variable to the tag’s body, and make it available to the
 calling page at the end of the tag invocation.
 
-<%-- page.jsp --%> +
-<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %> +
-<%@ taglib prefix=”my” tagdir=”/WEB-INF/tags” %> +
-<c:set var=”x” value=”1”/> +
-$\{x} <%-- (x == 1) --%> +
-<my:example> +
-$\{x} <%-- (x == 2) --%> +
-<c:set var=”x” value=”3”/> +
-</my:example> +
-$\{x} <%-- (x == 4) --%>
+....
+<%-- page.jsp --%>
+<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %>
+<%@ taglib prefix=”my” tagdir=”/WEB-INF/tags” %>
+<c:set var=”x” value=”1”/>
+$\{x} <%-- (x == 1) --%>
+<my:example>
+  ${x} <%-- (x == 2) --%>
+  <c:set var=”x” value=”3”/>
+</my:example>
+${x} <%-- (x == 4) --%>
 
-<%-- /WEB-INF/tags/example.tag --%> +
-<%@ variable name-given=”x” scope=”AT`BEGIN” %> +
-<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %> +
-$\{x} <%-- (x == null) --%> +
-<c:set var=”x” value=”2”/> +
-<jsp:doBody/> +
-$\{x} <%-- (x == 2) --%> +
+<%-- /WEB-INF/tags/example.tag --%>
+<%@ variable name-given=”x” scope=”AT_BEGIN” %>
+<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %>
+${x} <%-- (x == null) --%>
+<c:set var=”x” value=”2”/>
+<jsp:doBody/>
+${x} <%-- (x == 2) --%>
 <c:set var=”x” value=”4”/>
+....
 
-=== Example of AT`BEGIN and name-from-attribute
+===== Example of AT_BEGIN and name-from-attribute
 
 Like the previous example, in this example
-the `AT`BEGIN` scope is used to pass a variable to the tag’s body, and
+the `AT_BEGIN` scope is used to pass a variable to the tag’s body, and
 make it available to the calling page at the end of the tag invocation.
-The name of the attribute is customized via `name-from-attribute` .
+The name of the attribute is customized via `name-from-attribute`.
 
-<%-- page.jsp --%> +
-<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %> +
-<%@ taglib prefix=”my” tagdir=”/WEB-INF/tags” %> +
-<c:set var=”x” value=”1”/> +
-$\{x} <%-- (x == 1) --%> +
-<my:example var=”x”> +
-$\{x} <%-- (x == 2) --%> +
-$\{result} <%-- (result == null) --%> +
-<c:set var=”x” value=”3”/> +
-<c:set var=”result” value=”invisible”/> +
-</my:example> +
-$\{x} <%-- (x == 4) --%> +
-$\{result} <%-- (result == ‘invisible’) --%>
+....
+<%-- page.jsp --%>
+<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %>
+<%@ taglib prefix=”my” tagdir=”/WEB-INF/tags” %>
+<c:set var=”x” value=”1”/>
+${x} <%-- (x == 1) --%>
+<my:example var=”x”>
+  ${x} <%-- (x == 2) --%>
+  ${result} <%-- (result == null) --%>
+  <c:set var=”x” value=”3”/>
+  <c:set var=”result” value=”invisible”/>
+</my:example>
+${x} <%-- (x == 4) --%>
+${result} <%-- (result == ‘invisible’) --%>
 
-<%-- /WEB-INF/tags/example.tag --%> +
-<%@ attribute name=”var” required=”true” rtexprvalue=”false”%> +
-<%@ variable alias=”result” name-from-attribute=”var” scope=”AT`BEGIN”
-%> +
-<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %> +
-$\{x} <%-- (x == null) --%> +
-$\{result} <%-- (result == null) --%> +
-<c:set var=”x” value=”ignored”/> +
-<c:set var=”result” value=”2”/> +
-<jsp:doBody/> +
-$\{x} <%-- (x == ‘ignored’) --%> +
-$\{result} <%-- (result == 2) --%> +
-<c:set var=”x” value=”still`ignored”/> +
+<%-- /WEB-INF/tags/example.tag --%>
+<%@ attribute name=”var” required=”true” rtexprvalue=”false”%>
+<%@ variable alias=”result” name-from-attribute=”var” scope=”AT_BEGIN”
+%>
+<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %>
+${x} <%-- (x == null) --%>
+${result} <%-- (result == null) --%>
+<c:set var=”x” value=”ignored”/>
+<c:set var=”result” value=”2”/>
+<jsp:doBody/>
+${x} <%-- (x == ‘ignored’) --%>
+${result} <%-- (result == 2) --%>
+<c:set var=”x” value=”still`ignored”/>
 <c:set var=”result” value=”4”/>
+....
 
-=== Example of NESTED
+===== Example of NESTED
 
 In this example, the `NESTED` scope is used
 to make a private variable available to the calling page. The original
 value is restored when the tag is done.
 
-<%-- page.jsp --%> +
-<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %> +
-<%@ taglib prefix=”my” tagdir=”/WEB-INF/tags” %> +
-<c:set var=”x” value=”1”/> +
-$\{x} <%-- (x == 1) --%> +
-<my:example> +
-$\{x} <%-- (x == 2) --%> +
-<c:set var=”x” value=”3”/> +
-</my:example> +
-$\{x} <%-- (x == 1) --%>
+....
+<%-- page.jsp --%>
+<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %>
+<%@ taglib prefix=”my” tagdir=”/WEB-INF/tags” %>
+<c:set var=”x” value=”1”/>
+${x} <%-- (x == 1) --%>
+<my:example>
+  ${x} <%-- (x == 2) --%>
+  <c:set var=”x” value=”3”/>
+</my:example>
+${x} <%-- (x == 1) --%>
 
-<%-- /WEB-INF/tags/example.tag --%> +
-<%@ variable name-given=”x” scope=”NESTED” %> +
-<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %> +
-$\{x} <%-- (x == null) --%> +
-<c:set var=”x” value=”2”/> +
-<jsp:doBody/> +
-$\{x} <%-- (x == 2) --%> +
+<%-- /WEB-INF/tags/example.tag --%>
+<%@ variable name-given=”x” scope=”NESTED” %>
+<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %>
+${x} <%-- (x == null) --%>
+<c:set var=”x” value=”2”/>
+<jsp:doBody/>
+${x} <%-- (x == 2) --%>
 <c:set var=”x” value=”4”/>
+....
 
-=== Example of AT`END
+===== Example of AT_END
 
-In this example, the AT`END scope is used to
+In this example, the AT_END scope is used to
 return a value to the page. The body of the tag is not affected.
 
-<%-- page.jsp --%> +
-<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %> +
-<%@ taglib prefix=”my” tagdir=”/WEB-INF/tags” %> +
-<c:set var=”x” value=”1”/> +
-$\{x} <%-- (x == 1) --%> +
-<my:example> +
-$\{x} <%-- (x == 1) --%> +
-<c:set var=”x” value=”3”/> +
-</my:example> +
-$\{x} <%-- (x == 4) --%>
+....
+<%-- page.jsp --%>
+<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %>
+<%@ taglib prefix=”my” tagdir=”/WEB-INF/tags” %>
+<c:set var=”x” value=”1”/>
+${x} <%-- (x == 1) --%>
+<my:example>
+  ${x} <%-- (x == 1) --%>
+  <c:set var=”x” value=”3”/>
+</my:example>
+${x} <%-- (x == 4) --%>
 
-<%-- /WEB-INF/tags/example.tag --%> +
-<%@ variable name-given=”x” scope=”AT`END” %> +
-<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %> +
-$\{x} <%-- (x == null) --%> +
-<c:set var=”x” value=”2”/> +
-<jsp:doBody/> +
-$\{x} <%-- (x == 2) --%> +
+<%-- /WEB-INF/tags/example.tag --%>
+<%@ variable name-given=”x” scope=”AT_END” %>
+<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %>
+${x} <%-- (x == null) --%>
+<c:set var=”x” value=”2”/>
+<jsp:doBody/>
+${x} <%-- (x == 2) --%>
 <c:set var=”x” value=”4”/>
+....
 
-=== Example of Removing Parameters
+===== Example of Removing Parameters
 
 This example illustrates how the tag file can
 remove objects from the page scope of the calling page during
 synchronization.
 
-<%-- page.jsp --%> +
-<%@ taglib prefix=”my” tagdir=”/WEB-INF/tags” %> +
-<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %> +
-<c:set var=”x” value=”2”/> +
-$\{x} +
-<my:tag1> +
-‘$\{x}’ +
-</my:tag1> +
-$\{x} +
- +
-<%-- /WEB-INF/tags/example.tag --%> +
-<%@ variable name-given=”x” scope=”NESTED” %> +
-<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %> +
-<c:set var=”x” value=”1”/> +
-<jsp:doBody/> +
-<c:remove var=”x”/> +
+....
+<%-- page.jsp --%>
+<%@ taglib prefix=”my” tagdir=”/WEB-INF/tags” %>
+<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %>
+<c:set var=”x” value=”2”/>
+${x}
+<my:tag1>
+  ‘${x}’
+</my:tag1>
+${x}
+
+<%-- /WEB-INF/tags/example.tag --%>
+<%@ variable name-given=”x” scope=”NESTED” %>
+<%@ taglib prefix=”c” uri=”http://java.sun.com/jsp/jstl/core” %>
+<c:set var=”x” value=”1”/>
 <jsp:doBody/>
+<c:remove var=”x”/>
+<jsp:doBody/>
+....
 
-The expected output of this example is: 2 ‘1’
-‘’ 2
+The expected output of this example is: 2 ‘1’ ‘’ 2
 
-== CHAPTER 8 - 
 
-=== [[a2599]]Scripting
+== [[a2599]]Scripting
 
 This chapter describes the details of the
 Scripting Elements when the language directive value is `java` .
@@ -9536,12 +9488,12 @@ type is the type of the `class` attribute.
 
 | `<x:tag> +
 foo +
-</x:tag>` | `declare AT`BEGIN variables +
+</x:tag>` | `declare AT_BEGIN variables +
 \{ +
 declare NESTED variables +
 transformation of foo +
 } +
-declare AT`END variables`
+declare AT_END variables`
 |===
 
 Note that the value of the `scope` attribute
