@@ -7016,34 +7016,34 @@ library.
 A Tag Library is described via the Tag
 Library Descriptor ( TLD), an XML document that is described below.
 
-=== [[a2006]]Goals
+==== [[a2006]]Goals
 
 The tag extension mechanism described in this
 chapter addresses the following goals. It is designed to be:
 
-*  `Portable` - An action described in a tag
+*  _Portable_ - An action described in a tag
 library must be usable in any JSP container.
-*  `Simple` - Unsophisticated users must be
+*  _Simple_ - Unsophisticated users must be
 able to understand and use this mechanism. Vendors of JSP functionality
 must find it easy to make it available to users as actions.
-*  `Expressive` - The mechanism must support
+*  _Expressive_ - The mechanism must support
 a wide range of actions, including nested actions, scripting elements
 inside action bodies, and creation, use, and updating of scripting
 variables.
-*  `Usable from different scripting
-languages` - Although the JSP specification currently only defines the
+*  _Usable from different scripting
+languages_ - Although the JSP specification currently only defines the
 semantics for scripts in the Java programming language, we want to leave
 open the possibility of other scripting languages.
-*  `Built upon existing concepts and
-machinery` - We do not want to reinvent what exists elsewhere. Also, we
+*  _Built upon existing concepts and
+machinery_ - We do not want to reinvent what exists elsewhere. Also, we
 want to avoid future conflicts whenever we can predict them.
 
-=== [[a2013]]Overview
+==== [[a2013]]Overview
 
 The processing of a JSP page conceptually
 follows these steps:
 
-=== Parsing
+_Parsing_
 
 JSP pages can be authored using two different
 syntaxes: a JSP syntax and an XML syntax. The semantics and validation
@@ -7056,7 +7056,7 @@ directives. Information in the TLD is used in this step, including the
 identification of custom tags, so there is some processing of the taglib
 directives in the JSP page.
 
-=== Validation
+_Validation_
 
 The tag libraries in the XML document are
 processed in the order in which they appear in the page.
@@ -7072,7 +7072,7 @@ a `TagExtraInfo` class. If one is present, its `validate` method is
 invoked. The default implementation of `validate` is to call `isValid` .
 See the APIs for more details.
 
-=== Translation
+_Translation_
 
 Finally, the XML document is processed to
 create a JSP page implementation class. This process may involve
@@ -7081,7 +7081,7 @@ information about variables, either statically in the TLD, or more
 flexibly by using the `getVariableInfo` method of a `TagExtraInfo`
 class.
 
-=== Execution
+_Execution_
 
 Once a JSP page implementation class has been
 associated with a JSP page, the class will be treated as any other
@@ -7089,7 +7089,7 @@ servlet class: Requests will be directed to instances of the class. At
 run-time, tag handler instances will be created and methods will be
 invoked in them.
 
-=== Classic Tag Handlers
+==== Classic Tag Handlers
 
 A classic tag handler is a Java class that
 implements the `Tag` , `IterationTag` , or `BodyTag` interface, and is
@@ -7105,17 +7105,17 @@ and additional server-side objects.
 There are three main interfaces: `Tag` ,
 `IterationTag` , and `BodyTag` .
 
-* The `` `Tag` interface defines the basic
+* The `Tag` interface defines the basic
 methods needed in all tag handlers. These methods include setter methods
 to initialize a tag handler with context data and attribute values of
-the action, and the `doStartTag` and `doEndTag` `` methods.
-* The `` `IterationTag` `interface` is an
+the action, and the `doStartTag` and `doEndTag` methods.
+* The `IterationTag` `interface` is an
 extension to `Tag` that provides the additional method, `doAfterBody` ,
 invoked for the reevaluation of the body of the tag.
-* The `` `BodyTag` interface is an extension
+* The `BodyTag` interface is an extension
 of `IterationTag` with two new methods for when the tag handler wants to
 manipulate the tag body: `setBodyContent` passes a buffer, the
-`BodyContent` `` object, and `doInitBody` provides an opportunity to
+`BodyContent` object, and `doInitBody` provides an opportunity to
 process the buffer before the first evaluation of the body into the
 buffer.
 
@@ -7129,13 +7129,13 @@ of exceptions. The `TryCatchFinally` interface is a “mix-in” interface
 that can be added to a class implementing any of `Tag` , `IterationTag`
 , or `BodyTag` .
 
-=== [[a2035]]Simple Examples of Classic Tag Handlers
+==== [[a2035]]Simple Examples of Classic Tag Handlers
 
 As examples, we describe prototypical uses of
 tag extensions, briefly sketching how they take advantage of these
 mechanisms.
 
-=== Plain Actions
+===== Plain Actions
 
 The simplest type of action just does
 something, perhaps with parameters to modify what the “something” is,
@@ -7154,7 +7154,7 @@ tag is always intended to be empty. This indication leads to better
 error checking at translation time, and to better code quality in the
 JSP page implementation class.
 
-=== Actions with a Body
+===== Actions with a Body
 
 Another set of simple actions require
 something to happen when the start tag is found, and when the end tag is
@@ -7164,20 +7164,20 @@ invoked when the end tag of the action is encountered. The result of the
 `doEndTag` invocation indicates whether the remainder of the page is to
 be evaluated or not.
 
-=== Conditionals
+===== Conditionals
 
 In some cases, a body needs to be invoked
 only when some (possibly complex) condition happens. Again, this type of
 action is supported by the basic `Tag` interface through the use of
 return values in the `doStartTag` method.
 
-=== Iterations
+===== Iterations
 
 For iteration the `IterationTag` interface is
 needed. The `doAfterBody` method is invoked to determine whether to
 reevaluate the body or not.
 
-=== Actions that Process their Body
+===== Actions that Process their Body
 
 Consider an action that evaluates its body
 many times, creating a stream of response data. The `IterationTag`
@@ -7192,7 +7192,7 @@ through the creation of a `BodyContent` object and use of the
 after `setBodyContent` and before the first body evaluation provides an
 opportunity to interact with the body.
 
-=== Cooperating Actions
+===== Cooperating Actions
 
 Cooperating actions may offer the best way to
 describe a desired functionality. For example, one action may be used to
@@ -7210,7 +7210,7 @@ specification by providing each tag handler with its parent tag handler
 static method in `TagSupport` can then be used to locate a tag handler,
 and, once located, to perform valid operations on the tag handler.
 
-=== [[a2053]]Actions Defining Scripting Variables
+===== [[a2053]]Actions Defining Scripting Variables
 
 A custom action may create server-side
 objects and make them available to scripting elements by creating or
@@ -7242,7 +7242,7 @@ expressions, and therefore the container need not synchronize them.
 Instead, the page author can use the EL to access the `pageContext`
 values.
 
-=== [[a2059]]Simple Tag Handlers
+==== [[a2059]]Simple Tag Handlers
 
 The API and invocation protocol for classic
 tag handlers is necessarily somewhat complex because scriptlets and
@@ -7304,7 +7304,7 @@ page is invalid if it references a custom tag whose tag handler
 implements the SimpleTag interface and whose <body-content> is equal to
 "JSP" as per the supporting TLD.
 
-=== [[a2069]]JSP Fragments
+==== [[a2069]]JSP Fragments
 
 During the translation phase, various pieces
 of the page are translated into implementations of the
@@ -7328,7 +7328,7 @@ scriptlets or scriptlet expressions.
 See link:jakarta.servlet.jsp.tagext.html#UNKNOWN[]
 for more details on the `JspFragment` abstract class.
 
-=== Simple Examples of Simple Tag Handlers
+==== Simple Examples of Simple Tag Handlers
 
 In this section, we revisit the prototypical
 uses of classic tag extensions, as was presented in
@@ -7336,7 +7336,7 @@ link:jsp.html#a2035[See Simple Examples of Classic Tag
 Handlers.], and briefly describe how they are implemented using simple
 tag handlers.
 
-=== Plain Actions
+===== Plain Actions
 
 To implement plain actions, the tag library
 developer creates a class that extends `SimpleTagSupport` and implements
@@ -7345,7 +7345,7 @@ empty body are the same as with classic tag handlers. By default, the
 rest of the page will be evaluated after invoking `doTag` . To signal
 that the page is to be skipped, `doTag` throws `SkipPageException` .
 
-=== Actions with a Body
+===== Actions with a Body
 
 To implement actions with a body, the tag
 library developer implements `doTag` and invokes the body at any point
@@ -7353,20 +7353,20 @@ by calling `invoke` on the `JspFragment` object passed in via the
 `setJspBody` method. The tag handler can provide the fragment access to
 variables through the `JspContext` object.
 
-=== Conditionals
+===== Conditionals
 
 All conditional logic is handled in the
 `doTag` method. If the body is not to be invoked, the tag library
 developer simply does not call `invoke` on the `JspFragment` object
 passed in via `setJspBody` .
 
-=== Iterations
+===== Iterations
 
 All iteration logic is handled in the `doTag`
 method. The tag library developer simply calls `invoke` on the
 `JspFragment` object passed in via `setJspBody` as many times as needed.
 
-=== Actions that Process their Body
+===== Actions that Process their Body
 
 To divert the result of the body invocation,
 the tag library developer passes a `java.io.Writer` object to the
@@ -7374,7 +7374,7 @@ the tag library developer passes a `java.io.Writer` object to the
 handler’s `BodyContent` solution, the result of the invocation does not
 need to be buffered.
 
-=== Cooperating Actions
+===== Cooperating Actions
 
 Cooperating actions work the same way as with
 classic tag handlers. A `setParent` method is available in the
@@ -7402,7 +7402,7 @@ adapter.
 See link:jakarta.servlet.jsp.tagext.html#UNKNOWN[]
 for more details on these APIs.
 
-=== [[a2091]]Attributes With Dynamic Names
+==== [[a2091]]Attributes With Dynamic Names
 
 Prior to JSP 2.0, the name of every attribute
 that a tag handler accepted was predetermined at the time the tag
@@ -7419,7 +7419,7 @@ done by having the tag handler implement the
 link:jakarta.servlet.jsp.tagext.html#UNKNOWN[] for more details on this
 interface.
 
-=== [[a2094]]Event Listeners
+==== [[a2094]]Event Listeners
 
 A tag library may include classes that are
 event listeners (see the Servlet 2.5 specification). The listeners
@@ -7434,14 +7434,14 @@ The order in which the listeners are
 registered is undefined, but they are registered before application
 start.
 
-=== JspId Attribute
+==== JspId Attribute
 
 Sometimes it may be useful to provide unique
 identifications for tag handlers. A tag handler can implement the
 interface `jakarta.servlet.jsp.tagext.JspIdConsumer` for such
 functionality. See section JSP.13.4 for more details.
 
-=== Resource Injection
+==== Resource Injection
 
 The Java Metadata specification (JSR-175),
 which is part of J2SE 5.0 and greater, provides a means of specifying
@@ -7468,12 +7468,12 @@ of the event handler is constructed, and before it is registered.
 
 The annotations supported are:
 
-*  `@EJB` , @EJBs
-* @PersistenceContext, @PersistenceContexts
-* @PersistenceUnit, @PersistenceUnits
-* @PostConstruct, @PreDestroy
-*  `@Resource` , `@Resources`
-*  `@WebServiceRef, @WebServiceRefs`
+* `@EJB`, `@EJBs`
+* `@PersistenceContext`, `@PersistenceContexts`
+* `@PersistenceUnit`, `@PersistenceUnits`
+* `@PostConstruct`, `@PreDestroy`
+* `@Resource` , `@Resources`
+* `@WebServiceRef`, `@WebServiceRefs`
 
 Please see Section SRV.14.5 of the servlet
 specification for more details on these annotations.
@@ -7502,7 +7502,7 @@ associated with a Tag Library Description (TLD) file and with tag
 handler classes as indicated in link:jsp.html#a2131[See The Tag
 Library Descriptor.] below.
 
-=== Packaged Tag Libraries
+==== Packaged Tag Libraries
 
 JSP page authoring tools and JSP containers
 are required to accept a tag library that is packaged as a JAR file.
@@ -7519,7 +7519,7 @@ Tag Library Descriptors.] for how TLDs are identified.
 Both Classic and Simple Tag Handlers
 (implemented either in Java or as tag files) can be packaged together.
 
-=== Location of Java Classes
+==== Location of Java Classes
 
 A tag library contains classes for
 instantiation at translation time and classes for instantiation at
@@ -7538,7 +7538,7 @@ available at request time (and also at translation time, see
 link:jsp.html#a2189[See Translation-Time Class Loader.]). The
 mapping between the URI and the TLD is explained further below.
 
-=== Tag Library directive
+==== Tag Library directive
 
 The `taglib` directive in a JSP page declares
 that the page uses a tag library, uniquely identifies the tag library
@@ -7594,7 +7594,7 @@ As of JSP 2.0, the format for the Tag Library
 Descriptor is represented in XML Schema. This allows for a more
 extensible TLD that can be used as a true single-source document.
 
-=== [[a2138]]Identifying Tag Library Descriptors
+==== [[a2138]]Identifying Tag Library Descriptors
 
 Tag library descriptor files have names that
 use the extension `.tld` , and the extension indicates a tag library
@@ -7618,7 +7618,7 @@ be referenced using the `tagdir` attribute of the `taglib` directive.
 More details about identifying this implicit Tag Library Descriptor can
 be found in link:jsp.html#a2322[See Tag Files.].
 
-=== [[a2142]]TLD resource path
+==== [[a2142]]TLD resource path
 
 A URI in a `taglib` directive is mapped into
 a context relative path (as discussed in link:jsp.html#a274[See
@@ -7655,11 +7655,11 @@ Jakarta EE platform. This currently includes the Jakarta Server Pages Standard
 Tag Library libraries and the Jakarta Server Faces libraries.
 . Taglib Map in web.xml
 . Implicit Map Entries from TLDs
-. TLDs in JAR files in WEB-INF/lib
-. TLDs under WEB-INF
+.. TLDs in JAR files in WEB-INF/lib
+.. TLDs under WEB-INF
 . Implicit Map Entries from the Container
 
-=== [[a2153]]Taglib Map in web.xml
+==== [[a2153]]Taglib Map in web.xml
 
 The `` `web.xml` file can include an explicit
 taglib map between URIs and TLD resource paths described using the
@@ -7667,7 +7667,7 @@ taglib map between URIs and TLD resource paths described using the
 `WEB-INF/web.xml` . See link:jsp.html#a1215[See Taglib Map.] for
 more details.
 
-=== [[a2155]]Implicit Map Entries from TLDs
+==== [[a2155]]Implicit Map Entries from TLDs
 
 The taglib map described in `web.xml` is
 extended with new entries extracted from TLD files in the Web
@@ -7695,7 +7695,7 @@ location of the TLD file, which would require a mechanism like the
 Note also that the mechanism does not add
 duplicated entries.
 
-=== [[a2162]]Implicit Map Entries from the Container
+==== [[a2162]]Implicit Map Entries from the Container
 
 The Container may also add additional entries
 to the taglib map. As in the previous case, the entries are only added
@@ -7708,7 +7708,7 @@ providing their implementation, either through tag handlers, or via the
 mechanism described in link:jsp.html#a2195[See Well-Known
 URIs.].
 
-=== [[a2165]]Determining the TLD Resource Path
+==== [[a2165]]Determining the TLD Resource Path
 
 The TLD resource path can be determined from
 the `uri` attribute of a `taglib` directive as described below. In the
@@ -7720,7 +7720,7 @@ All steps are described as if they were
 taken, but an implementation can use a different implementation strategy
 as long as the result is preserved.
 
-=== Computing TLD Locations
+===== Computing TLD Locations
 
 The taglib map generated in Sections
 link:jsp.html#a2153[See Taglib Map in web.xml.],
@@ -7741,7 +7741,7 @@ some relative URI specification that does not start with `/` , the
 `/WEB-INF/web.xml` (the result of this resolution is a relative URI
 specification that starts with `/` ).
 
-=== [[a2172]]Computing the TLD Resource Path
+===== [[a2172]]Computing the TLD Resource Path
 
 The following describes how to resolve a
 `taglib` directive to compute the TLD resource path. It is based on the
@@ -7777,7 +7777,7 @@ matches +
 `../../WEB-INF/my.tld` , the TLD resource path would be
 `/WEB-INF/my.tld` .
 
-=== Usage Considerations
+===== Usage Considerations
 
 The explicit `web.xml` map provides a
 explicit description of the tag libraries that are being used in a web
@@ -7791,24 +7791,23 @@ The use of relative URI specifications in the
 taglib map enables very short names in the `taglib` `` directive. For
 example, if the map is:
 
-<taglib> +
-<taglib-uri>/myPRlibrary</taglib-uri> +
-<taglib-location>/WEB-INF/tlds/PRlibrary`1`4.tld</taglib-location> +
-</taglib>
+ <taglib>
+   <taglib-uri>/myPRlibrary</taglib-uri>
+   <taglib-location>/WEB-INF/tlds/PRlibrary`1`4.tld</taglib-location>
+ </taglib>
 
 then it can be used as:
 
-<%@ taglib uri=”/myPRlibrary” prefix=”x” %>
+ <%@ taglib uri=”/myPRlibrary” prefix=”x” %>
 
 Finally, the fallback rule allows a `taglib`
 directive to refer directly to the TLD. This arrangement is very
 convenient for quick development at the expense of less flexibility and
 accountability. For example, in the case above, it enables:
 
-<%@ taglib
-uri=”/WEB-INF/tlds/PRlibrary`1`4.tld” prefix=”x” %>
+ <%@ taglib uri=”/WEB-INF/tlds/PRlibrary`1`4.tld” prefix=”x” %>
 
-=== [[a2189]]Translation-Time Class Loader
+==== [[a2189]]Translation-Time Class Loader
 
 The set of classes available at translation
 time is the same as that available at runtime: the classes in the
@@ -7817,7 +7816,7 @@ class files in `WEB-INF/classes` , in the JAR files in `WEB-INF/lib` ,
 and, indirectly those indicated through the use of the `class-path`
 attribute in the `META-INF/MANIFEST` file of these JAR files.
 
-=== Assembling a Web Application
+==== Assembling a Web Application
 
 As part of the process of assembling a web
 application, the Application Assembler will create a `WEB-INF/` ``
@@ -7838,7 +7837,7 @@ deployment) may create and/or change information that customizes a tag
 library; see link:jsp.html#a2318[See Customizing a Tag
 Library.].
 
-=== [[a2195]]Well-Known URIs
+==== [[a2195]]Well-Known URIs
 
 A JSP container may “know of” some specific
 URIs and may provide alternate implementations for the tag libraries
@@ -7852,7 +7851,7 @@ If the deployer wants to use the platform-specific implementation of the
 well-known URI, the mapping for that URI should be removed at deployment
 time.
 
-=== Tag and Tag Library Extension Elements
+==== Tag and Tag Library Extension Elements
 
 The JSP 2.0 Tag Library Descriptor supports
 the notion of Tag Extension Elements and Tag Library Extension Elements.
@@ -7883,7 +7882,7 @@ are specified by adding a `<tag-extension>` element as a child of
 `<tag>` . To use these elements, an XML namespace must first be defined
 and the namespace must be imported into the TLD.
 
-=== Example
+===== Example
 
 In the following non-normative example, a
 fictitious company called ACME has decided to enhance the page author’s
@@ -7899,215 +7898,119 @@ The following example tag library uses ACME’s
 extensions to provide helpful voice annotations that describe how to use
 each tag in the tag library. Relevant parts highlighted in bold:
 
-
-
-<taglib
-xmlns=”http://java.sun.com/xml/ns/javaee” +
-xmlns:xsi=”http://www.w3.org/2001/XMLSchema-instance” +
-xmlns:acme=”http://acme.com/” +
-xsi:schemaLocation=”http://java.sun.com/xml/ns/javaee +
-http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary`2`1.xsd +
-http://acme.com/ http://acme.com/acme.xsd” +
-version=”2.1”>
-
- <description> +
-Simple Math Tag Library. +
-Contains ACME sound extensions with helpful voice annotations +
-that describe how to use the tags in this library. +
-</description>
-
- <tlib-version>1.0</tlib-version>
-
- <short-name>math</short-name>
-
- <tag>
-
- <description>Adds two
-numbers</description> +
-<display-name>add</display-name> +
-<name>add</name> +
-<tag-class>com.foobar.tags.AddTag</tag-class> +
-<body-content>empty</body-content> +
-<attribute> +
-<name>x</name> +
-<type>java.lang.Double</type> +
-</attribute> +
-<attribute> +
-<name>y</name> +
-<type>java.lang.Double</type> +
-</attribute>
-
- <tag-extension
-namespace=”http://acme.com/”> +
-<!-- Extensions for tag sounds --> +
-<extension-element xsi:type=”acme:acme-soundsType”> +
-<acme:version>1.5</acme:version>
-
- <!-- Sound played for help on the add tag
---> +
-<acme:tag-sound>sounds/add.au</acme:tag-sound>
-
- <!-- Sound played for help on the x
-attribute --> +
-<acme:attribute-sound name=”x”> +
-sounds/add-x.au +
-</acme:attribute-sound>
-
- <!-- Sound that’s played for help on the
-yattribute --> +
-<acme:attribute-sound name=”y”> +
-sounds/add-y.au +
-</acme:attribute-sound>
-
- </extension-element> +
-</tag-extension>
-
- </tag>
-
- <taglib-extension
-namespace=”http://acme.com/”> +
-<!-- Extensions for taglibrary sounds--> +
-<extension-element xsi:type=”acme:acme-soundsType”> +
-<acme:version>1.5</acme:version> +
-<!-- Sound played when author imports this taglib --> +
-<acme:import-sound>sounds/intro.au</acme:import-sound> +
-</extension-element> +
-</taglib-extension>
-
+....
+<taglib xmlns=”http://java.sun.com/xml/ns/javaee”
+        xmlns:xsi=”http://www.w3.org/2001/XMLSchema-instance”
+        xmlns:acme=”http://acme.com/”
+        xsi:schemaLocation=”http://java.sun.com/xml/ns/javaee
+            http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_1.xsd
+            http://acme.com/ http://acme.com/acme.xsd”
+        version=”2.1”>
+  <description>
+    Simple Math Tag Library.
+    Contains ACME sound extensions with helpful voice annotations
+    that describe how to use the tags in this library.
+  </description>
+  <tlib-version>1.0</tlib-version>
+  <short-name>math</short-name>
+  <tag>
+    <description>Adds two numbers</description>
+    <display-name>add</display-name>
+    <name>add</name>
+    <tag-class>com.foobar.tags.AddTag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <name>x</name>
+      <type>java.lang.Double</type>
+    </attribute>
+    <attribute>
+    <name>y</name>
+     <type>java.lang.Double</type>
+    </attribute>
+    <tag-extension namespace=”http://acme.com/”>
+      <!-- Extensions for tag sounds -->
+      <extension-element xsi:type=”acme:acme-soundsType”>
+        <acme:version>1.5</acme:version>
+        <!-- Sound played for help on the add tag -->
+        <acme:tag-sound>sounds/add.au</acme:tag-sound>
+        <!-- Sound played for help on the x attribute -->
+        <acme:attribute-sound name=”x”>
+          sounds/add-x.au
+        </acme:attribute-sound>
+        <!-- Sound that’s played for help on the yattribute -->
+        <acme:attribute-sound name=”y”>
+          sounds/add-y.au
+        </acme:attribute-sound>
+      </extension-element>
+    </tag-extension>
+  </tag>
+  <taglib-extension namespace=”http://acme.com/”>
+    <!-- Extensions for taglibrary sounds-->
+    <extension-element xsi:type=”acme:acme-soundsType”>
+      <acme:version>1.5</acme:version>
+      <!-- Sound played when author imports this taglib -->
+      <acme:import-sound>sounds/intro.au</acme:import-sound>
+    </extension-element>
+  </taglib-extension>
 </taglib>
+....
 
+The corresponding `acme.xsd` file would look something like:
 
-
-The corresponding `acme.xsd` file would look
-something like:
-
-
-
+....
 <?xml version=”1.0” encoding=”UTF-8”?>
-
-
-
-<xsd:schema
-
- targetNamespace=”http://acme.com/”
-
- xmlns:j2ee=”http://java.sun.com/xml/ns/j2ee”
-
- xmlns:acme=”http://acme.com/”
-
- xmlns:xsd=”http://www.w3.org/2001/XMLSchema”
-
-
-xmlns:xml=”http://www.w3.org/XML/1998/namespace”
-
- elementFormDefault=”qualified”
-
- attributeFormDefault=”unqualified”
-
- version=”1.0”>
-
-
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- This an XML Schema for sample Acme taglib
-extensibility
-
- elements, used to test TLD extensibility.
-
- </xsd:documentation>
-
- </xsd:annotation>
-
-
-
- <!--
-**************************************************** -->
-
-
-
- <xsd:import
-namespace=”http://java.sun.com/xml/ns/j2ee”
-schemaLocation=”../web-jsptaglibrary`2`0.xsd” />
-
-
-
- <!--
-**************************************************** -->
-
-
-
- <xsd:complexType name=”acme-soundsType”>
-
- <xsd:annotation>
-
- <xsd:documentation>
-
- Extension for sounds associated with a tag
-
- </xsd:documentation>
-
- </xsd:annotation>
-
- <xsd:complexContent>
-
- <xsd:extension base=”j2ee:extensibleType”>
-
- <xsd:sequence>
-
- <xsd:element name=”version”
-type=”xsd:string”/>
-
- <xsd:element name=”tag-sound”
-type=”xsd:string”
-
- minOccurs=”0” maxOccurs=”unbounded”/>
-
- <xsd:element name=”attribute-sound”
-
- minOccurs=”0” maxOccurs=”unbounded”>
-
- <xsd:complexType>
-
- <xsd:simpleContent>
-
- <xsd:extension base=”xsd:string”>
-
- <xsd:attribute name=”name” use=”required”
-
- type=”xsd:string” />
-
- </xsd:extension>
-
- </xsd:simpleContent>
-
- </xsd:complexType>
-
- </xsd:element>
-
- <xsd:element name=”import-sound”
-type=”xsd:string”
-
- minOccurs=”0” maxOccurs=”unbounded”/>
-
- </xsd:sequence>
-
- </xsd:extension>
-
- </xsd:complexContent>
-
- </xsd:complexType>
-
-
-
- <!--
-**************************************************** -->
-
-
-
+<xsd:schema targetNamespace=”http://acme.com/”
+            xmlns:j2ee=”http://java.sun.com/xml/ns/j2ee”
+            xmlns:acme=”http://acme.com/”
+            xmlns:xsd=”http://www.w3.org/2001/XMLSchema”
+            xmlns:xml=”http://www.w3.org/XML/1998/namespace”
+            elementFormDefault=”qualified”
+            attributeFormDefault=”unqualified”
+            version=”1.0”>
+  <xsd:annotation>
+    <xsd:documentation>
+      This an XML Schema for sample Acme taglib extensibility
+       elements, used to test TLD extensibility.
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <!-- **************************************************** -->
+
+  <xsd:import namespace=”http://java.sun.com/xml/ns/j2ee”
+              schemaLocation=”../web-jsptaglibrary`2`0.xsd” />
+
+  <!-- **************************************************** -->
+
+  <xsd:complexType name=”acme-soundsType”>
+    <xsd:annotation>
+      <xsd:documentation>
+        Extension for sounds associated with a tag
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base=”j2ee:extensibleType”>
+        <xsd:sequence>
+          <xsd:element name=”version” type=”xsd:string”/>
+          <xsd:element name=”tag-sound” type=”xsd:string”
+                       minOccurs=”0” maxOccurs=”unbounded”/>
+          <xsd:element name=”attribute-sound”
+                       minOccurs=”0” maxOccurs=”unbounded”>
+            <xsd:complexType>
+              <xsd:simpleContent>
+                <xsd:extension base=”xsd:string”>
+                  <xsd:attribute name=”name” use=”required” type=”xsd:string” />
+                </xsd:extension>
+              </xsd:simpleContent>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name=”import-sound” type=”xsd:string”
+                       minOccurs=”0” maxOccurs=”unbounded”/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
 </xsd:schema>
+....
 
 === Validation
 
@@ -8128,14 +8031,14 @@ validation provides a better user experience, and the JSP 2.2
 specification provides a very flexible translation-time validation
 mechanism.
 
-=== Translation-Time Mechanisms
+==== Translation-Time Mechanisms
 
 Some translation-time validation is
 represented in the Tag Library Descriptor. In some cases a
 `TagExtraInfo` class needs to be provided to supplement this
 information.
 
-=== Attribute Information
+===== Attribute Information
 
 The Tag Library Descriptor contains the basic
 syntactic information. In particular, the attributes are described
@@ -8149,7 +8052,7 @@ enforced. A tag library author can assume that the tag handler instance
 corresponds to an action that satisfies all constraints indicated in the
 TLD.
 
-=== [[a2295]]Validator Classes
+===== [[a2295]]Validator Classes
 
 A `TagLibraryValidator` class may be listed
 in the TLD for a tag library to request that a JSP page be validated.
@@ -8170,7 +8073,7 @@ different XML schema mechanisms (DTDs, XSchema, Relaxx, others).
 Standard validator classes may be incorporated into a later version of
 the JSP specification if a clear schema standard appears at some point.
 
-=== TagExtraInfo Class Validation
+===== TagExtraInfo Class Validation
 
 Additional translation-time validation can be
 done using the `validate` method in the `TagExtraInfo` class. The
@@ -8188,7 +8091,7 @@ implement the `validate` method in favor of the `isValid` method due to
 the ability to provide better validation messages. Either method will
 work, though implementing both is not recommended.
 
-=== Request-Time Errors
+==== Request-Time Errors
 
 In some cases, additional request-time
 validation will be done dynamically within the methods in the tag
@@ -8201,7 +8104,7 @@ the JSP specification.
 This section is not normative, although it
 reflects good design practices.
 
-=== How to Define New Implicit Objects
+==== How to Define New Implicit Objects
 
 We advocate the following style for the
 introduction of implicit objects:
@@ -8213,9 +8116,9 @@ define the desired objects.
 The JSP page can make these objects available
 as follows:
 
-<%@ taglib prefix="me" uri="......" %> +
-<me:defineObjects /> +
-.... start using the objects....
+ <%@ taglib prefix="me" uri="..." %>
+ <me:defineObjects />
+ ... start using the objects...
 
 This approach has the advantage of requiring
 no new machinery and of making very explicit the dependency.
@@ -8231,9 +8134,13 @@ compliant).
 This mechanism, together with the access to
 metadata information allows for vendors to innovate within the standard.
 
-* 
+NOTE: If a feature is added to a JSP specification, and a vendor also provides
+that feature through its vendor-specific mechanism, the standard mechanism, as
+indicated in the JSP specification will “win”. This means that vendor-specific
+mechanisms can slowly migrate into the specification as they prove their
+usefulness.
 
-=== Access to Vendor-Specific information
+==== Access to Vendor-Specific information
 
 If a vendor wants to associate some
 information that is not described in the current version of the TLD with
@@ -8242,7 +8149,7 @@ document it controls, inserting the document in the `WEB-INF` portion of
 the Web Application where the Tag Library resides, and using the
 standard Servlet 2.4 mechanisms to access that information.
 
-=== [[a2318]]Customizing a Tag Library
+==== [[a2318]]Customizing a Tag Library
 
 A tag library can be customized at assembly
 and deployment time. For example, a tag library that provides access to
@@ -8256,9 +8163,7 @@ author place this information in a well-known location at some resource
 in the `WEB-INF/` `` portion of the Web Application and access it via
 the `getResource` call on the `ServletContext` .
 
-== CHAPTER 7 - 
-
-=== [[a2322]]Tag Files
+== [[a2322]]Tag Files
 
 This chapter describes the details of tag
 files, a JSP 2.0 facility that allows page authors to author tag
