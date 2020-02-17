@@ -1,0 +1,2889 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+                      "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>JSR-045: Debugging Other Languages</TITLE>
+<META NAME="Author" CONTENT="Robert Field">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+
+<HR NOSHADE><P>
+<!-- body="start" -->
+<center><H1>JSR-045: Debugging Support for Other Languages</H1></center>
+<P>
+<hr>
+<a href="#goal">Goal</a><br>
+<a href="#terminology">Terminology</a><br>
+<a href="#approach">Approach</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1translation">Single Translation</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ntranslation">Multiple Translations</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#diagram">Diagram</a><br>
+<a href="#scope">Scope</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#variables">Variables</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#sourceviews">Multi-Level Source View</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#findingsource">Finding Source</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#multiplesource">Multiple Source Files per Class File</a><br>
+<a href="#sourcemapformat">Source Map</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#general">General Format</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#HeaderDesc">Header</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#StratumSectionDesc">StratumSection</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#FileSectionDesc">FileSection</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#LineSectionDesc">LineSection</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#VendorSectionDesc">VendorSection</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#EndSectionDesc">EndSection</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#EmbeddedSourceMapsDesc">EmbeddedSourceMaps</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#syntax">SMAP Syntax</a><br>
+<a href="#Resolution">SMAP Resolution</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Algorithm">LineInfo Composition Algorithm</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ResExample">Resolution Example</a><br>
+<a href="#jpdasupport">JPDA Support</a><br>
+<a href="#sde">SourceDebugExtension Support</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#sdeaccess">SourceDebugExtension Access</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#attribute"><code>SourceDebugExtension</code> Class File Attribute</a><br>
+<a href="#example">Example</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#InputSource">Input Source</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#LanguageProcessor">Language Processor</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#PostProcessor">Post Processor</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Debugging">Debugging</a><br>
+<a href="#license">License</a><br>
+<p>
+<a name="goal">
+<hr>
+<h2>Goal</h2>
+</a>
+<P>
+
+        A mechanism is needed by which programs executed under the
+        Java<sup><font size=-2>TM</font></sup> virtual machine
+        but written in languages other than the
+        Java programming language, can be debugged with
+        references to the original
+        source (for example, source file and line number
+        references).
+
+<P>Constraints:
+<UL>
+<LI>        No change to the Java programming language.
+
+<LI>        Optional change to Java programming language compiler.
+
+<LI>        No change to JPDA clients (debuggers, ...) for basic
+            functionality.  With the
+            exception being, tools that arbitrarily prohibit
+            non-Java programming language source.
+
+<LI>        Minimal change to Java virtual machine.
+
+<LI>        No change to the Java platform class libraries.
+</UL>
+
+<P>
+<a name="terminology">
+<hr>
+<h2>Terminology</H2>
+</a>
+<p>
+<blockquote>
+<table border="1" width="80%">
+<tr>
+<th bgcolor="#CCCCFF">Term</th>
+<th bgcolor="#CCCCFF">Definition</th>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF" align="left">        <a name="FinalSource">final-source</a>
+</th><td>
+                The final form of source.  This source will be <a href="#compiler">compiled</a>
+                into a <a href="#class-file">class file</a>.
+                Typically, final-source is Java programming language source.
+
+</td>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF" align="left">        <a name="TranslatedSource">translated-source</a>
+</th><td>
+                Source that will be translated by a
+                <a href="#language-processor">language-processor</a>
+                into another language or form.
+
+</td>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF" align="left">        <a name="language-processor">language-processor</a>
+</th><td>
+                Converts <a href="#TranslatedSource">translated-source</a> to
+                <a href="#FinalSource">final-source</a> or to different
+                <a href="#TranslatedSource">translated-source</a>.
+
+</td>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF" align="left">        <a name="class-file">class file</a>
+</th><td>
+                A collection of bytes in Java virtual machine
+                class file format.
+
+</td>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF" align="left">        <a name="compiler">compiler</a>
+</th><td>
+                Compiler which converts
+                <a href="#FinalSource">final-source</a> to class files.
+                For example, <code>javac</code> is a compiler.
+
+</td>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF" align="left">        <a name="post-processor">post-processor</a>
+</th><td>
+                Takes a <a href="#class-file">class file</a> and a
+                <a href="#sourcemapfile">Source Map File</a> as input; generates a class
+                file as output.  Inserts a
+                <a href="#SourceDebugExtension">SourceDebugExtension
+                attribute</a>.
+
+</td>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF" align="left">        <a name="SMAP">Source Map</a>
+                                       <br>SMAP
+</th><td>
+                Specifies the mapping of source between
+                one or more sets of input source and the output
+                source. See: <a href="#sourcemapformat">Source Map Format</a>.
+
+</td>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF" align="left">        <a name="sourcemapfile">Source Map File</a>
+                                       <br>SMAP-file
+</th><td>
+                Specifies the mapping created by a
+                <a href="#language-processor">language-processor</a> between
+                <a href="#TranslatedSource">translated-source</a> input
+                and the resultant output source.
+                It is a <a href="#SMAP">Source Map</a>
+                stored in a file in
+                <a href="#sourcemapformat">Source Map Format</a>.
+
+</td>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF" align="left">        <a name="stratum">stratum</a>
+</th><td>
+                A view of a class from a particular, named,
+                programming language level.
+
+</td>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF" align="left">        <a name="JPDA">JPDA</a>
+</th><td>
+                The <a href="http://java.sun.com/products/jpda">
+                Java Platform Debugger Architecture</a>.
+
+</td>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF" align="left">        <a name="JDI">JDI</a>
+</th><td>
+                The Java Debug Interface, which is the high-level
+                Java programming language interface of the
+                <a href="http://java.sun.com/products/jpda">
+                Java Platform Debugger Architecture</a>.
+                See:
+                <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/">
+                JDI Specification</a>.
+
+</td>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF" align="left">        <a name="SourceDebugExtension">SourceDebugExtension<br>attribute</a>
+</th><td>
+                A Java virtual machine class file attribute that
+                holds information about the source.
+                In this case, the information is a
+                <a href="#SMAP">Source Map</a> in
+                <a href="#sourcemapformat">Source Map Format</a>.
+                The source is mapped to <a href="#FinalSource">final-source</a>
+                (output source).
+                The Source Map has potentially multiple sets of input source
+                (<a href="#stratum">strata</a>).
+                See:
+                <a href="#attribute">SourceDebugExtension Class File Attribute</a>
+
+</td>
+</tr>
+</table>
+</blockquote>
+<P>
+<a name="approach">
+<hr>
+<h2>Approach</H2>
+</a>
+<p>
+<a name="1translation">
+<h4>Single Translation</h4>
+</a>
+<p>
+A <a href="#language-processor">language-processor</a>
+translates <a href="#TranslatedSource">translated-source</a> to
+<a href="#FinalSource">final-source</a>
+(the case of translation from one <a href="#TranslatedSource">translated-source</a>
+to another translated-source, is addressed
+<a href="#ntranslations">below</a>).
+It also creates a second output, an
+<a href="#sourcemapfile">SMAP-file</a>,
+whose format is described in <a href="#sourcemapformat">Source Map Format</a>.
+This file describes the
+mapping between input source and output source
+(e.g. line number and source file).
+<p>
+The <a href="#FinalSource">final-source</a> generated by the
+<a href="#language-processor">language-processor</a> is compiled by
+the <a href="#compiler">compiler</a>.
+<p>
+The <a href="#post-processor">post-processor</a> takes
+the class file generated by the
+<a href="#compiler">compiler</a> and the
+<a href="#sourcemapfile">SMAP-file</a> as input.
+A <a href="#SourceDebugExtension">SourceDebugExtension</a>
+attribute containing the SMAP in the SMAP-file
+is added to the class file and the new class file is written.
+<p>
+Optionally, the <a href="#compiler">compiler</a>
+may take both <a href="#FinalSource">final-source</a> and
+the SMAP-file as input, and perform both compilation and
+installation of the SourceDebugExtension.
+<p>
+When the resultant program is debugged using
+a debugging tool based on the
+Java Debug Interface (<a href="#JDI">JDI</a>) of <a href="#JPDA">JPDA</a>,
+the final-source line number information is converted to the
+specified language view (<a href="#stratum">strata</a>).
+<p>
+<a name="ntranslation">
+<h4>Multiple Translations</h4>
+</a>
+<p>
+A language-processor might translate source into source which
+will become input to another language-processor, and so on.
+Eventually, after possibly many translated-source forms, final-source is produced.
+Each translation produces SMAP information.
+This information must be preserved and placed in context,
+so that each <a href="#stratum">stratum</a> can be mapped to
+the final-source.
+<p>
+A language-processor checks for an
+<a href="#sourcemapfile">SMAP-file</a>
+in a location parallel to that of the input source.
+For example, if the source repository is a file system and the input source
+is located at <i>path</i> <i>name</i><code>.</code><i>extension</i> then
+<i>path</i> <i>name</i><code>.</code><i>extension</i><code>.smap</code>
+will be checked for
+an SMAP.  The input SMAPs will be
+copied into the generated SMAP.  See
+<a href="#OpenEmbeddedSectionDesc">OpenEmbeddedSection</a>
+for specifics on the embedding of input SMAPs.
+<p>
+In the case of multiple translations, the
+<a href="#post-processor">post-processor</a>
+must resolve the embedded SMAPs.
+See <a href="#Resolution">SMAP Resolution</a>.
+<p>
+Note that final-source need not be Java programming language
+source, as compilers for other languages may directly generate
+class files, including the
+<code>SourceFile</code> and <code>LineNumberTable</code>
+class file attributes. SMAPs and the mechanism presented here
+are still useful for handling multiple translations.
+<p>
+A programming language implementor, directly generating
+class files might also choose to generate SMAPs (thus functioning
+as both language-processor and compiler) since
+the SMAP is useful for describing source
+configurations (such as multiple source files per class file)
+which cannot be represented with the <code>SourceFile</code>
+and <code>LineNumberTable</code> attributes.
+In this case, the input is translated-source and the final-source
+is represented in the attributes but is never generated.
+<p>
+<a name="diagram">
+<h4>Diagram</h4>
+</a>
+<p>
+This diagram demonstrates data flow.
+The particular case shown has two levels of translation,
+with file inclusion on the second level
+(as is the case in the example in
+<a href="#Resolution">SMAP Resolution</a>).
+<p>
+<table border=0  cellspacing=0 cellpadding=0 align=center>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;TS<sub>0a</sub></td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;TS<sub>0b</sub></td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td colspan=7>
+   <table border=1 cellspacing=0 bgcolor="#EEEEFF" width="100%"><tr><td align="center">
+       language-processor<sub>0</sub>
+   </td></tr></table>
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan=7>
+   <table border=1 cellspacing=0 bgcolor="#EEEEFF" width="100%"><tr><td align="center">
+       language-processor<sub>0</sub>
+   </td></tr></table>
+</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;TS<sub>1a</sub></td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;SMAP<sub>1a</sub></td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;TS<sub>1b</sub></td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;SMAP<sub>1b</sub></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td colspan=19>
+   <table border=1 cellspacing=0 bgcolor="#EEEEFF" width="100%"><tr><td align="center">
+       language-processor<sub>1</sub>
+   </td></tr></table>
+</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;FS</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;SMAP<sub>2</sub></td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan=3>
+   <table border=1 cellspacing=0 bgcolor="#EEEEFF" width="100%"><tr><td align="center">
+       compiler
+   </td></tr></table>
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td colspan=3>&nbsp;class file</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan=7>
+   <table border=1 cellspacing=0 bgcolor="#EEEEFF" width="100%"><tr><td align="center">
+       post-processor
+   </td></tr></table>
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td colspan=3>&nbsp;class file</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan=7>
+   <table border=1 cellspacing=0 bgcolor="#EEEEFF" width="100%"><tr><td align="center">
+       Java virtual machine
+   </td></tr></table>
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td colspan=3>&nbsp;FS location&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td colspan=7>&nbsp;SMAP via SourceDebugExtension</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan=7>
+   <table border=1 cellspacing=0 bgcolor="#EEEEFF" width="100%"><tr><td align="center">
+       JPDA
+   </td></tr></table>
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td colspan=3>&nbsp;TS location</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan=7>
+   <table border=1 cellspacing=0 bgcolor="#EEEEFF" width="100%"><tr><td align="center">
+       debugger application
+   </td></tr></table>
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+</table>
+<p>
+Where <CODE>TS</CODE> is <a href="#TranslatedSource">translated-source</a>
+and <CODE>FS</CODE> is <a href="#FinalSource">final-source</a>.
+<P>
+<a name="scope">
+<hr>
+<h2>Scope</H2>
+</a>
+<p>
+<a name="variables">
+<h4>Variables</h4>
+</a>
+<p>
+The complexity of mapping semantics (like
+variable and data views) across languages has been
+discussed.  And it has been agreed
+that this issue will wait for a possible subsequent JSR.
+<p>
+<a name="sourceviews">
+<h4>Multi-Level Source View</h4>
+</a>
+<p>
+The ability to choose the
+source level to view is addressed in this JSR.
+These are referred to as <a href="#stratum">strata</a>.
+<p>
+<a name="findingsource">
+<h4>Finding Source Files</h4>
+</a>
+<p>
+Currently, <a href="#FinalSource">final-source</a> is found by combining
+the follow elements:
+<UL>
+<LI>A source path
+<LI>The package name converted to a directory path
+<LI>The source file name from a <a href="#JDI">JDI</a> call (derived from the
+<code>SourceFile</code> class file attribute
+</UL>
+
+Since existing debuggers use this mechanism (the only way
+for an existing debugger to find <a href="#TranslatedSource">translated-source</a>)
+each aspect must be addressed:
+<UL>
+<LI>The source path must be set-up to include translated-source directories
+<LI>Source must be placed in a directory corresponding to the package
+<LI>The <a href="#JDI">JDI</a> call must return the translated-source name.
+</UL>
+
+For debuggers written against the new APIs, a new method has
+been added which returns the source path - this makes the translated-source
+directory structure flexible.
+
+<p>
+<a name="multiplesource">
+<h4>Multiple Source Files per Class File</h4>
+</a>
+<p>
+When an inclusion
+mechanism is used, a class file will
+contain source from multiple <a href="#TranslatedSource">translated-source</a> files.
+The SourceFile attribute of class files
+only associates one source file
+with a class file which is one reason the approach of
+simply rewriting the <code>SourceFile</code> and
+<code>LineNumberTable</code>
+attributes had to be abandoned.
+The SMAP allows a virtually unlimited number of source
+files per stratum.
+<P>
+<a name="sourcemapformat">
+<hr>
+<h2>Source Map Format</h2>
+</a>
+A Source Map (SMAP) describes a mapping between source positions
+in an input language (<a href="#TranslatedSource">translated-source</a>) and source positions in a
+generated output language.
+A view of the source through such a mapping is called a
+<a href="#stratum">stratum</a>.
+The <a href="#sourcemapfile">SMAP-file</a> contains an unresolved SMAP.
+The <a href="#SourceDebugExtension">SourceDebugExtension</a> class file
+attribute, when used as described in this document, contains an SMAP.
+The SMAP stored in a SourceDebugExtension attribute must be
+<a href="#Resolution">resolved</a>, and thus will have no
+<a href="#EmbeddedSourceMapsDesc">embedded SMAPs</a> and will have the
+<a href="#FinalSource">final-source</a> language as the output language.
+<p>
+An SMAP consists of a header and one or more sections
+of mapping information.
+<p>
+There are currently seven types of section: stratum sections,
+file sections, line sections, vendor sections, end sections, and
+open and close embedded sections.
+New section types may be added
+in the future - to facilitate this, any unknown sections
+must be ignored without error.
+<p>
+The semantics of each section is discussed below.
+For clarity, an informal description of the syntax of
+each section is included in the discussion.
+See the <a href="#syntax">formal SMAP syntax</a> for
+syntax questions.
+<p>
+<a name="general">
+<h4>General Format</h4>
+</a>
+<p>
+The SMAP consists of lines of
+<a href="http://www.unicode.org/unicode/standard/standard.html">Unicode</a>
+text, with a concrete representation of
+<a href="http://ietf.org/rfc/rfc2279.txt">UTF-8</a>.
+Line termination is with line-feed, carriage-return or
+carriage-return followed by line-feed.
+Because SMAPs are included in class files, size of the SMAP was
+an important constraint on the format chosen for them.
+<p>
+<a name="HeaderDesc">
+<h4>Header</h4>
+</a>
+<p>
+The first line of an SMAP is the four letters "<code>SMAP</code>"
+which identifies it as an SMAP.
+The next line is the name of the generated file.
+This name is without path information (and thus if the
+generated file is final-source, the name should match the
+<code>SourceFile</code>
+class file attribute).
+The last line of the header is the default stratum for
+this class.  The default stratum is the stratum used
+when a debugger does not explicitly specify interest
+in another stratum.
+In an unresolved SMAP the default stratum can be unspecified (blank line).
+In a resolved SMAP the default stratum must be specified.
+A specified stratum must either be one
+represented with a stratum section or "<code>Java</code>" which
+indicates the standard final-source information should be used
+by default.
+<p>
+<a name="StratumSectionDesc">
+<h4>StratumSection</h4>
+</a>
+<p>
+An SMAP may map more than one <a href="#TranslatedSource">translated-source</a> to
+the output source (the output source is <a href="#FinalSource">final-source</a>
+if the SMAP is in a <a href="#SourceDebugExtension">SourceDebugExtension</a>).
+A view of the source is a stratum (whether viewed as translated-source
+or final-source).
+Each translated-source language should have its own stratum section
+with a unique stratum name.
+The final-source stratum (named "<code>Java</code>") is created automatically
+and should not have a stratum section.
+The stratum section should be followed
+by a file section and a line section which will be
+associated with that stratum.
+<p>
+The format of the section is simply the stratum section
+marker "<code>*S</code>" followed by the name of the stratum.
+The section ends with a line termination.
+One <a href="#FileSectionDesc">FileSection</a> and one
+<a href="#LineSectionDesc">LineSection</a> (in either
+order) must follow the StratumSection (before the next
+StratumSection or the <a href="#EndSectionDesc">EndSection</a>).
+One or more <a href="#VendorSectionDesc">VendorSection</a>s
+may follow a StratumSection.
+There must be at least one <a href="#StratumSection"><code><i>StratumSection</i></code></a>.
+<p>
+<a name="FileSectionDesc">
+<h4>FileSection</h4>
+</a>
+<p>
+The file section describes the translated-source file names.
+Each line maps a file ID
+to a source name and, optionally, to a source path.
+File IDs are used only in the
+<a href="#LineSectionDesc">LineSection</a>.
+The source name is the name of the translated-source.
+The source path is the path to the translated-source,
+the "/" symbol is translated to the local file
+separator.
+In the case where the source repository is a file system,
+source name is the file name (without directory information)
+and source path is a path name (often relative to one of the compilation
+source paths).
+For example: <code>Bar.foo</code> would be a source name, and
+<code>here/there/Bar.foo</code> would be a source path.
+The first file line denotes the primary file.
+<p>
+The format of the file section is the file section
+marker "<code>*F</code>" on a line by itself, followed by
+file information.
+File information has two forms, source name
+only and source name / source path.
+The source name only form is one line: the integer file ID
+followed by the source name.
+The source name / source path form is two lines:
+a plus sign "<code>+</code>", file ID, and source name on the
+first line and the source path on the second.
+The file ID must be unique within the file section.
+A <a href="#FileSection"><code><i>FileSection</i></code></a> may only occur after a
+<a href="#StratumSection"><code><i>StratumSection</i></code></a>.
+The <a href="#FileName"><code><i>FileName</i></code></a> must have at least one character.
+The <a href="#AbsoluteFileName"><code><i>AbsoluteFileName</i></code></a>, if specified,
+ must have at least one character.
+<p>
+For example:
+<blockquote>
+<pre>
+*F
++ 1 Foo.xyz
+here/there/Foo.xyz
+2 Incl.xyz
+</pre>
+</blockquote>
+declares two source files. File ID #1 has
+source name "<code>Foo.xyz</code>" and source path
+"<code>here/there/Foo.xyz</code>".
+File ID #2 has source name "<code>Incl.xyz</code>" and a source path
+to be computed by the debugger.
+<p>
+<a name="LineSectionDesc">
+<h4>LineSection</h4>
+</a>
+<p>
+The line section
+(<a href="#LineSection"><code><i>LineSection</i></code></a>)
+associates line numbers in the output source with
+line numbers and source names in the input source.
+<p>
+The format of the line section is the line section marker "<code>*L</code>"
+on a line by itself, followed by the lines of
+<a href="#LineInfo"><code><i>LineInfo</i></code></a>.
+Each <a href="#LineInfo"><code><i>LineInfo</i></code></a> has the form:
+<blockquote>
+<code>
+<a href="#InputStartLine"><i>InputStartLine</i></a>
+# <a href="#LineFileID"><i>LineFileID</i></a>
+, <a href="#RepeatCount"><i>RepeatCount</i></a>
+: <a href="#OutputStartLine"><i>OutputStartLine</i></a>
+, <a href="#OutputLineIncrement"><i>OutputLineIncrement</i></a>
+</code>
+</blockquote>
+where all but
+<blockquote>
+<code>
+<a href="#InputStartLine"><i>InputStartLine</i></a>
+: <a href="#OutputStartLine"><i>OutputStartLine</i></a>
+</code>
+</blockquote>
+are optional.
+<p>
+A range of output source lines is mapped to a
+single input source line.
+Each
+<a href="#LineInfo"><code><i>LineInfo</i></code></a>
+describes
+<a href="#RepeatCount"><code><i>RepeatCount</i></code></a>
+of these mappings.
+<a href="#OutputLineIncrement"><code><i>OutputLineIncrement</i></code></a>
+specifies the number of lines in the output source range;
+this line increment is applied to each mapping in the
+<a href="#LineInfo"><code><i>LineInfo</i></code></a>.
+The source file containing the input source line
+is specified by
+<a href="#LineFileID"><code><i>LineFileID</i></code></a>
+via the <a href="#FileSectionDesc">FileSection</a>.
+<p>
+More precisely, for each <code><b>n</b></code> between zero and
+<blockquote><pre>
+<a href="#RepeatCount"><code><i>RepeatCount</i></code></a> - 1
+</pre></blockquote>
+the input source line number
+<blockquote><pre>
+<a href="#InputStartLine"><code><i>InputStartLine</i></code></a> + <b>n</b>
+</pre></blockquote>
+maps to the output source line numbers from
+<blockquote><pre>
+<a href="#OutputStartLine"><code><i>OutputStartLine</i></code></a> + (<b>n</b> * <a href="#OutputLineIncrement"><code><i>OutputLineIncrement</i></code></a>)
+</pre></blockquote>
+through
+<blockquote><pre>
+<a href="#OutputStartLine"><code><i>OutputStartLine</i></code></a> + ((<b>n</b> + 1) * <a href="#OutputLineIncrement"><code><i>OutputLineIncrement</i></code></a>) - 1
+</pre></blockquote>
+
+If absent
+<a href="#RepeatCount"><code><i>RepeatCount</i></code></a>
+and
+<a href="#OutputLineIncrement"><code><i>OutputLineIncrement</i></code></a>
+default to one.
+If absent
+<a href="#LineFileID"><code><i>LineFileID</i></code></a>
+defaults to the most recent value (initially zero).
+<p>
+The first line of a file is line one.
+<a href="#RepeatCount"><code><i>RepeatCount</i></code></a> is greater than or equal to one.
+Each <a href="#LineFileID"><code><i>LineFileID</i></code></a> must be a file ID present in
+the <a href="#FileSectionDesc">FileSection</a>.
+<a href="#InputStartLine"><code><i>InputStartLine</i></code></a> is greater than or equal to one.
+<a href="#OutputStartLine"><code><i>OutputStartLine</i></code></a> is greater than or equal to one.
+<a href="#OutputLineIncrement"><code><i>OutputLineIncrement</i></code></a> is greater than or equal to zero.
+A <a href="#LineSection"><code><i>LineSection</i></code></a> may only occur after a
+<a href="#StratumSection"><code><i>StratumSection</i></code></a>.
+<p>
+For example:
+<pre>
+      *L
+      123:207
+      130,3:210
+      140:250,7
+      160,3:300,2
+</pre>
+Creates this mapping
+<blockquote>
+<table border="1">
+<tr>
+<th bgcolor="#CCCCFF">Input Source</th>
+<th bgcolor="#CCCCFF" colspan=2>Output Source</th>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF">Line</th>
+<th bgcolor="#EEEEFF">Begin Line</th>
+<th bgcolor="#EEEEFF">End Line</th>
+</tr>
+<tr>
+<td>123</td>
+<td>207</td>
+<td>207</td>
+</tr>
+<tr>
+<td>130</td>
+<td>210</td>
+<td>210</td>
+</tr>
+<tr>
+<td>131</td>
+<td>211</td>
+<td>211</td>
+</tr>
+<tr>
+<td>132</td>
+<td>212</td>
+<td>212</td>
+</tr>
+<tr>
+<td>140</td>
+<td>250</td>
+<td>256</td>
+</tr>
+<tr>
+<td>160</td>
+<td>300</td>
+<td>301</td>
+</tr>
+<tr>
+<td>161</td>
+<td>302</td>
+<td>303</td>
+</tr>
+<tr>
+<td>162</td>
+<td>304</td>
+<td>305</td>
+</tr>
+</table>
+</blockquote>
+<p>
+Note that multiple <a href="#LineInfo"><code><i>LineInfo</i></code></a>
+may map multiple input source lines to a single output source line,
+when such a <a href="#LineSection"><code><i>LineSection</i></code></a>
+is being used to map output source lines to input source lines, a
+first matching <a href="#LineInfo"><code><i>LineInfo</i></code></a> rule applies.
+<p>
+Note also that multiple <a href="#LineInfo"><code><i>LineInfo</i></code></a>
+may map a single input source line to a multiple, possibly disjoint, output source lines,
+when such a <a href="#LineSection"><code><i>LineSection</i></code></a>
+is being used to map input source lines to output source lines, a
+first matching <a href="#LineInfo"><code><i>LineInfo</i></code></a> rule again applies.
+<p>
+<a name="VendorSectionDesc">
+<h4>VendorSection</h4>
+</a>
+<p>
+The vendor section is for vendor specific information.
+<p>
+The format is "<code>*V</code>" on the first line to mark the section.
+The second line is the vendor ID which is formed
+by the same rules by which unique package names are formed in the Java
+language specification, second edition
+<a href="http://java.sun.com/docs/books/jls/second_edition/html/packages.doc.html#40169">
+(�7.7) Unique Package Names</a>.
+It includes the following lines until another section marker.
+<p>
+<a name="EndSectionDesc">
+<h4>EndSection</h4>
+</a>
+<p>
+The end section marks the end of an SMAP, it
+consists simply of a "<code>*E</code>" marker.
+The end section must be the last line of an SMAP.
+<p>
+<a name="EmbeddedSourceMapsDesc">
+<h4>EmbeddedSourceMaps</h4>
+</a>
+<p>
+The <a href="#OpenEmbeddedSectionDesc"><code><i>OpenEmbeddedSection</i></code></a> marks the beginning
+and <a href="#CloseEmbeddedSectionDesc"><code><i>CloseEmbeddedSection</i></code></a>
+the end of a set of
+<a href="#EmbeddedSourceMaps"><code><i>EmbeddedSourceMaps</i></code></a>.
+These SMAPs correspond to the input
+source for a language-processor.  The stratum of the language-processor is
+indicated on both sections.
+These sections must not occur in a
+<a href="#Resolution">resolved</a> SMAP.
+<p>
+The format is the "<code>*O</code>" marker and the name of the
+output stratum on the first line.
+This is followed by the set of embedded SMAPs.
+The embedded SMAPs are included "whole" - from
+the <code>SMAP</code> to the
+<a href="#EndSection"><code><i>EndSection</i></code></a>
+"<code>*E</code>" marker - inclusive.
+Finally, the "<code>*C</code>" marker and the name of the
+output stratum on the last line terminates the embedded SMAPs.
+
+<p>
+<a name="syntax">
+<h4>SMAP Syntax</h4>
+</a>
+<blockquote><pre>
+<i>
+SMAP:
+            Header { Section } EndSection
+
+<a name="Header">Header</a>:
+            ID OutputFileName DefaultStratumId
+
+ID:
+            </i>SMAP<i> CR
+
+OutputFileName:
+            NONASTERISKSTRING CR
+
+DefaultStratumId:
+            NONASTERISKSTRING CR
+
+Section:
+            StratumSection
+            FileSection
+            LineSection
+            EmbeddedSourceMaps
+            VendorSection
+            FutureSection
+
+<a name="EmbeddedSourceMaps">EmbeddedSourceMaps</a>:
+            OpenEmbeddedSection { SMAP } CloseEmbeddedSection
+
+<a name="OpenEmbeddedSection">OpenEmbeddedSection</a>:
+            </i>*O<i> StratumID CR
+
+<a name="CloseEmbeddedSection">CloseEmbeddedSection</a>:
+            </i>*C<i> StratumID CR
+
+<a name="StratumSection">StratumSection</a>:
+            </i>*S<i> StratumID CR
+
+<a name="StratumID">StratumID</a>:
+            NONASTERISKSTRING
+
+<a name="LineSection">LineSection</a>:
+            </i>*L<i> CR { LineInfo }
+
+<a name="LineInfo">LineInfo</a>:
+            InputLineInfo </i>:<i> OutputLineInfo CR
+
+<a name="InputLineInfo">InputLineInfo</a>:
+            InputStartLine </i>,<i> RepeatCount
+            InputStartLine
+
+<a name="OutputLineInfo">OutputLineInfo</a>:
+            OutputStartLine </i>,<i> OutputLineIncrement
+            OutputStartLine
+
+<a name="InputStartLine">InputStartLine</a>:
+            NUMBER
+            NUMBER </i>#<i> LineFileID
+
+<a name="LineFileID">LineFileID</a>:
+            FileID
+
+<a name="RepeatCount">RepeatCount</a>:
+            NUMBER
+
+<a name="OutputStartLine">OutputStartLine</a>:
+            NUMBER
+
+<a name="OutputLineIncrement">OutputLineIncrement</a>:
+            NUMBER
+
+<a name="FileSection">FileSection</a>:
+            </i>*F<i> CR { FileInfo }
+
+<a name="FileInfo">FileInfo</a>:
+            FileID FileName CR
+            </i>+<i> FileID FileName CR AbsoluteFileName CR
+
+<a name="FileID">FileID</a>:
+            NUMBER
+
+FileName:
+            NONASTERISKSTRING
+
+AbsoluteFileName:
+            NONASTERISKSTRING
+
+VendorSection:
+            </i>*V<i> CR VENDORID CR { VendorInfo }
+
+VendorInfo:
+            NONASTERISKSTRING CR
+
+FutureSection:
+            </i>*<i> OTHERCHAR CR { FutureInfo }
+
+FutureInfo:
+            NONASTERISKSTRING CR
+
+EndSection:
+            </i>*E<i> CR
+</i>
+</pre></blockquote>
+<p>
+Where <i>{x}</i> denotes zero or more occurrences of <i>x</i>.
+And where the terminals are defined as follows
+(whitespace is a sequence of zero or more spaces or tabs):
+<p>
+<table border=1 width="80%" align="center">
+<tr>
+<th colspan=2 bgcolor="#CCCCFF">Terminals</th>
+</tr>
+<tr>
+<td><code><i>NONASTERISKSTRING</i>
+</code></td>
+<td>Any sequence of characters
+(excluding the terminal carriage-return or new-line)
+which does not start with "*".
+Leading whitespace is ignored.
+</td>
+</tr>
+<tr>
+<td><code><i>NUMBER</i>
+</code></td>
+<td>Non negative decimal integer.
+The number is terminated by the first non-digit character.
+Leading and trailing whitespace is ignored.
+</td>
+</tr>
+<tr>
+<td><code><i>CR</i>
+</code></td>
+<td>a line terminator: carriage-return, carriage-return
+followed by new-line or new-line.
+</td>
+</tr>
+<tr>
+<td><code><i>OTHERCHAR</i>
+</code></td>
+<td>Any character
+(other than carriage-return, new-line, space or tab)
+not already used as a section header (not S,F,L,V,O,C or E).
+</td>
+</tr>
+<tr>
+<td><code><i>VENDORID</i>
+</code></td>
+<td>A sequence of characters that identifies a vendor.  The name is formed
+by the same rules that unique package names are formed in the Java
+language specification.
+Leading and trailing whitespace is ignored.
+The terminal carriage-return or new-line is excluded.
+</td>
+</tr>
+</table>
+<p>
+<a name="Resolution">
+<hr>
+<h2>SMAP Resolution</h2>
+</a>
+<p>
+Before the SMAP in a SMAP-file can be
+installed into the SourceDebugExtension
+attribute it must be resolved into an SMAP with no embedded
+SMAPs and with final-source as the output source.
+A set of <a href="#EmbeddedSourceMapsDesc">embedded SMAPs</a>
+is specific to a stratum and is resolved in the context of
+the matching StratumSection in the outer SMAP.
+The resolved SMAP includes StratumSections computed from
+each set of embedded SMAPs as well as
+the unchanged StratumSections of the outer SMAP.
+If embedded SMAPs are nested, the inner-most is resolved first.
+<p>
+The structure of an SMAP with embedded SMAPs is as follows:
+<blockquote>
+<code>SMAP</code><br>
+&nbsp;&nbsp;...<br>
+<code>*O</code> <i>B</i><br>
+<code>SMAP</code><br>
+&nbsp;&nbsp;...<br>
+<code>*S</code> <i>A</i><br>
+&nbsp;&nbsp;...<br>
+<code>*E</code><br>
+<code>*C</code> <i>B</i><br>
+&nbsp;&nbsp;...<br>
+<code>*S</code> <i>B</i><br>
+&nbsp;&nbsp;...<br>
+<code>*E</code>
+</blockquote>
+The structure is a set of embedded SMAPs (for a stratum, here named <i>B</i>),
+an outer StratumSection (for <i>B</i>),
+and an embedded SMAP with a StratumSection (for a
+stratum, here named <i>A</i>).
+Note that: there may be many sets of embedded SMAPs,
+many embedded SMAPs within the set of embedded SMAPs,
+and many StratumSections within an SMAP.
+A StratumSection maps source information from its stratum to
+an output stratum.
+Thus, the embedded StratumSection maps stratum <i>A</i>
+to stratum <i>B</i>.
+We know it is mapped to stratum <i>B</i> because the
+set of embedded SMAPs for stratum <i>B</i> corresponds to the input for the
+language-processor for <i>B</i>.
+The outer StratumSection maps stratum <i>B</i> to its output
+stratum (let's call this stratum <i>C</i>), if the shown SMAP is the
+outer-most SMAP then stratum <i>C</i> is the final-source stratum.
+The purpose of resolution is to create a non-embedded
+StratumSection for <i>A</i> which maps to <i>C</i>
+(all StratumSections within an SMAP must map to the same output stratum,
+in a resolved outer-most SMAP all StratumSections will map to the final-source stratum).
+This is done by composing the mapping in the
+embedded StratumSection (from <i>A</i>
+to <i>B</i>) with the mapping in the
+outer StratumSection (from <i>B</i>
+to <i>C</i>).
+Since there may be many embedded StratumSections for <i>A</i>,
+these sections must be merged.
+<p>
+A StratumSection is computed for each stratum present in the embedded SMAPs.
+The computed StratumSection is the merge of each embedded StratumSection, for
+that stratum.
+Line number information is composed with the line number information of
+the outer StratumSection
+(note that the embedded StratumSections cannot be for the same stratum
+as the outer StratumSection).
+Specifically, a computed StratumSection consists of a merged
+<a href="#FileSectionDesc">FileSection</a>, a
+composed <a href="#LineSectionDesc">LineSection</a>,
+and direct copies of any <a href="#VendorSectionDesc">VendorSection</a>s or
+unknown sections.
+The merged FileSection includes each unique
+<a href="#FileInfo">FileInfo</a>,
+with FileIDs reassigned to be unique.
+The composition the LineSections is described in the algorithm below.
+<p>
+<a name="Algorithm">
+<h4>LineInfo Composition Algorithm</h4>
+</a>
+<p>
+The following pseudo-code sketches the algorithm for resolving
+LineInfo in embedded SMAPs.
+LineInfo resolution is by composition - discussed above.
+An embedded LineInfo which maps stratum <i>A</i> to stratum <i>B</i>
+is composed with an outer LineInfo which maps stratum <i>B</i>
+to stratum <i>C</i> to create a new resolved LineInfo
+which maps stratum <i>A</i> to stratum <i>C</i>.
+<p>
+The SMAPs and their components are marked by subscript:
+<ul>
+<li>Embedded SMAP - level<sub>E</sub>
+<li>Outer StratumSection - level<sub>O</sub>
+<li>Resolved computed StratumSection - level<sub>R</sub>
+</ul>
+The inputs and outputs of the algorithm are LineInfo tuples.
+Line information is represented in this algorithm in its
+<a href="#LineInfo">LineInfo format</a> which is discussed
+in the <a href="#LineSectionDesc">LineSection</a>
+This algorithm is invoked for each
+LineInfo<sub>E</sub> in each embedded SMAP.
+<pre>
+ResolveLineInfo:
+   InputStartLine<sub>E</sub> #LineFileID<sub>E</sub>, RepeatCount<sub>E</sub> : OutputStartLine<sub>E</sub>, OutputLineIncrement<sub>E</sub>
+</code><i>as follows</i><code> {
+   </code><i>if</i><code> RepeatCount<sub>E</sub> &gt; 0 </code><i>then</i><code> {
+      </code><i>for each</i><code> LineInfo<sub>O</sub> </code><i>in the stratum of the embedded SMAP</i><code>:
+         InputStartLine<sub>O</sub> #LineFileID<sub>O</sub>, RepeatCount<sub>O</sub>: OutputStartLine<sub>O</sub>, OutputLineIncrement<sub>O</sub>
+      </code><i>which includes</i><code> OutputStartLine<sub>E</sub>
+          </code><i>that is,</i><code> InputStartLine<sub>O</sub> + <b>N</b> == OutputStartLine<sub>E</sub>
+             </code><i>for some offset into the outer input range</i><code> <b>N</b> </code><i>where</i><code> 0 &lt;= <b>N</b> &lt; RepeatCount<sub>O</sub>
+      </code><i>and for which</i><code> LineFileID<sub>O</sub> </code><i>has a sourceName matching the embedded SMAP's</i><code> OutputFileName {
+         </code><i>compute the number of outer mapping repeations which can be applied</i><code>
+         <b>available</b> := RepeatCount<sub>O</sub> - <b>N</b> ;
+         </code><i>compute the number of embedded mapping repeations which can be applied</i><code>
+         <b>completeCount</b> := </code><i>floor</i><code>(<b>available</b> / OutputLineIncrement<sub>E</sub>) </code><i>min</i><code> RepeatCount<sub>E</sub> ;
+         </code><i>if</i><code> <b>completeCount</b> &gt 0 </code><i>then</i><code> {
+            </code><i>output resolved LineInfo</i><code>
+               InputStartLine<sub>E</sub> # </code><i>uniquify</i><code>(LineFileID<sub>E</sub>), <b>completeCount</b> :
+               (OutputStartLine<sub>O</sub> + (<b>N</b> * OutputLineIncrement<sub>O</sub>)),
+               (OutputLineIncrement<sub>E</sub> * OutputLineIncrement<sub>O</sub>) ;
+            ResolveLineInfo
+               (InputStartLine<sub>E</sub> + <b>completeCount</b>) #LineFileID<sub>E</sub>, (RepeatCount<sub>E</sub> - <b>completeCount</b>) :
+               (OutputStartLine<sub>E</sub> + <b>completeCount</b> * OutputLineIncrement<sub>E</sub>), OutputLineIncrement<sub>E</sub> ;
+         } </code><i>else</i><code> {
+            </code><i>output resolved LineInfo</i><code>
+               InputStartLine<sub>E</sub> # </code><i>uniquify</i><code>(LineFileID<sub>E</sub>), 1 :
+               (OutputStartLine<sub>O</sub> + (<b>N</b> * OutputLineIncrement<sub>O</sub>)), <b>available</b> ;
+            ResolveLineInfo
+               InputStartLine<sub>E</sub> #LineFileID<sub>E</sub>, 1 :
+               (OutputStartLine<sub>E</sub> + <b>available</b>), (OutputLineIncrement<sub>E</sub> - <b>available</b>) ;
+            ResolveLineInfo
+               (InputStartLine<sub>E</sub> + 1) #LineFileID<sub>E</sub>, (RepeatCount<sub>E</sub> - 1):
+               (OutputStartLine<sub>E</sub> + OutputLineIncrement<sub>E</sub>), OutputLineIncrement<sub>E</sub> ;
+         }
+      }
+   }
+}
+</pre>
+<p>
+where <i>uniquify</i> converts a LineFileID<sub>E</sub> to a corresponding LineFileID<sub>R</sub>
+<p>
+<a name="ResExample">
+<h4>Resolution Example</h4>
+</a>
+<p>
+The following example demonstrates resolution with this algorithm.
+The <a href="#example">general example</a> will provide context
+before walking through this example.
+In this example, <code>Incl.bar</code> is included by <code>Hi.bar</code>,
+but each is the result of a prior translation.
+<p>
+<p>
+<table border=0  cellspacing=0 cellpadding=0 align=center>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;Hi.foo</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;Incl.foo</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td colspan=7>
+   <table border=1 cellspacing=0 bgcolor="#EEEEFF" width="100%"><tr><td align="center">
+       language-processor<sub>Foo</sub>
+   </td></tr></table>
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan=7>
+   <table border=1 cellspacing=0 bgcolor="#EEEEFF" width="100%"><tr><td align="center">
+       language-processor<sub>Foo</sub>
+   </td></tr></table>
+</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;Hi.bar</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;Hi.bar.smap</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;Incl.bar</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;Incl.bar.smap</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td colspan=19>
+   <table border=1 cellspacing=0 bgcolor="#EEEEFF" width="100%"><tr><td align="center">
+       language-processor<sub>Bar</sub>
+   </td></tr></table>
+</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;Hi.java</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;Hi.java.smap</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan=3>
+   <table border=1 cellspacing=0 bgcolor="#EEEEFF" width="100%"><tr><td align="center">
+       javac compiler
+   </td></tr></table>
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td colspan=3>&nbsp;Hi.class</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td colspan=7>
+   <table border=1 cellspacing=0 bgcolor="#EEEEFF" width="100%"><tr><td align="center">
+       post-processor
+   </td></tr></table>
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><font size="+2">|</font></td>
+<td colspan=3>&nbsp;Hi.class</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+</table>
+<p>
+If the unresolved SMAP (in <code>Hi.java.smap</code>) is as follows
+<blockquote>
+<table border=1 cellpadding=0 cellspacing=0>
+<tr><td width="50%"><code>
+SMAP<br>
+Hi.java<br>
+Java
+</code></td><td bgcolor="#CCCCFF">&nbsp;&nbsp;<i>Outer Header</i></td></tr><tr><td><code>
+*O Bar
+</code></td><td bgcolor="#CCCCFF">&nbsp;&nbsp;<i><a href="#OpenEmbeddedSectionDesc">OpenEmbeddedSection</a></i></td></tr>
+<tr><td><code>
+SMAP<br>
+Hi.bar<br>
+Java<br>
+*S Foo<br>
+*F<br>
+1 Hi.foo<br>
+*L<br>
+1#1,5:1,2<br>
+*E
+</code></td><td bgcolor="#CCCCFF">&nbsp;&nbsp;<i>Embedded SMAP (Hi.bar)</i></td></tr>
+<tr><td><code>
+SMAP<br>
+Incl.bar<br>
+Java<br>
+*S Foo<br>
+*F<br>
+1 Incl.foo<br>
+*L<br>
+1#1,2:1,2<br>
+*E
+</code></td><td bgcolor="#CCCCFF">&nbsp;&nbsp;<i>Embedded SMAP (Incl.bar)</i></td></tr><tr><td><code>
+*C Bar
+</code></td><td bgcolor="#CCCCFF">&nbsp;&nbsp;<i><a href="#CloseEmbeddedSectionDesc">CloseEmbeddedSection</a></i></td></tr>
+<tr><td><code>
+*S Bar<br>
+*F<br>
+1 Hi.bar<br>
+2 Incl.bar<br>
+*L<br>
+1#1:1<br>
+1#2,4:2<br>
+3#1,8:6<br>
+</code></td><td bgcolor="#CCCCFF">&nbsp;&nbsp;<i>Outer StratumSection</i></td></tr>
+<tr><td><code>
+*E
+</code></td><td bgcolor="#CCCCFF">&nbsp;&nbsp;<i>Final <a href="#EndSectionDesc">EndSection</a></i></td></tr>
+</table>
+</blockquote>
+The merged level<sub>R</sub> FileSection is (in stratum <code>Foo</code>):
+<blockquote>
+<pre>
+*F
+1 Hi.foo
+2 Incl.foo
+</pre>
+</blockquote>
+<p>
+
+The computation proceeds as follows --
+<table border=3>
+<tr bgcolor="#CCCCFF">
+<th>LineInfo<sub>E</sub>
+</th>
+<th>LineInfo<sub>E</sub><br>
+recursion 1
+</th>
+<th>LineInfo<sub>E</sub><br>
+recursion 2
+</th>
+<th>matching<br>
+outer<br>
+LineInfo<sub>O</sub>
+</th>
+<th>resolved<br>
+LineInfo<sub>R</sub>
+</th>
+<th>discussion
+</th>
+</tr>
+
+<tr>
+<td>
+1#1,5:1,2
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>
+1#1:1
+</td>
+<td>
+1#1,1:1,1
+</td>
+<td>
+<code>ResolveLineInfo</code> is called for <code>1#1,5:1,2</code>
+(from the first embedded SMAP - OutputFileName is <code>Hi.bar</code>).
+<code>1#1:1</code> is found as the outer StratumSection
+LineInfo<sub>O</sub> with <code>InputStartLine<sub>O</sub></code>
+of 1 and <code>LineFileID<sub>O</sub></code> has a sourceName matching
+<code>Hi.bar</code>.
+<code><b>N</b></code> is 0, and <code><b>completeCount</b></code> is 0,
+thus the <i>else</i> branch is taken. <code><b>available</b></code> is 1 and thus
+output is <code>1#1,1:1,1</code>.
+</td>
+</tr>
+
+<tr>
+<td>&nbsp;</td>
+<td>
+1#1,1:2,1
+</td>
+<td>&nbsp;</td>
+<td>
+no match
+</td>
+<td>&nbsp;</td>
+<td>
+The remaining half of the initial LineInfo<sub>E</sub> mapping
+then must be resolved recursively, but there is no match and it is ignored.
+</td>
+</tr>
+
+<tr>
+<td>&nbsp;</td>
+<td>
+2#1,4:3,2
+</td>
+<td>&nbsp;</td>
+<td>
+3#1,8:6
+</td>
+<td>
+2#1,4:6,2
+</td>
+<td>
+The remaining mappings are also handled recursively.
+There is a matching LineInfo<sub>O</sub>.
+<code><b>N</b></code> is 0, and <code><b>completeCount</b></code> is 4,
+thus the <i>if</i> branch is taken.
+</td>
+</tr>
+
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>
+6#1,0:11,2
+</td>
+<td>n/a</td>
+<td>&nbsp;</td>
+<td>
+The recursive resolve descends deeper but does nothing since all of
+RepeatCount<sub>E</sub> has been mapped.
+The first LineInfo<sub>E</sub> is now resolved.
+Since it had only one LineInfo<sub>E</sub> the
+first SMAP is also resolved.
+</td>
+</tr>
+
+<tr>
+<td>
+1#1,2:1,2
+</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>
+1#2,4:2
+</td>
+<td>
+1#2,2:2,2
+</td>
+<td>
+Now for the second
+SMAP (OutputFileName is <code>Incl.bar</code>).
+FileID<sub>E</sub> 1 in this SMAP is <code>Incl.foo</code>
+which corresponds to the remapped
+FileID<sub>R</sub> 2.
+So the matching LineInfo<sub>O</sub> is <code>1#2,4:2</code>.
+<code><b>N</b></code> is 0, and <code><b>completeCount</b></code> is 2, so
+the <i>if</i> branch is taken.
+</td>
+</tr>
+
+<tr>
+<td>&nbsp;</td>
+<td>
+3#1,0:5,2
+</td>
+<td>&nbsp;</td>
+<td>n/a</td>
+<td>&nbsp;</td>
+<td>
+The recursive resolve does nothing since all the maps have been handled.
+Resolution is complete.
+</td>
+</tr>
+</table>
+
+<p>
+The resultant resolved SMAP is:
+<blockquote>
+<pre>
+SMAP
+Hi.java
+Java
+*S Foo
+*F
+1 Hi.foo
+2 Incl.foo
+*L
+1#1,1:1,1
+2#1,4:6,2
+1#2,2:2,2
+*S Bar
+*F
+1 Hi.bar
+2 Incl.bar
+*L
+1#1:1
+1#2,4:2
+3#1,8:6
+*E
+</pre>
+</blockquote>
+<p>
+<a name="jpdasupport">
+<hr>
+<h2>JPDA Support</h2>
+</a>
+<p>
+The <a href="http://java.sun.com/products/jpda">Java
+Platform Debugger Architecture</a> in the Merlin release has been
+extended in support of debugging other languages.  The new APIs
+and APIs with comments changed to include reference to
+<a href="#stratum">strata</a> are listed below:
+<p>
+<table border=1 align="center">
+<tr>
+<th bgcolor="#CCCCFF">New APIs</th>
+<th bgcolor="#CCCCFF">APIs with Changed Comments</th>
+</tr>
+<tr>
+<th colspan=2 bgcolor="#EEEEFF"><a href="http://java.sun.com/products/jpda/guide/jpda/jvmdi-spec.html">JVMDI</a></th>
+</tr>
+<tr>
+<td><code><a href="http://java.sun.com/products/jpda/guide/jpda/jvmdi-spec.html#GetSourceDebugExtension">GetSourceDebugExtension</a></code></td>
+<td><code>&nbsp;</code></td>
+</tr>
+<tr>
+<th colspan=2 bgcolor="#EEEEFF"><a href="http://java.sun.com/products/jpda/guide/jpda/jdwp-spec.html">JDWP</a> - <code>ReferenceType</code> (2) Command Set</th>
+</tr>
+<tr>
+<td><code><a href="http://java.sun.com/products/jpda/guide/jpda/jdwp-protocol.html#JDWP_ReferenceType_SourceDebugExtension">SourceDebugExtension</a></code> Command (12)</td>
+<td><code>&nbsp;</code></td>
+</tr>
+<tr>
+<th colspan=2 bgcolor="#EEEEFF"><a href="http://java.sun.com/products/jpda/guide/jpda/jdwp-spec.html">JDWP</a> - <code>VirtualMachine</code> (1) Command Set</th>
+</tr>
+<tr>
+<td><code><a href="http://java.sun.com/products/jpda/guide/jpda/jdwp-protocol.html#JDWP_VirtualMachine_SetDefaultStratum">SetDefaultStratum</a></code> Command (19)</td>
+<td><code>&nbsp;</code></td>
+</tr>
+<tr>
+<th colspan=2 bgcolor="#EEEEFF"><a href="http://java.sun.com/products/jpda/guide/jpda/jdi/index.html">JDI</A> - <code><a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/VirtualMachine.html">VirtualMachine</a></code> interface</th>
+</tr>
+<tr>
+<td><code>void <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/VirtualMachine.html#setDefaultStratum(java.lang.String)">setDefaultStratum(String stratum)</a></code></td>
+<td><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td><code>String <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/VirtualMachine.html#getDefaultStratum()">getDefaultStratum()</a></code></td>
+<td><code>&nbsp;</code></td>
+</tr>
+<tr>
+<th colspan=2 bgcolor="#EEEEFF"><a href="http://java.sun.com/products/jpda/guide/jpda/jdi/index.html">JDI</A> - <code><a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/ReferenceType.html">ReferenceType</a></code> interface</th>
+</tr>
+<tr>
+<td><code>String <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#sourceNames(java.lang.String)">sourceNames(String stratum)</a></code></td>
+<td><code>String <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#sourceName()">sourceName()</a></code></td>
+</tr>
+<tr>
+<td><code>String <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#sourcePaths(java.lang.String)">sourcePaths(String stratum)</a></code></td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><code>List <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#allLineLocations(java.lang.String, java.lang.String)">allLineLocations(String stratum, String sourceName)</a></code></td>
+<td><code>List <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#allLineLocations()">allLineLocations()</a></code></td>
+</tr>
+<tr>
+<td><code>List <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#locationsOfLine(java.lang.String, java.lang.String, int)">locationsOfLine(String stratum, String sourceName, int lineNumber)</a></code></td>
+<td><code>List <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#locationsOfLine(int)">locationsOfLine(int lineNumber)</a></code></td>
+</tr>
+<tr>
+<td><code>List <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#availableStrata()">availableStrata()</a></code></td>
+<td><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td><code>String <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#defaultStratum()">defaultStratum()</a></code></td>
+<td><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td><code>String <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#sourceDebugExtension()">sourceDebugExtension()</a></code></td>
+<td><code>&nbsp;</code></td>
+</tr>
+<tr>
+<th colspan=2 bgcolor="#EEEEFF"><a href="http://java.sun.com/products/jpda/guide/jpda/jdi/index.html">JDI</A> - <code><a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Method.html">Method</a></code> interface</th>
+</tr>
+<tr>
+<td><code>List <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Method.html#allLineLocations(java.lang.String, java.lang.String)">allLineLocations(String stratum, String sourceName)</a></code></td>
+<td><code>List <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Method.html#allLineLocations()">allLineLocations()</a></code></td>
+</tr>
+<tr>
+<td><code>List <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Method.html#locationsOfLine(java.lang.String, java.lang.String, int)">locationsOfLine(String stratum, String sourceName, int lineNumber)</a></code></td>
+<td><code>List <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Method.html#locationsOfLine(int)">locationsOfLine(int lineNumber)</a></code></td>
+</tr>
+<tr>
+<th colspan=2 bgcolor="#EEEEFF"><a href="http://java.sun.com/products/jpda/guide/jpda/jdi/index.html">JDI</A> - <code><a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Location.html">Location</a></code> interface</th>
+</tr>
+<tr>
+<td><code>&nbsp;</code></td>
+<td><a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Location.html">class comment</a> (strata defined)</td>
+</tr>
+<tr>
+<td><code>int <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Location.html#lineNumber(java.lang.String)">lineNumber(String stratum)</a></code></td>
+<td><code>int <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Location.html#lineNumber()">lineNumber()</a></code></td>
+</tr>
+<tr>
+<td><code>String <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Location.html#sourceName(java.lang.String)">sourceName(String stratum)</a></code></td>
+<td><code>String <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Location.html#sourceName()">sourceName()</a></code></td>
+</tr>
+<tr>
+<td><code>String <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Location.html#sourcePath(java.lang.String)">sourcePath(String stratum)</a></code></td>
+<td><code>&nbsp;</code></td>
+</tr>
+<tr>
+<td><code>String <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Location.html#sourcePath()">sourcePath()</a></code></td>
+<td><code>&nbsp;</code></td>
+</tr>
+</table>
+
+<p>
+<a name="sde">
+<hr>
+<h2>SourceDebugExtension Support</h2>
+</a>
+<P>
+Debugger applications frequently need debugging information
+about the source that exceeds
+what is delivered by the existing Java<sup><font size=-2>TM</font></sup>
+Virtual Machine class file attributes (SourceFile, LineNumber, and
+LocalVariable).  This is particularly true for
+debugging the source of other languages.
+In a distributed environment side files may not be accessible,
+the information must be directly associated with the class.
+<P>
+The solution is the addition of a class file attribute which
+holds a string;  The string
+contains debugging information in a standardized format which allows
+for evolution and vendor extension.
+<p>
+<a name="sdeaccess">
+<h4>SourceDebugExtension Access</h4>
+</a>
+<p>
+This string is made opaquely accessible at the
+three layers of the <A HREF="http://java.sun.com/products/jpda">
+Java Platform Debugger Architecture</A> (JPDA):
+<p>
+<table border=1 align="center">
+<tr>
+<th bgcolor="#EEEEFF">JVMDI</th>
+<td><code><a href="http://java.sun.com/products/jpda/guide/jpda/jvmdi-spec.html#GetSourceDebugExtension">GetSourceDebugExtension(jclass clazz, char **sourceDebugExtensionPtr)</a></code></td>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF">JDWP</th>
+<td><code><a href="http://java.sun.com/products/jpda/guide/jpda/jdwp-protocol.html#JDWP_ReferenceType_SourceDebugExtension">SourceDebugExtension</a></code> Command (12) in the <code>ReferenceType</code> (2) Command Set</td>
+</tr>
+<tr>
+<th bgcolor="#EEEEFF">JDI</th>
+<td><code>String <a href="http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#sourceDebugExtension()">sourceDebugExtension()</a></code> in the <code>ReferenceType</code> interface</td>
+</tr>
+</table>
+<p>
+<a name="attribute">
+<h4><code>SourceDebugExtension</code> Class File Attribute</h4>
+</a>
+<p>
+Java virtual machine class file attributes are described in
+<a href="http://java.sun.com/docs/books/vmspec/2nd-edition/html/ClassFile.doc.html#43817">section 4.7</a>
+of the <a href="http://java.sun.com/docs/books/vmspec/2nd-edition/html/VMSpecTOC.doc.html">The Java Virtual Machine Specification</a>.
+The definition of the added attribute is in the context of
+The Java Virtual Machine Specification:
+<P>
+<table BGCOLOR="#EEEEFF" width="85%" align="center"><tr><td>
+The <code>SourceDebugExtension</code> attribute is an optional attribute in the <code>attributes</code>
+table of the <code>ClassFile</code>  structure. There can be no more than one
+<code>SourceDebugExtension</code> &#32;attribute in the <code>attributes</code> table of a given <code>ClassFile</code> structure.
+<p>
+The <code>SourceDebugExtension</code> attribute has the following format:<p>
+<pre><br>&nbsp;&nbsp;&nbsp;&nbsp;<code>SourceDebugExtension_attribute {
+</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>   u2 attribute_name_index;
+</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>   u4 attribute_length;
+</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>   u1 debug_extension[attribute_length];
+</code>&nbsp;&nbsp;&nbsp;&nbsp;<code>}
+</code><br></pre>
+The items of the <code>SourceDebugExtension_attribute</code> structure are as follows:
+<p>
+<dl><dt><code>attribute_name_index</code>
+<dd> The value of the <code>attribute_name_index</code> item must be a valid index into the <code>constant_pool</code> table. The <code>constant_pool</code> entry at that index must be a <code>CONSTANT_Utf8_info</code>  structure representing the string <code>"SourceDebugExtension"</code>.<p>
+
+<dt><code>attribute_length</code>
+<dd> The value of the <code>attribute_length</code> item indicates the length of
+the attribute, excluding the initial six bytes.  The value of the
+<code>attribute_length</code> item is thus the number of bytes in
+the <code>debug_extension[]</code> item.<p>
+
+<dt><code>debug_extension[]</code>
+<dd> The <code>debug_extension</code> array holds a string, which must be
+in UTF-8 format.  There is no terminating zero byte. <p>
+
+The string in the <code>debug_extension</code> item will be interpreted as
+extended debugging information.  The content of this string has no semantic
+effect on the Java Virtual Machine.<p>
+</dl>
+</td></tr></table>
+<p>
+<a name="example">
+<hr>
+<h2>Example</h2>
+</a>
+<P>
+
+The example below shows how the process described above would
+apply to a tiny JSP program.
+<p>
+<a name="InputSource">
+<h4>Input Source</h4>
+</a>
+<p>
+ The input consists of two JSP
+files, the first is <code>Hello.jsp</code>:
+<p>
+<table border=0 cellspacing=0 cellpadding=0>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;1&nbsp;&nbsp;</th>
+<td><code>&nbsp;&lt;HTML&gt;
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;2&nbsp;&nbsp;</th>
+<td><code>&nbsp;&lt;HEAD&gt;
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;3&nbsp;&nbsp;</th>
+<td><code>&nbsp;&lt;TITLE&gt;Hello Example&lt;/TITLE&gt;
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;4&nbsp;&nbsp;</th>
+<td><code>&nbsp;&lt;/HEAD&gt;
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;5&nbsp;&nbsp;</th>
+<td><code>&nbsp;&lt;BODY&gt;
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;6&nbsp;&nbsp;</th>
+<td><code>&nbsp;&lt;%@ include file="greeting.jsp" %&gt;
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;7&nbsp;&nbsp;</th>
+<td><code>&nbsp;&lt;/BODY&gt;
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;8&nbsp;&nbsp;</th>
+<td><code>&nbsp;&lt;/HTML&gt;
+</code></td></tr>
+</table>
+<p>
+The second JSP file is the included file <code>greeting.jsp</code>:
+<p>
+<table border=0 cellspacing=0 cellpadding=0>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;1&nbsp;&nbsp;</th>
+<td><code>&nbsp;Hello There!&lt;P&gt;
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;2&nbsp;&nbsp;</th>
+<td><code>&nbsp;Goodbye on &lt;%= new Date() %&gt;
+</code></td></tr>
+</table>
+<p>
+<a name="LanguageProcessor">
+<h4>Language Processor</h4>
+</a>
+<p>
+
+When a JSP compiler (the <a href="#language-processor">language-processor</a>)
+compiles these files it will produce two
+outputs - a Java programming language source file and a <a href="#sourcemapfile">SMAP-file</a>.
+The generated Java programming language source file is
+<code>HelloServlet.java</code>:
+<p>
+<table border=0 cellspacing=0 cellpadding=0>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;1&nbsp;&nbsp;</th>
+<td><code>&nbsp;import javax.servlet.*;
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;2&nbsp;&nbsp;</th>
+<td><code>&nbsp;import javax.servlet.http.*;
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;3&nbsp;&nbsp;</th>
+<td><code>&nbsp;
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;4&nbsp;&nbsp;</th>
+<td><code>&nbsp;public class HelloServlet extends HttpServlet {
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;5&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;public void doGet(HttpServletRequest request,
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;6&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HttpServletResponse response)
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;7&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throws ServletException, IOException {
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;8&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response.setContentType("text/html");
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;9&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PrintWriter out = response.getWriter();
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;10&nbsp;&nbsp;</th>
+<td><code>&nbsp;// Hello.jsp:1
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;11&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.println("&lt;HTML&gt;");
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;12&nbsp;&nbsp;</th>
+<td><code>&nbsp;// Hello.jsp:2
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;13&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.println("&lt;HEAD&gt;");
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;14&nbsp;&nbsp;</th>
+<td><code>&nbsp;// Hello.jsp:3
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;15&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.println("&lt;TITLE&gt;Hello Example&lt;/TITLE&gt;");
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;16&nbsp;&nbsp;</th>
+<td><code>&nbsp;// Hello.jsp:4
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;17&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.println("&lt;/HEAD&gt;");
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;18&nbsp;&nbsp;</th>
+<td><code>&nbsp;// Hello.jsp:5
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;19&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.println("&lt;BODY&gt;");
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;20&nbsp;&nbsp;</th>
+<td><code>&nbsp;// greeting.jsp:1
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;21&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.println("Hello There!&lt;P&gt;");
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;22&nbsp;&nbsp;</th>
+<td><code>&nbsp;// greeting.jsp:2
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;23&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.println("Goodbye on " + new Date() );
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;24&nbsp;&nbsp;</th>
+<td><code>&nbsp;// Hello.jsp:7
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;25&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.println("&lt;/BODY&gt;");
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;26&nbsp;&nbsp;</th>
+<td><code>&nbsp;// Hello.jsp:8
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;27&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.println("&lt;/HTML&gt;");
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;28&nbsp;&nbsp;</th>
+<td><code>&nbsp;&nbsp;&nbsp;}
+</code></td></tr>
+<tr><th bgcolor="#EEEEFF" align="right">&nbsp;&nbsp;29&nbsp;&nbsp;</th>
+<td><code>&nbsp;}
+</code></td></tr>
+</table>
+<p>
+The generated <a href="#sourcemapfile">SMAP-file</a> is <code>HelloServlet.java.smap</code>:
+<blockquote>
+<pre>
+SMAP
+HelloServlet.java
+JSP
+*S JSP
+*F
+1 Hello.jsp
+2 greeting.jsp
+*L
+1#1,5:10,2
+1#2,2:20,2
+7#1,2:24,2
+*E
+</pre>
+</blockquote>
+
+A couple things are interesting to note about this SMAP --
+the user has chosen to make JSP the default stratum (perhaps
+by a command line option) and
+even though there are ten lines of input source and 29 lines
+of generated source, only three LineInfo lines describe the transformation:
+the first and last are for the lines before and after the include
+(respectively) and the middle is for the included file
+<code>greeting.jsp</code>.
+<p>
+The three LineInfo lines describe these mappings:
+<p>
+<pre>
+   1#1,5:10,2
+        Hello.jsp:    line 1 ->  HelloServlet.java: lines 10, 11
+                      line 2 ->                     lines 12, 13
+                      line 3 ->                     lines 14, 15
+                      line 4 ->                     lines 16, 17
+                      line 5 ->                     lines 18, 19
+
+   1#2,2:20,2
+        greeting.jsp: line 1 ->  HelloServlet.java: lines 20, 21
+                      line 2 ->                     lines 22, 23
+
+   7#1,2:24,2
+         Hello.jsp:   line 7 ->  HelloServlet.java: lines 24, 25
+                      line 8 ->                     lines 26, 27
+</pre>
+<p>
+<a name="PostProcessor">
+<h4>Post Processor</h4>
+</a>
+<p>
+Next <code>HelloServlet.java</code> is compiled by a
+Java programming language compiler (for example <code>javac</code>)
+producing the class file <code>HelloServlet.class</code>.
+Then the <a href="#post-processor">post-processor</a>
+is run. It takes <code>HelloServlet.class</code>
+and <code>HelloServlet.java.smap</code> as input.  It creates a
+<a href="#SourceDebugExtension">SourceDebugExtension</a> attribute whose content is the SMAP in
+<code>HelloServlet.java.smap</code> and rewrites
+<code>HelloServlet.class</code> with this attribute.
+<p>
+<a name="Debugging">
+<h4>Debugging</h4>
+</a>
+<p>
+Now the program is run under the control of a debugger (which is
+a client of <a href="#JDI">JDI</a>). Let's say we are stepping through this code
+and the debugger has just received a <a href="#JDI">JDI</a> <code>StepEvent</code>
+for the line that is just about to output <code>&lt;BODY&gt;</code>.
+The debugger's code might look like this (the <code>StepEvent</code>
+is in the variable <code>stepEvent</code>):
+<blockquote>
+<pre>
+Location location = stepEvent.location();
+String sourceName = location.sourceName("Java");
+int lineNumber = location.lineNumber("Java");
+displaySource(sourceName, lineNumber);
+</pre>
+</blockquote>
+where <code>displaySource</code> is a debugger routine that displays
+a source location.  Because the <code>Java</code> stratum
+has been specified
+<code>sourceName</code> would be <code>HelloServlet.java</code>,
+the <code>lineNumber</code> would be <code>19</code> and the
+displayed line would be:
+<blockquote>
+<pre>
+out.println("&lt;BODY&gt;");
+</pre>
+</blockquote>
+However, if <code>sourceName</code> and <code>lineNumber</code>
+were derived as follows:
+<blockquote>
+<pre>
+String sourceName = location.sourceName("JSP");
+int lineNumber = location.lineNumber("JSP");
+</pre>
+</blockquote>
+Since the <code>JSP</code> stratum
+has been specified,
+<code>sourceName</code> would be <code>Hello.jsp</code>,
+the <code>lineNumber</code> would be <code>5</code> and the
+displayed line would be:
+<blockquote>
+<pre>
+&lt;BODY&gt;
+</pre>
+</blockquote>
+This occurs because the <a href="#SourceDebugExtension">SourceDebugExtension</a> attribute was stored
+when the VM read <code>HelloServlet.class</code> and it was retrieved
+with the SourceDebugExtension JDWP command which in turn caused
+the JVMDI function call GetSourceDebugExtension.
+The SMAP in the SourceDebugExtension was parsed which provided the
+above transformation of source location.  Specifically, the line:
+<blockquote>
+<pre>
+1#1,5:10,2
+</pre>
+</blockquote>
+is the basis of this transformation - which refers to FileId #1
+<blockquote>
+<pre>
+1 Hello.jsp
+</pre>
+</blockquote>
+and whence the sourceName information.
+Since the default stratum specified in the SMAP is <code>JSP</code>,
+the code:
+<blockquote>
+<pre>
+String sourceName = location.sourceName();
+int lineNumber = location.lineNumber();
+</pre>
+</blockquote>
+would have the same effect.  Since this is the form
+code would have taken before these extensions were introduced,
+existing debuggers can be utilized if they are run under the new
+implementation of <a href="#JDI">JDI</a>.
+<p>
+    <hr>
+<a name="license"></a>
+<P STYLE="margin-top: 0.25cm"><B><FONT COLOR="#000000">Debugging
+Support for Other Languages Specification (&quot;Specification&quot;)</FONT></B>
+<BR><B>Version: 1.0</B><BR><B>Status: FCS</B> <BR><B>Release:
+November 24, 2003</B></P>
+<P STYLE="margin-top: 0.25cm"><B>Copyright 2003 Sun Microsystems,
+Inc.</B>
+</P>
+<P STYLE="margin-bottom: 0.51cm"><B>4150 Network Circle, Santa Clara,
+California 95054, U.S.A</B> <BR><B>All rights reserved.</B>
+</P>
+<P STYLE="margin-top: 0.25cm"><B>NOTICE; LIMITED LICENSE GRANTS</B>
+</P>
+<P STYLE="margin-bottom: 0.13cm">Sun Microsystems, Inc. (&quot;Sun&quot;)
+hereby grants you a fully-paid, non-exclusive, non-transferable,
+worldwide, limited license (without the right to sublicense), under
+the Sun's applicable intellectual property rights to view, download,
+use and reproduce the Specification only for the purpose of internal
+evaluation, which shall be understood to include developing
+applications intended to run on an implementation of the
+Specification provided that such applications do not themselves
+implement any portion(s) of the Specification.
+</P>
+<P STYLE="margin-bottom: 0.13cm">Sun also grants you a perpetual,
+non-exclusive, worldwide, fully paid-up, royalty free, limited
+license (without the right to sublicense) under any applicable
+copyrights or patent rights it may have in the Specification to
+create and/or distribute an Independent Implementation of the
+Specification that: (i) fully implements the Spec(s) including all
+its required interfaces and functionality; (ii) does not modify,
+subset, superset or otherwise extend the Licensor Name Space, or
+include any public or protected packages, classes, Java interfaces,
+fields or methods within the Licensor Name Space other than those
+required/authorized by the Specification or Specifications being
+implemented; and (iii) passes the TCK (including satisfying the
+requirements of the applicable TCK Users Guide) for such
+Specification. The foregoing license is expressly conditioned on your
+not acting outside its scope. No license is granted hereunder for any
+other purpose.
+</P>
+<P STYLE="margin-bottom: 0.13cm">You need not include limitations
+(i)-(iii) from the previous paragraph or any other particular &quot;pass
+through&quot; requirements in any license You grant concerning the
+use of your Independent Implementation or products derived from it.
+However, except with respect to implementations of the Specification
+(and products derived from them) that satisfy limitations (i)-(iii)
+from the previous paragraph, You may neither: (a) grant or otherwise
+pass through to your licensees any licenses under Sun's applicable
+intellectual property rights; nor (b) authorize your licensees to
+make any claims concerning their implementation's compliance with the
+Spec in question.
+</P>
+<P STYLE="margin-bottom: 0.51cm">For the purposes of this Agreement:
+&quot;<I>Independent Implementation</I>&quot; shall mean an
+implementation of the Specification that neither derives from any of
+Sun's source code or binary code materials nor, except with an
+appropriate and separate license from Sun, includes any of Sun's
+source code or binary code materials; and &quot;<I>Licensor Name
+Space</I>&quot; shall mean the public class or interface declarations
+whose names begin with &quot;java&quot;, &quot;javax&quot;, &quot;com.sun&quot;
+or their equivalents in any subsequent naming convention adopted by
+Sun through the Java Community Process, or any recognized successors
+or replacements thereof.
+</P>
+<P STYLE="margin-bottom: 0.51cm">This Agreement will terminate
+immediately without notice from Sun if you fail to comply with any
+material provision of or act outside the scope of the licenses
+granted above.
+</P>
+<P STYLE="margin-top: 0.25cm"><B>TRADEMARKS</B>
+</P>
+<P STYLE="margin-bottom: 0.51cm"><FONT COLOR="#000000">No right,
+title, or interest in or to any trademarks, service marks, or trade
+names of Sun or Sun's licensors is granted hereunder.&nbsp; Sun, Sun
+Microsystems, the Sun logo, Java,<SPAN STYLE="background: transparent">
+and the Java Coffee Cup logo</SPAN> are trademarks or registered
+trademarks of Sun Microsystems, Inc. in the U.S. and other countries.</FONT></P>
+<P STYLE="margin-top: 0.25cm"><B>DISCLAIMER OF WARRANTIES</B>
+</P>
+<P STYLE="margin-bottom: 0.51cm">THE SPECIFICATION IS PROVIDED &quot;AS
+IS&quot;.&nbsp; SUN MAKES NO REPRESENTATIONS OR WARRANTIES, EITHER
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO, WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR
+NON-INFRINGEMENT, THAT THE CONTENTS OF THE SPECIFICATION ARE SUITABLE
+FOR ANY PURPOSE OR THAT ANY PRACTICE OR IMPLEMENTATION OF SUCH
+CONTENTS WILL NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADE
+SECRETS OR OTHER RIGHTS.&nbsp; This document does not represent any
+commitment to release or implement any portion of the Specification
+in any product.
+</P>
+<P STYLE="margin-bottom: 0.51cm">THE SPECIFICATION COULD INCLUDE
+TECHNICAL INACCURACIES OR TYPOGRAPHICAL ERRORS.&nbsp; CHANGES ARE
+PERIODICALLY ADDED TO THE INFORMATION THEREIN; THESE CHANGES WILL BE
+INCORPORATED INTO NEW VERSIONS OF THE SPECIFICATION, IF ANY.&nbsp;
+SUN MAY MAKE IMPROVEMENTS AND/OR CHANGES TO THE PRODUCT(S) AND/OR THE
+PROGRAM(S) DESCRIBED IN THE SPECIFICATION AT ANY TIME.&nbsp; Any use
+of such changes in the Specification will be governed by the
+then-current license for the applicable version of the Specification.
+</P>
+<P STYLE="margin-top: 0.25cm"><B>LIMITATION OF LIABILITY</B>
+</P>
+<P STYLE="margin-bottom: 0.51cm">TO THE EXTENT NOT PROHIBITED BY LAW,
+IN NO EVENT WILL SUN OR ITS LICENSORS BE LIABLE FOR ANY DAMAGES,
+INCLUDING WITHOUT LIMITATION, LOST REVENUE, PROFITS OR DATA, OR FOR
+SPECIAL, INDIRECT, CONSEQUENTIAL, INCIDENTAL OR PUNITIVE DAMAGES,
+HOWEVER CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, ARISING OUT
+OF OR RELATED TO ANY FURNISHING, PRACTICING, MODIFYING OR ANY USE OF
+THE SPECIFICATION, EVEN IF SUN AND/OR ITS LICENSORS HAVE BEEN ADVISED
+OF THE POSSIBILITY OF SUCH DAMAGES.
+</P>
+<P STYLE="margin-bottom: 0.51cm">You will indemnify, hold harmless,
+and defend Sun and its licensors from any claims arising or resulting
+from: (i) your use of the Specification; (ii) the use or distribution
+of your Java application, applet and/or clean room implementation;
+and/or (iii) any claims that later versions or releases of any
+Specification furnished to you are incompatible with the
+Specification provided to you under this license.
+</P>
+<P STYLE="margin-top: 0.25cm"><B>RESTRICTED RIGHTS LEGEND</B>
+</P>
+<P STYLE="margin-bottom: 0.51cm">U.S. Government: If this
+Specification is being acquired by or on behalf of the U.S.
+Government or by a U.S. Government prime contractor or subcontractor
+(at any tier), then the Government's rights in the Specification and
+accompanying documentation shall be only as set forth in this
+license; this is in accordance with 48 C.F.R. 227.7201 through
+227.7202-4 (for Department of Defense (DoD) acquisitions) and with 48
+C.F.R. 2.101 and 12.212 (for non-DoD acquisitions).
+</P>
+<P STYLE="margin-top: 0.25cm"><B>REPORT</B>
+</P>
+<P STYLE="margin-bottom: 0.51cm">You may wish to report any
+ambiguities, inconsistencies or inaccuracies you may find in
+connection with your use of the Specification (&quot;Feedback&quot;).
+To the extent that you provide Sun with any Feedback, you hereby: (i)
+agree that such Feedback is provided on a non-proprietary and
+non-confidential basis, and (ii) grant Sun a perpetual,
+non-exclusive, worldwide, fully paid-up, irrevocable license, with
+the right to sublicense through multiple levels of sublicensees, to
+incorporate, disclose, and use without limitation the Feedback for
+any purpose related to the Specification and future versions,
+implementations, and test suites thereof.
+</P>
+<P STYLE="margin-bottom: 0.51cm"><I><FONT COLOR="#000000">(LFI#136249/Form
+ID#011801)</FONT></I>
+</P>
+    <hr>
+<!-- hhmts start -->
+Last modified: Fri Oct  3 14:48:10 PDT 2003
+<!-- hhmts end -->
+<P><!-- body="end" -->
+<HR NOSHADE>
+<pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</BODY>
+</HTML>
