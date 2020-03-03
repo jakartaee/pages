@@ -36,11 +36,12 @@
     <properties>
         <spec.version>2.3</spec.version>
         <extensionName>javax.servlet.jsp</extensionName>
-        <bundle.symbolicName>org.glassfish.web.javax.servlet.jsp</bundle.symbolicName>
+        <bundle.symbolicName>${project.groupId}.${project.artifactId}</bundle.symbolicName>
         <vendorName>Eclipse Foundation</vendorName>
         <findbugs.version>2.5.2</findbugs.version>
         <findbugs.exclude />
         <findbugs.threshold>High</findbugs.threshold>
+        <legal.doc.source>${project.basedir}/..</legal.doc.source>
     </properties>
     
     <contributors>
@@ -144,7 +145,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.0</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
@@ -170,7 +171,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId> 
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.0</version>
                 <configuration>
                     <archive>
                         <manifestFile>
@@ -192,39 +193,21 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.1</version>
-                <configuration>
-                    <includePom>true</includePom>
-                </configuration>
-                <executions>
-                    <execution>
-                       <id>attach-sources</id>
-                       <goals>
-                           <goal>jar-no-fork</goal>
-                       </goals>
-                    </execution>
-                </executions>
+                <version>3.2.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.1</version>
-                <executions>
-                  <execution>
-                    <id>attach-javadocs</id>
-                      <goals>
-                          <goal>jar</goal>
-                      </goals>
-                    <configuration>
-                      <groups>
+                <version>3.1.1</version>
+                <configuration>
+                    <doclint>none</doclint>
+                    <groups>
                         <group>
-                          <title>JavaServer Pages API Documentation</title>
-                          <packages>javax.servlet.jsp</packages>
+                            <title>JavaServer Pages API Documentation</title>
+                            <packages>javax.servlet.jsp</packages>
                         </group>
-                      </groups>                      
-                    </configuration>
-                  </execution>
-                </executions>
+                    </groups>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -237,37 +220,6 @@
                     <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
                 </configuration>
             </plugin>
-            <plugin>
-                 <groupId>org.apache.maven.plugins</groupId>
-                 <artifactId>maven-gpg-plugin</artifactId>
-                 <version>1.6</version>
-                 <executions>
-                     <execution>
-                         <id>sign-artifacts</id>
-                         <phase>verify</phase>
-                         <goals>
-                             <goal>sign</goal>
-                         </goals>
-                     </execution>
-                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>                           
-                <artifactId>maven-release-plugin</artifactId>                         
-                 <version>2.5.2</version>
-                <configuration>                                                       
-                    <mavenExecutorId>forked-path</mavenExecutorId>                
-                    <useReleaseProfile>false</useReleaseProfile>                  
-                    <arguments>${release.arguments}</arguments>
-                </configuration>                                                      
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.scm</groupId>
-                        <artifactId>maven-scm-provider-gitexe</artifactId>
-                        <version>1.9.4</version>
-                    </dependency>
-                </dependencies>
-            </plugin>                    
         </plugins>
         <resources>
             <resource>
@@ -286,6 +238,7 @@
             </resource>
         </resources>
     </build>
+
     <reporting>
         <plugins>
             <plugin>
@@ -300,24 +253,6 @@
         </plugins>
     </reporting>
 
-    <repositories>
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-                <checksumPolicy>warn</checksumPolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-                <updatePolicy>never</updatePolicy>
-                <checksumPolicy>warn</checksumPolicy>
-            </snapshots>
-            <id>java.net.Releases</id>
-            <name>Java.net Releases</name>
-            <url>https://maven.java.net/content/repositories/releases</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -331,9 +266,9 @@
             <version>[3.0.1-b10,)</version>
         </dependency>
         <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>javax.servlet.jsp-api</artifactId>
-            <version>2.3.3</version>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <version>2.3.6</version>
         </dependency>
 
 <!--
