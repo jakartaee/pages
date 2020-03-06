@@ -881,17 +881,17 @@ tag, an empty body, and an end tag
 As examples, the following are all empty
 tags:
 
- <x:foo></x:foo> +
- <x:foo /> +
- <x:foo/> +
+ <x:foo></x:foo>
+ <x:foo />
+ <x:foo/>
  <x:foo><%-- any comment --%></x:foo>
 
 While the following are all non-empty tags:
 
- <foo> </foo> +
- <foo><%= expression %></foo> +
- <foo><% scriptlet %></foo> +
- <foo><bar/></foo> +
+ <foo> </foo>
+ <foo><%= expression %></foo>
+ <foo><% scriptlet %></foo>
+ <foo><bar/></foo>
  <foo><!-- a comment --></foo>
 
 ==== Attribute Values
@@ -1187,13 +1187,13 @@ AllBody                    ::= (   ( ‘<%--’ JSPCommentBody                 )
 ScriptlessBody             ::= (   ( ‘<%--’            JSPCommentBody      )
                                  | ( ‘<%@’             DirectiveBody       )
                                  | ( ‘<jsp:directive.’ XMLDirectiveBody    )
-                                 | ( ‘<%!’             <TRANSLATION`ERROR> )
+                                 | ( ‘<%!’             <TRANSLATION_ERROR> )
                                  | ( ‘<jsp:declaration’
-                                                       <TRANSLATION`ERROR> )
-                                 | ( ‘<%=’             <TRANSLATION`ERROR> )
-                                 | ( ‘<jsp:expression’ <TRANSLATION`ERROR> )
-                                 | ( ‘<%’              <TRANSLATION`ERROR> )
-                                 | ( ‘<jsp:scriptlet’  <TRANSLATION`ERROR> )
+                                                       <TRANSLATION_ERROR> )
+                                 | ( ‘<%=’             <TRANSLATION_ERROR> )
+                                 | ( ‘<jsp:expression’ <TRANSLATION_ERROR> )
+                                 | ( ‘<%’              <TRANSLATION_ERROR> )
+                                 | ( ‘<jsp:scriptlet’  <TRANSLATION_ERROR> )
                                  | ( ‘${‘              ELExpressionBody    )
                                  | ( ‘#{‘              ELExpressionBody    )
                                  | ( ‘<jsp:text’       XMLTemplateText     )
@@ -1208,23 +1208,23 @@ ScriptlessBody             ::= (   ( ‘<%--’            JSPCommentBody      )
 TemplateTextBody           ::= (   ( ‘<%--’            JSPCommentBody      )
                                  | ( ‘<%@’             DirectiveBody       )
                                  | ( ‘<jsp:directive.’ XMLDirectiveBody    )
-                                 | ( ‘<%!’             <TRANSLATION`ERROR> )
-                                 | ( ‘<jsp:declaration’<TRANSLATION`ERROR> )
-                                 | ( ‘<%=’             <TRANSLATION`ERROR> )
-                                 | ( ‘<jsp:expression’ <TRANSLATION`ERROR> )
-                                 | ( ‘<%’              <TRANSLATION`ERROR> )
-                                 | ( ‘<jsp:scriptlet’  <TRANSLATION`ERROR> )
-                                 | ( ‘${‘              <TRANSLATION`ERROR> )
-                                 | ( ‘#{‘              <TRANSLATION`ERROR> )
-                                 | ( ‘<jsp:text’       <TRANSLATION`ERROR> )
-                                 | ( ‘<jsp:’           <TRANSLATION`ERROR> )
-                                 | ( ‘<‘ CustomAction  <TRANSLATION`ERROR> )
+                                 | ( ‘<%!’             <TRANSLATION_ERROR> )
+                                 | ( ‘<jsp:declaration’<TRANSLATION_ERROR> )
+                                 | ( ‘<%=’             <TRANSLATION_ERROR> )
+                                 | ( ‘<jsp:expression’ <TRANSLATION_ERROR> )
+                                 | ( ‘<%’              <TRANSLATION_ERROR> )
+                                 | ( ‘<jsp:scriptlet’  <TRANSLATION_ERROR> )
+                                 | ( ‘${‘              <TRANSLATION_ERROR> )
+                                 | ( ‘#{‘              <TRANSLATION_ERROR> )
+                                 | ( ‘<jsp:text’       <TRANSLATION_ERROR> )
+                                 | ( ‘<jsp:’           <TRANSLATION_ERROR> )
+                                 | ( ‘<‘ CustomAction  <TRANSLATION_ERROR> )
                                  | TemplateText
                                )*
                                [ vc: ELEnabled ]
 
 JSPCommentBody             ::=   ( Char* - ( Char* ‘--%>’ ) ) ‘--%>’
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
 
 DirectiveBody              ::= JSPDirectiveBody | TagDefDirectiveBody
                                [ vc: TagFileSpecificDirectives ]
@@ -1238,7 +1238,7 @@ JSPDirectiveBody           ::=   S?
                                    | ( ‘include’ S IncludeDirectiveAttrList )
                                  )
                                  S? ‘%>’
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
 
 XMLJSPDirectiveBody        ::=   S?
                                  (   ( ‘page’ S PageDirectiveAttrList S?
@@ -1248,7 +1248,7 @@ XMLJSPDirectiveBody        ::=   S?
                                        ( ‘/>’ | ( ‘>’ S? ETag ) )
                                      )
                                  )
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
 
 TagDefDirectiveBody        ::=   S?
                                  (   ( ‘tag’ S TagDirectiveAttrList )
@@ -1258,7 +1258,7 @@ TagDefDirectiveBody        ::=   S?
                                    | ( ‘variable’ S VariableDirectiveAttrList )
                                  )
                                  S? ‘%>’
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
 
 XMLTagDefDirectiveBody     ::=   (   ( ‘tag’ S TagDirectiveAttrList S?
                                        ( ‘/>’ | ( ‘>’ S? ETag ) )
@@ -1273,7 +1273,7 @@ XMLTagDefDirectiveBody     ::=   (   ( ‘tag’ S TagDirectiveAttrList S?
                                        ( ‘/>’ | ( ‘>’ S? ETag ) )
                                      )
                                  )
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
 
 PageDirectiveAttrList      ::= ATTR[ language, extends, import, session,
                                      buffer, autoFlush, isThreadSafe,
@@ -1306,17 +1306,17 @@ VariableDirectiveAttrList  ::=   ATTR[ !name-given, variable-class,
                                [ vc: UniqueVariableName ]
 
 DeclarationBody            ::= ( Char* - ( Char* ‘%>’ ) ) ‘%>’
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
 
 XMLDeclarationBody         ::=   ( S? ‘/>’ )
                                | ( S? ‘>’
                                    ( ( Char* - ( Char* ‘<‘ ) ) CDSect? )*
                                    ETag
                                  )
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
 
 ExpressionBody             ::=   ( Char* - ( Char* ‘%>’ ) ) ‘%>’
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
                                [ vc: ExpressionBodyContent ]
 
 XMLExpressionBody          ::=   ( S? ‘/>’ )
@@ -1324,23 +1324,23 @@ XMLExpressionBody          ::=   ( S? ‘/>’ )
                                    ( ( Char* - ( Char* ‘<’ ) ) CDSect? )*
                                    ETag
                                  )
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
                                [ vc: ExpressionBodyContent ]
 
 ELExpressionBody           ::=   ELExpression ‘}’
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
 
 ELExpression               ::= [See EL spec document, production *Expression*]
 
 ScriptletBody              ::=   ( Char* - ( Char* ‘%>’ ) ) ‘%>’
-                               | <TRANSLATION`ERROR>`
+                               | <TRANSLATION_ERROR>`
 
 XMLScriptletBody           ::=   ( S? ‘/>’ )
                                | ( S? ‘>’
                                    ( ( Char* - ( Char* ‘<’ ) ) CDSect? )*
                                    ETag
                                  )
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
 
 StandardAction             ::=   ( ‘useBean’     StdActionContent )
                                | ( ‘setProperty’ StdActionContent )
@@ -1352,7 +1352,7 @@ StandardAction             ::=   ( ‘useBean’     StdActionContent )
                                | ( ‘doBody’      StdActionContent )
                                | ( ‘element’     StdActionContent )
                                | ( ‘output’      StdActionContent )
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
                                [ vc: TagFileSpecificActions ]
 
 StdActionContent           ::= Attributes StdActionBody
@@ -1375,7 +1375,7 @@ TagDependentBody           ::= Char* - ( Char* ETag )
 
 JspAttributeAndBody        ::= ( ‘>’ S? ( ‘<jsp:attribute’ NamedAttributes )?
                                  ‘<jsp:body’
-                                 ( JspBodyBody | <TRANSLATION`ERROR> )
+                                 ( JspBodyBody | <TRANSLATION_ERROR> )
                                  S? ETag
                                )
 
@@ -1394,7 +1394,7 @@ TagDependentOptionalBody   ::= EmptyBody | TagDependentActionBody
 ParamBody                  ::=   EmptyBody
                                | ( ‘>’ S? ( ‘<jsp:attribute’ NamedAttributes )?
                                    ‘<jsp:body’
-                                   (JspBodyParam | <TRANSLATION`ERROR>)
+                                   (JspBodyParam | <TRANSLATION_ERROR>)
                                    S? ETag
                                  )
                                | ( S? ‘>’ Param* ETag )
@@ -1403,7 +1403,7 @@ PluginBody                 ::=   EmptyBody
                                | ( ‘>’ S? ( ‘<jsp:attribute’ NamedAttributes )?
                                    ‘<jsp:body’
                                    (   JspBodyPluginTags
-                                     | <TRANSLATION`ERROR>
+                                     | <TRANSLATION_ERROR>
                                    )
                                    S? ETag
                                  )
@@ -1415,7 +1415,7 @@ AttributeBody              ::=   ATTR[ !name, trim ] S?
                                (   ‘/>’
                                  | ‘></jsp:attribute>’
                                  | ‘>’ AttributeBodyBody ‘</jsp:attribute>’
-                                 | <TRANSLATION`ERROR>
+                                 | <TRANSLATION_ERROR>
                                )
 
 AttributeBodyBody          ::=   AllBody
@@ -1431,7 +1431,7 @@ JspBodyBodyContent         ::= ScriptlessBody | Body | TagDependentBody
 
 JspBodyEmptyBody           ::=   ‘/>’
                                | ‘></jsp:body>’
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
 
 JspBodyParam               ::= S? ‘>’ S? Param* ‘</jsp:body>’
 
@@ -1443,7 +1443,7 @@ PluginTags                 ::= ( ‘<jsp:params’ Params S? )?
 Params                     ::= ‘>’ S?
                                (   ( ‘<jsp:body>’
                                      (   ( S? Param+ S? ‘</jsp:body>’ )
-                                       | <TRANSLATION`ERROR>
+                                       | <TRANSLATION_ERROR>
                                      )
                                    )
                                  | Param+
@@ -1456,7 +1456,7 @@ Fallback                   ::=   ’/>’
                                          ( Char* - ( Char* ‘</jsp:body>’ ) )
                                          ‘</jsp:body>’ S?
                                        )
-                                     | <TRANSLATION`ERROR>
+                                     | <TRANSLATION_ERROR>
                                    )
                                    ‘</jsp:fallback>’
                                  )
@@ -1478,7 +1478,7 @@ TagPrefix                  ::= Name
 CustomActionName           ::= Name
 
 CustomActionBody           ::=   ( Attributes CustomActionEnd )
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
 
 CustomActionEnd            ::=   CustomActionTagDependent
                                | CustomActionJSPContent
@@ -1512,7 +1512,7 @@ XMLTemplateText            ::=   ( S? ‘/>’ )
                                      CDSect?
                                    )* ETag
                                  )
-                               | <TRANSLATION`ERROR>
+                               | <TRANSLATION_ERROR>
                                [ vc: ELEnabled ]
 
 ExtraClosingTag            ::= ETag
@@ -1540,22 +1540,22 @@ AttributeValue             ::= AttributeValueDouble | AttributeValueSingle
 RTAttributeValue           ::= RTAttributeValueDouble | RTAttributeValueSingle
 
 AttributeValueDouble       ::= ( QuotedChar - ‘”’ )*
-                               ( ‘”’ | <TRANSLATION`ERROR> )
+                               ( ‘”’ | <TRANSLATION_ERROR> )
 
 AttributeValueSingle       ::= ( QuotedChar - “‘” )*
-                               ( “‘” | <TRANSLATION`ERROR> )
+                               ( “‘” | <TRANSLATION_ERROR> )
 
 RTAttributeValueDouble     ::= ( ( QuotedChar - ‘”’ )* -
                                      ( ( QuotedChar - ’"’ )* ’%>’ )
                                )
-                               ( ’%>"’ | <TRANSLATION`ERROR> )
+                               ( ’%>"’ | <TRANSLATION_ERROR> )
                                [ vc: RTAttributeScriptingEnabled ]
                                [ vc: ExpressionBodyContent ]
 
 RTAttributeValueSingle     ::= ( ( QuotedChar - “‘” )* -
                                    ( ( QuotedChar - “‘” )* ’%>’ )
                                )
-                               ( "%>’" | <TRANSLATION`ERROR> )
+                               ( "%>’" | <TRANSLATION_ERROR> )
                                [ vc: RTAttributeScriptingEnabled ]
                                [ vc: ExpressionBodyContent ]
 
@@ -1697,7 +1697,7 @@ followed.
 *  `JspBodyBodyContent` - The
 `ScriptlessBody` production must be followed if the body content for
 this tag is `scriptless` . The `Body` production must be followed if the
-body content for this tag is `JSP` . The TagDependentBody production
+body content for this tag is `JSP`. The TagDependentBody production
 must be followed if the body content for this tag is `tagdependent` .
 *  `UniqueAttSpec` - A translation error will
 result if the same attribute name appears more than once.
@@ -2094,7 +2094,7 @@ those of XML. See JSPDocuments.html#64789[].
 === Overall Semantics of a JSP Page
 
 A JSP page implementation class defines a
-``jspService()` method mapping from the request to the response object.
+`_jspService()` method mapping from the request to the response object.
 Some details of this transformation are specific to the scripting
 language used (see /C:/jspspec/JSP`Scripting.html#68206[]). Most details
 are not language specific and are described in this chapter.
@@ -2521,12 +2521,12 @@ this drawback.
 that are available to the scripting environment. The value is as in an
 import declaration in the Java programming language, a (comma separated)
 list of either a fully qualified Java programming language type name
-denoting that type, or of a package name followed by the `.*` string,
+denoting that type, or of a package name followed by the `.\*` string,
 denoting all the public types declared in that package. The import list
 shall be imported by the translated JSP page implementation and is thus
 available to the scripting environment. +
-Packages java.lang.*, jakarta.servlet.*,
-jakarta.servlet.jsp.*, and jakarta.servlet.http.* are imported implicitly
+Packages `java.lang.*`, `jakarta.servlet.\*`,
+`jakarta.servlet.jsp.*`, and `jakarta.servlet.http.*` are imported implicitly
 by the JSP container. No other packages may be part of this implicitly
 imported list. Page authors may use the include-prelude feature (see
 link:jsp.html#a1299[See Defining Implicit Includes.]) in order
@@ -3096,18 +3096,18 @@ Here is a simple example where the page
 changed dynamically depending on the time of day.
 
  <% if
- (Calendar.getInstance().get(Calendar.AM`PM) == Calendar.AM) {%> +
- Good Morning +
- <% } else { %> +
- Good Afternoon +
- <% } %>`
+ (Calendar.getInstance().get(Calendar.AM`PM) == Calendar.AM) {%>
+ Good Morning
+ <% } else { %>
+ Good Afternoon
+ <% } %>
 
 A scriptlet can also have a local variable
 declaration, for example the following scriptlet just declares and
 initializes an integer, and later increments it.
 
- <% int i; i= 0; %> +
- About to increment i... +
+ <% int i; i= 0; %>
+ About to increment i...
  <% i++; %>
 
 _Syntax_
@@ -4348,11 +4348,10 @@ this JSP configuration element can be used to force an error when an
 unknown namespace is used in a JSP page, as is already the case for JSP
 documents (XML syntax).
 
-The error-on-undeclared-namespace element is
-a subelement of jsp-property-group . It has no subelements. Its valid
-valuesare true and false, with false being the default.
-
- If it is set to true, then an error must be
+The `error-on-undeclared-namespace` element is
+a subelement of `jsp-property-group`. It has no subelements. Its valid
+values are `true` and `false`, with false being the default.
+If it is set to `true`, then an error must be
 raised during the translation time, when an undeclared tag is used in a
 JSP page.
 
@@ -4454,7 +4453,7 @@ _Byte representations of the BOM_
 |`FF FE 00 00`
 |UTF-32, little-endian
 
-|EF BB BF`
+|`EF BB BF`
 |UTF-8
 
 |===
@@ -5509,8 +5508,8 @@ The following is an example of using the
 `<jsp:attribute>` standard action within `<jsp:element>` , to define
 which attributes are to be output with that element:
 
- <jsp:element name=”firstname”> +
-     <jsp:attribute name=”name”>Susan</jsp:attribute> +
+ <jsp:element name=”firstname”>
+     <jsp:attribute name=”name”>Susan</jsp:attribute>
  </jsp:element>
 
 This would produce the following output:
@@ -6157,7 +6156,7 @@ Here is a simple JSP document:
        xmlns:c="http://java.sun.com/jsp/jstl/core"
        var="counter" begin="1" end="3">
      <row>${counter}</row>
-   </c:forEach> +
+   </c:forEach>
  </table>
 
 This well-formed, namespace-aware XML
@@ -11211,7 +11210,8 @@ One or more JSP files that form a
 syntactically complete description for processing a request to create a
 response.
 
- `JSP page, front` A JSP page that receives
+*JSP page, front* +
+A JSP page that receives
 an HTTP request directly from the client. It creates, updates, and/or
 accesses some server-side data and then forwards the request to a
 presentation JSP page.
