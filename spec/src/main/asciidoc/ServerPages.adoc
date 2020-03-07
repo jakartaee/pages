@@ -1688,7 +1688,7 @@ Standard Actions.] is followed.
 being specified determines which production is followed (see
 StandardActions.html#29033[]for details):
 * If a custom action that specifies an
-attribute of type `JspFragment` , `ScriptlessBody` must be followed.
+attribute of type `JspFragment`, `ScriptlessBody` must be followed.
 * If a standard or custom action that accepts
 a request-time expression value, `AllJspBody` must be followed.
 * If a standard or custom action that does
@@ -2082,8 +2082,8 @@ The next lines are all legal quotations.
 
  <x:tag value="end expression %\>"/>
 
- <% String s="abc"; %> +
- <x:tag value="<%= s + \"def\" + \"jkl\" + 'm' + \'n\' %>" /> +
+ <% String s="abc"; %>
+ <x:tag value="<%= s + \"def\" + \"jkl\" + 'm' + \'n\' %>" />
  <x:tag value='<%= s + \"def\" + "jkl" + \'m\' + \'n\' %>' />
 
 _XML Documents_
@@ -2299,7 +2299,7 @@ configuration object (as in the call
 
 |`out`
 |`jakarta.servlet.jsp.JspWriter`
-|An object that writes into the output stream.+
+|An object that writes into the output stream. +
 `page` scope
 
 |`config`
@@ -3017,8 +3017,8 @@ Precise definitions may be given for other languages in the future.
 Each scripting element has a `<%` -based
 syntax as follows:
 
- <%! this is a declaration %> +
- <% this is a scriptlet %> +
+ <%! this is a declaration %>
+ <% this is a scriptlet %>
  <%= this is an expression %>
 
 White space is optional after `<%!` , `<%` ,
@@ -3418,7 +3418,7 @@ can be used. For example:
 The following shows a custom action where two
 EL expressions are used to access bean properties:
 
- <c:wombat> +
+ <c:wombat>
  One value is ${bean1.a} and another is ${bean2.a.c}
  </c:wombat>
 
@@ -4628,13 +4628,13 @@ providing `class` or `beanName` attributes.
 
 At least one of `type` and `class` must be
 present, and it is not valid to provide both `class` and `beanName` . If
-`type` and `class` are present, `class` must be assignable to `type` ``
+`type` and `class` are present, `class` must be assignable to `type`
 (in the Java platform sense). For it not to be assignable is a
 translation-time error.
 
 The attribute `beanName` specifies the name
 of a Bean, as specified in the JavaBeans specification. It is used as an
-argument to the `instantiate` method in the `java.beans.Beans` `` class.
+argument to the `instantiate` method in the `java.beans.Beans` class.
 It must be of the form `a.b.c` , which may be either a class, or the
 name of a resource of the form `a/b/c.ser` that will be resolved in the
 current `ClassLoader` . If this is not true, a request-time exception,
@@ -9010,8 +9010,8 @@ configuration object (as in the call
 
 |===
 
-Object names with prefixes `jsp` , ``jsp` ,
-`jspx` and ``jspx` , in any combination of upper and lower case, are
+Object names with prefixes `jsp`, `jsp` ,
+`jspx` and `jspx` , in any combination of upper and lower case, are
 reserved by the JSP specification.
 
 === [[a2542]]Variable Synchronization
