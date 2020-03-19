@@ -1861,7 +1861,7 @@ prefix is reserved and used by the servlet and JSP specifications.
 A JSP is considered an Error Page if it sets
 the `page` directive’s `isErrorPage` attribute to `true` . If a page has
 `isErrorPage` set to `true` , then the “exception” implicit scripting
-language variable (see <<Implicit-Objects-Available-in-Error-Pages>>) of that page is initialized. The variable is
+language variable (see <<_Implicit_Objects_Available_in_Error_Pages>>) of that page is initialized. The variable is
 set to the value of the `jakarta.servlet.error.exception request`
 attribute value if present, otherwise to the value of the
 `jakarta.servlet.jsp.jspException` request attribute value (for backwards
@@ -2195,9 +2195,9 @@ handlers through the pageContext object, see below.
 
 Each implicit object has a class or interface
 type defined in a core Java technology or Jakarta Servlet API package, as
-shown in <<Implicit-Objects-Available-in-JSP-Pages>>.
+shown in <<_Implicit_Objects_Available_in_JSP_Pages>>.
 
-[[Implicit-Objects-Available-in-JSP-Pages]]
+[[_Implicit_Objects_Available_in_JSP_Pages]]
 .Implicit Objects Available in JSP Pages
 [cols="20,20,60",options="header"]
 |===
@@ -2263,9 +2263,9 @@ requestlink:#a6612[2] +
 
 In addition, the `exception` implicit object
 can be accessed in an error page, as described in
-<<Implicit-Objects-Available-in-Error-Pages>>.
+<<_Implicit_Objects_Available_in_Error_Pages>>.
 
-[[Implicit-Objects-Available-in-Error-Pages]]
+[[_Implicit_Objects_Available_in_Error_Pages]]
 .Implicit Objects Available in Error Pages
 [cols="20,20,60",options="header"]
 |===
@@ -2799,9 +2799,9 @@ The semantics for mixed syntax includes are described in
 Including data is a significant part of the
 tasks in a JSP page. Accordingly, the JSP 2.2 specification has two
 include mechanisms suited to different tasks. A summary of their
-semantics is shown in <<Summary-of-Include-Mechanisms-in-JSP-2.2>>.
+semantics is shown in <<_Summary_of_Include_Mechanisms_in_JSP_2.2>>.
 
-[[Summary-of-Include-Mechanisms-in-JSP-2.2]]
+[[_Summary_of_Include_Mechanisms_in_JSP_2.2]]
 .Summary of Include Mechanisms in JSP 2.2
 [cols="5*",options="header"]
 |===
@@ -5751,7 +5751,7 @@ attribute value may be used for this attribute.
 
 |===
 
-[[jsp:text]]
+[[_jsp:text]]
 === <jsp:text>
 
 A `jsp:text` action can be used to enclose
@@ -6514,7 +6514,7 @@ On the other hand, JSP documents have structure and some constraints are
 needed.
 
 JSP documents can generate unconstrained
-content using jsp:text, as defined in <<jsp:text>>. Jsp:text can be used to generate totally fixed content but
+content using jsp:text, as defined in <<_jsp:text>>. Jsp:text can be used to generate totally fixed content but
 it can also be used to generate some dynamic content, as described in
 <<Dynamic Template Content>> below.
 
@@ -9157,7 +9157,7 @@ complete language statements.
 ==== Valid JSP Page
 
 A JSP page is valid for a Java Platform if and
-only if the JSP page implementation class defined by <<Structure-of-the-Java-Programming-Language-Class>> (after applying all include directives), together with any other classes defined by the JSP container, is a valid program for the given Java Platform, and if it passes the validation methods for all the tag libraries associated with the JSP page.
+only if the JSP page implementation class defined by <<_Structure_of_the_Java_Programming_Language_Class>> (after applying all include directives), together with any other classes defined by the JSP container, is a valid program for the given Java Platform, and if it passes the validation methods for all the tag libraries associated with the JSP page.
 
 ==== Reserved Names
 
@@ -9173,7 +9173,7 @@ need not be performed literally. An implementation may implement things
 differently to provide better performance, lower memory footprint, or
 other implementation attributes.
 
-[[Structure-of-the-Java-Programming-Language-Class]]
+[[_Structure_of_the_Java_Programming_Language_Class]]
 .Structure of the Java Programming Language Class
 [cols="25,75"]
 |===
