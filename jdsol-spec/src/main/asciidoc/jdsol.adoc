@@ -18,7 +18,7 @@ Constraints:
 
 == Terminology
 
-[width="100%",cols="30%,70%",options="header"]
+[width="100%",cols=".^30%s,70%",options="header"]
 |===
 |Term |Definition
 |[#FinalSource]#final-source#
@@ -152,7 +152,7 @@ This diagram demonstrates data flow. The particular case shown has two levels of
 translation, with file inclusion on the second level (as is the case in the
 example in link:#Resolution[SMAP Resolution]).
 
-image:data-flow.png[data flow diagram]
+image:data-flow.png[data flow diagram,pdfwidth=75%]
 
 Where `TS` is link:#TranslatedSource[translated-source] and `FS` is
 link:#FinalSource[final-source].
@@ -162,8 +162,8 @@ link:#FinalSource[final-source].
 === Variables
 
 The complexity of mapping semantics (like variable and data views) across
-languages has been discussed. And it has been agreed that this issue will wait
-for a possible subsequent version of this specification.
+languages is such that this feature will be considered for a future version of
+this specification.
 
 === Multi-Level Source View
 
@@ -178,7 +178,7 @@ elements:
 * A source path
 * The package name converted to a directory path
 * The source file name from a link:#JDI[JDI] call (derived from the `SourceFile`
-  class file attribute
+  class file attribute)
 
 Since existing debuggers use this mechanism (the only way for an existing
 debugger to find link:#TranslatedSource[translated-source]) each aspect must b
@@ -427,7 +427,7 @@ The vendor section is for vendor specific information.
 The format is `*V` on the first line to mark the section. The second line is the
 vendor ID which is formed by the same rules by which unique package names are
 formed in the Java language specification, second edition
-http://java.sun.com/docs/books/jls/second_edition/html/packages.doc.html#40169[(�7.7) Unique Package Names].
+http://java.sun.com/docs/books/jls/second_edition/html/packages.doc.html#40169[(§7.7) Unique Package Names].
 It includes the following lines until another section marker.
 
 === EndSection
@@ -557,11 +557,10 @@ EndSection:
 Where `{x}` denotes zero or more occurrences of `x`. And where the terminals are
 defined as follows (whitespace is a sequence of zero or more spaces or tabs):
 
-[width="100%",cols="2",options="header"]
+[width="100%",cols="25%,75%",options="header"]
 |===
 
-|Terminals
-|
+2+^|Terminals
 
 |`NONASTERISKSTRING`
 |Any sequence of characters (excluding the terminal carriage-return or new-line)
@@ -663,39 +662,39 @@ The inputs and outputs of the algorithm are LineInfo tuples. Line information is
 ....
 ResolveLineInfo:
    InputStartLineE #LineFileIDE, RepeatCountE : OutputStartLineE, OutputLineIncrementE
-as follows {
-   if RepeatCountE > 0 then {
-      for each LineInfoO in the stratum of the embedded SMAP:
-         InputStartLineO #LineFileIDO, RepeatCountO: OutputStartLineO, OutputLineIncrementO
-      which includes OutputStartLineE
-          that is, InputStartLineO + N == OutputStartLineE
-             for some offset into the outer input range N where 0 <= N < RepeatCountO
-      and for which LineFileIDO has a sourceName matching the embedded SMAP's OutputFileName {
-         compute the number of outer mapping repeations which can be applied
-         available := RepeatCountO - N ;
-         compute the number of embedded mapping repeations which can be applied
-         completeCount := floor(available / OutputLineIncrementE) min RepeatCountE ;
-         if completeCount > 0 then {
-            output resolved LineInfo
-               InputStartLineE # uniquify(LineFileIDE), completeCount :
-               (OutputStartLineO + (N * OutputLineIncrementO)),
-               (OutputLineIncrementE * OutputLineIncrementO) ;
-            ResolveLineInfo
-               (InputStartLineE + completeCount) #LineFileIDE, (RepeatCountE - completeCount) :
-               (OutputStartLineE + completeCount * OutputLineIncrementE), OutputLineIncrementE ;
-         } else {
-            output resolved LineInfo
-               InputStartLineE # uniquify(LineFileIDE), 1 :
-               (OutputStartLineO + (N * OutputLineIncrementO)), available ;
-            ResolveLineInfo
-               InputStartLineE #LineFileIDE, 1 :
-               (OutputStartLineE + available), (OutputLineIncrementE - available) ;
-            ResolveLineInfo
-               (InputStartLineE + 1) #LineFileIDE, (RepeatCountE - 1):
-               (OutputStartLineE + OutputLineIncrementE), OutputLineIncrementE ;
-         }
-      }
-   }
+as follows:
+
+if RepeatCountE > 0 then {
+  for each LineInfoO in the stratum of the embedded SMAP:
+    InputStartLineO #LineFileIDO, RepeatCountO: OutputStartLineO, OutputLineIncrementO
+  which includes OutputStartLineE
+    that is, InputStartLineO + N == OutputStartLineE
+      for some offset into the outer input range N where 0 <= N < RepeatCountO
+  and for which LineFileIDO has a sourceName matching the embedded SMAP's OutputFileName {
+    compute the number of outer mapping repeations which can be applied
+    available := RepeatCountO - N ;
+    compute the number of embedded mapping repeations which can be applied
+    completeCount := floor(available / OutputLineIncrementE) min RepeatCountE ;
+    if completeCount > 0 then {
+      output resolved LineInfo
+        InputStartLineE # uniquify(LineFileIDE), completeCount :
+        (OutputStartLineO + (N * OutputLineIncrementO)),
+        (OutputLineIncrementE * OutputLineIncrementO) ;
+      ResolveLineInfo
+        (InputStartLineE + completeCount) #LineFileIDE, (RepeatCountE - completeCount) :
+        (OutputStartLineE + completeCount * OutputLineIncrementE), OutputLineIncrementE ;
+    } else {
+      output resolved LineInfo
+        InputStartLineE # uniquify(LineFileIDE), 1 :
+        (OutputStartLineO + (N * OutputLineIncrementO)), available ;
+      ResolveLineInfo
+        InputStartLineE #LineFileIDE, 1 :
+        (OutputStartLineE + available), (OutputLineIncrementE - available) ;
+      ResolveLineInfo
+        (InputStartLineE + 1) #LineFileIDE, (RepeatCountE - 1):
+        (OutputStartLineE + OutputLineIncrementE), OutputLineIncrementE ;
+    }
+  }
 }
 ....
 
@@ -708,11 +707,11 @@ link:#example[general example] will provide context before walking through this
 example. In this example, `Incl.bar` is included by `Hi.bar`, but each is the
 result of a prior translation.
 
-image:resolution.png[resolution diagram]         
+image:resolution.png[resolution diagram,pdfwidth=75%]         
 
 If the unresolved SMAP (in `Hi.java.smap`) is as follows:
 
-[cols="<.^,<.^"]
+[cols="<.^20%,<.^20%"]
 |===
 |`SMAP +
 Hi.java +
@@ -770,7 +769,7 @@ The merged level~R~ FileSection is (in stratum `Foo`):
 
 The computation proceeds as follows:
 
-[width="99%",cols="20%,16%,16%,16%,16%,16%",options="header",]
+[cols="11%,13%,13%,11%,11%,41%",options="header",]
 |===
 |LineInfo~E~
 |LineInfo~E~ +
@@ -871,7 +870,7 @@ the Java 1.4 release was extended in support of debugging other languages. The
 new APIs and APIs with comments changed to include reference to
 link:#stratum[strata] are listed below:
 
-[cols=",",options="headers"]
+[cols="60%,40%",options="headers"]
 |===
 
 |New APIs
