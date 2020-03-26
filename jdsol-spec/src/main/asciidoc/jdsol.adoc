@@ -21,65 +21,67 @@ Constraints:
 [width="100%",cols=".^30%s,70%",options="header"]
 |===
 |Term |Definition
-|[#FinalSource]#final-source#
-|The final form of source. This source will be link:#compiler[compiled] into a
-link:#class-file[class file]. Typically, final-source is Java programming
+|[#TermFinalSource]#final-source#
+|The final form of source. This source will be <<TermCompiler,compiled>> into a
+<<TermClassFile,class file>>. Typically, final-source is Java programming
 language source.
 
-|[#TranslatedSource]#translated-source#
-|Source that will be translated by a link:#language-processor[language-processor]
-into another language or form.
+|[#TermTranslatedSource]#translated-source#
+|Source that will be translated by a
+<<TermLanguageProcessor,language-processor>> into another language or form.
 
-|[#language-processor]#language-processor#
-|Converts link:#TranslatedSource[translated-source] to
-link:#FinalSource[final-source] or to different
-link:#TranslatedSource[translated-source].
+|[#TermLanguageProcessor]#language-processor#
+|Converts <<TermTranslatedSource,translated-source>> to
+<<TermFinalSource,final-source>> or to different
+<<TermTranslatedSource,translated-source>>.
 
-|[#class-file]#class file#
+|[#TermClassFile]#class file#
 |A collection of bytes in Java virtual machine class file format.
 
-|[#compiler]#compiler#
-|Compiler which converts link:#FinalSource[final-source] to class files. For
+|[#TermCompiler]#compiler#
+|Compiler which converts <<TermFinalSource,final-source>> to class files. For
 example, `javac` is a compiler.
 
-|[#post-processor]#post-processor#
-|Takes a link:#class-file[class file] and a
-link:#sourcemapfile[Source Map File] as input; generates a class file as output.
-Inserts a link:#SourceDebugExtension[SourceDebugExtension attribute].
+|[#TermPostProcessor]#post-processor#
+|Takes a <<TermClassFile,class file>> and a
+<<TermSourceMapFile,Source Map File>> as input; generates a class file as
+output. Inserts a <<TermSourceDebugExtension,SourceDebugExtension attribute>>.
 
-|[#SMAP]#Source Map# +
+|[#TermSourceMap]#Source Map# +
 SMAP
 |Specifies the mapping of source between one or more sets of input source and
-the output source. See: link:#sourcemapformat[Source Map Format].
+the output source. See: <<Source Map Format>>.
 
-|[#sourcemapfile]#Source Map File# +
+|[#TermSourceMapFile]#Source Map File# +
 SMAP-file
 |Specifies the mapping created by a
-link:#language-processor[language-processor] between
-link:#TranslatedSource[translated-source] input and the resultant output source.
-It is a link:#SMAP[Source Map] stored in a file in
-link:#sourcemapformat[Source Map Format].
+<<TermLanguageProcessor,language-processor>> between
+<<TermTranslatedSource,translated-source>> input and the resultant output
+source. It is a <<TermSourceMap,Source Map>> stored in a file in
+<<Source Map Format>>.
 
-|[#stratum]#stratum#
+|[#TermStratum]#stratum#
 |A view of a class from a particular, named, programming language level.
 
-|[#JPDA]#JPDA#
-|The http://java.sun.com/products/jpda[Java Platform Debugger Architecture].
+|[#TermJPDA]#JPDA#
+|The https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/index.html[Java
+Platform Debugger Architecture].
 
-|[#JDI]#JDI#
+|[#TermJDI]#JDI#
 |The Java Debug Interface, which is the high-level Java programming language
 interface of the
-http://java.sun.com/products/jpda[Java Platform Debugger Architecture].
-See: http://java.sun.com/products/jpda/guide/jpda/jdi/[JDI Specification].
+https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/[Java Platform Debugger
+Architecture]. See:
+https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/[JDI Specification].
 
-|[#SourceDebugExtension]#SourceDebugExtension +
+|[#TermSourceDebugExtension]#SourceDebugExtension +
 attribute#
 |A Java virtual machine class file attribute that holds information about the
 source. In this case, the information is a
-link:#SMAP[Source Map] in link:#sourcemapformat[Source Map Format]. The source
-is mapped to link:#FinalSource[final-source] (output source). The Source Map
-has potentially multiple sets of input source (link:#stratum[strata]).
-See: link:#attribute[SourceDebugExtension Class File Attribute]
+<<TermSourceMap,Source Map>> in <<Source Map Format>>. The source
+is mapped to <<TermFinalSource,final-source>> (output source). The Source Map
+has potentially multiple sets of input source (<<TermStratum,strata>>).
+See: <<attribute,SourceDebugExtension Class File Attribute>>
 |===
 
 
@@ -87,32 +89,31 @@ See: link:#attribute[SourceDebugExtension Class File Attribute]
 
 === Single Translation
 
-A link:#language-processor[language-processor] translates
-link:#TranslatedSource[translated-source] to link:#FinalSource[final-source]
-(the case of translation from one link:#TranslatedSource[translated-source]
-to another translated-source, is addressed link:#ntranslations[below]). It also
-creates a second output, an link:#sourcemapfile[SMAP-file], whose format is
-described in link:#sourcemapformat[Source Map Format]. This file describes the
-mapping between input source and output source (e.g. line number and source
-file).
+A <<TermLanguageProcessor,language-processor>> translates
+<<TermTranslatedSource,translated-source>> to <<TermFinalSource,final-source>>
+(the case of translation from one <<TermTranslatedSource,translated-source>> to
+another translated-source, is addressed <<Multiple Translations,below>>). It
+also creates a second output, an <<TermSourceMapFile,SMAP-file>>, whose format
+is described in <<Source Map Format>>. This file describes the mapping between
+input source and output source (e.g. line number and source file).
 
-The link:#FinalSource[final-source] generated by the
-link:#language-processor[language-processor] is compiled by the
-link:#compiler[compiler].
+The <<TermFinalSource,final-source>> generated by the
+<<TermLanguageProcessor,language-processor>> is compiled by the
+<<TermCompiler,compiler>>.
 
-The link:#post-processor[post-processor] takes the class file generated by the
-link:#compiler[compiler] and the link:#sourcemapfile[SMAP-file] as input. A
-link:#SourceDebugExtension[SourceDebugExtension] attribute containing the SMAP
+The <<TermPostProcessor,post-processor>> takes the class file generated by the
+<<TermCompiler,compiler>> and the <<TermSourceMapFile,SMAP-file>> as input. A
+<<TermSourceDebugExtension, SourceDebugExtension>> attribute containing the SMAP
 in the SMAP-file is added to the class file and the new class file is written.
 
-Optionally, the link:#compiler[compiler] may take both
-link:#FinalSource[final-source] and the SMAP-file as input, and perform both
+Optionally, the <<TermCompiler,compiler>> may take both
+<<TermFinalSource,final-source>> and the SMAP-file as input, and perform both
 compilation and installation of the SourceDebugExtension.
 
 When the resultant program is debugged using a debugging tool based on the Java
-Debug Interface (link:#JDI[JDI]) of link:#JPDA[JPDA], the final-source line
+Debug Interface (<<TermJDI,JDI>>) of <<TermJPDA,JPDA>>, the final-source line
 number information is converted to the specified language view
-(link:#stratum[strata]).
+(<<TermStratum,strata>>).
 
 === Multiple Translations
 
@@ -120,18 +121,17 @@ A language-processor might translate source into source which will become input
 to another language-processor, and so on. Eventually, after possibly many
 translated-source forms, final-source is produced. Each translation produces
 SMAP information. This information must be preserved and placed in context, so
-that each link:#stratum[stratum] can be mapped to the final-source.
+that each <<TermStratum,stratum>> can be mapped to the final-source.
 
-A language-processor checks for an link:#sourcemapfile[SMAP-file] in a location
+A language-processor checks for an <<TermSourceMapFile,SMAP-file>> in a location
 parallel to that of the input source. For example, if the source repository is a
 file system and the input source is located at `path name.extension` then
 `path name.extension.smap` will be checked for an SMAP. The input SMAPs will be
-copied into the generated SMAP. See
-link:#OpenEmbeddedSectionDesc[OpenEmbeddedSection] for specifics on the
-embedding of input SMAPs.
+copied into the generated SMAP. See <<Embedded Source Maps>> for specifics on
+the embedding of input SMAPs.
 
-In the case of multiple translations, the link:#post-processor[post-processor]
-must resolve the embedded SMAPs. See link:#Resolution[SMAP Resolution].
+In the case of multiple translations, the <<TermPostProcessor,post-processor>>
+must resolve the embedded SMAPs. See <<SMAP Resolution>>.
 
 Note that final-source need not be Java programming language source, as
 compilers for other languages may directly generate class files, including the
@@ -150,12 +150,12 @@ never generated.
 
 This diagram demonstrates data flow. The particular case shown has two levels of
 translation, with file inclusion on the second level (as is the case in the
-example in link:#Resolution[SMAP Resolution]).
+example in <<SMAP Resolution>>).
 
 image:data-flow.png[data flow diagram,pdfwidth=75%]
 
-Where `TS` is link:#TranslatedSource[translated-source] and `FS` is
-link:#FinalSource[final-source].
+Where `TS` is <<TermTranslatedSource,translated-source>> and `FS` is
+<<TermFinalSource,final-source>>.
 
 == Scope
 
@@ -168,25 +168,25 @@ this specification.
 === Multi-Level Source View
 
 The ability to choose the source level to view is addressed in this
-specification. These are referred to as link:#stratum[strata].
+specification. These are referred to as <<TermStratum,strata>>.
 
 === Finding Source Files
 
-Currently, link:#FinalSource[final-source] is found by combining the follow
+Currently, <<TermFinalSource,final-source>> is found by combining the follow
 elements:
 
 * A source path
 * The package name converted to a directory path
-* The source file name from a link:#JDI[JDI] call (derived from the `SourceFile`
+* The source file name from a <<TermJDI,JDI>> call (derived from the `SourceFile`
   class file attribute)
 
 Since existing debuggers use this mechanism (the only way for an existing
-debugger to find link:#TranslatedSource[translated-source]) each aspect must b
+debugger to find <<TermTranslatedSource,translated-source>>) each aspect must be
 addressed:
 
 * The source path must be set-up to include translated-source directories
 * Source must be placed in a directory corresponding to the package
-* The link:#JDI[JDI] call must return the translated-source name.
+* The <<TermJDI,JDI>> call must return the translated-source name.
 
 For debuggers written against the new APIs, a new method has been added which
 returns the source path - this makes the translated-source directory structure
@@ -195,7 +195,7 @@ flexible.
 === Multiple Source Files per Class File
 
 When an inclusion mechanism is used, a class file will contain source from
-multiple link:#TranslatedSource[translated-source] files. The SourceFile
+multiple <<TermTranslatedSource,translated-source>> files. The SourceFile
 attribute of class files only associates one source file with a class file which
 is one reason the approach of simply rewriting the `SourceFile` and
 `LineNumberTable` attributes had to be abandoned. The SMAP allows a virtually
@@ -204,14 +204,15 @@ unlimited number of source files per stratum.
 == Source Map Format
 
 A Source Map (SMAP) describes a mapping between source positions in an input
-language (link:#TranslatedSource[translated-source]) and source positions in a
+language (<<TermTranslatedSource,translated-source>>) and source positions in a
 generated output language. A view of the source through such a mapping is called
-a link:#stratum[stratum]. The link:#sourcemapfile[SMAP-file] contains an
-unresolved SMAP. The link:#SourceDebugExtension[SourceDebugExtension] class file
-attribute, when used as described in this document, contains an SMAP. The SMAP
-stored in a SourceDebugExtension attribute must be link:#Resolution[resolved],
-and thus will have no link:#EmbeddedSourceMapsDesc[embedded SMAPs] and will have
-the link:#FinalSource[final-source] language as the output language.
+a <<TermStratum,stratum>>. The <<TermSourceMapFile,SMAP-file>> contains an
+unresolved SMAP. The <<TermSourceDebugExtension,SourceDebugExtension>> class
+file attribute, when used as described in this document, contains an SMAP. The
+SMAP stored in a SourceDebugExtension attribute must be
+<<SMAP Resolution,resolved>>, and thus will have no
+<<Embedded Source Maps,embedded SMAPs>> and will have the
+<<TermFinalSource,final-source>> language as the output language.
 
 An SMAP consists of a header and one or more sections of mapping information.
 
@@ -222,7 +223,7 @@ unknown sections must be ignored without error.
 
 The semantics of each section is discussed below. For clarity, an informal
 description of the syntax of each section is included in the discussion. See the
-link:#syntax[formal SMAP syntax] for syntax questions.
+formal <<SMAP Syntax,SMAP syntax>> for syntax questions.
 
 === General Format
 
@@ -248,9 +249,9 @@ standard final-source information should be used by default.
 
 === StratumSection
 
-An SMAP may map more than one link:#TranslatedSource[translated-source] to th
-output source (the output source is link:#FinalSource[final-source] if the SMAP
-is in a link:#SourceDebugExtension[SourceDebugExtension]). A view of the source
+An SMAP may map more than one <<TermTranslatedSource,translated-source>> to th
+output source (the output source is <<TermFinalSource,final-source>> if the SMAP
+is in a <<TermSourceDebugExtension,SourceDebugExtension>>). A view of the source
 is a stratum (whether viewed as translated-source or final-source). Each
 translated-source language should have its own stratum section with a unique
 stratum name. The final-source stratum (named "`Java`") is created automatically
@@ -259,23 +260,22 @@ a file section and a line section which will be associated with that stratum.
 
 The format of the section is simply the stratum section marker `*S` followed by
 the name of the stratum. The section ends with a line termination. One
-link:#FileSectionDesc[FileSection] and one link:#LineSectionDesc[LineSection]
-(in either order) must follow the StratumSection (before the next StratumSection
-or the link:#EndSectionDesc[EndSection]). One or more
-link:#VendorSectionDesc[VendorSection]s may follow a StratumSection. There must
-be at least one link:#StratumSection[StratumSection].
+<<FileSection>> and one <<LineSection>> (in either order) must follow the
+StratumSection (before the next StratumSection or the <<EndSection>>). One or
+more <<VendorSection>>s may follow a StratumSection. There must be at least one
+<<StratumSection>>.
 
 === FileSection
 
 The file section describes the translated-source file names. Each line maps a
 file ID to a source name and, optionally, to a source path. File IDs are used
-only in the link:#LineSectionDesc[LineSection]. The source name is the name of
-the translated-source. The source path is the path to the translated-source,
-the "/" symbol is translated to the local file separator. In the case where the
-source repository is a file system, source name is the file name (without
-directory information) and source path is a path name (often relative to one of
-the compilation source paths). For example: `Bar.foo` would be a source name,
-and `here/there/Bar.foo` would be a source path. The first file line denotes the
+only in the <<LineSection>>. The source name is the name of the
+translated-source. The source path is the path to the translated-source, the "/"
+symbol is translated to the local file separator. In the case where the source
+repository is a file system, source name is the file name (without directory
+information) and source path is a path name (often relative to one of the
+compilation source paths). For example: `Bar.foo` would be a source name, and
+`here/there/Bar.foo` would be a source path. The first file line denotes the
 primary file.
 
 The format of the file section is the file section marker `*F` on a line by
@@ -284,9 +284,8 @@ name only and source name / source path. The source name only form is one line:
 the integer file ID followed by the source name. The source name / source path
 form is two lines: a plus sign `+`, file ID, and source name on the first line
 and the source path on the second. The file ID must be unique within the file
-section. A link:#FileSection[FileSection] may only occur after a
-link:#StratumSection[StratumSection]. The link:#FileName[FileName] must have
-at least one character. The link:#AbsoluteFileName[AbsoluteFileName], if
+section. A <<FileSection>> may only occur after a <<StratumSection>>. The
+`FileName` must have at least one character. The `AbsoluteFileName`, if
 specified, must have at least one character.
 
 For example:
@@ -302,58 +301,76 @@ be computed by the debugger.
 
 === LineSection
 
-The line section (link:#LineSection[LineSection]) associates line numbers in the
-output source with line numbers and source names in the input source.
+The <<SyntaxLineSection,line section>> associates line numbers in the output source
+with line numbers and source names in the input source.
 
 The format of the line section is the line section marker `*L` on a line by
-itself, followed by the lines of link:#LineInfo[`LineInfo`]. Each
-link:#LineInfo[`LineInfo`] has the form:
+itself, followed by the lines of <<SyntaxLineInfo,LineInfo>>. Each
+<<SyntaxLineInfo,LineInfo>> has the form:
 
- InputStartLine # LineFileID , RepeatCount : OutputStartLine , OutputLineIncrement
+[subs=normal]
+----
+<<SyntaxInputStartLine,InputStartLine>> # <<SyntaxLineFileID,LineFileID>> , <<SyntaxRepeatCount,RepeatCount>> : <<SyntaxOutputStartLine,OutputStartLine>> , <<SyntaxOutputLineIncrement,OutputLineIncrement>>
+----
 
 where all but
 
- InputStartLine : OutputStartLine
+[subs=normal]
+----
+<<SyntaxInputStartLine,InputStartLine>> : <<SyntaxOutputStartLine,OutputStartLine>>
+----
 
 are optional.
 
 A range of output source lines is mapped to a single input source line. Each
-link:#LineInfo[`LineInfo`] describes link:#RepeatCount[`RepeatCount`] of these
-mappings. link:#OutputLineIncrement[`OutputLineIncrement`] specifies the number
+<<SyntaxLineInfo,LineInfo>> describes <<SyntaxRepeatCount,RepeatCount>> of these
+mappings. <<SyntaxOutputLineIncrement,OutputLineIncrement>> specifies the number
 of lines in the output source range; this line increment is applied to each
-mapping in the link:#LineInfo[`LineInfo`]. The source file containing the input
-source line is specified by link:#LineFileID[`LineFileID`] via the
-link:#FileSectionDesc[FileSection].
+mapping in the <<SyntaxLineInfo,LineInfo>>. The source file containing the input
+source line is specified by <<SyntaxLineFileID,LineFileID>> via the
+<<FileSection>>.
 
 More precisely, for each `n` between zero and
 
- RepeatCount - 1
+[subs=normal]
+----
+<<SyntaxRepeatCount,RepeatCount>> - 1
+----
 
 the input source line number
 
- InputStartLine + n
+[subs=normal]
+----
+<<SyntaxInputStartLine,InputStartLine>> + n
+----
 
 maps to the output source line numbers from
 
- OutputStartLine + (n * OutputLineIncrement)
+[subs=normal]
+----
+<<SyntaxOutputStartLine,OutputStartLine>> + (n * <<SyntaxOutputLineIncrement,OutputLineIncrement>>)
+----
 
 through
 
- OutputStartLine + ((n + 1) * OutputLineIncrement) - 1
+[subs=normal]
+----
+<<SyntaxOutputStartLine,OutputStartLine>> + ((n + 1) * <<SyntaxOutputLineIncrement,OutputLineIncrement>>) - 1
+----
 
-If absent link:#RepeatCount[`RepeatCount`] and
-link:#OutputLineIncrement[`OutputLineIncrement`] default to one. If absent
-link:#LineFileID[`LineFileID`] defaults to the most recent value (initially
+If absent <<SyntaxRepeatCount,RepeatCount>> and
+<<SyntaxOutputLineIncrement,OutputLineIncrement>> default to one. If absent
+<<SyntaxLineFileID,LineFileID>> defaults to the most recent value (initially
 zero).
 
-The first line of a file is line one. link:#RepeatCount[`RepeatCount`] is
-greater than or equal to one. Each link:#LineFileID[`LineFileID`] must be a
-file ID present in the link:#FileSectionDesc[FileSection].
-link:#InputStartLine[`InputStartLine`] is greater than or equal to one.
-link:#OutputStartLine[`OutputStartLine`] is greater than or equal to one.
-link:#OutputLineIncrement[`OutputLineIncrement`] is greater than or equal to
-zero. A link:#LineSection[`LineSection`] may only occur after a
-link:#StratumSection[`StratumSection`].
+The first line of a file is line one. <<SyntaxRepeatCount,RepeatCount>> is
+greater than or equal to one. Each <<SyntaxLineFileID,LineFileID>> must be a
+file ID present in the <<FileSection,FileSection>>.
+<<SyntaxInputStartLine,InputStartLine>> is greater than or equal to one.
+<<SyntaxOutputStartLine,OutputStartLine>> is greater than or equal to one.
+<<SyntaxOutputLineIncrement,OutputLineIncrement>> is greater than or equal to
+zero. A <<LineSection,LineSection>> may only occur after a
+<<StratumSection,StratumSection>>.
 
 For example:
 
@@ -368,8 +385,7 @@ Creates this mapping:
 [width="100%",cols="3",options="header"]
 |===
 |Input Source
-|Output Source
-|
+2+^|Output Source
 
 |Line
 |Begin Line
@@ -409,15 +425,15 @@ Creates this mapping:
 
 |===
 
-Note that multiple link:#LineInfo[`LineInfo`] may map multiple input source
+Note that multiple <<SyntaxLineInfo,LineInfo>> may map multiple input source
 lines to a single output source line, when such a
-link:#LineSection[`LineSection`] is being used to map output source lines to
-input source lines, a first matching link:#LineInfo[`LineInfo`] rule applies.
+<<SyntaxLineSection,LineSection>> is being used to map output source lines to
+input source lines, a first matching <<SyntaxLineInfo,LineInfo>> rule applies.
 
-Note also that multiple link:#LineInfo[`LineInfo`] may map a single input
+Note also that multiple <<SyntaxLineInfo,LineInfo>> may map a single input
 source line to a multiple, possibly disjoint, output source lines, when such a
-link:#LineSection[`LineSection`] is being used to map input source lines to
-output source lines, a first matching link:#LineInfo[`LineInfo`] rule again
+<<SyntaxLineSection,LineSection>> is being used to map input source lines to
+output source lines, a first matching <<SyntaxLineInfo,LineInfo>> rule again
 applies.
 
 === VendorSection
@@ -426,8 +442,8 @@ The vendor section is for vendor specific information.
 
 The format is `*V` on the first line to mark the section. The second line is the
 vendor ID which is formed by the same rules by which unique package names are
-formed in the Java language specification, second edition
-http://java.sun.com/docs/books/jls/second_edition/html/packages.doc.html#40169[(§7.7) Unique Package Names].
+formed in the Java language specification, third edition
+https://docs.oracle.com/javase/specs/jls/se6/html/packages.html#7.7[(§7.7) Unique Package Names].
 It includes the following lines until another section marker.
 
 === EndSection
@@ -435,24 +451,24 @@ It includes the following lines until another section marker.
 The end section marks the end of an SMAP, it consists simply of a `*E` marker.
 The end section must be the last line of an SMAP.
 
-=== EmbeddedSourceMaps
+=== Embedded Source Maps
 
-The link:#OpenEmbeddedSectionDesc[`OpenEmbeddedSection`] marks the beginning and
-link:#CloseEmbeddedSectionDesc[`CloseEmbeddedSection`] the end of a set of
-link:#EmbeddedSourceMaps[`EmbeddedSourceMaps`]. These SMAPs correspond to the
+The <<SyntaxOpenEmbeddedSection,OpenEmbeddedSection>> marks the beginning and
+<<SyntaxCloseEmbeddedSection,CloseEmbeddedSection>> the end of a set of
+<<SyntaxEmbeddedSourceMaps,EmbeddedSourceMaps>>. These SMAPs correspond to the
 input source for a language-processor. The stratum of the language-processor is
 indicated on both sections. These sections must not occur in a
-link:#Resolution[resolved] SMAP.
+<<SMAP Resolution,resolved>> SMAP.
 
 The format is the `*O` marker and the name of the output stratum on the first
 line. This is followed by the set of embedded SMAPs. The embedded SMAPs are
-included "whole" - from the `SMAP` to the link:#EndSection[`EndSection`] `*E`
+included "whole" - from the `SMAP` to the <<EndSection,`EndSection`>> `*E`
 marker - inclusive. Finally, the `*C` marker and the name of the output stratum
 on the last line terminates the embedded SMAPs.
 
 === SMAP Syntax
 
-[source]
+[source,subs=macros]
 ----
 SMAP:
             Header { Section } EndSection
@@ -476,13 +492,13 @@ Section:
             EmbeddedSourceMaps
             VendorSection
             FutureSection
-
+[[SyntaxEmbeddedSourceMaps]]
 EmbeddedSourceMaps:
             OpenEmbeddedSection { SMAP } CloseEmbeddedSection
-
+[[SyntaxOpenEmbeddedSection]]
 OpenEmbeddedSection:
             *O StratumID CR
-
+[[SyntaxCloseEmbeddedSection]]
 CloseEmbeddedSection:
             *C StratumID CR
 
@@ -491,10 +507,10 @@ StratumSection:
 
 StratumID:
             NONASTERISKSTRING
-
+[[SyntaxLineSection]]
 LineSection:
             *L CR { LineInfo }
-
+[[SyntaxLineInfo]]
 LineInfo:
             InputLineInfo : OutputLineInfo CR
 
@@ -505,26 +521,26 @@ InputLineInfo:
 OutputLineInfo:
             OutputStartLine , OutputLineIncrement
             OutputStartLine
-
+[[SyntaxInputStartLine]]
 InputStartLine:
             NUMBER
             NUMBER # LineFileID
-
+[[SyntaxLineFileID]]
 LineFileID:
             FileID
-
+[[SyntaxRepeatCount]]
 RepeatCount:
             NUMBER
-
+[[SyntaxOutputStartLine]]
 OutputStartLine:
             NUMBER
-
+[[SyntaxOutputLineIncrement]]
 OutputLineIncrement:
             NUMBER
 
 FileSection:
             *F CR { FileInfo }
-
+[[SyntaxFileInfo]]
 FileInfo:
             FileID FileName CR
             + FileID FileName CR AbsoluteFileName CR
@@ -592,7 +608,7 @@ carriage-return or new-line is excluded.
 Before the SMAP in a SMAP-file can be installed into the SourceDebugExtension
 attribute it must be resolved into an SMAP with no embedded SMAPs and with
 final-source as the output source. A set of
-link:#EmbeddedSourceMapsDesc[embedded SMAPs] is specific to a stratum and is
+<<SyntaxEmbeddedSourceMaps,embedded SMAPs>> is specific to a stratum and is
 resolved in the context of the matching StratumSection in the outer SMAP. The
 resolved SMAP includes StratumSections computed from each set of embedded SMAPs
 as well as the unchanged StratumSections of the outer SMAP. If embedded SMAPs
@@ -640,16 +656,19 @@ computed StratumSection is the merge of each embedded StratumSection, for that
 stratum. Line number information is composed with the line number information of
 the outer StratumSection (note that the embedded StratumSections cannot be for
 the same stratum as the outer StratumSection). Specifically, a computed
-StratumSection consists of a merged link:#FileSectionDesc[FileSection], a
-composed link:#LineSectionDesc[LineSection], and direct copies of any
-link:#VendorSectionDesc[VendorSection]s or unknown sections. The merged
-FileSection includes each unique link:#FileInfo[FileInfo], with FileIDs
+StratumSection consists of a merged <<FileSection>>, a composed <<LineSection>>,
+and direct copies of any <<VendorSection>>s or unknown sections. The merged
+FileSection includes each unique <<SyntaxFileInfo,FileInfo>>, with FileIDs
 reassigned to be unique. The composition the LineSections is described in the
 algorithm below.
 
 === LineInfo Composition Algorithm
 
-The following pseudo-code sketches the algorithm for resolving LineInfo in embedded SMAPs. LineInfo resolution is by composition - discussed above. An embedded LineInfo which maps stratum _A_ to stratum _B_ is composed with an outer LineInfo which maps stratum _B_ to stratum _C_ to create a new resolved LineInfo which maps stratum _A_ to stratum _C_.
+The following pseudo-code sketches the algorithm for resolving LineInfo in
+embedded SMAPs. LineInfo resolution is by composition - discussed above. An
+embedded LineInfo which maps stratum _A_ to stratum _B_ is composed with an
+outer LineInfo which maps stratum _B_ to stratum _C_ to create a new resolved
+LineInfo which maps stratum _A_ to stratum _C_.
 
 The SMAPs and their components are marked by subscript:
 
@@ -657,7 +676,10 @@ The SMAPs and their components are marked by subscript:
 * Outer StratumSection - level~O~
 * Resolved computed StratumSection - level~R~
 
-The inputs and outputs of the algorithm are LineInfo tuples. Line information is represented in this algorithm in its link:#LineInfo[LineInfo format] which is discussed in the link:#LineSectionDesc[LineSection] This algorithm is invoked for each LineInfo~E~ in each embedded SMAP.
+The inputs and outputs of the algorithm are LineInfo tuples. Line information is
+represented in this algorithm in its <<SyntaxLineInfo,LineInfo format>> which is
+discussed in the <<LineSection>>. This algorithm is invoked for each LineInfo~E~
+in each embedded SMAP.
 
 ....
 ResolveLineInfo:
@@ -703,7 +725,7 @@ where _uniquify_ converts a LineFileID~E~ to a corresponding LineFileID~R~
 === Resolution Example
 
 The following example demonstrates resolution with this algorithm. The
-link:#example[general example] will provide context before walking through this
+<<example,general example>> will provide context before walking through this
 example. In this example, `Incl.bar` is included by `Hi.bar`, but each is the
 result of a prior translation.
 
@@ -719,7 +741,7 @@ Java`
 |_Outer Header_
 
 |`*O Bar`
-|_link:#OpenEmbeddedSectionDesc[OpenEmbeddedSection]_
+|_<<SyntaxOpenEmbeddedSection,OpenEmbeddedSection>>_
 
 |`SMAP +
 Hi.bar +
@@ -743,7 +765,7 @@ Java +
 |_Embedded SMAP (Incl.bar)_
 
 |`*C Bar`
-|_link:#CloseEmbeddedSectionDesc[CloseEmbeddedSection]_
+|_<<SyntaxCloseEmbeddedSection,CloseEmbeddedSection>>_
 
 |`*S Bar +
 *F +
@@ -756,7 +778,7 @@ Java +
 |_Outer StratumSection_
 
 |`*E`
-|_Final link:#EndSectionDesc[EndSection]_
+|_Final <<EndSection>>_
 |===
 
 The merged level~R~ FileSection is (in stratum `Foo`):
@@ -865,10 +887,10 @@ Java
 
 == JPDA Support
 
-The http://java.sun.com/products/jpda[Java Platform Debugger Architecture] in
-the Java 1.4 release was extended in support of debugging other languages. The
-new APIs and APIs with comments changed to include reference to
-link:#stratum[strata] are listed below:
+The https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/[Java Platform Debugger
+Architecture] in the Java 1.4 release was extended in support of debugging other
+languages. The new APIs and APIs with comments changed to include reference to
+<<TermStratum,strata>> are listed below:
 
 [cols="60%,40%",options="headers"]
 |===
@@ -876,81 +898,82 @@ link:#stratum[strata] are listed below:
 |New APIs
 |APIs with Changed Comments
 
-2+^|http://java.sun.com/products/jpda/guide/jpda/jvmdi-spec.html[JVMDI]
+2+^|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jvmdi-spec.html[JVMDI]
 
-|`GetSourceDebugExtension`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jvmdi-spec.html#GetSourceDebugExtension[`GetSourceDebugExtension`]
 |
 
-2+^|http://java.sun.com/products/jpda/guide/jpda/jdwp-spec.html[JDWP] -
+2+^|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdwp-spec.html[JDWP] -
 `ReferenceType` (2) Command Set
 
-|`SourceDebugExtension` Command (12)
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdwp/jdwp-protocol.html#JDWP_ReferenceType_SourceDebugExtension[`SourceDebugExtension`] Command (12)
 |
 
-2+^|http://java.sun.com/products/jpda/guide/jpda/jdwp-spec.html[JDWP] -
+2+^|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdwp-spec.html[JDWP] -
 `VirtualMachine` (1) Command Set
 
-|`SetDefaultStratum` Command (19)
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdwp/jdwp-protocol.html#JDWP_VirtualMachine_SetDefaultStratum[`SetDefaultStratum`] Command (19)
 |
 
-2+^|http://java.sun.com/products/jpda/guide/jpda/jdi/index.html[JDI] -
-`VirtualMachine` interface
+2+^|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/index.html[JDI] -
+https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/VirtualMachine.html[`VirtualMachine`]
+interface
 
-|`void setDefaultStratum(String stratum)`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/VirtualMachine.html#setDefaultStratum(java.lang.String)[`void setDefaultStratum(String stratum)`]
 |
 
-|`String getDefaultStratum()`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/VirtualMachine.html#getDefaultStratum()[`String getDefaultStratum()`]
 |
 
-2+^|http://java.sun.com/products/jpda/guide/jpda/jdi/index.html[JDI] -
-`ReferenceType` interface
+2+^|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/index.html[JDI] -
+https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/ReferenceType.html[`ReferenceType`] interface
 
-|`String sourceNames(String stratum)`
-|`String sourceName()`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#sourceNames(java.lang.String)[`String sourceNames(String stratum)`]
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#sourceName()[`String sourceName()`]
 
-|`String sourcePaths(String stratum)`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#sourcePaths(java.lang.String)[`String sourcePaths(String stratum)`]
 |
 
-|`List allLineLocations(String stratum, String sourceName)`
-|`List allLineLocations()`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#allLineLocations(java.lang.String,%20java.lang.String)[`List allLineLocations(String stratum, String sourceName)`]
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#allLineLocations()[`List allLineLocations()`]
 
-|`List locationsOfLine(String stratum, String sourceName, int lineNumber)`
-|`List locationsOfLine(int lineNumber)`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#locationsOfLine(java.lang.String,%20java.lang.String,%20int)[`List locationsOfLine(String stratum, String sourceName, int lineNumber)`]
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#locationsOfLine(int)[`List locationsOfLine(int lineNumber)`]
 
-|`List availableStrata()`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#availableStrata()[`List availableStrata()`]
 |
 
-|`String defaultStratum()`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#defaultStratum()[`String defaultStratum()`]
 |
 
-|`String sourceDebugExtension()`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#sourceDebugExtension()[`String sourceDebugExtension()`]
 |
 
-2+^|http://java.sun.com/products/jpda/guide/jpda/jdi/index.html[JDI] -
-`Method` interface
+2+^|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/index.html[JDI] -
+https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/Method.html[`Method`] interface
 
-|`List allLineLocations(String stratum, String sourceName)`
-|`List allLineLocations()`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/Method.html#allLineLocations(java.lang.String,%20java.lang.String)[`List allLineLocations(String stratum, String sourceName)`]
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/Method.html#allLineLocations()[`List allLineLocations()`]
 
-|`List locationsOfLine(String stratum, String sourceName, int lineNumber)`
-|`List locationsOfLine(int lineNumber)`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/Method.html#locationsOfLine(java.lang.String,%20java.lang.String,%20int)[`List locationsOfLine(String stratum, String sourceName, int lineNumber)`]
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/Method.html#locationsOfLine(int)[`List locationsOfLine(int lineNumber)`]
 
-2+^|http://java.sun.com/products/jpda/guide/jpda/jdi/index.html[JDI] -
-`Location` interface
+2+^|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/index.html[JDI] -
+https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/Location.html[`Location`] interface
 
 |
-|http://java.sun.com/products/jpda/guide/jpda/jdi/com/sun/jdi/Location.html[class comment] (strata defined)
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/Location.html[class comment] (strata defined)
 
-|`int lineNumber(String stratum)`
-|`int lineNumber()`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/Location.html#lineNumber(java.lang.String)[`int lineNumber(String stratum)`]
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/Location.html#lineNumber()[`int lineNumber()`]
 
-|`String sourceName(String stratum)`
-|`String sourceName()`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/Location.html#sourceName(java.lang.String)[`String sourceName(String stratum)`]
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/Location.html#sourceName()[`String sourceName()`]
 
-|`String sourcePath(String stratum)`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/Location.html#sourcePath(java.lang.String)[`String sourcePath(String stratum)`]
 |
 
-|`String sourcePath()`
+|https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/Location.html#sourcePath()[`String sourcePath()`]
 |
 
 |===
@@ -971,19 +994,21 @@ for evolution and vendor extension.
 === SourceDebugExtension Access
 
 This string is made opaquely accessible at the three layers of the
-http://java.sun.com/products/jpda[Java Platform Debugger Architecture] (JPDA):
+https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/[Java Platform Debugger Architecture] (JPDA):
 
 [cols="10%,90%"]
 |===
-|JVMDI |`GetSourceDebugExtension(jclass clazz, char **sourceDebugExtensionPtr)`
-|JDWP |`SourceDebugExtension` Command (12) in the `ReferenceType` (2) Command Set
-|JDI |`String sourceDebugExtension()` in the `ReferenceType` interface
+|JVMDI |https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jvmdi-spec.html#GetSourceDebugExtension[`GetSourceDebugExtension(jclass clazz, char **sourceDebugExtensionPtr)`]
+|JDWP |https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdwp/jdwp-protocol.html#JDWP_ReferenceType_SourceDebugExtension[`SourceDebugExtension`] Command (12) in the `ReferenceType` (2) Command Set
+|JDI |https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#sourceDebugExtension()[`String sourceDebugExtension()`] in the `ReferenceType` interface
 |===
 
+[#attribute]
 === `SourceDebugExtension` Class File Attribute
 
 Java virtual machine class file attributes are described in
-http://java.sun.com/docs/books/vmspec/2nd-edition/html/ClassFile.doc.html#43817[section 4.7] of the http://java.sun.com/docs/books/vmspec/2nd-edition/html/VMSpecTOC.doc.html[The Java Virtual Machine Specification].
+https://docs.oracle.com/javase/specs/jvms/se6/html/ClassFile.doc.html#43817[section 4.7]
+of the https://docs.oracle.com/javase/specs/jvms/se6/html/VMSpecTOC.doc.html[The Java Virtual Machine Specification].
 The definition of the added attribute is in the context of The Java Virtual
 Machine Specification:
 
@@ -1056,9 +1081,9 @@ The second JSP file is the included file `greeting.jsp`:
 
 === Language Processor
 
-When a JSP compiler (the link:#language-processor[language-processor]) compiles
+When a JSP compiler (the <<TermLanguageProcessor,language-processor>>) compiles
 these files it will produce two outputs - a Java programming language source
-file and a link:#sourcemapfile[SMAP-file]. The generated Java programming
+file and a <<TermSourceMapFile,SMAP-file>>. The generated Java programming
 language source file is `HelloServlet.java`:
 
 [cols=">10%,90%"]
@@ -1094,7 +1119,7 @@ language source file is `HelloServlet.java`:
 |29|`}`
 |===
 
-The generated link:#sourcemapfile[SMAP-file] is `HelloServlet.java.smap`:
+The generated <<TermSourceMapFile,SMAP-file>> is `HelloServlet.java.smap`:
 
 ----
 SMAP
@@ -1141,15 +1166,19 @@ The three LineInfo lines describe these mappings:
 
 Next `HelloServlet.java` is compiled by a Java programming language compiler
 (for example `javac`) producing the class file `HelloServlet.class`. Then the
-link:#post-processor[post-processor] is run. It takes `HelloServlet.class` and
+<<TermPostProcessor,post-processor>> is run. It takes `HelloServlet.class` and
 `HelloServlet.java.smap` as input. It creates a
-link:#SourceDebugExtension[SourceDebugExtension] attribute whose content is the
+<<TermSourceDebugExtension,SourceDebugExtension>> attribute whose content is the
 SMAP in `HelloServlet.java.smap` and rewrites `HelloServlet.class` with this
 attribute.
 
 === Debugging
 
-Now the program is run under the control of a debugger (which is a client of link:#JDI[JDI]). Let's say we are stepping through this code and the debugger has just received a link:#JDI[JDI] `StepEvent` for the line that is just about to output `<BODY>`. The debugger's code might look like this (the `StepEvent` is in the variable `stepEvent`):
+Now the program is run under the control of a debugger (which is a client of
+<<TermJDI,JDI>>). Let's say we are stepping through this code and the debugger
+has just received a <<TermJDI,JDI>> `StepEvent` for the line that is just about
+to output `<BODY>`. The debugger's code might look like this (the `StepEvent`
+is in the variable `stepEvent`):
 
 ----
 Location location = stepEvent.location();
@@ -1181,7 +1210,7 @@ the `lineNumber` would be `5` and the displayed line would be:
 <BODY>
 ----
 
-This occurs because the link:#SourceDebugExtension[SourceDebugExtension]
+This occurs because the <<TermSourceDebugExtension,SourceDebugExtension>>
 attribute was stored when the VM read `HelloServlet.class` and it was retrieved
 with the SourceDebugExtension JDWP command which in turn caused the JVMDI
 function call GetSourceDebugExtension. The SMAP in the SourceDebugExtension was
@@ -1208,4 +1237,4 @@ int lineNumber = location.lineNumber();
 
 would have the same effect. Since this is the form code would have taken before
 these extensions were introduced, existing debuggers can be utilized if they are
-run under the new implementation of link:#JDI[JDI].
+run under the new implementation of <<TermJDI,JDI>>.
