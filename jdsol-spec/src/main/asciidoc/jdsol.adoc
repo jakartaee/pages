@@ -111,7 +111,8 @@ Optionally, the <<TermCompiler,compiler>> may take both
 compilation and installation of the SourceDebugExtension.
 
 When the resultant program is debugged using a debugging tool based on the Java
-Debug Interface (<<TermJDI,JDI>>) of <<TermJPDA,JPDA>>, the final-source line
+Debug Interface +
+(<<TermJDI,JDI>>) of <<TermJPDA,JPDA>>, the final-source line
 number information is converted to the specified language view
 (<<TermStratum,strata>>).
 
@@ -162,8 +163,8 @@ Where `TS` is <<TermTranslatedSource,translated-source>> and `FS` is
 === Variables
 
 The complexity of mapping semantics (like variable and data views) across
-languages is such that this feature will be considered for a future version of
-this specification.
+languages is such that this feature has not been included in this version of the
+specification and will be considered for a future version.
 
 === Multi-Level Source View
 
@@ -249,7 +250,7 @@ standard final-source information should be used by default.
 
 === StratumSection
 
-An SMAP may map more than one <<TermTranslatedSource,translated-source>> to th
+An SMAP may map more than one <<TermTranslatedSource,translated-source>> to the
 output source (the output source is <<TermFinalSource,final-source>> if the SMAP
 is in a <<TermSourceDebugExtension,SourceDebugExtension>>). A view of the source
 is a stratum (whether viewed as translated-source or final-source). Each
@@ -358,8 +359,8 @@ through
 <<SyntaxOutputStartLine,OutputStartLine>> + ((n + 1) * <<SyntaxOutputLineIncrement,OutputLineIncrement>>) - 1
 ----
 
-If absent <<SyntaxRepeatCount,RepeatCount>> and
-<<SyntaxOutputLineIncrement,OutputLineIncrement>> default to one. If absent
+If absent, <<SyntaxRepeatCount,RepeatCount>> and
+<<SyntaxOutputLineIncrement,OutputLineIncrement>> default to one. If absent,
 <<SyntaxLineFileID,LineFileID>> defaults to the most recent value (initially
 zero).
 
@@ -444,7 +445,6 @@ The format is `*V` on the first line to mark the section. The second line is the
 vendor ID which is formed by the same rules by which unique package names are
 formed in the Java language specification, third edition
 https://docs.oracle.com/javase/specs/jls/se6/html/packages.html#7.7[(§7.7) Unique Package Names].
-It includes the following lines until another section marker.
 
 === EndSection
 
@@ -681,44 +681,45 @@ represented in this algorithm in its <<SyntaxLineInfo,LineInfo format>> which is
 discussed in the <<LineSection>>. This algorithm is invoked for each LineInfo~E~
 in each embedded SMAP.
 
-....
+[subs=normal]
+----
 ResolveLineInfo:
-   InputStartLineE #LineFileIDE, RepeatCountE : OutputStartLineE, OutputLineIncrementE
+   InputStartLine~E~ #LineFileID~E~, RepeatCount~E~ : OutputStartLine~E~, OutputLineIncrement~E~
 as follows:
 
-if RepeatCountE > 0 then {
-  for each LineInfoO in the stratum of the embedded SMAP:
-    InputStartLineO #LineFileIDO, RepeatCountO: OutputStartLineO, OutputLineIncrementO
-  which includes OutputStartLineE
-    that is, InputStartLineO + N == OutputStartLineE
-      for some offset into the outer input range N where 0 <= N < RepeatCountO
-  and for which LineFileIDO has a sourceName matching the embedded SMAP's OutputFileName {
+if RepeatCount~E~ > 0 then {
+  for each LineInfo~O~ in the stratum of the embedded SMAP:
+    InputStartLine~O~ #LineFileID~O~, RepeatCount~O~: OutputStartLine~O~, OutputLineIncrement~O~
+  which includes OutputStartLine~E~
+    that is, InputStartLine~O~ + N == OutputStartLine~E~
+      for some offset into the outer input range N where 0 <= N < RepeatCount~O~
+  and for which LineFileID~O~ has a sourceName matching the embedded SMAP's OutputFileName {
     compute the number of outer mapping repeations which can be applied
-    available := RepeatCountO - N ;
+    available := RepeatCount~O~ - N ;
     compute the number of embedded mapping repeations which can be applied
-    completeCount := floor(available / OutputLineIncrementE) min RepeatCountE ;
+    completeCount := floor(available / OutputLineIncrement~E~) min RepeatCount~E~ ;
     if completeCount > 0 then {
       output resolved LineInfo
-        InputStartLineE # uniquify(LineFileIDE), completeCount :
-        (OutputStartLineO + (N * OutputLineIncrementO)),
-        (OutputLineIncrementE * OutputLineIncrementO) ;
+        InputStartLine~E~ # uniquify(LineFileID~E~), completeCount :
+        (OutputStartLine~O~ + (N * OutputLineIncrement~O~)),
+        (OutputLineIncrement~E~ * OutputLineIncrement~O~) ;
       ResolveLineInfo
-        (InputStartLineE + completeCount) #LineFileIDE, (RepeatCountE - completeCount) :
-        (OutputStartLineE + completeCount * OutputLineIncrementE), OutputLineIncrementE ;
+        (InputStartLine~E~ + completeCount) #LineFileID~E~, (RepeatCount~E~ - completeCount) :
+        (OutputStartLine~E~ + completeCount * OutputLineIncrement~E~), OutputLineIncrement~E~ ;
     } else {
       output resolved LineInfo
-        InputStartLineE # uniquify(LineFileIDE), 1 :
-        (OutputStartLineO + (N * OutputLineIncrementO)), available ;
+        InputStartLine~E~ # uniquify(LineFileID~E~), 1 :
+        (OutputStartLine~O~ + (N * OutputLineIncrement~O~)), available ;
       ResolveLineInfo
-        InputStartLineE #LineFileIDE, 1 :
-        (OutputStartLineE + available), (OutputLineIncrementE - available) ;
+        InputStartLine~E~ #LineFileID~E~, 1 :
+        (OutputStartLine~E~ + available), (OutputLineIncrement~E~ - available) ;
       ResolveLineInfo
-        (InputStartLineE + 1) #LineFileIDE, (RepeatCountE - 1):
-        (OutputStartLineE + OutputLineIncrementE), OutputLineIncrementE ;
+        (InputStartLine~E~ + 1) #LineFileID~E~, (RepeatCount~E~ - 1):
+        (OutputStartLine~E~ + OutputLineIncrement~E~), OutputLineIncrement~E~ ;
     }
   }
 }
-....
+----
 
 where _uniquify_ converts a LineFileID~E~ to a corresponding LineFileID~R~
 
@@ -987,7 +988,7 @@ particularly true for debugging the source of other languages. In a distributed
 environment side files may not be accessible, the information must be directly
 associated with the class.
 
-The solution is the addition of a class file attribute which holds a string;
+The solution is the addition of a class file attribute which holds a string.
 The string contains debugging information in a standardized format which allows
 for evolution and vendor extension.
 
@@ -1017,7 +1018,7 @@ Machine Specification:
 a|
 The `SourceDebugExtension` attribute is an optional attribute in the
 `attributes` table of the `ClassFile` structure. There can be no more than one
-`SourceDebugExtension` attribute in the `attributes` table of a given`ClassFile`
+`SourceDebugExtension` attribute in the `attributes` table of a given `ClassFile`
 structure.
 
 The `SourceDebugExtension` attribute has the following format:
@@ -1043,7 +1044,6 @@ The items of the `SourceDebugExtension_attribute` structure are as follows:
 `debug_extension[]`::
   The `debug_extension` array holds a string, which must be in UTF-8 format.
   There is no terminating zero byte. +
-   +
   The string in the `debug_extension` item will be interpreted as extended
   debugging information. The content of this string has no semantic effect on
   the Java Virtual Machine.
