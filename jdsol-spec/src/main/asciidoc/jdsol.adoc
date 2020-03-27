@@ -235,6 +235,7 @@ termination is with line-feed, carriage-return or carriage-return followed by
 line-feed. Because SMAPs are included in class files, size of the SMAP was an
 important constraint on the format chosen for them.
 
+[#smap-header]
 === Header
 
 The first line of an SMAP is the four letters `SMAP` which identifies it as an
