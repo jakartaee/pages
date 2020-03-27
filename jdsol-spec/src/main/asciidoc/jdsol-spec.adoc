@@ -3,8 +3,8 @@
 //
 
 = Jakarta Debugging Support for Other Languages
-:authors: Jakarta Debugging Support for Other Languages Team, https://projects.eclipse.org/projects/ee4j.jdsol
-:email: https://dev.eclipse.org/mailman/listinfo/jdsol-dev
+:authors: Jakarta Server Pages Team, https://projects.eclipse.org/projects/ee4j.jsp
+:email: https://dev.eclipse.org/mailman/listinfo/jsp-dev
 :version-label!:
 :doctype: book
 :license: Eclipse Foundation Specification License v1.0
