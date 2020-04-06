@@ -141,7 +141,7 @@
                     <!--svn|mercurial|git - defaults to svn-->
                     <scm>git</scm>
                     <!-- turn on/off debugging -->
-                    <debug>off</debug>
+                    <debug>false</debug>
                     <!-- skip files not under SCM-->
                     <scmOnly>true</scmOnly>
                     <!-- turn off warnings -->

@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import javax.el.FunctionMapper;
+import jakarta.el.FunctionMapper;
 import jakarta.servlet.jsp.tagext.FunctionInfo;
 import jakarta.servlet.jsp.tagext.JspFragment;
 import jakarta.servlet.jsp.tagext.PageData;
@@ -1029,14 +1029,14 @@ class Validator {
                     }
                     return;
                 }
-                if (! "javax.el.ValueExpression".equals(typeName)) {
+                if (! "jakarta.el.ValueExpression".equals(typeName)) {
                     err.jspError(n, "jsp.error.setter.notvalueexpression",
                         handlerName, property);
                 }
                 return;
             }
             if (tldattr.isDeferredMethod()) {
-                if (! "javax.el.MethodExpression".equals(typeName)) {
+                if (! "jakarta.el.MethodExpression".equals(typeName)) {
                     err.jspError(n, "jsp.error.setter.notmethodexpression",
                         handlerName, property);
                 }

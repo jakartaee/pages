@@ -110,10 +110,10 @@ public class Constants {
      * Servlet context and request attributes that the JSP engine
      * uses. 
      */
-    public static final String INC_REQUEST_URI = "javax.servlet.include.request_uri";
-    public static final String INC_SERVLET_PATH = "javax.servlet.include.servlet_path";
-    public static final String TMP_DIR = "javax.servlet.context.tempdir";
-    public static final String FORWARD_SEEN = "javax.servlet.forward.seen";
+    public static final String INC_REQUEST_URI = "jakarta.servlet.include.request_uri";
+    public static final String INC_SERVLET_PATH = "jakarta.servlet.include.servlet_path";
+    public static final String TMP_DIR = "jakarta.servlet.context.tempdir";
+    public static final String FORWARD_SEEN = "jakarta.servlet.forward.seen";
     public static final String FIRST_REQUEST_SEEN = "jspx.1st.request";
 
     // Must be kept in sync with org/apache/catalina/Globals.java

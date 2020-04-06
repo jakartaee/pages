@@ -20,7 +20,6 @@ package org.apache.jasper.servlet;
 
 import java.io.File;
 import java.io.InputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,19 +33,18 @@ import java.util.Vector;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.net.URL;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
-import javax.servlet.FilterRegistration;
-import javax.servlet.Filter;
-import javax.servlet.SessionCookieConfig;
-import javax.servlet.SessionTrackingMode;
-import javax.servlet.descriptor.JspConfigDescriptor;
-import javax.servlet.descriptor.TaglibDescriptor;
-import javax.servlet.descriptor.JspPropertyGroupDescriptor;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRegistration;
+import jakarta.servlet.FilterRegistration;
+import jakarta.servlet.Filter;
+import jakarta.servlet.SessionCookieConfig;
+import jakarta.servlet.SessionTrackingMode;
+import jakarta.servlet.descriptor.JspConfigDescriptor;
+import jakarta.servlet.descriptor.TaglibDescriptor;
+import jakarta.servlet.descriptor.JspPropertyGroupDescriptor;
 
 import org.apache.jasper.JasperException;
 import org.apache.jasper.xmlparser.TreeNode;
@@ -513,6 +511,11 @@ public class JspCServletContext implements ServletContext {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public ServletRegistration.Dynamic addJspFile(String s, String s1) {
+        throw new UnsupportedOperationException();
+    }
+
     public <T extends Servlet> T createServlet(Class<T> c)
         throws ServletException {
         throw new UnsupportedOperationException();
@@ -596,6 +599,38 @@ public class JspCServletContext implements ServletContext {
 
     public void declareRoles(String... roleNames) {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public String getVirtualServerName() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public int getSessionTimeout() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setSessionTimeout(int i) {
+    }
+
+    @Override
+    public String getRequestCharacterEncoding() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setRequestCharacterEncoding(String s) {
+    }
+
+    @Override
+    public String getResponseCharacterEncoding() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setResponseCharacterEncoding(String s) {
     }
 
     private static final String WEB_XML = "/WEB-INF/web.xml";

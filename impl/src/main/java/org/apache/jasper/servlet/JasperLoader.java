@@ -25,21 +25,11 @@ import java.security.AccessController;
 import java.security.CodeSource;
 import java.security.PermissionCollection;
 import java.security.PrivilegedAction;
-import java.security.PrivilegedActionException;
-import java.security.PrivilegedExceptionAction;
 import java.security.ProtectionDomain;
 import java.util.Map;
 
-import javax.servlet.http.*;
-
-import org.apache.jasper.JasperException;
 import org.apache.jasper.Constants;
 import org.apache.jasper.security.SecurityUtil;
-
-// START OF IASRI 4709374
-// XXX Remove dependency on glassfish common-util
-// import com.sun.appserv.server.util.PreprocessorUtil;
-// END OF IASRI 4709374
 
 /**
  * Class loader for loading servlet class files (corresponding to JSP files) 

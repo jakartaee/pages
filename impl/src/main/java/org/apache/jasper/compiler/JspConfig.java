@@ -17,18 +17,16 @@
 
 package org.apache.jasper.compiler;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-import javax.servlet.ServletContext;
-import javax.servlet.descriptor.JspConfigDescriptor;
-import javax.servlet.descriptor.JspPropertyGroupDescriptor;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.descriptor.JspConfigDescriptor;
+import jakarta.servlet.descriptor.JspPropertyGroupDescriptor;
 
 import org.apache.jasper.JasperException;
-import org.apache.jasper.Constants;
 
 /**
  * Handles the jsp-config element in WEB_INF/web.xml.  This is used

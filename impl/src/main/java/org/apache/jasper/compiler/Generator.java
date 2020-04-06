@@ -26,15 +26,11 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
-
-import javax.el.ValueExpression;
-import javax.el.MethodExpression;
 
 import jakarta.servlet.jsp.tagext.TagAttributeInfo;
 import jakarta.servlet.jsp.tagext.TagInfo;
@@ -558,7 +554,7 @@ class Generator {
             out.printil("if (exception != null) {");
             out.pushIndent();
             out.printil(
-                "response.setStatus((Integer)request.getAttribute(\"javax.servlet.error.status_code\"));");
+                "response.setStatus((Integer)request.getAttribute(\"jakarta.servlet.error.status_code\"));");
             out.popIndent();
             out.printil("}");
         }
@@ -2864,7 +2860,7 @@ class Generator {
                 // then type is adjusted accordingly.
                 if (attrType == Object.class &&
                                 attr.getEL().hasPoundExpression()) {
-                    attrType = javax.el.ValueExpression.class;
+                    attrType = jakarta.el.ValueExpression.class;
                 }
                 attrValue =
                     JspUtil.interpreterCall(

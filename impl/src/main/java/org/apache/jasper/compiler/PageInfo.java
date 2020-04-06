@@ -36,8 +36,8 @@ public class PageInfo {
      * generated code. 
      */
     private static final String[] STANDARD_IMPORTS = { 
-	"javax.servlet.*", 
-	"javax.servlet.http.*", 
+	"jakarta.servlet.*",
+	"jakarta.servlet.http.*",
 	"jakarta.servlet.jsp.*"
     };
 

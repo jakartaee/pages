@@ -44,6 +44,7 @@
     <modules>
         <module>api</module>
         <module>spec</module>
+        <module>impl</module>
     </modules>
 
     <licenses>

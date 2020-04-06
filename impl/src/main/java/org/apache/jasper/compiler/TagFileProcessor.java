@@ -307,9 +307,9 @@ class TagFileProcessor {
                 }
             } else if (type == null) {
                 if (isDeferredValue) {
-                    type = "javax.el.ValueExpression";
+                    type = "jakarta.el.ValueExpression";
                 } else if (isDeferredMethod) {
-                    type = "javax.el.MethodExpression";
+                    type = "jakarta.el.MethodExpression";
                 } else {
                     type = "java.lang.String";
                 }

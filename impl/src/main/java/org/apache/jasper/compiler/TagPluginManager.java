@@ -19,7 +19,7 @@ package org.apache.jasper.compiler;
 
 import java.util.*;
 import java.io.*;
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import org.apache.jasper.Constants;
 import org.apache.jasper.JasperException;

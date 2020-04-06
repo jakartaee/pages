@@ -31,9 +31,9 @@ import java.util.zip.ZipEntry;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.el.ELException;
-import javax.el.FunctionMapper;
-import javax.el.ExpressionFactory;
+import jakarta.el.ELException;
+import jakarta.el.FunctionMapper;
+import jakarta.el.ExpressionFactory;
 
 import org.apache.jasper.Constants;
 import org.apache.jasper.JasperException;
@@ -497,7 +497,7 @@ public class JspUtil {
 	else
 	    jspCtxt = "_jspx_page_context";
 
-        if (expectedType == javax.el.ValueExpression.class) {
+        if (expectedType == jakarta.el.ValueExpression.class) {
 
             if (expectedDeferredType == null) {
                 expectedDeferredType = "java.lang.Object";
@@ -511,7 +511,7 @@ public class JspUtil {
 
         }
 
-        if (expectedType == javax.el.MethodExpression.class) {
+        if (expectedType == jakarta.el.MethodExpression.class) {
 
             if (expectedReturnType == null) {
                 expectedReturnType = "Void";

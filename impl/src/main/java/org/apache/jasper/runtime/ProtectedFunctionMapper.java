@@ -23,7 +23,7 @@ import java.security.PrivilegedAction;
 import java.security.PrivilegedExceptionAction;
 import java.security.PrivilegedActionException;
 import java.lang.reflect.Method;
-import javax.el.FunctionMapper;
+import jakarta.el.FunctionMapper;
 import org.apache.jasper.security.SecurityUtil;
 /**
  * Maps EL functions to their Java method counterparts.  Keeps the
