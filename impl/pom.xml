@@ -250,7 +250,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>javax.servlet.ServletContainerInitializer</include>
+                    <include>jakarta.servlet.ServletContainerInitializer</include>
                 </includes>
                 <targetPath>META-INF/services</targetPath>
             </resource>
