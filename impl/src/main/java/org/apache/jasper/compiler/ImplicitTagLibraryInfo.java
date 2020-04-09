@@ -20,7 +20,6 @@ package org.apache.jasper.compiler;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
-import javax.servlet.ServletContext;
 import jakarta.servlet.jsp.tagext.FunctionInfo;
 import jakarta.servlet.jsp.tagext.TagLibraryInfo;
 import jakarta.servlet.jsp.tagext.TagInfo;

@@ -30,16 +30,13 @@ import java.security.CodeSource;
 import java.security.cert.Certificate;
 import java.security.PermissionCollection;
 import java.security.Policy;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.*;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.jsp.JspFactory;
 import javax.tools.JavaFileObject;
 

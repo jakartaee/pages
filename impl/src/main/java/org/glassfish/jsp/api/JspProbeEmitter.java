@@ -16,8 +16,6 @@
 
 package org.glassfish.jsp.api;
 
-import javax.servlet.Servlet;
-
 /**
  * Interface for triggering events useful for monitoring.
  *

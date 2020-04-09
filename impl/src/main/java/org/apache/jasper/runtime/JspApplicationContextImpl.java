@@ -17,29 +17,26 @@
 
 package org.apache.jasper.runtime;
 
-/**
- * Implements jakarta.servlet.jsp.JspApplication
- */
-
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Collections;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.jsp.JspApplicationContext;
 
-import javax.el.ELException;
-import javax.el.ELResolver;
-import javax.el.ELContext;
-import javax.el.ExpressionFactory;
-import javax.el.ELContextListener;
-import javax.el.ELContextEvent;
+import jakarta.el.ELResolver;
+import jakarta.el.ELContext;
+import jakarta.el.ExpressionFactory;
+import jakarta.el.ELContextListener;
+import jakarta.el.ELContextEvent;
 
 import org.apache.jasper.Constants;
 
+/**
+ * Implements jakarta.servlet.jsp.JspApplication
+ */
 public class JspApplicationContextImpl implements JspApplicationContext {
 
     public JspApplicationContextImpl(ServletContext context) {

@@ -17,38 +17,24 @@
 
 package org.apache.jasper.servlet;
 
-// START PWC 6300204
 import java.io.FileNotFoundException;
-// END PWC 6300204
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Enumeration;
-// START GlassFish 750
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.concurrent.ConcurrentHashMap;
-// END GlassFish 750
-import java.util.concurrent.atomic.*;
-// START SJSWS 6232180
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.StringTokenizer;
-// END SJSWS 6232180
-// START GlassFish 747
-import java.util.HashMap;
-// END GlassFish 747
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-// START GlassFish 750
-import jakarta.servlet.jsp.tagext.TagLibraryInfo;
-// END GlassFish 750
-
-import java.util.logging.Logger;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.jsp.tagext.TagLibraryInfo;
 import org.apache.jasper.Constants;
 import org.apache.jasper.EmbeddedServletOptions;
 import org.apache.jasper.Options;
@@ -57,7 +43,6 @@ import org.apache.jasper.compiler.JspUtil;
 import org.apache.jasper.compiler.Localizer;
 import org.apache.jasper.runtime.JspApplicationContextImpl;
 import org.glassfish.jsp.api.JspProbeEmitter;
-import org.glassfish.jsp.api.ResourceInjector;
 
 /**
  * The JSP engine (a.k.a Jasper).
@@ -298,10 +283,10 @@ public class JspServlet extends HttpServlet {
                 /*
 		 * Requested JSP has been target of
                  * RequestDispatcher.include(). Its path is assembled from the
-                 * relevant javax.servlet.include.* request attributes
+                 * relevant jakarta.servlet.include.* request attributes
                  */
                 String pathInfo = (String) request.getAttribute(
-                                    "javax.servlet.include.path_info");
+                                    "jakarta.servlet.include.path_info");
                 if (pathInfo != null) {
                     jspUri += pathInfo;
                 }
@@ -402,7 +387,7 @@ public class JspServlet extends HttpServlet {
                     if (null == context.getResource(jspUri)
                             && !options.getUsePrecompiled()) {
                         String includeRequestUri = (String) 
-                            request.getAttribute("javax.servlet.include.request_uri");
+                            request.getAttribute("jakarta.servlet.include.request_uri");
                         if (includeRequestUri != null) {
                             // Missing JSP resource has been the target of a
                             // RequestDispatcher.include().

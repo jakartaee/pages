@@ -17,8 +17,8 @@
 
 package org.apache.jasper.runtime;
 
-import javax.el.ELContext;
-import javax.el.ELResolver;
+import jakarta.el.ELContext;
+import jakarta.el.ELResolver;
 import jakarta.servlet.jsp.PageContext;
 import jakarta.servlet.jsp.el.VariableResolver;
 
@@ -58,7 +58,7 @@ public class VariableResolverImpl
         ELResolver elResolver = elContext.getELResolver();
         try {
             return elResolver.getValue(elContext, null, pName);
-        } catch (javax.el.ELException ex) {
+        } catch (jakarta.el.ELException ex) {
             throw new jakarta.servlet.jsp.el.ELException();
         }
     }

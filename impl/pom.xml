@@ -20,7 +20,7 @@
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.6</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -250,7 +250,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>javax.servlet.ServletContainerInitializer</include>
+                    <include>jakarta.servlet.ServletContainerInitializer</include>
                 </includes>
                 <targetPath>META-INF/services</targetPath>
             </resource>
@@ -274,12 +274,23 @@
         <repository>
             <releases>
                 <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
                 <checksumPolicy>warn</checksumPolicy>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
-                <updatePolicy>never</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+            <id>jakarta.oss.releases</id>
+            <name>Jakarta Public Releases</name>
+            <url>https://jakarta.oss.sonatype.org/content/groups/public/</url>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
                 <checksumPolicy>warn</checksumPolicy>
             </snapshots>
             <id>java.net.Releases</id>
@@ -290,30 +301,31 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0-M1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.el</artifactId>
-            <version>[3.0.1-b10,)</version>
+            <groupId>jakarta.el</groupId>
+            <artifactId>jakarta.el-api</artifactId>
+            <version>4.0.0-RC1</version>
         </dependency>
         <dependency>
             <groupId>jakarta.servlet.jsp</groupId>
             <artifactId>jakarta.servlet.jsp-api</artifactId>
             <version>3.0.0-SNAPSHOT</version>
         </dependency>
-
-<!--
-  Needed only if we include JDTJavaCompiler.java
-    <dependency>
-      <groupId>eclipse</groupId>
-      <artifactId>jdtcore</artifactId>
-      <version>3.1.0</version>
-      <scope>compile</scope>
-    </dependency>
--->
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.10.7</version>
+        </dependency>
+        <dependency>
+          <groupId>eclipse</groupId>
+          <artifactId>jdtcore</artifactId>
+          <version>3.1.0</version>
+          <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

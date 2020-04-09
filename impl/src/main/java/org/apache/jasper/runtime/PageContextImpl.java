@@ -28,43 +28,41 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.logging.Logger;
-import java.util.logging.Level;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.Servlet;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.JspFactory;
 import jakarta.servlet.jsp.JspWriter;
 import jakarta.servlet.jsp.PageContext;
-import jakarta.servlet.jsp.JspApplicationContext;
 import jakarta.servlet.jsp.tagext.BodyContent;
 import jakarta.servlet.jsp.el.ExpressionEvaluator;
 import jakarta.servlet.jsp.el.VariableResolver;
 import jakarta.servlet.jsp.el.ImplicitObjectELResolver;
 import jakarta.servlet.jsp.el.ScopedAttributeELResolver;
 
-import javax.el.ELException;
-import javax.el.ELResolver;
-import javax.el.ELContext;
-import javax.el.BeanELResolver;
-import javax.el.ArrayELResolver;
-import javax.el.MapELResolver;
-import javax.el.ResourceBundleELResolver;
-import javax.el.ListELResolver;
-import javax.el.CompositeELResolver;
-import javax.el.ValueExpression;
-import javax.el.FunctionMapper;
-import javax.el.MethodExpression;
-import javax.el.ExpressionFactory;
-import javax.el.StaticFieldELResolver;
+import jakarta.el.ELException;
+import jakarta.el.ELResolver;
+import jakarta.el.ELContext;
+import jakarta.el.BeanELResolver;
+import jakarta.el.ArrayELResolver;
+import jakarta.el.MapELResolver;
+import jakarta.el.ResourceBundleELResolver;
+import jakarta.el.ListELResolver;
+import jakarta.el.CompositeELResolver;
+import jakarta.el.ValueExpression;
+import jakarta.el.FunctionMapper;
+import jakarta.el.MethodExpression;
+import jakarta.el.ExpressionFactory;
+import jakarta.el.StaticFieldELResolver;
 
 import org.apache.jasper.Constants;
 import org.apache.jasper.compiler.Localizer;
@@ -634,7 +632,7 @@ public class PageContextImpl extends PageContext {
 
         if (!path.startsWith("/")) {
 	    String uri = (String)
-		request.getAttribute("javax.servlet.include.servlet_path");
+		request.getAttribute("jakarta.servlet.include.servlet_path");
 	    if (uri == null)
 		uri = ((HttpServletRequest) request).getServletPath();
             String baseURI = uri.substring(0, uri.lastIndexOf('/'));
@@ -854,7 +852,7 @@ public class PageContextImpl extends PageContext {
 
             /*
              * Set request attributes.
-             * Do not set the javax.servlet.error.exception attribute here
+             * Do not set the jakarta.servlet.error.exception attribute here
              * (instead, set in the generated servlet code for the error page)
              * in order to prevent the ErrorReportValve, which is invoked as
              * part of forwarding the request to the error page, from
@@ -862,11 +860,11 @@ public class PageContextImpl extends PageContext {
              * will have been committed if the error page is a JSP page).
              */
             request.setAttribute("jakarta.servlet.jsp.jspException", t);
-            request.setAttribute("javax.servlet.error.status_code",
+            request.setAttribute("jakarta.servlet.error.status_code",
                 Integer.valueOf(HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
-            request.setAttribute("javax.servlet.error.request_uri",
+            request.setAttribute("jakarta.servlet.error.request_uri",
             ((HttpServletRequest) request).getRequestURI());
-            request.setAttribute("javax.servlet.error.servlet_name",
+            request.setAttribute("jakarta.servlet.error.servlet_name",
                      config.getServletName());
             try {
                 forward(errorPageURL);
@@ -876,17 +874,17 @@ public class PageContextImpl extends PageContext {
 
             // The error page could be inside an include.
 
-            Object newException = request.getAttribute("javax.servlet.error.exception");
+            Object newException = request.getAttribute("jakarta.servlet.error.exception");
 
             // t==null means the attribute was not set.
             if( (newException!= null) && (newException==t) ) {
-                request.removeAttribute("javax.servlet.error.exception");
+                request.removeAttribute("jakarta.servlet.error.exception");
                 request.setAttribute(Constants.JSP_ERROR_HANDLED, Boolean.TRUE);
             }
 
             // now clear the error code - to prevent double handling.
-            request.removeAttribute("javax.servlet.error.status_code");
-            request.removeAttribute("javax.servlet.error.request_uri");
+            request.removeAttribute("jakarta.servlet.error.status_code");
+            request.removeAttribute("jakarta.servlet.error.request_uri");
             request.removeAttribute("jakarta.servlet.jsp.jspException");
 
         } else {

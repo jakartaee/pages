@@ -19,17 +19,15 @@ package org.apache.jasper.runtime;
 
 import java.beans.PropertyEditor;
 import java.beans.PropertyEditorManager;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.lang.reflect.Method;
 import java.util.Enumeration;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.jsp.JspWriter;
 import jakarta.servlet.jsp.PageContext;
 import jakarta.servlet.jsp.tagext.BodyContent;
@@ -52,12 +50,12 @@ import org.apache.jasper.compiler.Localizer;
 public class JspRuntimeLibrary {
     
     private static final String SERVLET_EXCEPTION
-	= "javax.servlet.error.exception";
+	= "jakarta.servlet.error.exception";
     private static final String JSP_EXCEPTION
 	= "jakarta.servlet.jsp.jspException";
 
     /**
-     * Returns the value of the javax.servlet.error.exception request
+     * Returns the value of the jakarta.servlet.error.exception request
      * attribute value, if present, otherwise the value of the
      * jakarta.servlet.jsp.jspException request attribute value.
      *
@@ -825,10 +823,10 @@ public class JspRuntimeLibrary {
             return (relativePath);
         HttpServletRequest hrequest = (HttpServletRequest) request;
         String uri = (String)
-            request.getAttribute("javax.servlet.include.servlet_path");
+            request.getAttribute("jakarta.servlet.include.servlet_path");
         if (uri != null) {
             String pathInfo = (String)
-                request.getAttribute("javax.servlet.include.path_info");
+                request.getAttribute("jakarta.servlet.include.path_info");
             if (pathInfo == null) {
                 if (uri.lastIndexOf('/') >= 0) {
                     uri = uri.substring(0, uri.lastIndexOf('/'));

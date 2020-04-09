@@ -19,10 +19,10 @@ package org.apache.jasper.runtime;
 
 import java.util.Iterator;
 
-import javax.el.ELContext;
-import javax.el.ELResolver;
-import javax.el.ValueExpression;
-import javax.el.ExpressionFactory;
+import jakarta.el.ELContext;
+import jakarta.el.ELResolver;
+import jakarta.el.ValueExpression;
+import jakarta.el.ExpressionFactory;
 
 import jakarta.servlet.jsp.PageContext;
 import jakarta.servlet.jsp.el.Expression;
@@ -58,15 +58,15 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
             throws ELException {
 
         ExpressionFactory fac = ExpressionFactory.newInstance();
-        javax.el.ValueExpression expr;
+        jakarta.el.ValueExpression expr;
         ELContextImpl elContext = new ELContextImpl(null);
-        javax.el.FunctionMapper fm = new FunctionMapperWrapper(fMapper);
+        jakarta.el.FunctionMapper fm = new FunctionMapperWrapper(fMapper);
         elContext.setFunctionMapper(fm);
         try {
             expr = fac.createValueExpression(
                            elContext,
                            expression, expectedType);
-        } catch (javax.el.ELException ex) {
+        } catch (jakarta.el.ELException ex) {
             throw new ELException(ex);
         }
         return new ExpressionImpl(expr, pageContext);
@@ -88,7 +88,7 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
             elContext = new ELContextImpl(new ELResolverWrapper(vResolver));
         }
 
-        javax.el.FunctionMapper fm = new FunctionMapperWrapper(fMapper);
+        jakarta.el.FunctionMapper fm = new FunctionMapperWrapper(fMapper);
         elContext.setFunctionMapper(fm);
         ExpressionFactory fac = ExpressionFactory.newInstance();
         Object value;
@@ -98,7 +98,7 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
                                  expression,
                                  expectedType);
             value = expr.getValue(elContext);
-        } catch (javax.el.ELException ex) {
+        } catch (jakarta.el.ELException ex) {
             throw new ELException(ex);
         }
         return value;
@@ -128,14 +128,14 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
             }
             try {
                 return valueExpr.getValue(elContext);
-            } catch (javax.el.ELException ex) {
+            } catch (jakarta.el.ELException ex) {
                 throw new ELException(ex);
             }
         }
     }
 
     private static class FunctionMapperWrapper
-        extends javax.el.FunctionMapper {
+        extends jakarta.el.FunctionMapper {
 
         private FunctionMapper mapper;
 
@@ -159,13 +159,13 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
         public Object getValue(ELContext context,
                                Object base,
                                Object property)
-                throws javax.el.ELException {
+                throws jakarta.el.ELException {
             if (base == null) {
                 context.setPropertyResolved(true);
                 try {
                     return vResolver.resolveVariable(property.toString());
                 } catch (ELException ex) {
-                    throw new javax.el.ELException(ex);
+                    throw new jakarta.el.ELException(ex);
                 }
             }
             return null;
@@ -174,7 +174,7 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
         public Class getType(ELContext context,
                              Object base,
                              Object property)
-                throws javax.el.ELException {
+                throws jakarta.el.ELException {
             return null;
         }
 
@@ -182,13 +182,13 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
                              Object base,
                              Object property,
                              Object value)
-                throws javax.el.ELException {
+                throws jakarta.el.ELException {
         }
 
         public boolean isReadOnly(ELContext context,
                                   Object base,
                                   Object property)
-                throws javax.el.ELException {
+                throws jakarta.el.ELException {
             return false;
         }
 

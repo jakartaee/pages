@@ -23,14 +23,13 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.text.MessageFormat;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 
 import org.apache.jasper.runtime.TldScanner;
 import org.apache.jasper.compiler.JspConfig;
 import org.apache.jasper.compiler.TagPluginManager;
 import org.apache.jasper.compiler.Localizer;
-import org.apache.jasper.xmlparser.ParserUtils;
 
 /**
  * A class to hold all init parameters specific to the JSP engine. 
@@ -531,7 +530,7 @@ public final class EmbeddedServletOptions implements Options {
         if (dir != null) {
             scratchDir = new File(dir);
         } else {
-            // First try the Servlet 2.2 javax.servlet.context.tempdir property
+            // First try the Servlet 2.2 jakarta.servlet.context.tempdir property
             scratchDir = (File) context.getAttribute(Constants.TMP_DIR);
             if (scratchDir == null) {
                 // Not running in a Servlet 2.2 container.

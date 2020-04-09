@@ -17,13 +17,13 @@
 
 package org.apache.jasper.runtime;
 
-import javax.el.ELContext;
-import javax.el.ELResolver;
-import javax.el.FunctionMapper;
-import javax.el.VariableMapper;
+import jakarta.el.ELContext;
+import jakarta.el.ELResolver;
+import jakarta.el.FunctionMapper;
+import jakarta.el.VariableMapper;
 
 /**
- * Concrete implementation of {@link javax.el.ELContext}.
+ * Concrete implementation of {@link jakarta.el.ELContext}.
  * ELContext's constructor is protected to control creation of ELContext
  * objects through their appropriate factory methods.  This version of
  * ELContext forces construction through JspApplicationContextImpl.
