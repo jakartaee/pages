@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0, which is available at
@@ -16,48 +17,23 @@
 
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
         <version>1.0.6</version>
     </parent>
 
-    <modelVersion>4.0.0</modelVersion>
     <groupId>org.glassfish.web</groupId>
     <artifactId>jakarta.servlet.jsp</artifactId>
     <version>3.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-    <name>JSP implementation</name>
 
+    <name>Jakarta Server Pages implementation</name>
     <description>JavaServer Pages API</description>
     <url>https://projects.eclipse.org/projects/ee4j.jsp</url>
-
-    <properties>
-        <spec.version>3.0</spec.version>
-        <extensionName>jakarta.servlet.jsp</extensionName>
-        <bundle.symbolicName>org.glassfish.web.jakarta.servlet.jsp</bundle.symbolicName>
-        <vendorName>Eclipse Foundation</vendorName>
-        <findbugs.version>2.5.2</findbugs.version>
-        <findbugs.exclude />
-        <findbugs.threshold>High</findbugs.threshold>
-    </properties>
-    
-    <contributors>
-        <contributor>
-            <name>Kin Man Chung</name>
-        </contributor>
-    </contributors>
-    
-    <developers>
-        <developer>
-            <id>yaminikb</id>
-            <name>Yamini K B</name>
-            <organization>Oracle Corporation</organization>
-            <organizationUrl>http://www.oracle.com</organizationUrl>
-        </developer>
-    </developers>
-
     <licenses>
         <license>
             <name>EPL 2.0</name>
@@ -70,51 +46,124 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-    <issueManagement>
-        <system>github</system>
-        <url>https://github.com/eclipse-ee4j/jsp-api/issues</url>
-    </issueManagement>
+
+    <developers>
+        <developer>
+            <id>yaminikb</id>
+            <name>Yamini K B</name>
+            <organization>Oracle Corporation</organization>
+            <organizationUrl>http://www.oracle.com</organizationUrl>
+        </developer>
+    </developers>
+    <contributors>
+        <contributor>
+            <name>Kin Man Chung</name>
+        </contributor>
+    </contributors>
+
     <mailingLists>
         <mailingList>
-          <name>JSTL dev mailing list</name>
-          <post>jsp-dev@eclipse.org</post>
-          <subscribe>https://dev.eclipse.org/mailman/listinfo/jsp-dev</subscribe>
-          <unsubscribe>https://dev.eclipse.org/mailman/listinfo/jsp-dev</unsubscribe>
-          <archive>https://dev.eclipse.org/mhonarc/lists/jsp-dev</archive>
+            <name>Jakarta Server Pages dev mailing list</name>
+            <post>jsp-dev@eclipse.org</post>
+            <subscribe>https://dev.eclipse.org/mailman/listinfo/jsp-dev</subscribe>
+            <unsubscribe>https://dev.eclipse.org/mailman/listinfo/jsp-dev</unsubscribe>
+            <archive>https://dev.eclipse.org/mhonarc/lists/jsp-dev</archive>
         </mailingList>
-    </mailingLists> 
+    </mailingLists>
+
     <scm>
         <connection>scm:git:https://github.com/eclipse-ee4j/jsp-api.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/eclipse-ee4j/jsp-api.git</developerConnection>
         <url>https://github.com/eclipse-ee4j/jsp-api</url>
         <tag>HEAD</tag>
     </scm>
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/eclipse-ee4j/jsp-api/issues</url>
+    </issueManagement>
+
+    <properties>
+        <spec.version>3.0</spec.version>
+        <extensionName>jakarta.servlet.jsp</extensionName>
+        <bundle.symbolicName>org.glassfish.web.jakarta.servlet.jsp</bundle.symbolicName>
+        <vendorName>Eclipse Foundation</vendorName>
+    </properties>
+
+    <dependencies>
+        <!-- Jakarta EE Dependencies -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0-M1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.el</groupId>
+            <artifactId>jakarta.el-api</artifactId>
+            <version>4.0.0-RC1</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <version>3.0.0-M1</version>
+        </dependency>
+
+        <!-- Other dependencies -->
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.10.7</version>
+        </dependency>
+        <dependency>
+            <groupId>eclipse</groupId>
+            <artifactId>jdtcore</artifactId>
+            <version>3.1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>jakarta.servlet.ServletContainerInitializer</include>
+                </includes>
+                <targetPath>META-INF/services</targetPath>
+            </resource>
+        </resources>
+
         <plugins>
+            <!-- Sets minimal Maven version to 3.3.0 -->
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>1.4.3</version>
-                <configuration>
-                    <supportedProjectTypes>
-                        <supportedProjectType>jar</supportedProjectType>
-                    </supportedProjectTypes>
-                    <instructions>
-                        <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
-                        <_include>-osgi.bundle</_include>
-                    </instructions>
-                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.0.0-M2</version>
                 <executions>
                     <execution>
-                        <id>bundle-manifest</id>
-                        <phase>process-classes</phase>
+                        <id>enforce-maven</id>
                         <goals>
-                            <goal>manifest</goal>
+                            <goal>enforce</goal>
                         </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.3.0</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Restricts the Java version to 1.8 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -137,8 +186,32 @@
                     </excludes>
                 </configuration>
             </plugin>
+
+            <!-- Creates the OSGi MANIFEST.MF file -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId> 
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>1.4.3</version>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+                        <_include>-osgi.bundle</_include>
+                    </instructions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>bundle-manifest</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>manifest</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Adds the manifest file created by the org.apache.felix:maven-bundle-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
@@ -148,17 +221,16 @@
                         </manifestFile>
                         <manifestEntries>
                             <Extension-Name>${extensionName}</Extension-Name>
-                            <!--Specification-Title>${specificationTitle}</Specification-Title-->
                             <Specification-Version>${spec.version}</Specification-Version>
                             <Specification-Vendor>${vendorName}</Specification-Vendor>
-                            <!--Implementation-Title>${implementationTitle}</Implementation-Title-->
                             <Implementation-Version>${project.version}</Implementation-Version>
                             <Implementation-Vendor>${vendorName}</Implementation-Vendor>
-                            <!--Implementation-Vendor-Id>com.sun</Implementation-Vendor-Id-->
                         </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
+
+            <!-- Creates the source jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -168,164 +240,37 @@
                 </configuration>
                 <executions>
                     <execution>
-                       <id>attach-sources</id>
-                       <goals>
-                           <goal>jar-no-fork</goal>
-                       </goals>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Create Javadoc for API jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.10.1</version>
                 <executions>
-                  <execution>
-                    <id>attach-javadocs</id>
-                      <goals>
-                          <goal>jar</goal>
-                      </goals>
-                    <configuration>
-                      <groups>
-                        <group>
-                          <title>JavaServer Pages API Documentation</title>
-                          <packages>jakarta.servlet.jsp</packages>
-                        </group>
-                      </groups>                      
-                    </configuration>
-                  </execution>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <groups>
+                                <group>
+                                    <title>Jakarta Server Pages API Documentation</title>
+                                    <packages>jakarta.servlet.jsp</packages>
+                                </group>
+                            </groups>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>${findbugs.version}</version>
-                <configuration>
-                    <threshold>${findbugs.threshold}</threshold>
-                    <excludeFilterFile>${findbugs.exclude}</excludeFilterFile>
-                    <findbugsXmlOutput>true</findbugsXmlOutput>
-                    <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
-                </configuration>
-            </plugin>
-            <plugin>
-                 <groupId>org.apache.maven.plugins</groupId>
-                 <artifactId>maven-gpg-plugin</artifactId>
-                 <version>1.6</version>
-                 <executions>
-                     <execution>
-                         <id>sign-artifacts</id>
-                         <phase>verify</phase>
-                         <goals>
-                             <goal>sign</goal>
-                         </goals>
-                     </execution>
-                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>                           
-                <artifactId>maven-release-plugin</artifactId>                         
-                 <version>2.5.2</version>
-                <configuration>                                                       
-                    <mavenExecutorId>forked-path</mavenExecutorId>                
-                    <useReleaseProfile>false</useReleaseProfile>                  
-                    <arguments>${release.arguments}</arguments>
-                </configuration>                                                      
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.scm</groupId>
-                        <artifactId>maven-scm-provider-gitexe</artifactId>
-                        <version>1.9.4</version>
-                    </dependency>
-                </dependencies>
-            </plugin>                    
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>jakarta.servlet.ServletContainerInitializer</include>
-                </includes>
-                <targetPath>META-INF/services</targetPath>
-            </resource>
-        </resources>
     </build>
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>${findbugs.version}</version>
-                <configuration>
-                    <threshold>${findbugs.threshold}</threshold>
-                    <excludeFilterFile>${findbugs.exclude}</excludeFilterFile>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
 
-    <repositories>
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-                <checksumPolicy>warn</checksumPolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-                <checksumPolicy>warn</checksumPolicy>
-            </snapshots>
-            <id>jakarta.oss.releases</id>
-            <name>Jakarta Public Releases</name>
-            <url>https://jakarta.oss.sonatype.org/content/groups/public/</url>
-        </repository>
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-                <checksumPolicy>warn</checksumPolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-                <checksumPolicy>warn</checksumPolicy>
-            </snapshots>
-            <id>java.net.Releases</id>
-            <name>Java.net Releases</name>
-            <url>https://maven.java.net/content/repositories/releases</url>
-        </repository>
-    </repositories>
-
-    <dependencies>
-        <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>5.0.0-M1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.el</groupId>
-            <artifactId>jakarta.el-api</artifactId>
-            <version>4.0.0-RC1</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.servlet.jsp</groupId>
-            <artifactId>jakarta.servlet.jsp-api</artifactId>
-            <version>3.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.ant</groupId>
-            <artifactId>ant</artifactId>
-            <version>1.10.7</version>
-        </dependency>
-        <dependency>
-          <groupId>eclipse</groupId>
-          <artifactId>jdtcore</artifactId>
-          <version>3.1.0</version>
-          <scope>compile</scope>
-        </dependency>
-    </dependencies>
 </project>
