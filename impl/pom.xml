@@ -17,7 +17,8 @@
 
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -62,11 +63,11 @@
 
     <mailingLists>
         <mailingList>
-          <name>Jakarta Server Pages dev mailing list</name>
-          <post>jsp-dev@eclipse.org</post>
-          <subscribe>https://dev.eclipse.org/mailman/listinfo/jsp-dev</subscribe>
-          <unsubscribe>https://dev.eclipse.org/mailman/listinfo/jsp-dev</unsubscribe>
-          <archive>https://dev.eclipse.org/mhonarc/lists/jsp-dev</archive>
+            <name>Jakarta Server Pages dev mailing list</name>
+            <post>jsp-dev@eclipse.org</post>
+            <subscribe>https://dev.eclipse.org/mailman/listinfo/jsp-dev</subscribe>
+            <unsubscribe>https://dev.eclipse.org/mailman/listinfo/jsp-dev</unsubscribe>
+            <archive>https://dev.eclipse.org/mhonarc/lists/jsp-dev</archive>
         </mailingList>
     </mailingLists>
 
@@ -106,7 +107,7 @@
             <artifactId>jakarta.servlet.jsp-api</artifactId>
             <version>3.0.0-M1</version>
         </dependency>
-        
+
         <!-- Other dependencies -->
         <dependency>
             <groupId>org.apache.ant</groupId>
@@ -114,10 +115,10 @@
             <version>1.10.7</version>
         </dependency>
         <dependency>
-          <groupId>eclipse</groupId>
-          <artifactId>jdtcore</artifactId>
-          <version>3.1.0</version>
-          <scope>compile</scope>
+            <groupId>eclipse</groupId>
+            <artifactId>jdtcore</artifactId>
+            <version>3.1.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -138,9 +139,9 @@
                 <targetPath>META-INF/services</targetPath>
             </resource>
         </resources>
-        
+
         <plugins>
-            <!-- Sets minimal Maven version to 3.5.4 -->
+            <!-- Sets minimal Maven version to 3.3.0 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -161,7 +162,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <!-- Restricts the Java version to 1.8 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -185,7 +186,7 @@
                     </excludes>
                 </configuration>
             </plugin>
-        
+
             <!-- Creates the OSGi MANIFEST.MF file -->
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -207,7 +208,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <!-- Adds the manifest file created by the org.apache.felix:maven-bundle-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -228,7 +229,7 @@
                     </archive>
                 </configuration>
             </plugin>
-            
+
             <!-- Creates the source jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -239,39 +240,37 @@
                 </configuration>
                 <executions>
                     <execution>
-                       <id>attach-sources</id>
-                       <goals>
-                           <goal>jar-no-fork</goal>
-                       </goals>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
-            
-            <!-- 
-               Create Javadoc for API jar
-             -->
+
+            <!-- Create Javadoc for API jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.10.1</version>
                 <executions>
-                  <execution>
-                    <id>attach-javadocs</id>
-                      <goals>
-                          <goal>jar</goal>
-                      </goals>
-                    <configuration>
-                      <groups>
-                        <group>
-                          <title>Jakarta Server Pages API Documentation</title>
-                          <packages>jakarta.servlet.jsp</packages>
-                        </group>
-                      </groups>                      
-                    </configuration>
-                  </execution>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <groups>
+                                <group>
+                                    <title>Jakarta Server Pages API Documentation</title>
+                                    <packages>jakarta.servlet.jsp</packages>
+                                </group>
+                            </groups>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-    
+
 </project>
