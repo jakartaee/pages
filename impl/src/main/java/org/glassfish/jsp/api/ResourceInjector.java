@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -30,18 +30,14 @@ public interface ResourceInjector {
      *
      * @param clazz the tag handler class to be instantiated and injected
      *
-     * @throws Exception if an error has occurred during instantiation or
-     * injection
+     * @throws Exception if an error has occurred during instantiation or injection
      */
-    public <T extends JspTag> T createTagHandlerInstance(Class<T> clazz)
-            throws Exception;
+    public <T extends JspTag> T createTagHandlerInstance(Class<T> clazz) throws Exception;
 
     /**
-     * Invokes any @PreDestroy methods defined on the instance's class
-     * (and super-classes).
+     * Invokes any @PreDestroy methods defined on the instance's class (and super-classes).
      *
-     * @param handler The tag handler instance whose @PreDestroy methods
-     * to call
+     * @param handler The tag handler instance whose @PreDestroy methods to call
      */
     public void preDestroy(JspTag handler);
 }

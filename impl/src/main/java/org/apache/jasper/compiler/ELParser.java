@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +20,7 @@ package org.apache.jasper.compiler;
 /**
  * This class implements a parser for EL expressions.
  *
- * It takes strings of the form xxx${..}yyy${..}zzz etc, and turn it into
- * a ELNode.Nodes.
+ * It takes strings of the form xxx${..}yyy${..}zzz etc, and turn it into a ELNode.Nodes.
  *
  * Currently, it only handles text outside ${..} and functions in ${ ..}.
  *
@@ -30,121 +29,115 @@ package org.apache.jasper.compiler;
 
 public class ELParser {
 
-    private Token curToken;	// current token
-    private Token prevToken;	// previous token
+    private Token curToken; // current token
+    private Token prevToken; // previous token
     private ELNode.Nodes expr;
     private ELNode.Nodes ELexpr;
-    private int index;		// Current index of the expression
-    private String expression;	// The EL expression
-    private boolean escapeBS;	// is '\' an escape char in text outside EL?
+    private int index; // Current index of the expression
+    private String expression; // The EL expression
+    private boolean escapeBS; // is '\' an escape char in text outside EL?
     private boolean isDollarExpr;
 
-    private static final String reservedWords[] = {
-        "and", "div", "empty", "eq", "false",
-        "ge", "gt", "instanceof", "le", "lt", "mod",
-        "ne", "not", "null", "or", "true"};
+    private static final String reservedWords[] = { "and", "div", "empty", "eq", "false", "ge", "gt", "instanceof", "le", "lt", "mod", "ne", "not", "null",
+            "or", "true" };
 
     public ELParser(String expression) {
-	index = 0;
-	this.expression = expression;
-	expr = new ELNode.Nodes();
+        index = 0;
+        this.expression = expression;
+        expr = new ELNode.Nodes();
     }
 
     /**
      * Parse an EL expression
-     * @param expression The input expression string of the form
-     *                   ( (Char* | (('${' | '#{') Char* '}') )+
+     *
+     * @param expression The input expression string of the form ( (Char* | (('${' | '#{') Char* '}') )+
      * @return Parsed EL expression in ELNode.Nodes
      */
     public static ELNode.Nodes parse(String expression) {
-	ELParser parser = new ELParser(expression);
-	while (parser.hasNextChar()) {
-	    String text = parser.skipUntilEL();
-	    if (text.length() > 0) {
-		parser.expr.add(new ELNode.Text(text));
-	    }
-	    ELNode.Nodes elexpr = parser.parseEL();
-	    if (! elexpr.isEmpty()) {
-		parser.expr.add(new ELNode.Root(elexpr, parser.isDollarExpr));
-	    }
-	}
-	return parser.expr;
+        ELParser parser = new ELParser(expression);
+        while (parser.hasNextChar()) {
+            String text = parser.skipUntilEL();
+            if (text.length() > 0) {
+                parser.expr.add(new ELNode.Text(text));
+            }
+            ELNode.Nodes elexpr = parser.parseEL();
+            if (!elexpr.isEmpty()) {
+                parser.expr.add(new ELNode.Root(elexpr, parser.isDollarExpr));
+            }
+        }
+        return parser.expr;
     }
 
     /**
      * Parse an EL expression string '${...} or #{...}'
-     *@return An ELNode.Nodes representing the EL expression
-     * TODO: Currently only parsed into functions and text strings.  This
-     *       should be rewritten for a full parser.
+     *
+     * @return An ELNode.Nodes representing the EL expression TODO: Currently only parsed into functions and text strings.
+     * This should be rewritten for a full parser.
      */
     private ELNode.Nodes parseEL() {
 
-	StringBuilder buf = new StringBuilder();
-	ELexpr = new ELNode.Nodes();
-	while (hasNext()) {
-	    nextToken();
-	    if (curToken instanceof Char) {
-		if (curToken.toChar() == '}') {
-		    break;
-		}
-		buf.append(curToken.toChar());
-	    } else {
-		// Output whatever is in buffer
-		if (buf.length() > 0) {
-		    ELexpr.add(new ELNode.ELText(buf.toString()));
-		}
-		if (!parseFunction()) {
-		    ELexpr.add(new ELNode.ELText(curToken.toString()));
-		}
-	    }
-	}
-	if (buf.length() > 0) {
-	    ELexpr.add(new ELNode.ELText(buf.toString()));
-	}
+        StringBuilder buf = new StringBuilder();
+        ELexpr = new ELNode.Nodes();
+        while (hasNext()) {
+            nextToken();
+            if (curToken instanceof Char) {
+                if (curToken.toChar() == '}') {
+                    break;
+                }
+                buf.append(curToken.toChar());
+            } else {
+                // Output whatever is in buffer
+                if (buf.length() > 0) {
+                    ELexpr.add(new ELNode.ELText(buf.toString()));
+                }
+                if (!parseFunction()) {
+                    ELexpr.add(new ELNode.ELText(curToken.toString()));
+                }
+            }
+        }
+        if (buf.length() > 0) {
+            ELexpr.add(new ELNode.ELText(buf.toString()));
+        }
 
-	return ELexpr;
+        return ELexpr;
     }
 
     /**
-     * Parse for a function
-     * FunctionInvokation ::= (identifier ':')? identifier '('
-     *			      (Expression (,Expression)*)? ')'
-     * Note: currently we don't parse arguments
-     * In EL 1.2, method can include parameters, so we need to exclude
-     * cases such as a.b().
+     * Parse for a function FunctionInvokation ::= (identifier ':')? identifier '(' (Expression (,Expression)*)? ')' Note:
+     * currently we don't parse arguments In EL 1.2, method can include parameters, so we need to exclude cases such as
+     * a.b().
      */
     private boolean parseFunction() {
-	if (! (curToken instanceof Id) || isELReserved(curToken.toString())) {
-	    return false;
-	}
-	String s1 = null;                 // Function prefix
-	String s2 = curToken.toString();  // Function name
-	int mark = getIndex();
-	if (hasNext()) {
-            boolean nodotSeen = prevToken == null || 
-                                (prevToken.toChar() != '.');
-	    Token t = nextToken();
-	    if (t.toChar() == ':') {
-		if (hasNext()) {
-		    Token t2 = nextToken();
-		    if (t2 instanceof Id) {
-			s1 = s2;
-			s2 = t2.toString();
-			if (hasNext()) {
-			    t = nextToken();
-			}
-		    }
-		}
-	    }
-	    if (t.toChar() == '(' && nodotSeen) {
+        if (!(curToken instanceof Id) || isELReserved(curToken.toString())) {
+            return false;
+        }
+        String s1 = null; // Function prefix
+        String s2 = curToken.toString(); // Function name
+        int mark = getIndex();
+        if (hasNext()) {
+            boolean nodotSeen = prevToken == null || (prevToken.toChar() != '.');
+            Token t = nextToken();
+            if (t.toChar() == ':') {
+                if (hasNext()) {
+                    Token t2 = nextToken();
+                    if (t2 instanceof Id) {
+                        s1 = s2;
+                        s2 = t2.toString();
+                        if (hasNext()) {
+                            t = nextToken();
+                        }
+                    }
+                }
+            }
+            if (t.toChar() == '(' && nodotSeen) {
                 // In EL 1.2, method expressions can include parameters, so
                 // .foo() is a method expression , and not a function
-		ELexpr.add(new ELNode.Function(s1, s2));
-		return true;
-	    }
-	}
-	setIndex(mark);
-	return false;
+                ELexpr.add(new ELNode.Function(s1, s2));
+                return true;
+            }
+        }
+        setIndex(mark);
+        return false;
     }
 
     /**
@@ -154,13 +147,13 @@ public class ELParser {
         int i = 0;
         int j = reservedWords.length;
         while (i < j) {
-            int k = (i+j)/2;
+            int k = (i + j) / 2;
             int result = reservedWords[k].compareTo(id);
             if (result == 0) {
                 return true;
             }
             if (result < 0) {
-                i = k+1;
+                i = k + 1;
             } else {
                 j = k;
             }
@@ -169,149 +162,145 @@ public class ELParser {
     }
 
     /**
-     * Skip until an EL expression ('${' or '#{') is reached, allowing escape
-     * sequences '\\', '\$', and '\#'.
+     * Skip until an EL expression ('${' or '#{') is reached, allowing escape sequences '\\', '\$', and '\#'.
+     *
      * @return The text string up to the EL expression
      */
     private String skipUntilEL() {
-	char prev = 0;
-	StringBuilder buf = new StringBuilder();
-	while (hasNextChar()) {
-	    char ch = nextChar();
-	    if (prev == '\\') {
-		prev = 0;
-		if (ch == '\\') {
-		    buf.append('\\');
-		    if (!escapeBS)
-			prev = '\\';
-		} else if (ch == '$' || ch == '#') {
-		    buf.append(ch);
-		}
-		// else error!
-	    } else if (prev == '$' || prev == '#') {
-		if (ch == '{') {
+        char prev = 0;
+        StringBuilder buf = new StringBuilder();
+        while (hasNextChar()) {
+            char ch = nextChar();
+            if (prev == '\\') {
+                prev = 0;
+                if (ch == '\\') {
+                    buf.append('\\');
+                    if (!escapeBS)
+                        prev = '\\';
+                } else if (ch == '$' || ch == '#') {
+                    buf.append(ch);
+                }
+                // else error!
+            } else if (prev == '$' || prev == '#') {
+                if (ch == '{') {
                     this.isDollarExpr = (prev == '$');
-		    prev = 0;
-		    break;
-		} 
-		buf.append(prev);
+                    prev = 0;
+                    break;
+                }
+                buf.append(prev);
                 if (ch == '\\' || ch == '$' || ch == '#') {
                     prev = ch;
                 } else {
                     buf.append(ch);
                 }
-	    } else if (ch == '\\' || ch == '$' || ch == '#') {
-		prev = ch;
-	    } else {
-		buf.append(ch);
-	    }
-	}
-	if (prev != 0) {
-	    buf.append(prev);
-	}
-	return buf.toString();
+            } else if (ch == '\\' || ch == '$' || ch == '#') {
+                prev = ch;
+            } else {
+                buf.append(ch);
+            }
+        }
+        if (prev != 0) {
+            buf.append(prev);
+        }
+        return buf.toString();
     }
 
     /*
-     * @return true if there is something left in EL expression buffer other
-     *         than white spaces.
+     * @return true if there is something left in EL expression buffer other than white spaces.
      */
     private boolean hasNext() {
-	skipSpaces();
-	return hasNextChar();
+        skipSpaces();
+        return hasNextChar();
     }
 
     /*
      * @return The next token in the EL expression buffer.
      */
     private Token nextToken() {
-	skipSpaces();
-	if (hasNextChar()) {
+        skipSpaces();
+        if (hasNextChar()) {
             prevToken = curToken;
-	    char ch = nextChar();
-	    if (Character.isJavaIdentifierStart(ch)) {
-		StringBuilder buf = new StringBuilder();
-		buf.append(ch);
-		while (peekChar() != -1 &&
-                        Character.isJavaIdentifierPart(ch=(char)peekChar())) {
-		    buf.append(ch);
-		    nextChar();
-		}
-		return (curToken = new Id(buf.toString()));
-	    }
+            char ch = nextChar();
+            if (Character.isJavaIdentifierStart(ch)) {
+                StringBuilder buf = new StringBuilder();
+                buf.append(ch);
+                while (peekChar() != -1 && Character.isJavaIdentifierPart(ch = (char) peekChar())) {
+                    buf.append(ch);
+                    nextChar();
+                }
+                return (curToken = new Id(buf.toString()));
+            }
 
-	    if (ch == '\'' || ch == '"') {
-		return curToken = parseQuotedChars(ch);
-	    } else {
-		// For now...
-		return curToken = new Char(ch);
-	    }
-	}
-	return curToken = null;
+            if (ch == '\'' || ch == '"') {
+                return curToken = parseQuotedChars(ch);
+            } else {
+                // For now...
+                return curToken = new Char(ch);
+            }
+        }
+        return curToken = null;
     }
 
     /*
-     * Parse a string in single or double quotes, allowing for escape sequences
-     * '\\', and ('\"', or "\'")
+     * Parse a string in single or double quotes, allowing for escape sequences '\\', and ('\"', or "\'")
      */
     private Token parseQuotedChars(char quote) {
-	StringBuilder buf = new StringBuilder();
-	buf.append(quote);
-	while (hasNextChar()) {
-	    char ch = nextChar();
-	    if (ch == '\\') {
-		ch = nextChar();
-		if (ch == '\\' || ch == quote) {
-		    buf.append(ch);
-		}
-		// else error!
-	    } else if (ch == quote) {
-		buf.append(ch);
-		break;
-	    } else {
-		buf.append(ch);
-	    }
-	}
-	return new QuotedString(buf.toString());
+        StringBuilder buf = new StringBuilder();
+        buf.append(quote);
+        while (hasNextChar()) {
+            char ch = nextChar();
+            if (ch == '\\') {
+                ch = nextChar();
+                if (ch == '\\' || ch == quote) {
+                    buf.append(ch);
+                }
+                // else error!
+            } else if (ch == quote) {
+                buf.append(ch);
+                break;
+            } else {
+                buf.append(ch);
+            }
+        }
+        return new QuotedString(buf.toString());
     }
 
     /*
-     * A collection of low level parse methods dealing with character in
-     * the EL expression buffer.
+     * A collection of low level parse methods dealing with character in the EL expression buffer.
      */
 
     private void skipSpaces() {
-	while (hasNextChar()) {
-	    if (expression.charAt(index) > ' ')
-		break;
-	    index++;
-	}
+        while (hasNextChar()) {
+            if (expression.charAt(index) > ' ')
+                break;
+            index++;
+        }
     }
 
     private boolean hasNextChar() {
-	return index < expression.length();
+        return index < expression.length();
     }
 
     private char nextChar() {
-	if (index >= expression.length()) {
-	    return (char)-1;
-	}
-	return expression.charAt(index++);
+        if (index >= expression.length()) {
+            return (char) -1;
+        }
+        return expression.charAt(index++);
     }
 
     private int peekChar() {
-	if (index >= expression.length()) {
-	    return -1;
-	}
-	return expression.charAt(index);
+        if (index >= expression.length()) {
+            return -1;
+        }
+        return expression.charAt(index);
     }
 
     private int getIndex() {
-	return index;
+        return index;
     }
 
     private void setIndex(int i) {
-	index = i;
+        index = i;
     }
 
     /*
@@ -319,28 +308,28 @@ public class ELParser {
      */
     private static class Token {
 
-	char toChar() {
-	    return 0;
-	}
+        char toChar() {
+            return 0;
+        }
 
-	public String toString() {
-	    return "";
-	}
+        public String toString() {
+            return "";
+        }
     }
 
     /*
      * Represents an ID token in EL
      */
     private static class Id extends Token {
-	String id;
+        String id;
 
-	Id(String id) {
-	    this.id = id;
-	}
+        Id(String id) {
+            this.id = id;
+        }
 
-	public String toString() {
-	    return id;
-	}
+        public String toString() {
+            return id;
+        }
     }
 
     /*
@@ -348,19 +337,19 @@ public class ELParser {
      */
     private static class Char extends Token {
 
-	private char ch;
+        private char ch;
 
-	Char(char ch) {
-	    this.ch = ch;
-	}
+        Char(char ch) {
+            this.ch = ch;
+        }
 
-	char toChar() {
-	    return ch;
-	}
+        char toChar() {
+            return ch;
+        }
 
-	public String toString() {
-	    return (Character.valueOf(ch)).toString();
-	}
+        public String toString() {
+            return (Character.valueOf(ch)).toString();
+        }
     }
 
     /*
@@ -368,15 +357,14 @@ public class ELParser {
      */
     private static class QuotedString extends Token {
 
-	private String value;
+        private String value;
 
-	QuotedString(String v) {
-	    this.value = v;
-	}
+        QuotedString(String v) {
+            this.value = v;
+        }
 
-	public String toString() {
-	    return value;
-	}
+        public String toString() {
+            return value;
+        }
     }
 }
-

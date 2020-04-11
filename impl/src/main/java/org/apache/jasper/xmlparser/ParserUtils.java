@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -56,9 +56,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
- * XML parsing utilities for processing web application deployment
- * descriptor and tag library descriptor files.  FIXME - make these
- * use a separate class loader for the parser to be used.
+ * XML parsing utilities for processing web application deployment descriptor and tag library descriptor files. FIXME -
+ * make these use a separate class loader for the parser to be used.
  *
  * @author Craig R. McClanahan
  * @version $Revision: 1.11 $ $Date: 2007/05/05 05:32:59 $
@@ -88,44 +87,26 @@ public class ParserUtils {
 
     private static final String SCHEMA_LOCATION_ATTR = "schemaLocation";
 
-    private static HashMap<String, Schema> schemaCache =
-        new HashMap<String, Schema>();
+    private static HashMap<String, Schema> schemaCache = new HashMap<String, Schema>();
 
     /**
-     * List of the Public IDs that we cache, and their
-     * associated location. This is used by
-     * an EntityResolver to return the location of the
-     * cached copy of a DTD.
+     * List of the Public IDs that we cache, and their associated location. This is used by an EntityResolver to return the
+     * location of the cached copy of a DTD.
      */
-    static final String[] CACHED_DTD_PUBLIC_IDS = {
-        Constants.TAGLIB_DTD_PUBLIC_ID_11,
-        Constants.TAGLIB_DTD_PUBLIC_ID_12,
-        Constants.WEBAPP_DTD_PUBLIC_ID_22,
-        Constants.WEBAPP_DTD_PUBLIC_ID_23,
-    };
+    static final String[] CACHED_DTD_PUBLIC_IDS = { Constants.TAGLIB_DTD_PUBLIC_ID_11, Constants.TAGLIB_DTD_PUBLIC_ID_12, Constants.WEBAPP_DTD_PUBLIC_ID_22,
+            Constants.WEBAPP_DTD_PUBLIC_ID_23, };
 
     // START PWC 6386258
-    private static final String[] DEFAULT_DTD_RESOURCE_PATHS = {
-        Constants.TAGLIB_DTD_RESOURCE_PATH_11,
-        Constants.TAGLIB_DTD_RESOURCE_PATH_12,
-        Constants.WEBAPP_DTD_RESOURCE_PATH_22,
-        Constants.WEBAPP_DTD_RESOURCE_PATH_23,
-    };
+    private static final String[] DEFAULT_DTD_RESOURCE_PATHS = { Constants.TAGLIB_DTD_RESOURCE_PATH_11, Constants.TAGLIB_DTD_RESOURCE_PATH_12,
+            Constants.WEBAPP_DTD_RESOURCE_PATH_22, Constants.WEBAPP_DTD_RESOURCE_PATH_23, };
 
-    static final String[] CACHED_DTD_RESOURCE_PATHS =
-            (String[])DEFAULT_DTD_RESOURCE_PATHS;
+    static final String[] CACHED_DTD_RESOURCE_PATHS = (String[]) DEFAULT_DTD_RESOURCE_PATHS;
 
-    private static final String[] DEFAULT_SCHEMA_RESOURCE_PATHS = {
-        Constants.TAGLIB_SCHEMA_RESOURCE_PATH_20,
-        Constants.TAGLIB_SCHEMA_RESOURCE_PATH_21,
-        Constants.WEBAPP_SCHEMA_RESOURCE_PATH_24,
-        Constants.WEBAPP_SCHEMA_RESOURCE_PATH_25,
-    };
+    private static final String[] DEFAULT_SCHEMA_RESOURCE_PATHS = { Constants.TAGLIB_SCHEMA_RESOURCE_PATH_20, Constants.TAGLIB_SCHEMA_RESOURCE_PATH_21,
+            Constants.WEBAPP_SCHEMA_RESOURCE_PATH_24, Constants.WEBAPP_SCHEMA_RESOURCE_PATH_25, };
 
-    static final String[] CACHED_SCHEMA_RESOURCE_PATHS =
-            (String[])DEFAULT_SCHEMA_RESOURCE_PATHS; 
+    static final String[] CACHED_SCHEMA_RESOURCE_PATHS = (String[]) DEFAULT_SCHEMA_RESOURCE_PATHS;
     // END PWC 6386258
-
 
     // --------------------------------------------------------- Constructors
     public ParserUtils() {
@@ -158,12 +139,11 @@ public class ParserUtils {
             isSchemaResourcePrefixFileUrl = false;
         }
 
-        for (int i=0; i<CACHED_SCHEMA_RESOURCE_PATHS.length; i++) {
+        for (int i = 0; i < CACHED_SCHEMA_RESOURCE_PATHS.length; i++) {
             String path = DEFAULT_SCHEMA_RESOURCE_PATHS[i];
             int index = path.lastIndexOf('/');
             if (index != -1) {
-                CACHED_SCHEMA_RESOURCE_PATHS[i] =
-                    schemaResourcePrefix + path.substring(index+1);
+                CACHED_SCHEMA_RESOURCE_PATHS[i] = schemaResourcePrefix + path.substring(index + 1);
             }
         }
     }
@@ -181,12 +161,11 @@ public class ParserUtils {
             isDtdResourcePrefixFileUrl = false;
         }
 
-        for (int i=0; i<CACHED_DTD_RESOURCE_PATHS.length; i++) {
+        for (int i = 0; i < CACHED_DTD_RESOURCE_PATHS.length; i++) {
             String path = DEFAULT_DTD_RESOURCE_PATHS[i];
             int index = path.lastIndexOf('/');
             if (index != -1) {
-                CACHED_DTD_RESOURCE_PATHS[i] =
-                    dtdResourcePrefix + path.substring(index+1);
+                CACHED_DTD_RESOURCE_PATHS[i] = dtdResourcePrefix + path.substring(index + 1);
             }
         }
     }
@@ -203,48 +182,43 @@ public class ParserUtils {
                 } else {
                     try {
                         stringBuilder.append(URLEncoder.encode(token, "UTF-8"));
-                    } catch(java.io.UnsupportedEncodingException ex) {
+                    } catch (java.io.UnsupportedEncodingException ex) {
                     }
                 }
             }
-            
+
             return stringBuilder.toString();
         } else {
             return prefix;
         }
     }
 
-
     // --------------------------------------------------------- Public Methods
 
     /**
-     * Parse the specified XML document, and return a <code>TreeNode</code>
-     * that corresponds to the root node of the document tree.
+     * Parse the specified XML document, and return a <code>TreeNode</code> that corresponds to the root node of the
+     * document tree.
      *
      * @param uri URI of the XML document being parsed
      * @param is Input source containing the deployment descriptor
      *
      * @exception JasperException if an I/O or parsing error has occurred
      */
-    public TreeNode parseXMLDocument(String uri, InputSource is)
-            throws JasperException {
+    public TreeNode parseXMLDocument(String uri, InputSource is) throws JasperException {
         return parseXMLDocument(uri, is, false);
     }
 
     /**
-     * Parse the specified XML document, and return a <code>TreeNode</code>
-     * that corresponds to the root node of the document tree.
+     * Parse the specified XML document, and return a <code>TreeNode</code> that corresponds to the root node of the
+     * document tree.
      *
      * @param uri URI of the XML document being parsed
      * @param is Input source containing the deployment descriptor
-     * @param validate true if the XML document needs to be validated against
-     * its DTD or schema, false otherwise
+     * @param validate true if the XML document needs to be validated against its DTD or schema, false otherwise
      *
      * @exception JasperException if an I/O or parsing error has occurred
      */
-    public TreeNode parseXMLDocument(String uri, InputSource is,
-                                     boolean validate)
-            throws JasperException {
+    public TreeNode parseXMLDocument(String uri, InputSource is, boolean validate) throws JasperException {
 
         Document document = null;
 
@@ -255,27 +229,22 @@ public class ParserUtils {
         if (Constants.IS_SECURITY_ENABLED) {
             PrivilegedGetTccl pa = new PrivilegedGetTccl();
             currentLoader = AccessController.doPrivileged(pa);
-        } else { 
+        } else {
             currentLoader = Thread.currentThread().getContextClassLoader();
         }
         try {
             if (Constants.IS_SECURITY_ENABLED) {
-                PrivilegedSetTccl pa =
-                        new PrivilegedSetTccl(getClass().getClassLoader());
+                PrivilegedSetTccl pa = new PrivilegedSetTccl(getClass().getClassLoader());
                 AccessController.doPrivileged(pa);
             } else {
-                Thread.currentThread().setContextClassLoader(
-                    getClass().getClassLoader());
+                Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
             }
             // END 6412405
-            DocumentBuilderFactory factory =
-                DocumentBuilderFactory.newInstance();
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
-            /* See CR 6399139
-            factory.setFeature(
-                "http://apache.org/xml/features/validation/dynamic",
-                true);
-            */
+            /*
+             * See CR 6399139 factory.setFeature( "http://apache.org/xml/features/validation/dynamic", true);
+             */
             DocumentBuilder builder = factory.newDocumentBuilder();
             builder.setEntityResolver(entityResolver);
             builder.setErrorHandler(errorHandler);
@@ -287,30 +256,20 @@ public class ParserUtils {
                     // Validate TLD against specified schema
                     schema.newValidator().validate(new DOMSource(document));
                 }
-                /* See CR 6399139
-                else {
-                    log.warning(Localizer.getMessage(
-                        "jsp.warning.dtdValidationNotSupported"));
-                }
-                */
+                /*
+                 * See CR 6399139 else { log.warning(Localizer.getMessage( "jsp.warning.dtdValidationNotSupported")); }
+                 */
             }
-	} catch (ParserConfigurationException ex) {
-            throw new JasperException
-                (Localizer.getMessage("jsp.error.parse.xml", uri), ex);
-	} catch (SAXParseException ex) {
-            throw new JasperException
-                (Localizer.getMessage("jsp.error.parse.xml.line",
-				      uri,
-				      Integer.toString(ex.getLineNumber()),
-				      Integer.toString(ex.getColumnNumber())),
-		 ex);
-	} catch (SAXException sx) {
-            throw new JasperException
-                (Localizer.getMessage("jsp.error.parse.xml", uri), sx);
+        } catch (ParserConfigurationException ex) {
+            throw new JasperException(Localizer.getMessage("jsp.error.parse.xml", uri), ex);
+        } catch (SAXParseException ex) {
+            throw new JasperException(
+                    Localizer.getMessage("jsp.error.parse.xml.line", uri, Integer.toString(ex.getLineNumber()), Integer.toString(ex.getColumnNumber())), ex);
+        } catch (SAXException sx) {
+            throw new JasperException(Localizer.getMessage("jsp.error.parse.xml", uri), sx);
         } catch (IOException io) {
-            throw new JasperException
-                (Localizer.getMessage("jsp.error.parse.xml", uri), io);
-        // START 6412405
+            throw new JasperException(Localizer.getMessage("jsp.error.parse.xml", uri), io);
+            // START 6412405
         } finally {
             if (Constants.IS_SECURITY_ENABLED) {
                 PrivilegedSetTccl pa = new PrivilegedSetTccl(currentLoader);
@@ -325,45 +284,38 @@ public class ParserUtils {
         return (convert(null, document.getDocumentElement()));
     }
 
-
     /**
-     * Parse the specified XML document, and return a <code>TreeNode</code>
-     * that corresponds to the root node of the document tree.
+     * Parse the specified XML document, and return a <code>TreeNode</code> that corresponds to the root node of the
+     * document tree.
      *
      * @param uri URI of the XML document being parsed
      * @param is Input stream containing the deployment descriptor
      *
      * @exception JasperException if an I/O or parsing error has occurred
      */
-    public TreeNode parseXMLDocument(String uri, InputStream is)
-            throws JasperException {
+    public TreeNode parseXMLDocument(String uri, InputStream is) throws JasperException {
         return parseXMLDocument(uri, new InputSource(is), false);
     }
 
     /**
-     * Parse the specified XML document, and return a <code>TreeNode</code>
-     * that corresponds to the root node of the document tree.
+     * Parse the specified XML document, and return a <code>TreeNode</code> that corresponds to the root node of the
+     * document tree.
      *
      * @param uri URI of the XML document being parsed
      * @param is Input stream containing the deployment descriptor
-     * @param validate true if the XML document needs to be validated against
-     * its DTD or schema, false otherwise
+     * @param validate true if the XML document needs to be validated against its DTD or schema, false otherwise
      *
      * @exception JasperException if an I/O or parsing error has occurred
      */
-    public TreeNode parseXMLDocument(String uri, InputStream is,
-                                     boolean validate)
-            throws JasperException {
-        return  parseXMLDocument(uri, new InputSource(is), validate);
+    public TreeNode parseXMLDocument(String uri, InputStream is, boolean validate) throws JasperException {
+        return parseXMLDocument(uri, new InputSource(is), validate);
     }
-
 
     // ------------------------------------------------------ Protected Methods
 
-
     /**
-     * Create and return a TreeNode that corresponds to the specified Node,
-     * including processing all of the attributes and children nodes.
+     * Create and return a TreeNode that corresponds to the specified Node, including processing all of the attributes and
+     * children nodes.
      *
      * @param parent The parent TreeNode (if any) for the new TreeNode
      * @param node The XML document Node to be converted
@@ -379,8 +331,7 @@ public class ParserUtils {
             int n = attributes.getLength();
             for (int i = 0; i < n; i++) {
                 Node attribute = attributes.item(i);
-                treeNode.addAttribute(attribute.getNodeName(),
-                                      attribute.getNodeValue());
+                treeNode.addAttribute(attribute.getNodeName(), attribute.getNodeValue());
             }
         }
 
@@ -404,11 +355,10 @@ public class ParserUtils {
                 }
             }
         }
-        
+
         // Return the completed TreeNode graph
         return (treeNode);
     }
-
 
     // -------------------------------------------------------- Private Methods
 
@@ -419,39 +369,29 @@ public class ParserUtils {
      *
      * @return The schema against which to validate
      */
-    private static Schema getSchema(Document document)
-            throws SAXException, JasperException {
+    private static Schema getSchema(Document document) throws SAXException, JasperException {
 
         Schema schema = null;
         Element root = document.getDocumentElement();
         NamedNodeMap map = root.getAttributes();
-        for (int i=0; map!=null && i<map.getLength(); i++) {
+        for (int i = 0; map != null && i < map.getLength(); i++) {
             if (SCHEMA_LOCATION_ATTR.equals(map.item(i).getLocalName())) {
                 String schemaLocation = map.item(i).getNodeValue();
                 if (Constants.SCHEMA_LOCATION_JSP_20.equals(schemaLocation)) {
-                    schema = getSchema(
-                            Constants.TAGLIB_SCHEMA_PUBLIC_ID_20);
+                    schema = getSchema(Constants.TAGLIB_SCHEMA_PUBLIC_ID_20);
                     break;
-                } else if (Constants.SCHEMA_LOCATION_JSP_21.equals(
-                                                schemaLocation)) {
-                    schema = getSchema(
-                            Constants.TAGLIB_SCHEMA_PUBLIC_ID_21);
+                } else if (Constants.SCHEMA_LOCATION_JSP_21.equals(schemaLocation)) {
+                    schema = getSchema(Constants.TAGLIB_SCHEMA_PUBLIC_ID_21);
                     break;
-                } else if (Constants.SCHEMA_LOCATION_WEBAPP_24.equals(
-                                                schemaLocation)) {
-                    schema = getSchema(
-                            Constants.WEBAPP_SCHEMA_PUBLIC_ID_24);
+                } else if (Constants.SCHEMA_LOCATION_WEBAPP_24.equals(schemaLocation)) {
+                    schema = getSchema(Constants.WEBAPP_SCHEMA_PUBLIC_ID_24);
                     break;
-                } else if (Constants.SCHEMA_LOCATION_WEBAPP_25.equals(
-                                                schemaLocation)) {
-                    schema = getSchema(
-                            Constants.WEBAPP_SCHEMA_PUBLIC_ID_25);
+                } else if (Constants.SCHEMA_LOCATION_WEBAPP_25.equals(schemaLocation)) {
+                    schema = getSchema(Constants.WEBAPP_SCHEMA_PUBLIC_ID_25);
                     break;
                 } else {
-                    throw new JasperException(Localizer.getMessage(
-                        "jsp.error.parse.unknownTldSchemaLocation",
-                        document.getDocumentURI(),
-                        map.item(i).getNodeValue()));
+                    throw new JasperException(
+                            Localizer.getMessage("jsp.error.parse.unknownTldSchemaLocation", document.getDocumentURI(), map.item(i).getNodeValue()));
                 }
             }
         }
@@ -459,34 +399,29 @@ public class ParserUtils {
         return schema;
     }
 
-
     /*
      * Gets the compiled schema for the given schema public id.
      *
-     * @param schemaPublicId The public id for which to get the schema
-     * (e.g., web-jsptaglibrary_2_0.xsd)
+     * @param schemaPublicId The public id for which to get the schema (e.g., web-jsptaglibrary_2_0.xsd)
      *
      * @return The compiled schema
      */
-    private static Schema getSchema(String schemaPublicId)
-            throws SAXException {
+    private static Schema getSchema(String schemaPublicId) throws SAXException {
 
         Schema schema = schemaCache.get(schemaPublicId);
         if (schema == null) {
             synchronized (schemaCache) {
                 schema = schemaCache.get(schemaPublicId);
                 if (schema == null) {
-                    SchemaFactory schemaFactory = SchemaFactory.newInstance(
-                        XMLConstants.W3C_XML_SCHEMA_NS_URI);
-                    schemaFactory.setResourceResolver(
-                        new MyLSResourceResolver());
+                    SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+                    schemaFactory.setResourceResolver(new MyLSResourceResolver());
                     schemaFactory.setErrorHandler(new MyErrorHandler());
 
                     String path = schemaPublicId;
                     if (schemaResourcePrefix != null) {
                         int index = schemaPublicId.lastIndexOf('/');
                         if (index != -1) {
-                            path = schemaPublicId.substring(index+1);
+                            path = schemaPublicId.substring(index + 1);
                         }
                         path = schemaResourcePrefix + path;
                     }
@@ -495,7 +430,7 @@ public class ParserUtils {
                     if (isSchemaResourcePrefixFileUrl) {
                         try {
                             File f = new File(new URI(path));
-                            if (f.exists()) { 
+                            if (f.exists()) {
                                 input = new FileInputStream(f);
                             }
                         } catch (Exception e) {
@@ -506,10 +441,7 @@ public class ParserUtils {
                     }
 
                     if (input == null) {
-		        throw new SAXException(
-                            Localizer.getMessage(
-                                "jsp.error.internal.filenotfound",
-                                schemaPublicId));
+                        throw new SAXException(Localizer.getMessage("jsp.error.internal.filenotfound", schemaPublicId));
                     }
 
                     schema = schemaFactory.newSchema(new StreamSource(input));
@@ -523,7 +455,6 @@ public class ParserUtils {
 
 }
 
-
 // ------------------------------------------------------------ Private Classes
 
 class MyEntityResolver implements EntityResolver {
@@ -534,15 +465,13 @@ class MyEntityResolver implements EntityResolver {
         this.blockExternal = blockExternal;
     }
 
-    public InputSource resolveEntity(String publicId, String systemId)
-        throws SAXException
-    {
-        for (int i=0; i<ParserUtils.CACHED_DTD_PUBLIC_IDS.length; i++) {
+    public InputSource resolveEntity(String publicId, String systemId) throws SAXException {
+        for (int i = 0; i < ParserUtils.CACHED_DTD_PUBLIC_IDS.length; i++) {
             String cachedDtdPublicId = ParserUtils.CACHED_DTD_PUBLIC_IDS[i];
             if (cachedDtdPublicId.equals(publicId)) {
-                /* PWC 6386258
-                String resourcePath = Constants.CACHED_DTD_RESOURCE_PATHS[i];
-                */
+                /*
+                 * PWC 6386258 String resourcePath = Constants.CACHED_DTD_RESOURCE_PATHS[i];
+                 */
                 // START PWC 6386258
                 String resourcePath = ParserUtils.CACHED_DTD_RESOURCE_PATHS[i];
                 // END PWC 6386258
@@ -553,16 +482,14 @@ class MyEntityResolver implements EntityResolver {
                         if (path.exists()) {
                             input = new FileInputStream(path);
                         }
-                    } catch(Exception e) {
+                    } catch (Exception e) {
                         throw new SAXException(e);
                     }
                 } else {
                     input = this.getClass().getResourceAsStream(resourcePath);
                 }
                 if (input == null) {
-                    throw new SAXException(
-                        Localizer.getMessage("jsp.error.internal.filenotfound",
-                                             resourcePath));
+                    throw new SAXException(Localizer.getMessage("jsp.error.internal.filenotfound", resourcePath));
                 }
                 InputSource isrc = new InputSource(input);
                 return isrc;
@@ -570,68 +497,51 @@ class MyEntityResolver implements EntityResolver {
         }
 
         if (ParserUtils.log.isLoggable(Level.FINE)) {
-            ParserUtils.log.fine("Resolve entity failed"  + publicId + " "
-                                  + systemId );
+            ParserUtils.log.fine("Resolve entity failed" + publicId + " " + systemId);
         }
 
-        ParserUtils.log.severe(
-            Localizer.getMessage("jsp.error.parse.xml.invalidPublicId",
-            publicId));
+        ParserUtils.log.severe(Localizer.getMessage("jsp.error.parse.xml.invalidPublicId", publicId));
 
         if (blockExternal) {
-            throw new SAXException(
-                Localizer.getMessage("jsp.error.parse.xml.invalidPublicId",
-                publicId));
+            throw new SAXException(Localizer.getMessage("jsp.error.parse.xml.invalidPublicId", publicId));
         }
         return null;
     }
 }
 
 class MyErrorHandler implements ErrorHandler {
-    public void warning(SAXParseException ex)
-	throws SAXException
-    {
+    public void warning(SAXParseException ex) throws SAXException {
         if (ParserUtils.log.isLoggable(Level.FINE))
-            ParserUtils.log.log(Level.FINE, "ParserUtils: warning ", ex );
-	// We ignore warnings
+            ParserUtils.log.log(Level.FINE, "ParserUtils: warning ", ex);
+        // We ignore warnings
     }
 
-    public void error(SAXParseException ex)
-	throws SAXException
-    {
-	throw ex;
+    public void error(SAXParseException ex) throws SAXException {
+        throw ex;
     }
 
-    public void fatalError(SAXParseException ex)
-	throws SAXException
-    {
-	throw ex;
+    public void fatalError(SAXParseException ex) throws SAXException {
+        throw ex;
     }
 }
 
 class MyLSResourceResolver implements LSResourceResolver {
 
-    public LSInput resolveResource(String type, 
-                                   String namespaceURI, 
-                                   String publicId, 
-                                   String systemId, 
-                                   String baseURI) {
+    public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
 
         InputStream is = null;
 
         String resourceName = systemId;
         int index = systemId.lastIndexOf('/');
         if (index != -1) {
-            resourceName = systemId.substring(index+1);
+            resourceName = systemId.substring(index + 1);
         }
-        String resourcePath = (ParserUtils.schemaResourcePrefix != null) ?
-            (ParserUtils.schemaResourcePrefix + resourceName) :
-            resourceName;
+        String resourcePath = (ParserUtils.schemaResourcePrefix != null) ? (ParserUtils.schemaResourcePrefix + resourceName) : resourceName;
 
         if (ParserUtils.isSchemaResourcePrefixFileUrl) {
             try {
                 File f = new File(new URI(resourcePath));
-                if (f.exists()) { 
+                if (f.exists()) {
                     is = new FileInputStream(f);
                 }
             } catch (Exception e) {

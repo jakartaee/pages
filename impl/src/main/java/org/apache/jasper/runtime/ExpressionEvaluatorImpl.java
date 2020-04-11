@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,30 +32,26 @@ import jakarta.servlet.jsp.el.ExpressionEvaluator;
 import jakarta.servlet.jsp.el.VariableResolver;
 
 /**
- * <p>This is the implementation of ExpreesioEvaluator
- * using implementation of JSP2.1.
- * 
+ * <p>
+ * This is the implementation of ExpreesioEvaluator using implementation of JSP2.1.
+ *
  * @author Kin-man Chung
  * @version $Change: 181177 $$DateTime: 2001/06/26 08:45:09 $$Author: kchung $
  */
 
-public class ExpressionEvaluatorImpl extends ExpressionEvaluator
-{
+public class ExpressionEvaluatorImpl extends ExpressionEvaluator {
     private PageContext pageContext;
 
-    //-------------------------------------
+    // -------------------------------------
     /**
      * Constructor
      */
-    public ExpressionEvaluatorImpl (PageContext pageContext) {
+    public ExpressionEvaluatorImpl(PageContext pageContext) {
         this.pageContext = pageContext;
     }
-  
-    //-------------------------------------
-    public Expression parseExpression(String expression,
-                                      Class expectedType,
-                                      FunctionMapper fMapper )
-            throws ELException {
+
+    // -------------------------------------
+    public Expression parseExpression(String expression, Class expectedType, FunctionMapper fMapper) throws ELException {
 
         ExpressionFactory fac = ExpressionFactory.newInstance();
         jakarta.el.ValueExpression expr;
@@ -63,28 +59,21 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
         jakarta.el.FunctionMapper fm = new FunctionMapperWrapper(fMapper);
         elContext.setFunctionMapper(fm);
         try {
-            expr = fac.createValueExpression(
-                           elContext,
-                           expression, expectedType);
+            expr = fac.createValueExpression(elContext, expression, expectedType);
         } catch (jakarta.el.ELException ex) {
             throw new ELException(ex);
         }
         return new ExpressionImpl(expr, pageContext);
     }
 
-     public Object evaluate(String expression,
-                            Class expectedType,
-                            VariableResolver vResolver,
-                            FunctionMapper fMapper )
-                throws ELException {
+    public Object evaluate(String expression, Class expectedType, VariableResolver vResolver, FunctionMapper fMapper) throws ELException {
 
         ELContextImpl elContext;
         if (vResolver instanceof VariableResolverImpl) {
             elContext = (ELContextImpl) pageContext.getELContext();
-        }
-        else {
+        } else {
             // The provided variable Resolver is a custom resolver,
-            // wrap it with a ELResolver 
+            // wrap it with a ELResolver
             elContext = new ELContextImpl(new ELResolverWrapper(vResolver));
         }
 
@@ -93,10 +82,7 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
         ExpressionFactory fac = ExpressionFactory.newInstance();
         Object value;
         try {
-            ValueExpression expr = fac.createValueExpression(
-                                 elContext,
-                                 expression,
-                                 expectedType);
+            ValueExpression expr = fac.createValueExpression(elContext, expression, expectedType);
             value = expr.getValue(elContext);
         } catch (jakarta.el.ELException ex) {
             throw new ELException(ex);
@@ -109,8 +95,7 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
         private ValueExpression valueExpr;
         private PageContext pageContext;
 
-        ExpressionImpl(ValueExpression valueExpr,
-                       PageContext pageContext) {
+        ExpressionImpl(ValueExpression valueExpr, PageContext pageContext) {
             this.valueExpr = valueExpr;
             this.pageContext = pageContext;
         }
@@ -120,10 +105,9 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
             ELContext elContext;
             if (vResolver instanceof VariableResolverImpl) {
                 elContext = pageContext.getELContext();
-            }
-            else {
+            } else {
                 // The provided variable Resolver is a custom resolver,
-                // wrap it with a ELResolver 
+                // wrap it with a ELResolver
                 elContext = new ELContextImpl(new ELResolverWrapper(vResolver));
             }
             try {
@@ -134,8 +118,7 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
         }
     }
 
-    private static class FunctionMapperWrapper
-        extends jakarta.el.FunctionMapper {
+    private static class FunctionMapperWrapper extends jakarta.el.FunctionMapper {
 
         private FunctionMapper mapper;
 
@@ -143,8 +126,7 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
             this.mapper = mapper;
         }
 
-        public java.lang.reflect.Method resolveFunction(String prefix,
-                                                        String localName) {
+        public java.lang.reflect.Method resolveFunction(String prefix, String localName) {
             return mapper.resolveFunction(prefix, localName);
         }
     }
@@ -156,10 +138,7 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
             this.vResolver = vResolver;
         }
 
-        public Object getValue(ELContext context,
-                               Object base,
-                               Object property)
-                throws jakarta.el.ELException {
+        public Object getValue(ELContext context, Object base, Object property) throws jakarta.el.ELException {
             if (base == null) {
                 context.setPropertyResolved(true);
                 try {
@@ -171,34 +150,22 @@ public class ExpressionEvaluatorImpl extends ExpressionEvaluator
             return null;
         }
 
-        public Class getType(ELContext context,
-                             Object base,
-                             Object property)
-                throws jakarta.el.ELException {
+        public Class getType(ELContext context, Object base, Object property) throws jakarta.el.ELException {
             return null;
         }
 
-        public void setValue(ELContext context,
-                             Object base,
-                             Object property,
-                             Object value)
-                throws jakarta.el.ELException {
+        public void setValue(ELContext context, Object base, Object property, Object value) throws jakarta.el.ELException {
         }
 
-        public boolean isReadOnly(ELContext context,
-                                  Object base,
-                                  Object property)
-                throws jakarta.el.ELException {
+        public boolean isReadOnly(ELContext context, Object base, Object property) throws jakarta.el.ELException {
             return false;
         }
 
-        public Iterator<java.beans.FeatureDescriptor>
-                getFeatureDescriptors(ELContext context, Object base) {
+        public Iterator<java.beans.FeatureDescriptor> getFeatureDescriptors(ELContext context, Object base) {
             return null;
         }
 
-        public Class<?> getCommonPropertyType(ELContext context,
-                                           Object base) {
+        public Class<?> getCommonPropertyType(ELContext context, Object base) {
             return null;
         }
     }

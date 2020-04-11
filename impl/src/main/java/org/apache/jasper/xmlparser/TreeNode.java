@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,6 @@
 
 package org.apache.jasper.xmlparser;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -25,16 +24,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
-
 /**
- * Simplified implementation of a Node from a Document Object Model (DOM)
- * parse of an XML document.  This class is used to represent a DOM tree
- * so that the XML parser's implementation of <code>org.w3c.dom</code> need
- * not be visible to the remainder of Jasper.
+ * Simplified implementation of a Node from a Document Object Model (DOM) parse of an XML document. This class is used
+ * to represent a DOM tree so that the XML parser's implementation of <code>org.w3c.dom</code> need not be visible to
+ * the remainder of Jasper.
  * <p>
- * <strong>WARNING</strong> - Construction of a new tree, or modifications
- * to an existing one, are not thread-safe and such accesses must be
- * synchronized.
+ * <strong>WARNING</strong> - Construction of a new tree, or modifications to an existing one, are not thread-safe and
+ * such accesses must be synchronized.
  *
  * @author Craig R. McClanahan
  * @version $Revision: 1.2 $ $Date: 2005/12/08 01:29:00 $
@@ -42,9 +38,7 @@ import java.util.Iterator;
 
 public class TreeNode {
 
-
     // ----------------------------------------------------------- Constructors
-
 
     /**
      * Construct a new node with no parent.
@@ -56,7 +50,6 @@ public class TreeNode {
         this(name, null);
 
     }
-
 
     /**
      * Construct a new node with the specified parent.
@@ -74,47 +67,37 @@ public class TreeNode {
 
     }
 
-
     // ----------------------------------------------------- Instance Variables
 
-
     /**
-     * The attributes of this node, keyed by attribute name,
-     * Instantiated only if required.
+     * The attributes of this node, keyed by attribute name, Instantiated only if required.
      */
     protected HashMap<String, String> attributes = null;
-
 
     /**
      * The body text associated with this node (if any).
      */
     protected String body = null;
 
-
     /**
      * The children of this node, instantiated only if required.
      */
     protected ArrayList<TreeNode> children = null;
-
 
     /**
      * The name of this node.
      */
     protected String name = null;
 
-
     /**
      * The parent node of this node.
      */
     protected TreeNode parent = null;
 
-
     // --------------------------------------------------------- Public Methods
 
-
     /**
-     * Add an attribute to this node, replacing any existing attribute
-     * with the same name.
+     * Add an attribute to this node, replacing any existing attribute with the same name.
      *
      * @param name The attribute name to add
      * @param value The new attribute value
@@ -126,7 +109,6 @@ public class TreeNode {
         attributes.put(name, value);
 
     }
-
 
     /**
      * Add a new child node to this node.
@@ -141,10 +123,8 @@ public class TreeNode {
 
     }
 
-
     /**
-     * Return the value of the specified node attribute if it exists, or
-     * <code>null</code> otherwise.
+     * Return the value of the specified node attribute if it exists, or <code>null</code> otherwise.
      *
      * @param name Name of the requested attribute
      */
@@ -157,10 +137,8 @@ public class TreeNode {
 
     }
 
-
     /**
-     * Return an Iterator of the attribute names of this node.  If there are
-     * no attributes, an empty Iterator is returned.
+     * Return an Iterator of the attribute names of this node. If there are no attributes, an empty Iterator is returned.
      */
     public Iterator<String> findAttributes() {
 
@@ -173,10 +151,9 @@ public class TreeNode {
 
     }
 
-
     /**
-     * Return the first child node of this node with the specified name,
-     * if there is one; otherwise, return <code>null</code>.
+     * Return the first child node of this node with the specified name, if there is one; otherwise, return
+     * <code>null</code>.
      *
      * @param name Name of the desired child element
      */
@@ -184,7 +161,7 @@ public class TreeNode {
 
         if (children == null)
             return (null);
-        for (TreeNode item: children) {
+        for (TreeNode item : children) {
             if (name.equals(item.getName()))
                 return (item);
         }
@@ -192,10 +169,8 @@ public class TreeNode {
 
     }
 
-
     /**
-     * Return an Iterator of all children of this node.  If there are no
-     * children, an empty Iterator is returned.
+     * Return an Iterator of all children of this node. If there are no children, an empty Iterator is returned.
      */
     public Iterator<TreeNode> findChildren() {
 
@@ -207,11 +182,9 @@ public class TreeNode {
         return nodes.iterator();
     }
 
-
     /**
-     * Return an Iterator over all children of this node that have the
-     * specified name.  If there are no such children, an empty Iterator
-     * is returned.
+     * Return an Iterator over all children of this node that have the specified name. If there are no such children, an
+     * empty Iterator is returned.
      *
      * @param name Name used to select children
      */
@@ -222,14 +195,13 @@ public class TreeNode {
             results = Collections.emptyList();
         else {
             results = new ArrayList<TreeNode>();
-            for (TreeNode item: children) {
+            for (TreeNode item : children) {
                 if (name.equals(item.getName()))
                     results.add(item);
             }
         }
         return results.iterator();
     }
-
 
     /**
      * Return the body text associated with this node (if any).
@@ -240,7 +212,6 @@ public class TreeNode {
 
     }
 
-
     /**
      * Return the name of this node.
      */
@@ -249,7 +220,6 @@ public class TreeNode {
         return (this.name);
 
     }
-
 
     /**
      * Remove any existing value for the specified attribute name.
@@ -263,7 +233,6 @@ public class TreeNode {
 
     }
 
-
     /**
      * Remove a child node from this node, if it is one.
      *
@@ -276,7 +245,6 @@ public class TreeNode {
 
     }
 
-
     /**
      * Set the body text associated with this node (if any).
      *
@@ -287,7 +255,6 @@ public class TreeNode {
         this.body = body;
 
     }
-
 
     /**
      * Return a String representation of this TreeNode.
@@ -300,20 +267,17 @@ public class TreeNode {
 
     }
 
-
     // ------------------------------------------------------ Protected Methods
 
-
     /**
-     * Append to the specified StringBuilder a character representation of
-     * this node, with the specified amount of indentation.
+     * Append to the specified StringBuilder a character representation of this node, with the specified amount of
+     * indentation.
      *
      * @param sb The StringBuilder to append to
      * @param indent Number of characters of indentation
      * @param node The TreeNode to be printed
      */
-    protected void toString(StringBuilder sb, int indent,
-                            TreeNode node) {
+    protected void toString(StringBuilder sb, int indent, TreeNode node) {
 
         int indent2 = indent + 2;
 
@@ -358,6 +322,5 @@ public class TreeNode {
         sb.append(">\n");
 
     }
-
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,17 +23,14 @@ import jakarta.el.FunctionMapper;
 import jakarta.el.VariableMapper;
 
 /**
- * Concrete implementation of {@link jakarta.el.ELContext}.
- * ELContext's constructor is protected to control creation of ELContext
- * objects through their appropriate factory methods.  This version of
- * ELContext forces construction through JspApplicationContextImpl.
+ * Concrete implementation of {@link jakarta.el.ELContext}. ELContext's constructor is protected to control creation of
+ * ELContext objects through their appropriate factory methods. This version of ELContext forces construction through
+ * JspApplicationContextImpl.
  *
  * @author Mark Roth
  * @author Kin-man Chung
  */
-public class ELContextImpl 
-    extends ELContext
-{
+public class ELContextImpl extends ELContext {
     /**
      * Constructs a new ELContext associated with the given ELResolver.
      */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,11 +21,10 @@ import org.apache.jasper.JasperException;
 
 /**
  * Interface for handling JSP parse and javac compilation errors.
- * 
- * An implementation of this interface may be registered with the
- * ErrorDispatcher by setting the XXX initialization parameter in the JSP
- * page compiler and execution servlet in Catalina's web.xml file to the
- * implementation's fully qualified class name.
+ *
+ * An implementation of this interface may be registered with the ErrorDispatcher by setting the XXX initialization
+ * parameter in the JSP page compiler and execution servlet in Catalina's web.xml file to the implementation's fully
+ * qualified class name.
  *
  * @author Jan Luehe
  * @author Kin-man Chung
@@ -41,8 +40,7 @@ public interface ErrorHandler {
      * @param msg Parse error message
      * @param exception Parse exception
      */
-    public void jspError(String fname, int line, int column, String msg,
-			 Exception exception) throws JasperException;
+    public void jspError(String fname, int line, int column, String msg, Exception exception) throws JasperException;
 
     /**
      * Processes the given JSP parse error.
@@ -50,17 +48,14 @@ public interface ErrorHandler {
      * @param msg Parse error message
      * @param exception Parse exception
      */
-    public void jspError(String msg, Exception exception)
-	throws JasperException;
+    public void jspError(String msg, Exception exception) throws JasperException;
 
     /**
      * Processes the given javac compilation errors.
      *
-     * @param details Array of JavacErrorDetail instances corresponding to the
-     * compilation errors
+     * @param details Array of JavacErrorDetail instances corresponding to the compilation errors
      */
-    public void javacError(JavacErrorDetail[] details)
-	throws JasperException;
+    public void javacError(JavacErrorDetail[] details) throws JasperException;
 
     /**
      * Processes the given javac error report and exception.
@@ -68,6 +63,5 @@ public interface ErrorHandler {
      * @param errorReport Compilation error report
      * @param exception Compilation exception
      */
-    public void javacError(String errorReport, Exception exception)
-        throws JasperException;
+    public void javacError(String errorReport, Exception exception) throws JasperException;
 }

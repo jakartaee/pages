@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,9 +33,8 @@ import org.apache.jasper.JasperException;
 import org.apache.jasper.JspCompilationContext;
 
 /**
- * Contains static utilities for generating SMAP data based on the
- * current version of Jasper.
- * 
+ * Contains static utilities for generating SMAP data based on the current version of Jasper.
+ *
  * @author Jayson Falkner
  * @author Shawn Bayern
  * @author Robert Field (inner SDEInstaller class)
@@ -47,12 +46,12 @@ public class SmapUtil {
     private JspCompilationContext ctxt;
     private List<ClassInfo> classInfos;
 
-    //*********************************************************************
+    // *********************************************************************
     // Constants
 
     public static final String SMAP_ENCODING = "UTF-8";
 
-    //*********************************************************************
+    // *********************************************************************
     // Public entry points
 
     SmapUtil(JspCompilationContext ctxt) {
@@ -60,15 +59,13 @@ public class SmapUtil {
     }
 
     /**
-     * Generates an appropriate SMAP representing the current compilation
-     * context.  (JSR-045.)
+     * Generates an appropriate SMAP representing the current compilation context. (JSR-045.)
      *
      * @param ctxt Current compilation context
      * @param pageNodes The current JSP page
      * @return a SMAP for the page
      */
-    public void generateSmap(Node.Nodes pageNodes)
-        throws IOException {
+    public void generateSmap(Node.Nodes pageNodes) throws IOException {
 
         classInfos = new ArrayList<ClassInfo>();
         String className = ctxt.getFullClassName();
@@ -81,7 +78,7 @@ public class SmapUtil {
         evaluateNodes(pageNodes, s, ctxt.getOptions().getMappedFile());
 
         String classFileName = ctxt.getClassFileName();
-        for (ClassInfo entry: classInfos) {
+        for (ClassInfo entry : classInfos) {
             // Get SmapStratum
             s = entry.getSmapStratum();
             s.optimizeLineSection();
@@ -90,23 +87,18 @@ public class SmapUtil {
             SmapGenerator g = new SmapGenerator();
             g.setOutputFileName(unqualify(ctxt.getServletJavaFileName()));
             g.addStratum(s, true);
- 
-            String name = entry.getClassName();  // class name
+
+            String name = entry.getClassName(); // class name
             // Compute the class name and output file name for inner classes
             if (!className.equals(name)) {
-                classFileName = ctxt.getOutputDir() + 
-                    name.substring(name.lastIndexOf('.')+1) + ".class";
+                classFileName = ctxt.getOutputDir() + name.substring(name.lastIndexOf('.') + 1) + ".class";
             }
             entry.setClassFileName(classFileName);
             entry.setSmap(g.getString());
 
             if (ctxt.getOptions().isSmapDumped()) {
                 File outSmap = new File(classFileName + ".smap");
-                PrintWriter so =
-                    new PrintWriter(
-                        new OutputStreamWriter(
-                            new FileOutputStream(outSmap),
-                            SMAP_ENCODING));
+                PrintWriter so = new PrintWriter(new OutputStreamWriter(new FileOutputStream(outSmap), SMAP_ENCODING));
                 so.print(g.getString());
                 so.close();
             }
@@ -115,22 +107,19 @@ public class SmapUtil {
 
     public void installSmap() throws IOException {
 
-        for (ClassInfo ci: classInfos) {
+        for (ClassInfo ci : classInfos) {
             String className = ci.getClassName();
             byte[] classfile = ctxt.getRuntimeContext().getBytecode(className);
             if (classfile == null) {
-                SDEInstaller.install(new File(ci.getClassFileName()),
-                             ci.getSmap().getBytes(Charset.defaultCharset()));
-            }
-            else {
-                classfile = SDEInstaller.install(classfile,
-                             ci.getSmap().getBytes(Charset.defaultCharset()));
+                SDEInstaller.install(new File(ci.getClassFileName()), ci.getSmap().getBytes(Charset.defaultCharset()));
+            } else {
+                classfile = SDEInstaller.install(classfile, ci.getSmap().getBytes(Charset.defaultCharset()));
                 ctxt.getRuntimeContext().setBytecode(className, classfile);
             }
         }
     }
 
-    //*********************************************************************
+    // *********************************************************************
     // Private utilities
 
     /**
@@ -141,7 +130,7 @@ public class SmapUtil {
         return path.substring(path.lastIndexOf('/') + 1);
     }
 
-    //*********************************************************************
+    // *********************************************************************
     // Installation logic (from Robert Field, JSR-045 spec lead)
     private static class SDEInstaller {
 
@@ -160,25 +149,18 @@ public class SmapUtil {
             if (args.length == 2) {
                 install(new File(args[0]), new File(args[1]));
             } else if (args.length == 3) {
-                install(
-                    new File(args[0]),
-                    new File(args[1]),
-                    new File(args[2]));
+                install(new File(args[0]), new File(args[1]), new File(args[2]));
             } else {
-                System.err.println(
-                    "Usage: <command> <input class file> "
-                        + "<attribute file> <output class file name>\n"
+                System.err.println("Usage: <command> <input class file> " + "<attribute file> <output class file name>\n"
                         + "<command> <input/output class file> <attribute file>");
             }
         }
 
-        static void install(File inClassFile, File attrFile, File outClassFile)
-            throws IOException {
+        static void install(File inClassFile, File attrFile, File outClassFile) throws IOException {
             new SDEInstaller(inClassFile, attrFile, outClassFile);
         }
 
-        static void install(File inOutClassFile, File attrFile)
-            throws IOException {
+        static void install(File inOutClassFile, File attrFile) throws IOException {
             File tmpFile = new File(inOutClassFile.getPath() + "tmp");
             new SDEInstaller(inOutClassFile, attrFile, tmpFile);
             if (!inOutClassFile.delete()) {
@@ -200,24 +182,21 @@ public class SmapUtil {
             }
         }
 
-        static byte[] install(byte[] classfile, byte[] smap)
-                throws IOException {
+        static byte[] install(byte[] classfile, byte[] smap) throws IOException {
             SDEInstaller installer = new SDEInstaller(classfile, smap);
             byte[] tmp = new byte[installer.genPos];
             System.arraycopy(installer.gen, 0, tmp, 0, installer.genPos);
             return tmp;
         }
 
-        SDEInstaller(byte[] classfile, byte[] sdeAttr) 
-		throws IOException {
+        SDEInstaller(byte[] classfile, byte[] sdeAttr) throws IOException {
             orig = classfile;
             this.sdeAttr = sdeAttr;
             gen = new byte[orig.length + sdeAttr.length + 100];
             addSDE();
         }
 
-        SDEInstaller(File inClassFile, byte[] sdeAttr, File outClassFile)
-            throws IOException {
+        SDEInstaller(File inClassFile, byte[] sdeAttr, File outClassFile) throws IOException {
             if (!inClassFile.exists()) {
                 throw new FileNotFoundException("no such file: " + inClassFile);
             }
@@ -236,14 +215,13 @@ public class SmapUtil {
             outStream.close();
         }
 
-        SDEInstaller(File inClassFile, File attrFile, File outClassFile)
-            throws IOException {
+        SDEInstaller(File inClassFile, File attrFile, File outClassFile) throws IOException {
             this(inClassFile, readWhole(attrFile), outClassFile);
         }
 
         static byte[] readWhole(File input) throws IOException {
             FileInputStream inStream = new FileInputStream(input);
-            int len = (int)input.length();
+            int len = (int) input.length();
             byte[] bytes = new byte[len];
             if (inStream.read(bytes, 0, len) != len) {
                 throw new IOException("expected size: " + len);
@@ -332,7 +310,7 @@ public class SmapUtil {
         }
 
         int readU1() {
-            return ((int)orig[origPos++]) & 0xFF;
+            return ((int) orig[origPos++]) & 0xFF;
         }
 
         int readU2() {
@@ -346,7 +324,7 @@ public class SmapUtil {
         }
 
         void writeU1(int val) {
-            gen[genPos++] = (byte)val;
+            gen[genPos++] = (byte) val;
         }
 
         void writeU2(int val) {
@@ -379,43 +357,42 @@ public class SmapUtil {
             }
         }
 
-        int copyConstantPool(int constantPoolCount)
-            throws UnsupportedEncodingException, IOException {
+        int copyConstantPool(int constantPoolCount) throws UnsupportedEncodingException, IOException {
             int sdeIndex = -1;
             // copy const pool index zero not in class file
             for (int i = 1; i < constantPoolCount; ++i) {
                 int tag = readU1();
                 writeU1(tag);
                 switch (tag) {
-                    case 7 : // Class
-                    case 8 : // String
-                        copy(2);
-                        break;
-                    case 9 : // Field
-                    case 10 : // Method
-                    case 11 : // InterfaceMethod
-                    case 3 : // Integer
-                    case 4 : // Float
-                    case 12 : // NameAndType
-                        copy(4);
-                        break;
-                    case 5 : // Long
-                    case 6 : // Double
-                        copy(8);
-                        i++;
-                        break;
-                    case 1 : // Utf8
-                        int len = readU2();
-                        writeU2(len);
-                        byte[] utf8 = readBytes(len);
-                        String str = new String(utf8, "UTF-8");
-                        if (str.equals(nameSDE)) {
-                            sdeIndex = i;
-                        }
-                        writeBytes(utf8);
-                        break;
-                    default :
-                        throw new IOException("unexpected tag: " + tag);
+                case 7: // Class
+                case 8: // String
+                    copy(2);
+                    break;
+                case 9: // Field
+                case 10: // Method
+                case 11: // InterfaceMethod
+                case 3: // Integer
+                case 4: // Float
+                case 12: // NameAndType
+                    copy(4);
+                    break;
+                case 5: // Long
+                case 6: // Double
+                    copy(8);
+                    i++;
+                    break;
+                case 1: // Utf8
+                    int len = readU2();
+                    writeU2(len);
+                    byte[] utf8 = readBytes(len);
+                    String str = new String(utf8, "UTF-8");
+                    if (str.equals(nameSDE)) {
+                        sdeIndex = i;
+                    }
+                    writeBytes(utf8);
+                    break;
+                default:
+                    throw new IOException("unexpected tag: " + tag);
                 }
             }
             return sdeIndex;
@@ -431,10 +408,7 @@ public class SmapUtil {
         }
     }
 
-    private void evaluateNodes(
-        Node.Nodes nodes,
-        SmapStratum s,
-        boolean breakAtLF) {
+    private void evaluateNodes(Node.Nodes nodes, SmapStratum s, boolean breakAtLF) {
         try {
             nodes.visit(new SmapGenVisitor(s, breakAtLF, classInfos));
         } catch (JasperException ex) {
@@ -447,8 +421,7 @@ public class SmapUtil {
         private boolean breakAtLF;
         private List<ClassInfo> classInfos;
 
-        SmapGenVisitor(SmapStratum s, boolean breakAtLF,
-                       List<ClassInfo> classInfos) {
+        SmapGenVisitor(SmapStratum s, boolean breakAtLF, List<ClassInfo> classInfos) {
             this.smapStratum = s;
             this.breakAtLF = breakAtLF;
             this.classInfos = classInfos;
@@ -459,7 +432,7 @@ public class SmapUtil {
             String innerClass = n.getInnerClassName();
             if (innerClass != null) {
                 found: {
-                    for (ClassInfo ci: classInfos) {
+                    for (ClassInfo ci : classInfos) {
                         if (innerClass.equals(ci.getClassName())) {
                             smapStratum = ci.getSmapStratum();
                             break found;
@@ -564,16 +537,15 @@ public class SmapUtil {
                 return;
             }
 
-            //Add the file information
+            // Add the file information
             String fileName = mark.getFile();
             smapStratum.addFile(unqualify(fileName), fileName);
 
-            //Add a LineInfo that corresponds to the beginning of this node
+            // Add a LineInfo that corresponds to the beginning of this node
             int iInputStartLine = mark.getLineNumber();
             int iOutputStartLine = n.getBeginJavaLine();
-            int iOutputLineIncrement = breakAtLF? 1: 0;
-            smapStratum.addLineData(iInputStartLine, fileName, 1,
-                             iOutputStartLine, iOutputLineIncrement);
+            int iOutputLineIncrement = breakAtLF ? 1 : 0;
+            smapStratum.addLineData(iInputStartLine, fileName, 1, iOutputStartLine, iOutputLineIncrement);
 
             // Output additional mappings in the text
             java.util.ArrayList extraSmap = n.getExtraSmap();
@@ -581,21 +553,12 @@ public class SmapUtil {
             if (extraSmap != null) {
                 for (int i = 0; i < extraSmap.size(); i++) {
                     iOutputStartLine += iOutputLineIncrement;
-                    smapStratum.addLineData(
-                        iInputStartLine+((Integer)extraSmap.get(i)).intValue(),
-                        fileName,
-                        1,
-                        iOutputStartLine,
-                        iOutputLineIncrement);
+                    smapStratum.addLineData(iInputStartLine + ((Integer) extraSmap.get(i)).intValue(), fileName, 1, iOutputStartLine, iOutputLineIncrement);
                 }
             }
         }
 
-        private void doSmap(
-            Node n,
-            int inLineCount,
-            int outIncrement,
-            int skippedLines) {
+        private void doSmap(Node n, int inLineCount, int outIncrement, int skippedLines) {
             Mark mark = n.getStart();
             if (mark == null) {
                 return;
@@ -603,12 +566,8 @@ public class SmapUtil {
 
             String unqualifiedName = unqualify(mark.getFile());
             smapStratum.addFile(unqualifiedName, mark.getFile());
-            smapStratum.addLineData(
-                mark.getLineNumber() + skippedLines,
-                mark.getFile(),
-                inLineCount - skippedLines,
-                n.getBeginJavaLine() + skippedLines,
-                outIncrement);
+            smapStratum.addLineData(mark.getLineNumber() + skippedLines, mark.getFile(), inLineCount - skippedLines, n.getBeginJavaLine() + skippedLines,
+                    outIncrement);
         }
 
         private void doSmap(Node n) {
@@ -659,8 +618,8 @@ public class SmapUtil {
     }
 
     /*
-     * A place to keep some temporary info on a class.  More than a class
-     * may be produced in a compilation, since it may generate inner classes
+     * A place to keep some temporary info on a class. More than a class may be produced in a compilation, since it may
+     * generate inner classes
      */
     static public class ClassInfo {
 

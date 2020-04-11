@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +16,6 @@
  */
 
 package org.apache.jasper.servlet;
-
 
 import java.io.File;
 import java.io.InputStream;
@@ -51,29 +50,24 @@ import org.apache.jasper.xmlparser.TreeNode;
 import org.apache.jasper.xmlparser.ParserUtils;
 
 /**
- * Simple <code>ServletContext</code> implementation without
- * HTTP-specific methods.
+ * Simple <code>ServletContext</code> implementation without HTTP-specific methods.
  *
  * @author Peter Rossbach (pr@webapp.de)
  */
 
 public class JspCServletContext implements ServletContext {
 
-
     // ----------------------------------------------------- Instance Variables
-
 
     /**
      * Servlet context attributes.
      */
     protected Hashtable<String, Object> myAttributes;
 
-
     /**
      * The log writer we will write log messages to.
      */
     protected PrintWriter myLogWriter;
-
 
     /**
      * The base URL (document root) for this context.
@@ -83,7 +77,6 @@ public class JspCServletContext implements ServletContext {
     private JspConfigDescriptor jspConfigDescriptor;
 
     // ----------------------------------------------------------- Constructors
-
 
     /**
      * Create a new instance of this ServletContext implementation.
@@ -100,9 +93,7 @@ public class JspCServletContext implements ServletContext {
         parseWebDotXml();
     }
 
-
     // --------------------------------------------------------- Public Methods
-
 
     /**
      * Return the specified context attribute, if any.
@@ -115,7 +106,6 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
      * Return an enumeration of context attribute names.
      */
@@ -125,14 +115,12 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
      * Returns the context path of the web application.
      */
     public String getContextPath() {
         return null;
     }
-
 
     /**
      * Return the servlet context for the specified path.
@@ -145,7 +133,6 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
      * Return the specified context initialization parameter.
      *
@@ -157,10 +144,8 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
-     * Return an enumeration of the names of context initialization
-     * parameters.
+     * Return an enumeration of the names of context initialization parameters.
      */
     public Enumeration<String> getInitParameterNames() {
 
@@ -168,14 +153,12 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
      * Return the Servlet API major version number.
      */
     public int getMajorVersion() {
         return 3;
     }
-
 
     /**
      * Return the MIME type for the specified filename.
@@ -185,7 +168,6 @@ public class JspCServletContext implements ServletContext {
     public String getMimeType(String file) {
         return (null);
     }
-
 
     /**
      * Return the Servlet API minor version number.
@@ -204,7 +186,6 @@ public class JspCServletContext implements ServletContext {
         return 0;
     }
 
-
     /**
      * Return a request dispatcher for the specified servlet name.
      *
@@ -216,10 +197,8 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
-     * Return the real path for the specified context-relative
-     * virtual path.
+     * Return the real path for the specified context-relative virtual path.
      *
      * @param path The context-relative virtual path to resolve
      */
@@ -230,15 +209,13 @@ public class JspCServletContext implements ServletContext {
         if (!path.startsWith("/"))
             return (null);
         try {
-            return
-                (getResource(path).getFile().replace('/', File.separatorChar));
+            return (getResource(path).getFile().replace('/', File.separatorChar));
         } catch (Throwable t) {
             return (null);
         }
 
     }
-            
-            
+
     /**
      * Return a request dispatcher for the specified context-relative path.
      *
@@ -250,21 +227,17 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
-     * Return a URL object of a resource that is mapped to the
-     * specified context-relative path.
+     * Return a URL object of a resource that is mapped to the specified context-relative path.
      *
      * @param path Context-relative path of the desired resource
      *
-     * @exception MalformedURLException if the resource path is
-     *  not properly formed
+     * @exception MalformedURLException if the resource path is not properly formed
      */
     public URL getResource(String path) throws MalformedURLException {
 
         if (!path.startsWith("/"))
-            throw new MalformedURLException("Path '" + path +
-                                            "' does not start with '/'");
+            throw new MalformedURLException("Path '" + path + "' does not start with '/'");
         URL url = new URL(myResourceBaseURL, path.substring(1));
         InputStream is = null;
         try {
@@ -283,10 +256,8 @@ public class JspCServletContext implements ServletContext {
         return url;
     }
 
-
     /**
-     * Return an InputStream allowing access to the resource at the
-     * specified context-relative path.
+     * Return an InputStream allowing access to the resource at the specified context-relative path.
      *
      * @param path Context-relative path of the desired resource
      */
@@ -300,10 +271,8 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
-     * Return the set of resource paths for the "directory" at the
-     * specified context path.
+     * Return the set of resource paths for the "directory" at the specified context path.
      *
      * @param path Context-relative base path
      */
@@ -330,7 +299,6 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
      * Return descriptive information about this server.
      */
@@ -339,7 +307,6 @@ public class JspCServletContext implements ServletContext {
         return ("JspCServletContext/1.0");
 
     }
-
 
     /**
      * Return a null reference for the specified servlet name.
@@ -354,7 +321,6 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
      * Return the name of this servlet context.
      */
@@ -363,7 +329,6 @@ public class JspCServletContext implements ServletContext {
         return (getServerInfo());
 
     }
-
 
     /**
      * Return an empty enumeration of servlet names.
@@ -376,7 +341,6 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
      * Return an empty enumeration of servlets.
      *
@@ -388,7 +352,6 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
      * Log the specified message.
      *
@@ -399,7 +362,6 @@ public class JspCServletContext implements ServletContext {
         myLogWriter.println(message);
 
     }
-
 
     /**
      * Log the specified message and exception.
@@ -415,7 +377,6 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
      * Log the specified message and exception.
      *
@@ -429,7 +390,6 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /**
      * Remove the specified context attribute.
      *
@@ -440,7 +400,6 @@ public class JspCServletContext implements ServletContext {
         myAttributes.remove(name);
 
     }
-
 
     /**
      * Set or replace the specified context attribute.
@@ -454,40 +413,27 @@ public class JspCServletContext implements ServletContext {
 
     }
 
-
     /*
-     * Adds the servlet with the given name, description, class name,
-     * init parameters, and loadOnStartup, to this servlet context.
+     * Adds the servlet with the given name, description, class name, init parameters, and loadOnStartup, to this servlet
+     * context.
      */
-    public void addServlet(String servletName,
-                           String description,
-                           String className,
-                           Map<String, String> initParameters,
-                           int loadOnStartup) {
+    public void addServlet(String servletName, String description, String className, Map<String, String> initParameters, int loadOnStartup) {
         // Do nothing
         return;
     }
 
-
     /**
-     * Adds servlet mappings from the given url patterns to the servlet
-     * with the given servlet name to this servlet context.
+     * Adds servlet mappings from the given url patterns to the servlet with the given servlet name to this servlet context.
      */
-    public void addServletMapping(String servletName,
-                                  String[] urlPatterns) {
+    public void addServletMapping(String servletName, String[] urlPatterns) {
         // Do nothing
         return;
     }
 
-
     /**
-     * Adds the filter with the given name, description, and class name to
-     * this servlet context.
+     * Adds the filter with the given name, description, and class name to this servlet context.
      */
-    public void addFilter(String filterName,
-                          String description,
-                          String className,
-                          Map<String, String> initParameters) {
+    public void addFilter(String filterName, String description, String className, Map<String, String> initParameters) {
         // Do nothing
         return;
     }
@@ -496,18 +442,15 @@ public class JspCServletContext implements ServletContext {
         throw new UnsupportedOperationException();
     }
 
-     public ServletRegistration.Dynamic addServlet(
-        String servletName, String className) {
+    public ServletRegistration.Dynamic addServlet(String servletName, String className) {
         throw new UnsupportedOperationException();
     }
 
-    public ServletRegistration.Dynamic addServlet(
-        String servletName, Servlet servlet) {
+    public ServletRegistration.Dynamic addServlet(String servletName, Servlet servlet) {
         throw new UnsupportedOperationException();
     }
 
-    public ServletRegistration.Dynamic addServlet(String servletName,
-        Class <? extends Servlet> servletClass) {
+    public ServletRegistration.Dynamic addServlet(String servletName, Class<? extends Servlet> servletClass) {
         throw new UnsupportedOperationException();
     }
 
@@ -516,8 +459,7 @@ public class JspCServletContext implements ServletContext {
         throw new UnsupportedOperationException();
     }
 
-    public <T extends Servlet> T createServlet(Class<T> c)
-        throws ServletException {
+    public <T extends Servlet> T createServlet(Class<T> c) throws ServletException {
         throw new UnsupportedOperationException();
     }
 
@@ -529,18 +471,15 @@ public class JspCServletContext implements ServletContext {
         throw new UnsupportedOperationException();
     }
 
-    public FilterRegistration.Dynamic addFilter(
-        String filterName, String className) {
+    public FilterRegistration.Dynamic addFilter(String filterName, String className) {
         throw new UnsupportedOperationException();
     }
 
-    public FilterRegistration.Dynamic addFilter(
-        String filterName, Filter filter) {
+    public FilterRegistration.Dynamic addFilter(String filterName, Filter filter) {
         throw new UnsupportedOperationException();
     }
 
-    public FilterRegistration.Dynamic addFilter(String filterName,
-        Class <? extends Filter> filterClass) {
+    public FilterRegistration.Dynamic addFilter(String filterName, Class<? extends Filter> filterClass) {
         throw new UnsupportedOperationException();
     }
 
@@ -580,12 +519,11 @@ public class JspCServletContext implements ServletContext {
         throw new UnsupportedOperationException();
     }
 
-    public void addListener(Class <? extends EventListener> listenerClass) {
+    public void addListener(Class<? extends EventListener> listenerClass) {
         throw new UnsupportedOperationException();
     }
 
-    public <T extends EventListener> T createListener(Class<T> clazz)
-            throws ServletException {
+    public <T extends EventListener> T createListener(Class<T> clazz) throws ServletException {
         throw new UnsupportedOperationException();
     }
 
@@ -634,6 +572,7 @@ public class JspCServletContext implements ServletContext {
     }
 
     private static final String WEB_XML = "/WEB-INF/web.xml";
+
     private void parseWebDotXml() {
 
         InputStream is = getResourceAsStream(WEB_XML);
@@ -655,8 +594,7 @@ public class JspCServletContext implements ServletContext {
         }
 
         ArrayList<TaglibDescriptor> taglibs = new ArrayList<TaglibDescriptor>();
-        ArrayList<JspPropertyGroupDescriptor> jspPropertyGroups =
-                new ArrayList<JspPropertyGroupDescriptor>();
+        ArrayList<JspPropertyGroupDescriptor> jspPropertyGroups = new ArrayList<JspPropertyGroupDescriptor>();
 
         Iterator<TreeNode> children = jspConfig.findChildren("taglib");
         while (children.hasNext()) {
@@ -725,27 +663,14 @@ public class JspCServletContext implements ServletContext {
                 else if ("error-on-undeclared-namespace".equals(tname))
                     errorOnUndeclaredNamespace = element.getBody();
             }
-            jspPropertyGroups.add(new JspPropertyGroupDescriptorImpl(
-                                      urlPatterns,
-                                      isXml,
-                                      elIgnored,
-                                      scriptingInvalid,
-                                      trimSpaces,
-                                      poundAllowed,
-                                      pageEncoding,
-                                      includePrelude,
-                                      includeCoda,
-                                      defaultContentType,
-                                      buffer,
-                                      errorOnUndeclaredNamespace));
+            jspPropertyGroups.add(new JspPropertyGroupDescriptorImpl(urlPatterns, isXml, elIgnored, scriptingInvalid, trimSpaces, poundAllowed, pageEncoding,
+                    includePrelude, includeCoda, defaultContentType, buffer, errorOnUndeclaredNamespace));
         }
 
-        jspConfigDescriptor =
-            new JspConfigDescriptorImpl(taglibs, jspPropertyGroups);
+        jspConfigDescriptor = new JspConfigDescriptorImpl(taglibs, jspPropertyGroups);
     }
 
-    static class JspPropertyGroupDescriptorImpl
-            implements JspPropertyGroupDescriptor {
+    static class JspPropertyGroupDescriptorImpl implements JspPropertyGroupDescriptor {
         Collection<String> urlPatterns;
         String isXml;
         String elIgnored;
@@ -759,12 +684,9 @@ public class JspCServletContext implements ServletContext {
         String buffer;
         String errorOnUndeclaredNamespace;
 
-        JspPropertyGroupDescriptorImpl(Collection<String> urlPatterns,
-                    String isXml, String elIgnored, String scriptingInvalid,
-                    String trimSpaces, String poundAllowed,
-                    String pageEncoding, Collection<String> includePrelude,
-                    Collection<String> includeCoda, String defaultContentType,
-                    String buffer, String errorOnUndeclaredNamespace) {
+        JspPropertyGroupDescriptorImpl(Collection<String> urlPatterns, String isXml, String elIgnored, String scriptingInvalid, String trimSpaces,
+                String poundAllowed, String pageEncoding, Collection<String> includePrelude, Collection<String> includeCoda, String defaultContentType,
+                String buffer, String errorOnUndeclaredNamespace) {
             this.urlPatterns = urlPatterns;
             this.isXml = isXml;
             this.elIgnored = elIgnored;
@@ -773,7 +695,7 @@ public class JspCServletContext implements ServletContext {
             this.poundAllowed = poundAllowed;
             this.pageEncoding = pageEncoding;
             this.includePrelude = includePrelude;
-            this.includeCoda =includeCoda;
+            this.includeCoda = includeCoda;
             this.defaultContentType = defaultContentType;
             this.buffer = buffer;
             this.errorOnUndeclaredNamespace = errorOnUndeclaredNamespace;
@@ -846,7 +768,8 @@ public class JspCServletContext implements ServletContext {
 
         public TaglibDescriptorImpl(String uri, String loc) {
             this.uri = uri;
-            this.loc = loc;;
+            this.loc = loc;
+            ;
         }
 
         public String getTaglibURI() {
@@ -863,10 +786,9 @@ public class JspCServletContext implements ServletContext {
         Collection<TaglibDescriptor> taglibs;
         Collection<JspPropertyGroupDescriptor> jspPropertyGroups;
 
-        public JspConfigDescriptorImpl(Collection<TaglibDescriptor> taglibs,
-                   Collection<JspPropertyGroupDescriptor> jspPropertyGroups) {
-           this.taglibs = taglibs;
-           this.jspPropertyGroups = jspPropertyGroups;
+        public JspConfigDescriptorImpl(Collection<TaglibDescriptor> taglibs, Collection<JspPropertyGroupDescriptor> jspPropertyGroups) {
+            this.taglibs = taglibs;
+            this.jspPropertyGroups = jspPropertyGroups;
         }
 
         public Collection<TaglibDescriptor> getTaglibs() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,8 +43,7 @@ public class JspApplicationContextImpl implements JspApplicationContext {
         this.context = context;
 
         // Add system defined ELResolver, as defined in JSR 299
-        ELResolver beanManagerELResolver = (ELResolver)
-            context.getAttribute("org.glassfish.jsp.beanManagerELResolver");
+        ELResolver beanManagerELResolver = (ELResolver) context.getAttribute("org.glassfish.jsp.beanManagerELResolver");
         if (beanManagerELResolver != null) {
             elResolvers.add(beanManagerELResolver);
         }
@@ -52,8 +51,7 @@ public class JspApplicationContextImpl implements JspApplicationContext {
 
     public void addELResolver(ELResolver resolver) {
         if ("true".equals(context.getAttribute(Constants.FIRST_REQUEST_SEEN))) {
-            throw new IllegalStateException("Attempt to invoke addELResolver "
-                + "after the application has already received a request");
+            throw new IllegalStateException("Attempt to invoke addELResolver " + "after the application has already received a request");
         }
 
         elResolvers.add(0, resolver);
@@ -105,14 +103,10 @@ public class JspApplicationContextImpl implements JspApplicationContext {
         return elResolvers.iterator();
     }
 
-    private static Map<ServletContext, JspApplicationContextImpl> map =
-            Collections.synchronizedMap(
-                new HashMap<ServletContext, JspApplicationContextImpl>());
+    private static Map<ServletContext, JspApplicationContextImpl> map = Collections.synchronizedMap(new HashMap<ServletContext, JspApplicationContextImpl>());
 
     private ArrayList<ELResolver> elResolvers = new ArrayList<ELResolver>();
-    private ArrayList<ELContextListener> listeners =
-            new ArrayList<ELContextListener>();
+    private ArrayList<ELContextListener> listeners = new ArrayList<ELContextListener>();
     private ServletContext context;
     private ExpressionFactory expressionFactory;
 }
-

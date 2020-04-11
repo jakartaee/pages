@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,8 +23,7 @@ public class JspPropertyGroup {
     private String extension;
     private JspProperty jspProperty;
 
-    public JspPropertyGroup(String path, String extension,
-                            JspProperty jspProperty) {
+    public JspPropertyGroup(String path, String extension, JspProperty jspProperty) {
         this.path = path;
         this.extension = extension;
         this.jspProperty = jspProperty;

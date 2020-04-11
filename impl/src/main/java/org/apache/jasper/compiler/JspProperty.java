@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,18 +33,8 @@ public class JspProperty {
     private String defaultContentType;
     private String errorOnUndeclaredNamespace;
 
-    public JspProperty(String isXml,
-                       String elIgnored,
-                       String scriptingInvalid,
-                       String trimSpaces,
-                       String poundAllowed,
-                       String pageEncoding,
-                       List<String> includePrelude,
-                       List<String> includeCoda,
-                       String defaultContentType,
-                       String buffer,
-                       String errorOnUndeclaredNamespace) {
-
+    public JspProperty(String isXml, String elIgnored, String scriptingInvalid, String trimSpaces, String poundAllowed, String pageEncoding,
+            List<String> includePrelude, List<String> includeCoda, String defaultContentType, String buffer, String errorOnUndeclaredNamespace) {
 
         this.isXml = isXml;
         this.elIgnored = elIgnored;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@ public final class Otherwise implements TagPlugin {
 
     public void doTag(TagPluginContext ctxt) {
 
-	// See When.java for the reason whey "}" is need at the beginng and
-	// not at the end.
-	ctxt.generateJavaSource("} else {");
-	ctxt.generateBody();
+        // See When.java for the reason whey "}" is need at the beginng and
+        // not at the end.
+        ctxt.generateJavaSource("} else {");
+        ctxt.generateBody();
     }
 }

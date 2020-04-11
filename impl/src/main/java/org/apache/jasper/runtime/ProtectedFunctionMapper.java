@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,17 +25,17 @@ import java.security.PrivilegedActionException;
 import java.lang.reflect.Method;
 import jakarta.el.FunctionMapper;
 import org.apache.jasper.security.SecurityUtil;
+
 /**
- * Maps EL functions to their Java method counterparts.  Keeps the
- * actual Method objects protected so that JSP pages can't indirectly
- * do reflection.
+ * Maps EL functions to their Java method counterparts. Keeps the actual Method objects protected so that JSP pages
+ * can't indirectly do reflection.
  *
  * @author Mark Roth
  * @author Kin-man Chung
  */
 public final class ProtectedFunctionMapper extends FunctionMapper {
 
-    /** 
+    /**
      * Maps "prefix:name" to java.lang.Method objects.
      */
     private HashMap<String, Method> fnmap = null;
@@ -52,135 +52,112 @@ public final class ProtectedFunctionMapper extends FunctionMapper {
     }
 
     /**
-     * Generated Servlet and Tag Handler implementations call this
-     * method to retrieve an instance of the ProtectedFunctionMapper.
-     * This is necessary since generated code does not have access to
-     * create instances of classes in this package.
+     * Generated Servlet and Tag Handler implementations call this method to retrieve an instance of the
+     * ProtectedFunctionMapper. This is necessary since generated code does not have access to create instances of classes
+     * in this package.
      *
      * @return A new protected function mapper.
      */
     public static ProtectedFunctionMapper getInstance() {
         ProtectedFunctionMapper funcMapper;
-	if (SecurityUtil.isPackageProtectionEnabled()) {
-	    funcMapper = AccessController.doPrivileged(
-		new PrivilegedAction<ProtectedFunctionMapper>() {
-		public ProtectedFunctionMapper run() {
-		    return new ProtectedFunctionMapper();
-		}
-	    } );
-	} else {
-	    funcMapper = new ProtectedFunctionMapper();
-	}
-	funcMapper.fnmap = new java.util.HashMap<String, Method>();
-	return funcMapper;
+        if (SecurityUtil.isPackageProtectionEnabled()) {
+            funcMapper = AccessController.doPrivileged(new PrivilegedAction<ProtectedFunctionMapper>() {
+                public ProtectedFunctionMapper run() {
+                    return new ProtectedFunctionMapper();
+                }
+            });
+        } else {
+            funcMapper = new ProtectedFunctionMapper();
+        }
+        funcMapper.fnmap = new java.util.HashMap<String, Method>();
+        return funcMapper;
     }
 
     /**
-     * Stores a mapping from the given EL function prefix and name to 
-     * the given Java method.
+     * Stores a mapping from the given EL function prefix and name to the given Java method.
      *
      * @param fnQName The EL function qualified name (including prefix)
      * @param c The class containing the Java method
      * @param methodName The name of the Java method
      * @param args The arguments of the Java method
-     * @throws RuntimeException if no method with the given signature
-     *     could be found.
+     * @throws RuntimeException if no method with the given signature could be found.
      */
-    public void mapFunction(String fnQName, final Class<?> c,
-			    final String methodName, final Class<?>[] args ) 
-    {
-	java.lang.reflect.Method method;
-        if (SecurityUtil.isPackageProtectionEnabled()){
-            try{
-                method = AccessController.doPrivileged(
-                new PrivilegedExceptionAction<Method>(){
-                    public Method run() throws Exception{
+    public void mapFunction(String fnQName, final Class<?> c, final String methodName, final Class<?>[] args) {
+        java.lang.reflect.Method method;
+        if (SecurityUtil.isPackageProtectionEnabled()) {
+            try {
+                method = AccessController.doPrivileged(new PrivilegedExceptionAction<Method>() {
+                    public Method run() throws Exception {
                         return c.getDeclaredMethod(methodName, args);
-                    }                
-                });      
-            } catch (PrivilegedActionException ex){
-                throw new RuntimeException(
-                    "Invalid function mapping - no such method: "
-		    + ex.getException().getMessage());               
+                    }
+                });
+            } catch (PrivilegedActionException ex) {
+                throw new RuntimeException("Invalid function mapping - no such method: " + ex.getException().getMessage());
             }
         } else {
-             try {
+            try {
                 method = c.getDeclaredMethod(methodName, args);
-            } catch( NoSuchMethodException e ) {
-                throw new RuntimeException(
-                    "Invalid function mapping - no such method: "
-		    + e.getMessage());
+            } catch (NoSuchMethodException e) {
+                throw new RuntimeException("Invalid function mapping - no such method: " + e.getMessage());
             }
         }
 
-	this.fnmap.put(fnQName, method );
+        this.fnmap.put(fnQName, method);
     }
 
     /**
-     * Creates an instance for this class, and stores the Method for
-     * the given EL function prefix and name. This method is used for
-     * the case when there is only one function in the EL expression.
+     * Creates an instance for this class, and stores the Method for the given EL function prefix and name. This method is
+     * used for the case when there is only one function in the EL expression.
      *
      * @param fnQName The EL function qualified name (including prefix)
      * @param c The class containing the Java method
      * @param methodName The name of the Java method
      * @param args The arguments of the Java method
-     * @throws RuntimeException if no method with the given signature
-     *     could be found.
+     * @throws RuntimeException if no method with the given signature could be found.
      */
-    public static ProtectedFunctionMapper getMapForFunction(
-		String fnQName, final Class<?> c,
-                final String methodName, final Class<?>[] args )
-    {
+    public static ProtectedFunctionMapper getMapForFunction(String fnQName, final Class<?> c, final String methodName, final Class<?>[] args) {
         java.lang.reflect.Method method;
         ProtectedFunctionMapper funcMapper;
-        if (SecurityUtil.isPackageProtectionEnabled()){
-            funcMapper = AccessController.doPrivileged(
-                new PrivilegedAction<ProtectedFunctionMapper>(){
+        if (SecurityUtil.isPackageProtectionEnabled()) {
+            funcMapper = AccessController.doPrivileged(new PrivilegedAction<ProtectedFunctionMapper>() {
                 public ProtectedFunctionMapper run() {
                     return new ProtectedFunctionMapper();
                 }
             });
 
-            try{
-                method = AccessController.doPrivileged(
-                    new PrivilegedExceptionAction<Method>(){
-                    public Method run() throws Exception{
+            try {
+                method = AccessController.doPrivileged(new PrivilegedExceptionAction<Method>() {
+                    public Method run() throws Exception {
                         return c.getDeclaredMethod(methodName, args);
                     }
                 });
-            } catch (PrivilegedActionException ex){
-                throw new RuntimeException(
-                    "Invalid function mapping - no such method: "
-                    + ex.getException().getMessage());
+            } catch (PrivilegedActionException ex) {
+                throw new RuntimeException("Invalid function mapping - no such method: " + ex.getException().getMessage());
             }
         } else {
-	    funcMapper = new ProtectedFunctionMapper();
-             try {
+            funcMapper = new ProtectedFunctionMapper();
+            try {
                 method = c.getDeclaredMethod(methodName, args);
-            } catch( NoSuchMethodException e ) {
-                throw new RuntimeException(
-                    "Invalid function mapping - no such method: "
-                    + e.getMessage());
+            } catch (NoSuchMethodException e) {
+                throw new RuntimeException("Invalid function mapping - no such method: " + e.getMessage());
             }
         }
         funcMapper.theMethod = method;
-	return funcMapper;
+        return funcMapper;
     }
 
     /**
-     * Resolves the specified local name and prefix into a Java.lang.Method.
-     * Returns null if the prefix and local name are not found.
-     * 
+     * Resolves the specified local name and prefix into a Java.lang.Method. Returns null if the prefix and local name are
+     * not found.
+     *
      * @param prefix the prefix of the function
      * @param localName the short name of the function
-     * @return the result of the method mapping.  Null means no entry found.
+     * @return the result of the method mapping. Null means no entry found.
      */
     public Method resolveFunction(String prefix, String localName) {
         if (this.fnmap != null) {
             return this.fnmap.get(prefix + ":" + localName);
         }
-	return theMethod;
+        return theMethod;
     }
 }
-

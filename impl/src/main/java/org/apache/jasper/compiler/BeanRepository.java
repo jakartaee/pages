@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,13 +17,12 @@
 
 package org.apache.jasper.compiler;
 
-
 import java.util.HashMap;
 
 import org.apache.jasper.JasperException;
 
 /**
- * Repository of {page, request, session, application}-scoped beans 
+ * Repository of {page, request, session, application}-scoped beans
  *
  * @author Mandar Raje
  */
@@ -35,45 +34,35 @@ class BeanRepository {
 
     /*
      * Constructor.
-     */    
+     */
     public BeanRepository(ClassLoader loader, ErrorDispatcher err) {
-
         this.loader = loader;
-	this.errDispatcher = err;
-	beanTypes = new HashMap<String, String>();
+        this.errDispatcher = err;
+        beanTypes = new HashMap<String, String>();
     }
-        
-    public void addBean(Node.UseBean n, String s, String type, String scope)
-	    throws JasperException {
 
-	if (scope == null || scope.equals("page") ||
-	    scope.equals("request") ||
-	    scope.equals("session") ||
-	    scope.equals("application") )
-        {
-	    beanTypes.put(s, type);
-	} else {
-	    errDispatcher.jspError(n, "jsp.error.invalid.scope", scope);
-	}
-	
+    public void addBean(Node.UseBean n, String s, String type, String scope) throws JasperException {
+
+        if (scope == null || scope.equals("page") || scope.equals("request") || scope.equals("session") || scope.equals("application")) {
+            beanTypes.put(s, type);
+        } else {
+            errDispatcher.jspError(n, "jsp.error.invalid.scope", scope);
+        }
+
     }
-            
+
     public Class getBeanType(String bean) throws JasperException {
-	Class clazz = null;
-	try {
-	    clazz = loader.loadClass (beanTypes.get(bean));
-	} catch (ClassNotFoundException ex) {
-	    throw new JasperException (ex);
-	}
-	return clazz;
+        Class clazz = null;
+        try {
+            clazz = loader.loadClass(beanTypes.get(bean));
+        } catch (ClassNotFoundException ex) {
+            throw new JasperException(ex);
+        }
+        return clazz;
     }
-      
-    public boolean checkVariable (String bean) {
+
+    public boolean checkVariable(String bean) {
         return beanTypes.containsKey(bean);
     }
 
 }
-
-
-
-

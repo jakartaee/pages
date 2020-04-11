@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,14 +32,9 @@ import jakarta.servlet.jsp.tagext.TagLibraryInfo;
 public class PageInfo {
 
     /**
-     * These classes/packages are automatically imported by the
-     * generated code. 
+     * These classes/packages are automatically imported by the generated code.
      */
-    private static final String[] STANDARD_IMPORTS = { 
-	"jakarta.servlet.*",
-	"jakarta.servlet.http.*",
-	"jakarta.servlet.jsp.*"
-    };
+    private static final String[] STANDARD_IMPORTS = { "jakarta.servlet.*", "jakarta.servlet.http.*", "jakarta.servlet.jsp.*" };
 
     private List<String> imports;
     private List<String> dependants;
@@ -58,7 +53,7 @@ public class PageInfo {
     private String session;
     private boolean isSession = true;
     private String bufferValue;
-    private int buffer = 8*1024;	// XXX confirm
+    private int buffer = 8 * 1024; // XXX confirm
     private String autoFlush;
     private boolean isAutoFlush = true;
     private String isThreadSafeValue;
@@ -91,54 +86,53 @@ public class PageInfo {
     private boolean hasJspRoot = false;
     private List<String> includePrelude;
     private List<String> includeCoda;
-    private List<String> pluginDcls;      // Id's for tagplugin declarations
+    private List<String> pluginDcls; // Id's for tagplugin declarations
 
     // Resource location path of the translation unit's top-level page
     private String rootPath;
 
-
     PageInfo(BeanRepository beanRepository, String jspFile) {
 
         this.jspFile = jspFile;
-	this.beanRepository = beanRepository;
-	this.taglibsMap = new HashMap<String, TagLibraryInfo>();
-	this.jspPrefixMapper = new HashMap<String, String>();
-	this.xmlPrefixMapper = new HashMap<String, LinkedList<String>>();
+        this.beanRepository = beanRepository;
+        this.taglibsMap = new HashMap<String, TagLibraryInfo>();
+        this.jspPrefixMapper = new HashMap<String, String>();
+        this.xmlPrefixMapper = new HashMap<String, LinkedList<String>>();
         this.nonCustomTagPrefixMap = new HashMap<String, Mark>();
-	this.imports = new ArrayList<String>();
+        this.imports = new ArrayList<String>();
         this.dependants = new ArrayList<String>();
-	this.includePrelude = new ArrayList<String>();
-	this.includeCoda = new ArrayList<String>();
-	this.pluginDcls = new ArrayList<String>();
-	this.prefixes = new HashSet<String>();
+        this.includePrelude = new ArrayList<String>();
+        this.includeCoda = new ArrayList<String>();
+        this.pluginDcls = new ArrayList<String>();
+        this.prefixes = new HashSet<String>();
 
-	// Enter standard imports
-	for(int i = 0; i < STANDARD_IMPORTS.length; i++)
-	    imports.add(STANDARD_IMPORTS[i]);
+        // Enter standard imports
+        for (int i = 0; i < STANDARD_IMPORTS.length; i++)
+            imports.add(STANDARD_IMPORTS[i]);
     }
 
     /**
-     * Check if the plugin ID has been previously declared.  Make a not
-     * that this Id is now declared.
+     * Check if the plugin ID has been previously declared. Make a not that this Id is now declared.
+     *
      * @return true if Id has been declared.
      */
     public boolean isPluginDeclared(String id) {
-	if (pluginDcls.contains(id))
-	    return true;
-	pluginDcls.add(id);
-	return false;
+        if (pluginDcls.contains(id))
+            return true;
+        pluginDcls.add(id);
+        return false;
     }
 
     public void addImports(List<String> imports) {
-	this.imports.addAll(imports);
+        this.imports.addAll(imports);
     }
 
     public void addImport(String imp) {
-	this.imports.add(imp);
+        this.imports.add(imp);
     }
 
     public List<String> getImports() {
-	return imports;
+        return imports;
     }
 
     public String getJspFile() {
@@ -146,16 +140,16 @@ public class PageInfo {
     }
 
     public void addDependant(String d) {
-       if (!dependants.contains(d) && !jspFile.equals(d))
+        if (!dependants.contains(d) && !jspFile.equals(d))
             dependants.add(d);
     }
-     
+
     public List<String> getDependants() {
         return dependants;
     }
 
     public BeanRepository getBeanRepository() {
-	return beanRepository;
+        return beanRepository;
     }
 
     public int getMaxTagNesting() {
@@ -167,94 +161,94 @@ public class PageInfo {
     }
 
     public void setScriptless(boolean s) {
-	scriptless = s;
+        scriptless = s;
     }
 
     public boolean isScriptless() {
-	return scriptless;
+        return scriptless;
     }
 
     public void setScriptingInvalid(boolean s) {
-	scriptingInvalid = s;
+        scriptingInvalid = s;
     }
 
     public boolean isScriptingInvalid() {
-	return scriptingInvalid;
+        return scriptingInvalid;
     }
 
     public List<String> getIncludePrelude() {
-	return includePrelude;
+        return includePrelude;
     }
 
     public void setIncludePrelude(List<String> prelude) {
-	includePrelude = prelude;
+        includePrelude = prelude;
     }
 
     public List<String> getIncludeCoda() {
-	return includeCoda;
+        return includeCoda;
     }
 
     public void setIncludeCoda(List<String> coda) {
-	includeCoda = coda;
+        includeCoda = coda;
     }
 
     public void setHasJspRoot(boolean s) {
-	hasJspRoot = s;
+        hasJspRoot = s;
     }
 
     public boolean hasJspRoot() {
-	return hasJspRoot;
+        return hasJspRoot;
     }
 
     public String getOmitXmlDecl() {
-	return omitXmlDecl;
+        return omitXmlDecl;
     }
 
     public void setOmitXmlDecl(String omit) {
-	omitXmlDecl = omit;
+        omitXmlDecl = omit;
     }
 
     public String getDoctypeName() {
-	return doctypeName;
+        return doctypeName;
     }
 
     public void setDoctypeName(String doctypeName) {
-	this.doctypeName = doctypeName;
+        this.doctypeName = doctypeName;
     }
 
     public String getDoctypeSystem() {
-	return doctypeSystem;
+        return doctypeSystem;
     }
 
     public void setDoctypeSystem(String doctypeSystem) {
-	this.doctypeSystem = doctypeSystem;
+        this.doctypeSystem = doctypeSystem;
     }
 
     public String getDoctypePublic() {
-	return doctypePublic;
+        return doctypePublic;
     }
 
     public void setDoctypePublic(String doctypePublic) {
-	this.doctypePublic = doctypePublic;
+        this.doctypePublic = doctypePublic;
     }
 
     /* Tag library and XML namespace management methods */
 
     public void setIsJspPrefixHijacked(boolean isHijacked) {
-	isJspPrefixHijacked = isHijacked;
+        isJspPrefixHijacked = isHijacked;
     }
 
     public boolean isJspPrefixHijacked() {
-	return isJspPrefixHijacked;
+        return isJspPrefixHijacked;
     }
 
     /*
      * Adds the given prefix to the set of prefixes of this translation unit.
-     * 
+     *
      * @param prefix The prefix to add
      */
     public void addPrefix(String prefix) {
-	prefixes.add(prefix);
+        prefixes.add(prefix);
     }
 
     /*
@@ -262,21 +256,21 @@ public class PageInfo {
      *
      * @param prefix The prefix to check
      *
-     * @return true if this translation unit contains the given prefix, false
-     * otherwise
+     * @return true if this translation unit contains the given prefix, false otherwise
      */
     public boolean containsPrefix(String prefix) {
-	return prefixes.contains(prefix);
+        return prefixes.contains(prefix);
     }
 
     /*
      * Maps the given URI to the given tag library.
      *
      * @param uri The URI to map
+     *
      * @param info The tag library to be associated with the given URI
      */
     public void addTaglib(String uri, TagLibraryInfo info) {
-	taglibsMap.put(uri, info);
+        taglibsMap.put(uri, info);
     }
 
     /*
@@ -285,7 +279,7 @@ public class PageInfo {
      * @return Tag library corresponding to the given URI
      */
     public TagLibraryInfo getTaglib(String uri) {
-	return taglibsMap.get(uri);
+        return taglibsMap.get(uri);
     }
 
     /*
@@ -294,7 +288,7 @@ public class PageInfo {
      * @return Collection of tag libraries that are associated with a URI
      */
     public Collection<TagLibraryInfo> getTaglibs() {
-	return taglibsMap.values();
+        return taglibsMap.values();
     }
 
     /*
@@ -302,51 +296,50 @@ public class PageInfo {
      *
      * @param uri The URI to map
      *
-     * @return true if the given URI is mapped to a tag library, false
-     * otherwise
+     * @return true if the given URI is mapped to a tag library, false otherwise
      */
     public boolean hasTaglib(String uri) {
-	return taglibsMap.containsKey(uri);
+        return taglibsMap.containsKey(uri);
     }
 
     /*
      * Maps the given prefix to the given URI.
      *
      * @param prefix The prefix to map
+     *
      * @param uri The URI to be associated with the given prefix
      */
     public void addPrefixMapping(String prefix, String uri) {
-	jspPrefixMapper.put(prefix, uri);
+        jspPrefixMapper.put(prefix, uri);
     }
 
     /*
-     * Pushes the given URI onto the stack of URIs to which the given prefix
-     * is mapped.
+     * Pushes the given URI onto the stack of URIs to which the given prefix is mapped.
      *
      * @param prefix The prefix whose stack of URIs is to be pushed
+     *
      * @param uri The URI to be pushed onto the stack
      */
     public void pushPrefixMapping(String prefix, String uri) {
-	LinkedList<String> stack = xmlPrefixMapper.get(prefix);
-	if (stack == null) {
-	    stack = new LinkedList<String>();
-	    xmlPrefixMapper.put(prefix, stack);
-	}
-	stack.addFirst(uri);
+        LinkedList<String> stack = xmlPrefixMapper.get(prefix);
+        if (stack == null) {
+            stack = new LinkedList<String>();
+            xmlPrefixMapper.put(prefix, stack);
+        }
+        stack.addFirst(uri);
     }
 
     /*
-     * Removes the URI at the top of the stack of URIs to which the given 
-     * prefix is mapped. 
+     * Removes the URI at the top of the stack of URIs to which the given prefix is mapped.
      *
      * @param prefix The prefix whose stack of URIs is to be popped
      */
     public void popPrefixMapping(String prefix) {
-	LinkedList<String> stack = xmlPrefixMapper.get(prefix);
-	if (stack == null || stack.size() == 0) {
-	    // XXX throw new Exception("XXX");
-	}
-	stack.removeFirst();
+        LinkedList<String> stack = xmlPrefixMapper.get(prefix);
+        if (stack == null || stack.size() == 0) {
+            // XXX throw new Exception("XXX");
+        }
+        stack.removeFirst();
     }
 
     /*
@@ -358,365 +351,336 @@ public class PageInfo {
      */
     public String getURI(String prefix) {
 
-	String uri = null;
+        String uri = null;
 
-	LinkedList<String> stack = xmlPrefixMapper.get(prefix);
-	if (stack == null || stack.size() == 0) {
-	    uri = (String) jspPrefixMapper.get(prefix);
-	} else {
-	    uri = (String) stack.getFirst();
-	}
+        LinkedList<String> stack = xmlPrefixMapper.get(prefix);
+        if (stack == null || stack.size() == 0) {
+            uri = (String) jspPrefixMapper.get(prefix);
+        } else {
+            uri = (String) stack.getFirst();
+        }
 
-	return uri;
+        return uri;
     }
-
 
     /* Page/Tag directive attributes */
 
     /*
      * language
      */
-    public void setLanguage(String value, Node n, ErrorDispatcher err,
-			    boolean pagedir)
-	    throws JasperException {
+    public void setLanguage(String value, Node n, ErrorDispatcher err, boolean pagedir) throws JasperException {
 
-	if (!"java".equalsIgnoreCase(value)) {
-	    if (pagedir)
-		err.jspError(n, "jsp.error.page.language.nonjava");
-	    else
-		err.jspError(n, "jsp.error.tag.language.nonjava");
-	}
+        if (!"java".equalsIgnoreCase(value)) {
+            if (pagedir)
+                err.jspError(n, "jsp.error.page.language.nonjava");
+            else
+                err.jspError(n, "jsp.error.tag.language.nonjava");
+        }
 
-	language = value;
+        language = value;
     }
 
     public String getLanguage(boolean useDefault) {
-	return (language == null && useDefault ? defaultLanguage : language);
+        return (language == null && useDefault ? defaultLanguage : language);
     }
 
     public String getLanguage() {
-	return getLanguage(true);
+        return getLanguage(true);
     }
-
 
     /*
      * extends
      */
     public void setExtends(String value, Node.PageDirective n) {
 
-	xtends = value;
+        xtends = value;
 
-	/*
-	 * If page superclass is top level class (i.e. not in a package)
-	 * explicitly import it. If this is not done, the compiler will assume
-	 * the extended class is in the same pkg as the generated servlet.
-	 */
-	if (value.indexOf('.') < 0)
-	    n.addImport(value);
+        /*
+         * If page superclass is top level class (i.e. not in a package) explicitly import it. If this is not done, the compiler
+         * will assume the extended class is in the same pkg as the generated servlet.
+         */
+        if (value.indexOf('.') < 0)
+            n.addImport(value);
     }
 
     /**
      * Gets the value of the 'extends' page directive attribute.
      *
-     * @param useDefault TRUE if the default
-     * (org.apache.jasper.runtime.HttpJspBase) should be returned if this
-     * attribute has not been set, FALSE otherwise
+     * @param useDefault TRUE if the default (org.apache.jasper.runtime.HttpJspBase) should be returned if this attribute
+     * has not been set, FALSE otherwise
      *
-     * @return The value of the 'extends' page directive attribute, or the
-     * default (org.apache.jasper.runtime.HttpJspBase) if this attribute has
-     * not been set and useDefault is TRUE
+     * @return The value of the 'extends' page directive attribute, or the default (org.apache.jasper.runtime.HttpJspBase)
+     * if this attribute has not been set and useDefault is TRUE
      */
     public String getExtends(boolean useDefault) {
-	return (xtends == null && useDefault ? defaultExtends : xtends);
+        return (xtends == null && useDefault ? defaultExtends : xtends);
     }
 
     /**
      * Gets the value of the 'extends' page directive attribute.
      *
-     * @return The value of the 'extends' page directive attribute, or the
-     * default (org.apache.jasper.runtime.HttpJspBase) if this attribute has
-     * not been set
+     * @return The value of the 'extends' page directive attribute, or the default (org.apache.jasper.runtime.HttpJspBase)
+     * if this attribute has not been set
      */
     public String getExtends() {
-	return getExtends(true);
+        return getExtends(true);
     }
-
 
     /*
      * contentType
      */
     public void setContentType(String value) {
-	contentType = value;
+        contentType = value;
     }
 
     public String getContentType() {
-	return contentType;
+        return contentType;
     }
-
 
     /*
      * buffer
      */
-    public void setBufferValue(String value, Node n, ErrorDispatcher err)
-	    throws JasperException {
+    public void setBufferValue(String value, Node n, ErrorDispatcher err) throws JasperException {
 
-	if ("none".equalsIgnoreCase(value))
-	    buffer = 0;
-	else {
-	    if (value == null || !value.endsWith("kb"))
-                if (n == null) 
+        if ("none".equalsIgnoreCase(value))
+            buffer = 0;
+        else {
+            if (value == null || !value.endsWith("kb"))
+                if (n == null)
                     err.jspError("jsp.error.jspproperty.invalid.buffer");
                 else
-		    err.jspError(n, "jsp.error.page.invalid.buffer");
-	    try {
-		Integer k = new Integer(value.substring(0, value.length()-2));
-		buffer = k.intValue() * 1024;
-	    } catch (NumberFormatException e) {
-                if (n == null) 
+                    err.jspError(n, "jsp.error.page.invalid.buffer");
+            try {
+                Integer k = new Integer(value.substring(0, value.length() - 2));
+                buffer = k.intValue() * 1024;
+            } catch (NumberFormatException e) {
+                if (n == null)
                     err.jspError("jsp.error.jspproperty.invalid.buffer");
                 else
-		    err.jspError(n, "jsp.error.page.invalid.buffer");
-	    }
-	}
+                    err.jspError(n, "jsp.error.page.invalid.buffer");
+            }
+        }
 
-	bufferValue = value;
+        bufferValue = value;
     }
 
     public String getBufferValue() {
-	return bufferValue;
+        return bufferValue;
     }
 
     public int getBuffer() {
-	return buffer;
+        return buffer;
     }
 
     public void setBuffer(int size) {
         buffer = size;
     }
 
-
     /*
      * session
      */
-    public void setSession(String value, Node n, ErrorDispatcher err)
-	    throws JasperException {
+    public void setSession(String value, Node n, ErrorDispatcher err) throws JasperException {
 
-	if ("true".equalsIgnoreCase(value))
-	    isSession = true;
-	else if ("false".equalsIgnoreCase(value))
-	    isSession = false;
-	else
-	    err.jspError(n, "jsp.error.page.invalid.session");
+        if ("true".equalsIgnoreCase(value))
+            isSession = true;
+        else if ("false".equalsIgnoreCase(value))
+            isSession = false;
+        else
+            err.jspError(n, "jsp.error.page.invalid.session");
 
-	session = value;
+        session = value;
     }
 
     public String getSession() {
-	return session;
+        return session;
     }
 
     public boolean isSession() {
-	return isSession;
+        return isSession;
     }
-
 
     /*
      * autoFlush
      */
-    public void setAutoFlush(String value, Node n, ErrorDispatcher err)
-	    throws JasperException {
+    public void setAutoFlush(String value, Node n, ErrorDispatcher err) throws JasperException {
 
-	if ("true".equalsIgnoreCase(value))
-	    isAutoFlush = true;
-	else if ("false".equalsIgnoreCase(value))
-	    isAutoFlush = false;
-	else
-	    err.jspError(n, "jsp.error.autoFlush.invalid");
+        if ("true".equalsIgnoreCase(value))
+            isAutoFlush = true;
+        else if ("false".equalsIgnoreCase(value))
+            isAutoFlush = false;
+        else
+            err.jspError(n, "jsp.error.autoFlush.invalid");
 
-	autoFlush = value;
+        autoFlush = value;
     }
 
     public String getAutoFlush() {
-	return autoFlush;
+        return autoFlush;
     }
 
     public boolean isAutoFlush() {
-	return isAutoFlush;
+        return isAutoFlush;
     }
-
 
     /*
      * isThreadSafe
      */
-    public void setIsThreadSafe(String value, Node n, ErrorDispatcher err)
-	    throws JasperException {
+    public void setIsThreadSafe(String value, Node n, ErrorDispatcher err) throws JasperException {
 
-	if ("true".equalsIgnoreCase(value))
-	    isThreadSafe = true;
-	else if ("false".equalsIgnoreCase(value))
-	    isThreadSafe = false;
-	else
-	    err.jspError(n, "jsp.error.page.invalid.isthreadsafe");
+        if ("true".equalsIgnoreCase(value))
+            isThreadSafe = true;
+        else if ("false".equalsIgnoreCase(value))
+            isThreadSafe = false;
+        else
+            err.jspError(n, "jsp.error.page.invalid.isthreadsafe");
 
-	isThreadSafeValue = value;
+        isThreadSafeValue = value;
     }
 
     public String getIsThreadSafe() {
-	return isThreadSafeValue;
+        return isThreadSafeValue;
     }
 
     public boolean isThreadSafe() {
-	return isThreadSafe;
+        return isThreadSafe;
     }
-
 
     /*
      * info
      */
     public void setInfo(String value) {
-	info = value;
+        info = value;
     }
 
     public String getInfo() {
-	return info;
+        return info;
     }
 
-    
     /*
      * errorPage
      */
     public void setErrorPage(String value) {
-	errorPage = value;
+        errorPage = value;
     }
 
     public String getErrorPage() {
-	return errorPage;
+        return errorPage;
     }
-
 
     /*
      * isErrorPage
      */
-    public void setIsErrorPage(String value, Node n, ErrorDispatcher err)
-	    throws JasperException {
+    public void setIsErrorPage(String value, Node n, ErrorDispatcher err) throws JasperException {
 
-	if ("true".equalsIgnoreCase(value))
-	    isErrorPage = true;
-	else if ("false".equalsIgnoreCase(value))
-	    isErrorPage = false;
-	else
-	    err.jspError(n, "jsp.error.page.invalid.iserrorpage");
+        if ("true".equalsIgnoreCase(value))
+            isErrorPage = true;
+        else if ("false".equalsIgnoreCase(value))
+            isErrorPage = false;
+        else
+            err.jspError(n, "jsp.error.page.invalid.iserrorpage");
 
-	isErrorPageValue = value;
+        isErrorPageValue = value;
     }
 
     public String getIsErrorPage() {
-	return isErrorPageValue;
+        return isErrorPageValue;
     }
 
     public boolean isErrorPage() {
-	return isErrorPage;
+        return isErrorPage;
     }
-
 
     /*
      * isELIgnored
      */
-    public void setIsELIgnored(String value, Node n, ErrorDispatcher err,
-			       boolean pagedir)
-	    throws JasperException {
+    public void setIsELIgnored(String value, Node n, ErrorDispatcher err, boolean pagedir) throws JasperException {
 
-	if ("true".equalsIgnoreCase(value))
-	    isELIgnored = true;
-	else if ("false".equalsIgnoreCase(value))
-	    isELIgnored = false;
-	else {
-	    if (pagedir) 
-		err.jspError(n, "jsp.error.page.invalid.iselignored");
-	    else 
-		err.jspError(n, "jsp.error.tag.invalid.iselignored");
-	}
+        if ("true".equalsIgnoreCase(value))
+            isELIgnored = true;
+        else if ("false".equalsIgnoreCase(value))
+            isELIgnored = false;
+        else {
+            if (pagedir)
+                err.jspError(n, "jsp.error.page.invalid.iselignored");
+            else
+                err.jspError(n, "jsp.error.tag.invalid.iselignored");
+        }
 
-	isELIgnoredValue = value;
+        isELIgnoredValue = value;
     }
 
     public void setELIgnored(boolean s) {
-	isELIgnored = s;
+        isELIgnored = s;
     }
 
     public String getIsELIgnored() {
-	return isELIgnoredValue;
+        return isELIgnoredValue;
     }
 
     public boolean isELIgnored() {
-	return isELIgnored;
+        return isELIgnored;
     }
-
 
     /*
      * deferredSyntaxAllowedAsLiteral
      */
-    public void setDeferredSyntaxAllowedAsLiteral(String value, Node n,
-                       ErrorDispatcher err, boolean pagedir)
-	    throws JasperException {
+    public void setDeferredSyntaxAllowedAsLiteral(String value, Node n, ErrorDispatcher err, boolean pagedir) throws JasperException {
 
-	if ("true".equalsIgnoreCase(value))
-	    deferredSyntaxAllowedAsLiteral = true;
-	else if ("false".equalsIgnoreCase(value))
-	    deferredSyntaxAllowedAsLiteral = false;
-	else {
-	    if (pagedir) 
-		err.jspError(n, "jsp.error.page.invalid.deferred");
-	    else 
-		err.jspError(n, "jsp.error.tag.invalid.deferred");
-	}
+        if ("true".equalsIgnoreCase(value))
+            deferredSyntaxAllowedAsLiteral = true;
+        else if ("false".equalsIgnoreCase(value))
+            deferredSyntaxAllowedAsLiteral = false;
+        else {
+            if (pagedir)
+                err.jspError(n, "jsp.error.page.invalid.deferred");
+            else
+                err.jspError(n, "jsp.error.tag.invalid.deferred");
+        }
 
-	deferredSyntaxAllowedAsLiteralValue = value;
+        deferredSyntaxAllowedAsLiteralValue = value;
     }
 
     public void setDeferredSyntaxAllowedAsLiteral(boolean s) {
-	deferredSyntaxAllowedAsLiteral = s;
+        deferredSyntaxAllowedAsLiteral = s;
     }
 
     public String getDeferredSyntaxAllowedAsLiteral() {
-	return deferredSyntaxAllowedAsLiteralValue;
+        return deferredSyntaxAllowedAsLiteralValue;
     }
 
     public boolean isDeferredSyntaxAllowedAsLiteral() {
-	return deferredSyntaxAllowedAsLiteral;
+        return deferredSyntaxAllowedAsLiteral;
     }
 
     /*
      * trimDirectiveWhitespaces
      */
-    public void setTrimDirectiveWhitespaces(String value, Node n,
-                         ErrorDispatcher err, boolean pagedir)
-	    throws JasperException {
+    public void setTrimDirectiveWhitespaces(String value, Node n, ErrorDispatcher err, boolean pagedir) throws JasperException {
 
-	if ("true".equalsIgnoreCase(value))
-	    trimDirectiveWhitespaces = true;
-	else if ("false".equalsIgnoreCase(value))
-	    trimDirectiveWhitespaces = false;
-	else {
-	    if (pagedir) 
-		err.jspError(n, "jsp.error.page.invalid.trim");
-	    else 
-		err.jspError(n, "jsp.error.tag.invalid.trim");
-	}
+        if ("true".equalsIgnoreCase(value))
+            trimDirectiveWhitespaces = true;
+        else if ("false".equalsIgnoreCase(value))
+            trimDirectiveWhitespaces = false;
+        else {
+            if (pagedir)
+                err.jspError(n, "jsp.error.page.invalid.trim");
+            else
+                err.jspError(n, "jsp.error.tag.invalid.trim");
+        }
 
-	trimDirectiveWhitespacesValue = value;
+        trimDirectiveWhitespacesValue = value;
     }
 
     public void setTrimDirectiveWhitespaces(boolean s) {
-	trimDirectiveWhitespaces = s;
+        trimDirectiveWhitespaces = s;
     }
 
     public String getTrimDirectiveWhitespaces() {
-	return trimDirectiveWhitespacesValue;
+        return trimDirectiveWhitespacesValue;
     }
 
     public boolean isTrimDirectiveWhitespaces() {
-	return trimDirectiveWhitespaces;
+        return trimDirectiveWhitespaces;
     }
 
     public void setErrorOnUndeclaredNamespace(boolean s) {
@@ -735,24 +699,19 @@ public class PageInfo {
         return nonCustomTagPrefixMap.get(prefix);
     }
 
-
     /**
-     * Sets the resource location path of the translation unit's top-level
-     * page.
+     * Sets the resource location path of the translation unit's top-level page.
      *
-     * @param rootPath Resource location path of the translation unit's
-     * top-level page
+     * @param rootPath Resource location path of the translation unit's top-level page
      */
     void setRootPath(String rootPath) {
         this.rootPath = rootPath;
     }
 
     /**
-     * Gets the resource location path of the translation unit's top-level
-     * page.
+     * Gets the resource location path of the translation unit's top-level page.
      *
-     * @return Resource location path of the translation unit's top-level
-     * page
+     * @return Resource location path of the translation unit's top-level page
      */
     String getRootPath() {
         return rootPath;

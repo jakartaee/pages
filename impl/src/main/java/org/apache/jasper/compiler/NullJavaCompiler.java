@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -28,9 +28,8 @@ import org.apache.jasper.JasperException;
 import org.apache.jasper.JspCompilationContext;
 
 /**
- * Java compiler for invoking JSP to java translation only.  This only
- * implements the part of JavaCompiler that handles the writing of the
- * generated Java file.  
+ * Java compiler for invoking JSP to java translation only. This only implements the part of JavaCompiler that handles
+ * the writing of the generated Java file.
  *
  * @author Kin-man Chung
  */
@@ -42,9 +41,7 @@ public class NullJavaCompiler implements JavaCompiler {
     private String javaFileName;
     private String javaEncoding;
 
-    public void init(JspCompilationContext ctxt,
-                     ErrorDispatcher errDispatcher,
-                     boolean suppressLogging) {
+    public void init(JspCompilationContext ctxt, ErrorDispatcher errDispatcher, boolean suppressLogging) {
 
         this.ctxt = ctxt;
         this.errDispatcher = errDispatcher;
@@ -81,29 +78,23 @@ public class NullJavaCompiler implements JavaCompiler {
         throw new UnsupportedOperationException();
     }
 
-    public Writer getJavaWriter(String javaFileName,
-                                String javaEncoding)
-            throws JasperException {
+    public Writer getJavaWriter(String javaFileName, String javaEncoding) throws JasperException {
 
         this.javaFileName = javaFileName;
         this.javaEncoding = javaEncoding;
-    
+
         Writer writer = null;
         try {
-            writer = new OutputStreamWriter(
-                        new FileOutputStream(javaFileName), javaEncoding);
+            writer = new OutputStreamWriter(new FileOutputStream(javaFileName), javaEncoding);
         } catch (UnsupportedEncodingException ex) {
-            errDispatcher.jspError("jsp.error.needAlternateJavaEncoding",
-                                   javaEncoding);
+            errDispatcher.jspError("jsp.error.needAlternateJavaEncoding", javaEncoding);
         } catch (IOException ex) {
-            errDispatcher.jspError("jsp.error.unableToCreateOutputWriter",
-                                   javaFileName, ex);
+            errDispatcher.jspError("jsp.error.unableToCreateOutputWriter", javaFileName, ex);
         }
         return writer;
     }
 
-    public JavacErrorDetail[] compile(String className, Node.Nodes pageNodes)
-            throws JasperException {
+    public JavacErrorDetail[] compile(String className, Node.Nodes pageNodes) throws JasperException {
         throw new UnsupportedOperationException();
     }
 
@@ -114,4 +105,3 @@ public class NullJavaCompiler implements JavaCompiler {
         }
     }
 }
-

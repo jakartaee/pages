@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -61,14 +61,13 @@ import org.apache.jasper.xmlparser.ParserUtils;
 // END SJSAS 6258619
 
 /**
- * Shell for the jspc compiler.  Handles all options associated with the
- * command line and creates compilation contexts which it then compiles
- * according to the specified options.
+ * Shell for the jspc compiler. Handles all options associated with the command line and creates compilation contexts
+ * which it then compiles according to the specified options.
  *
- * This version can process files from a _single_ webapp at once, i.e.
- * a single docbase can be specified.
+ * This version can process files from a _single_ webapp at once, i.e. a single docbase can be specified.
  *
  * It can be used as an Ant task using:
+ *
  * <pre>
  *   &lt;taskdef classname="org.apache.jasper.JspC" name="jasper2" &gt;
  *      &lt;classpath&gt;
@@ -96,8 +95,7 @@ import org.apache.jasper.xmlparser.ParserUtils;
  */
 public class JspC implements Options {
 
-    public static final String DEFAULT_IE_CLASS_ID =
-            "clsid:8AD9C840-044E-11D1-B3E9-00805F499D93";
+    public static final String DEFAULT_IE_CLASS_ID = "clsid:8AD9C840-044E-11D1-B3E9-00805F499D93";
 
     // START SJSAS 6402545
     private static final String JAVA_1_0 = "1.0";
@@ -153,12 +151,11 @@ public class JspC implements Options {
     private static final String SWITCH_VALIDATE = "-validate";
     // END PWC 6385018
     // START SJSAS 6393940
-    private static final String SWITCH_IGNORE_JSP_FRAGMENTS
-        = "-ignoreJspFragmentErrors";
+    private static final String SWITCH_IGNORE_JSP_FRAGMENTS = "-ignoreJspFragmentErrors";
     // END SJSAS 6393940
     private static final String SWITCH_DISABLE_POOLING = "-disablePooling";
 
-    private static final String SHOW_SUCCESS ="-s";
+    private static final String SHOW_SUCCESS = "-s";
     private static final String LIST_ERRORS = "-l";
     private static final int NO_WEBXML = 0;
     private static final int INC_WEBXML = 10;
@@ -166,14 +163,11 @@ public class JspC implements Options {
     private static final int DEFAULT_DIE_LEVEL = 1;
     private static final int NO_DIE_LEVEL = 0;
 
-    private static final String[] insertBefore = 
-    { "</web-app>", "<servlet-mapping>", "<session-config>", 
-      "<mime-mapping>", "<welcome-file-list>", "<error-page>", "<taglib>",
-      "<resource-env-ref>", "<resource-ref>", "<security-constraint>",
-      "<login-config>", "<security-role>", "<env-entry>", "<ejb-ref>", 
-      "<ejb-local-ref>" };
+    private static final String[] insertBefore = { "</web-app>", "<servlet-mapping>", "<session-config>", "<mime-mapping>", "<welcome-file-list>",
+            "<error-page>", "<taglib>", "<resource-env-ref>", "<resource-ref>", "<security-constraint>", "<login-config>", "<security-role>", "<env-entry>",
+            "<ejb-ref>", "<ejb-local-ref>" };
 
-    private int dieLevel; 
+    private int dieLevel;
     private String classPath = null;
     // START PWC 1.2 6311155
     private String sysClassPath = null;
@@ -205,18 +199,16 @@ public class JspC implements Options {
     private boolean classDebugInfo = true;
 
     /**
-     * Throw an exception if there's a compilation error, or swallow it.
-     * Default is true to preserve old behavior.
+     * Throw an exception if there's a compilation error, or swallow it. Default is true to preserve old behavior.
      */
     private boolean failOnError = true;
 
     private ArrayList<String> extensions;
     private ArrayList<String> pages = new ArrayList<String>();
     private boolean errorOnUseBeanInvalidClassAttribute = false;
-    
+
     /**
-     * The java file encoding.  Default
-     * is UTF-8.  Added per bugzilla 19622.
+     * The java file encoding. Default is UTF-8. Added per bugzilla 19622.
      */
     private String javaEncoding = "UTF-8";
 
@@ -254,13 +246,11 @@ public class JspC implements Options {
     // END SJSAS 6384538
 
     // START SJSAS 6329723
-    private HashMap<String,JasperException> jspErrors
-        = new HashMap<String,JasperException>();
+    private HashMap<String, JasperException> jspErrors = new HashMap<String, JasperException>();
     // END SJSAS 6329723
 
     // START SJSAS 6403017
-    private static String myJavaVersion =
-        System.getProperty("java.specification.version");
+    private static String myJavaVersion = System.getProperty("java.specification.version");
     // END SJSAS 6403017
 
     // START SJSAS 6393940
@@ -275,7 +265,7 @@ public class JspC implements Options {
 
     public static void main(String arg[]) {
         if (arg.length == 0) {
-           System.out.println(Localizer.getMessage("jspc.usage"));
+            System.out.println(Localizer.getMessage("jspc.usage"));
         } else {
             JspC jspc = new JspC();
             try {
@@ -287,7 +277,7 @@ public class JspC implements Options {
                 }
             } catch (JasperException je) {
                 System.err.println(je);
-                //System.err.println(je.getMessage());
+                // System.err.println(je.getMessage());
                 if (jspc.getDieLevel() != NO_DIE_LEVEL) {
                     System.exit(jspc.getDieLevel());
                 }
@@ -308,26 +298,26 @@ public class JspC implements Options {
                 listErrors = true;
             } else if (tok.equals(SWITCH_OUTPUT_DIR)) {
                 tok = nextArg();
-                setOutputDir( tok );
+                setOutputDir(tok);
             } else if (tok.equals(SWITCH_PACKAGE_NAME)) {
                 targetPackage = nextArg();
             } else if (tok.equals(SWITCH_COMPILE)) {
-                compile=true;
+                compile = true;
             } else if (tok.equals(SWITCH_CLASS_NAME)) {
                 targetClassName = nextArg();
             } else if (tok.equals(SWITCH_URI_BASE)) {
-                uriBase=nextArg();
+                uriBase = nextArg();
             } else if (tok.equals(SWITCH_URI_ROOT)) {
-                setUriroot( nextArg());
-            // START IASRI 4660687
+                setUriroot(nextArg());
+                // START IASRI 4660687
             } else if (tok.equals(SWITCH_GENERATE_CLASSES)) {
                 compile = true;
-            // END IASRI 4660687
+                // END IASRI 4660687
             } else if (tok.equals(SWITCH_FILE_WEBAPP)) {
-                setUriroot( nextArg());
-            } else if ( tok.equals( SHOW_SUCCESS ) ) {
+                setUriroot(nextArg());
+            } else if (tok.equals(SHOW_SUCCESS)) {
                 showSuccess = true;
-            } else if ( tok.equals( LIST_ERRORS ) ) {
+            } else if (tok.equals(LIST_ERRORS)) {
                 listErrors = true;
             } else if (tok.equals(SWITCH_WEBAPP_INC)) {
                 webxmlFile = nextArg();
@@ -351,8 +341,7 @@ public class JspC implements Options {
                 setSystemClassPath(nextArg());
             } else if (tok.startsWith(SWITCH_DIE)) {
                 try {
-                    dieLevel = Integer.parseInt(
-                        tok.substring(SWITCH_DIE.length()));
+                    dieLevel = Integer.parseInt(tok.substring(SWITCH_DIE.length()));
                 } catch (NumberFormatException nfe) {
                     dieLevel = DEFAULT_DIE_LEVEL;
                 }
@@ -367,26 +356,25 @@ public class JspC implements Options {
             } else if (tok.equals(SWITCH_DUMP_SMAP)) {
                 smapDumped = true;
                 smapSuppressed = false;
-            // START PWC 6386258
+                // START PWC 6386258
             } else if (tok.equals(SWITCH_SCHEMAS_PREFIX)) {
                 setSchemaResourcePrefix(nextArg());
             } else if (tok.equals(SWITCH_DTDS_PREFIX)) {
                 setDtdResourcePrefix(nextArg());
-            // END PWC 6386258
-            // START PWC 6385018
+                // END PWC 6386258
+                // START PWC 6385018
             } else if (tok.equals(SWITCH_VALIDATE)) {
                 setValidateXml(true);
-            // END PWC 6385018
-            // START SJSAS 6393940
+                // END PWC 6385018
+                // START SJSAS 6393940
             } else if (tok.equals(SWITCH_IGNORE_JSP_FRAGMENTS)) {
                 setIgnoreJspFragmentErrors(true);
-            // END SJSAS 6393940
+                // END SJSAS 6393940
             } else if (tok.equals(SWITCH_DISABLE_POOLING)) {
                 setPoolingEnabled(false);
             } else {
                 if (tok.startsWith("-")) {
-                    throw new JasperException("Unrecognized option: " + tok +
-                        ".  Use -help for help.");
+                    throw new JasperException("Unrecognized option: " + tok + ".  Use -help for help.");
                 }
                 if (!fullstop) {
                     argPos--;
@@ -397,10 +385,11 @@ public class JspC implements Options {
         }
 
         // Add all extra arguments to the list of files
-        while( true ) {
+        while (true) {
             String file = nextFile();
-            if( file==null ) break;
-            pages.add( file );
+            if (file == null)
+                break;
+            pages.add(file);
         }
     }
 
@@ -450,29 +439,28 @@ public class JspC implements Options {
     }
 
     public int getTagPoolSize() {
-	return Constants.MAX_POOL_SIZE;
+        return Constants.MAX_POOL_SIZE;
     }
 
     // START SJSWS
     /**
-     * Gets initial capacity of HashMap which maps JSPs to their corresponding
-     * servlets.
+     * Gets initial capacity of HashMap which maps JSPs to their corresponding servlets.
      */
     public int getInitialCapacity() {
         return Constants.DEFAULT_INITIAL_CAPACITY;
     }
-    // END SJSWS 
-    
+    // END SJSWS
+
     /**
      * Are we supporting HTML mapped servlets?
      */
     public boolean getMappedFile() {
-	return mappedFile;
+        return mappedFile;
     }
 
     // Off-line compiler, no need for security manager
     public Object getProtectionDomain() {
-	return null;
+        return null;
     }
 
     public boolean getSendErrorToClient() {
@@ -480,8 +468,8 @@ public class JspC implements Options {
         return true;
     }
 
-    public void setClassDebugInfo( boolean b ) {
-        classDebugInfo=b;
+    public void setClassDebugInfo(boolean b) {
+        classDebugInfo = b;
     }
 
     public boolean getClassDebugInfo() {
@@ -545,11 +533,9 @@ public class JspC implements Options {
     }
 
     /**
-     * Determines whether text strings are to be generated as char arrays,
-     * which improves performance in some cases.
+     * Determines whether text strings are to be generated as char arrays, which improves performance in some cases.
      *
-     * @param genStringAsCharArray true if text strings are to be generated as
-     * char arrays, false otherwise
+     * @param genStringAsCharArray true if text strings are to be generated as char arrays, false otherwise
      */
     public void setGenStringAsCharArray(boolean genStringAsCharArray) {
         this.genStringAsCharArray = genStringAsCharArray;
@@ -558,8 +544,7 @@ public class JspC implements Options {
     /**
      * Indicates whether text strings are to be generated as char arrays.
      *
-     * @return true if text strings are to be generated as char arrays, false
-     * otherwise
+     * @return true if text strings are to be generated as char arrays, false otherwise
      */
     public boolean genStringAsCharArray() {
         return genStringAsCharArray;
@@ -582,8 +567,7 @@ public class JspC implements Options {
     }
 
     /**
-     * Sets the class-id value to be sent to Internet Explorer when using
-     * <jsp:plugin> tags.
+     * Sets the class-id value to be sent to Internet Explorer when using <jsp:plugin> tags.
      *
      * @param ieClassId Class-id value
      */
@@ -592,8 +576,7 @@ public class JspC implements Options {
     }
 
     /**
-     * Gets the class-id value that is sent to Internet Explorer when using
-     * <jsp:plugin> tags.
+     * Gets the class-id value that is sent to Internet Explorer when using <jsp:plugin> tags.
      *
      * @return Class-id value
      */
@@ -606,12 +589,12 @@ public class JspC implements Options {
     }
 
     public Class getJspCompilerPlugin() {
-       // we don't compile, so this is meanlingless
+        // we don't compile, so this is meanlingless
         return null;
     }
 
     public String getJspCompilerPath() {
-       // we don't compile, so this is meanlingless
+        // we don't compile, so this is meanlingless
         return null;
     }
 
@@ -623,7 +606,7 @@ public class JspC implements Options {
     }
 
     public void setCompiler(String c) {
-        compiler=c;
+        compiler = c;
     }
 
     /**
@@ -645,19 +628,15 @@ public class JspC implements Options {
         } else if (JAVA_8.equals(vm)) {
             vm = JAVA_1_8;
         }
-        if (!JAVA_1_1.equals(vm) && !JAVA_1_2.equals(vm) 
-                && !JAVA_1_3.equals(vm) && !JAVA_1_4.equals(vm)
-                && !JAVA_1_5.equals(vm) && !JAVA_1_6.equals(vm)
-                && !JAVA_1_7.equals(vm) && !JAVA_1_8.equals(vm)){
-            throw new IllegalArgumentException(
-                Localizer.getMessage("jspc.illegalCompilerTargetVM", tvm));
+        if (!JAVA_1_1.equals(vm) && !JAVA_1_2.equals(vm) && !JAVA_1_3.equals(vm) && !JAVA_1_4.equals(vm) && !JAVA_1_5.equals(vm) && !JAVA_1_6.equals(vm)
+                && !JAVA_1_7.equals(vm) && !JAVA_1_8.equals(vm)) {
+            throw new IllegalArgumentException(Localizer.getMessage("jspc.illegalCompilerTargetVM", tvm));
         }
         // END SJSAS 6402545
         // START SJSAS 6403017
         Double targetVersion = Double.valueOf(vm);
         if (targetVersion.compareTo(Double.valueOf(myJavaVersion)) > 0) {
-            throw new IllegalArgumentException(
-                Localizer.getMessage("jspc.compilerTargetVMTooHigh", vm));
+            throw new IllegalArgumentException(Localizer.getMessage("jspc.compilerTargetVMTooHigh", vm));
         }
         // END SJSAS 6403017
         compilerTargetVM = vm;
@@ -666,22 +645,18 @@ public class JspC implements Options {
     /**
      * @see Options#getCompilerSourceVM.
      */
-     public String getCompilerSourceVM() {
-         return compilerSourceVM;
-     }
-        
+    public String getCompilerSourceVM() {
+        return compilerSourceVM;
+    }
+
     /**
      * @see Options#getCompilerSourceVM.
      */
     public void setCompilerSourceVM(String vm) {
         // START SJSAS 6402545
-        if (!JAVA_1_3.equals(vm) && !JAVA_1_4.equals(vm) 
-                && !JAVA_1_5.equals(vm) && !JAVA_5.equals(vm)
-                && !JAVA_1_6.equals(vm) && !JAVA_6.equals(vm)
-                && !JAVA_1_7.equals(vm) && !JAVA_7.equals(vm)
-                && !JAVA_1_8.equals(vm) && !JAVA_8.equals(vm)) {
-            throw new IllegalArgumentException(
-                Localizer.getMessage("jspc.illegalCompilerSourceVM", vm));
+        if (!JAVA_1_3.equals(vm) && !JAVA_1_4.equals(vm) && !JAVA_1_5.equals(vm) && !JAVA_5.equals(vm) && !JAVA_1_6.equals(vm) && !JAVA_6.equals(vm)
+                && !JAVA_1_7.equals(vm) && !JAVA_7.equals(vm) && !JAVA_1_8.equals(vm) && !JAVA_8.equals(vm)) {
+            throw new IllegalArgumentException(Localizer.getMessage("jspc.illegalCompilerSourceVM", vm));
         }
         // END SJSAS 6402545
         compilerSourceVM = vm;
@@ -695,27 +670,25 @@ public class JspC implements Options {
     }
 
     public TldScanner getTldScanner() {
-	return tldScanner;
+        return tldScanner;
     }
 
     /**
-     * Returns the encoding to use for
-     * java files.  The default is UTF-8.
+     * Returns the encoding to use for java files. The default is UTF-8.
      *
      * @return String The encoding
      */
     public String getJavaEncoding() {
-	return javaEncoding;
+        return javaEncoding;
     }
 
     /**
-     * Sets the encoding to use for
-     * java files.
+     * Sets the encoding to use for java files.
      *
-     * @param encodingName The name, e.g. "UTF-8" 
+     * @param encodingName The name, e.g. "UTF-8"
      */
     public void setJavaEncoding(String encodingName) {
-      javaEncoding = encodingName;
+        javaEncoding = encodingName;
     }
 
     public boolean getFork() {
@@ -723,18 +696,18 @@ public class JspC implements Options {
     }
 
     public String getClassPath() {
-        if( classPath != null )
+        if (classPath != null)
             return classPath;
-        /* PWC 1.2 6311155
-        return System.getProperty("java.class.path");
-        */
+        /*
+         * PWC 1.2 6311155 return System.getProperty("java.class.path");
+         */
         // START PWC 1.2 6311155
         return "";
         // END PWC 1.2 6311155
     }
 
     public void setClassPath(String s) {
-        classPath=s;
+        classPath = s;
     }
 
     // START PWC 1.2 6311155
@@ -762,16 +735,15 @@ public class JspC implements Options {
     // END PWC 1.2 6311155
 
     /**
-     * Base dir for the webapp. Used to generate class names and resolve
-     * includes
+     * Base dir for the webapp. Used to generate class names and resolve includes
      */
-    public void setUriroot( String s ) {
+    public void setUriroot(String s) {
         uriRoot = s;
         if (s != null) {
             try {
-                uriRoot=new File( s ).getCanonicalPath();
-            } catch( Exception ex ) {
-                uriRoot=s;
+                uriRoot = new File(s).getCanonicalPath();
+            } catch (Exception ex) {
+                uriRoot = s;
             }
         }
     }
@@ -795,8 +767,7 @@ public class JspC implements Options {
     /*
      * Parses comma-separated list of JSP files to be processed.
      *
-     * <p>Each file is interpreted relative to uriroot, unless it is absolute,
-     * in which case it must start with uriroot.
+     * <p>Each file is interpreted relative to uriroot, unless it is absolute, in which case it must start with uriroot.
      *
      * @param jspFiles Comma-separated list of JSP files to be processed
      */
@@ -807,11 +778,11 @@ public class JspC implements Options {
         }
     }
 
-    public void setCompile( boolean b ) {
-        compile=b;
+    public void setCompile(boolean b) {
+        compile = b;
     }
 
-    public void setVerbose( int level ) {
+    public void setVerbose(int level) {
         if (level > 0) {
             verbose = true;
             showSuccess = true;
@@ -819,10 +790,10 @@ public class JspC implements Options {
         }
     }
 
-    public void setValidateXml( boolean b ) {
-        /* SJSAS 6384538
-        org.apache.jasper.xmlparser.ParserUtils.validating=b;
-        */
+    public void setValidateXml(boolean b) {
+        /*
+         * SJSAS 6384538 org.apache.jasper.xmlparser.ParserUtils.validating=b;
+         */
         // START SJSAS 6384538
         setIsValidationEnabled(b);
         // END SJSAS 6384538
@@ -838,45 +809,44 @@ public class JspC implements Options {
     }
     // END SJSAS 6384538
 
-    public void setListErrors( boolean b ) {
+    public void setListErrors(boolean b) {
         listErrors = b;
     }
 
-    public void setOutputDir( String s ) {
-        if( s!= null ) {
+    public void setOutputDir(String s) {
+        if (s != null) {
             scratchDir = new File(s).getAbsoluteFile();
         } else {
-            scratchDir=null;
+            scratchDir = null;
         }
     }
 
-    public void setPackage( String p ) {
-        targetPackage=p;
+    public void setPackage(String p) {
+        targetPackage = p;
     }
 
     /**
-     * Class name of the generated file ( without package ).
-     * Can only be used if a single file is converted.
-     * XXX Do we need this feature ?
+     * Class name of the generated file ( without package ). Can only be used if a single file is converted. XXX Do we need
+     * this feature ?
      */
-    public void setClassName( String p ) {
-        targetClassName=p;
+    public void setClassName(String p) {
+        targetClassName = p;
     }
 
     /**
      * File where we generate a web.xml fragment with the class definitions.
      */
-    public void setWebXmlFragment( String s ) {
-        webxmlFile=s;
-        webxmlLevel=INC_WEBXML;
+    public void setWebXmlFragment(String s) {
+        webxmlFile = s;
+        webxmlLevel = INC_WEBXML;
     }
 
     /**
      * File where we generate a complete web.xml with the class definitions.
      */
-    public void setWebXml( String s ) {
-        webxmlFile=s;
-        webxmlLevel=ALL_WEBXML;
+    public void setWebXml(String s) {
+        webxmlFile = s;
+        webxmlLevel = ALL_WEBXML;
     }
 
     public void setAddWebXmlMappings(boolean b) {
@@ -884,8 +854,7 @@ public class JspC implements Options {
     }
 
     /**
-     * Set the option that throws an exception in case of a compilation
-     * error.
+     * Set the option that throws an exception in case of a compilation error.
      */
     public void setFailOnError(final boolean b) {
         failOnError = b;
@@ -905,21 +874,19 @@ public class JspC implements Options {
      * Obtain JSP configuration informantion specified in web.xml.
      */
     public JspConfig getJspConfig() {
-	return jspConfig;
+        return jspConfig;
     }
 
     public TagPluginManager getTagPluginManager() {
         return tagPluginManager;
     }
 
-    public void generateWebMapping( String file, JspCompilationContext clctxt )
-        throws IOException
-    {
+    public void generateWebMapping(String file, JspCompilationContext clctxt) throws IOException {
         String className = clctxt.getServletClassName();
         String packageName = clctxt.getServletPackageName();
 
         String thisServletName;
-        if  ("".equals(packageName)) {
+        if ("".equals(packageName)) {
             thisServletName = className;
         } else {
             thisServletName = packageName + '.' + className;
@@ -942,20 +909,15 @@ public class JspC implements Options {
         }
     }
 
-
     // START SJSAS 6329723
     /**
-     * Gets the list of JSP compilation errors caught during the most recent
-     * invocation of this instance's <code>execute</code> method when
-     * failOnError has been set to FALSE.
+     * Gets the list of JSP compilation errors caught during the most recent invocation of this instance's
+     * <code>execute</code> method when failOnError has been set to FALSE.
      *
-     * Each error error in the list is represented by an instance of
-     * org.apache.jasper.JasperException.
+     * Each error error in the list is represented by an instance of org.apache.jasper.JasperException.
      *
-     * @return List of JSP compilation errors caught during most recent
-     * invocation of this instance's <code>execute</code> method, or an empty
-     * list if no errors were encountered or this instance's failOnError
-     * property was set to TRUE
+     * @return List of JSP compilation errors caught during most recent invocation of this instance's <code>execute</code>
+     * method, or an empty list if no errors were encountered or this instance's failOnError property was set to TRUE
      */
     public List<JasperException> getJSPCompilationErrors() {
 
@@ -974,7 +936,6 @@ public class JspC implements Options {
     }
     // END SJSAS 6329723
 
-
     /**
      * Include the generated web.xml inside the webapp's web.xml.
      */
@@ -983,17 +944,12 @@ public class JspC implements Options {
         File webappBase = new File(uriRoot);
         File webXml = new File(webappBase, "WEB-INF/web.xml");
         File webXml2 = new File(webappBase, "WEB-INF/web2.xml");
-        String insertStartMarker = 
-            Localizer.getMessage("jspc.webinc.insertStart");
-        String insertEndMarker = 
-            Localizer.getMessage("jspc.webinc.insertEnd");
+        String insertStartMarker = Localizer.getMessage("jspc.webinc.insertStart");
+        String insertEndMarker = Localizer.getMessage("jspc.webinc.insertEnd");
 
-        BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(webXml),"UTF-8"));
-        BufferedReader fragmentReader = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(webxmlFile),"UTF-8"));
-        PrintWriter writer = new PrintWriter(
-                    new OutputStreamWriter(new FileOutputStream(webXml2),"UTF-8"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(webXml), "UTF-8"));
+        BufferedReader fragmentReader = new BufferedReader(new InputStreamReader(new FileInputStream(webxmlFile), "UTF-8"));
+        PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(webXml2), "UTF-8"));
 
         // Insert the <servlet> and <servlet-mapping> declarations
         int pos = -1;
@@ -1090,11 +1046,9 @@ public class JspC implements Options {
 
     }
 
-    private void processFile(String file)
-        throws JasperException
-    {
+    private void processFile(String file) throws JasperException {
         ClassLoader originalClassLoader = null;
-        String jspUri=file.replace('\\','/');
+        String jspUri = file.replace('\\', '/');
 
         try {
             // set up a scratch/output dir if none is provided
@@ -1106,8 +1060,7 @@ public class JspC implements Options {
                 scratchDir = new File(new File(temp).getAbsolutePath());
             }
 
-            JspCompilationContext clctxt = new JspCompilationContext
-                ( jspUri, false,  this, context, null, rctxt );
+            JspCompilationContext clctxt = new JspCompilationContext(jspUri, false, this, context, null, rctxt);
 
             /* Override the defaults */
             if ((targetClassName != null) && (targetClassName.length() > 0)) {
@@ -1119,8 +1072,8 @@ public class JspC implements Options {
             }
 
             originalClassLoader = Thread.currentThread().getContextClassLoader();
-            if( loader==null ) {
-                initClassLoader( clctxt );
+            if (loader == null) {
+                initClassLoader(clctxt);
             }
             Thread.currentThread().setContextClassLoader(loader);
 
@@ -1133,7 +1086,7 @@ public class JspC implements Options {
             // .jsp file is newer than .class file;
             // Otherwise only generate .java, if .jsp file is newer than
             // the .java file
-            if( clc.isOutDated(compile) ) {
+            if (clc.isOutDated(compile)) {
                 clc.compile(compile);
             }
 
@@ -1152,25 +1105,22 @@ public class JspC implements Options {
                     }
                     clc.setPageInfo(null);
                 }
-	    }
+            }
             // END SJSAS 6393940
 
             // Generate mapping
-            generateWebMapping( file, clctxt );
-            if ( showSuccess ) {
-                log.info( "Built File: " + file );
+            generateWebMapping(file, clctxt);
+            if (showSuccess) {
+                log.info("Built File: " + file);
             }
 
         } catch (JasperException je) {
             Throwable rootCause = je;
-            while (rootCause instanceof JasperException
-                    && ((JasperException) rootCause).getRootCause() != null) {
+            while (rootCause instanceof JasperException && ((JasperException) rootCause).getRootCause() != null) {
                 rootCause = ((JasperException) rootCause).getRootCause();
             }
             if (listErrors && rootCause != je) {
-                log.log(Level.SEVERE,
-                    Localizer.getMessage("jspc.error.generalException", file),
-                    rootCause);
+                log.log(Level.SEVERE, Localizer.getMessage("jspc.error.generalException", file), rootCause);
             }
 
             // Bugzilla 35114.
@@ -1186,14 +1136,12 @@ public class JspC implements Options {
             }
 
         } catch (Exception e) {
-            if ((e instanceof FileNotFoundException) &&
-                        log.isLoggable(Level.WARNING)) {
-                log.warning(Localizer.getMessage("jspc.error.fileDoesNotExist",
-                                                  e.getMessage()));
+            if ((e instanceof FileNotFoundException) && log.isLoggable(Level.WARNING)) {
+                log.warning(Localizer.getMessage("jspc.error.fileDoesNotExist", e.getMessage()));
             }
             throw new JasperException(e);
         } finally {
-            if(originalClassLoader != null) {
+            if (originalClassLoader != null) {
                 Thread.currentThread().setContextClassLoader(originalClassLoader);
             }
         }
@@ -1201,10 +1149,9 @@ public class JspC implements Options {
     }
 
     /**
-     * Locate all jsp files in the webapp. Used if no explicit
-     * jsps are specified.
+     * Locate all jsp files in the webapp. Used if no explicit jsps are specified.
      */
-    public void scanFiles( File base ) throws JasperException {
+    public void scanFiles(File base) throws JasperException {
         Stack<String> dirs = new Stack<String>();
         dirs.push(base.toString());
         if (extensions == null) {
@@ -1225,9 +1172,8 @@ public class JspC implements Options {
                     } else {
                         String path = f2.getPath();
                         String uri = path.substring(uriRoot.length());
-                        ext = files[i].substring(files[i].lastIndexOf('.') +1);
-                        if (extensions.contains(ext) ||
-                                jspConfig.isJspPage(uri)) {
+                        ext = files[i].substring(files[i].lastIndexOf('.') + 1);
+                        if (extensions.contains(ext) || jspConfig.isJspPage(uri)) {
                             pages.add(path);
                         }
                     }
@@ -1246,51 +1192,45 @@ public class JspC implements Options {
         // END SJSAS 6393940
 
         try {
-	    if (uriRoot == null) {
-		if( pages.size() == 0 ) {
-		    throw new JasperException(
-                        Localizer.getMessage("jsp.error.jspc.missingTarget"));
-		}
-		String firstJsp=pages.get( 0 );
-                File firstJspF = new File( firstJsp );
-                if (!firstJspF.exists()) {
-                   throw new JasperException(
-                       Localizer.getMessage("jspc.error.fileDoesNotExist",
-                                            firstJsp));
+            if (uriRoot == null) {
+                if (pages.size() == 0) {
+                    throw new JasperException(Localizer.getMessage("jsp.error.jspc.missingTarget"));
                 }
-                locateUriRoot( firstJspF );
-	    }
+                String firstJsp = pages.get(0);
+                File firstJspF = new File(firstJsp);
+                if (!firstJspF.exists()) {
+                    throw new JasperException(Localizer.getMessage("jspc.error.fileDoesNotExist", firstJsp));
+                }
+                locateUriRoot(firstJspF);
+            }
 
             if (uriRoot == null) {
-		throw new JasperException(
-                    Localizer.getMessage("jsp.error.jspc.no_uriroot"));
-	    }
+                throw new JasperException(Localizer.getMessage("jsp.error.jspc.no_uriroot"));
+            }
 
-	    if( context==null )
-		initServletContext();
+            if (context == null)
+                initServletContext();
 
-	    // No explicit pages, we'll process all .jsp in the webapp
-	    if (pages.size() == 0) {
-		scanFiles( new File( uriRoot ));
-	    }
+            // No explicit pages, we'll process all .jsp in the webapp
+            if (pages.size() == 0) {
+                scanFiles(new File(uriRoot));
+            }
 
-	    File uriRootF = new File(uriRoot);
-	    if (!uriRootF.exists() || !uriRootF.isDirectory()) {
-		throw new JasperException(
-                    Localizer.getMessage("jsp.error.jspc.uriroot_not_dir"));
-	    }
+            File uriRootF = new File(uriRoot);
+            if (!uriRootF.exists() || !uriRootF.isDirectory()) {
+                throw new JasperException(Localizer.getMessage("jsp.error.jspc.uriroot_not_dir"));
+            }
 
-	    initWebXml();
+            initWebXml();
 
-            for (String nextjsp: pages) {
+            for (String nextjsp : pages) {
                 File fjsp = new File(nextjsp);
                 if (!fjsp.isAbsolute()) {
                     fjsp = new File(uriRootF, nextjsp);
                 }
                 if (!fjsp.exists()) {
                     if (log.isLoggable(Level.WARNING)) {
-                        log.warning(Localizer.getMessage
-                            ("jspc.error.fileDoesNotExist", fjsp.toString()));
+                        log.warning(Localizer.getMessage("jspc.error.fileDoesNotExist", fjsp.toString()));
                     }
                     continue;
                 }
@@ -1301,8 +1241,8 @@ public class JspC implements Options {
                 if (nextjsp.startsWith("." + File.separatorChar)) {
                     nextjsp = nextjsp.substring(2);
                 }
-		processFile(nextjsp);
-	    }
+                processFile(nextjsp);
+            }
 
             // START SJSAS 6393940
             if (ignoreJspFragmentErrors) {
@@ -1313,8 +1253,8 @@ public class JspC implements Options {
             }
             // END SJJAS 6393940
 
-	    completeWebXml();
-	    
+            completeWebXml();
+
             if (addWebXmlMappings) {
                 mergeIntoWebXml();
             }
@@ -1324,8 +1264,7 @@ public class JspC implements Options {
 
         } catch (JasperException je) {
             Throwable rootCause = je;
-            while (rootCause instanceof JasperException
-                    && ((JasperException) rootCause).getRootCause() != null) {
+            while (rootCause instanceof JasperException && ((JasperException) rootCause).getRootCause() != null) {
                 rootCause = ((JasperException) rootCause).getRootCause();
             }
             if (rootCause != je) {
@@ -1359,12 +1298,10 @@ public class JspC implements Options {
         }
     }
 
-
     // ==================== Private utility methods ====================
 
     private String nextArg() {
-        if ((argPos >= args.length)
-            || (fullstop = SWITCH_FULL_STOP.equals(args[argPos]))) {
+        if ((argPos >= args.length) || (fullstop = SWITCH_FULL_STOP.equals(args[argPos]))) {
             return null;
         } else {
             return args[argPos++];
@@ -1372,7 +1309,8 @@ public class JspC implements Options {
     }
 
     private String nextFile() {
-        if (fullstop) argPos++;
+        if (fullstop)
+            argPos++;
         if (argPos >= args.length) {
             return null;
         } else {
@@ -1384,7 +1322,7 @@ public class JspC implements Options {
         try {
             if (webxmlLevel >= INC_WEBXML) {
                 File fmapings = new File(webxmlFile);
-                mapout = new OutputStreamWriter(new FileOutputStream(fmapings),"UTF-8");
+                mapout = new OutputStreamWriter(new FileOutputStream(fmapings), "UTF-8");
                 servletout = new CharArrayWriter();
                 mappingout = new CharArrayWriter();
             } else {
@@ -1395,7 +1333,7 @@ public class JspC implements Options {
             if (webxmlLevel >= ALL_WEBXML) {
                 mapout.write(Localizer.getMessage("jspc.webxml.header"));
                 mapout.flush();
-            } else if ((webxmlLevel>= INC_WEBXML) && !addWebXmlMappings) {
+            } else if ((webxmlLevel >= INC_WEBXML) && !addWebXmlMappings) {
                 mapout.write(Localizer.getMessage("jspc.webinc.header"));
                 mapout.flush();
             }
@@ -1425,10 +1363,9 @@ public class JspC implements Options {
 
     private void initServletContext() {
         try {
-            context =new JspCServletContext
-                (new PrintWriter(new OutputStreamWriter(System.out, "UTF-8")),
+            context = new JspCServletContext(new PrintWriter(new OutputStreamWriter(System.out, "UTF-8")),
 
-                 new URL("file:" + uriRoot.replace('\\','/') + '/'));
+                    new URL("file:" + uriRoot.replace('\\', '/') + '/'));
             tldScanner = new TldScanner(context, isValidationEnabled);
 
             // START GlassFish 750
@@ -1436,8 +1373,7 @@ public class JspC implements Options {
             context.setAttribute(Constants.JSP_TAGLIBRARY_CACHE, taglibs);
 
             tagFileJarUrls = new ConcurrentHashMap<String, URL>();
-            context.setAttribute(Constants.JSP_TAGFILE_JAR_URLS_CACHE,
-                                 tagFileJarUrls);
+            context.setAttribute(Constants.JSP_TAGFILE_JAR_URLS_CACHE, tagFileJarUrls);
             // END GlassFish 750
         } catch (MalformedURLException me) {
             System.out.println("**" + me);
@@ -1449,14 +1385,12 @@ public class JspC implements Options {
     }
 
     /**
-     * Initializes the classloader as/if needed for the given
-     * compilation context.
+     * Initializes the classloader as/if needed for the given compilation context.
      *
      * @param clctxt The compilation context
      * @throws IOException If an error occurs
      */
-    private void initClassLoader(JspCompilationContext clctxt)
-	    throws IOException {
+    private void initClassLoader(JspCompilationContext clctxt) throws IOException {
 
         classPath = getClassPath();
 
@@ -1464,8 +1398,7 @@ public class JspC implements Options {
 
         // Turn the classPath into URLs
         ArrayList<URL> urls = new ArrayList<URL>();
-        StringTokenizer tokenizer = new StringTokenizer(classPath,
-                                                        File.pathSeparator);
+        StringTokenizer tokenizer = new StringTokenizer(classPath, File.pathSeparator);
         while (tokenizer.hasMoreTokens()) {
             String path = tokenizer.nextToken();
             try {
@@ -1484,8 +1417,7 @@ public class JspC implements Options {
             File classes = new File(webappBase, "/WEB-INF/classes");
             try {
                 if (classes.exists()) {
-                    classPath = classPath + File.pathSeparator
-                        + classes.getCanonicalPath();
+                    classPath = classPath + File.pathSeparator + classes.getCanonicalPath();
                     urls.add(classes.getCanonicalFile().toURL());
                 }
             } catch (IOException ioe) {
@@ -1498,19 +1430,18 @@ public class JspC implements Options {
             if (lib.exists() && lib.isDirectory()) {
                 String[] libs = lib.list();
                 for (int i = 0; i < libs.length; i++) {
-                    if( libs[i].length() <5 ) continue;
-                    String ext=libs[i].substring( libs[i].length() - 4 );
-                    if (! ".jar".equalsIgnoreCase(ext)) {
+                    if (libs[i].length() < 5)
+                        continue;
+                    String ext = libs[i].substring(libs[i].length() - 4);
+                    if (!".jar".equalsIgnoreCase(ext)) {
                         if (".tld".equalsIgnoreCase(ext)) {
-                            log.warning(
-                              "TLD files should not be placed in /WEB-INF/lib");
+                            log.warning("TLD files should not be placed in /WEB-INF/lib");
                         }
                         continue;
                     }
                     try {
                         File libFile = new File(lib, libs[i]);
-                        classPath = classPath + File.pathSeparator
-                            + libFile.getCanonicalPath();
+                        classPath = classPath + File.pathSeparator + libFile.getCanonicalPath();
                         urls.add(libFile.getCanonicalFile().toURL());
                     } catch (IOException ioe) {
                         // failing a toCanonicalPath on a file that
@@ -1525,11 +1456,11 @@ public class JspC implements Options {
         // What is this ??
         urls.add(new File(clctxt.getRealPath("/")).getCanonicalFile().toURL());
 
-        URL urlsA[]=new URL[urls.size()];
+        URL urlsA[] = new URL[urls.size()];
         urls.toArray(urlsA);
 
-        /* SJSAS 6327357
-        loader = new URLClassLoader(urlsA, this.getClass().getClassLoader());
+        /*
+         * SJSAS 6327357 loader = new URLClassLoader(urlsA, this.getClass().getClassLoader());
          */
         // START SJSAS 6327357
         ClassLoader sysClassLoader = initSystemClassLoader();
@@ -1542,11 +1473,10 @@ public class JspC implements Options {
     }
 
     /**
-     * Find the WEB-INF dir by looking up in the directory tree.
-     * This is used if no explicit docbase is set, but only files.
+     * Find the WEB-INF dir by looking up in the directory tree. This is used if no explicit docbase is set, but only files.
      * XXX Maybe we should require the docbase.
      */
-    private void locateUriRoot( File f ) {
+    private void locateUriRoot(File f) {
         String tUriBase = uriBase;
         if (tUriBase == null) {
             tUriBase = "/";
@@ -1559,11 +1489,9 @@ public class JspC implements Options {
                     if (g.exists() && g.isDirectory()) {
                         uriRoot = f.getCanonicalPath();
                         uriBase = tUriBase;
-			if (log.isLoggable(Level.INFO)) {
-                            log.info(
-                                Localizer.getMessage("jspc.implicit.uriRoot",
-                                                     uriRoot));
-			}
+                        if (log.isLoggable(Level.INFO)) {
+                            log.info(Localizer.getMessage("jspc.implicit.uriRoot", uriRoot));
+                        }
                         break;
                     }
                     if (f.exists() && f.isDirectory()) {
@@ -1594,7 +1522,6 @@ public class JspC implements Options {
         }
     }
 
-
     // START SJSAS 6327357
     private ClassLoader initSystemClassLoader() throws IOException {
 
@@ -1604,8 +1531,7 @@ public class JspC implements Options {
         }
 
         ArrayList<URL> urls = new ArrayList<URL>();
-        StringTokenizer tokenizer = new StringTokenizer(sysClassPath,
-                                                        File.pathSeparator);
+        StringTokenizer tokenizer = new StringTokenizer(sysClassPath, File.pathSeparator);
         while (tokenizer.hasMoreTokens()) {
             urls.add(new File(tokenizer.nextToken()).toURL());
         }
@@ -1620,7 +1546,6 @@ public class JspC implements Options {
         return new URLClassLoader(urlsArray, this.getClass().getClassLoader());
     }
     // END SJAS 6327357
-
 
     // START SJSAS 6393940
     /*

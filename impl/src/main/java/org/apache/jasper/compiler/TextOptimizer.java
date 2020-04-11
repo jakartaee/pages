@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,7 @@ public class TextOptimizer {
         private boolean prePass;
         private boolean trim;
 
-        public TextCatVisitor(boolean prePass, boolean trim){
+        public TextCatVisitor(boolean prePass, boolean trim) {
             this.prePass = prePass;
             this.trim = trim;
         }
@@ -45,9 +45,8 @@ public class TextOptimizer {
             collectText();
         }
 
-	/*
-         * The following directives are ignored in text concatenation
-         * except in the pre pass phase.
+        /*
+         * The following directives are ignored in text concatenation except in the pre pass phase.
          */
 
         public void visit(Node.PageDirective n) throws JasperException {
@@ -90,7 +89,7 @@ public class TextOptimizer {
 
         public void visit(Node.TemplateText n) throws JasperException {
 
-            if ((trim) && ! prePass && n.isAllSpace()) {
+            if ((trim) && !prePass && n.isAllSpace()) {
                 n.setText(emptyText);
                 return;
             }
@@ -106,8 +105,7 @@ public class TextOptimizer {
         }
 
         /**
-         * This method breaks concatenation mode.  As a side effect it copies
-         * the concatenated string to the first text node 
+         * This method breaks concatenation mode. As a side effect it copies the concatenated string to the first text node
          */
         private void collectText() {
 
@@ -120,13 +118,10 @@ public class TextOptimizer {
 
     }
 
-    public static void concatenate(Compiler compiler, Node.Nodes page)
-            throws JasperException {
-
+    public static void concatenate(Compiler compiler, Node.Nodes page) throws JasperException {
         Options options = compiler.getCompilationContext().getOptions();
         PageInfo pageInfo = compiler.getPageInfo();
-        boolean trim =
-            options.getTrimSpaces() || pageInfo.isTrimDirectiveWhitespaces();
+        boolean trim = options.getTrimSpaces() || pageInfo.isTrimDirectiveWhitespaces();
 
         if (trim) {
             TextCatVisitor v = new TextCatVisitor(true, trim);
@@ -136,7 +131,7 @@ public class TextOptimizer {
         TextCatVisitor v = new TextCatVisitor(false, trim);
         page.visit(v);
 
-	// Cleanup, in case the page ends with a template text
+        // Cleanup, in case the page ends with a template text
         v.collectText();
     }
 }

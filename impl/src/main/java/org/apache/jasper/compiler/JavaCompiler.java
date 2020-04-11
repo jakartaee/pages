@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2020 Oracle and/or its affiliates. All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,20 +28,17 @@ interface JavaCompiler {
 
     /**
      * Start Java compilation
+     *
      * @param className Name of the class under compilation
      * @param pageNode Internal form for the page, used for error line mapping
      */
-    public JavacErrorDetail[] compile(String className, Node.Nodes pageNodes)
-        throws JasperException;
+    public JavacErrorDetail[] compile(String className, Node.Nodes pageNodes) throws JasperException;
 
     /**
-     * Get a Writer for the Java file.
-     * The writer is used by JSP compiler.  This method allows the Java
-     * compiler control where the Java file should be generated so it knows how
-     * to handle the input for java compilation accordingly.
+     * Get a Writer for the Java file. The writer is used by JSP compiler. This method allows the Java compiler control
+     * where the Java file should be generated so it knows how to handle the input for java compilation accordingly.
      */
-    public Writer getJavaWriter(String javaFileName, String javaEncoding)
-        throws JasperException;
+    public Writer getJavaWriter(String javaFileName, String javaEncoding) throws JasperException;
 
     /**
      * Remove/save the generated Java File from/to disk
@@ -62,21 +59,22 @@ interface JavaCompiler {
      * Java Compiler options.
      */
     public void setClassPath(List<File> cp);
+
     public void setDebug(boolean debug);
+
     public void setExtdirs(String exts);
+
     public void setTargetVM(String targetVM);
+
     public void setSourceVM(String sourceVM);
 
     /**
      * Initializations
      */
-    public void init(JspCompilationContext ctxt,
-                     ErrorDispatcher err,
-                     boolean suppressLogging);
+    public void init(JspCompilationContext ctxt, ErrorDispatcher err, boolean suppressLogging);
 
     /**
      * Release resouces used in the current compilation
      */
     public void release();
 }
-    
