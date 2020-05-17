@@ -698,7 +698,7 @@ Sessions, Requests and Responses.
 
 Elements may use relative URL specifications,
 called URI paths, in the Servlet 2.5 specification. These paths are as
-described in RFC 2396. We refer to the path part of that specification,
+described in RFC 3986. We refer to the path part of that specification,
 not the scheme, nor authority parts. Some examples are:
 
 * A context-relative path is a path that
