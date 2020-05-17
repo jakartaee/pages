@@ -26,7 +26,7 @@
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
         <version>1.0.6</version>
-        <relativePath />
+        <relativePath/>
     </parent>
 
     <groupId>jakarta.jdsol</groupId>
