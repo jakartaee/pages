@@ -4289,7 +4289,7 @@ The Java programming language represents
 characters internally using the Unicode character encoding, which
 provides support for most languages. As of Java 8, the Unicode 6.2
 character set is supported. For storage and transmission over networks,
-however, many other character encodings are used. The J2SE platform
+however, many other character encodings are used. The Java SE platform
 therefore also supports character conversion to and from other character
 encodings. Any Java runtime must support the Unicode transformations
 UTF-8, UTF-16BE, and UTF-16LE as well as the ISO-8859-1 (Latin-1)
@@ -7318,7 +7318,7 @@ functionality. See section JSP.13.4 for more details.
 ==== Resource Injection
 
 The Java Metadata specification (JSR-175),
-which is part of J2SE 5.0 and greater, provides a means of specifying
+which is part of Java SE 5.0 and greater, provides a means of specifying
 configuration data in Java code. Metadata in Java code is also referred
 to as annotations. In Jakarta EE, annotations are used to declare
 dependencies on external resources and configuration data in Java code
