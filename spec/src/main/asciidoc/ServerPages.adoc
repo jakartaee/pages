@@ -4287,7 +4287,7 @@ issues of character encodings.
 
 The Java programming language represents
 characters internally using the Unicode character encoding, which
-provides support for most languages. As of J2SE 1.4, the Unicode 3.0
+provides support for most languages. As of Java 8, the Unicode 6.2
 character set is supported. For storage and transmission over networks,
 however, many other character encodings are used. The J2SE platform
 therefore also supports character conversion to and from other character
