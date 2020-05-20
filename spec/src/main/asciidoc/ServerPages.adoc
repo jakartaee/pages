@@ -1,4 +1,11 @@
 :xrefstyle: full
+// Need our own counter to generate IDs for tables, figures etc that
+// our consistent with previous versions. It must be incremented at
+// the start of every chapter. Table captions are generated with
+// table-number since there are lots of them. Figure are hard-coded
+// (for now) as there are only a couple
+:jsp-chapter: 0
+
 :sectnums!:
 == Jakarta Server Pages Specification, Version 3.0
 
@@ -392,7 +399,9 @@ The chapters of this part are:
 * XML Views
 
 :sectnums:
-== Core Syntax and Semantics
+// Table, figure numbering etc
+:table-number: 0
+== Core Syntax and Semantics{counter2:jsp-chapter}
 
 This chapter describes the core syntax
 and semantics for the Jakarta Server Pages 3.0 specification (JSP 3.0).
@@ -952,6 +961,7 @@ Next are two examples of JSP code with their
 associated output. Note that directives generate no data and apply
 globally to the JSP page.
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Example 1 - Input
 [cols="20,80",options="header"]
 |===
@@ -963,6 +973,7 @@ globally to the JSP page.
 
 The result is
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Example 1 - Output
 [cols="20,80",options="header"]
 |===
@@ -975,6 +986,7 @@ The result is
 The next two tables show another example,
 with input and output.
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Example 2 - Input
 [cols="20,80",options="header"]
 |===
@@ -987,6 +999,7 @@ with input and output.
 
 The result is
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Example 2 - Output
 [cols="20,80",options="header"]
 |===
@@ -1736,6 +1749,7 @@ attribute combination to be matched selects the valid body production
 for this standard action invocation.
 
 [[_Valid_Body_Content_And_Attributes_For_Standard_Actions]]
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Valid body content and attributes for Standard Actions
 [cols="20,20,60",options="header"]
 |===
@@ -2199,6 +2213,7 @@ Each implicit object has a class or interface
 type defined in a core Java technology or Jakarta Servlet API package, as
 shown in <<_Implicit_Objects_Available_in_JSP_Pages>>.
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [[_Implicit_Objects_Available_in_JSP_Pages]]
 .Implicit Objects Available in JSP Pages
 [cols="20,40,40",options="header"]
@@ -2270,6 +2285,7 @@ In addition, the `exception` implicit object
 can be accessed in an error page, as described in
 <<_Implicit_Objects_Available_in_Error_Pages>>.
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [[_Implicit_Objects_Available_in_Error_Pages]]
 .Implicit Objects Available in Error Pages
 [cols="20,40,40",options="header"]
@@ -2414,8 +2430,8 @@ page_directive_attr_list ::= { language="scriptingLanguage"                }
 
 The details of the attributes are as follows:
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Page Directive Attributes
-
 [cols="20,80"]
 |===
 
@@ -2678,7 +2694,7 @@ tag library functionality.
 See <<Tag Extensions>> for more specification details. And see
 <<Tag Library directive>> for an implementation note.
 
-<<Namespaces, Standard Actions, and Tag Libraries>>
+<<Namespaces_Standard_Actions_and_Tag_Libraries>>
 describes how the functionality of this directive can be exposed using
 XML syntax.
 
@@ -2703,7 +2719,8 @@ _Syntax_
 
 where the attributes are:
 
-.taglib attributes
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
+.{blank}
 [cols="20,80"]
 |===
 
@@ -2801,6 +2818,7 @@ tasks in a JSP page. Accordingly, the JSP 3.0 specification has two
 include mechanisms suited to different tasks. A summary of their
 semantics is shown in <<_Summary_of_Include_Mechanisms_in_JSP_3.0>>.
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [[_Summary_of_Include_Mechanisms_in_JSP_3.0]]
 .Summary of Include Mechanisms in JSP 3.0
 [cols="25,15,15,25,20",options="header"]
@@ -3206,6 +3224,7 @@ in the table.
 A conversion failure leads to an error,
 whether at translation time or request-time.
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [[_Conversion_from_string_values_to_target_type]]
 .Conversions from string values to target type
 [cols="20,80",options="header"]
@@ -3283,7 +3302,9 @@ the rules in section 1.23, "Type Conversion" of the EL 4.0 specification
 document must be followed.
 
 
-== Expression Language
+// Table, figure numbering etc
+:table-number: 0
+== Expression Language{counter2:jsp-chapter}
 
 Please consult the Jakarta Expression Language 4.0 specification document
 for details on the Expression Language supported by JSP 3.0.
@@ -3471,9 +3492,9 @@ type=java.lang.ValueExpression`
 The following tags would yield the following
 results:
 
-Examples of Using ${} and #{}
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="50,05",options="header"]
+.Examples of Using ${} and #{}
 |===
 
 |Expression
@@ -3553,7 +3574,9 @@ using these implicit objects:
 
 Examples of Using Implicit Objects
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="50,50",options="header"]
+.Examples of Using Implicit Objects
 |===
 
 |Expression
@@ -3782,7 +3805,9 @@ resulting value is the value returned by the method evaluation, or
 is thrown during the method evaluation, the exception must be wrapped in
 an `ELException` and the `ELException` must be thrown.
 
-== JSP Configuration
+// Table, figure numbering etc
+:table-number: 0
+== JSP Configuration{counter2:jsp-chapter}
 
 This chapter describes the JSP
 configuration information, which is specified in the Web Application
@@ -3935,6 +3960,7 @@ directive can be used to control the EL evaluation settings.
 <<_EL_Evaluation_Settings_for_JSP_Pages>> summarizes the EL evaluation settings for JSP
 pages, and their meanings:
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [[_EL_Evaluation_Settings_for_JSP_Pages]]
 .EL Evaluation Settings for JSP Pages
 [cols="30,30,40",options="header"]
@@ -3968,6 +3994,7 @@ pages, and their meanings:
 
 <<_EL_Evaluation_Settings_for_Tag_Files>> summarizes the EL evaluation settings for tag files, and their meanings:
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [[_EL_Evaluation_Settings_for_Tag_Files]]
 .EL Evaluation Settings for Tag Files
 [cols="50,50",options="header"]
@@ -4024,6 +4051,7 @@ delivered using the `.jsp` extension:
 
 <<_Scripting_Settings>> summarizes the scripting settings and their meanings:
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [[_Scripting_Settings]]
 .Scripting Settings
 [cols="50,50",options="header"]
@@ -4286,7 +4314,9 @@ See <<Packaging in a JAR>>, and <<Packaging Directly in a Web Application>>,
 for how the JSP version of a tag file is determined.
 
 
-== Internationalization Issues
+// Table, figure numbering etc
+:table-number: 0
+== Internationalization Issues{counter2:jsp-chapter}
 
 This chapter describes requirements for
 internationalization with Jakarta Server Pages.
@@ -4362,9 +4392,9 @@ byte order and encoding form of unmarked plaintext files.
 The exact byte representation of the BOM
 depends on the particular encoding of the text file, as follows:
 
-_Byte representations of the BOM_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="50,50",options="header"]
+.Byte representations of the BOM
 |===
 
 |Bytes
@@ -4523,7 +4553,9 @@ Combinations of these approaches also make sense.
 
 
 
-== Standard Actions
+// Table, figure numbering etc
+:table-number: 0
+== Standard Actions{counter2:jsp-chapter}
 
 This chapter describes the standard
 actions of Jakarta Server Pages 3.0 (JSP 3.0). Standard actions are
@@ -4760,9 +4792,10 @@ restricted.
 The `<jsp:useBean>` tag has the following
 attributes:
 
-_jsp:useBean Attributes_
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+.jsp:useBean Attributes
 |===
 
 | `id`
@@ -4890,9 +4923,10 @@ request-time attribute value, as described in
 The `<jsp:setProperty>` action has the
 following attributes:
 
-_jsp:setProperty Attributes_
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+.jsp:setProperty Attributes
 |===
 
 |`name`
@@ -4982,9 +5016,9 @@ _Syntax_
 
 The attributes are:
 
-_jsp:getProperty Attributes_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+.jsp:getProperty Attributes
 |===
 
 |`name`
@@ -5077,9 +5111,9 @@ used to augment the request for the purposes of the inclusion.
 
 The valid attributes are:
 
-_jsp:include Atrributes_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+.jsp:include Atrributes
 |===
 
 |`page`
@@ -5145,9 +5179,9 @@ This tag allows the page author to cause the
 current request processing to be affected by the specified attributes as
 follows:
 
-_jsp:forward Attributes_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+.jsp:forward Attributes
 |===
 
 | `page`
@@ -5269,9 +5303,9 @@ _Syntax_
 </jsp:plugin>
 ....
 
-_jsp:plugin Attributes_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+.jsp:plugin Attributes
 |===
 
 | `type`
@@ -5452,9 +5486,9 @@ See <<JSP Syntax Grammar>> for the formal syntax definition of the
 
 The attributes are:
 
-_Attributes for the `<jsp:attribute>` standard action_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+.Attributes for the `<jsp:attribute>` standard action
 |===
 
 |`name`
@@ -5602,9 +5636,9 @@ standard action.
 
 The attributes are:
 
-_Attributes for the `<jsp:invoke>` standard action_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+.Attributes for the `<jsp:invoke>` standard action
 |===
 
 |`fragment`
@@ -5669,9 +5703,9 @@ standard action.
 
 The attributes are:
 
-_Attributes for the `<jsp:doBody>` standard action_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+.Attributes for the `<jsp:doBody>` standard action
 |===
 
 |`var`
@@ -5761,9 +5795,9 @@ be specified using `<jsp:attribute>` This is because `<jsp:attribute>`
 has a special meaning when used in the body of `<jsp:element>`. See
 <<jsp:attribute>> for more details..
 
-_Attributes for the `<jsp:element>` standard action_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+.Attributes for the `<jsp:element>` standard action
 |===
 
 |`name`
@@ -6014,9 +6048,9 @@ doctypeDecl ::=   ( doctype-root-element="rootElement"
 The following are the valid attributes of
 jsp:output:
 
-_Attribute for the `<jsp:output>` standard action_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="30,70"]
+.Attribute for the `<jsp:output>` standard action
 |===
 
 |`omit-xml-declaration`
@@ -6054,8 +6088,10 @@ which are available in all JSP pages. They are:
 * `<jsp:expression>`, defined in <<_Scripting_Elements>>.
 
 
+// Table, figure numbering etc
+:table-number: 0
 [[JSP_Documents]]
-== JSP Documents
+== JSP Documents{counter2:jsp-chapter}
 
 This chapter introduces two concepts
 related to XML and JSP: JSP documents and XML views. This chapter
@@ -6139,7 +6175,7 @@ view, and the Request Processing phase, where requests are processed to
 produce responses.
 
 [[_Relationship_between_JSP_Pages_and_XML_views_of_JSP_pages]]
-.Relationship between JSP Pages and XML views of JSP pages
+.*Figure JSP.{jsp-chapter}-1* Relationship between JSP Pages and XML views of JSP pages
 image:sp-4.png[image]
 
 JSP documents are used by JSP page authors.
@@ -6334,6 +6370,7 @@ namespace to the prefix that the DTD has chosen.
 This section describes the elements in a JSP
 document.
 
+[[Namespaces_Standard_Actions_and_Tag_Libraries]]
 ==== Namespaces, Standard Actions, and Tag Libraries
 
 JSP documents and tag files in XML syntax use
@@ -6429,9 +6466,10 @@ element.
 The one valid, mandatory, attribute of
 jsp:root is the version of the JSP specification used:
 
-_Attributes for the `<jsp:root>` standard action_
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+.Attributes for the `<jsp:root>` standard action
 |===
 
 |`version`
@@ -6553,9 +6591,9 @@ of `out`, after the whitespace processing described in
 For example, if the variable i has the value
 3, and the JSP document is of the form. :
 
-_Example 1 - Input_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80",options="header"]
+.Example 1 - Input
 |===
 
 |LineNo
@@ -6583,9 +6621,9 @@ _Example 1 - Input_
 
 The result is:
 
-_Example 1 - Output_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80",options="header"]
+.Example 1 - Output
 |===
 
 |LineNo
@@ -6858,7 +6896,9 @@ version of the JSP specification.
 Similarly, future versions of the
 specification may also consider support for XInclude.
 
-== Tag Extensions
+// Table, figure numbering etc
+:table-number: 0
+== Tag Extensions{counter2:jsp-chapter}
 
 This chapter describes the tag library
 facility for introducing new actions into a JSP page. The tag library
@@ -8054,7 +8094,9 @@ author place this information in a well-known location at some resource
 in the `WEB-INF/` portion of the Web Application and access it via
 the `getResource` call on the `ServletContext`.
 
-== Tag Files
+// Table, figure numbering etc
+:table-number: 0
+== Tag Files{counter2:jsp-chapter}
 
 This chapter describes the details of tag
 files, a JSP 2.0 onwards facility that allows page authors to author tag
@@ -8387,6 +8429,7 @@ available within tag files, which define Simple Tag Handlers.
 <<_Directives_available_to_tag_files>>
 outlines which directives are available in tag files:
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [[_Directives_available_to_tag_files]]
 .Directives available to tag files
 [cols="20,20,60",options="header"]
@@ -8483,9 +8526,10 @@ tag_directive_attr_list ::= { display-name="display-name" }
 
 The details of the attributes are as follows:
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
+[cols="20,80"]
 [[_Details_of_tag_directive_attribute]]
 .Details of `tag` directive attributes
-[cols="20,80"]
 |===
 
 |`display-name`
@@ -8610,9 +8654,9 @@ attribute_directive_attr_list ::= name="attribute-name"
 
 The details of the attributes are as follows:
 
-_Details of `attribute` directive attributes_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+.Details of `attribute` directive attributes
 |===
 
 
@@ -8730,9 +8774,9 @@ variable_directive_attr_list ::= (   name-given="output-name"
 
 The details of the attributes are as follows:
 
-_Details of `variable` directive attributes_
-
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="25,75"]
+.Details of `variable` directive attributes
 |===
 
 |`name-given`
@@ -8842,9 +8886,10 @@ Each implicit object has a class or interface
 type defined in a core Java technology or Jakarta Servlet API package, as
 shown in <<_Implicit_Objects_Available_in_Tag_Files>>.
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
+[cols="15,45,40",options="header"]
 [[_Implicit_Objects_Available_in_Tag_Files]]
 .Implicit Objects Available in Tag Files
-[cols="15,45,40",options="header"]
 |===
 
 |Variable Name
@@ -8952,9 +8997,10 @@ code to handle the synchronization of each declared variable. The
 details of how and when each variable is synchronized varies by the
 variable’s scope, as per <<_Variable_synchronization_behavior>>.
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
+[cols="40,20,20,20",options="header"]
 [[_Variable_synchronization_behavior]]
 .Variable synchronization behavior
-[cols="40,20,20,20",options="header"]
 |===
 
 |
@@ -9170,7 +9216,9 @@ ${x}
 The expected output of this example is: 2 '1' '' 2
 
 
-== Scripting
+// Table, figure numbering etc
+:table-number: 0
+== Scripting{counter2:jsp-chapter}
 
 This chapter describes the details of the
 Scripting Elements when the language directive value is `java`.
@@ -9217,9 +9265,10 @@ need not be performed literally. An implementation may implement things
 differently to provide better performance, lower memory footprint, or
 other implementation attributes.
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
+[cols="25,75"]
 [[_Structure_of_the_Java_Programming_Language_Class]]
 .Structure of the Java Programming Language Class
-[cols="25,75"]
 |===
 
 |Optional imports clause as indicated via
@@ -9380,7 +9429,9 @@ does not affect the visibility of the variables within the generated
 program. It affects where and thus for how long there will be additional
 references to the object denoted by the variable.
 
-== XML View
+// Table, figure numbering etc
+:table-number: 0
+== XML View{counter2:jsp-chapter}
 
 This chapter provides details on the XML
 view of a JSP page and tag files. The XML views are used to enable
@@ -9441,9 +9492,10 @@ file has no `DOCTYPE` information; see <<Validating an XML View of a JSP page>>.
 A quick overview of the transformation is
 shown in <<_XML_View_Transformations>>:
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
+[cols="30,70",options="header"]
 [[_XML_View_Transformations]]
 .XML View Transformations
-[cols="30,70",options="header"]
 |===
 
 |JSP element
@@ -9623,9 +9675,10 @@ combined.
 illustrates these rules. Assume the EL expression `${foo}` evaluates to `[bar]`
 and that EL is enabled for this translation unit.
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
+[cols="30,30,30",options="header"]
 [[_XML_View_of_an_Escaped_EL_Expression_in_a_Request_time_Attribute_Value]]
 .XML View of an Escaped EL Expression in a Request-time Attribute Value
-[cols="30,30,30",options="header"]
 |===
 
 |Attribute Value
@@ -9689,9 +9742,10 @@ expression `${foo}` evaluates to `[bar]` and that EL is enabled for this
 translation unit. The same rules apply for the `\#{expr}` syntax, where `${`
 is simply substituted with `\#{`.
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
+[cols="30,30,30",options="header"]
 [[_XML_View_of_an_Escaped_EL_Expression_in_Template_Text]]
 .XML View of an Escaped EL Expression in Template Text
-[cols="30,30,30",options="header"]
 |===
 
 |Attribute Value
@@ -10018,7 +10072,9 @@ Library authors should read:
 * `jakarta.servlet.jsp.tagext` Javadoc
 * Expression Language Specification
 
-== JSP Container
+// Table, figure numbering etc
+:table-number: 0
+== JSP Container{counter2:jsp-chapter}
 
 This chapter describes the contracts
 between a JSP container and a JSP page, including the precompilation
@@ -10107,7 +10163,7 @@ the `Servlet` class corresponding to the JSP page must implement the
 `jakarta.servlet.jsp.JspPage` interface if the protocol is not HTTP).
 
 [[Contracts_between_a_JSP_Page_and_a_JSP_Container]]
-.Contracts between a JSP Page and a JSP Container
+.*Figure JSP.{jsp-chapter}-1* Contracts between a JSP Page and a JSP Container
 image:sp-11.png[image]
 
 
@@ -10173,9 +10229,10 @@ attribute of the `jsp` directive is used, the JSP page author must
 guarantee that the superclass given in the extends attribute supports
 this contract.[[a2917]]
 
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
+[cols="55,45",options="header"]
 [[How_the_JSP_Container_Processes_JSP_Pages]]
 .How the JSP Container Processes JSP Pages
-[cols="55,45",options="header"]
 |===
 
 |Methods the JSP Container Invokes
