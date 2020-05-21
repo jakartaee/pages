@@ -2,8 +2,8 @@
 // Need our own counter to generate IDs for tables, figures etc that
 // our consistent with previous versions. It must be incremented at
 // the start of every chapter. Table captions are generated with
-// table-number since there are lots of them. Figure are hard-coded
-// (for now) as there are only a couple
+// table-number since there are lots of them. Figures and Code
+// Examples are hard-coded (for now) as there are only a couple
 :jsp-chapter: 0
 
 :sectnums!:
@@ -21,31 +21,27 @@ The Jakarta Server Pages Team - {revdate}
 
 Comments to: jsp-dev@eclipse.org
 
-== Preface
+=== Preface
 
-This is the Server Pages specification
+This is the Jakarta Server Pages specification
 version 3.0, developed by the Jakarta Server Pages Team under the Eclipse
 Foundation Specification Process.
 
-=== Who Should Read This Document
+==== Who Should Read This Document
 
 This document is the authoritative JSP 3.0
 specification. It is intended to provide requirements for
 implementations of JSP page processing, and support by web containers in
 web servers and application servers. As an authoritative document, it
-covers material pertaining to a wide audience, including Page Authors,
-Tag Library Developers, Deployers, Container Vendors, and Tool Vendors.
-
-This specification includes chapters that are
-derived directly from the Javadoc comments in the API classes, but, were
-there to be any discrepancies, this specification has precedence over
-the Javadoc comments.
+covers material pertaining to a wide audience, including _Page Authors_,
+_Tag Library Developers_, _Deployers_, _Container Vendors_, and
+_Tool Vendors_.
 
 This document is not intended to be a user’s
 guide. We expect other documents will be created that will cater to
 different readerships.
 
-=== Organization of This Document
+==== Organization of This Document
 
 This document comprises of a number of
 Chapters and Appendices that are organized into 3 parts. In addition,
@@ -62,24 +58,24 @@ detail. The information in this part is intended for advanced JSP users.
 
 Finally, <<Part III>> contains all the appendices.
 
-=== Historical Note
+==== Historical Note
 
 Prior to version 3.0, this specification was developed in the Java
 Community Process as part of JSR 245.
 
-== Overview
+=== Overview
 
-=== The Jakarta Server Pages Technology
+==== The Jakarta Server Pages Technology
 
 Jakarta Server Pages (JSP) is the Jakarta EE technology for building
 applications for generating dynamic web content, such as HTML, DHTML,
 XHTML, and XML. JSP technology enables the easy authoring of web pages
 that create dynamic content with maximum power and flexibility.
 
-=== General Concepts
+===== General Concepts
 
 JSP technology provides the means for textual
-specification of the creation of a dynamic response to a request. The
+specification of the creation of a dynamic _response_ to a _request_. The
 technology builds on the following concepts:
 
 *  _Template Data_ +
@@ -106,7 +102,7 @@ enable the creation of good authoring tools.
 Careful development of these concepts yields a flexible and powerful
 server-side technology.
 
-=== Benefits of Jakarta Server Pages Technology
+===== Benefits of Jakarta Server Pages Technology
 
 JSP technology offers the following benefits:
 
@@ -126,8 +122,8 @@ portable tools.
 
 *  _Separation of Roles_ +
 JSP supports the separation of developer and
-author roles. Developers write components that interact with server-side
-objects. Authors put static data and dynamic content together to create
+author roles. _Developers_ write components that interact with server-side
+objects. _Authors_ put static data and dynamic content together to create
 presentations suited for their intended audience. +
 Each group may do their job without knowing
 the job of the other. Each role emphasizes different abilities and,
@@ -178,15 +174,15 @@ applications that include a web site using Jakarta Server Pages technology
 as a front end to Enterprise JavaBeans components in a Jakarta EE compliant
 environment.
 
-=== Basic Concepts
+==== Basic Concepts
 
 This section introduces basic concepts that
 will be defined formally later in the specification.
 
-=== What Is a JSP Page?
+===== What Is a JSP Page?
 
 A JSP page is a text-based document that
-describes how to process a request to create a response. The description
+describes how to process a _request_ to create a _response_. The description
 intermixes template data with dynamic actions and leverages the Java
 Platform. JSP technology supports a number of different paradigms for
 authoring dynamic content. The key features of Jakarta Server Pages are:
@@ -197,7 +193,7 @@ authoring dynamic content. The key features of Jakarta Server Pages are:
 * Tag Extension mechanism
 * Template content
 
-=== Web Applications
+===== Web Applications
 
 The concept of a web application is inherited
 from the servlet specification. A web application can be composed of:
@@ -216,23 +212,23 @@ pages.
 The Jakarta Server Pages specification inherits
 from the servlet specification the concepts of web applications,
 `ServletContexts`, sessions, and requests and responses. See the Jakarta
-Servlet specification for more details.
+Servlet 5.0 specification for more details.
 
-=== Components and Containers
+===== Components and Containers
 
 JSP pages and servlet classes are
-collectively referred to as web components. JSP pages are delivered to a
-container that provides the services indicated in the JSP Component
-Contract.
+collectively referred to as _web components_. JSP pages are delivered to a
+_container_ that provides the services indicated in the JSP _Component
+Contract_.
 
 The separation of components from containers
 allows the reuse of components, with quality-of-service features
 provided by the container.
 
-=== Translation and Execution Steps
+===== Translation and Execution Steps
 
 JSP pages are textual components. They go
-through two phases: a translation phase, and a request phase.
+through two phases: a _translation_ phase, and a _request_ phase.
 Translation is done once per page. The request phase is done once per
 request.
 
@@ -249,7 +245,7 @@ The translation may also be done by the JSP
 container at deployment time, or on-demand as the requests reach an
 untranslated JSP page.
 
-=== Deployment Descriptor and Global Information
+===== Deployment Descriptor and Global Information
 
 The JSP pages delivered in a web application
 may require some JSP configuration information. This information is
@@ -262,13 +258,13 @@ include page encoding information, EL evaluation activation, automatic
 includes before and after pages, and whether scripting is enabled in a
 given page.
 
-=== Role in Jakarta EE
+===== Role in Jakarta EE
 
 With a few exceptions, integration of JSP
-pages within Jakarta EE is inherited from the Servlet
+pages within Jakarta EE 9 is inherited from the Servlet 5.0
 specification since translation turns JSPs into servlets.
 
-=== Users of Jakarta Server Pages
+==== Users of Jakarta Server Pages
 
 There are six classes of users that interact
 with Jakarta Server Pages technology. This section describes each class of
@@ -278,7 +274,7 @@ each user class. The intent is to ensure that Jakarta Server Pages remains a
 practical and easy-to-use technology for each class of user, even as the
 language continues to grow.
 
-=== Page Authors
+===== Page Authors
 
 Page Authors are application component
 providers that use Jakarta Server Pages to develop the presentation
@@ -297,12 +293,12 @@ this class of user:
 * <<JSP Configuration>>
 * <<Internationalization Issues>>
 * <<Standard Actions>>
-* <<JSP Documents>>, except for sections that discuss declarations, scriptlets, expressions, and request-time attributes
+* <<JSP_Documents>>, except for sections that discuss declarations, scriptlets, expressions, and request-time attributes
 * <<Goals>> and <<Overview>> of <<Tag Extensions>>
 * <<Tag Files>>
 * Appendices <<Packaging JSP Pages>>, <<Changes>>, and <<Glossary>>
 
-=== Advanced Page Authors
+===== Advanced Page Authors
 
 Like Page Authors, Advanced Page Authors are
 also application component providers that use Jakarta Server Pages to
@@ -316,9 +312,9 @@ The following sections are most relevant to
 this class of user:
 
 * Chapters <<Core Syntax and Semantics>>, <<Expression Language>>, <<JSP Configuration>>, <<Internationalization Issues>> and <<Standard Actions>>
-* <<JSP Documents>>
+* <<JSP_Documents>>
 * <<Valid JSP Page>> and <<Reserved Names>> of <<Scripting>>
-* <<Goals>> and <<Overview>> of <<Tag Extensions>>
+* <<Goals>> and <<_Overview>> of <<Tag Extensions>>
 * <<Tag Files>>
 * <<Precompilation>> of <<JSP Container>>
 * Appendices <<Packaging JSP Pages>>, <<Changes>>, and <<Glossary>>
@@ -327,7 +323,7 @@ Advanced page authors may also wish to look at the Javadoc for the
 `jakarta.servlet.jsp` package and the XML schema for the JSP 3.0
 deployment descriptor.
 
-=== Tag Library Developers
+===== Tag Library Developers
 
 Tag Library Developers are application
 component providers who write tag libraries that provide increased
@@ -339,7 +335,7 @@ this class of user:
 
 * Chapters <<Core Syntax and Semantics>>, <<Expression Language>>, <<JSP Configuration>>, <<Internationalization Issues>> and
 <<Standard Actions>>
-* <<JSP Documents>>
+* <<JSP_Documents>>
 * <<Valid JSP Page>> and <<Reserved Names>> of <<Scripting>>
 * <<Tag Extensions>>
 * <<Tag Files>>
@@ -349,7 +345,7 @@ this class of user:
 Tag library developers may also wish to look at the Javadoc for the
 `jakarta.servlet.jsp` and `jakarta.servlet.jsp.tagext` packages.
 
-=== Deployers
+===== Deployers
 
 A deployer is an expert in a specific
 operational environment who is responsible for configuring a web
@@ -361,14 +357,14 @@ ability to read deployment descriptors.
 The following sections are most relevant to
 this class of user:
 
-* <<What Is a JSP Page>> and <<Web Applications>> of
+* <<What Is a JSP Page>> and <<Web_Applications>> of
 <<Core Syntax and Semantics>>
 * <<JSP Configuration>>
 * <<Internationalization Issues>>
 * <<JSP Container>>
 * All Appendices
 
-=== Container Developers and Tool Vendors
+===== Container Developers and Tool Vendors
 
 Container Developers develop containers that
 host Jakarta Server Pages. Tool Vendors write development tools to assist
@@ -647,8 +643,9 @@ development environments have lacked a standard format for conveying
 source map information allowing the debugger of one vendor to be used
 with the JSP container of another. JSP 3.0 containers must
 support the Jakarta Debugging Support for Other Languages Specification.
-Details can be found in <<JSP Container>>.
+Details can be found in <<Debugging Requirements>>.
 
+[[Web_Applications]]
 === Web Applications
 
 A web application is a collection of
@@ -777,7 +774,7 @@ tag, possibly with attributes:
 And:
 
  <mytag attr1="attribute value".../>
- <mytag attr1="attribute value" ...></mytag>
+ <mytag attr1="attribute value"...></mytag>
 
 An element has an element type describing its
 tag name, its valid attributes and its semantics. We refer to the type
@@ -941,7 +938,7 @@ convention (i.e. must be an `NMTOKEN` as indicated in the XML 1.0
 specification). The names for attributes must follow the conventions
 described in the JavaBeans specification.
 
-Attribute names that start with `jsp`, `jsp` and `jakarta` are
+Attribute names that start with `jsp`, `_jsp`, `java` and `jakarta` are
 reserved in this specification.
 
 ==== White Space
@@ -971,7 +968,7 @@ globally to the JSP page.
 |3|The rest of the document goes here
 |===
 
-The result is
+The result is:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Example 1 - Output
@@ -997,7 +994,7 @@ with input and output.
 |4|The rest of the document goes here
 |===
 
-The result is
+The result is:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Example 2 - Output
@@ -1038,7 +1035,7 @@ The default convention for JSP documents is
 `.jspx`. There are configuration elements that can be used to indicate
 that a specific file is a JSP document.
 
-See <<JSP Documents>> for
+See <<JSP_Documents>> for
 more details on JSP documents, and
 <<JSP Configuration>> for more details on
 configuration.
@@ -1079,8 +1076,9 @@ each other by whitespace, but no attribute can be repeated more than
 once. To make these XML-style attribute specifications more concise and
 easier to read, the syntax `ATTR[attrset]` is used in the EBNF to
 define a set of XML attributes that are recognized in a particular
-production. +
+production.
 +
+--
 Within the square brackets (`attrset`) is
 listed a comma-separated list of case-sensitive attribute names that are
 valid. Each attribute name represents a single XML attribute. If the
@@ -1091,26 +1089,29 @@ matched (only static values are accepted). If the attribute name is
 prefixed with a `!`, the attribute is required and must appear in order
 for this production to be matched. If an attribute that matches the
 `Attribute` production with a name not listed appears adjacent to any of
-the other attributes, the production is not matched. +
-+
+the other attributes, the production is not matched.
+
 For example, consider a production that
 contains `ATTR[!name, =value, =!repeat]`. This production is matched
-if and only if all of the following hold true: +
-* The `name` attribute appears exactly once
+if and only if all of the following hold true:
+--
++
+--
+** The `name` attribute appears exactly once
 and matches the `NonRTAttribute` production.
-* The `value` attribute appears at most once.
+** The `value` attribute appears at most once.
 If it appears, the `Attribute` production must be matched.
-* The `repeat` attribute appears exactly once
+** The `repeat` attribute appears exactly once
 and matches the `Attribute` production.
-* There must be no other attributes aside from `name`, `value`, or `repeat`.
-
+** There must be no other attributes aside from `name`, `value`, or `repeat`.
+--
++
 For example, the following sample strings
 match the above:
 
-* `name="somename" value="somevalue"
-repeat="2"`
+** `name="somename" value="somevalue" repeat="2"`
+** `repeat="${ x + y }" name="othername"`
 
-* `repeat="${ x + y }" name="othername"`
 
 ===== EBNF Grammar for JSP Syntax
 
@@ -1124,12 +1125,12 @@ Body                       ::= AllBody | ScriptlessBody
                                [ vc: ScriptingEnabled ]
                                [ vc: ScriptlessBody ]
 
-AllBody                    ::= (   ( '<%--' JSPCommentBody                 )
-                                 | ( '<%@' DirectiveBody                   )
+AllBody                    ::= (   ( '<%--'            JSPCommentBody      )
+                                 | ( '<%@'             DirectiveBody       )
                                  | ( '<jsp:directive.' XMLDirectiveBody    )
-                                 | ( '<%!' DeclarationBody                 )
+                                 | ( '<%!'             DeclarationBody     )
                                  | ( '<jsp:declaration' XMLDeclarationBody )
-                                 | ( '<%=' ExpressionBody                  )
+                                 | ( '<%='             ExpressionBody      )
                                  | ( '<jsp:expression' XMLExpressionBody   )
                                  | ( '<%'              ScriptletBody       )
                                  | ( '<jsp:scriptlet'  XMLScriptletBody    )
@@ -1210,11 +1211,11 @@ XMLJSPDirectiveBody        ::=   S?
                                | <TRANSLATION_ERROR>
 
 TagDefDirectiveBody        ::=   S?
-                                 (   ( 'tag' S TagDirectiveAttrList )
-                                   | ( 'taglib' S TagLibDirectiveAttrList )
-                                   | ( 'include' S IncludeDirectiveAttrList )
+                                 (   ( 'tag'       S TagDirectiveAttrList )
+                                   | ( 'taglib'    S TagLibDirectiveAttrList )
+                                   | ( 'include'   S IncludeDirectiveAttrList )
                                    | ( 'attribute' S AttributeDirectiveAttrList )
-                                   | ( 'variable' S VariableDirectiveAttrList )
+                                   | ( 'variable'  S VariableDirectiveAttrList )
                                  )
                                  S? '%>'
                                | <TRANSLATION_ERROR>
@@ -1658,6 +1659,8 @@ result if the same attribute name appears more than once.
 * `CustomActionMatchesAndValid` - Following
 the rules in <<The Tag Library Descriptor>> for determining
 the relevant set of tags and tag libraries, assume the following:
++
+--
 ** Let `U` be the URI indicated by the `uri`
 `AttributeValue` of the previously encountered `TagLibDirectiveAttrList`
 with `prefix` matching the `TagPrefix` for this potential custom action,
@@ -1666,10 +1669,11 @@ translation unit.
 ** If `U` is not `nil`, let `L` be the
 `<taglib>` element in the relevant TLD entry such that `L.uri` is equal
 to `U`.
-
-[none]
-* Then:
-
+--
++
+Then:
++
+--
 ** If, after being parsed, the `CustomAction`
 production is matched (not yet taking into account the following rules),
 `TagPrefix` is considered a potential `TagPrefix` in this translation
@@ -1683,6 +1687,8 @@ encountered in this translation unit.
 is matched, a translation error will result if there does not exist a
 `<tag>` element `T` in a relevant TLD such that `L.T.name` is equal to
 `CustomActionName.`
+--
++
 * `CustomActionTagDependentMatch` - Assume
 the definition of `L` from the `CustomActionMatchesAndValid` validity
 constraint above. The `CustomActionTagDependent` production is not
@@ -1719,8 +1725,8 @@ template text, and no translation error is produced:
  <my:indent level="2">
    </ul>
  </my:indent>
-
-* The following example, however, would
++
+The following example, however, would
 produce a translation error, assuming ‘my’ is a valid prefix and
 ‘indent’ is a valid tag, and regardless of whether ‘othertag’ is a valid
 tag or not.
@@ -1924,8 +1930,7 @@ HTML/XML comments, such as actions, scriptlets and expressions, is still
 processed by the container. If the generated comment is to have dynamic
 data, this can be obtained through an expression syntax, as in:
 
- <!-- comments <%= expression %> more comments
- ... -->
+ <!-- comments <%= expression %> more comments ... -->
 
 ===== JSP Comments
 
@@ -2009,8 +2014,7 @@ available to describe single and double quotes.
 
 _Examples_
 
-The following line shows an illegal attribute
-values.
+The following line shows an illegal attribute value.
 
  <mytags:tag value="<%= "hi!" %>" />
 
@@ -2027,9 +2031,9 @@ The next lines are all legal quotations.
  <%= "Joe said %\>" %>
 
 ----
-<% String joes`statement = "hi!"; %>
-    <%= "Joe said \"" + joes`statement + "\"." %>
-    <x:tag value='<%="Joe said \\"" + joes`statement + "\\"."%>'/>
+<% String joes_statement = "hi!"; %>
+    <%= "Joe said \"" + joes_statement + "\"." %>
+    <x:tag value='<%="Joe said \\"" + joes_statement + "\\"."%>'/>
 ----
  <x:tag value='<%= "hi!" %>' />
 
@@ -2216,7 +2220,7 @@ shown in <<_Implicit_Objects_Available_in_JSP_Pages>>.
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [[_Implicit_Objects_Available_in_JSP_Pages]]
 .Implicit Objects Available in JSP Pages
-[cols="20,40,40",options="header"]
+[cols="15,45,40",options="header"]
 |===
 
 |Variable Name
@@ -2274,7 +2278,7 @@ configuration object (as in the call
 |The instance of this page’s
 implementation class processing the current
 request +
-`page` scope
+`page` scope + 
 _When the scripting
 language is `java` then `page` is a synonym for `this` in the body of
 the page_ +
@@ -2368,7 +2372,7 @@ complete translation unit (i.e. page directives are position
 independent). An exception to this position independence is the use of
 the `pageEncoding` and `contentType` attributes in the determination of
 the page character encoding; for this purpose, they should appear at the
-beginning of the page (see <<Internationalization Issues>>). There
+beginning of the page (see <<Page Character Encoding>>). There
 shall be only one occurrence of any attribute/value pair defined by this
 directive in a given translation unit, unless the values for the
 duplicate attributes are identical for all occurrences. The `import` and
@@ -2654,8 +2658,8 @@ translation unit. If false (the default value), a translation error
 occurs when the character sequence is used as a String literal. The
 corresponding JSP configuration element is
 `deferred-syntax-allowed-as-literal` (see
-#52904[]). See
-<<Deferred_Syntax>> for more information.
+<<Deferred_Syntax>>). See
+<<Backwards Compatibility with JSP 2.0>> for more information.
 
 |`trimDirectiveWhitespaces`
 |Indicates how whitespaces in template text
@@ -2706,8 +2710,7 @@ other tag libraries should be introduced in this page using this prefix.
 In this particular case, we assume the tag library includes a `doMagic`
 element type, which is used within the page.
 
- <%@ taglib uri="http://www.mycorp/supertags"
-     prefix="super" %>
+ <%@ taglib uri="http://www.mycorp/supertags" prefix="super" %>
  ...
  <super:doMagic>
  ...
@@ -3250,32 +3253,31 @@ String is empty.
 `java.lang.Byte.valueOf(String)` or `(byte) 0` if the string is empty.
 
 |char or Character
-|As indicated in `String.charAt(0), or ‘(char)
-0’ if the string is empty.`
+|As indicated in `String.charAt(0)`, or `(char) 0` if the string is empty.
 
 |double or Double
 |As indicated in
-`java.lang.Double.valueOf(String), or 0 if the string is empty.`
+`java.lang.Double.valueOf(String)`, or `0` if the string is empty.
 
 |int or Integer
 |As indicated in
-`java.lang.Integer.valueOf(String), or 0 if the string is empty.`
+`java.lang.Integer.valueOf(String)`, or `0` if the string is empty.
 
 |float or Float
 |As indicated in
-`java.lang.Float.valueOf(String), or 0 if the string is empty.`
+`java.lang.Float.valueOf(String)`, or `0` if the string is empty.
 
 |long or Long
 |As indicated in
-`java.lang.Long.valueOf(String), or 0 if the string is empty.`
+`java.lang.Long.valueOf(String)`, or `0` if the string is empty.
 
 |short or Short
 |As indicated in
-`java.lang.Short.valueOf(String), or 0 if the string is empty.`
+`java.lang.Short.valueOf(String)`, or `0` if the string is empty.
 
 |Object
 |As if new `String(string-literal)`. This
-results in new String("") if the string is empty.
+results in `new String("")` if the string is empty.
 
 |===
 
@@ -3410,7 +3412,7 @@ defaults to `java.lang.Object`.
 * Value can be a String literal, a scriptlet
 expression, or an EL expression using the `${}` syntax.
 * An EL expression is parsed using
-`ExpressionFactory.createValueExpression() (` with an expected type
+`ExpressionFactory.createValueExpression()` (with an expected type
 equal to the type specified in the TLD) and the evaluation of the
 expression takes place immediately by calling method `getValue()` on the
 `ValueExpression`. After evaluation of the expression, the value is
@@ -3429,8 +3431,8 @@ expression using the `#{}` syntax.
 `ExpressionFactory.createValueExpression()` (with an expected type
 equal to the type specified in the TLD). The expression is not
 evaluated. The result of parsing the expression is passed directly to
-the setter method of the tag attribute, whose argument type must be j
-`avax.el.ValueExpression`. This allows for deferred evaluation of EL
+the setter method of the tag attribute, whose argument type must be
+`javax.el.ValueExpression`. This allows for deferred evaluation of EL
 expressions. When the expression is evaluated by the tag handler, the
 value is coerced to the expected type. If a static value is provided, it
 is converted to a `ValueExpression` where `isLiteralText()` returns
@@ -3454,8 +3456,8 @@ method to be invoked on an Object.
 * A String literal can be provided, as long
 as the return type of the deferred method signature is not void. A
 `MethodExpression` is created, which when invoked, returns the String
-literal coerced to expected return type (the standard EL coercion rules
-- see section 1.23, "Type Conversion" of the EL 4.0 specification) apply. A
+literal coerced to expected return type (the standard EL coercion rules -
+see section 1.23, "Type Conversion" of the EL 4.0 specification) apply. A
 translation error occurs if the return type is void or if the string
 literal cannot be coerced to the return type of the deferred method
 signature.
@@ -3572,8 +3574,6 @@ initialization parameter names to their `String` parameter value
 The following table shows some examples of
 using these implicit objects:
 
-Examples of Using Implicit Objects
-
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="50,50",options="header"]
 .Examples of Using Implicit Objects
@@ -3684,7 +3684,7 @@ the page, request, session, and application scopes, and will return its
 value. If the attribute is not found, `null` is returned.
 
 [[_JSP_Resolver_Hierarchy]]
-.JSP Resolver Hierarchy
+.*Figure JSP.2-1* JSP Resolver Hierarchy
 image:sp-2.png[image]
 
 === Functions
@@ -3785,7 +3785,8 @@ invocation of the function:
 * If the function has no prefix, the default
 namespace is used. If the function has a prefix, assume the namespace as
 that associated with the prefix.
-* Let `ns` be the namespace associated with
++
+Let `ns` be the namespace associated with
 the function, and `f` be the name of the function.
 * Locate the TLD associated with `ns`. If
 none can be found, this shall be a translation-time error.
@@ -3901,7 +3902,7 @@ A `jsp-property-group` is a subelement of
 * Prelude and Coda automatic includes.
 * Indicate that a resource is a JSP document.
 * Indicate that the deferred syntax
-(initiated by the character sequence `#{)` is allowed as a String
+(initiated by the character sequence `#{`) is allowed as a String
 literal.
 * Control handling of whitespaces in template
 text.
@@ -4015,7 +4016,7 @@ pages, and their meanings:
 |===
 
 The EL evaluation setting for a translation
-unit also affects whether the `\$` and `\#` quote sequences are enabled
+unit also affects whether the `\$` and `\\#` quote sequences are enabled
 for template text and attribute values in a JSP page, document, or tag
 file. When EL evaluation is disabled, `\$` and `\#` will not be
 recognized as quotes, whereas when EL evaluation is enabled, `\$` and
@@ -4212,31 +4213,29 @@ are preserved by default (See <<White Space>>). Unfortunately, this means that u
 often make it into the response output.
 
 For example, the following code snippet
-(where `\n` represents the end-of-line character(s))
+(where `<EOL>` represents the end-of-line character(s))
 
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>\n
- <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>\n
- Hello World!\n
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><EOL>
+ <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %><EOL>
+ Hello World!<EOL>
 
 would generate the following output:
 
- \n
- \n
- Hello World!\n
-
-
+ <EOL>
+ <EOL>
+ Hello World!<EOL>
 
 For JSP pages (standard syntax), the JSP
 configuration element `trim-directive-whitespaces` can be used to
 indicate that template text containing only whitespaces must be removed
 from the response output. It has no effect on JSP documents (XML
-syntax). In the example above, the first `\n` represents template text
-that contains only whitespaces and would therefore be removed. `\n`
-HelloWorld! `\n` represents template text that does not contain only
+syntax). In the example above, the first `<EOL>` represents template text
+that contains only whitespaces and would therefore be removed. `<EOL>`
+HelloWorld! `<EOL>` represents template text that does not contain only
 whitespaces and would therefore be preserved as-is.
 
- \n
- Hello World!\n
+ <EOL>
+ Hello World!<EOL>
 
 The `trim-directive-whitespaces` element is a
 subelement of `jsp-property-group` (See <<_JSP_Property_Groups>>). It has
@@ -4285,6 +4284,7 @@ documents (XML syntax).
 The `error-on-undeclared-namespace` element is
 a subelement of `jsp-property-group`. It has no subelements. Its valid
 values are `true` and `false`, with false being the default.
+
 If it is set to `true`, then an error must be
 raised during the translation time, when an undeclared tag is used in a
 JSP page.
@@ -4613,7 +4613,7 @@ translation time and at client request processing time. In particular:
 * the `name` must be unique within the
 translation unit, and identifies the particular element in which it
 appears to the JSP container and page.
-
++
 Duplicate `id` ’s found in the same
 translation unit shall result in a fatal translation error.
 
@@ -4621,12 +4621,12 @@ translation unit shall result in a fatal translation error.
 (a JavaBean component) with the named value and accessed via that name
 in various contexts through the `pagecontext` object described later in
 this specification.
-
++
 The `name` is also used to expose a variable
 (`name`) in the page’s scripting language environment. The scope of
 the scripting language variable is dependent upon the scoping rules and
 capabilities of the scripting language used in the page.
-
++
 Note that this implies the `name` value
 syntax must comply with the variable naming syntax rules of the
 scripting language used in the page. <<Scripting>> provides details for the case where the language attribute
@@ -5282,18 +5282,18 @@ _Syntax_
 <jsp:plugin type="bean|applet"
     code="objectCode"
     codebase="objectCodebase"
-    { align="alignment" }
-    { archive="archiveList" }
-    { height="height" }
-    { hspace="hspace" }
+    { align="alignment"       }
+    { archive="archiveList"   }
+    { height="height"         }
+    { hspace="hspace"         }
     { jreversion="jreversion" }
-    { name="componentName" }
-    { vspace="vspace" }
-    { title="title" }
-    { width="width" }
-    { nspluginurl="url" }
-    { iepluginurl="url" }
-    { mayscript='true|false' } >
+    { name="componentName"    }
+    { vspace="vspace"         }
+    { title="title"           }
+    { width="width"           }
+    { nspluginurl="url"       }
+    { iepluginurl="url"       }
+    { mayscript='true|false'  } >
 
     { <jsp:params>
         { <jsp:param name="paramName" value="paramValue" /> }+
@@ -5818,8 +5818,9 @@ Its syntax is:
 
  <jsp:text> template data </jsp:text>
 
-The interpretation of a `jsp:text` element is to pass its content through to the current value of `out`.
-This is very similar to the XSLT `xsl:text` element.
+The interpretation of a `jsp:text` element is to pass its content through
+to the current value of `out`. This is very similar to the XSLT `xsl:text`
+element.
 
 _Examples_
 
@@ -5831,7 +5832,7 @@ could be in both a JSP page or a JSP document.
  </jsp:text>
 
 Expressions may appear within `jsp:text`, as
-in the next example, where the expression foo.content is evaluated and
+in the next example, where the expression _foo.content_ is evaluated and
 the result is inserted.
 
  <jsp:text>
@@ -6101,7 +6102,7 @@ of a JSP document are described in <<XML View>>.
 
 === Overview of JSP Documents and of XML Views
 
-A `JSP document` is a JSP page written using
+A _JSP document_ is a JSP page written using
 XML syntax. JSP documents need to be described as such, either
 implicitly or explicitly, to the JSP container, which will then process
 them as XML documents, checking for well-formedness and applying
@@ -6496,11 +6497,11 @@ is:
  <jsp:directive.page page_directive_attr_list />
 
 Where `page_directive_attr_list` is as
-described in <<The page Directive>>.
+described in <<The `page` Directive>>.
 
 The interpretation of a `jsp:directive.page`
-element is as described in <<The page Directive>>, and its scope is the JSP document and any fragments
-included through an include directive.
+element is as described in <<The `page` Directive>>, and its scope is the
+JSP document and any fragments included through an include directive.
 
 ==== The jsp:directive.include Element
 
@@ -6511,7 +6512,7 @@ can appear anywhere within a JSP document. Its syntax is:
  <jsp:directive.include file="relativeURLspec" />
 
 The interpretation of a
-`jsp:directive.include` element is as in <<The include Directive>>.
+`jsp:directive.include` element is as in <<The `include` Directive>>.
 
 The XML view of a JSP page does not contain
 `jsp:directive.include` elements, rather the included file is expanded
@@ -6522,9 +6523,9 @@ in-place. This is done to simplify validation.
 <<Tag Files>>
 describes the tag, attribute and variable directives, which can be used
 in tag files. The XML syntax for these directives is the same as in the
-XML view (see <<The tag Directive>>,
-<<The attribute Directive>>, and
-<<The variable Directive>> for details).
+XML view (see <<_The_tag_Directive>>,
+<<_The_attribute_Directive>>, and
+<<_The_variable_Directive>> for details).
 
 [[_Scripting_Elements]]
 ==== Scripting Elements
@@ -6731,7 +6732,7 @@ custom action, then the elements so effected would be interpreted as
 invocations on custom actions or tags.
 
 Although the JSP container understands that
-this document is a namespace-aware document. the JSP 2.0 container does
+this document is a namespace-aware document. the JSP 3.0 container does
 not really understand that the generated content is a well-formed XML
 document and, as the next example shows, a JSP document can generate
 other types of content.
@@ -6980,6 +6981,7 @@ open the possibility of other scripting languages.
 machinery_ - We do not want to reinvent what exists elsewhere. Also, we
 want to avoid future conflicts whenever we can predict them.
 
+[[_Overview]]
 ==== Overview
 
 The processing of a JSP page conceptually
@@ -7378,7 +7380,8 @@ start.
 Sometimes it may be useful to provide unique
 identifications for tag handlers. A tag handler can implement the
 interface `jakarta.servlet.jsp.tagext.JspIdConsumer` for such
-functionality. See section JSP.13.4 for more details.
+functionality. See `jakarta.servlet.jsp.tagext` Javadoc for more
+details.
 
 ==== Resource Injection
 
@@ -8188,22 +8191,28 @@ as optional and not specified, no variable is created. If the tag
 accepts dynamic attributes, then the names and values of those dynamic
 attributes must be exposed to the tag file as specified in
 <<_Details_of_tag_directive_attribute>>. +
++
 If the attribute is a deferred-value, it is directly mapped. If the
 attribute is a deferred-method, it is wrapped in a `ValueExpression`,
 and the resulting `ValueExpression` is mapped. +
++
 There are two implications here. They are best illustrated by examples.
 Suppose we have a tag file tagf.tag:
-
- <%@ attribute name="attr1" deferredValue="true"/>
- <%@ attribute name="attr2" deferredMethod="true"/>
- <c:out value="${attr1.bar}"/>
- <h:commandButton value="#{attr1.foo}" action="#{attr2}"/>
-
-used in test.jsp
-
- <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
- <my:tagf attr1="#{someExpr}" attr2="#{someMethod}"/>
-
++
+----
+<%@ attribute name="attr1" deferredValue="true"/>
+<%@ attribute name="attr2" deferredMethod="true"/>
+<c:out value="${attr1.bar}"/>
+<h:commandButton value="#{attr1.foo}" action="#{attr2}"/>
+----
++
+used in test.jsp:
++
+----
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<my:tagf attr1="#{someExpr}" attr2="#{someMethod}"/>
+----
++
 First, in `tagf.tag`, `${attr1.bar}` will cause the immediate
 evaluation of the deferred expression. Secondly, since the
 `VariableMapper` is used to resolve variables at EL parse time, a
@@ -8211,6 +8220,7 @@ deferred expression such as `\#{attr1.foo}` is not dependent on `attr1`
 anymore, so that it can be evaluated long after the end of life of the
 tag file's pageContext. This is very useful for Jakarta Server Faces
 applications. +
++
 Since the EL syntax does not allow for invokation of the method in a
 `MethodExpression`, the only allowable use of `attr2` is to pass it to
 another tag that has a deferred-method attribute, in the form of
@@ -8346,7 +8356,7 @@ contains three tag libraries:
 The JSP container must generate an implicit
 tag library for each directory under and including `/WEB-INF/tags/`.
 This tag library can be imported only via the `tagdir` attribute of the
-`taglib` directive (see <<The taglib Directive>>), and has the following
+`taglib` directive (see <<The `taglib` Directive>>), and has the following
 hard-wired values:
 
 * `<tlib-version>` for the tag library
@@ -8362,9 +8372,9 @@ versus `/WEB-INF/tags/tags/` or `/WEB-INF/tags/a-b/` versus
 * A `<tag-file>` element is considered to
 exist for each tag file in this directory, with the following
 sub-elements:
-* The `<name>` for each is the filename of
+** The `<name>` for each is the filename of
 the tag file, without the `.tag` or `.tagx` extension.
-* The `<path>` for each is the path of the
+** The `<path>` for each is the path of the
 tag file, relative to the root of the web application.
 
 For the above example, the implicit Tag
@@ -8509,19 +8519,19 @@ _Syntax_
 ....
 <%@ tag tag_directive_attr_list %>
 
-tag_directive_attr_list ::= { display-name="display-name" }
+tag_directive_attr_list ::= { display-name="display-name"                  }
                             { body-content="scriptless|tagdependent|empty" }
-                            { dynamic-attributes="name" }
-                            { small-icon="small-icon" }
-                            { large-icon="large-icon" }
-                            { description="description" }
-                            { example="example" }
-                            { language="scriptingLanguage" }
-                            { import="importList" }
-                            { pageEncoding="peinfo" }
-                            { isELIgnored="true|false" }
-                            { deferredSyntaxAllowedAsLiteral="true|false" }
-                            { trimDirectiveWhitespaces="true|false" }
+                            { dynamic-attributes="name"                    }
+                            { small-icon="small-icon"                      }
+                            { large-icon="large-icon"                      }
+                            { description="description"                    }
+                            { example="example"                            }
+                            { language="scriptingLanguage"                 }
+                            { import="importList"                          }
+                            { pageEncoding="peinfo"                        }
+                            { isELIgnored="true|false"                     }
+                            { deferredSyntaxAllowedAsLiteral="true|false"  }
+                            { trimDirectiveWhitespaces="true|false"        }
 ....
 
 The details of the attributes are as follows:
@@ -8641,14 +8651,14 @@ _Syntax_
 <%@ attribute attribute_directive_attr_list %>
 
 attribute_directive_attr_list ::= name="attribute-name"
-                                  { required="true|false" }
-                                  { fragment="true|false" }
-                                  { rtexprvalue="true|false" }
-                                  { type="type" }
-                                  { description="description" }
-                                  { deferredValue="true|false" }
-                                  { deferredValueType="type" }
-                                  { deferredMethod="true|false" }
+                                  { required="true|false"               }
+                                  { fragment="true|false"               }
+                                  { rtexprvalue="true|false"            }
+                                  { type="type"                         }
+                                  { description="description"           }
+                                  { deferredValue="true|false"          }
+                                  { deferredValueType="type"            }
+                                  { deferredMethod="true|false"         }
                                   { deferredMethodSignature="signature" }
 ....
 
@@ -8766,10 +8776,10 @@ variable_directive_attr_list ::= (   name-given="output-name"
                                        alias="local-name" +
                                      )
                                  )
-                                 { variable-class="output-type" }
-                                 { declare="true|false" }
+                                 { variable-class="output-type"   }
+                                 { declare="true|false"           }
                                  { scope="AT_BEGIN|AT_END|NESTED" }
-                                 { description="description" }
+                                 { description="description"      }
 ....
 
 The details of the attributes are as follows:
@@ -8836,7 +8846,7 @@ variable. Defaults to no description.
 === Tag Files in XML Syntax
 
 Tag files can be authored using the XML
-syntax, as described in <<JSP Documents>>.
+syntax, as described in <<JSP_Documents>>.
 This section describes the few distinctions from the case of JSP
 documents.
 
@@ -8897,8 +8907,9 @@ shown in <<_Implicit_Objects_Available_in_Tag_Files>>.
 |Semantics & Scope
 
 |`request`
-|protocol dependent subtype of: `jakarta.servlet.ServletRequest`
-e.g: `jakarta.servlet.http.HttpServletRequest`
+|protocol dependent subtype of: `jakarta.servlet.ServletRequest` +
+e.g: +
+`jakarta.servlet.http.HttpServletRequest`
 
 |The request triggering the service
 invocation. +
@@ -8906,7 +8917,8 @@ invocation. +
 
 |`response`
 |protocol dependent subtype of:
-`jakarta.servlet.ServletResponse,` e.g:
+`jakarta.servlet.ServletResponse` +
+e.g: +
 `jakarta.servlet.http.HttpServletResponse`
 |The response to the request. +
 `page` scope.
@@ -9014,8 +9026,8 @@ variable’s scope, as per <<_Variable_synchronization_behavior>>.
 |do nothing
 
 |Before any fragment
-|tag → page
-|tag → page
+|_tag → page_
+|_tag → page_
 |do nothing
  
 |After any fragment
@@ -9024,9 +9036,9 @@ variable’s scope, as per <<_Variable_synchronization_behavior>>.
 |do nothing
 
 |End of tag file
-|tag → page
+|_tag → page_
 |restore
-|tag → page
+|_tag → page_
 
 |===
 
@@ -9039,7 +9051,7 @@ name of P is equal to the value of the attribute (at the time the page
 was called) specified by the value of `name-from-attribute` and the name
 of T is equal to the value of the `alias` attribute.
 
-* tag → page - For this variable, if T exists in the tag file, create/update P in
+* _tag → page_ - For this variable, if T exists in the tag file, create/update P in
 the calling page. If a T does not exist in the tag file, and P does exist in the
 calling page, P is removed from the calling page’s page scope. If the declare
 attribute for this variable is set to true , a corresponding scripting variable is
@@ -9290,7 +9302,7 @@ implementation class
 
 |signature for generated method
 |`public void
-jspService(<ServletRequestSubtype> request,
+_jspService(<ServletRequestSubtype> request,
 <ServletResponseSubtype> response)
 throws ServletException, IOException {`
 
@@ -9301,7 +9313,7 @@ request, response, page, pageContext etc.`
 |(3) Main Section
 |`// code that defines request/response mapping`
 
-|close of `jspService` method
+|close of `_jspService` method
 |`}`
 
 |close of `jspXXX`
@@ -9412,15 +9424,15 @@ type is the type of the `class` attribute.
 |Original
 |Equivalent Text
 
-|`<x:tag> +
-  foo +
-</x:tag>`
-|`declare AT_BEGIN variables +
-{ +
-declare NESTED variables +
-transformation of foo +
-} +
-declare AT_END variables`
+|`<x:tag>` +  
+`{nbsp} foo` +
+`</x:tag>`
+|`declare AT_BEGIN variables` +
+`{` +
+`{nbsp} declare NESTED variables` +
+`{nbsp} transformation of foo` +
+`}` +
+`declare AT_END variables`
 
 |===
 
@@ -9505,7 +9517,7 @@ shown in <<_XML_View_Transformations>>:
 |removed
 
 |`<%@ page \... %>`
-|`<jsp:directive.page \... />`. Add `jsp:id`
+|`<jsp:directive.page \... />`. Add `jsp:id`.
 
 |`<%@ taglib \... %>`
 
@@ -9575,7 +9587,7 @@ The value of the `pageEncoding` attribute is
 set to "`UTF-8`". The value of the `contentType` attribute is set to
 the value that the container will pass to
 ServletResponse.setContentType(), determined as described in
-/C:/jspspec/JSP`I18N.html#52032[]. The `page` directive and both
+<<Response Character Encoding>>. The `page` directive and both
 attributes are added if they don’t exist already.
 
 ==== The taglib Directive
@@ -9790,6 +9802,7 @@ page author has redefined the `jsp` prefix, an alternative prefix must
 be used by the container. See
 the `jakarta.servlet.jsp.tagext` Javadoc for more details.
 
+[[_The_tag_Directive]]
 ==== The tag Directive
 
 The `tag` directive is applicable to tag
@@ -9805,6 +9818,7 @@ The value of the `pageEncoding` attribute is
 set to "`UTF-8`". A `tag` directive and the `pageEncoding` attribute
 are added if they don’t exist already.
 
+[[_The_attribute_Directive]]
 ==== The attribute Directive
 
 The `attribute` directive is applicable to
@@ -9816,6 +9830,7 @@ is translated into an element of the form:
 
  <jsp:directive.attribute { attr="value" }* />
 
+[[_The_variable_Directive]]
 ==== The variable Directive
 
 The `variable` directive is applicable to tag
@@ -10066,7 +10081,7 @@ The chapters are:
 * JSP Container
 
 JSP Container Vendors, JSP Page authors, and JSP Tag
-Library authors should read:
+Library authors should also read:
 
 * `jakarta.servlet.jsp` Javadoc
 * `jakarta.servlet.jsp.tagext` Javadoc
@@ -10305,14 +10320,14 @@ when it transforms the JSP page.
 In the following code examples, <<A_Generic_HTTP_Superclass>>
 illustrates a generic HTTP superclass named `ExampleHttpSuper`.
 <<The_Java_Class_Generated_From_a_JSP_Page>> shows a subclass named
-`jsp1344` that extends `ExampleHttpSuper` and is the class generated
-from the JSP page. By using separate `jsp1344` and `ExampleHttpSuper`
+`_jsp1344` that extends `ExampleHttpSuper` and is the class generated
+from the JSP page. By using separate `_jsp1344` and `ExampleHttpSuper`
 classes, the JSP page translator does not need to discover whether the
 JSP page includes a declaration with `jspInit` or `jspDestroy`. This
 significantly simplifies the implementation.
 
 [[A_Generic_HTTP_Superclass]]
-.A Generic HTTP Superclass
+.*Code Example JSP.11-1* A Generic HTTP Superclass
 ....
 imports jakarta.servlet.*;
 imports jakarta.servlet.http.*;
@@ -10372,7 +10387,7 @@ abstract class ExampleHttpSuper implements HttpJspPage {
 ....
 
 [[The_Java_Class_Generated_From_a_JSP_Page]]
-.The Java Class Generated From a JSP Page
+.*Code Example JSP.11-2* The Java Class Generated From a JSP Page
 ....
 imports jakarta.servlet.*;
 imports jakarta.servlet.http.*;
@@ -10384,7 +10399,7 @@ imports jakarta.servlet.jsp.*;
  * The name of the class is unpredictable.
  * We are assuming that this is an HTTP JSP page (like almost all are)
  */
-class jsp1344 extends ExampleHttpSuper {
+class _jsp1344 extends ExampleHttpSuper {
 
   // Next code inserted directly via declarations.
   // Any of the following pieces may or not be present
@@ -10431,7 +10446,7 @@ Additionally, it is the responsibility of the
 JSP page author that the provided superclass satisfies:
 
 * The `service` method of the servlet API
-invokes the `jspService` method.
+invokes the `_jspService` method.
 * The `init(ServletConfig)` method stores the
 configuration, makes it available via `getServletConfig`, then invokes
 `jspInit`.
@@ -10504,7 +10519,7 @@ used by any user or implementation except as indicated by the
 specification.
 
 All JSPs pages should ignore (not depend on)
-any parameter that starts with `jsp`.
+any parameter that starts with `jsp_`.
 
 ==== Precompilation Protocol
 
@@ -10759,7 +10774,7 @@ public class _jsp_HelloWorld_XXX_Impl
 
   static JspFactory _factory = JspFactory.getDefaultFactory();
 
-  public void _jspService( HttpServletRequest request,
+  public void _jspService(HttpServletRequest request,
       HttpServletResponse response)
       throws IOException, ServletException {
       
@@ -10822,8 +10837,8 @@ with the following `web.xml`:
 Finally everything is packaged together into
 a WAR:
 
-* /WEB-INF/web.xml
-* /WEB-INF/classes/com/acme/_jsp_HelloWorld_XXX_Impl.class
+* `/WEB-INF/web.xml`
+* `/WEB-INF/classes/com/acme/_jsp_HelloWorld_XXX_Impl.class`
 
 Note that if the servlet class generated for
 the JSP page had depended on some support classes, they would have to be
@@ -10875,7 +10890,8 @@ standard syntax.
 . If the file is a JSP page in standard syntax:
 +
 3.1 If the file is not preceded by a BOM:
-
++
+--
 .. Check whether there is a JSP configuration
 element `<page-encoding>` whose URL pattern matches this file.
 .. Read the file using the initial encoding
@@ -10901,8 +10917,13 @@ attribute to be found only if it is not preceded by non-ASCII
 characters, so simplified implementations are allowed.
 .. Otherwise, the page character encoding is
 `ISO-8859-1`.
+--
 +
+--
 3.2 If the file is preceded by a BOM:
+--
++
+[start=8]
 .. Read the file using the encoding indicated
 by the BOM, and search for a pageEncoding attribute in a page
 declaration.
@@ -10953,8 +10974,11 @@ the file is a tag file in XML syntax. Otherwise, it is a tag file in
 standard syntax.
 . If the file is a tag file in standard syntax, use these steps:
 +
+--
 2.1 If the file is not preceded by a BOM:
-
+--
++
+--
 .. Read the file using the initial default
 encoding and search for a `pageEncoding` attribute in a tag directive.
 The specification requires the attribute to be found only if it is not
@@ -10965,8 +10989,13 @@ page character encoding is the one named in this attribute.
 `ISO-8859-1`.
 .. Reset the file and read it using the page
 character encoding.
+--
 +
-3.0 If the file is preceded by a BOM:
+--
+2.2 If the file is preceded by a BOM:
+--
++
+[start=5]
 .. Read the file using the encoding indicated
 by the BOM, and search for a pageEncoding attribute in a tag directive.
 .. Report an error if there is a pageEncoding
@@ -11048,7 +11077,7 @@ variables, or both in a JSP page. Syntactically it is delimited by the
 *directive* +
 An element in a JSP page that gives an
 instruction to the JSP container and is interpreted at translation time.
-Syntactically it is delimited by the` `<%@` and `%>` characters.
+Syntactically it is delimited by the `<%@` and `%>` characters.
 
 *dynamic attribute* +
 An attribute, passed to a custom action,
@@ -11076,7 +11105,7 @@ processed by a component.
 *implicit object* +
 A server-side object that is defined by the
 JSP container and is always available in a JSP file without being
-declared. The implicit objects are` `request`, `response`,
+declared. The implicit objects are `request`, `response`,
 `pageContext`, `session`, `application`, `out`, `config`, `page`,
 and `exception` for scriptlets and scripting expressions. The implicit
 objects are `pageContext`, `pageScope`, `requestScope`,
@@ -11107,7 +11136,7 @@ well.
 
 *JSP fragment* +
 A portion of JSP code, translated into an
-implementation of the` `jakarta.servlet.jsp.JspFragment` abstract class.
+implementation of the `jakarta.servlet.jsp.JspFragment` abstract class.
 
 *JSP page* +
 One or more JSP files that form a
