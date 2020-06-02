@@ -952,7 +952,7 @@ This specification follows the whitespace
 behavior defined for XML. White space within the body text of a document
 is not significant, but is preserved. This default behavior can be
 modified for JSP pages in standard syntax as described in
-<<Removing whitespaces from template text>>.
+<<Removing Whitespaces from Template Text>>.
 
 Next are two examples of JSP code with their
 associated output. Note that directives generate no data and apply
@@ -1009,7 +1009,7 @@ The result is:
 It is possible to have
 extraneous whitespaces removed from template text through element
 `trim-directive-whitespaces` of JSP Property Groups (See
-<<Removing whitespaces from template text>>), or the page and tag file
+<<Removing Whitespaces from Template Text>>), or the page and tag file
 directive attribute `trimDirectiveWhitespaces` (See
 <<The `page` Directive>>, <<The tag Directive>>).
 
@@ -2668,7 +2668,7 @@ is removed from the output. The default is not to trim whitespaces. This
 attribute is useful to remove the extraneous whitespaces from the end of
 a directive that is not followed by template text. The corresponding JSP
 configuration element is `trim-directive-whitespaces` (see
-<<Removing whitespaces from template text>>). The attribute is ignored by
+<<Removing Whitespaces from Template Text>>). The attribute is ignored by
 JSP documents (XML syntax).
 
 |===
@@ -2696,7 +2696,7 @@ that will be consulted to determine if a JSP page is correctly using the
 tag library functionality.
 
 See <<Tag Extensions>> for more specification details. And see
-<<Tag Library directive>> for an implementation note.
+<<Tag Library Directive>> for an implementation note.
 
 <<Namespaces_Standard_Actions_and_Tag_Libraries>>
 describes how the functionality of this directive can be exposed using
@@ -3323,7 +3323,7 @@ standard and custom actions and within template text.
 This chapter describes how the expression
 language is integrated within the JSP 3.0 environment.
 
-=== Syntax of expressions in JSP pages: ${} vs #{}
+=== Syntax of Expressions in JSP Pages: ${} vs #{}
 
 There are two constructs to represent EL
 expressions: `${expr}` and `\#{expr}`. While the EL parses and
@@ -3617,7 +3617,7 @@ authors, or page authoring groups, may want to follow a methodology
 where scripting elements are not allowed. See
 <<_Disabling_Scripting_Elements>> for more details.
 
-=== Invalid EL expressions
+=== Invalid EL Expressions
 
 JSP containers are required to produce a
 translation error when a syntactically invalid EL expression is
@@ -4211,7 +4211,7 @@ directive (see <<Directives>>). See also
 <<Backwards Compatibility with JSP 2.0>>
 for more information.
 
-==== Removing whitespaces from template text
+==== Removing Whitespaces from Template Text
 
 Whitespaces in template text of a JSP page
 are preserved by default (See <<White Space>>). Unfortunately, this means that unwanted extraneous whitespaces
@@ -6397,7 +6397,7 @@ or a plain URI.
 
 If the `uri` value is a URN of the form
 `urn:jsptld:path`, then the TLD is determined following the
-mechanism described in <<TLD resource path>>.
+mechanism described in <<TLD Resource Path>>.
 
 If the `uri` value is a URN of the form
 `urn:jsptagdir:tagdir`, then the TLD is determined following the
@@ -6680,7 +6680,7 @@ and the expression table.value as that for the body of an element:
 The following sections provide several
 annotated examples of JSP documents.
 
-==== Example: A simple JSP document
+==== Example: A Simple JSP Document
 
 This simple JSP document generates a table
 with 3 rows with numeric values 1, 2, 3. The JSP document uses template
@@ -6717,7 +6717,7 @@ directing the container to do otherwise.
 The JSP document above does not generate an
 XML document that uses namespaces, but the next example does.
 
-==== Example: Generating Namespace-aware documents
+==== Example: Generating Namespace-aware Documents
 
  <table
      xmlns="http://table.com/Table1"
@@ -7483,7 +7483,7 @@ available at request time (and also at translation time, see
 <<Translation-Time Class Loader>>). The
 mapping between the URI and the TLD is explained further below.
 
-==== Tag Library directive
+==== Tag Library Directive
 
 The `taglib` directive in a JSP page declares
 that the page uses a tag library, uniquely identifies the tag library
@@ -7562,7 +7562,7 @@ be referenced using the `tagdir` attribute of the `taglib` directive.
 More details about identifying this implicit Tag Library Descriptor can
 be found in <<Tag Files>>.
 
-==== TLD resource path
+==== TLD Resource Path
 
 A URI in a `taglib` directive is mapped into
 a context relative path (as discussed in <<Relative URL Specifications>>). The
@@ -9879,7 +9879,7 @@ fragments. The second shows a JSP page in JSP syntax and its mapping to
 XML syntax. The three following examples illustrate the semantics of
 cross-syntax translation-time includes and the effect on the XML View.
 
-==== A JSP document
+==== A JSP Document
 
 This is an example of a very simple JSP
 document that has some template XML elements. This particular example
@@ -9895,7 +9895,7 @@ describes a table that is a collection of 3 rows, with numeric values 1,
    </c:forEach>
  </table>
 
-==== A JSP page and its corresponding XML View
+==== A JSP Page and its Corresponding XML View
 
 Here is an example of mapping between JSP and
 XML syntax.
