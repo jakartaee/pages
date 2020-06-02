@@ -14,6 +14,7 @@
 :sectnumlevels: 4
 :sectanchors:
 ifdef::backend-pdf[]
+:media: prepress
 :pagenums:
 :numbered:
 :title-logo-image: image:jakarta_ee_logo_schooner_color_stacked_default.png[pdfwidth=4.25in,align=right]
