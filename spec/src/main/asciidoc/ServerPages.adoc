@@ -3782,8 +3782,8 @@ invocation of the function:
 
 ==== Semantics
 
-* If the function has no prefix, the default
-namespace is used. If the function has a prefix, assume the namespace as
+* If the function has no prefix, the default namespace is used and the function
+is not validated. If the function has a prefix, assume the namespace as
 that associated with the prefix.
 +
 Let `ns` be the namespace associated with
@@ -3805,6 +3805,11 @@ resulting value is the value returned by the method evaluation, or
 `null` if the Java method is declared to return `void`. If an exception
 is thrown during the method evaluation, the exception must be wrapped in
 an `ELException` and the `ELException` must be thrown.
+
+NOTE: The introduction in Expression Language 3.0 of Lambdas and the ability to
+import methods at runtime via an `ImportHandler`, mean it is no longer possible
+to validate functions without a prefix at translation time.
+
 
 // Table, figure numbering etc
 :table-number: 0
