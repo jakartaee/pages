@@ -10118,9 +10118,11 @@ creating and/or using some other objects in the process . A JSP page may
 also indicate how some events are to be handled. In JSP 3.0 only `init`
 and `destroy` events are allowed events.
 
-The JSP container must render a JSP page for
-the HTTP methods GET, POST, and HEAD, with identical responses. The
-behavior of the JSP container is undefined for other methods.
+The JSP container must render a JSP page for the HTTP methods GET and POST
+with identical responses.
+The response for a HEAD request to a JSP page must be identical to the response
+for a GET request minus the response body.
+The behavior of the JSP container is undefined for other methods.
 
 ==== Protocol Seen by the Web Server
 
