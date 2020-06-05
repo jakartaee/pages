@@ -3674,14 +3674,23 @@ Handles all cases where `base != null`
 Handles all cases where `base == null`. +
 Provides a map for other identifiers by looking up its value as an
 attribute, according to the behavior of
-`PageContext.findAttribute(String)` on the `pageContext` object. For
-example: +
+`PageContext.findAttribute(String)` on the `pageContext` object.
+If not found as an attribute, the value is looked up in the `ImportHandler`.
+For example: +
  +
 `${product}` +
  +
 This expression will look for the attribute named `product`, searching
 the page, request, session, and application scopes, and will return its
-value. If the attribute is not found, `null` is returned.
+value if found. If the attribute is not found, the `ImportHandler` will be checked:
+first for an imported class and then for an imported static field. If
+neither is found then `null` is returned.
+
+Container vendors should be aware of the performance implications of the above.
+If applications look up attributes that don't exist (a frequent occurrence) additional
+lookups will then be performed using the `ImportHandler`. The `ImportHandler` lookups
+may require optimisation to ensure that these additional lookups do not add
+unacceptable delay to the application.
 
 [[_JSP_Resolver_Hierarchy]]
 .*Figure JSP.2-1* JSP Resolver Hierarchy

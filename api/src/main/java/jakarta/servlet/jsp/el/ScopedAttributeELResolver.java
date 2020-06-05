@@ -29,6 +29,7 @@ import jakarta.servlet.jsp.JspContext;
 import jakarta.el.ELContext;
 import jakarta.el.ELClass;
 import jakarta.el.ELResolver;
+import jakarta.el.ImportHandler;
 import jakarta.el.ELException;
 
 /**
@@ -82,15 +83,30 @@ public class ScopedAttributeELResolver extends ELResolver {
                 // To support reference of static fields for imported class in
                 // EL 3.0, if a scoped attribute returns null, this attribute
                 // is further checked to see if it is the name of an imported
-                // class. If so, an ELClass instance is returned.
+                // class or field.
                 if (value == null) {
+                    ImportHandler importHandler = context.getImportHandler();
                     // check to see if the property is an imported class
-                    if (context.getImportHandler() != null) {
-                        Class<?> c = context.getImportHandler().resolveClass(attribute);
+                    if (importHandler != null) {
+                        Class<?> c = importHandler.resolveClass(attribute);
                         if (c != null) {
                             value = new ELClass(c);
                             // A possible optimization is to set the ELClass
                             // instance in an attribute map.
+                        }
+                        if (value == null) {
+                            // Check to see if the property is an imported
+                            // static field
+                            c = importHandler.resolveStatic(attribute);
+                            if (c != null) {
+                                try {
+                                    value = c.getField(attribute).get(null);
+                                } catch (NoSuchFieldException | SecurityException |
+                                        IllegalArgumentException | IllegalAccessException e) {
+                                    // Checks in the ImportHandler should avoid these.
+                                    // Should never happen and ignore it if it does.
+                                }
+                            }
                         }
                     }
                 }
