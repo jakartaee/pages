@@ -83,10 +83,6 @@ public class ScopedAttributeELResolver extends ELResolver {
                 // EL 3.0, if a scoped attribute returns null, this attribute
                 // is further checked to see if it is the name of an imported
                 // class. If so, an ELClass instance is returned.
-                // Note: the JSP spec needs to be updated for this behavior. Note
-                // also that this behavior is not backward compatible with JSP 2.2
-                // and a runtime switch may be needed to force backward
-                // compatility.
                 if (value == null) {
                     // check to see if the property is an imported class
                     if (context.getImportHandler() != null) {
