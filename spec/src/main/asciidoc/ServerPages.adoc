@@ -1371,7 +1371,7 @@ PluginBody                 ::=   EmptyBody
 
 NamedAttributes            ::= AttributeBody S? ( '<jsp:attribute' AttributeBody S? )*
 
-AttributeBody              ::=   ATTR[ !name, trim ] S?
+AttributeBody              ::=   ATTR[ !name, trim, omit ] S?
                                (   '/>'
                                  | '></jsp:attribute>'
                                  | '>' AttributeBodyBody '</jsp:attribute>'
