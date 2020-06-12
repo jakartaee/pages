@@ -40,11 +40,7 @@ package org.apache.jasper.xmlparser;
  *  </li>
  * </ul>
  *
- * @see SymbolHash
- *
  * @author Andy Clark
- *
- * @version $Id: SymbolTable.java,v 1.2 2005/12/08 01:29:00 kchung Exp $
  */
 public class SymbolTable {
 

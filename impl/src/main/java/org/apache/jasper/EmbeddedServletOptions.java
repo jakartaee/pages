@@ -376,7 +376,7 @@ public final class EmbeddedServletOptions implements Options {
     }
 
     /**
-     * @see Options#getCompilerName
+     * @see Options#getCompiler
      */
     public String getCompilerClassName() {
         return compilerClassName;
