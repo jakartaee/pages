@@ -918,7 +918,7 @@ public class XMLChar {
      * Check to see if a string is a valid NCName according to [4]
      * from the XML Namespaces 1.0 Recommendation
      *
-     * @param name string to check
+     * @param ncName string to check
      * @return true if name is a valid NCName
      */
     public static boolean isValidNCName(String ncName) {

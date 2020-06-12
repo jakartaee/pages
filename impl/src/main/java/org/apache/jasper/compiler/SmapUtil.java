@@ -63,9 +63,7 @@ public class SmapUtil {
      * Generates an appropriate SMAP representing the current compilation
      * context.  (JSR-045.)
      *
-     * @param ctxt Current compilation context
      * @param pageNodes The current JSP page
-     * @return a SMAP for the page
      */
     public void generateSmap(Node.Nodes pageNodes)
         throws IOException {
