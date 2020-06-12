@@ -469,7 +469,7 @@ on the last line terminates the embedded SMAPs.
 
 === SMAP Syntax
 
-[source,subs=macros]
+[listing,subs="+macros"]
 ----
 SMAP:
             Header { Section } EndSection
