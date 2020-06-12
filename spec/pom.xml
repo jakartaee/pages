@@ -23,7 +23,7 @@
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
         <version>1.0.6</version>
-        <relativePath />
+        <relativePath/>
     </parent>
 
     <groupId>jakarta.jsp</groupId>
@@ -35,9 +35,57 @@
     <description>Jakarta Server Pages - Specification</description>
     <url>https://projects.eclipse.org/projects/ee4j.jsp</url>
 
+    <licenses>
+        <license>
+            <name>Eclipse Foundation Specification License – v1.0</name>
+            <url>https://www.eclipse.org/legal/efsl.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>jakarta-ee4j-jsp</id>
+            <name>Jakarta Server Pages Developers</name>
+            <organization>Eclipse Foundation</organization>
+            <email>jsp-dev@eclipse.org</email>
+        </developer>
+    </developers>
+
+    <contributors>
+       <contributor>
+           <name>Jakarta Server Pages Contributors</name>
+           <email>jsp-dev@eclipse.org</email>
+           <url>https://github.com/eclipse-ee4j/jsp-api/graphs/contributors</url>
+       </contributor>
+    </contributors>
+
+    <mailingLists>
+        <mailingList>
+            <name>JSP dev mailing list</name>
+            <post>jsp-dev@eclipse.org</post>
+            <subscribe>https://dev.eclipse.org/mailman/listinfo/jsp-dev</subscribe>
+            <unsubscribe>https://dev.eclipse.org/mailman/listinfo/jsp-dev</unsubscribe>
+            <archive>https://dev.eclipse.org/mhonarc/lists/jsp-dev</archive>
+        </mailingList>
+    </mailingLists>
+
+    <scm>
+        <connection>scm:git:https://github.com/eclipse-ee4j/jsp-api.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/eclipse-ee4j/jsp-api.git</developerConnection>
+        <url>https://github.com/eclipse-ee4j/jsp-api</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/eclipse-ee4j/jsp-api/issues</url>
+    </issueManagement>
+
     <properties>
         <site.output.dir>${project.build.directory}/staging</site.output.dir>
         <maven.site.skip>true</maven.site.skip>
+        <asciidoctor.maven.plugin.version>2.0.0-RC.1</asciidoctor.maven.plugin.version>
         <asciidoctorj.version>2.2.0</asciidoctorj.version>
         <asciidoctorj.pdf.version>1.5.3</asciidoctorj.pdf.version>
         <jruby.version>9.2.11.1</jruby.version>
@@ -50,6 +98,33 @@
     <build>
         <defaultGoal>package</defaultGoal>
         <plugins>
+            <!-- Sets minimal Maven version to 3.5.4 and Java version to 8 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.0.0-M3</version>
+                <executions>
+                    <execution>
+                        <id>enforce</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.5.4</version>
+                                    <message>You need Maven 3.5.4 or higher</message>
+                                </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <version>1.8</version>
+                                    <message>You need JDK8 or higher</message>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -69,34 +144,11 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M3</version>
-                <executions>
-                    <execution>
-                        <id>enforce-versions</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireMavenVersion>
-                                    <version>3.5.4</version>
-                                </requireMavenVersion>
-                                <requireJavaVersion>
-                                    <version>[1.8.0,)</version>
-                                    <message>You need JDK8 or higher</message>
-                                </requireJavaVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>2.0.0-RC.1</version>
+                <version>${asciidoctor.maven.plugin.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.jruby</groupId>
