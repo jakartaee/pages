@@ -266,6 +266,15 @@ Use is subject to <a href="http://www.eclipse.org/legal/epl-2.0" target="_top">l
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Explicitly define staging profile ID as auto-matching finds wrong one -->
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <configuration>
+                  <stagingProfileId>1c0c18a0fc339</stagingProfileId>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
