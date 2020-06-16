@@ -6469,10 +6469,9 @@ jsp:root is the version of the JSP specification used:
 |===
 
 |`version`
-|(required) The version of the JSP
-specification used in this page. Valid values are "1.2", "2.0", and
-"2.1". It is a translation error if the container does not support the
-specified version.
+|(required) The version of the JSP specification used in this page.
+Valid values are "1.2", "2.0", "2.1", "2.2", "2.3" and "3.0".
+It is a translation error if the container does not support the specified version.
 
 |===
 
