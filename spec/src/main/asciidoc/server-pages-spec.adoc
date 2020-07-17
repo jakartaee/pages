@@ -24,6 +24,6 @@ endif::[]
 :sectnums!:
 include::license-efsl.adoc[]
 
-// == Scope
+// == Body
 :sectnums:
 include::ServerPages.adoc[]
