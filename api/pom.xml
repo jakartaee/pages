@@ -30,7 +30,7 @@
 
     <groupId>jakarta.servlet.jsp</groupId>
     <artifactId>jakarta.servlet.jsp-api</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.0</version>
     <packaging>jar</packaging>
 
     <name>Jakarta Server Pages API</name>
