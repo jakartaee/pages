@@ -272,7 +272,7 @@ Use is subject to <a href="http://www.eclipse.org/legal/epl-2.0" target="_top">l
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
                 <configuration>
-                  <stagingProfileId>1c0c18a0fc339</stagingProfileId>
+                  <stagingProfileId>a59edb2a44fc7</stagingProfileId>
                 </configuration>
             </plugin>
         </plugins>
