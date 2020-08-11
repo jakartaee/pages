@@ -280,15 +280,6 @@ Use is subject to <a href="{@docRoot}/doc-files/EFSL.html" target="_top">license
                     </execution>
                 </executions>
             </plugin>
-
-            <!-- Explicitly define staging profile ID as auto-matching finds wrong one -->
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <configuration>
-                  <stagingProfileId>3bda51d9c036</stagingProfileId>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
