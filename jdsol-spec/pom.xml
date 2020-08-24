@@ -35,7 +35,6 @@
     <name>Jakarta Debugging Support for Other Languages Specification</name>
     <description>Jakarta Debugging Support for Other Languages - Specification</description>
     <url>https://projects.eclipse.org/projects/ee4j.jsp</url>
-
     <licenses>
         <license>
             <name>Eclipse Foundation Specification License – v1.0</name>
@@ -52,7 +51,6 @@
             <email>jsp-dev@eclipse.org</email>
         </developer>
     </developers>
-
     <contributors>
        <contributor>
            <name>Jakarta Server Pages Contributors</name>
@@ -77,7 +75,6 @@
         <url>https://github.com/eclipse-ee4j/jsp-api</url>
         <tag>HEAD</tag>
     </scm>
-
     <issueManagement>
         <system>github</system>
         <url>https://github.com/eclipse-ee4j/jsp-api/issues</url>
@@ -87,9 +84,9 @@
         <site.output.dir>${project.build.directory}/staging</site.output.dir>
         <maven.site.skip>true</maven.site.skip>
         <asciidoctor.maven.plugin.version>2.0.0-RC.1</asciidoctor.maven.plugin.version>
-        <asciidoctorj.version>2.3.0</asciidoctorj.version>
+        <asciidoctorj.version>2.4.0</asciidoctorj.version>
         <asciidoctorj.pdf.version>1.5.3</asciidoctorj.pdf.version>
-        <jruby.version>9.2.12.0</jruby.version>
+        <jruby.version>9.2.13.0</jruby.version>
         <!-- status: DRAFT, BETA, etc., or blank for final -->
         <status>DRAFT</status>
         <maven.build.timestamp.format>MMMM dd, yyyy</maven.build.timestamp.format>
@@ -235,7 +232,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.3.0</version>
                 <inherited>false</inherited>
                 <executions>
                     <execution>

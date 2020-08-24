@@ -45,7 +45,6 @@
             <email>jsp-dev@eclipse.org</email>
         </developer>
     </developers>
-
     <contributors>
        <contributor>
            <name>Jakarta Server Pages Contributors</name>
@@ -70,7 +69,6 @@
         <url>https://github.com/eclipse-ee4j/jsp-api</url>
         <tag>HEAD</tag>
     </scm>
-
     <issueManagement>
         <system>github</system>
         <url>https://github.com/eclipse-ee4j/jsp-api/issues</url>
@@ -89,7 +87,7 @@
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>5.0.0-M2</version>
+            <version>5.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -117,7 +115,6 @@
                 <targetPath>META-INF</targetPath>
             </resource>
         </resources>
-
         <plugins>
             <!-- Sets minimal Maven version to 3.5.4 -->
             <plugin>
@@ -217,7 +214,7 @@
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                         <manifestEntries>
-                            <Automatic-Module-Name>jakarta.servlet.jsp.api</Automatic-Module-Name>
+                            <Automatic-Module-Name>jakarta.servlet.jsp</Automatic-Module-Name>
                         </manifestEntries>
                     </archive>
                     <excludes>
@@ -291,5 +288,4 @@ Use is subject to <a href="{@docRoot}/doc-files/EFSL.html" target="_top">license
             </plugin>
         </plugins>
     </build>
-
 </project>
