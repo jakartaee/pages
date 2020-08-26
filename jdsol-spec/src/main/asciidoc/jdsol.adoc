@@ -1089,8 +1089,8 @@ language source file is `HelloServlet.java`:
 
 [cols=">10%,90%"]
 |===
-|1 |`import javax.servlet.*;`
-|2 |`import javax.servlet.http.*;`
+|1 |`import jakarta.servlet.*;`
+|2 |`import jakarta.servlet.http.*;`
 |3 |
 |4 |`public class HelloServlet extends HttpServlet {`
 |5 |`  public void doGet(HttpServletRequest request,`
