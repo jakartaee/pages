@@ -3425,7 +3425,7 @@ expression using the `#{}` syntax.
 equal to the type specified in the TLD). The expression is not
 evaluated. The result of parsing the expression is passed directly to
 the setter method of the tag attribute, whose argument type must be
-`javax.el.ValueExpression`. This allows for deferred evaluation of EL
+`jakarta.el.ValueExpression`. This allows for deferred evaluation of EL
 expressions. When the expression is evaluated by the tag handler, the
 value is coerced to the expected type. If a static value is provided, it
 is converted to a `ValueExpression` where `isLiteralText()` returns
@@ -11003,7 +11003,7 @@ Jakarta Server Pages specification. This appendix is non-normative.
 
 === Changes between JSP 3.0 and JSR 245
 
-* The API has moved from the `javax.servlet.jsp` package to the
+* The API has moved from the `jakarta.servlet.jsp` package to the
   `jakarta.servlet.jsp` package.
 * All deprecated methods now include the `@Deprecated` annotation.
 * All API methods use generics where appropriate.
