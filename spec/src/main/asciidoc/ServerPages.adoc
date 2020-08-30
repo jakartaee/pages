@@ -11003,7 +11003,7 @@ Jakarta Server Pages specification. This appendix is non-normative.
 
 === Changes between JSP 3.0 and JSR 245
 
-* The API has moved from the `jakarta.servlet.jsp` package to the
+* The API has moved from the `javax.servlet.jsp` package to the
   `jakarta.servlet.jsp` package.
 * All deprecated methods now include the `@Deprecated` annotation.
 * All API methods use generics where appropriate.
