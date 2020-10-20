@@ -30,7 +30,7 @@
 
     <groupId>org.glassfish.web</groupId>
     <artifactId>jakarta.servlet.jsp</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.0</version>
 
     <name>Jakarta Server Pages implementation</name>
     <description>JavaServer Pages API</description>
