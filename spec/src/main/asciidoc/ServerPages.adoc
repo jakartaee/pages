@@ -25,7 +25,8 @@ Comments to: jsp-dev@eclipse.org
 
 This is the Jakarta Server Pages specification
 version 3.0, developed by the Jakarta Server Pages Team under the Eclipse
-Foundation Specification Process.
+Foundation Specification Process. References in this document to JSP refer
+to Jakarta Server Pages unless otherwise noted.
 
 ==== Who Should Read This Document
 
