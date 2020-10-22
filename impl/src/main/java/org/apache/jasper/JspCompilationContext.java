@@ -209,6 +209,10 @@ public class JspCompilationContext {
     }
 
     public void setClassLoader(URLClassLoader loader) {
+        setClassLoader((ClassLoader) loader);
+    }
+
+    public void setClassLoader(ClassLoader loader) {
         this.loader = loader;
     }
 
