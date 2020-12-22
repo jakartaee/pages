@@ -204,6 +204,7 @@
                             <Specification-Vendor>${vendorName}</Specification-Vendor>
                             <Implementation-Version>${project.version}</Implementation-Version>
                             <Implementation-Vendor>${vendorName}</Implementation-Vendor>
+                            <Automatic-Module-Name>jakarta.servlet.jsp.impl</Automatic-Module-Name>
                         </manifestEntries>
                     </archive>
                 </configuration>
