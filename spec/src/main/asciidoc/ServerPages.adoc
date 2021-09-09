@@ -11004,7 +11004,8 @@ Jakarta Server Pages specification. This appendix is non-normative.
 
 === Changes between JSP 3.1 and JSP 3.0
 
-
+* Deprecate methods that override `ELResolver.getFeatureDescriptors()` as that
+  method has been deprecated as of EL 5.0.
 
 === Changes between JSP 3.0 and JSR 245
 
