@@ -3294,7 +3294,7 @@ for the setProperty standard action.
 Request-time expressions can be assigned to
 properties of any type. In the case of scriptlet expressions, no
 automatic conversions will be performed. In the case of EL expressions,
-the rules in section 1.23, "Type Conversion" of the EL 4.0 specification
+the rules in section 1.23, "Type Conversion" of the EL 5.0 specification
 document must be followed.
 
 
@@ -3451,7 +3451,7 @@ method to be invoked on an Object.
 as the return type of the deferred method signature is not void. A
 `MethodExpression` is created, which when invoked, returns the String
 literal coerced to expected return type (the standard EL coercion rules -
-see section 1.23, "Type Conversion" of the EL 4.0 specification) apply. A
+see section 1.23, "Type Conversion" of the EL 5.0 specification) apply. A
 translation error occurs if the return type is void or if the string
 literal cannot be coerced to the return type of the deferred method
 signature.
