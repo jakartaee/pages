@@ -640,7 +640,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          */
         public static Map<String, Object> createPageScopeMap(PageContext pContext) {
             final PageContext context = pContext;
-            return new EnumeratedMap<String, Object>() {
+            return new EnumeratedMap<>() {
                 @Override
                 public Enumeration<String> enumerateKeys() {
                     return context.getAttributeNamesInScope(PageContext.PAGE_SCOPE);
@@ -673,7 +673,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          */
         public static Map<String, Object> createRequestScopeMap(PageContext pContext) {
             final PageContext context = pContext;
-            return new EnumeratedMap<String, Object>() {
+            return new EnumeratedMap<>() {
                 @Override
                 public Enumeration<String> enumerateKeys() {
                     return context.getAttributeNamesInScope(PageContext.REQUEST_SCOPE);
@@ -706,7 +706,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          */
         public static Map<String, Object> createSessionScopeMap(PageContext pContext) {
             final PageContext context = pContext;
-            return new EnumeratedMap<String, Object>() {
+            return new EnumeratedMap<>() {
                 @Override
                 public Enumeration<String> enumerateKeys() {
                     return context.getAttributeNamesInScope(PageContext.SESSION_SCOPE);
@@ -739,7 +739,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          */
         public static Map<String, Object> createApplicationScopeMap(PageContext pContext) {
             final PageContext context = pContext;
-            return new EnumeratedMap<String, Object>() {
+            return new EnumeratedMap<>() {
                 @Override
                 public Enumeration<String> enumerateKeys() {
                     return context.getAttributeNamesInScope(PageContext.APPLICATION_SCOPE);
@@ -772,7 +772,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          */
         public static Map<String, String> createParamMap(PageContext pContext) {
             final HttpServletRequest request = (HttpServletRequest) pContext.getRequest();
-            return new EnumeratedMap<String, String>() {
+            return new EnumeratedMap<>() {
                 @Override
                 public Enumeration<String> enumerateKeys() {
                     return request.getParameterNames();
@@ -805,7 +805,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          */
         public static Map<String, String[]> createParamsMap(PageContext pContext) {
             final HttpServletRequest request = (HttpServletRequest) pContext.getRequest();
-            return new EnumeratedMap<String, String[]>() {
+            return new EnumeratedMap<>() {
                 @Override
                 public Enumeration<String> enumerateKeys() {
                     return request.getParameterNames();
@@ -838,7 +838,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          */
         public static Map<String, String> createHeaderMap(PageContext pContext) {
             final HttpServletRequest request = (HttpServletRequest) pContext.getRequest();
-            return new EnumeratedMap<String, String>() {
+            return new EnumeratedMap<>() {
                 @Override
                 public Enumeration<String> enumerateKeys() {
                     return request.getHeaderNames();
@@ -871,7 +871,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          */
         public static Map<String, String[]> createHeadersMap(PageContext pContext) {
             final HttpServletRequest request = (HttpServletRequest) pContext.getRequest();
-            return new EnumeratedMap<String, String[]>() {
+            return new EnumeratedMap<>() {
                 @Override
                 public Enumeration<String> enumerateKeys() {
                     return request.getHeaderNames();
@@ -912,7 +912,7 @@ public class ImplicitObjectELResolver extends ELResolver {
          */
         public static Map<String, String> createInitParamMap(PageContext pContext) {
             final ServletContext context = pContext.getServletContext();
-            return new EnumeratedMap<String, String>() {
+            return new EnumeratedMap<>() {
                 @Override
                 public Enumeration<String> enumerateKeys() {
                     return context.getInitParameterNames();
