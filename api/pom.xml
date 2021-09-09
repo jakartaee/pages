@@ -76,8 +76,8 @@
 
     <properties>
         <!-- Make sure the two versions are in sync with the maven version -->
-        <spec.version>3.0</spec.version>
-        <bundle.version>3.0.0-SNAPSHOT</bundle.version>
+        <spec.version>3.1</spec.version>
+        <bundle.version>3.1.0-SNAPSHOT</bundle.version>
         <extensionName>jakarta.servlet.jsp</extensionName>
         <bundle.symbolicName>jakarta.servlet.jsp-api</bundle.symbolicName>
         <vendorName>Eclipse Foundation</vendorName>
