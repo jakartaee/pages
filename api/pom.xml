@@ -253,7 +253,7 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <source>1.8</source>
+                            <source>11</source>
                             <additionalJOption>-Xdoclint:none</additionalJOption>
                             <description>Jakarta Server Pages API documentation</description>
                             <doctitle>Jakarta Server Pages API documentation</doctitle>
