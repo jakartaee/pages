@@ -253,7 +253,11 @@ public class ScopedAttributeELResolver extends ELResolver {
      *                <code>null</code> return value.
      * @return An <code>Iterator</code> containing one <code>FeatureDescriptor</code> object for each scoped attribute,
      *         or <code>null</code> if <code>base</code> is not <code>null</code>.
+     *         
+     * @deprecated This method is deprecated as of EL 5.0 and will be removed in EL 6.0 (Jakarta EE 11). Therefore it
+     *             will be removed here in JSP 4.0.
      */
+    @Deprecated(forRemoval = true, since = "JSP 3.1")
     @Override
     public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext context, Object base) {
         Enumeration<String> attrs;
