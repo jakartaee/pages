@@ -86,7 +86,7 @@ public class ScopedAttributeELResolver extends ELResolver {
                 // Note: the JSP spec needs to be updated for this behavior. Note
                 // also that this behavior is not backward compatible with JSP 2.2
                 // and a runtime switch may be needed to force backward
-                // compatility.
+                // compatibility.
                 if (value == null) {
                     // check to see if the property is an imported class
                     if (context.getImportHandler() != null) {
