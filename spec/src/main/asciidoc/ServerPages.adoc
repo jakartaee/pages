@@ -2396,8 +2396,8 @@ buffering, and provides an error page.
 
 The following directive indicates that the
 scripting language is based on Java, that the types declared in the
-package `com.myco` are directly available to the scripting code, and
-that a buffering of 16KB should be used.
+package `com.myco` are directly available to the scripting code and EL
+environment, and that a buffering of 16KB should be used.
 
  <%@ page language="java" import="com.myco.*" buffer="16kb” %>
 
@@ -2476,13 +2476,13 @@ this drawback.
 
 |`import`
 |An `import` attribute describes the types
-that are available to the scripting environment. The value is as in an
+that are available to the scripting and EL environments. The value is as in an
 import declaration in the Java programming language, a (comma separated)
 list of either a fully qualified Java programming language type name
 denoting that type, or of a package name followed by the `.\*` string,
 denoting all the public types declared in that package. The import list
 shall be imported by the translated JSP page implementation and is thus
-available to the scripting environment. +
+available to the scripting and EL environments. +
 Packages `java.lang.*`, `jakarta.servlet.\*`,
 `jakarta.servlet.jsp.*`, and `jakarta.servlet.http.*` are imported implicitly
 by the JSP container. No other packages may be part of this implicitly
