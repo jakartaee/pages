@@ -1,0 +1,157 @@
+/*
+ * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v. 2.0, which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the
+ * Eclipse Public License v. 2.0 are satisfied: GNU General Public License,
+ * version 2 with the GNU Classpath Exception, which is available at
+ * https://www.gnu.org/software/classpath/license.html.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+ */
+package jakarta.servlet.jsp.el;
+
+import java.beans.FeatureDescriptor;
+import java.util.Iterator;
+import java.util.Collections;
+
+import jakarta.el.ELContext;
+import jakarta.el.ELResolver;
+import jakarta.el.ELException;
+
+/**
+ * Defines variable resolution when all other resolvers fail.
+ *
+ * @since JSP 3.1
+ */
+public class NotFoundELResolver extends ELResolver {
+
+    /**
+     * If the base object is <code>null</code>, searches the Class and static imports for an import with the given name
+     * and returns it if an import exists with the given name.
+     *
+     * <p>
+     * The <code>propertyResolved</code> property of the <code>ELContext</code> object is always set to {@code true}
+     * by this resolver before returning.
+     * </p>
+     *
+     * @param context  The context of this evaluation.
+     * @param base     Ignored
+     * @param property Ignored
+     * @return Always {@code null}
+     * @throws NullPointerException if context is <code>null</code>
+     * @throws ELException          if an exception was thrown while performing the property or variable resolution. The
+     *                              thrown exception must be included as the cause property of this exception, if
+     *                              available.
+     */
+    @Override
+    public Object getValue(ELContext context, Object base, Object property) {
+
+        if (context == null) {
+            throw new NullPointerException();
+        }
+
+        context.setPropertyResolved(true);
+
+        return null;
+    }
+
+    /**
+     * Always returns {@code null} since in normal usage {@link ScopedAttributeELResolver} will handle calls to
+     * {@link ELResolver#getType(ELContext, Object, Object)}.
+     *
+     * @param context  The context of this evaluation.
+     * @param base     Ignored
+     * @param property Ignored
+     * @return Always {@code null}
+     * @throws NullPointerException if context is <code>null</code>
+     * @throws ELException          if an exception was thrown while performing the property or variable resolution. The
+     *                              thrown exception must be included as the cause property of this exception, if
+     *                              available.
+     */
+    @Override
+    public Class<Object> getType(ELContext context, Object base, Object property) {
+
+        if (context == null) {
+            throw new NullPointerException();
+        }
+
+        return null;
+    }
+
+    /**
+     * Always a NO-OP since in normal usage {@link ScopedAttributeELResolver} will handle calls to
+     * {@link ELResolver#setValue(ELContext, Object, Object, Object)}.
+     * 
+     * @param context  The context of this evaluation.
+     * @param base     Ignored
+     * @param property Ignored
+     * @param val      Ignored
+     * @throws NullPointerException if context is <code>null</code>.
+     * @throws ELException          if an exception was thrown while performing the property or variable resolution. The
+     *                              thrown exception must be included as the cause property of this exception, if
+     *                              available.
+     */
+    @Override
+    public void setValue(ELContext context, Object base, Object property, Object val) {
+        if (context == null) {
+            throw new NullPointerException();
+        }
+    }
+
+    /**
+     * Always returns {@code false} since in normal usage {@link ScopedAttributeELResolver} will handle calls to
+     * {@link ELResolver#isReadOnly(ELContext, Object, Object)}.
+     *
+     * @param context  The context of this evaluation.
+     * @param base     Ignored
+     * @param property Ignored
+     * @return Always {@code false}
+     * @throws NullPointerException if context is <code>null</code>.
+     * @throws ELException          if an exception was thrown while performing the property or variable resolution. The
+     *                              thrown exception must be included as the cause property of this exception, if
+     *                              available.
+     */
+    @Override
+    public boolean isReadOnly(ELContext context, Object base, Object property) {
+        if (context == null) {
+            throw new NullPointerException();
+        }
+        return false;
+    }
+
+    /**
+     * Always returns an empty iterator since {@link ELResolver#getFeatureDescriptors} method has been deprecated.
+     * 
+     * @param context  Ignored
+     * @param base     Ignored
+     * @return An <code>Iterator</code> containing one <code>FeatureDescriptor</code> object for each scoped attribute,
+     *         or <code>null</code> if <code>base</code> is not <code>null</code>.
+     *         
+     * @deprecated This method is deprecated as of EL 5.0 and will be removed in EL 6.0 (Jakarta EE 11). Therefore it
+     *             will be removed here in JSP 4.0.
+     */
+    @Deprecated(forRemoval = true, since = "JSP 3.1")
+    @Override
+    public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext context, Object base) {
+        return Collections.emptyIterator();
+    }
+
+    /**
+     * Always returns {@code null} since in normal usage {@link ScopedAttributeELResolver} will handle calls to
+     * {@link ELResolver#getCommonPropertyType(ELContext, Object)}.
+     *
+     * @param context Ignored
+     * @param base    Ignored
+     * 
+     * @return Always {@code null}
+     */
+    @Override
+    public Class<String> getCommonPropertyType(ELContext context, Object base) {
+        return null;
+    }
+}

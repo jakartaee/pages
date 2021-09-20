@@ -27,7 +27,6 @@ import jakarta.servlet.jsp.PageContext;
 import jakarta.servlet.jsp.JspContext;
 
 import jakarta.el.ELContext;
-import jakarta.el.ELClass;
 import jakarta.el.ELResolver;
 import jakarta.el.ELException;
 
@@ -35,9 +34,9 @@ import jakarta.el.ELException;
  * Defines variable resolution behavior for scoped attributes.
  *
  * <p>
- * This resolver handles all variable resolutions (where <code>base</code> is <code>null</code>. It searches
- * <code>PageContext.findAttribute()</code> for a matching attribute. If not found, it will return <code>null</code>, or
- * in the case of <code>setValue</code> it will create a new attribute in the page scope with the given name.
+ * This resolver handles variable resolutions where <code>base</code> is <code>null</code>. It searches
+ * <code>PageContext.findAttribute()</code> for a matching attribute. If not found in the case of
+ * <code>setValue</code>, it will create a new attribute in the page scope with the given name.
  * </p>
  *
  * @see jakarta.el.ELResolver
@@ -47,12 +46,12 @@ public class ScopedAttributeELResolver extends ELResolver {
 
     /**
      * If the base object is <code>null</code>, searches the page, request, session and application scopes for an
-     * attribute with the given name and returns it, or <code>null</code> if no attribute exists with the current name.
+     * attribute with the given name and returns it if an attribute exists with the current name.
      *
      * <p>
      * The <code>propertyResolved</code> property of the <code>ELContext</code> object must be set to <code>true</code>
-     * by this resolver before returning if base is <code>null</code>. If this property is not <code>true</code> after
-     * this method is called, the caller should ignore the return value.
+     * by this resolver before returning if a scoped attribute is matched. If this property is not <code>true</code>
+     * after this method is called, the caller should ignore the return value.
      * </p>
      *
      * @param context  The context of this evaluation.
@@ -74,29 +73,12 @@ public class ScopedAttributeELResolver extends ELResolver {
         }
 
         if (base == null) {
-            context.setPropertyResolved(true);
             if (property instanceof String) {
                 String attribute = (String) property;
                 PageContext ctxt = (PageContext) context.getContext(JspContext.class);
                 Object value = ctxt.findAttribute(attribute);
-                // To support reference of static fields for imported class in
-                // EL 3.0, if a scoped attribute returns null, this attribute
-                // is further checked to see if it is the name of an imported
-                // class. If so, an ELClass instance is returned.
-                // Note: the JSP spec needs to be updated for this behavior. Note
-                // also that this behavior is not backward compatible with JSP 2.2
-                // and a runtime switch may be needed to force backward
-                // compatility.
-                if (value == null) {
-                    // check to see if the property is an imported class
-                    if (context.getImportHandler() != null) {
-                        Class<?> c = context.getImportHandler().resolveClass(attribute);
-                        if (c != null) {
-                            value = new ELClass(c);
-                            // A possible optimization is to set the ELClass
-                            // instance in an attribute map.
-                        }
-                    }
+                if (value != null) {
+                    context.setPropertyResolved(true);
                 }
                 return value;
             }
