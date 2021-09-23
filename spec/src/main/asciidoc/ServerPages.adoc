@@ -770,12 +770,18 @@ element. They have a start tag including the element name and may have
 attributes, an optional body, and a matching end tag, or may be an empty
 tag, possibly with attributes:
 
+[source,jsp]
+----
  <mytag attr1="attribute value"...>body</mytag>
+----
 
 And:
 
+[source,jsp]
+----
  <mytag attr1="attribute value".../>
  <mytag attr1="attribute value"...></mytag>
+----
 
 An element has an element type describing its
 tag name, its valid attributes and its semantics. We refer to the type
@@ -799,9 +805,12 @@ simplify accessing data from different sources. EL expressions can be
 used in JSP standard and custom actions and template data. EL
 expressions use the syntax `${expr}` and `#{expr}`. For example:
 
+[source,jsp]
+----
  <mytag attr1="${bean.property}".../>
  ${map[entry]}
  <lib:myAction>${3+counter}</lib:myAction>
+----
 
 <<Expression Language>> provides more details on the EL.
 
@@ -838,18 +847,24 @@ tag, an empty body, and an end tag
 As examples, the following are all empty
 tags:
 
+[source,jsp]
+----
  <x:foo></x:foo>
  <x:foo />
  <x:foo/>
  <x:foo><%-- any comment --%></x:foo>
+----
 
 While the following are all non-empty tags:
 
+[source,jsp]
+----
  <foo> </foo>
  <foo><%= expression %></foo>
  <foo><% scriptlet %></foo>
  <foo><bar/></foo>
  <foo><!-- a comment --></foo>
+----
 
 ==== Attribute Values
 
@@ -891,11 +906,14 @@ attribute standard action to define the value of the `param2` attribute.
 In this example, the value of `param2` comes from the result of a custom
 action invocation.
 
+[source,jsp]
+----
  <mytag:paramTag param1="value1">
    <jsp:attribute name="param2">
      <mymath:add x="2" y="2"/>
    </jsp:attribute>
  </mytag:paramTag>
+----
 
 If a page author wishes to pass both an
 attribute standard action and a tag body, the `<jsp:body>` standard
@@ -911,26 +929,35 @@ the `color` and `size` attributes. The second example uses an attribute
 standard action to pass the value of the `color` attribute. Both
 examples have tag body containing simply the words “Template Text”.
 
+[source,jsp]
+----
  <mytag:tagWithBody color="blue" size="12">
    Template Text
  </mytag:tagWithBody>
-
+----
+ 
+[source,jsp]
+----
  <mytag:tagWithBody size="12">
    <jsp:attribute name="color">blue</jsp:attribute>
    <jsp:body>
      Template Text
    </jsp:body>
  </mytag:tagWithBody>
+----
 
 `<jsp:attribute>` can be used with the
 `<jsp:element>` standard action to generate dynamic content in a well
 structured way. The example below generates an HTML head of some type
 unknown at page authoring time:
 
+[source,jsp]
+----
  <jsp:element name="H${headLevel}">
    <jsp:attribute name="size">${headSize}</jsp:attribute>
    <jsp:body>${headText}<jsp:body>
  </jsp:element>
+----
 
 ==== Valid Names for Actions and Attributes
 
@@ -1719,18 +1746,24 @@ standard action. In the following example, assuming ‘my’ is a valid
 prefix and ‘indent’ is a valid tag, the `</ul>` tag is considered
 template text, and no translation error is produced:
 
+[source,jsp]
+----
  <my:indent level="2">
    </ul>
  </my:indent>
+----
 +
 The following example, however, would
 produce a translation error, assuming ‘my’ is a valid prefix and
 ‘indent’ is a valid tag, and regardless of whether ‘othertag’ is a valid
 tag or not.
 
+[source,jsp]
+----
  <my:indent level="2">
    </my:othertag>
  </my:indent>
+----
 
 * `ExtraClosingTagMatch` - The
 `ExtraClosingTag` production is not matched if encountered within two or
@@ -1915,7 +1948,10 @@ In order to generate comments that appear in
 the response output stream to the requesting client, the HTML and XML
 comment syntax is used, as follows:
 
+[source,jsp]
+----
  <!-- comments ... -->
+----
 
 These comments are treated as uninterpreted
 template text by the JSP container. Dynamic content that appears within
@@ -1923,13 +1959,19 @@ HTML/XML comments, such as actions, scriptlets and expressions, is still
 processed by the container. If the generated comment is to have dynamic
 data, this can be obtained through an expression syntax, as in:
 
+[source,jsp]
+----
  <!-- comments <%= expression %> more comments ... -->
+----
 
 ===== JSP Comments
 
 A JSP comment is of the form
 
+[source,jsp]
+----
  <%-- anything but a closing --%> ... --%>
+----
 
 The body of the content is ignored
 completely. Comments are useful for documentation but also are used to
@@ -1939,14 +1981,20 @@ nest.
 An alternative way to place a comment in JSP
 is to use the comment mechanism of the scripting language. For example:
 
+[source,jsp]
+----
  <% /** this is a comment ... **/ %>
+----
 
 ==== Comments in JSP Documents
 
 Comments in JSP documents use the XML syntax,
 as follows:
 
+[source,jsp]
+----
  <!-- comments ... -->
+----
 
 The body of the content is ignored
 completely. Comments in JSP documents may be used for documentation
@@ -2009,37 +2057,70 @@ _Examples_
 
 The following line shows an illegal attribute value.
 
+[source,jsp]
+----
  <mytags:tag value="<%= "hi!" %>" />
+----
 
 The following line shows a legal scriptlet,
 but perhaps with an unintended value. The result is `Joe said %\>` not
 `Joe said %>`.
 
+[source,jsp]
+----
  <%= "Joe said %\\>" %>
+----
 
 The next lines are all legal quotations.
 
+[source,jsp]
+----
  <%= "Joe said %/>" %>
+----
 
+[source,jsp]
+----
  <%= "Joe said %\>" %>
+----
 
+[source,jsp]
 ----
 <% String joes_statement = "hi!"; %>
     <%= "Joe said \"" + joes_statement + "\"." %>
     <x:tag value='<%="Joe said \\"" + joes_statement + "\\"."%>'/>
 ----
+
+[source,jsp]
+----
  <x:tag value='<%= "hi!" %>' />
+----
 
+[source,jsp]
+----
  <x:tag value="<%= \"hi!\" %>" />
+----
 
+[source,jsp]
+----
  <x:tag value='<%= \"name\" %>' />
+----
 
+[source,jsp]
+----
  <x:tag value="<%= \"Joe said 'hello'\" %>"/>
+----
 
+[source,jsp]
+----
  <x:tag value="<%= \"Joe said \\\"hello\\\" \" %>"/>
+----
 
+[source,jsp]
+----
  <x:tag value="end expression %\>"/>
+----
 
+[source,jsp]
 ----
 <% String s="abc"; %>
     <x:tag value="<%= s + \"def\" + \"jkl\" + 'm' + \'n\' %>" />
@@ -2332,7 +2413,10 @@ Text is very simple: the template text is passed through to the current
 Directives are messages to the JSP container.
 Directives have this syntax:
 
+[source,jsp]
+----
  <%@ directive { attr="value" }* %>
+----
 
 There may be optional white space after the
 `<%@` and before `%>`.
@@ -2387,23 +2471,32 @@ _Examples_
 The following directive provides some
 user-visible information on this JSP page:
 
+[source,jsp]
+----
  <%@ page info="my latest JSP Example" %>
+----
 
 The following directive requests no
 buffering, and provides an error page.
 
+[source,jsp]
+----
  <%@ page buffer="none" errorPage="/oops.jsp" %>
+----
 
 The following directive indicates that the
 scripting language is based on Java, that the types declared in the
 package `com.myco` are directly available to the scripting code and EL
 environment, and that a buffering of 16KB should be used.
 
+[source,jsp]
+----
  <%@ page language="java" import="com.myco.*" buffer="16kb” %>
+----
 
 _Syntax_
 
-[source]
+[source,jsp]
 ----
 <%@ page page_directive_attr_list %>
 
@@ -2704,15 +2797,21 @@ other tag libraries should be introduced in this page using this prefix.
 In this particular case, we assume the tag library includes a `doMagic`
 element type, which is used within the page.
 
+[source,jsp]
+----
  <%@ taglib uri="http://www.mycorp/supertags" prefix="super" %>
  ...
  <super:doMagic>
  ...
  </super:doMagic>
+----
 
 _Syntax_
 
+[source,jsp]
+----
  <%@ taglib ( uri="tagLibraryURI" | tagdir="tagDir" ) prefix="tagPrefix" %>
+----
 
 where the attributes are:
 
@@ -2786,11 +2885,17 @@ The following example requests the inclusion,
 at translation time, of a copyright file. The file may have elements
 which will be processed too.
 
+[source,jsp]
+----
  <%@ include file="copyright.html" %>
+----
 
 _Syntax_
 
+[source,jsp]
+----
  <%@ include file="relativeURLspec" %>
+----
 
 ==== Implicit Includes
 
@@ -2970,9 +3075,12 @@ Precise definitions may be given for other languages in the future.
 Each scripting element has a `<%` -based
 syntax as follows:
 
+[source,jsp]
+----
  <%! this is a declaration %>
  <% this is a scriptlet %>
  <%= this is an expression %>
+----
 
 White space is optional after `<%!`, `<%`,
 and `<%=`, and before `%>`.
@@ -3007,15 +3115,27 @@ same and initializes it to zero. This type of initialization should be
 done with care in the presence of multiple requests on the page. The
 third declaration declares a method global to the page.
 
+[source,jsp]
+----
  <%! int i; %>
+----
 
+[source,jsp]
+----
  <%! int i = 0; %>
+----
 
+[source,jsp]
+----
  <%! public String f(int i) { if (i<3) return("..."); ... } %>
+----
 
 _Syntax_
 
+[source,jsp]
+----
  <%! declaration(s) %>
+----
 
 ==== Scriptlets
 
@@ -3048,24 +3168,33 @@ _Examples_
 Here is a simple example where the page
 changed dynamically depending on the time of day.
 
+[source,jsp]
+----
  <% if
  (Calendar.getInstance().get(Calendar.AM_PM) == Calendar.AM) {%>
  Good Morning
  <% } else { %>
  Good Afternoon
  <% } %>
+----
 
 A scriptlet can also have a local variable
 declaration, for example the following scriptlet just declares and
 initializes an integer, and later increments it.
 
+[source,jsp]
+----
  <% int i; i= 0; %>
  About to increment i...
  <% i++; %>
+----
 
 _Syntax_
 
+[source,jsp]
+----
  <% scriptlet %>
+----
 
 ==== Expressions
 
@@ -3103,11 +3232,17 @@ _Examples_
 
 This example inserts the current date.
 
+[source,jsp]
+----
  <%= (new java.util.Date()).toLocaleString() %>
+----
 
 _Syntax_
 
+[source,jsp]
+----
  <%= expression %>
+----
 
 === Actions
 
@@ -3352,14 +3487,20 @@ the current output. In cases where escaping is desired (for example, to
 help prevent cross-site scripting attacks), the JSTL core tag `<c:out>`
 can be used. For example:
 
+[source,jsp]
+----
  <c:out value="${anELexpression}" />
+----
 
 The following shows a custom action where two
 EL expressions are used to access bean properties:
 
+[source,jsp]
+----
  <c:wombat>
  One value is ${bean1.a} and another is ${bean2.a.c}
  </c:wombat>
+----
 
 === Expressions and Attribute Values
 
@@ -3372,14 +3513,20 @@ For example, the following shows a
 conditional action that uses the EL to test whether a property of a bean
 is less than 3.
 
+[source,jsp]
+----
  <c:if test="${bean1.a < 3}">
  ...
  </c:if>
+----
 
 Note that the normal JSP coercion mechanism
 already allows for:
 
+[source,jsp]
+----
  <mytags:if test="true" />
+----
 
 An EL expression that appears in an attribute
 value is processed differently depending on the attribute’s type
@@ -3717,12 +3864,17 @@ namespace is used (this is only possible in JSP documents).
 In the following standard syntax example,
 `func1` is associated with `some-taglib` :
 
+[source,jsp]
+----
  <%@ taglib prefix="some" uri="http://acme.com/some-taglib" %>
  ${some:func1(true)}
+----
 
 In the following JSP document example, both
 `func2` and `func3` are associated with `default-taglib` :
 
+[source,jsp]
+----
  <some:tag xmlns="http://acme.com/default-taglib"
            xmlns:some="http://acme.com/some-taglib"
            xmlns:jsp="http://java.sun.com/JSP/Page">
@@ -3730,6 +3882,7 @@ In the following JSP document example, both
        ${func3(true)}
    </some:other>
  </some:tag>
+----
 
 ==== Tag Library Descriptor Information
 
@@ -3762,6 +3915,8 @@ The following TLD fragment describes a
 function with name `nickname` that is intended to fetch the nickname of
 the user:
 
+[source,jsp]
+----
  <taglib>
    ...
    <function>
@@ -3772,11 +3927,15 @@ the user:
      </function-signature>
    </function>
  </taglib>
+----
 
 The following EL fragment shows the
 invocation of the function:
 
+[source,jsp]
+----
  <h2>Dear ${my:nickname(user)}</h2>
+----
 
 ==== Semantics
 
@@ -3951,10 +4110,13 @@ For example, the following `web.xml` fragment
 defines a group that deactivates EL evaluation for all JSP pages
 delivered using the `.jsp` extension:
 
+[source,xml]
+----
  <jsp-property-group>
    <url-pattern>*.jsp</url-pattern>
    <el-ignored>true</el-ignored>
  </jsp-property-group>
+----
 
 Page authors can override the default mode
 through the `isELIgnored` attribute of the page directive. For tag
@@ -4048,10 +4210,13 @@ For example, the following `web.xml` fragment
 defines a group that disables scripting elements for all JSP pages
 delivered using the `.jsp` extension:
 
+[source,xml]
+----
  <jsp-property-group>
    <url-pattern>*.jsp</url-pattern>
    <scripting-invalid>true</scripting-invalid>
  </jsp-property-group>
+----
 
 <<_Scripting_Settings>> summarizes the scripting settings and their meanings:
 
@@ -4098,10 +4263,13 @@ For example, the following `web.xml` fragment
 defines a group that explicitly assigns `Shift_JIS` to all JSP pages and
 included JSP segments in the `/ja` subdirectory of the web application:
 
+[source,xml]
+----
  <jsp-property-group>
    <url-pattern>/ja/*</url-pattern>
    <page-encoding>Shift_JIS</page-encoding>
  </jsp-property-group>
+----
 
 ==== Defining Implicit Includes
 
@@ -4143,6 +4311,8 @@ that order, while other `.jsp` files only have
 `/WEB-INF/jspf/prelude1.jspf` at the beginning and
 `/WEB-INF/jspf/coda1.jspf` at the end.
 
+[source,xml]
+----
  <jsp-property-group>
    <url-pattern>*.jsp</url-pattern>
    <include-prelude>/WEB-INF/jspf/prelude1.jspf</include-prelude>
@@ -4153,6 +4323,7 @@ that order, while other `.jsp` files only have
    <include-prelude>/WEB-INF/jspf/prelude2.jspf</include-prelude>
    <include-coda>/WEB-INF/jspf/coda2.jspf</include-coda>
  </jsp-property-group>
+----
 
 ==== Denoting XML Documents
 
@@ -4176,6 +4347,8 @@ are instead just plain JSP pages. The last group indicates that files
 with extension `.svg` are actually JSP documents (which most likely are
 generating SVG files).
 
+[source,xml]
+----
  <jsp-property-group>
    <url-pattern>*.jspx</url-pattern>
    <is-xml>false</is-xml>
@@ -4184,6 +4357,7 @@ generating SVG files).
    <url-pattern>*.svg</url-pattern>
    <is-xml>true</is-xml>
  </jsp-property-group>
+----
 
 [[Deferred_Syntax]]
 ==== Deferred Syntax (character sequence `#{`)
@@ -4218,9 +4392,12 @@ often make it into the response output.
 For example, the following code snippet
 (where `<EOL>` represents the end-of-line character(s))
 
+[source,jsp]
+----
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><EOL>
  <%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %><EOL>
  Hello World!<EOL>
+----
 
 would generate the following output:
 
@@ -4638,6 +4815,8 @@ is `java`.
 An example of the scope rules just mentioned
 is shown next:
 
+[source,jsp]
+----
 ....
 <% { // introduce a new block %>
   ...
@@ -4662,6 +4841,7 @@ is shown next:
 // the object is still valid (and accessible via pageContext)
 %>
 ....
+----
 
 _The scope Attribute_
 
@@ -4749,14 +4929,20 @@ In the following example, a Bean with name
 actions on this element, either because it was already created and
 found, or because it is newly created.
 
+[source,jsp]
+----
  <jsp:useBean id="connection" class="com.myco.myapp.Connection" />
+----
 
 In the next example, the `timeout` property
 is set to 33 if the Bean was instantiated.
 
+[source,jsp]
+----
  <jsp:useBean id="connection" class="com.myco.myapp.Connection"> +
    <jsp:setProperty name="connection" property="timeout" value="33"> +
  </jsp:useBean>`
+----
 
 In the final example, the object should have
 been present in the session. If so, it is given the local name `wombat`
@@ -4764,14 +4950,20 @@ with `WombatType`. A `ClassCastException` may be raised if the
 object is of the wrong class, and an `InstantiationException` may be
 raised if the object is not defined.
 
+[source,jsp]
+----
  <jsp:useBean id="wombat" type="my.WombatType" scope="session"/>
+----
 
 _Syntax_
 
 This action may or not have a body. If the
 action has no body, it is of the form:
 
+[source,jsp]
+----
  <jsp:useBean id="name" scope="page|request|session|application" typeSpec />
+----
 
  typeSpec ::=   class="className"
               | class="className" type="typeName"
@@ -4782,9 +4974,12 @@ action has no body, it is of the form:
 
 If the action has a body, it is of the form:
 
+[source,jsp]
+----
  <jsp:useBean id="name" scope="page|request|session|application" typeSpec >
    body
  </jsp:useBean>
+----
 
 In this case, the body will be invoked if the
 Bean denoted by the action is created. Typically, the body will contain
@@ -4895,18 +5090,27 @@ _Examples_
 The following two actions set a value from
 the request parameter values.
 
+[source,jsp]
+----
  <jsp:setProperty name="request" property="*" />
  <jsp:setProperty name="user" property="user" param="username" />
+----
 
 The following two elements set a property
 from a value
 
+[source,jsp]
+----
  <jsp:setProperty name="results" property="col" value="${i mod 4}"/>
  <jsp:setProperty name="results" property="row" value="<%= i/4 %>" />
+----
 
 _Syntax_
 
+[source,jsp]
+----
  <jsp:setProperty name="beanName" prop_expr />
+----
 
 ....
 prop_expr ::=   property="*"
@@ -5011,11 +5215,17 @@ the scripting variable. The truth is always the value held by the
 
 _Examples_
 
+[source,jsp]
+----
  <jsp:getProperty name="user" property="name" />
+----
 
 _Syntax_
 
+[source,jsp]
+----
  <jsp:getProperty name="name" property="propertyName" />
+----
 
 The attributes are:
 
@@ -5070,7 +5280,10 @@ attribute is `false`.
 
 _Examples_
 
+[source,jsp]
+----
  <jsp:include page="/templates/copyright.html"/>
+----
 
 The above example is a simple inclusion of an
 object. The path is interpreted in the context of the Web Application.
@@ -5100,13 +5313,19 @@ In this case the relative specification `C.jsp` resolves to `C.jsp`.
 
 _Syntax_
 
+[source,jsp]
+----
  <jsp:include page="urlSpec" flush="true|false"/>
+----
 
 and
 
+[source,jsp]
+----
  <jsp:include page="urlSpec" flush="true|false">
    { <jsp:param .... /> }*
  </jsp:include>
+----
 
 The first syntax just does a request-time
 inclusion. In the second case, the values in the `param` subelements are
@@ -5165,18 +5384,27 @@ _Examples_
 The following action might be used to forward
 to a static page based on some dynamic condition.
 
+[source,jsp]
+----
  <% String whereTo = "/templates/"+someValue; %>
  <jsp:forward page='<%= whereTo %>' />
+----
 
 _Syntax_
 
+[source,jsp]
+----
  <jsp:forward page="relativeURLspec" />
+----
 
 and
 
+[source,jsp]
+----
  <jsp:forward page="urlSpec">
    { <jsp:param .... /> }*
  </jsp:forward>
+----
 
 This tag allows the page author to cause the
 current request processing to be affected by the specified attributes as
@@ -5229,7 +5457,10 @@ names and values must be encoded as per the content type
 
 _Syntax_
 
+[source,jsp]
+----
  <jsp:param name="name" value="value" />
+----
 
 This action has two mandatory attributes:
 `name` and `value`. `name` indicates the name of the parameter, and
@@ -5268,6 +5499,8 @@ for the benefit of their customers.
 
 _Examples_
 
+[source,jsp]
+----
  <jsp:plugin type="applet" code="Molecule.class" codebase="/html" >
    <jsp:params>
      <jsp:param
@@ -5278,9 +5511,12 @@ _Examples_
      <p> unable to start plugin </p>
    </jsp:fallback>
  </jsp:plugin>
+----
 
 _Syntax_
 
+[source,jsp]
+----
 ....
 <jsp:plugin type="bean|applet"
     code="objectCode"
@@ -5305,6 +5541,7 @@ _Syntax_
     { <jsp:fallback> arbitrary_text </jsp:fallback> }
 </jsp:plugin>
 ....
+----
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
@@ -5466,19 +5703,25 @@ evaluated by the container prior to the custom action invocation. This
 example assumes the name attribute is declared with type
 `java.lang.String` in the TLD.
 
+[source,jsp]
+----
  <mytag:highlight>
    <jsp:attribute name="text">
        Inline definition.
    </jsp:attribute>
  </mytag:highlight>
+----
 
 The following is an example of using the
 `<jsp:attribute>` standard action within `<jsp:element>`, to define
 which attributes are to be output with that element:
 
+[source,jsp]
+----
  <jsp:element name="firstname">
      <jsp:attribute name="name">Susan</jsp:attribute>
  </jsp:element>
+----
 
 This would produce the following output:
 
@@ -5569,7 +5812,10 @@ in null for the `Writer` parameter so that the results will be sent to
 the `JspWriter` of the `JspContext` associated with the `JspFragment`.
 The following is an example of such a basic fragment invocation:
 
+[source,jsp]
+----
  <jsp:invoke fragment="frag1"/>
+----
 
 ==== Storing Fragment Output
 
@@ -5602,9 +5848,15 @@ scope of the resulting scoped variable.
 The following is an example of using `var` or
 `varReader` and the `scope` attribute:
 
+[source,jsp]
+----
  <jsp:invoke fragment="frag2" var="resultString" scope="session"/>
+----
 
+[source,jsp]
+----
  <jsp:invoke fragment="frag3" varReader="resultReader" scope="page"/>
+----
 
 ==== Providing a Fragment Access to Variables
 
@@ -5626,10 +5878,13 @@ details of how variables are synchronized can be found in
 The following is an example of a tag file
 providing a fragment access to a variable:
 
+[source,jsp]
+----
  <%@ variable name-given="x" scope="NESTED" %>
  ...
  <c:set var="x" value="1"/>
  <jsp:invoke fragment="frag4"/>
+----
 
 A translation error shall result if the
 `<jsp:invoke>` action contains a non-empty body.
@@ -5760,18 +6015,24 @@ content.headerName. The element has an attribute, lang, and the value of
 the attribute is that of the expression content.lang. The body of the
 element is the value of the expression content.body.
 
+[source,jsp]
+----
  <jsp:element
        name="${content.headerName}"
        xmlns:jsp="http://java.sun.com/JSP/Page" >
    <jsp:attribute name="lang">${content.lang}</jsp:attribute>
    <jsp:body>${content.body}</jsp:body>
  </jsp:element>
+----
 
 The next example fragment shows that
 `jsp:element` needs no children. The example generates an empty element
 with name that of the value of the expression myName.
 
+[source,jsp]
+----
  <jsp:element name="${myName}"/>
+----
 
 _Syntax_
 
@@ -5779,17 +6040,23 @@ The `jsp:element` action may have a body. Two
 forms are valid, depending on whether the element is to have attributes
 or not. In the first form, no attributes are present:
 
+[source,jsp]
+----
  <jsp:element name="name">
    optional body
  </jsp:element>
+----
 
 In the second form, zero or more attributes
 are requested, using `jsp:attribute` and `jsp:body`, as appropriate.
 
+[source,jsp]
+----
  <jsp:element name="name">
    jsp:attribute*
    jsp:body?
  </jsp:element>
+----
 
 The one valid, mandatory, attribute of
 `jsp:element` is its name. Unlike other standard actions, the value of
@@ -5819,7 +6086,10 @@ template data in a JSP page, a JSP document, or a tag file. A `jsp:text`
 action has no attributes and can appear anywhere that template data can.
 Its syntax is:
 
+[source,jsp]
+----
  <jsp:text> template data </jsp:text>
+----
 
 The interpretation of a `jsp:text` element is to pass its content through
 to the current value of `out`. This is very similar to the XSLT `xsl:text`
@@ -5830,34 +6100,46 @@ _Examples_
 The following example is a fragment that
 could be in both a JSP page or a JSP document.
 
+[source,jsp]
+----
  <jsp:text>
    This is some content
  </jsp:text>
+----
 
 Expressions may appear within `jsp:text`, as
 in the next example, where the expression _foo.content_ is evaluated and
 the result is inserted.
 
+[source,jsp]
+----
  <jsp:text>
    This is some content: ${foo.content}
  </jsp:text>
+----
 
 No subelements may appear within `jsp:text` ;
 for example the following fragment is invalid and must generate a
 translation error.
 
+[source,jsp]
+----
  <jsp:text>
   This is some content: <jsp:text>foo</jsp:text>
  </jsp:text>
+----
 
 When within a JSP document, of course, the
 body content needs to additionally conform to the constraints of being a
 well-formed XML document, so the following example, although valid in a
 JSP page is invalid in a JSP document:
 
+[source,jsp]
+----
  <jsp:text>
    This is some content: ${foo.content > 3}
  </jsp:text>
+----
 
 The same example can be made legal, with no
 semantic changes, by using `gt` instead of `>` in the expression; i.e.
@@ -5866,9 +6148,12 @@ semantic changes, by using `gt` instead of `>` in the expression; i.e.
 In an JSP document, CDATA sections can also
 be used to quote, uninterpreted, content, as in the following example:
 
+[source,jsp]
+----
  <jsp:text>
    <![CDATA[<mumble></foobar>]]>
  </jsp:text>
+----
 
 _Syntax_
 
@@ -5877,9 +6162,12 @@ action may have a body. The body may not have nested actions nor
 scripting elements. The body may have EL expressions. The syntax is of
 the form:
 
+[source,jsp]
+----
  <jsp:text>
    optional body
  </jsp:text>
+----
 
 [[jsp:output]]
 === <jsp:output>
@@ -5914,7 +6202,10 @@ will emit an XML declaration as its first content.
 
 The generated XML declaration is of the form:
 
+[source,xml]
+----
  <?xml version="1.0" encoding="encodingValue" ?>
+----
 
 Where `encodingValue` is the response character
 encoding, as determined in <<Response Character Encoding>>.
@@ -5970,37 +6261,51 @@ _Examples_
 The following JSP document (with an extension
 of `.jspx` or with `<is-xml>` set to `true` in the JSP configuration):
 
+[source,jsp]
+----
  <?xml version="1.0" encoding="EUC-JP" ?>
  <hello></hello>
+----
 
 generates an XML document as follows:
 
+[source,xml]
+----
  <?xml version="1.0" encoding="UTF-8" ?>
  <hello></hello>
+----
 
 The following JSP document is like the
 previous one, except that the XML declaration is omited. A typical use
 would be where the XML fragment is to be included within another
 document.
 
+[source,jsp]
+----
  <?xml version="1.0" encoding="EUC-JP" ?>
  <hello>
    <jsp:output
        xmlns:jsp="http://java.sun.com/JSP/Page"
        omit-xml-declaration="true"/>
  </hello>
+----
 
 The following JSP document is equivalent but
 uses `jsp:root` instead of `jsp:output`.
 
+[source,jsp]
+----
  <?xml version="1.0" encoding="EUC-JP" ?>
  <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0" >
    <hello></hello>
  </jsp:root>
+----
 
 The following JSP document specifies both a
 `doctype-public` and a `doctype-system` :
 
+[source,jsp]
+----
  <?xml version="1.0" encoding="UTF-8" ?>
  <html xmlns:jsp="http://java.sun.com/JSP/Page">
    <jsp:output doctype-root-element="html"
@@ -6010,17 +6315,23 @@ The following JSP document specifies both a
      <h1>Example XHTML Document</h1>
    </body>
  </html>
+----
 
 and generates and XML document as follows:
 
+[source,xml]
+----
  <?xml version="1.0" encoding="UTF-8" ?>
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.0//EN"
  "http://www.w3.org/TR/xhtml-basic/xhtml-basic10.dtd">
  <html><body><h1>Example XHTML Document</h1></body></html>
+----
 
 The following JSP document omits the
 `doctype-public` and explicitly omits the XML declaration:
 
+[source,jsp]
+----
  <?xml version="1.0" encoding="UTF-8" ?>
  <elementA>
    <jsp:output omit-xml-declaration="true"
@@ -6028,17 +6339,23 @@ The following JSP document omits the
        doctype-system="test.dtd" />
    Element body goes here.
  </elementA>
+----
 
 and generates an XML document as follows:
 
+[source,xml]
+----
  <!DOCTYPE elementA SYSTEM "test.dtd">
  <elementA>Element body goes here.</elementA>
+----
 
 _Syntax_
 
 The `jsp:output` action cannot have a body.
 The <jsp:output> action has the following syntax:
 
+[source,jsp]
+----
 ....
 <jsp:output ( omit-xml-declaration="yes|no|true|false" ) { doctypeDecl } />
 
@@ -6048,6 +6365,7 @@ doctypeDecl ::=   ( doctype-root-element="rootElement"
                 | ( doctype-root-element="rootElement"
                     doctype-system="SystemLiteral" )
 ....
+----
 
 The following are the valid attributes of
 jsp:output:
@@ -6114,6 +6432,8 @@ generate dynamic content using the standard JSP semantics.
 
 Here is a simple JSP document:
 
+[source,jsp]
+----
  <table>
    <c:forEach
        xmlns:c="http://java.sun.com/jsp/jstl/core"
@@ -6121,6 +6441,7 @@ Here is a simple JSP document:
      <row>${counter}</row>
    </c:forEach>
  </table>
+----
 
 This well-formed, namespace-aware XML
 document generates, using the JSP standard tag library, an XML document
@@ -6279,8 +6600,11 @@ It should be noted that the equivalent JSP
 document form of +
 `<a href="<%= url %>">`, where ’a’ is not a custom action, is:
 
+[source,jsp]
+----
  <jsp:text><![CDATA[<a href="]]></jsp:text><jsp:expression>url</jsp:expression>
  <jsp:text><![CDATA[">]]></jsp:text>
+----
 
 In the JSP document element `<a href="%= url
 %">`, `"%= url %"` does not represent a request-time attribute value.
@@ -6356,10 +6680,13 @@ namespace, and the namespace prefix to which they are bound.
 
 For example, the following XML document:
 
+[source,xml]
+----
  <?xml version="1.0"?>
  <!DOCTYPE root PUBLIC "-//My Org//My DTD//EN"
      "http://www.my.org/dtd/my.dtd">
  <root xmlns:jsp="http://java.sun.com/JSP/Page"/>
+----
 
 can only be validated against its DTD if the
 DTD makes special provision for both the attribute "xmlns:jsp"
@@ -6442,28 +6769,37 @@ _Examples_
 The following example generates a sequence of
 two XML documents. No XML declaration is generated.
 
+[source,jsp]
+----
  <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
    <table>foo</table>
    <table>bar</table>
  </jsp:root>
+----
 
 The following example generates one XML
 document. An XML declaration is generated because of the use of
 `jsp:output`. The example is mostly instructional, as the same content
 could be generated dropping the `jsp:root` element.
 
+[source,jsp]
+----
  <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
    <jsp:output omit-xml-declaration="no"/>
    <table>foo</table>
  </jsp:root>
+----
 
 _Syntax_
 
 No other attributes are defined in this
 element.
 
+[source,jsp]
+----
  <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" body...
  </jsp:root>
+----
 
 The one valid, mandatory, attribute of
 jsp:root is the version of the JSP specification used:
@@ -6494,7 +6830,10 @@ number of page dependent properties and communicates these to the JSP
 container. This element must be a child of the root element. Its syntax
 is:
 
+[source,jsp]
+----
  <jsp:directive.page page_directive_attr_list />
+----
 
 Where `page_directive_attr_list` is as
 described in <<The `page` Directive>>.
@@ -6509,7 +6848,10 @@ The `jsp:directive.include` element is used to
 substitute text and/or code at JSP page translation-time. This element
 can appear anywhere within a JSP document. Its syntax is:
 
+[source,jsp]
+----
  <jsp:directive.include file="relativeURLspec" />
+----
 
 The interpretation of a
 `jsp:directive.include` element is as in <<The `include` Directive>>.
@@ -6542,7 +6884,10 @@ scripting elements. A `jsp:declaration` element has no attributes and
 its body is the declaration itself. The interpretation of a
 `jsp:declaration` element is as in <<Declarations>>. Its syntax is:
 
+[source,jsp]
+----
  <jsp:declaration> declaration goes here </jsp:declaration>
+----
 
 The `jsp:scriptlet` element is used to
 describe actions to be performed in response to some request. Scriptlets
@@ -6551,7 +6896,10 @@ its body is the program fragment that comprises the scriptlet. The
 interpretation of a `jsp:scriptlet` element is as in
 <<Scriptlets>>. Its syntax is:
 
+[source,jsp]
+----
  <jsp:scriptlet> code fragment goes here </jsp:scriptlet>
+----
 
 The `jsp:expression` element is used to
 describe complete expressions in the scripting language that get
@@ -6560,7 +6908,10 @@ and its body is the expression. The interpretation of a `jsp:expression`
 element is as in <<Expressions>>. Its
 syntax is:
 
+[source,jsp]
+----
  <jsp:expression> expression goes here </jsp:expression>
+----
 
 ==== Other Standard Actions
 
@@ -6652,12 +7003,15 @@ dynamic content is `jsp:element`. `jsp:element`, together with
 Further details of jsp:element, jsp:attribute and jsp:body are given in
 <<jsp:element>>, in <<jsp:attribute>> and in <<jsp:body>>. The following example is from that section:
 
+[source,jsp]
+----
  <jsp:element
      name="${content.headerName}"
      xmlns:jsp="http://java.sun.com/JSP/Page" >
    <jsp:attribute name="lang">${content.lang}</jsp:attribute>
    <jsp:body>${content.body}</jsp:body>
  </jsp:element>
+----
 
 In some cases, the dynamic content that is
 generated can be described as simple substitutions on otherwise static
@@ -6666,9 +7020,12 @@ used as the values of the body or of attributes. For instance, the next
 example uses the expression `table.indent` as the value of an attribute,
 and the expression `table.value` as that for the body of an element:
 
+[source,jsp]
+----
  <table indent="${table.indent}">
    <row>${table.value}</row>
  </table>
+----
 
 === Examples of JSP Documents
 
@@ -6681,6 +7038,8 @@ This simple JSP document generates a table
 with 3 rows with numeric values 1, 2, 3. The JSP document uses template
 XML elements intermixed with actions from the JSP Standard Tag Library.
 
+[source,jsp]
+----
  <table size="${3}">
    <c:forEach
        xmlns:c="http://java.sun.com/jsp/jstl/core"
@@ -6688,6 +7047,7 @@ XML elements intermixed with actions from the JSP Standard Tag Library.
      <row>${counter}</row>
    </c:forEach>
  </table>
+----
 
 Some comments:
 
@@ -6714,6 +7074,8 @@ XML document that uses namespaces, but the next example does.
 
 ==== Example: Generating Namespace-aware Documents
 
+[source,jsp]
+----
  <table
      xmlns="http://table.com/Table1"
      size="${3}">
@@ -6723,6 +7085,7 @@ XML document that uses namespaces, but the next example does.
      <row>${counter}</row>
    </c:forEach>
  </table>
+----
 
 This example is essentially the same as the
 one above, except that a default namespace is introduced in the top
@@ -6739,6 +7102,8 @@ other types of content.
 
 ==== Example: Generating non-XML documents
 
+[source,jsp]
+----
  <jsp:root
      xmlns:c="http://java.sun.com/jsp/jstl/core"
      xmlns:jsp="http://java.sun.com/JSP/Page"
@@ -6748,6 +7113,7 @@ other types of content.
      <jsp:text>${counter}</jsp:text>
    </c:forEach>
  </jsp:root>
+----
 
 This example just generates 123. There is no
 xml declaration generated because there is no <jsp:output> element to
@@ -6765,6 +7131,8 @@ namespace attribute.
 For example, the same output would be
 generated with the following modification of the previous example:
 
+[source,jsp]
+----
  <wombat:root
      xmlns:c="http://java.sun.com/jsp/jstl/core"
      xmlns:wombat="http://java.sun.com/JSP/Page"
@@ -6774,6 +7142,7 @@ generated with the following modification of the previous example:
      <wombat:text>${counter}</wombat:text>
    </c:forEach>
  </wombat:root>
+----
 
 On the other hand, although the following
 example uses the jsp prefix the URI used in the namespace attribute is
@@ -6781,6 +7150,8 @@ not the JSP URI and the JSP document will generate as output an XML
 document with root <jsp:root> using the URI
 `http://johnsonshippingproducts.com`.
 
+[source,jsp]
+----
  <jsp:root
      xmlns:c="http://java.sun.com/jsp/jstl/core"
      xmlns:jsp="http://johnsonshippingproducts.com"
@@ -6790,6 +7161,7 @@ document with root <jsp:root> using the URI
      <jsp:text>${counter}</jsp:text>
    </c:forEach>
  </jsp:root>
+----
 
 Finally, note that, since a JSP document is a
 well-formed, namespace-aware document, prefixes, including jsp cannot be
@@ -6807,6 +7179,8 @@ The following example generates an XHTML
 document using tag library abstractions for presentation and data
 access, made available through the prefixes u and data respectively.
 
+[source,jsp]
+----
  <html xmlns="http://www.w3.org/1999/xhtml"
        xmlns:jsp="http://java.sun.com/JSP/Page"
        xmlns:c="http://java.sun.com/jsp/jstl/core"
@@ -6824,6 +7198,7 @@ access, made available through the prefixes u and data respectively.
      </ul>
    </body>
  </html>
+----
 
 For convenience we use the <c:set> JSTL
 action, which defines variables and associates values with them. This
@@ -6842,6 +7217,8 @@ The action <u:headInfo> could be implemented
 either through a custom action or through a tag. For example, as a tag
 it could be defined by the following code:
 
+[source,jsp]
+----
 ....
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
   <jsp:directive.tag />
@@ -6855,6 +7232,7 @@ it could be defined by the following code:
 
 where pageCharSet is a variable with a value as iso-8859-1.
 ....
+----
 
 Note that this tag is a JSP document (because
 of the jsp:root declaration), and, as such, it is validated by the
@@ -7725,21 +8103,30 @@ The use of relative URI specifications in the
 taglib map enables very short names in the `taglib` directive. For
 example, if the map is:
 
+[source,jsp]
+----
  <taglib>
    <taglib-uri>/myPRlibrary</taglib-uri>
    <taglib-location>/WEB-INF/tlds/PRlibrary_1_4.tld</taglib-location>
  </taglib>
+----
 
 then it can be used as:
 
+[source,jsp]
+----
  <%@ taglib uri="/myPRlibrary" prefix="x" %>
+----
 
 Finally, the fallback rule allows a `taglib`
 directive to refer directly to the TLD. This arrangement is very
 convenient for quick development at the expense of less flexibility and
 accountability. For example, in the case above, it enables:
 
+[source,jsp]
+----
  <%@ taglib uri="/WEB-INF/tlds/PRlibrary_1_4.tld" prefix="x" %>
+----
 
 ==== Translation-Time Class Loader
 
@@ -7831,6 +8218,8 @@ The following example tag library uses ACME’s
 extensions to provide helpful voice annotations that describe how to use
 each tag in the tag library.
 
+[source,jsp]
+----
 ....
 <taglib xmlns="http://java.sun.com/xml/ns/javaee"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -7887,9 +8276,12 @@ each tag in the tag library.
   </taglib-extension>
 </taglib>
 ....
+----
 
 The corresponding `acme.xsd` file would look something like:
 
+[source,xsd]
+----
 ....
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://acme.com/"
@@ -7944,6 +8336,7 @@ The corresponding `acme.xsd` file would look something like:
   </xsd:complexType>
 </xsd:schema>
 ....
+----
 
 === Validation
 
@@ -8047,9 +8440,12 @@ define the desired objects.
 The JSP page can make these objects available
 as follows:
 
+[source,jsp]
+----
  <%@ taglib prefix="me" uri="..." %>
  <me:defineObjects />
  ... start using the objects...
+----
 
 This approach has the advantage of requiring
 no new machinery and of making very explicit the dependency.
@@ -8503,15 +8899,20 @@ fatal translation errors.
 
 _Examples_
 
+[source,jsp]
+----
  <%@ tag display-name="Addition"
          body-content="scriptless"
          dynamic-attributes="dyn"
          small-icon="/WEB-INF/sample-small.jpg"
          large-icon="/WEB-INF/sample-large.jpg"
          description="Sample usage of tag directive" %>
+----
 
 _Syntax_
 
+[source,jsp]
+----
 ....
 <%@ tag tag_directive_attr_list %>
 
@@ -8529,6 +8930,7 @@ tag_directive_attr_list ::= { display-name="display-name"                  }
                             { deferredSyntaxAllowedAsLiteral="true|false"  }
                             { trimDirectiveWhitespaces="true|false"        }
 ....
+----
 
 The details of the attributes are as follows:
 
@@ -8633,16 +9035,27 @@ declaration of custom action attributes.
 
 _Examples_
 
+[source,jsp]
+----
  <%@ attribute name="x" required="true" fragment="false"
                rtexprvalue="false" type="java.lang.Integer"
                description="The first operand" %>
+----
 
+[source,jsp]
+----
  <%@ attribute name="y" type="java.lang.Integer" %>
+----
 
+[source,jsp]
+----
  <%@ attribute name="prompt" fragment="true" %>
+----
 
 _Syntax_
 
+[source,jsp]
+----
 ....
 <%@ attribute attribute_directive_attr_list %>
 
@@ -8657,6 +9070,7 @@ attribute_directive_attr_list ::= name="attribute-name"
                                   { deferredMethod="true|false"         }
                                   { deferredMethodSignature="signature" }
 ....
+----
 
 The details of the attributes are as follows:
 
@@ -8750,20 +9164,31 @@ See <<Actions Defining Scripting Variables>> for more details.
 
 _Examples_
 
+[source,jsp]
+----
  <%@ variable name-given="sum"
               variable-class="java.lang.Integer"
               scope="NESTED"
               declare="true"
               description="The sum of the two operands" %>
+----
 
+[source,jsp]
+----
  <%@ variable name-given="op1"
               variable-class="java.lang.Integer"
               description="The first operand" %>
+----
 
+[source,jsp]
+----
  <%@ variable name-from-attribute="var" alias="result" %>
+----
 
 _Syntax_
 
+[source,jsp]
+----
 ....
 <%@ variable variable_directive_attr_list %>
 
@@ -8777,6 +9202,7 @@ variable_directive_attr_list ::= (   name-given="output-name"
                                  { scope="AT_BEGIN|AT_END|NESTED" }
                                  { description="description"      }
 ....
+----
 
 The details of the attributes are as follows:
 
@@ -9080,6 +9506,8 @@ In this example, the `AT_BEGIN` scope is used
 to pass a variable to the tag’s body, and make it available to the
 calling page at the end of the tag invocation.
 
+[source,jsp]
+----
 ....
 <%-- page.jsp --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9101,6 +9529,7 @@ ${x} <%-- (x == null) --%>
 ${x} <%-- (x == 2) --%>
 <c:set var="x" value="4"/>
 ....
+----
 
 ===== Example of AT_BEGIN and name-from-attribute
 
@@ -9109,6 +9538,8 @@ the `AT_BEGIN` scope is used to pass a variable to the tag’s body, and
 make it available to the calling page at the end of the tag invocation.
 The name of the attribute is customized via `name-from-attribute`.
 
+[source,jsp]
+----
 ....
 <%-- page.jsp --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9139,6 +9570,7 @@ ${result} <%-- (result == 2) --%>
 <c:set var="x" value="still`ignored"/>
 <c:set var="result" value="4"/>
 ....
+----
 
 ===== Example of NESTED
 
@@ -9146,6 +9578,8 @@ In this example, the `NESTED` scope is used
 to make a private variable available to the calling page. The original
 value is restored when the tag is done.
 
+[source,jsp]
+----
 ....
 <%-- page.jsp --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9167,12 +9601,15 @@ ${x} <%-- (x == null) --%>
 ${x} <%-- (x == 2) --%>
 <c:set var="x" value="4"/>
 ....
+----
 
 ===== Example of AT_END
 
 In this example, the AT_END scope is used to
 return a value to the page. The body of the tag is not affected.
 
+[source,jsp]
+----
 ....
 <%-- page.jsp --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9194,6 +9631,7 @@ ${x} <%-- (x == null) --%>
 ${x} <%-- (x == 2) --%>
 <c:set var="x" value="4"/>
 ....
+----
 
 ===== Example of Removing Parameters
 
@@ -9201,6 +9639,8 @@ This example illustrates how the tag file can
 remove objects from the page scope of the calling page during
 synchronization.
 
+[source,jsp]
+----
 ....
 <%-- page.jsp --%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
@@ -9220,6 +9660,7 @@ ${x}
 <c:remove var="x"/>
 <jsp:doBody/>
 ....
+----
 
 The expected output of this example is: 2 '1' '' 2
 
@@ -9573,11 +10014,17 @@ passed through to the XML view of a JSP page.
 
 A `page` directive of the form:
 
+[source,jsp]
+----
  <%@ page { attr="value" }* %>
+----
 
 is translated into an element of the form:
 
+[source,jsp]
+----
  <jsp:directive.page { attr="value" }* />
+----
 
 The value of the `pageEncoding` attribute is
 set to "`UTF-8`". The value of the `contentType` attribute is set to
@@ -9590,7 +10037,10 @@ attributes are added if they don’t exist already.
 
 A taglib directive of the form
 
+[source,jsp]
+----
  <%@ taglib uri="uriValue" prefix="prefix" %>
+----
 
 is translated into an `xmlns:prefix`
 attribute on the root of the JSP document, with a value that depends on
@@ -9599,7 +10049,10 @@ attribute on the root of the JSP document, with a value that depends on
 
 A taglib directive of the form
 
+[source,jsp]
+----
  <%@ taglib tagdir="tagDirValue" prefix="prefix" %>
+----
 
 is translated into an `xmlns:prefix`
 attribute on the root of the JSP document, with a value of the form
@@ -9609,7 +10062,10 @@ attribute on the root of the JSP document, with a value of the form
 
 An include directive of the form
 
+[source,jsp]
+----
  <%@ include file="value" %>
+----
 
 is expanded into the JSP content indicated by
 `value`. This is done to allow for validation of the page.
@@ -9619,18 +10075,27 @@ is expanded into the JSP content indicated by
 Declarations are translated into a `jsp:declaration` element.
 For example, the second example from <<Declarations>>:
 
+[source,jsp]
+----
  <%! public String f(int i) { if (i<3) return("..."); ... } %>
+----
 
 is translated into the following.
 
+[source,jsp]
+----
  <jsp:declaration> <![CDATA[ public String f(int i) { if (i<3) return("..."); } ]]>
  </jsp:declaration>
+----
 
 Alternatively, we could use an `&amp;lt;` and
 instead say:
 
+[source,jsp]
+----
  <jsp:declaration> public String f(int i) {if (i&lt;3) return("..."); }
  </jsp:declaration>
+----
 
 ==== Scriptlets
 
@@ -9638,14 +10103,20 @@ Scriptlets are translated into a
 `jsp:scriptlet` element. In the XML document corresponding to JSP pages,
 directives are represented using the syntax:
 
+[source,jsp]
+----
  <jsp:scriptlet> code fragment goes here </jsp:scriptlet>
+----
 
 ==== Expressions
 
 In the XML document corresponding to JSP
 pages, directives are represented using the `jsp:expression` element:
 
+[source,jsp]
+----
  <jsp:expression> expression goes here </jsp:expression>
+----
 
 ==== Standard and Custom Actions
 
@@ -9803,11 +10274,17 @@ the `jakarta.servlet.jsp.tagext` Javadoc for more details.
 The `tag` directive is applicable to tag
 files only. A `tag` directive of the form:
 
+[source,jsp]
+----
  <%@ tag { attr="value" }* %>
+----
 
 is translated into an element of the form:
 
+[source,jsp]
+----
  <jsp:directive.tag { attr="value" }* />
+----
 
 The value of the `pageEncoding` attribute is
 set to "`UTF-8`". A `tag` directive and the `pageEncoding` attribute
@@ -9819,11 +10296,17 @@ are added if they don’t exist already.
 The `attribute` directive is applicable to
 tag files only. An `attribute` directive of the form:
 
+[source,jsp]
+----
  <%@ attribute { attr="value" }* %>
+----
 
 is translated into an element of the form:
 
+[source,jsp]
+----
  <jsp:directive.attribute { attr="value" }* />
+----
 
 [[_The_variable_Directive]]
 ==== The variable Directive
@@ -9831,11 +10314,17 @@ is translated into an element of the form:
 The `variable` directive is applicable to tag
 files only. A `variable` directive of the form:
 
+[source,jsp]
+----
  <%@ variable { attr="value" }* %>
+----
 
 is translated into an element of the form:
 
+[source,jsp]
+----
  <jsp:directive.variable { attr="value" }* />
+----
 
 === Validating an XML View of a JSP page
 
@@ -9876,6 +10365,8 @@ document that has some template XML elements. This particular example
 describes a table that is a collection of 3 rows, with numeric values 1,
 2, 3. The JSP Standard Tag Library is being used:
 
+[source,jsp]
+----
  <?xml version="1.0"?>
  <table>
    <c:forEach
@@ -9884,6 +10375,7 @@ describes a table that is a collection of 3 rows, with numeric values 1,
      <row>${counter}</row>
    </c:forEach>
  </table>
+----
 
 ==== A JSP Page and its Corresponding XML View
 
@@ -9892,6 +10384,8 @@ XML syntax.
 
 For this JSP page:
 
+[source,jsp]
+----
 ....
 <html>
 <title>positiveTagLib</title>
@@ -9906,9 +10400,12 @@ Positive Test taglib directive </eg:test>
 </body>
 </html>
 ....
+----
 
 The XML View of the previous page is:
 
+[source,xml]
+----
 ....
 <jsp:root
 xmlns:jsp="http://java.sun.com/JSP/Page"
@@ -9934,6 +10431,7 @@ xmlns:temp="urn:jsptld:/WEB-INF/tlds/my.tld">
 ]]></jsp:text>
 </jsp:root>
 ....
+----
 
 ==== Clearing Out Default Namespace on Include
 
@@ -9941,6 +10439,8 @@ This example illustrates the need to clear
 out the default namespace when doing a translation-time include of a JSP
 document:
 
+[source,jsp]
+----
 ....
 <!-- a.jspx -->
 <elementA>
@@ -9953,10 +10453,13 @@ document:
 <!-- b.jspx -->
 <elementC />
 ....
+----
 
 The resulting XML View for these two JSP
 documents is:
 
+[source,xml]
+----
 ....
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page">
   <elementA>
@@ -9966,6 +10469,7 @@ documents is:
   </elementA>
 </jsp:root>
 ....
+----
 
 ==== Taglib Direcive Adds to Global Namespace
 
@@ -9974,6 +10478,8 @@ taglib directive on the XML View. Notice how the taglib directive always
 affects the `<jsp:root>` element, independent of where it is
 encountered.
 
+[source,jsp]
+----
 ....
 <!-- c.jspx -->
 <elementD xmlns:jsp="http://java.sun.com/JSP/Page">
@@ -9988,10 +10494,13 @@ encountered.
 <%-- e.jsp --%>
 <x:tagE />
 ....
+----
 
 The resulting XML View of these documents and
 pages is:
 
+[source,xml]
+----
 ....
 <jsp:root xmlns:x="http://namespace2"
     xmlns:jsp="http://java.sun.com/JSP/Page" >
@@ -10001,12 +10510,15 @@ pages is:
   </elementD>
 </jsp:root>
 ....
+----
 
 ==== Collective Application of Inclusion Semantics
 
 This example illustrates how the various
 translation-time include semantics are collectively applied:
 
+[source,jsp]
+----
 ....
 <%-- f.jsp --%>
 <%@ taglib prefix="m" uri="http://namespace3" %>
@@ -10037,10 +10549,13 @@ translation-time include semantics are collectively applied:
   </y:tagL>
 </jsp:root>
 ....
+----
 
 The resulting XML View of these documents and
 pages is:
 
+[source,xml]
+----
 ....
 <jsp:root xmlns:m="http://namespace3"
     xmlns:n="http://namespace6"
@@ -10060,6 +10575,7 @@ pages is:
   </tagF>
 </jsp:root>
 ....
+----
 
 = Part II
 
@@ -10324,6 +10840,8 @@ significantly simplifies the implementation.
 
 [[A_Generic_HTTP_Superclass]]
 .*Code Example JSP.11-1* A Generic HTTP Superclass
+[source,java]
+----
 ....
 imports jakarta.servlet.*;
 imports jakarta.servlet.http.*;
@@ -10381,9 +10899,12 @@ abstract class ExampleHttpSuper implements HttpJspPage {
       HttpServletResponse response) throws ServletException, IOException;
   }
 ....
+----
 
 [[The_Java_Class_Generated_From_a_JSP_Page]]
 .*Code Example JSP.11-2* The Java Class Generated From a JSP Page
+[source,java]
+----
 ....
 imports jakarta.servlet.*;
 imports jakarta.servlet.http.*;
@@ -10421,6 +10942,7 @@ class _jsp1344 extends ExampleHttpSuper {
   }
 }
 ....
+----
 
 ==== Using the extends Attribute
 
@@ -10467,6 +10989,8 @@ The `jakarta.servlet.jsp.JspWriter` class
 buffers and sends output. The `JspWriter` class is used in the
 `_jspService` method as in the following example:
 
+[source,java]
+----
 ....
 import jakarta.servlet.jsp.JspWriter;
 
@@ -10489,6 +11013,7 @@ _jspService(<SRequest> request, <SResponse> response) {
   out.flush();
 }
 ....
+----
 
 The complete listing of
 `jakarta.servlet.jsp.JspWriter` can be found in
@@ -10717,10 +11242,13 @@ tools are interested in.
 We start with a very simple JSP page
 `HelloWorld.jsp`.
 
+[source,jsp]
+----
  <%@ page info="Example JSP pre-compiled" %>
  <p>
  Hello World
  </p>
+----
 
 === The JSP Page Packaged as Source in a WAR File
 
@@ -10728,6 +11256,8 @@ The JSP page can be packaged into a WAR file
 by just placing it at location `/HelloWorld.jsp` the default JSP page
 extension mapping will pick it up. The `web.xml` is trivial:
 
+[source,xml]
+----
 ....
 <!DOCTYPE webapp
     SYSTEM "http://java.sun.com/j2ee/dtds/web-app_2_3.dtd">
@@ -10737,6 +11267,7 @@ extension mapping will pick it up. The `web.xml` is trivial:
   </session-config>
 </webapp>
 ....
+----
 
 === The Servlet for the Compiled JSP Page
 
@@ -10748,6 +11279,8 @@ some implementation dependent name `com.acme._jsp_HelloWorld_XXX_Impl`.
 The servlet code only depends on the JSP 3.1 and Servlet 6.0 APIs, as
 follows:
 
+[source,java]
+----
 ....
 package com.acme;
 
@@ -10800,12 +11333,15 @@ public class _jsp_HelloWorld_XXX_Impl
   }
 }
 ....
+----
 
 === The Web Application Descriptor
 
 The servlet is made to look as a JSP page
 with the following `web.xml`:
 
+[source,xml]
+----
 ....
 <!DOCTYPE webapp
     SYSTEM "http://java.sun.com/j2ee/dtds/web-app_2_3.dtd">
@@ -10825,6 +11361,7 @@ with the following `web.xml`:
    </session-config>
 </webapp>
 ....
+----
 
 === The WAR for the Compiled JSP Page
 
