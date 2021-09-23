@@ -1265,7 +1265,7 @@ XMLTagDefDirectiveBody     ::=   (   ( 'tag' S TagDirectiveAttrList S?
 PageDirectiveAttrList      ::= ATTR[ language, extends, import, session, buffer,
                                      autoFlush, isThreadSafe, info, errorPage,
                                      isErrorPage, contentType, pageEncoding,
-                                     isELIgnored ]
+                                     isELIgnored, errorOnELNotFound ]
                                [ vc: PageDirectiveUniqueAttr ]
 
 TagLibDirectiveAttrList    ::=   ATTR[ !uri, !prefix ]
@@ -1276,7 +1276,8 @@ IncludeDirectiveAttrList   ::= ATTR[ !file ]
 
 TagDirectiveAttrList       ::= ATTR[ display-name, body-content, dynamic-attributes,
                                      small-icon, large-icon, description, example,
-                                     language, import, pageEncoding, isELIgnored ]
+                                     language, import, pageEncoding, isELIgnored,
+                                     errorOnELNotFound ]
                                [ vc: TagDirectiveUniqueAttr ]
 
 AttributeDirectiveAttrList ::= ATTR[ !name, required, fragment, rtexprvalue,
@@ -2513,6 +2514,7 @@ page_directive_attr_list ::= { language="scriptingLanguage"                }
                              { contentType="ctinfo"                        }
                              { pageEncoding="peinfo"                       }
                              { isELIgnored="true|false"                    }
+                             { errorOnELNotFound="true|false"              }
                              { deferredSyntaxAllowedAsLiteral="true|false" }
                              { trimDirectiveWhitespaces="true|false"       }
 ----
@@ -2735,6 +2737,12 @@ attributes. The corresponding JSP configuration element is `el-ignored`
 (see <<_Deactivating_EL_Evaluation>>). The default value
 varies depending on the `web.xml` version - see
 <<Deactivating EL Evaluation>>.
+
+|`errorOnELNotFound`
+|Defines whether a `PropertyNotFoundException` is thrown when an EL expression
+contains an identifier that the EL machinery cannot resolve. The corresponding
+JSP configuration element is `error-on-el-not-found`
+(see <<_Unknown_EL_Identifiers>>)
 
 |`deferredSyntax-` +
 `AllowedAsLiteral`
@@ -3758,6 +3766,14 @@ authors, or page authoring groups, may want to follow a methodology
 where scripting elements are not allowed. See
 <<_Disabling_Scripting_Elements>> for more details.
 
+=== Unknown EL Identifiers
+
+The default behaviour of the `NotFoundELResolver` is to return null when
+attempting to resolve an unknown identifier. This can mask bugs and therefore
+may not always be the desired behaviour. To address this, the default behaviour
+can be changed as indicated in
+<<_Unknown_EL_Identifiers>>
+
 === Invalid EL Expressions
 
 JSP containers are required to produce a
@@ -4237,6 +4253,93 @@ delivered using the `.jsp` extension:
 
 |true
 |Translation Error
+
+|===
+
+[[_Unknown_EL_Identifiers]]
+==== Unknown EL Identifiers
+
+The default behaviour of the `NotFoundELResolver` is to return `null` when
+attempting to resolve an unknown identifier. This can mask bugs and therefore
+may not always be the desired behaviour. To address this, the default behaviour
+can be changed as indicated in this section.
+
+The default behaviour can be explicitly changed by setting the value of the
+`error-on-el-not-found` element. The `error-on-el-not-found` element is a
+subelement of `jsp-property-group` (see <<_JSP_Property_Groups>>)
+It has no subelements. Its valid values are `true` and `false`.
+
+For example, the following `web.xml` fragment defines a group that configures
+all JSP pages delivered using the `.jsp` extension to throw a
+`PropertyNotFoundException` if an EL expression contains an unknown identifier.:
+
+[source,xml]
+----
+ <jsp-property-group>
+   <url-pattern>*.jsp</url-pattern>
+   <error-on-el-not-found>true</error-on-el-not-found>
+ </jsp-property-group>
+----
+
+Page authors can override the default mode through the `errorOnELNotFound`
+attribute of the page directive and the `errorOnELNotFound` attribute of the tag
+directive can.
+
+<<_EL_Unknown_Identifier_Settings_for_JSP_Pages>> summarizes the EL unknown
+identifier settings for JSP pages, and their meanings:
+
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
+[[_EL_Unknown_Identifier_Settings_for_JSP_Pages]]
+.EL Evaluation Unknown Identifier for JSP Pages
+[cols="30,30,40",options="header"]
+|===
+
+|JSP Configuration <error-on-el-not-found>
+|Page Directive errorOnELNotFound
+|Unknown Identifier Encountered
+
+|unspecified
+|unspecified
+|`null` is returned by `ELResolver`
+
+|false
+|unspecified
+|`null` is returned by `ELResolver`
+
+|true
+|unspecified
+|`PropertyNotFoundException` thrown by `ELResolver`
+
+|don’t care
+|false
+|`null` is returned by `ELResolver`
+
+|don’t care
+|true
+|`PropertyNotFoundException` thrown by `ELResolver`
+
+|===
+
+<<_EL_Unknown_Identifier_Settings_for_Tag_Files>> summarizes the EL unknown
+identifier settings for tag files, and their meanings:
+
+[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
+[[_EL_Unknown_Identifier_Settings_for_Tag_Files]]
+.EL Unknown Identifier Settings for Tag Files
+[cols="50,50",options="header"]
+|===
+
+|Tag Directive errorOnELNotFound
+|Unknown Identifier Encountered
+
+|unspecified
+|`null` is returned by `ELResolver`
+
+|false
+|`null` is returned by `ELResolver`
+
+|true
+|`PropertyNotFoundException` thrown by `ELResolver`
 
 |===
 
@@ -8927,6 +9030,7 @@ tag_directive_attr_list ::= { display-name="display-name"                  }
                             { import="importList"                          }
                             { pageEncoding="peinfo"                        }
                             { isELIgnored="true|false"                     }
+                            { errorOnELNotFound="true|false"               }
                             { deferredSyntaxAllowedAsLiteral="true|false"  }
                             { trimDirectiveWhitespaces="true|false"        }
 ....
@@ -9007,6 +9111,12 @@ XML syntax.
 |`isELIgnored`
 |(optional) Carries the same syntax and
 semantics of the `isELIgnored` attribute of the `page` directive.
+However, there is no corresponding global configuration element in
+`web.xml`.
+
+|`errorOnELNotFound`
+|(optional) Carries the same syntax and
+semantics of the `errorOnELNotFound` attribute of the `page` directive.
 However, there is no corresponding global configuration element in
 `web.xml`.
 
@@ -11548,6 +11658,9 @@ Jakarta Server Pages specification. This appendix is non-normative.
 
 * Deprecate methods that override `ELResolver.getFeatureDescriptors()` as that
   method has been deprecated as of EL 5.0.
+* https://github.com/eclipse-ee4j/jsp-api/issues/40[#40]
+  Add an option to raise a `PropertyNotFoundException` when an EL expression
+  contains an unknown identifier.
 * https://github.com/eclipse-ee4j/jsp-api/issues/44[#44]
   Clarify that the EL environment within a JSP has a set of default imports
   consistent with the default imports for the scripting environment. Refactor
