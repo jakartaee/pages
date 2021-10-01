@@ -11665,6 +11665,9 @@ Jakarta Server Pages specification. This appendix is non-normative.
 * https://github.com/eclipse-ee4j/jsp-api/issues/40[#40]
   Add an option to raise a `PropertyNotFoundException` when an EL expression
   contains an unknown identifier.
+* https://github.com/eclipse-ee4j/jsp-api/issues/42[#42]
+  Clarify the meaning of 'scope' in the context of scripting variables
+  associated with custom actions.
 * https://github.com/eclipse-ee4j/jsp-api/issues/44[#44]
   Clarify that the EL environment within a JSP has a set of default imports
   consistent with the default imports for the scripting environment. Refactor
