@@ -9955,7 +9955,7 @@ this corresponds to a statement of the form:
 
 An action defining one or more objects is
 transformed into one or more variable declarations for those objects,
-together with code that initializes the variables. Their visibility is
+together with code that initializes the variables. Their visibility may be
 affected by other constructs, for example scriptlets.
 
 The semantics of the action type determines
@@ -9983,10 +9983,14 @@ type is the type of the `class` attribute.
 
 |===
 
-Note that the value of the `scope` attribute
-does not affect the visibility of the variables within the generated
-program. It affects where and thus for how long there will be additional
-references to the object denoted by the variable.
+Note that as per <<Implementation Flexibility>>, implementations may opt to take
+a different approach to the location of variable declarations. The value of the
+`scope` attribute does not affect the visibility of the variables within the
+generated program. It affects where and thus for how long there will be
+additional references to the object denoted by the variable. Developers wishing
+to have more precise control over variable declarations may configure the
+variables with `declare=false` and explicitly declare the variables themselves.
+
 
 // Table, figure numbering etc
 :table-number: 0
