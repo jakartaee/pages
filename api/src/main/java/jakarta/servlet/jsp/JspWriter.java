@@ -92,7 +92,7 @@ abstract public class JspWriter extends java.io.Writer {
     }
 
     /**
-     * Write a line separator. The line separator string is defined by the system property <tt>line.separator</tt>, and
+     * Write a line separator. The line separator string is defined by the system property {@code line.separator}, and
      * is not necessarily a single newline ('\n') character.
      *
      * @exception IOException If an I/O error occurs

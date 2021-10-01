@@ -132,7 +132,7 @@ public class SimpleTagSupport implements SimpleTag {
      *
      * <p>
      * For every instance of TagAdapter encountered while traversing the ancestors, the tag handler returned by
-     * <tt>TagAdapter.getAdaptee()</tt> - instead of the TagAdpater itself - is compared to <tt>klass</tt>. If the tag
+     * {@link TagAdapter#getAdaptee()} - instead of the TagAdpater itself - is compared to {@code klass}. If the tag
      * handler matches, it - and not its TagAdapter - is returned.
      *
      * <p>

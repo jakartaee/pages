@@ -41,7 +41,7 @@ package jakarta.servlet.jsp.tagext;
  * getVariableInfo().
  *
  * <p>
- * <tt>NOTE:</tt> It is a (translation time) error for a tag definition in a TLD with one or more variable subelements
+ * <b>NOTE:</b> It is a (translation time) error for a tag definition in a TLD with one or more variable subelements
  * to have an associated TagExtraInfo implementation that returns a VariableInfo array with one or more elements from a
  * call to getVariableInfo().
  */
