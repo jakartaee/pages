@@ -33,8 +33,8 @@ public class NotFoundELResolver extends ELResolver {
     private static final ResourceBundle lStrings = ResourceBundle.getBundle(LSTRING_FILE);
 
     /**
-     * If the base object is <code>null</code>, searches the Class and static imports for an import with the given name
-     * and returns it if an import exists with the given name.
+     * Always returns {@code null} since in normal usage {@link ScopedAttributeELResolver} will handle calls to
+     * {@link ELResolver#getValue(ELContext, Object, Object)}.
      *
      * <p>
      * The <code>propertyResolved</code> property of the <code>ELContext</code> object is always set to {@code true}
