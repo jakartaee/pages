@@ -15,10 +15,6 @@
  */
 package jakarta.servlet.jsp.el;
 
-import java.beans.FeatureDescriptor;
-import java.util.Iterator;
-import java.util.Collections;
-
 import jakarta.el.ELContext;
 import jakarta.el.ELClass;
 import jakarta.el.ELResolver;
@@ -139,23 +135,6 @@ public class ImportELResolver extends ELResolver {
             throw new NullPointerException();
         }
         return false;
-    }
-
-    /**
-     * Always returns an empty iterator since {@link ELResolver#getFeatureDescriptors} method has been deprecated.
-     * 
-     * @param context  Ignored
-     * @param base     Ignored
-     * @return An <code>Iterator</code> containing one <code>FeatureDescriptor</code> object for each scoped attribute,
-     *         or <code>null</code> if <code>base</code> is not <code>null</code>.
-     *         
-     * @deprecated This method is deprecated as of EL 5.0 and will be removed in EL 6.0 (Jakarta EE 11). Therefore it
-     *             will be removed here in JSP 4.0.
-     */
-    @Deprecated(forRemoval = true, since = "JSP 3.1")
-    @Override
-    public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext context, Object base) {
-        return Collections.emptyIterator();
     }
 
     /**
