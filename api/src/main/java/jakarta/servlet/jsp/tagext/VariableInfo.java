@@ -61,6 +61,10 @@ package jakarta.servlet.jsp.tagext;
  * <B>Synchronization Protocol</B>
  *
  * <p>
+ * The value of the `scope` attribute does not affect the visibility of the variables within the generated program. It
+ * affects where and thus for how long there will be additional references to the object denoted by the variable.
+ *
+ * <p>
  * The result of the invocation on getVariableInfo is an array of VariableInfo objects. Each such object describes a
  * scripting variable by providing its name, its type, whether the variable is new or not, and what its scope is. Scope
  * is best described through a picture:
@@ -72,12 +76,12 @@ package jakarta.servlet.jsp.tagext;
  * The JSP 2.0 specification defines the interpretation of 3 values:
  * 
  * <ul>
- * <li>NESTED, if the scripting variable is available between the start tag and the end tag of the action that defines
- * it.
- * <li>AT_BEGIN, if the scripting variable is available from the start tag of the action that defines it until the end
- * of the scope.
- * <li>AT_END, if the scripting variable is available after the end tag of the action that defines it until the end of
- * the scope.
+ * <li>NESTED, if the scripting variable is synchronized with the calling page between the start tag and the end tag of
+ * the action that defines it.
+ * <li>AT_BEGIN, if the scripting variable is synchronized with the calling page from the start tag of the action that
+ * defines it until the end of the scope.
+ * <li>AT_END, if the scripting variable is synchronized with the calling page after the end tag of the action that
+ * defines it until the end of the scope.
  * </ul>
  *
  * The scope value for a variable implies what methods may affect its value and thus where synchronization is needed as
@@ -168,17 +172,17 @@ package jakarta.servlet.jsp.tagext;
 public class VariableInfo {
 
     /**
-     * Scope information that scripting variable is visible only within the start/end tags.
+     * Scope information that scripting variable is synchronized with the calling page only within the start/end tags.
      */
     public static final int NESTED = 0;
 
     /**
-     * Scope information that scripting variable is visible after start tag.
+     * Scope information that scripting variable is synchronized with the calling page after start tag.
      */
     public static final int AT_BEGIN = 1;
 
     /**
-     * Scope information that scripting variable is visible after end tag.
+     * Scope information that scripting variable is synchronized with the calling page after end tag.
      */
     public static final int AT_END = 2;
 
@@ -188,7 +192,7 @@ public class VariableInfo {
      * @param varName   The name of the scripting variable
      * @param className The type of this variable
      * @param declare   If true, it is a new variable (in some languages this will require a declaration)
-     * @param scope     Indication on the lexical scope of the variable
+     * @param scope     Indication of the synchronization scope of the variable
      */
     public VariableInfo(String varName, String className, boolean declare, int scope) {
         this.varName = varName;
@@ -227,9 +231,9 @@ public class VariableInfo {
     }
 
     /**
-     * Returns the lexical scope of the variable.
+     * Returns the synchronization scope of the variable.
      * 
-     * @return the lexical scope of the variable, either AT_BEGIN, AT_END, or NESTED.
+     * @return the synchronization scope of the variable, either AT_BEGIN, AT_END, or NESTED.
      * @see #AT_BEGIN
      * @see #AT_END
      * @see #NESTED
