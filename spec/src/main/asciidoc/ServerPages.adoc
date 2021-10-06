@@ -2624,11 +2624,14 @@ buffer overflow. It is illegal, resulting in a translation error, to set
 `autoFlush` to `false` when `buffer=none`. The default value is `true`.
 
 |`isThreadSafe`
-a|NOTE: The Servlet 2.4 specification
-deprecated `SingleThreadModel`, which is the most common mechanism for JSP
-containers to implement isThreadSafe. Page authors are advised against
-using isThreadSafe, as the generated Servlet may contain deprecated
-code.
+a|NOTE: `isThreadSafe` is deprecated in the JSP 3.1 specification and will be
+removed in the JSP 4.0 specification. `SingleThreadModel` which is the most
+common mechanism for JSP containers to implement isThreadSafe was deprecated in
+the Servlet 2.4 specification and removed in the Servlet 6.0 specification. Page
+authors are strongly advised against using isThreadSafe, as the options to
+implement it are limited are are likely to exhibit poor performance. JSP
+implementations must log a warning at translation time if a JSP page uses the
+`isThreadSafe` directive.
 
 Indicates the level of thread safety
 implemented in the page. +
@@ -11673,6 +11676,9 @@ Jakarta Server Pages specification. This appendix is non-normative.
   consistent with the default imports for the scripting environment. Refactor
   the `ScopedAttributeELResolver` to remove the special handling for imports and
   unresolved variables.
+* Deprecate the `isThreadSafe` page directive attribute as the related Servlet
+  API interface `SingleThreadModel` has been removed as of the Servlet 6.0
+  specification.e
 
 === Changes between JSP 3.0 and JSR 245
 
