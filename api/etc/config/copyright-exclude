@@ -1,6 +1,7 @@
-speclicense.html
+EFSL.html
 /etc/config/copyright-exclude
-/etc/config/copyright.txt
+/etc/config/copyright-eclipse.txt
+/etc/config/copyright-oracle.txt
 /src/main/javadoc/jakarta/servlet/jsp/tagext/doc-files/BodyTagProtocol.gif
 /src/main/javadoc/jakarta/servlet/jsp/tagext/doc-files/TagProtocol.gif
 /src/main/javadoc/jakarta/servlet/jsp/tagext/doc-files/VariableInfo-1.gif
