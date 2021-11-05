@@ -55,7 +55,7 @@ The notice is:
 "Copyright © 2018, 2020 Eclipse Foundation. This software or document
 includes material copied from or derived from
 Jakarta ® Server Pages
-https://jakarta.ee/specifications/pages/3.0/[https://jakarta.ee/specifications/pages/3.0/]"
+https://jakarta.ee/specifications/pages/3.1/[https://jakarta.ee/specifications/pages/3.1/]"
 
 ==== Disclaimers
 
