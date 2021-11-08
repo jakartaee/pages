@@ -20,7 +20,7 @@ package jakarta.servlet.jsp;
 
 /**
  * Exception to indicate the calling page must cease evaluation. Thrown by a simple tag handler to indicate that the
- * remainder of the page must not be evaluated. The result is propagated back to the pagein the case where one tag
+ * remainder of the page must not be evaluated. The result is propagated back to the page in the case where one tag
  * invokes another (as can be the case with tag files). The effect is similar to that of a Classic Tag Handler returning
  * Tag.SKIP_PAGE from doEndTag(). Jsp Fragments may also throw this exception. This exception should not be thrown
  * manually in a JSP page or tag file - the behavior is undefined. The exception is intended to be thrown inside
