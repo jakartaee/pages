@@ -1,3 +1,3 @@
 # Prerequisites
 
-JDK 1.8
+Java 11
