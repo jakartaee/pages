@@ -19,6 +19,6 @@ module jakarta.servlet.jsp {
     exports jakarta.servlet.jsp.el;
 
     requires transitive jakarta.el;
-    requires transitive jakarta.servlet.api;
+    requires transitive jakarta.servlet;
     requires transitive java.desktop;
 }
