@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 1997, 2021 Oracle and/or its affiliates and others.
+    Copyright (c) 1997, 2022 Oracle and/or its affiliates and others.
     All rights reserved.
 
     This program and the accompanying materials are made available under the
@@ -77,7 +77,7 @@
     <properties>
         <!-- Make sure the two versions are in sync with the maven version -->
         <spec.version>3.1</spec.version>
-        <bundle.version>3.1.0-SNAPSHOT</bundle.version>
+        <bundle.version>${project.version}</bundle.version>
         <extensionName>jakarta.servlet.jsp</extensionName>
         <bundle.symbolicName>jakarta.servlet.jsp-api</bundle.symbolicName>
         <vendorName>Eclipse Foundation</vendorName>
