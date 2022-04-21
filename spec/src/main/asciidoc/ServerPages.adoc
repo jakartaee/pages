@@ -1082,7 +1082,7 @@ The notation for this grammar is identical to
 that described by Chapter 6 of the XML 1.0 specification, available at
 the following URL:
 
-http://www.w3c.org/TR/2000/REC-xml-20001006#sec-notation
+https://www.w3.org/TR/xml/#sec-notation
 
 In addition, the following notes and rules
 apply:
