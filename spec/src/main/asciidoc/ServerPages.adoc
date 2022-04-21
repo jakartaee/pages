@@ -5574,138 +5574,18 @@ This action has two mandatory attributes:
 
 [[jsp:plugin]]
 === <jsp:plugin>
-The plugin action enables a JSP page author
-to generate HTML that contains the appropriate client browser dependent
-constructs (`OBJECT` or `EMBED`) that will result in the download of
-the Java Plugin software (if required) and subsequent execution of the
-Applet or JavaBeans component specified therein.
 
-The `<jsp:plugin>` tag is replaced by either
-an `<object>` or `<embed>` tag, as appropriate for the requesting user
-agent, and emitted into the output stream of the response. The
-attributes of the `<jsp:plugin>` tag provide configuration data for the
-presentation of the element, as indicated in the table below.
+The HTML elements that the `jsp:plugin` action is translated to are no
+longer supported by any major browser. Therefore, as of version 3.1 of
+this specification, the `jsp:plugin` action has been deprecated and
+will be removed in a future version.
 
-The `<jsp:params>` action containing one or
-more `<jsp:param>` actions provides parameters to the Applet or
-JavaBeans component.
+As of version 3.1 of this specification, the JSP container must ignore
+the `jsp:plugin` action rather than generate HTML that contains either
+the `OBJECT` or `EMBED` constructs.
 
-The `<jsp:fallback>` element indicates the
-content to be used by the client browser if the plugin cannot be started
-(either because `OBJECT` or `EMBED` is not supported by the client
-browser or due to some other problem). If the plugin can start but the
-Applet or JavaBeans component cannot be found or started, a plugin
-specific message will be presented to the user, most likely a popup
-window reporting a `ClassNotFoundException`.
-
-The actual plugin code need not be bundled
-with the JSP container and a reference to Sun’s plugin location can be
-used instead, although some vendors will choose to include the plugin
-for the benefit of their customers.
-
-_Examples_
-
-[source,jsp]
-----
- <jsp:plugin type="applet" code="Molecule.class" codebase="/html" >
-   <jsp:params>
-     <jsp:param
-         name="molecule"
-         value="molecules/benzene.mol"/>
-   </jsp:params>
-   <jsp:fallback>
-     <p> unable to start plugin </p>
-   </jsp:fallback>
- </jsp:plugin>
-----
-
-_Syntax_
-
-[source,jsp]
-----
-....
-<jsp:plugin type="bean|applet"
-    code="objectCode"
-    codebase="objectCodebase"
-    { align="alignment"       }
-    { archive="archiveList"   }
-    { height="height"         }
-    { hspace="hspace"         }
-    { jreversion="jreversion" }
-    { name="componentName"    }
-    { vspace="vspace"         }
-    { title="title"           }
-    { width="width"           }
-    { nspluginurl="url"       }
-    { iepluginurl="url"       }
-    { mayscript='true|false'  } >
-
-    { <jsp:params>
-        { <jsp:param name="paramName" value="paramValue" /> }+
-      </jsp:params> }
-
-    { <jsp:fallback> arbitrary_text </jsp:fallback> }
-</jsp:plugin>
-....
-----
-
-[caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
-[cols="20,80"]
-.jsp:plugin Attributes
-|===
-
-| `type`
-|Identifies the type of the component; a bean,
-or an Applet.
-
-|`code`
-|As defined by HTML spec.
-
-|`codebase`
-|As defined by HTML spec.
-
-|`align`
-|As defined by HTML spec.
-
-|`archive`
-|As defined by HTML spec.
-
-|`height`
-|As defined by HTML spec. +
-Accepts a run-time expression value.
-
-|`hspace`
-|As defined by HTML spec.
-
-|`jreversion`
-|Identifies the spec version number of the JRE
-the component requires in order to operate; the default is: `1.2`.
-
-|`name`
-|As defined by HTML spec.
-
-|`vspace`
-|As defined by HTML spec.
-
-|`title`
-|As defined by the HTML spec.
-
-|`width`
-|As defined by HTML spec. +
-Accepts a run-time expression value.
-
-|`nspluginurl`
-|URL where JRE plugin can be downloaded for
-Netscape Navigator, default is implementation defined.
-
-|`iepluginurl`
-|URL where JRE plugin can be downloaded for
-IE, default is implementation defined.
-
-|`mayscript`
-|As defined by HTML spec.
-
-|===
+The JSP container must still validate that the content of any
+`jsp:plugin` action is consistent with the <<JSP Syntax Grammar>>.
 
 === <jsp:params>
 
@@ -5714,8 +5594,11 @@ The `jsp:params` action is part of the
 `<jsp:plugin>` action. Using the `jsp:params` element in any other
 context shall result in a translation-time error.
 
-The semantics and syntax of `jsp:params` are
-described in <<jsp:plugin>>.
+As of version 3.1 of this specification, the `jsp:params` action is
+deprecated and will be removed in a future version.
+
+The JSP container must still validate that the content of any
+`jsp:params` action is consistent with the <<JSP Syntax Grammar>>.
 
 === <jsp:fallback>
 
@@ -5724,8 +5607,11 @@ The `jsp:fallback` action is part of the
 `<jsp:plugin>` element. Using the `jsp:fallback` element in any other
 context shall result in a translation-time error.
 
-The semantics and syntax of `jsp:fallback`
-are described in <<jsp:plugin>>.
+As of version 3.1 of this specification, the `jsp:fallback` action is
+deprecated and will be removed in a future version.
+
+The JSP container must still validate that the content of any
+`jsp:fallback` action is consistent with the <<JSP Syntax Grammar>>.
 
 [[jsp:attribute]]
 === <jsp:attribute>
@@ -11678,7 +11564,10 @@ Jakarta Server Pages specification. This appendix is non-normative.
   unresolved variables.
 * Deprecate the `isThreadSafe` page directive attribute as the related Servlet
   API interface `SingleThreadModel` has been removed as of the Servlet 6.0
-  specification.e
+  specification.
+* https://github.com/eclipse-ee4j/jsp-api/issues/226[#226]
+  Deprecate the `jsp:plugin` action and related actions as the associated HTML
+  elements are no longer supported by any major borowser.
 
 === Changes between JSP 3.0 and JSR 245
 
