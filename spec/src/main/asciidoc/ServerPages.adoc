@@ -11567,7 +11567,7 @@ Jakarta Server Pages specification. This appendix is non-normative.
   specification.
 * https://github.com/eclipse-ee4j/jsp-api/issues/226[#226]
   Deprecate the `jsp:plugin` action and related actions as the associated HTML
-  elements are no longer supported by any major borowser.
+  elements are no longer supported by any major browser.
 
 === Changes between JSP 3.0 and JSR 245
 
