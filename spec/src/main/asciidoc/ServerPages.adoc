@@ -1263,9 +1263,9 @@ XMLTagDefDirectiveBody     ::=   (   ( 'tag' S TagDirectiveAttrList S?
                                | <TRANSLATION_ERROR>
 
 PageDirectiveAttrList      ::= ATTR[ language, extends, import, session, buffer,
-                                     autoFlush, isThreadSafe, info, errorPage,
-                                     isErrorPage, contentType, pageEncoding,
-                                     isELIgnored, errorOnELNotFound ]
+                                     autoFlush, info, errorPage, isErrorPage,
+                                     contentType, pageEncoding, isELIgnored,
+                                     errorOnELNotFound ]
                                [ vc: PageDirectiveUniqueAttr ]
 
 TagLibDirectiveAttrList    ::=   ATTR[ !uri, !prefix ]
@@ -2507,7 +2507,6 @@ page_directive_attr_list ::= { language="scriptingLanguage"                }
                              { session="true|false"                        }
                              { buffer="none|sizekb"                        }
                              { autoFlush="true|false"                      }
-                             { isThreadSafe="true|false"                   }
                              { info="info_text"                            }
                              { errorPage="error_url"                       }
                              { isErrorPage="true|false"                    }
@@ -2622,32 +2621,6 @@ be flushed automatically (`true` value) when the buffer is filled, or
 whether an exception should be raised (`false` value) to indicate
 buffer overflow. It is illegal, resulting in a translation error, to set
 `autoFlush` to `false` when `buffer=none`. The default value is `true`.
-
-|`isThreadSafe`
-a|NOTE: `isThreadSafe` is deprecated in the JSP 3.1 specification and will be
-removed in the JSP 4.0 specification. `SingleThreadModel` which is the most
-common mechanism for JSP containers to implement isThreadSafe was deprecated in
-the Servlet 2.4 specification and removed in the Servlet 6.0 specification. Page
-authors are strongly advised against using isThreadSafe, as the options to
-implement it are limited are are likely to exhibit poor performance. JSP
-implementations must log a warning at translation time if a JSP page uses the
-`isThreadSafe` directive.
-
-Indicates the level of thread safety
-implemented in the page. +
-If `false` then the JSP container shall
-dispatch multiple outstanding client requests, one at a time, in the
-order they were received, to the page implementation for processing. +
-If `true` then the JSP container may choose
-to dispatch multiple outstanding client requests to the page
-simultaneously. +
-Page authors using `true` must ensure that
-they properly synchronize access to the shared state of the page. +
-Default is `true`. +
-Note that even if the `isThreadSafe`
-attribute is `false` the JSP page author must ensure that accesses to
-any shared objects are properly synchronized., The objects may be shared
-in either the `ServletContext` or the `HttpSession`.
 
 |`info`
 |Defines an arbitrary string that is
@@ -11557,6 +11530,8 @@ Jakarta Server Pages specification. This appendix is non-normative.
 * Remove the deprecated `BodyTag.EVAL_BODY_TAG` constant.
 
 * Remove the deprecated `JspException.getRootCause`.
+
+* Remove the deprecated `isThreadSafe` page directive attribute.
 
 === Changes between JSP 3.1 and JSP 3.0
 
