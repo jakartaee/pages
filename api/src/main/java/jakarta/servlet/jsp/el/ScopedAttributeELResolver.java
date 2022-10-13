@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2021 Oracle and/or its affiliates and others.
+ * Copyright (c) 1997, 2022 Oracle and/or its affiliates and others.
  * All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
@@ -17,11 +17,6 @@
  */
 
 package jakarta.servlet.jsp.el;
-
-import java.beans.FeatureDescriptor;
-import java.util.Iterator;
-import java.util.ArrayList;
-import java.util.Enumeration;
 
 import jakarta.servlet.jsp.PageContext;
 import jakarta.servlet.jsp.JspContext;
@@ -202,114 +197,6 @@ public class ScopedAttributeELResolver extends ELResolver {
             context.setPropertyResolved(true);
         }
         return false;
-    }
-
-    /**
-     * If the base object is <code>null</code>, returns an <code>Iterator</code> containing
-     * <code>FeatureDescriptor</code> objects with information about each scoped attribute resolved by this resolver.
-     * Otherwise, returns <code>null</code>.
-     *
-     * <p>
-     * The <code>Iterator</code> returned must contain one instance of {@link java.beans.FeatureDescriptor} for each
-     * scoped attribute found in any scope. Each info object contains information about a single scoped attribute, and
-     * is initialized as follows:
-     * </p>
-     *
-     * <dl>
-     * <dt>displayName</dt><dd>- The name of the scoped attribute.</dd>
-     * <dt>name</dt><dd>- Same as displayName property.</dd>
-     * <dt>shortDescription</dt><dd>- A suitable description for the scoped attribute. Should include the attribute's current
-     * scope (page, request, session, application). Will vary by implementation.</dd>
-     * <dt>expert</dt><dd>- <code>false</code></dd>
-     * <dt>hidden</dt><dd>- <code>false</code></dd>
-     * <dt>preferred</dt><dd>- <code>true</code></dd>
-     * </dl>
-     * In addition, the following named attributes must be set in the returned <code>FeatureDescriptor</code>s:
-     * <dl>
-     * <dt>{@link ELResolver#TYPE}</dt><dd>- The current runtime type of the scoped attribute.</dd>
-     * <dt>{@link ELResolver#RESOLVABLE_AT_DESIGN_TIME}</dt><dd>- <code>true</code>.</dd>
-     * </dl>
-     * 
-     * @param context The context of this evaluation.
-     * @param base    Only <code>null</code> is handled by this resolver. Other values will result in a
-     *                <code>null</code> return value.
-     * @return An <code>Iterator</code> containing one <code>FeatureDescriptor</code> object for each scoped attribute,
-     *         or <code>null</code> if <code>base</code> is not <code>null</code>.
-     *         
-     * @deprecated This method is deprecated as of EL 5.0 and will be removed in EL 6.0 (Jakarta EE 11). Therefore it
-     *             will be removed here in JSP 4.0.
-     */
-    @Deprecated(forRemoval = true, since = "JSP 3.1")
-    @Override
-    public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext context, Object base) {
-        Enumeration<String> attrs;
-        ArrayList<FeatureDescriptor> list = new ArrayList<>();
-        PageContext ctxt = (PageContext) context.getContext(JspContext.class);
-
-        attrs = ctxt.getAttributeNamesInScope(PageContext.PAGE_SCOPE);
-        while (attrs.hasMoreElements()) {
-            String name = attrs.nextElement();
-            Object value = ctxt.getAttribute(name, PageContext.PAGE_SCOPE);
-            FeatureDescriptor descriptor = new FeatureDescriptor();
-            descriptor.setName(name);
-            descriptor.setDisplayName(name);
-            descriptor.setShortDescription("page scope attribute");
-            descriptor.setExpert(false);
-            descriptor.setHidden(false);
-            descriptor.setPreferred(true);
-            descriptor.setValue("type", value.getClass());
-            descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-            list.add(descriptor);
-        }
-
-        attrs = ctxt.getAttributeNamesInScope(PageContext.REQUEST_SCOPE);
-        while (attrs.hasMoreElements()) {
-            String name = attrs.nextElement();
-            Object value = ctxt.getAttribute(name, PageContext.REQUEST_SCOPE);
-            FeatureDescriptor descriptor = new FeatureDescriptor();
-            descriptor.setName(name);
-            descriptor.setDisplayName(name);
-            descriptor.setShortDescription("request scope attribute");
-            descriptor.setExpert(false);
-            descriptor.setHidden(false);
-            descriptor.setPreferred(true);
-            descriptor.setValue("type", value.getClass());
-            descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-            list.add(descriptor);
-        }
-
-        attrs = ctxt.getAttributeNamesInScope(PageContext.SESSION_SCOPE);
-        while (attrs.hasMoreElements()) {
-            String name = attrs.nextElement();
-            Object value = ctxt.getAttribute(name, PageContext.SESSION_SCOPE);
-            FeatureDescriptor descriptor = new FeatureDescriptor();
-            descriptor.setName(name);
-            descriptor.setDisplayName(name);
-            descriptor.setShortDescription("session scope attribute");
-            descriptor.setExpert(false);
-            descriptor.setHidden(false);
-            descriptor.setPreferred(true);
-            descriptor.setValue("type", value.getClass());
-            descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-            list.add(descriptor);
-        }
-
-        attrs = ctxt.getAttributeNamesInScope(PageContext.APPLICATION_SCOPE);
-        while (attrs.hasMoreElements()) {
-            String name = attrs.nextElement();
-            Object value = ctxt.getAttribute(name, PageContext.APPLICATION_SCOPE);
-            FeatureDescriptor descriptor = new FeatureDescriptor();
-            descriptor.setName(name);
-            descriptor.setDisplayName(name);
-            descriptor.setShortDescription("application scope attribute");
-            descriptor.setExpert(false);
-            descriptor.setHidden(false);
-            descriptor.setPreferred(true);
-            descriptor.setValue("type", value.getClass());
-            descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-            list.add(descriptor);
-        }
-        return list.iterator();
     }
 
     /**
