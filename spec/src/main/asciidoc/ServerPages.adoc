@@ -11549,7 +11549,8 @@ Jakarta Server Pages specification. This appendix is non-normative.
 
 === Changes between JSP 4.0 and JSP 3.1
 
-* TBD
+* Remove the methods that implemented `ELResolver.getFeatureDescriptors()` as
+  those methods have been removed as of EL 6.0.
 
 === Changes between JSP 3.1 and JSP 3.0
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2021 Oracle and/or its affiliates and others.
+ * Copyright (c) 1997, 2022 Oracle and/or its affiliates and others.
  * All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
@@ -18,8 +18,6 @@
 
 package jakarta.servlet.jsp.el;
 
-import java.beans.FeatureDescriptor;
-import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -254,180 +252,6 @@ public class ImplicitObjectELResolver extends ELResolver {
             return true;
         }
         return false; // Doesn't matter
-    }
-
-    /**
-     * If the base object is <code>null</code>, and the property matches the name of a JSP implicit object, returns an
-     * <code>Iterator</code> containing <code>FeatureDescriptor</code> objects with information about each JSP implicit
-     * object resolved by this resolver. Otherwise, returns <code>null</code>.
-     *
-     * <p>
-     * The <code>Iterator</code> returned must contain one instance of {@link java.beans.FeatureDescriptor} for each of
-     * the EL implicit objects defined by the JSP spec. Each info object contains information about a single implicit
-     * object, and is initialized as follows:
-     * </p>
-     * <dl>
-     * <dt>displayName</dt><dd>- The name of the implicit object.</dd>
-     * <dt>name</dt><dd>- Same as displayName property.</dd>
-     * <dt>shortDescription</dt><dd>- A suitable description for the implicit object. Will vary by implementation.</dd>
-     * <dt>expert</dt><dd>- <code>false</code></dd>
-     * <dt>hidden</dt><dd>- <code>false</code></dd>
-     * <dt>preferred</dt><dd>- <code>true</code></dd>
-     * </dl>
-     * In addition, the following named attributes must be set in the returned <code>FeatureDescriptor</code>s:
-     * <dl>
-     * <dt>{@link ELResolver#TYPE}</dt><dd>- The runtime type of the implicit object.</dd>
-     * <dt>{@link ELResolver#RESOLVABLE_AT_DESIGN_TIME}</dt><dd>- <code>true</code>.</dd>
-     * </dl>
-     *
-     * @param context The context of this evaluation.
-     * @param base    Only <code>null</code> is handled by this resolver. Other values will result in a
-     *                <code>null</code> return value.
-     * @return An <code>Iterator</code> containing one <code>FeatureDescriptor</code> object for each implicit object,
-     *         or <code>null</code> if <code>base</code> is not <code>null</code>.
-     *         
-     * @deprecated This method is deprecated as of EL 5.0 and will be removed in EL 6.0 (Jakarta EE 11). Therefore it
-     *             will be removed here in JSP 4.0.
-     */
-    @Deprecated(forRemoval = true, since = "JSP 3.1")
-    @Override
-    public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext context, Object base) {
-
-        ArrayList<FeatureDescriptor> list = new ArrayList<>(11);
-
-        // pageContext
-        FeatureDescriptor descriptor = new FeatureDescriptor();
-        descriptor.setName("pageContext");
-        descriptor.setDisplayName("pageContext");
-        // descriptor.setShortDescription("");
-        descriptor.setExpert(false);
-        descriptor.setHidden(false);
-        descriptor.setPreferred(true);
-        descriptor.setValue("type", PageContext.class);
-        descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-        list.add(descriptor);
-
-        // pageScope
-        descriptor = new FeatureDescriptor();
-        descriptor.setName("pageScope");
-        descriptor.setDisplayName("pageScope");
-        // descriptor.setShortDescription("");
-        descriptor.setExpert(false);
-        descriptor.setHidden(false);
-        descriptor.setPreferred(true);
-        descriptor.setValue("type", Map.class);
-        descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-        list.add(descriptor);
-
-        // requestScope
-        descriptor = new FeatureDescriptor();
-        descriptor.setName("requestScope");
-        descriptor.setDisplayName("requestScope");
-        // descriptor.setShortDescription("");
-        descriptor.setExpert(false);
-        descriptor.setHidden(false);
-        descriptor.setPreferred(true);
-        descriptor.setValue("type", Map.class);
-        descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-        list.add(descriptor);
-
-        // sessionScope
-        descriptor = new FeatureDescriptor();
-        descriptor.setName("sessionScope");
-        descriptor.setDisplayName("sessionScope");
-        // descriptor.setShortDescription("");
-        descriptor.setExpert(false);
-        descriptor.setHidden(false);
-        descriptor.setPreferred(true);
-        descriptor.setValue("type", Map.class);
-        descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-        list.add(descriptor);
-
-        // applicationScope
-        descriptor = new FeatureDescriptor();
-        descriptor.setName("applicationScope");
-        descriptor.setDisplayName("applicationScope");
-        // descriptor.setShortDescription("");
-        descriptor.setExpert(false);
-        descriptor.setHidden(false);
-        descriptor.setPreferred(true);
-        descriptor.setValue("type", Map.class);
-        descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-        list.add(descriptor);
-
-        // param
-        descriptor = new FeatureDescriptor();
-        descriptor.setName("param");
-        descriptor.setDisplayName("param");
-        // descriptor.setShortDescription("");
-        descriptor.setExpert(false);
-        descriptor.setHidden(false);
-        descriptor.setPreferred(true);
-        descriptor.setValue("type", Map.class);
-        descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-        list.add(descriptor);
-
-        // paramValues
-        descriptor = new FeatureDescriptor();
-        descriptor.setName("paramValues");
-        descriptor.setDisplayName("paramValues");
-        // descriptor.setShortDescription("");
-        descriptor.setExpert(false);
-        descriptor.setHidden(false);
-        descriptor.setPreferred(true);
-        descriptor.setValue("type", Map.class);
-        descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-        list.add(descriptor);
-
-        // header
-        descriptor = new FeatureDescriptor();
-        descriptor.setName("header");
-        descriptor.setDisplayName("header");
-        // descriptor.setShortDescription("");
-        descriptor.setExpert(false);
-        descriptor.setHidden(false);
-        descriptor.setPreferred(true);
-        descriptor.setValue("type", Map.class);
-        descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-        list.add(descriptor);
-
-        // headerValues
-        descriptor = new FeatureDescriptor();
-        descriptor.setName("headerValues");
-        descriptor.setDisplayName("headerValues");
-        // descriptor.setShortDescription("");
-        descriptor.setExpert(false);
-        descriptor.setHidden(false);
-        descriptor.setPreferred(true);
-        descriptor.setValue("type", Map.class);
-        descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-        list.add(descriptor);
-
-        // cookie
-        descriptor = new FeatureDescriptor();
-        descriptor.setName("cookie");
-        descriptor.setDisplayName("cookie");
-        // descriptor.setShortDescription("");
-        descriptor.setExpert(false);
-        descriptor.setHidden(false);
-        descriptor.setPreferred(true);
-        descriptor.setValue("type", Map.class);
-        descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-        list.add(descriptor);
-
-        // initParam
-        descriptor = new FeatureDescriptor();
-        descriptor.setName("initParam");
-        descriptor.setDisplayName("initParam");
-        // descriptor.setShortDescription("");
-        descriptor.setExpert(false);
-        descriptor.setHidden(false);
-        descriptor.setPreferred(true);
-        descriptor.setValue("type", Map.class);
-        descriptor.setValue("resolvableAtDesignTime", Boolean.TRUE);
-        list.add(descriptor);
-
-        return list.iterator();
     }
 
     /**
