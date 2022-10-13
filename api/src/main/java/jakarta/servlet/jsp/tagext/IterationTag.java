@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2020 Oracle and/or its affiliates and others.
+ * Copyright (c) 1997, 2022 Oracle and/or its affiliates and others.
  * All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
@@ -70,10 +70,6 @@ public interface IterationTag extends Tag {
 
     /**
      * Request the reevaluation of some body. Returned from doAfterBody.
-     *
-     * For compatibility with JSP 1.1, the value is carefully selected to be the same as the, now deprecated,
-     * BodyTag.EVAL_BODY_TAG,
-     * 
      */
     public final static int EVAL_BODY_AGAIN = 2;
 
