@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2020 Oracle and/or its affiliates and others.
+ * Copyright (c) 1997, 2022 Oracle and/or its affiliates and others.
  * All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
@@ -96,15 +96,6 @@ import jakarta.servlet.jsp.JspException;
  * doEndTag() is invoked. If the custom action element is empty, only doStart() and doEndTag() are invoked.
  */
 public interface BodyTag extends IterationTag {
-
-    /**
-     * Deprecated constant that has the same value as EVAL_BODY_BUFFERED and EVAL_BODY_AGAIN. This name has been marked
-     * as deprecated to encourage the use of the two different terms, which are much more descriptive.
-     *
-     * @deprecated As of Java JSP API 1.2, use BodyTag.EVAL_BODY_BUFFERED or IterationTag.EVAL_BODY_AGAIN.
-     */
-    @Deprecated
-    public final static int EVAL_BODY_TAG = 2;
 
     /**
      * Request the creation of new buffer, a BodyContent on which to evaluate the body of this tag.
