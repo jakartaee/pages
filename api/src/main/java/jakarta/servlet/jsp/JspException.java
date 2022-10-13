@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2020 Oracle and/or its affiliates and others.
+ * Copyright (c) 1997, 2022 Oracle and/or its affiliates and others.
  * All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
@@ -47,8 +47,7 @@ public class JspException extends Exception {
      * Constructs a new <code>JspException</code> with the specified detail message and cause.
      *
      * @param message a <code>String</code> specifying the text of the exception message
-     * @param cause   the cause which is saved for later retrieval by the {@link #getCause()} and
-     *                {@link #getRootCause()} methods.
+     * @param cause   the cause which is saved for later retrieval by the {@link #getCause()} method.
      *
      * @see java.lang.Exception#Exception(String, Throwable)
      */
@@ -59,24 +58,11 @@ public class JspException extends Exception {
     /**
      * Constructs a new <code>JspException</code> with the specified cause.
      *
-     * @param cause the cause which is saved for later retrieval by the {@link #getCause()} and {@link #getRootCause()}
-     *              methods.
+     * @param cause the cause which is saved for later retrieval by the {@link #getCause()} method.
      *
      * @see java.lang.Exception#Exception(Throwable)
      */
     public JspException(Throwable cause) {
         super(cause);
-    }
-
-    /**
-     * Returns the exception that caused this JSP exception.
-     *
-     * @return the <code>Throwable</code> that caused this JSP exception
-     *
-     * @deprecated As of JSP 2.1, replaced by {@link #getCause()}
-     */
-    @Deprecated
-    public Throwable getRootCause() {
-        return getCause();
     }
 }
