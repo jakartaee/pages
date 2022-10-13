@@ -1332,7 +1332,6 @@ StandardAction             ::=   ( 'useBean'     StdActionContent )
                                | ( 'getProperty' StdActionContent )
                                | ( 'include'     StdActionContent )
                                | ( 'forward'     StdActionContent )
-                               | ( 'plugin'      StdActionContent )
                                | ( 'invoke'      StdActionContent )
                                | ( 'doBody'      StdActionContent )
                                | ( 'element'     StdActionContent )
@@ -1346,7 +1345,6 @@ StdActionContent           ::= Attributes StdActionBody
 StdActionBody              ::=   EmptyBody
                                | OptionalBody
                                | ParamBody
-                               | PluginBody
                                [ vc: StdActionBodyMatch ]
 
 EmptyBody                  ::=   '/>'
@@ -1384,16 +1382,6 @@ ParamBody                  ::=   EmptyBody
                                  )
                                | ( S? '>' Param* ETag )
 
-PluginBody                 ::=   EmptyBody
-                               | ( '>' S? ( '<jsp:attribute' NamedAttributes )?
-                                   '<jsp:body'
-                                   (   JspBodyPluginTags
-                                     | <TRANSLATION_ERROR>
-                                   )
-                                   S? ETag
-                                 )
-                               | ( '>' S? PluginTags ETag )
-
 NamedAttributes            ::= AttributeBody S? ( '<jsp:attribute' AttributeBody S? )*
 
 AttributeBody              ::=   ATTR[ !name, trim, omit ] S?
@@ -1419,36 +1407,6 @@ JspBodyEmptyBody           ::=   '/>'
                                | <TRANSLATION_ERROR>
 
 JspBodyParam               ::= S? '>' S? Param* '</jsp:body>'
-
-JspBodyPluginTags          ::= S? '>' S? PluginTags '</jsp:body>'
-
-PluginTags                 ::= ( '<jsp:params' Params S? )?
-                               ( '<jsp:fallback' Fallback S? )?
-
-Params                     ::= '>' S?
-                               (   ( '<jsp:body>'
-                                     (   ( S? Param+ S? '</jsp:body>' )
-                                       | <TRANSLATION_ERROR>
-                                     )
-                                   )
-                                 | Param+
-                               )
-                               '</jsp:params>'
-
-Fallback                   ::=   '/>'
-                               | ( '>' S? '<jsp:body>'
-                                   (   ( S?
-                                         ( Char* - ( Char* '</jsp:body>' ) )
-                                         '</jsp:body>' S?
-                                       )
-                                     | <TRANSLATION_ERROR>
-                                   )
-                                   '</jsp:fallback>'
-                                 )
-                               | ( '>'
-                                   ( Char* - ( Char* '</jsp:fallback>' ) )
-                                   '</jsp:fallback>'
-                                 )
 
 Param                      ::= '<jsp:param' StdActionContent
 
@@ -1815,13 +1773,6 @@ indicates which attributes can be provided.
 |`jsp:forward`
 |`ParamBody`
 |`( =!page )`
-
-|`jsp:plugin`
-|`PluginBody`
-|`( !type, !code, !codebase, align, archive,` +
-`{nbsp} =height, hspace, jreversion, name, vspace,` +
-`{nbsp} title, =width, nspluginurl, iepluginurl,` +
-`{nbsp} mayscript )`
 
 |`jsp:invoke`
 |`EmptyBody`
@@ -3312,8 +3263,6 @@ expressions:
 (<<jsp:forward>>).
 * The `value` attribute of `jsp:param`
 (<<jsp:param>>).
-* The `height` and `width` attributes of
-`jsp:plugin` (<<jsp:plugin>>).
 * The `name` attribute of `jsp:element`
 (<<jsp:element>>).
 
@@ -5544,47 +5493,6 @@ _Syntax_
 This action has two mandatory attributes:
 `name` and `value`. `name` indicates the name of the parameter, and
 `value`, which may be a request-time expression, indicates its value.
-
-[[jsp:plugin]]
-=== <jsp:plugin>
-
-The HTML elements that the `jsp:plugin` action is translated to are no
-longer supported by any major browser. Therefore, as of version 3.1 of
-this specification, the `jsp:plugin` action has been deprecated and
-will be removed in a future version.
-
-As of version 3.1 of this specification, the JSP container must ignore
-the `jsp:plugin` action rather than generate HTML that contains either
-the `OBJECT` or `EMBED` constructs.
-
-The JSP container must still validate that the content of any
-`jsp:plugin` action is consistent with the <<JSP Syntax Grammar>>.
-
-=== <jsp:params>
-
-The `jsp:params` action is part of the
-`jsp:plugin` action and can only occur as a direct child of a
-`<jsp:plugin>` action. Using the `jsp:params` element in any other
-context shall result in a translation-time error.
-
-As of version 3.1 of this specification, the `jsp:params` action is
-deprecated and will be removed in a future version.
-
-The JSP container must still validate that the content of any
-`jsp:params` action is consistent with the <<JSP Syntax Grammar>>.
-
-=== <jsp:fallback>
-
-The `jsp:fallback` action is part of the
-`jsp:plugin` action and can only occur as a direct child of a
-`<jsp:plugin>` element. Using the `jsp:fallback` element in any other
-context shall result in a translation-time error.
-
-As of version 3.1 of this specification, the `jsp:fallback` action is
-deprecated and will be removed in a future version.
-
-The JSP container must still validate that the content of any
-`jsp:fallback` action is consistent with the <<JSP Syntax Grammar>>.
 
 [[jsp:attribute]]
 === <jsp:attribute>
@@ -11532,6 +11440,8 @@ Jakarta Server Pages specification. This appendix is non-normative.
 * Remove the deprecated `JspException.getRootCause`.
 
 * Remove the deprecated `isThreadSafe` page directive attribute.
+
+* Remove the deprecated `jsp:plugin` action and related actions.
 
 === Changes between JSP 3.1 and JSP 3.0
 
