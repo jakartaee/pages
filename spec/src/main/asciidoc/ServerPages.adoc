@@ -11556,6 +11556,8 @@ Jakarta Server Pages specification. This appendix is non-normative.
 
 * Remove the deprecated `BodyTag.EVAL_BODY_TAG` constant.
 
+* Remove the deprecated `JspException.getRootCause`.
+
 === Changes between JSP 3.1 and JSP 3.0
 
 * Deprecate methods that override `ELResolver.getFeatureDescriptors()` as that
