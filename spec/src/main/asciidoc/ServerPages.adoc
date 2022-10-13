@@ -7087,7 +7087,7 @@ custom action, then the elements so effected would be interpreted as
 invocations on custom actions or tags.
 
 Although the JSP container understands that
-this document is a namespace-aware document, t4.0JSP 3.1 container does
+this document is a namespace-aware document, the JSP 4.0 container does
 not really understand that the generated content is a well-formed XML
 document and, as the next example shows, a JSP document can generate
 other types of content.
@@ -7242,7 +7242,7 @@ versions of the JSP specification.
 
 ==== Generating XML Content Natively
 
-A4.0JSP 3.1 content is textual, even when
+All JSP 4.0 content is textual, even when
 using JSP documents to generate XML content. This is quite acceptable,
 and even ideal, for some applications, but in some other applications
 XML documents are the main data type being manipulated. For example, the
@@ -8344,7 +8344,7 @@ development group may want to constrain the way some features are used.
 
 Validation can be done either at
 translation-time or at request-time. In general translation-time
-validation provides a better user experience, and t4.0JSP 3.1
+validation provides a better user experience, and the JSP 4.0
 specification provides a very flexible translation-time validation
 mechanism.
 
@@ -10628,7 +10628,7 @@ from the JSP page implementation object to the client.
 The JSP page describes how to create a
 response object from a request object for a given protocol, possibly
 creating and/or using some other objects in the process . A JSP page may
-also indicate how some events are to be handled. 4.0JSP 3.1 only `init`
+also indicate how some events are to be handled. In JSP 4.0 only `init`
 and `destroy` events are allowed events.
 
 The JSP container must render a JSP page for the HTTP methods GET and POST
@@ -10669,7 +10669,7 @@ in <<Scripting>>.
 
 The contract also describes how a JSP author
 can indicate what actions will be taken when the `init` and `destroy`
-methods of the page implementation occur. 4.0JSP 3.1 this is done by
+methods of the page implementation occur. In JSP 4.0 this is done by
 defining methods with the names `jspInit` and `jspDestroy` in a
 declaration scripting element in the JSP page. The `jspInit` method, if
 present, will be called to prepare the page before the first request is
@@ -11029,7 +11029,7 @@ can still be used in a scriptlet in a `.jsp` file, by invoking
 === Precompilation
 
 A JSP page that is using the HTTP protocol
-will receive HTTP request4.0JSP 3.1 compliant containers must support a
+will receive HTTP requests. JSP 4.0 compliant containers must support a
 simple precompilation protocol, as well as some basic reserved parameter
 names. Note that the precompilation protocol is related but not the same
 as the notion of compiling a JSP page into a `Servlet` class
@@ -11082,7 +11082,9 @@ error; 500 (Server error).
 The Jakarta Debugging Support for Other Languages specification provides
 the JSP Compiler with a standard format to convey source map debugging
 information to tools such as debuggers. See
-`https://jakarta.ee/specifications/debugging/2.0/` for details4.0JSP 3.1 containers are required to provide debugging support for JSP pages
+`https://jakarta.ee/specifications/debugging/2.0/` for details.
+
+JSP 4.0 containers are required to provide debugging support for JSP pages
 and tag files written in either standard or XML syntax.
 
 The JSP compiler must produce `.class` files
@@ -11228,13 +11230,13 @@ This appendix shows two simple examples
 of packaging a JSP page into a WAR for delivery into a Web container. In
 the first example, the JSP page is delivered in source form. This is
 likely to be the most common example. In the second example the JSP page
-is compiled into a servlet that uses only Servlet 6.0 a4.0JSP 3.1 API
+is compiled into a servlet that uses only Servlet 6.0 and JSP 4.0 API
 calls; the servlet is then packaged into a WAR with a deployment
 descriptor such that it looks as the original JSP page to any client.
 
 This appendix is non normative. Actually,
 strictly speaking, the appendix relates more to the Servlet 6.0
-capabilities than to t4.0JSP 3.1 capabilities. The appendix is included
+capabilities than to the JSP 4.0 capabilities. The appendix is included
 here as this is a feature that JSP page authors and JSP page authoring
 tools are interested in.
 
@@ -11277,7 +11279,7 @@ compile the JSP page into a servlet class to run in a JSP container.
 
 The JSP page is compiled into a servlet with
 some implementation dependent name `com.acme._jsp_HelloWorld_XXX_Impl`.
-The servlet code only depends on t4.0JSP 3.1 and Servlet 6.0 APIs, as
+The servlet code only depends on the JSP 4.0 and Servlet 6.0 APIs, as
 follows:
 
 [source,java]
@@ -11419,7 +11421,7 @@ standard syntax.
 
 . Reset the file.
 
-. If the file is a JSP page in standard syn4.0:
+. If the file is a JSP page in standard syntax:
 +
 3.1 If the file is not preceded by a BOM:
 +
