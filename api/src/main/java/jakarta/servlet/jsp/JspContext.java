@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2020 Oracle and/or its affiliates and others.
+ * Copyright (c) 1997, 2022 Oracle and/or its affiliates and others.
  * All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
@@ -175,29 +175,6 @@ public abstract class JspContext {
      * @return the current JspWriter stream being used for client response
      */
     abstract public JspWriter getOut();
-
-    /**
-     * Provides programmatic access to the ExpressionEvaluator. The JSP Container must return a valid instance of an
-     * ExpressionEvaluator that can parse EL expressions.
-     *
-     * @deprecated As of JSP 2.1, replaced by {@link JspApplicationContext#getExpressionFactory}
-     * @return A valid instance of an ExpressionEvaluator.
-     * @since JSP 2.0
-     */
-    @Deprecated
-    public abstract jakarta.servlet.jsp.el.ExpressionEvaluator getExpressionEvaluator();
-
-    /**
-     * Returns an instance of a VariableResolver that provides access to the implicit objects specified in the JSP
-     * specification using this JspContext as the context object.
-     *
-     * @deprecated As of JSP 2.1, replaced by {@link ELContext#getELResolver}, which can be obtained by
-     *             <code>jspContext.getELContext().getELResolver()</code>.
-     * @return A valid instance of a VariableResolver.
-     * @since JSP 2.0
-     */
-    @Deprecated
-    public abstract jakarta.servlet.jsp.el.VariableResolver getVariableResolver();
 
     /**
      * Returns the <code>ELContext</code> associated with this <code>JspContext</code>.
