@@ -11552,6 +11552,8 @@ Jakarta Server Pages specification. This appendix is non-normative.
 * Remove the methods that implemented `ELResolver.getFeatureDescriptors()` as
   those methods have been removed as of EL 6.0.
 
+* Remove the deprecated classes from the `jakarta.servlet.jsp.el` package.
+
 === Changes between JSP 3.1 and JSP 3.0
 
 * Deprecate methods that override `ELResolver.getFeatureDescriptors()` as that
