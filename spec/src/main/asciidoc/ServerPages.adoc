@@ -11443,6 +11443,10 @@ Jakarta Server Pages specification. This appendix is non-normative.
 
 * Remove the deprecated `jsp:plugin` action and related actions.
 
+* https://github.com/eclipse-ee4j/jsp-api/issues/235[#235]
+  Update `ErrorData` to add support for the new attribute
+  `jakarta.servlet.error.query_string`
+
 === Changes between JSP 3.1 and JSP 3.0
 
 * Deprecate methods that override `ELResolver.getFeatureDescriptors()` as that
