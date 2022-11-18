@@ -424,7 +424,8 @@ abstract public class PageContext extends JspContext {
         return new ErrorData((Throwable) getRequest().getAttribute("jakarta.servlet.error.exception"),
                 ((Integer) getRequest().getAttribute("jakarta.servlet.error.status_code")).intValue(),
                 (String) getRequest().getAttribute("jakarta.servlet.error.request_uri"),
-                (String) getRequest().getAttribute("jakarta.servlet.error.servlet_name"));
+                (String) getRequest().getAttribute("jakarta.servlet.error.servlet_name"),
+                (String) getRequest().getAttribute("jakarta.servlet.error.query_string"));
     }
 
 }
