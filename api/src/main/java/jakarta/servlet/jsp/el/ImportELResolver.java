@@ -65,6 +65,24 @@ public class ImportELResolver extends ELResolver {
                 // A possible optimization is to set the ELClass
                 // instance in an attribute map.
             }
+
+
+            if (value == null) {
+                // This might be an imported static field
+                c = context.getImportHandler().resolveStatic(attribute);
+                if (c != null) {
+                    try {
+                        value = c.getField(attribute).get(null);
+                    } catch (IllegalArgumentException | IllegalAccessException |
+                            NoSuchFieldException | SecurityException e) {
+                        // Most (all?) of these should have been
+                        // prevented by the checks when the import
+                        // was defined.
+                    }
+                }
+            }
+
+
             if (value != null) {
                 context.setPropertyResolved(true);
             }
