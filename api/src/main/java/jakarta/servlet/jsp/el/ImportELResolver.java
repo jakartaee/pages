@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 2023 Contributors to the Eclipse Foundation.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -18,6 +18,7 @@ package jakarta.servlet.jsp.el;
 import jakarta.el.ELContext;
 import jakarta.el.ELClass;
 import jakarta.el.ELResolver;
+import jakarta.el.ImportHandler;
 import jakarta.el.ELException;
 
 /**
@@ -55,15 +56,30 @@ public class ImportELResolver extends ELResolver {
             throw new NullPointerException();
         }
 
-        // check to see if the property is an imported class
-        if (base == null && property instanceof String && context.getImportHandler() != null) {
+        ImportHandler importHandler = context.getImportHandler();
+        if (base == null && property instanceof String && importHandler != null) {
             String attribute = (String) property;
             Object value = null;
-            Class<?> c = context.getImportHandler().resolveClass(attribute);
+            // Check to see if the property is an imported class
+            Class<?> c = importHandler.resolveClass(attribute);
             if (c != null) {
                 value = new ELClass(c);
                 // A possible optimization is to set the ELClass
                 // instance in an attribute map.
+            }
+            // Check to see if the property is an imported static field
+            if (value == null) {
+                c = importHandler.resolveStatic(attribute);
+                if (c != null) {
+                    try {
+                        value = c.getField(attribute).get(null);
+                    } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException |
+                            SecurityException e) {
+                        // Most (all?) of these should have been
+                        // prevented by the checks when the import
+                        // was defined.
+                    }
+                }
             }
             if (value != null) {
                 context.setPropertyResolved(true);
