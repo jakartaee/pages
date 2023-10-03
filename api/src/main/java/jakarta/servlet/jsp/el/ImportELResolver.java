@@ -20,6 +20,8 @@ import jakarta.el.ELClass;
 import jakarta.el.ELResolver;
 import jakarta.el.ImportHandler;
 import jakarta.el.ELException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Defines variable resolution behavior for Class imports and static imports.
@@ -27,6 +29,10 @@ import jakarta.el.ELException;
  * @since JSP 3.1
  */
 public class ImportELResolver extends ELResolver {
+
+    private final Map<String, Object> cache = new ConcurrentHashMap<>();
+
+    private static final Object NULL_MARKER = new Object();
 
     /**
      * If the base object is <code>null</code>, searches the Class and static imports for an import with the given name
@@ -60,12 +66,23 @@ public class ImportELResolver extends ELResolver {
         if (base == null && property instanceof String && importHandler != null) {
             String attribute = (String) property;
             Object value = null;
+            Object cacheResult = cache.get(attribute);
+            if(cacheResult != null) {
+                if(cacheResult == NULL_MARKER) {
+                    return null;
+                } else {
+                    return new ELClass((Class) cacheResult);
+                }
+            }
             // Check to see if the property is an imported class
             Class<?> c = importHandler.resolveClass(attribute);
             if (c != null) {
+                cache.put(attribute, c);
                 value = new ELClass(c);
                 // A possible optimization is to set the ELClass
                 // instance in an attribute map.
+            } else {
+                cache.put(attribute, NULL_MARKER);
             }
             // Check to see if the property is an imported static field
             if (value == null) {
