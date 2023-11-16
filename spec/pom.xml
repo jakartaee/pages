@@ -82,9 +82,9 @@
     <properties>
         <site.output.dir>${project.build.directory}/staging</site.output.dir>
         <maven.site.skip>true</maven.site.skip>
-        <asciidoctorj.version>2.4.0</asciidoctorj.version>
-        <asciidoctorj.pdf.version>1.5.3</asciidoctorj.pdf.version>
-        <jruby.version>9.2.13.0</jruby.version>
+        <asciidoctorj.version>2.5.10</asciidoctorj.version>
+        <asciidoctorj.pdf.version>2.3.9</asciidoctorj.pdf.version>
+        <jruby.version>9.3.13.0</jruby.version>
         <!-- status: DRAFT, BETA, etc., or blank for final -->
         <status>DRAFT</status>
         <maven.build.timestamp.format>MMMM dd, yyyy</maven.build.timestamp.format>
@@ -169,6 +169,7 @@
                         </goals>
                         <configuration>
                             <backend>html5</backend>
+                            <sourceDirectory>${basedir}/src/main/asciidoc</sourceDirectory>
                             <outputFile>${project.build.directory}/generated-docs/jakarta-server-pages-spec-${project.version}.html</outputFile>
                             <attributes>
                                 <doctype>book</doctype>
@@ -192,6 +193,7 @@
                         </goals>
                         <configuration>
                             <backend>pdf</backend>
+                            <sourceDirectory>${basedir}/src/main/asciidoc</sourceDirectory>
                             <outputFile>${project.build.directory}/generated-docs/jakarta-server-pages-spec-${project.version}.pdf</outputFile>
                             <attributes>
                                 <pdf-stylesdir>${project.basedir}/src/main/theme</pdf-stylesdir>
@@ -214,8 +216,8 @@
                 </executions>
                 <configuration>
                     <sourceDocumentName>server-pages-spec.adoc</sourceDocumentName>
-                    <sourceHighlighter>coderay</sourceHighlighter>
                     <attributes>
+                        <source-highlighter>coderay</source-highlighter>
                         <revnumber>${project.version}</revnumber>
                         <revremark>${status}</revremark>
                         <revdate>${revisiondate}</revdate>
