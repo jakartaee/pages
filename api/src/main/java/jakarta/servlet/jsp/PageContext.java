@@ -20,6 +20,7 @@ package jakarta.servlet.jsp;
 
 import java.io.IOException;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
@@ -421,11 +422,11 @@ abstract public class PageContext extends JspContext {
      * @since JSP 2.0
      */
     public ErrorData getErrorData() {
-        return new ErrorData((Throwable) getRequest().getAttribute("jakarta.servlet.error.exception"),
-                ((Integer) getRequest().getAttribute("jakarta.servlet.error.status_code")).intValue(),
-                (String) getRequest().getAttribute("jakarta.servlet.error.method"),
-                (String) getRequest().getAttribute("jakarta.servlet.error.request_uri"),
-                (String) getRequest().getAttribute("jakarta.servlet.error.servlet_name"),
-                (String) getRequest().getAttribute("jakarta.servlet.error.query_string"));
+        return new ErrorData((Throwable) getRequest().getAttribute(RequestDispatcher.ERROR_EXCEPTION),
+                ((Integer) getRequest().getAttribute(RequestDispatcher.ERROR_STATUS_CODE)).intValue(),
+                (String) getRequest().getAttribute(RequestDispatcher.ERROR_METHOD),
+                (String) getRequest().getAttribute(RequestDispatcher.ERROR_REQUEST_URI),
+                (String) getRequest().getAttribute(RequestDispatcher.ERROR_SERVLET_NAME),
+                (String) getRequest().getAttribute(RequestDispatcher.ERROR_QUERY_STRING));
     }
 }
