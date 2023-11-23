@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2020 Oracle and/or its affiliates and others.
+ * Copyright (c) 1997, 2023 Oracle and/or its affiliates and others.
  * All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
@@ -423,9 +423,9 @@ abstract public class PageContext extends JspContext {
     public ErrorData getErrorData() {
         return new ErrorData((Throwable) getRequest().getAttribute("jakarta.servlet.error.exception"),
                 ((Integer) getRequest().getAttribute("jakarta.servlet.error.status_code")).intValue(),
+                (String) getRequest().getAttribute("jakarta.servlet.error.method"),
                 (String) getRequest().getAttribute("jakarta.servlet.error.request_uri"),
                 (String) getRequest().getAttribute("jakarta.servlet.error.servlet_name"),
                 (String) getRequest().getAttribute("jakarta.servlet.error.query_string"));
     }
-
 }

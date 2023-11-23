@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2020 Oracle and/or its affiliates and others.
+ * Copyright (c) 1997, 2023 Oracle and/or its affiliates and others.
  * All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
@@ -30,6 +30,7 @@ public final class ErrorData {
 
     private final Throwable throwable;
     private final int statusCode;
+    private final String method;
     private final String uri;
     private final String queryString;
     private final String servletName;
@@ -46,7 +47,7 @@ public final class ErrorData {
      */
     @Deprecated(since = "4.0", forRemoval = true)
     public ErrorData(Throwable throwable, int statusCode, String uri, String servletName) {
-        this(throwable, statusCode, uri, servletName, null);
+        this(throwable, statusCode, null, uri, servletName, null);
     }
 
     /**
@@ -54,13 +55,16 @@ public final class ErrorData {
      *
      * @param throwable   The Throwable that is the cause of the error
      * @param statusCode  The status code of the error
+     * @param method      The request method
      * @param uri         The request URI
      * @param servletName The name of the servlet invoked
      * @param queryString The request query string
      */
-    public ErrorData(Throwable throwable, int statusCode, String uri, String servletName, String queryString) {
+    public ErrorData(Throwable throwable, int statusCode, String method, String uri, String servletName,
+            String queryString) {
         this.throwable = throwable;
         this.statusCode = statusCode;
+        this.method = method;
         this.uri = uri;
         this.servletName = servletName;
         this.queryString = queryString;
@@ -82,6 +86,15 @@ public final class ErrorData {
      */
     public int getStatusCode() {
         return this.statusCode;
+    }
+
+    /**
+     * Returns the request method.
+     *
+     * @return The request method
+     */
+    public String getMethod() {
+        return this.method;
     }
 
     /**
