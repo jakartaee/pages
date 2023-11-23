@@ -11447,7 +11447,10 @@ Jakarta Server Pages specification. This appendix is non-normative.
 
 * https://github.com/eclipse-ee4j/jsp-api/issues/235[#235]
   Update `ErrorData` to add support for the new attribute
-  `jakarta.servlet.error.query_string`
+  `jakarta.servlet.error.query_string`.
+
+* Update `ErrorData` to add support for the new attribute
+  `jakarta.servlet.error.method`.
 
 === Changes between JSP 3.1 and JSP 3.0
 
