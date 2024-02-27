@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2023 Oracle and/or its affiliates and others.
+ * Copyright (c) 1997, 2024 Oracle and/or its affiliates and others.
  * All rights reserved.
  * Copyright 2004 The Apache Software Foundation
  *
@@ -43,7 +43,7 @@ public final class ErrorData {
      * @param uri         The request URI
      * @param servletName The name of the servlet invoked
      * 
-     * @deprecated Use {@link ErrorData#ErrorData(Throwable, int, String, String, String)}
+     * @deprecated Use {@link ErrorData#ErrorData(Throwable, int, String, String, String, String)}
      */
     @Deprecated(since = "4.0", forRemoval = true)
     public ErrorData(Throwable throwable, int statusCode, String uri, String servletName) {
