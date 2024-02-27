@@ -29,7 +29,7 @@
 
     <groupId>jakarta.servlet.jsp</groupId>
     <artifactId>jsp-parent</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.0.0-M2</version>
     <packaging>pom</packaging>
 
     <name>Jakarta Server Pages API</name>
