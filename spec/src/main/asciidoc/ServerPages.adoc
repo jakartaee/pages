@@ -3753,15 +3753,12 @@ include the `ELResolver` registered by Faces.
 . The `ELResolver` returned
 by `ExpressionFactory.getStreamELResolver()`.
 . `jakarta.el.StaticFieldResolver`
-. `jakarta.el.MapELResolver` - constructed in
-read/write mode.
+. `jakarta.el.MapELResolver` - constructed in read/write mode.
 . `jakarta.el.ResourceBundleELResolver`
-. `jakarta.el.ListELResolver` - constructed in
-read/write mode.
-. `jakarta.el.ArrayELResolver` - constructed
-in read/write mode.
-. `jakarta.el.BeanELResolver` - constructed in
-read/write mode. +
+. `jakarta.el.ListELResolver` - constructed in read/write mode.
+. `jakarta.el.ArrayELResolver` - constructed in read/write mode.
+. `jakarta.el.RecordELResolver` - always read only.
+. `jakarta.el.BeanELResolver` - constructed in read/write mode. +
 Handles all cases where `base != null`
 +
 . `jsp.ScopedAttributeELResolver` +
