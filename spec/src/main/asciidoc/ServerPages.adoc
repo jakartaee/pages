@@ -9,7 +9,7 @@
 :sectnums!:
 == Jakarta Server Pages Specification, Version 4.0
 
-Copyright (c) 2013, 2023 Oracle and/or its affiliates and others.
+Copyright (c) 2013, 2024 Oracle and/or its affiliates and others.
 All rights reserved.
 
 Eclipse is a registered trademark of the Eclipse Foundation. Jakarta
