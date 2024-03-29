@@ -261,9 +261,8 @@ given page.
 
 ===== Role in Jakarta EE
 
-With a few exceptions, integration of JSP
-pages within Jakarta EE 9 is inherited from the Servlet 6.1
-specification since translation turns JSPs into servlets.
+With a few exceptions, integration of JSP pages within Jakarta EE is inherited
+from the Servlet specification since translation turns JSPs into servlets.
 
 ==== Users of Jakarta Server Pages
 
