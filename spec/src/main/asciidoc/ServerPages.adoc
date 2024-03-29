@@ -1704,7 +1704,7 @@ with an unrecognized prefix is allowed in the body of a custom or
 standard action. In the following example, assuming ‘my’ is a valid
 prefix and ‘indent’ is a valid tag, the `</ul>` tag is considered
 template text, and no translation error is produced:
-
++
 [source,jsp]
 ----
  <my:indent level="2">
@@ -1716,7 +1716,7 @@ The following example, however, would
 produce a translation error, assuming ‘my’ is a valid prefix and
 ‘indent’ is a valid tag, and regardless of whether ‘othertag’ is a valid
 tag or not.
-
++
 [source,jsp]
 ----
  <my:indent level="2">
