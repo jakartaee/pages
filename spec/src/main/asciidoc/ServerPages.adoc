@@ -989,6 +989,7 @@ globally to the JSP page.
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Example 1 - Input
 [cols="20,80",options="header"]
+[%breakable]
 |===
 |LineNo|Source Text
 |1|`<?xml version="1.0" ?>`
@@ -1001,6 +1002,7 @@ The result is:
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Example 1 - Output
 [cols="20,80",options="header"]
+[%breakable]
 |===
 |LineNo|Output Text
 |1|`<?xml version="1.0" ?>`
@@ -1014,6 +1016,7 @@ with input and output.
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Example 2 - Input
 [cols="20,80",options="header"]
+[%breakable]
 |===
 |LineNo|Source Text
 |1|`<% response.setContentType("\...");`
@@ -1027,6 +1030,7 @@ The result is:
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Example 2 - Output
 [cols="20,80",options="header"]
+[%breakable]
 |===
 |LineNo|Output Text
 |1|`<?xml version="1.0" ?>`
@@ -1744,6 +1748,7 @@ indicates which attributes can be provided.
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Valid body content and attributes for Standard Actions
 [cols="20,20,60",options="header"]
+[%breakable]
 |===
 
 |Element
@@ -2247,6 +2252,7 @@ shown in <<_Implicit_Objects_Available_in_JSP_Pages>>.
 [[_Implicit_Objects_Available_in_JSP_Pages]]
 .Implicit Objects Available in JSP Pages
 [cols="15,45,40",options="header"]
+[%breakable]
 |===
 
 |Variable Name
@@ -2319,6 +2325,7 @@ can be accessed in an error page, as described in
 [[_Implicit_Objects_Available_in_Error_Pages]]
 .Implicit Objects Available in Error Pages
 [cols="20,40,40",options="header"]
+[%breakable]
 |===
 
 |Variable Name
@@ -2474,6 +2481,7 @@ The details of the attributes are as follows:
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .Page Directive Attributes
 [cols="20,80"]
+[%breakable]
 |===
 
 |`language`
@@ -2753,6 +2761,7 @@ where the attributes are:
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 .{blank}
 [cols="20,80"]
+[%breakable]
 |===
 
 |`uri`
@@ -2859,6 +2868,7 @@ semantics is shown in <<_Summary_of_Include_Mechanisms_in_JSP_4.0>>.
 [[_Summary_of_Include_Mechanisms_in_JSP_4.0]]
 .Summary of Include Mechanisms in JSP 4.0
 [cols="28,15,12,25,20",options="header"]
+[%breakable]
 |===
 
 |Syntax
@@ -3293,6 +3303,7 @@ whether at translation time or request-time.
 [[_Conversion_from_string_values_to_target_type]]
 .Conversions from string values to target type
 [cols="20,80",options="header"]
+[%breakable]
 |===
 
 |Target Type
@@ -3570,6 +3581,7 @@ results:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="50,05",options="header"]
+[%breakable]
 .Examples of Using ${} and #{}
 |===
 
@@ -3650,6 +3662,7 @@ using these implicit objects:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="50,50",options="header"]
+[%breakable]
 .Examples of Using Implicit Objects
 |===
 
@@ -4071,6 +4084,7 @@ pages, and their meanings:
 [[_EL_Evaluation_Settings_for_JSP_Pages]]
 .EL Evaluation Settings for JSP Pages
 [cols="30,30,40",options="header"]
+[%breakable]
 |===
 
 |JSP Configuration <el-ignored>
@@ -4105,6 +4119,7 @@ pages, and their meanings:
 [[_EL_Evaluation_Settings_for_Tag_Files]]
 .EL Evaluation Settings for Tag Files
 [cols="50,50",options="header"]
+[%breakable]
 |===
 
 |Tag Directive isELIgnored
@@ -4165,6 +4180,7 @@ delivered using the `.jsp` extension:
 [[_Scripting_Settings]]
 .Scripting Settings
 [cols="50,50",options="header"]
+[%breakable]
 |===
 
 |JSP Configuration <scripting-invalid>
@@ -4217,6 +4233,7 @@ identifier settings for JSP pages, and their meanings:
 [[_EL_Unknown_Identifier_Settings_for_JSP_Pages]]
 .EL Evaluation Unknown Identifier for JSP Pages
 [cols="30,30,40",options="header"]
+[%breakable]
 |===
 
 |JSP Configuration <error-on-el-not-found>
@@ -4252,6 +4269,7 @@ identifier settings for tag files, and their meanings:
 [[_EL_Unknown_Identifier_Settings_for_Tag_Files]]
 .EL Unknown Identifier Settings for Tag Files
 [cols="50,50",options="header"]
+[%breakable]
 |===
 
 |Tag Directive errorOnELNotFound
@@ -4602,6 +4620,7 @@ depends on the particular encoding of the text file, as follows:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="50,50",options="header"]
+[%breakable]
 .Byte representations of the BOM
 |===
 
@@ -5021,6 +5040,7 @@ attributes:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+[%breakable]
 .jsp:useBean Attributes
 |===
 
@@ -5161,6 +5181,7 @@ following attributes:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+[%breakable]
 .jsp:setProperty Attributes
 |===
 
@@ -5259,6 +5280,7 @@ The attributes are:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+[%breakable]
 .jsp:getProperty Attributes
 |===
 
@@ -5363,6 +5385,7 @@ The valid attributes are:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+[%breakable]
 .jsp:include Atrributes
 |===
 
@@ -5440,6 +5463,7 @@ follows:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+[%breakable]
 .jsp:forward Attributes
 |===
 
@@ -5607,6 +5631,7 @@ The attributes are:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+[%breakable]
 .Attributes for the `<jsp:attribute>` standard action
 |===
 
@@ -5769,6 +5794,7 @@ The attributes are:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+[%breakable]
 .Attributes for the `<jsp:invoke>` standard action
 |===
 
@@ -5836,6 +5862,7 @@ The attributes are:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+[%breakable]
 .Attributes for the `<jsp:doBody>` standard action
 |===
 
@@ -5940,6 +5967,7 @@ has a special meaning when used in the body of `<jsp:element>`. See
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+[%breakable]
 .Attributes for the `<jsp:element>` standard action
 |===
 
@@ -6245,6 +6273,7 @@ jsp:output:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="30,70"]
+[%breakable]
 .Attribute for the `<jsp:output>` standard action
 |===
 
@@ -6680,6 +6709,7 @@ jsp:root is the version of the JSP specification used:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+[%breakable]
 .Attributes for the `<jsp:root>` standard action
 |===
 
@@ -6818,6 +6848,7 @@ For example, if the variable i has the value
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80",options="header"]
+[%breakable]
 .Example 1 - Input
 |===
 
@@ -6848,6 +6879,7 @@ The result is:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80",options="header"]
+[%breakable]
 .Example 1 - Output
 |===
 
@@ -8708,6 +8740,7 @@ outlines which directives are available in tag files:
 [[_Directives_available_to_tag_files]]
 .Directives available to tag files
 [cols="20,20,60",options="header"]
+[%breakable]
 |===
 
 |Directive
@@ -8810,6 +8843,7 @@ The details of the attributes are as follows:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+[%breakable]
 [[_Details_of_tag_directive_attribute]]
 .Details of `tag` directive attributes
 |===
@@ -8956,6 +8990,7 @@ The details of the attributes are as follows:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="20,80"]
+[%breakable]
 .Details of `attribute` directive attributes
 |===
 
@@ -9088,6 +9123,7 @@ The details of the attributes are as follows:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="25,75"]
+[%breakable]
 .Details of `variable` directive attributes
 |===
 
@@ -9200,6 +9236,7 @@ shown in <<_Implicit_Objects_Available_in_Tag_Files>>.
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="15,45,40",options="header"]
+[%breakable]
 [[_Implicit_Objects_Available_in_Tag_Files]]
 .Implicit Objects Available in Tag Files
 |===
@@ -9313,6 +9350,7 @@ variable’s scope, as per <<_Variable_synchronization_behavior>>.
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="40,20,20,20",options="header"]
+[%breakable]
 [[_Variable_synchronization_behavior]]
 .Variable synchronization behavior
 |===
@@ -9596,6 +9634,7 @@ other implementation attributes.
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="25,75"]
+[%breakable]
 [[_Structure_of_the_Java_Programming_Language_Class]]
 .Structure of the Java Programming Language Class
 |===
@@ -9674,6 +9713,7 @@ Ignoring quotation issues and performance
 issues, this corresponds to a statement of the form:
 
 [cols="50%,50%",options="header"]
+[%breakable]
 |===
 
 |Original
@@ -9690,6 +9730,7 @@ A scriptlet is transformed into its code
 fragment.:
 
 [cols="50%,50%",options="header"]
+[%breakable]
 |===
 
 |Original
@@ -9711,6 +9752,7 @@ Ignoring quotation and performance issues,
 this corresponds to a statement of the form:
 
 [cols="50%,50%",options="header"]
+[%breakable]
 |===
 
 |Original
@@ -9736,6 +9778,7 @@ of the variable introduced is the name of the `id` attribute and its
 type is the type of the `class` attribute.
 
 [cols="50%,50%",options="header"]
+[%breakable]
 |===
 
 |Original
@@ -9827,6 +9870,7 @@ shown in <<_XML_View_Transformations>>:
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="30,70",options="header"]
+[%breakable]
 [[_XML_View_Transformations]]
 .XML View Transformations
 |===
@@ -10039,6 +10083,7 @@ and that EL is enabled for this translation unit.
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="30,30,30",options="header"]
+[%breakable]
 [[_XML_View_of_an_Escaped_EL_Expression_in_a_Request_time_Attribute_Value]]
 .XML View of an Escaped EL Expression in a Request-time Attribute Value
 |===
@@ -10106,6 +10151,7 @@ is simply substituted with `\#{`.
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="30,30,30",options="header"]
+[%breakable]
 [[_XML_View_of_an_Escaped_EL_Expression_in_Template_Text]]
 .XML View of an Escaped EL Expression in Template Text
 |===
@@ -10642,6 +10688,7 @@ this contract.[[a2917]]
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
 [cols="55,45",options="header"]
+[%breakable]
 [[How_the_JSP_Container_Processes_JSP_Pages]]
 .How the JSP Container Processes JSP Pages
 |===
