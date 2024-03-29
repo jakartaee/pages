@@ -4860,7 +4860,6 @@ is shown next:
 
 [source,jsp]
 ----
-....
 <% { // introduce a new block %>
   ...
 <jsp:useBean id="customer" class="com.myco.Customer" />
@@ -4883,7 +4882,6 @@ is shown next:
 // the variable customer is out of scope now but
 // the object is still valid (and accessible via pageContext)
 %>
-....
 ----
 
 _The scope Attribute_
@@ -5369,7 +5367,7 @@ and
 [source,jsp]
 ----
  <jsp:include page="urlSpec" flush="true|false">
-   { <jsp:param .... /> }*
+   { <jsp:param ... /> }*
  </jsp:include>
 ----
 
@@ -5449,7 +5447,7 @@ and
 [source,jsp]
 ----
  <jsp:forward page="urlSpec">
-   { <jsp:param .... /> }*
+   { <jsp:param ... /> }*
  </jsp:forward>
 ----
 
@@ -6253,7 +6251,6 @@ The <jsp:output> action has the following syntax:
 
 [source,jsp]
 ----
-....
 <jsp:output ( omit-xml-declaration="yes|no|true|false" ) { doctypeDecl } />
 
 doctypeDecl ::=   ( doctype-root-element="rootElement"
@@ -6261,7 +6258,6 @@ doctypeDecl ::=   ( doctype-root-element="rootElement"
                     doctype-system="SystemLiteral" )
                 | ( doctype-root-element="rootElement"
                     doctype-system="SystemLiteral" )
-....
 ----
 
 The following are the valid attributes of
@@ -7120,7 +7116,6 @@ it could be defined by the following code:
 
 [source,jsp]
 ----
-....
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
   <jsp:directive.tag />
   <jsp:directive.attribute name="title" required="true" />
@@ -7132,7 +7127,7 @@ it could be defined by the following code:
 </jsp:root>
 
 where pageCharSet is a variable with a value as iso-8859-1.
-....
+
 ----
 
 Note that this tag is a JSP document (because
@@ -8121,7 +8116,6 @@ each tag in the tag library.
 
 [source,jsp]
 ----
-....
 <taglib xmlns="http://java.sun.com/xml/ns/javaee"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:acme="http://acme.com/"
@@ -8176,14 +8170,12 @@ each tag in the tag library.
     </extension-element>
   </taglib-extension>
 </taglib>
-....
 ----
 
 The corresponding `acme.xsd` file would look something like:
 
 [source,xsd]
 ----
-....
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://acme.com/"
             xmlns:j2ee="http://java.sun.com/xml/ns/j2ee"
@@ -8236,7 +8228,6 @@ The corresponding `acme.xsd` file would look something like:
     </xsd:complexContent>
   </xsd:complexType>
 </xsd:schema>
-....
 ----
 
 === Validation
@@ -8815,7 +8806,6 @@ _Syntax_
 
 [source,jsp]
 ----
-....
 <%@ tag tag_directive_attr_list %>
 
 tag_directive_attr_list ::= { display-name="display-name"                  }
@@ -8832,7 +8822,6 @@ tag_directive_attr_list ::= { display-name="display-name"                  }
                             { errorOnELNotFound="true|false"               }
                             { deferredSyntaxAllowedAsLiteral="true|false"  }
                             { trimDirectiveWhitespaces="true|false"        }
-....
 ----
 
 The details of the attributes are as follows:
@@ -8966,7 +8955,6 @@ _Syntax_
 
 [source,jsp]
 ----
-....
 <%@ attribute attribute_directive_attr_list %>
 
 attribute_directive_attr_list ::= name="attribute-name"
@@ -8979,7 +8967,6 @@ attribute_directive_attr_list ::= name="attribute-name"
                                   { deferredValueType="type"            }
                                   { deferredMethod="true|false"         }
                                   { deferredMethodSignature="signature" }
-....
 ----
 
 The details of the attributes are as follows:
@@ -9100,7 +9087,6 @@ _Syntax_
 
 [source,jsp]
 ----
-....
 <%@ variable variable_directive_attr_list %>
 
 variable_directive_attr_list ::= (   name-given="output-name"
@@ -9112,7 +9098,6 @@ variable_directive_attr_list ::= (   name-given="output-name"
                                  { declare="true|false"           }
                                  { scope="AT_BEGIN|AT_END|NESTED" }
                                  { description="description"      }
-....
 ----
 
 The details of the attributes are as follows:
@@ -9422,7 +9407,6 @@ calling page at the end of the tag invocation.
 
 [source,jsp]
 ----
-....
 <%-- page.jsp --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
@@ -9442,7 +9426,6 @@ ${x} <%-- (x == null) --%>
 <jsp:doBody/>
 ${x} <%-- (x == 2) --%>
 <c:set var="x" value="4"/>
-....
 ----
 
 ===== Example of AT_BEGIN and name-from-attribute
@@ -9454,7 +9437,6 @@ The name of the attribute is customized via `name-from-attribute`.
 
 [source,jsp]
 ----
-....
 <%-- page.jsp --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
@@ -9483,7 +9465,6 @@ ${x} <%-- (x == 'ignored') --%>
 ${result} <%-- (result == 2) --%>
 <c:set var="x" value="still`ignored"/>
 <c:set var="result" value="4"/>
-....
 ----
 
 ===== Example of NESTED
@@ -9494,7 +9475,6 @@ value is restored when the tag is done.
 
 [source,jsp]
 ----
-....
 <%-- page.jsp --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
@@ -9514,7 +9494,6 @@ ${x} <%-- (x == null) --%>
 <jsp:doBody/>
 ${x} <%-- (x == 2) --%>
 <c:set var="x" value="4"/>
-....
 ----
 
 ===== Example of AT_END
@@ -9524,7 +9503,6 @@ return a value to the page. The body of the tag is not affected.
 
 [source,jsp]
 ----
-....
 <%-- page.jsp --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
@@ -9544,7 +9522,6 @@ ${x} <%-- (x == null) --%>
 <jsp:doBody/>
 ${x} <%-- (x == 2) --%>
 <c:set var="x" value="4"/>
-....
 ----
 
 ===== Example of Removing Parameters
@@ -9555,7 +9532,6 @@ synchronization.
 
 [source,jsp]
 ----
-....
 <%-- page.jsp --%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9573,7 +9549,6 @@ ${x}
 <jsp:doBody/>
 <c:remove var="x"/>
 <jsp:doBody/>
-....
 ----
 
 The expected output of this example is: 2 '1' '' 2
@@ -10312,7 +10287,6 @@ For this JSP page:
 
 [source,jsp]
 ----
-....
 <html>
 <title>positiveTagLib</title>
 <body>
@@ -10325,14 +10299,12 @@ For this JSP page:
 Positive Test taglib directive </eg:test>
 </body>
 </html>
-....
 ----
 
 The XML View of the previous page is:
 
 [source,xml]
 ----
-....
 <jsp:root
 xmlns:jsp="http://java.sun.com/JSP/Page"
 xmlns:eg="http://java.apache.org/tomcat/examples-taglib"
@@ -10356,7 +10328,6 @@ xmlns:temp="urn:jsptld:/WEB-INF/tlds/my.tld">
 </html>
 ]]></jsp:text>
 </jsp:root>
-....
 ----
 
 ==== Clearing Out Default Namespace on Include
@@ -10367,7 +10338,6 @@ document:
 
 [source,jsp]
 ----
-....
 <!-- a.jspx -->
 <elementA>
   <tagB xmlns="http://namespace1">
@@ -10378,7 +10348,6 @@ document:
 
 <!-- b.jspx -->
 <elementC />
-....
 ----
 
 The resulting XML View for these two JSP
@@ -10386,7 +10355,6 @@ documents is:
 
 [source,xml]
 ----
-....
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page">
   <elementA>
     <tagB xmlns="http://namespace1">
@@ -10394,7 +10362,6 @@ documents is:
     </tagB>
   </elementA>
 </jsp:root>
-....
 ----
 
 ==== Taglib Direcive Adds to Global Namespace
@@ -10406,7 +10373,6 @@ encountered.
 
 [source,jsp]
 ----
-....
 <!-- c.jspx -->
 <elementD xmlns:jsp="http://java.sun.com/JSP/Page">
   <jsp:directive.include file="d.jsp" />
@@ -10419,7 +10385,6 @@ encountered.
 
 <%-- e.jsp --%>
 <x:tagE />
-....
 ----
 
 The resulting XML View of these documents and
@@ -10427,7 +10392,6 @@ pages is:
 
 [source,xml]
 ----
-....
 <jsp:root xmlns:x="http://namespace2"
     xmlns:jsp="http://java.sun.com/JSP/Page" >
   <elementD>
@@ -10435,7 +10399,6 @@ pages is:
     <x:tagE />
   </elementD>
 </jsp:root>
-....
 ----
 
 ==== Collective Application of Inclusion Semantics
@@ -10445,7 +10408,6 @@ translation-time include semantics are collectively applied:
 
 [source,jsp]
 ----
-....
 <%-- f.jsp --%>
 <%@ taglib prefix="m" uri="http://namespace3" %>
 <%@ include file="g.jspx" %>
@@ -10474,7 +10436,6 @@ translation-time include semantics are collectively applied:
     <jsp:directive.include file="h.jsp" />
   </y:tagL>
 </jsp:root>
-....
 ----
 
 The resulting XML View of these documents and
@@ -10482,7 +10443,6 @@ pages is:
 
 [source,xml]
 ----
-....
 <jsp:root xmlns:m="http://namespace3"
     xmlns:n="http://namespace6"
     xmlns:jsp="http://java.sun.com/JSP/Page" >
@@ -10500,7 +10460,6 @@ pages is:
     <tagI />
   </tagF>
 </jsp:root>
-....
 ----
 
 = Part II
@@ -10769,7 +10728,6 @@ significantly simplifies the implementation.
 .*Code Example JSP.11-1* A Generic HTTP Superclass
 [source,java]
 ----
-....
 imports jakarta.servlet.*;
 imports jakarta.servlet.http.*;
 imports jakarta.servlet.jsp.*;
@@ -10825,14 +10783,12 @@ abstract class ExampleHttpSuper implements HttpJspPage {
   abstract public void _jspService(HttpServletRequest request,
       HttpServletResponse response) throws ServletException, IOException;
   }
-....
 ----
 
 [[The_Java_Class_Generated_From_a_JSP_Page]]
 .*Code Example JSP.11-2* The Java Class Generated From a JSP Page
 [source,java]
 ----
-....
 imports jakarta.servlet.*;
 imports jakarta.servlet.http.*;
 imports jakarta.servlet.jsp.*;
@@ -10850,8 +10806,8 @@ class _jsp1344 extends ExampleHttpSuper {
   // if they are not defined here the superclass methods
   // will be used.
 
-  public void jspInit() {....}
-  public void jspDestroy() {....}
+  public void jspInit() {...}
+  public void jspDestroy() {...}
 
   // The next method is generated automatically by the
   // JSP processor.
@@ -10868,7 +10824,6 @@ class _jsp1344 extends ExampleHttpSuper {
 
   }
 }
-....
 ----
 
 ==== Using the extends Attribute
@@ -10918,7 +10873,6 @@ buffers and sends output. The `JspWriter` class is used in the
 
 [source,java]
 ----
-....
 import jakarta.servlet.jsp.JspWriter;
 
 static JspFactory jspFactory = JspFactory.getDefaultFactory();
@@ -10934,12 +10888,11 @@ _jspService(<SRequest> request, <SResponse> response) {
       PageContext.DEFAULT`BUFFER,
       false);
   JSPWriter out = pageContext.getOut();
-  // ....
-  // .... the body goes here using "out"
-  // ....
+  // ...
+  // ... the body goes here using "out"
+  // ...
   out.flush();
 }
-....
 ----
 
 The complete listing of
@@ -11185,7 +11138,6 @@ extension mapping will pick it up. The `web.xml` is trivial:
 
 [source,xml]
 ----
-....
 <!DOCTYPE webapp
     SYSTEM "http://java.sun.com/j2ee/dtds/web-app_2_3.dtd">
 <webapp>
@@ -11193,7 +11145,6 @@ extension mapping will pick it up. The `web.xml` is trivial:
     <session-timeout>1</session-timeout>
   </session-config>
 </webapp>
-....
 ----
 
 === The Servlet for the Compiled JSP Page
@@ -11208,7 +11159,6 @@ follows:
 
 [source,java]
 ----
-....
 package com.acme;
 
 import jakarta.servlet.*;
@@ -11259,7 +11209,6 @@ public class _jsp_HelloWorld_XXX_Impl
     }
   }
 }
-....
 ----
 
 === The Web Application Descriptor
@@ -11269,7 +11218,6 @@ with the following `web.xml`:
 
 [source,xml]
 ----
-....
 <!DOCTYPE webapp
     SYSTEM "http://java.sun.com/j2ee/dtds/web-app_2_3.dtd">
 <webapp>
@@ -11287,7 +11235,6 @@ with the following `web.xml`:
     <session-timeout>1</session-timeout>
    </session-config>
 </webapp>
-....
 ----
 
 === The WAR for the Compiled JSP Page
