@@ -213,7 +213,7 @@ pages.
 The Jakarta Server Pages specification inherits
 from the servlet specification the concepts of web applications,
 servlet contexts, sessions, and requests and responses. See the Jakarta
-Servlet 6.0 specification for more details.
+Servlet 6.1 specification for more details.
 
 ===== Components and Containers
 
@@ -262,7 +262,7 @@ given page.
 ===== Role in Jakarta EE
 
 With a few exceptions, integration of JSP
-pages within Jakarta EE 9 is inherited from the Servlet 6.0
+pages within Jakarta EE 9 is inherited from the Servlet 6.1
 specification since translation turns JSPs into servlets.
 
 ==== Users of Jakarta Server Pages
@@ -622,9 +622,9 @@ time.
 ===== JSP Page Packaging
 
 When a JSP page implementation class depends
-on support classes in addition to the JSP 4.0 and Servlet 6.0 classes,
+on support classes in addition to the JSP 4.0 and Servlet 6.1 classes,
 the support classes are included in the packaged WAR, as defined in the
-Servlet 6.0 specification, for portability across JSP containers.
+Servlet 6.1 specification, for portability across JSP containers.
 
 <<Packaging JSP Pages>> contains two examples of JSP pages packaged in
 WARs:
@@ -666,12 +666,12 @@ pages.
 * Resource files used by Java classes.
 
 Web applications are described in more detail
-in the Servlet 6.0 specification.
+in the Servlet 6.1 specification.
 
 A web application contains a deployment
 descriptor `web.xml` that contains information about the JSP pages,
 servlets, and other resources used in the web application. The
-deployment descriptor is described in detail in the Servlet 6.0
+deployment descriptor is described in detail in the Servlet 6.1
 specification.
 
 JSP 4.0 requires that these resources be
@@ -689,7 +689,7 @@ semantics of the following elements:
 * The `jsp:forward` action (see<<jsp:forward>>).
 
 JSP 4.0 supports portable packaging and
-deployment of web applications through the Servlet 6.0 specification.
+deployment of web applications through the Servlet 6.1 specification.
 The Jakarta Server Pages specification inherits from the servlet
 specification the concepts of applications, `ServletContexts`,
 `Sessions`, `Requests` and `Responses`.
@@ -697,7 +697,7 @@ specification the concepts of applications, `ServletContexts`,
 ==== Relative URL Specifications
 
 Elements may use relative URL specifications,
-called URI paths in the Servlet 6.0 specification. These paths are as
+called URI paths in the Servlet 6.1 specification. These paths are as
 described in RFC 3986. We refer to the path part of that specification,
 not the scheme, nor authority parts. Some examples are:
 
@@ -3928,7 +3928,7 @@ to validate functions without a prefix at translation time.
 
 This chapter describes the JSP
 configuration information, which is specified in the Web Application
-Deployment Descriptor in `WEB-INF/web.xml`. For Servlet 6.0, the Web
+Deployment Descriptor in `WEB-INF/web.xml`. For Servlet 6.1, the Web
 Application Deployment Descriptor is defined using XML Schema, and
 imports the elements described in the XML Schema for JSP 4.0 Deployment
 Descriptor. See the XML Schema for the details on how to specify JSP
@@ -3985,7 +3985,7 @@ the URL pattern.
 
 The applicability of a JSP property group is
 defined through one or more URL patterns. URL patterns use the same
-syntax as defined in Chapter SRV.12 of the Servlet 6.0 specification,
+syntax as defined in Chapter SRV.12 of the Servlet 6.1 specification,
 but are bound at translation time. All the properties in the group apply
 to the resources in the Web Application that match any of the URL
 patterns. There is an implicit property: that of being a JSP file. JSP
@@ -5491,7 +5491,7 @@ existing values when applicable. The scope of the new parameters is the
 `jsp:include` or `jsp:forward` call; i.e. in the case of an
 `jsp:include` the new parameters (and values) will not apply after the
 include. This is the same behavior as in the `ServletRequest` `include`
-and `forward` methods (see Section 9.1.1 in the Servlet 6.0
+and `forward` methods (see Section 9.1.1 in the Servlet 6.1
 specification).
 
 For example, if the request has a parameter
@@ -7647,7 +7647,7 @@ interface.
 ==== Event Listeners
 
 A tag library may include classes that are
-event listeners (see the Servlet 6.0 specification). The listeners
+event listeners (see the Servlet 6.1 specification). The listeners
 classes are listed in the tag library descriptor and the JSP container
 automatically instantiates them and registers them. A Container is
 required to locate all TLD files (see <<Identifying Tag Library Descriptors>> for details on how they are
@@ -7730,7 +7730,7 @@ handler classes as indicated in <<The Tag Library Descriptor>> below.
 JSP page authoring tools and JSP containers
 are required to accept a tag library that is packaged as a JAR file.
 When deployed in a JSP container, the standard JAR conventions described
-in the Servlet 6.0 specification apply, including the conventions for
+in the Servlet 6.1 specification apply, including the conventions for
 dependencies on extensions.
 
 Packaged tag libraries must have at least one
@@ -8379,7 +8379,7 @@ information that is not described in the current version of the TLD with
 some tag library, it can do so by inserting the information in a
 document it controls, inserting the document in the `WEB-INF` portion of
 the Web Application where the Tag Library resides, and using the
-standard Servlet 6.0 mechanisms to access that information.
+standard Servlet 6.1 mechanisms to access that information.
 
 ==== Customizing a Tag Library
 
@@ -8388,7 +8388,7 @@ and deployment time. For example, a tag library that provides access to
 databases may be customized with login and password information.
 
 There is no convenient place in `web.xml` in
-the Servlet 6.0 spec for customization information. A standardized
+the Servlet 6.1 spec for customization information. A standardized
 mechanism is probably going to be part of a forthcoming JSP
 specification, but in the meantime the suggestion is that a tag library
 author place this information in a well-known location at some resource
@@ -10658,7 +10658,7 @@ improve performance, for example.
 
 The JSP page implementation class will
 implement `jakarta.servlet.Servlet` and requests are delivered to the
-class as per the rules in the Servlet 6.0 specification.
+class as per the rules in the Servlet 6.1 specification.
 
 A JSP page implementation class may depend on
 support classes. If the JSP page implementation class is packaged into a
@@ -10677,7 +10677,7 @@ will implement an interface that extends `JspPage`.
 
 The contract between the JSP container and a
 Java class implementing a JSP page corresponds to the `Servlet`
-interface. Refer to the Servlet 6.0 specification for details.
+interface. Refer to the Servlet 6.1 specification for details.
 
 The responsibility for adhering to this
 contract rests on the JSP container implementation if the JSP page does
@@ -11158,12 +11158,12 @@ This appendix shows two simple examples
 of packaging a JSP page into a WAR for delivery into a Web container. In
 the first example, the JSP page is delivered in source form. This is
 likely to be the most common example. In the second example the JSP page
-is compiled into a servlet that uses only Servlet 6.0 and JSP 4.0 API
+is compiled into a servlet that uses only Servlet 6.1 and JSP 4.0 API
 calls; the servlet is then packaged into a WAR with a deployment
 descriptor such that it looks as the original JSP page to any client.
 
 This appendix is non normative. Actually,
-strictly speaking, the appendix relates more to the Servlet 6.0
+strictly speaking, the appendix relates more to the Servlet 6.1
 capabilities than to the JSP 4.0 capabilities. The appendix is included
 here as this is a feature that JSP page authors and JSP page authoring
 tools are interested in.
@@ -11207,7 +11207,7 @@ compile the JSP page into a servlet class to run in a JSP container.
 
 The JSP page is compiled into a servlet with
 some implementation dependent name `com.acme._jsp_HelloWorld_XXX_Impl`.
-The servlet code only depends on the JSP 4.0 and Servlet 6.0 APIs, as
+The servlet code only depends on the JSP 4.0 and Servlet 6.1 APIs, as
 follows:
 
 [source,java]
