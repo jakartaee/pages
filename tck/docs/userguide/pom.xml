@@ -29,7 +29,7 @@
     <artifactId>tck_jsp</artifactId>
     <packaging>pom</packaging>
     <version>3.1.0</version>
-    <name>Eclipse Foundation Technology Compatibility Kit User's Guide for Jakarta Server Pages for Jakarta EE, Release 3.1</name>
+    <name>Eclipse Foundation Technology Compatibility Kit User's Guide for Jakarta Server Pages for Jakarta EE, Release 4.0</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,7 +49,7 @@
 
     <distributionManagement>
         <site>
-            <url>scm:git:git@github.com:eclipse-ee4j/jakartaee-tck.git</url>
+            <url>scm:git:git@github.com:jakartaee/pages.git</url>
         </site>
     </distributionManagement>
 
