@@ -43,6 +43,8 @@
         <jms-api.version>3.1.0</jms-api.version>
         <jsp-api.version>4.0.0-M2</jsp-api.version>
         <junit.jupiter.version>5.9.3</junit.jupiter.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <repositories>
