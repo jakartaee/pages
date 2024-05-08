@@ -45,6 +45,7 @@
         <jsp-api.version>4.0.0-M2</jsp-api.version>
         <jakarta.ee.version>11.0.0-M1</jakarta.ee.version>
         <junit.jupiter.version>5.9.3</junit.jupiter.version>
+        <javatest.version>5.0</javatest.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
@@ -119,6 +120,11 @@
             <groupId>org.jboss.arquillian.junit5</groupId>
             <artifactId>arquillian-junit5-core</artifactId>
             <version>${arquillian.junit}</version>
+        </dependency>
+        <dependency>
+            <groupId>javatest</groupId>
+            <artifactId>javatest</artifactId>
+            <version>${javatest.version}</version>
         </dependency>
     </dependencies>
 
