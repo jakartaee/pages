@@ -38,7 +38,7 @@ public class PropertyBean implements Serializable {
   public PropertyBean() {
     _pString = "StringValue";
     _pBoolean = Boolean.FALSE;
-    _pInt = new Integer("10");
+    _pInt = Integer.valueOf(10);
   }
 
   /**
