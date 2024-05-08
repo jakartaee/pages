@@ -36,7 +36,7 @@ public class PIntegerPropertyEditor extends PropertyEditorSupport {
    *              if unable to set property
    */
   public void setAsText(String param1) throws IllegalArgumentException {
-    setValue(new Integer(param1 + "314"));
+    setValue(Integer.valueOf(param1 + "314"));
   }
 
 }// PIntegerPropertyEditor
