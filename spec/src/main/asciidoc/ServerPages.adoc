@@ -7,7 +7,7 @@
 :jsp-chapter: 0
 
 :sectnums!:
-== Jakarta Server Pages Specification, Version 4.0
+== Jakarta Server Pages Specification, Version 4.1
 
 Copyright (c) 2013, 2024 Oracle and/or its affiliates and others.
 All rights reserved.
@@ -24,13 +24,13 @@ Comments to: jsp-dev@eclipse.org
 === Preface
 
 This is the Jakarta Server Pages specification
-version 4.0, developed by the Jakarta Server Pages Team under the Eclipse
+version 4.1, developed by the Jakarta Server Pages Team under the Eclipse
 Foundation Specification Process. References in this document to JSP refer
 to Jakarta Server Pages unless otherwise noted.
 
 ==== Who Should Read This Document
 
-This document is the authoritative JSP 4.0
+This document is the authoritative JSP 4.1
 specification. It is intended to provide requirements for
 implementations of JSP page processing, and support by web containers in
 web servers and application servers. As an authoritative document, it
@@ -213,7 +213,7 @@ pages.
 The Jakarta Server Pages specification inherits
 from the servlet specification the concepts of web applications,
 servlet contexts, sessions, and requests and responses. See the Jakarta
-Servlet 6.1 specification for more details.
+Servlet 6.2 specification for more details.
 
 ===== Components and Containers
 
@@ -320,7 +320,7 @@ this class of user:
 * Appendices <<Packaging JSP Pages>>, <<Changes>>, and <<Glossary>>
 
 Advanced page authors may also wish to look at the Javadoc for the
-`jakarta.servlet.jsp` package and the XML schema for the JSP 4.0
+`jakarta.servlet.jsp` package and the XML schema for the JSP 4.1
 deployment descriptor.
 
 ===== Tag Library Developers
@@ -400,7 +400,7 @@ The chapters of this part are:
 == Core Syntax and Semantics{counter2:jsp-chapter}
 
 This chapter describes the core syntax
-and semantics for the Jakarta Server Pages 4.0 specification (JSP 4.0).
+and semantics for the Jakarta Server Pages 4.1 specification (JSP 4.1).
 
 === What Is a JSP Page
 
@@ -621,9 +621,9 @@ time.
 ===== JSP Page Packaging
 
 When a JSP page implementation class depends
-on support classes in addition to the JSP 4.0 and Servlet 6.1 classes,
+on support classes in addition to the JSP 4.1 and Servlet 6.2 classes,
 the support classes are included in the packaged WAR, as defined in the
-Servlet 6.1 specification, for portability across JSP containers.
+Servlet 6.2 specification, for portability across JSP containers.
 
 <<Packaging JSP Pages>> contains two examples of JSP pages packaged in
 WARs:
@@ -641,7 +641,7 @@ implementation class for that page.
 In the past debugging tools provided by
 development environments have lacked a standard format for conveying
 source map information allowing the debugger of one vendor to be used
-with the JSP container of another. JSP 4.0 containers must
+with the JSP container of another. JSP 4.1 containers must
 support the Jakarta Debugging Support for Other Languages Specification.
 Details can be found in <<Debugging Requirements>>.
 
@@ -665,15 +665,15 @@ pages.
 * Resource files used by Java classes.
 
 Web applications are described in more detail
-in the Servlet 6.1 specification.
+in the Servlet 6.2 specification.
 
 A web application contains a deployment
 descriptor `web.xml` that contains information about the JSP pages,
 servlets, and other resources used in the web application. The
-deployment descriptor is described in detail in the Servlet 6.1
+deployment descriptor is described in detail in the Servlet 6.2
 specification.
 
-JSP 4.0 requires that these resources be
+JSP 4.1 requires that these resources be
 implicitly associated with and accessible through a unique
 `ServletContext` instance available as the implicit `application` object
 (see <<Objects>>).
@@ -687,8 +687,8 @@ semantics of the following elements:
 * The `jsp:include` action element (see <<jsp:include>>).
 * The `jsp:forward` action (see<<jsp:forward>>).
 
-JSP 4.0 supports portable packaging and
-deployment of web applications through the Servlet 6.1 specification.
+JSP 4.1 supports portable packaging and
+deployment of web applications through the Servlet 6.2 specification.
 The Jakarta Server Pages specification inherits from the servlet
 specification the concepts of applications, `ServletContexts`,
 `Sessions`, `Requests` and `Responses`.
@@ -696,7 +696,7 @@ specification the concepts of applications, `ServletContexts`,
 ==== Relative URL Specifications
 
 Elements may use relative URL specifications,
-called URI paths in the Servlet 6.1 specification. These paths are as
+called URI paths in the Servlet 6.2 specification. These paths are as
 described in RFC 3986. We refer to the path part of that specification,
 not the scheme, nor authority parts. Some examples are:
 
@@ -2136,7 +2136,7 @@ written to it will be passed directly through to the `ServletResponse`
 output stream.
 
 A JSP page can also describe what should
-happen when some specific events occur. In JSP 4.0, the only events that
+happen when some specific events occur. In JSP 4.1, the only events that
 can be described are the initialization and the destruction of the page.
 These events are described using “well-known method names” in
 declaration elements. (See <<JSP Container>>).
@@ -2488,7 +2488,7 @@ The details of the attributes are as follows:
 the scriptlets, expression scriptlets, and declarations within the body
 of the translation unit (the JSP page and any files included using the
 `include` directive below). +
-In JSP 4.0, the only defined and required
+In JSP 4.1, the only defined and required
 scripting language value for this attribute is `java` (all lowercase,
 case-sensitive). +
 This specification only describes the
@@ -2816,7 +2816,7 @@ for mixed syntax includes are described in
 
 A JSP container can include a mechanism for
 being notified if an included file changes, so the container can
-recompile the JSP page. However, the JSP 4.0 specification does not have
+recompile the JSP page. However, the JSP 4.1 specification does not have
 a way of directing the JSP container that included files have changed.
 
 The `<jsp:directive.include>` element (<<The jsp:directive.include Element>>)
@@ -2859,13 +2859,13 @@ The semantics for mixed syntax includes are described in
 ==== Including Data in JSP Pages
 
 Including data is a significant part of the
-tasks in a JSP page. Accordingly, the JSP 4.0 specification has two
+tasks in a JSP page. Accordingly, the JSP 4.1 specification has two
 include mechanisms suited to different tasks. A summary of their
-semantics is shown in <<_Summary_of_Include_Mechanisms_in_JSP_4.0>>.
+semantics is shown in <<_Summary_of_Include_Mechanisms_in_JSP_4.1>>.
 
 [caption='*Table JSP.{jsp-chapter}-{counter:table-number}* ']
-[[_Summary_of_Include_Mechanisms_in_JSP_4.0]]
-.Summary of Include Mechanisms in JSP 4.0
+[[_Summary_of_Include_Mechanisms_in_JSP_4.1]]
+.Summary of Include Mechanisms in JSP 4.1
 [cols="28,15,12,25,20",options="header"]
 [%breakable]
 |===
@@ -2986,7 +2986,7 @@ element in the web.xml deployment descriptor (see
 There are three other classes of scripting
 elements: declarations, scriptlets and expressions. The scripting
 language used in the current page is given by the value of the
-`language` directive (see <<The `page` Directive>>). In JSP 4.0, the only
+`language` directive (see <<The `page` Directive>>). In JSP 4.1, the only
 value defined is `java`.
 
 Declarations are used to declare scripting
@@ -3216,7 +3216,7 @@ may be applicable; the rules for them are described in
 <<Type Conversions>>.
 
 Many values are fixed translation-time
-values, but JSP 4.0 also provides a mechanism for describing values that
+values, but JSP 4.1 also provides a mechanism for describing values that
 are computed at request time, the rules are described in
 <<Request Time Attribute Values>>.
 
@@ -3372,7 +3372,7 @@ for the setProperty standard action.
 Request-time expressions can be assigned to
 properties of any type. In the case of scriptlet expressions, no
 automatic conversions will be performed. In the case of EL expressions,
-the rules in section 1.23, "Type Conversion" of the EL 6.0 specification
+the rules in section 1.23, "Type Conversion" of the EL 6.1 specification
 document must be followed.
 
 
@@ -3380,8 +3380,8 @@ document must be followed.
 :table-number: 0
 == Expression Language{counter2:jsp-chapter}
 
-Please consult the Jakarta Expression Language 6.0 specification document
-for details on the Expression Language supported by JSP 4.0.
+Please consult the Jakarta Expression Language 6.1 specification document
+for details on the Expression Language supported by JSP 4.1.
 
 The addition of the EL to the JSP technology
 facilitates the writing of scriptless JSP pages. These pages can
@@ -3393,7 +3393,7 @@ The EL is available in attribute values for
 standard and custom actions and within template text.
 
 This chapter describes how the expression
-language is integrated within the JSP 4.0 environment.
+language is integrated within the JSP 4.1 environment.
 
 === Syntax of Expressions in JSP Pages: ${} vs #{}
 
@@ -3541,7 +3541,7 @@ method to be invoked on an Object.
 as the return type of the deferred method signature is not void. A
 `MethodExpression` is created, which when invoked, returns the String
 literal coerced to expected return type (the standard EL coercion rules -
-see section 1.23, "Type Conversion" of the EL 6.0 specification) apply. A
+see section 1.23, "Type Conversion" of the EL 6.1 specification) apply. A
 translation error occurs if the return type is void or if the string
 literal cannot be coerced to the return type of the deferred method
 signature.
@@ -3924,9 +3924,9 @@ to validate functions without a prefix at translation time.
 
 This chapter describes the JSP
 configuration information, which is specified in the Web Application
-Deployment Descriptor in `WEB-INF/web.xml`. For Servlet 6.1, the Web
+Deployment Descriptor in `WEB-INF/web.xml`. For Servlet 6.2, the Web
 Application Deployment Descriptor is defined using XML Schema, and
-imports the elements described in the XML Schema for JSP 4.0 Deployment
+imports the elements described in the XML Schema for JSP 4.1 Deployment
 Descriptor. See the XML Schema for the details on how to specify JSP
 configuration information in a Web Application.
 
@@ -3981,7 +3981,7 @@ the URL pattern.
 
 The applicability of a JSP property group is
 defined through one or more URL patterns. URL patterns use the same
-syntax as defined in Chapter SRV.12 of the Servlet 6.1 specification,
+syntax as defined in Chapter SRV.12 of the Servlet 6.2 specification,
 but are bound at translation time. All the properties in the group apply
 to the resources in the Web Application that match any of the URL
 patterns. There is an implicit property: that of being a JSP file. JSP
@@ -4781,7 +4781,7 @@ Combinations of these approaches also make sense.
 == Standard Actions{counter2:jsp-chapter}
 
 This chapter describes the standard
-actions of Jakarta Server Pages 4.0 (JSP 4.0). Standard actions are
+actions of Jakarta Server Pages 4.1 (JSP 4.1). Standard actions are
 represented using XML elements with a prefix of `jsp` (though that
 prefix can be redefined in the XML syntax). A translation error will
 result if the JSP prefix is used for an element that is not a standard
@@ -5291,7 +5291,7 @@ the property is obtained.
 
 A `<jsp:include \.../>` action provides for
 the inclusion of static and dynamic resources in the same context as the
-current page. See <<Summary of Include Mechanisms in JSP 4.0>> for a summary of include facilities.
+current page. See <<Summary of Include Mechanisms in JSP 4.1>> for a summary of include facilities.
 
 Inclusion is into the current value of `out`. The resource is specified
 using a `relativeURLspec` that is
@@ -5485,7 +5485,7 @@ existing values when applicable. The scope of the new parameters is the
 `jsp:include` or `jsp:forward` call; i.e. in the case of an
 `jsp:include` the new parameters (and values) will not apply after the
 include. This is the same behavior as in the `ServletRequest` `include`
-and `forward` methods (see Section 9.1.1 in the Servlet 6.1
+and `forward` methods (see Section 9.1.1 in the Servlet 6.2
 specification).
 
 For example, if the request has a parameter
@@ -5967,7 +5967,7 @@ has a special meaning when used in the body of `<jsp:element>`. See
 
 |`name`
 |(required) The value of name is that of the
-element generated. The name can be a QName; JSP 4.0 places no
+element generated. The name can be a QName; JSP 4.1 places no
 constraints on this value: it is accepted as is. A request-time
 attribute value may be used for this attribute.
 
@@ -6071,7 +6071,7 @@ The `jsp:output` action can only be used in
 JSP documents and in tag files in XML syntax, and a translation error
 must result if used in a standard syntax JSP or tag file. This action is
 used to modify some properties of the output of a JSP document or a tag
-file. In JSP 4.0 there are four properties that can be specified, all of
+file. In JSP 4.1 there are four properties that can be specified, all of
 which affect the output of the XML prolog.
 
 The `omit-xml-declaration` property allows
@@ -6381,7 +6381,7 @@ The _XML view of a JSP page_ is an XML
 document that is derived from the JSP page following a mapping defined
 later in this chapter. The XML view of a JSP page is intended to be used
 for validating the JSP page against some description of the set of valid
-pages. Validation of the JSP page is supported in the JSP 4.0
+pages. Validation of the JSP page is supported in the JSP 4.1
 specification through a `TagLibraryValidator` class associated with a
 tag library. The validator class acts on a PageData object that
 represents the XML view of the JSP page (see, for example,
@@ -6438,12 +6438,12 @@ See <<Tag Files in XML Syntax>> for details on identifying tag files in XML synt
 
 A JSP document may or not have a `<jsp:root>`
 as its top element; `<jsp:root>` was mandatory in JSP 1.2, but we expect
-most JSP documents in JSP 4.0 not to use it.
+most JSP documents in JSP 4.1 not to use it.
 
 JSP documents identify standard actions
 through the use of a well-defined URI in its namespace; although in this
 chapter the prefix `jsp` is used for the standard actions, any prefix is
-valid as long as the correct URI identifying JSP 4.0 standard actions is
+valid as long as the correct URI identifying JSP 4.1 standard actions is
 used. Custom actions are identified using the URI that identifies their
 tag library; `taglib` directives are not required and cannot appear in a
 JSP document.
@@ -6561,7 +6561,7 @@ must be validated by the container in the translation phase. Validation
 errors must be handled the same way as any other translation phase
 errors, as described in <<Translation Time Processing Errors>>.
 
-JSP 4.0 requires only DTD validation for JSP
+JSP 4.1 requires only DTD validation for JSP
 Documents; containers should not perform validation based on other types
 of schemas, such as XML schema.
 
@@ -6707,7 +6707,7 @@ jsp:root is the version of the JSP specification used:
 
 |`version`
 |(required) The version of the JSP specification used in this page.
-Valid values are "1.2", "2.0", "2.1", "2.2", "2.3", "3.0", "3.1" and "4.0".
+Valid values are "1.2", "2.0", "2.1", "2.2", "2.3", "3.0", "3.1", "4.0" and "4.1".
 It is a translation error if the container does not support the specified version.
 
 |===
@@ -6992,7 +6992,7 @@ custom action, then the elements so effected would be interpreted as
 invocations on custom actions or tags.
 
 Although the JSP container understands that
-this document is a namespace-aware document, the JSP 4.0 container does
+this document is a namespace-aware document, the JSP 4.1 container does
 not really understand that the generated content is a well-formed XML
 document and, as the next example shows, a JSP document can generate
 other types of content.
@@ -7146,7 +7146,7 @@ versions of the JSP specification.
 
 ==== Generating XML Content Natively
 
-All JSP 4.0 content is textual, even when
+All JSP 4.1 content is textual, even when
 using JSP documents to generate XML content. This is quite acceptable,
 and even ideal, for some applications, but in some other applications
 XML documents are the main data type being manipulated. For example, the
@@ -7638,7 +7638,7 @@ interface.
 ==== Event Listeners
 
 A tag library may include classes that are
-event listeners (see the Servlet 6.1 specification). The listeners
+event listeners (see the Servlet 6.2 specification). The listeners
 classes are listed in the tag library descriptor and the JSP container
 automatically instantiates them and registers them. A Container is
 required to locate all TLD files (see <<Identifying Tag Library Descriptors>> for details on how they are
@@ -7721,7 +7721,7 @@ handler classes as indicated in <<The Tag Library Descriptor>> below.
 JSP page authoring tools and JSP containers
 are required to accept a tag library that is packaged as a JAR file.
 When deployed in a JSP container, the standard JAR conventions described
-in the Servlet 6.1 specification apply, including the conventions for
+in the Servlet 6.2 specification apply, including the conventions for
 dependencies on extensions.
 
 Packaged tag libraries must have at least one
@@ -8244,7 +8244,7 @@ development group may want to constrain the way some features are used.
 
 Validation can be done either at
 translation-time or at request-time. In general translation-time
-validation provides a better user experience, and the JSP 4.0
+validation provides a better user experience, and the JSP 4.1
 specification provides a very flexible translation-time validation
 mechanism.
 
@@ -8366,7 +8366,7 @@ information that is not described in the current version of the TLD with
 some tag library, it can do so by inserting the information in a
 document it controls, inserting the document in the `WEB-INF` portion of
 the Web Application where the Tag Library resides, and using the
-standard Servlet 6.1 mechanisms to access that information.
+standard Servlet 6.2 mechanisms to access that information.
 
 ==== Customizing a Tag Library
 
@@ -8375,7 +8375,7 @@ and deployment time. For example, a tag library that provides access to
 databases may be customized with login and password information.
 
 There is no convenient place in `web.xml` in
-the Servlet 6.1 spec for customization information. A standardized
+the Servlet 6.2 spec for customization information. A standardized
 mechanism is probably going to be part of a forthcoming JSP
 specification, but in the meantime the suggestion is that a tag library
 author place this information in a well-known location at some resource
@@ -10510,7 +10510,7 @@ from the JSP page implementation object to the client.
 The JSP page describes how to create a
 response object from a request object for a given protocol, possibly
 creating and/or using some other objects in the process . A JSP page may
-also indicate how some events are to be handled. In JSP 4.0 only `init`
+also indicate how some events are to be handled. In JSP 4.1 only `init`
 and `destroy` events are allowed events.
 
 The JSP container must render a JSP page for the HTTP methods GET and POST
@@ -10551,7 +10551,7 @@ in <<Scripting>>.
 
 The contract also describes how a JSP author
 can indicate what actions will be taken when the `init` and `destroy`
-methods of the page implementation occur. In JSP 4.0 this is done by
+methods of the page implementation occur. In JSP 4.1 this is done by
 defining methods with the names `jspInit` and `jspDestroy` in a
 declaration scripting element in the JSP page. The `jspInit` method, if
 present, will be called to prepare the page before the first request is
@@ -10613,7 +10613,7 @@ improve performance, for example.
 
 The JSP page implementation class will
 implement `jakarta.servlet.Servlet` and requests are delivered to the
-class as per the rules in the Servlet 6.1 specification.
+class as per the rules in the Servlet 6.2 specification.
 
 A JSP page implementation class may depend on
 support classes. If the JSP page implementation class is packaged into a
@@ -10632,7 +10632,7 @@ will implement an interface that extends `JspPage`.
 
 The contract between the JSP container and a
 Java class implementing a JSP page corresponds to the `Servlet`
-interface. Refer to the Servlet 6.1 specification for details.
+interface. Refer to the Servlet 6.2 specification for details.
 
 The responsibility for adhering to this
 contract rests on the JSP container implementation if the JSP page does
@@ -10906,7 +10906,7 @@ can still be used in a scriptlet in a `.jsp` file, by invoking
 === Precompilation
 
 A JSP page that is using the HTTP protocol
-will receive HTTP requests. JSP 4.0 compliant containers must support a
+will receive HTTP requests. JSP 4.1 compliant containers must support a
 simple precompilation protocol, as well as some basic reserved parameter
 names. Note that the precompilation protocol is related but not the same
 as the notion of compiling a JSP page into a `Servlet` class
@@ -10961,7 +10961,7 @@ the JSP Compiler with a standard format to convey source map debugging
 information to tools such as debuggers. See
 `https://jakarta.ee/specifications/debugging/2.0/` for details.
 
-JSP 4.0 containers are required to provide debugging support for JSP pages
+JSP 4.1 containers are required to provide debugging support for JSP pages
 and tag files written in either standard or XML syntax.
 
 The JSP compiler must produce `.class` files
@@ -11107,13 +11107,13 @@ This appendix shows two simple examples
 of packaging a JSP page into a WAR for delivery into a Web container. In
 the first example, the JSP page is delivered in source form. This is
 likely to be the most common example. In the second example the JSP page
-is compiled into a servlet that uses only Servlet 6.1 and JSP 4.0 API
+is compiled into a servlet that uses only Servlet 6.2 and JSP 4.1 API
 calls; the servlet is then packaged into a WAR with a deployment
 descriptor such that it looks as the original JSP page to any client.
 
 This appendix is non normative. Actually,
-strictly speaking, the appendix relates more to the Servlet 6.1
-capabilities than to the JSP 4.0 capabilities. The appendix is included
+strictly speaking, the appendix relates more to the Servlet 6.2
+capabilities than to the JSP 4.1 capabilities. The appendix is included
 here as this is a feature that JSP page authors and JSP page authoring
 tools are interested in.
 
@@ -11154,7 +11154,7 @@ compile the JSP page into a servlet class to run in a JSP container.
 
 The JSP page is compiled into a servlet with
 some implementation dependent name `com.acme._jsp_HelloWorld_XXX_Impl`.
-The servlet code only depends on the JSP 4.0 and Servlet 6.1 APIs, as
+The servlet code only depends on the JSP 4.1 and Servlet 6.2 APIs, as
 follows:
 
 [source,java]
@@ -11418,12 +11418,16 @@ described in appendix F.1 of the XML 1.0 specification.
 This appendix lists the changes in the
 Jakarta Server Pages specification. This appendix is non-normative.
 
+=== Changes between JSP 4.1 and JSP 4.0
+
+* TBD
+
 === Changes between JSP 4.0 and JSP 3.1
 
 * Update the minimum Java version to Java 17.
 
 * Remove the methods that implemented `ELResolver.getFeatureDescriptors()` as
-  those methods have been removed as of EL 6.0.
+  those methods have been removed as of EL 6.1.
 
 * Remove the deprecated classes from the `jakarta.servlet.jsp.el` package.
 
