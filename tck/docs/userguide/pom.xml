@@ -28,8 +28,8 @@
     <groupId>org.glassfish</groupId>
     <artifactId>tck_jsp</artifactId>
     <packaging>pom</packaging>
-    <version>3.1.0</version>
-    <name>Eclipse Foundation Technology Compatibility Kit User's Guide for Jakarta Server Pages for Jakarta EE, Release 4.0</name>
+    <version>4.1.0</version>
+    <name>Eclipse Foundation Technology Compatibility Kit User's Guide for Jakarta Server Pages for Jakarta EE, Release 4.1</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
