@@ -31,3 +31,9 @@ Implementations
 
 * [Eclipse WaSP](https://github.com/eclipse-ee4j/wasp)
 * [Tomcat Jasper](https://tomcat.apache.org/tomcat-10.0-doc/jasper-howto.html)
+
+## TCK Challenges
+
+All test challenges for Jakarta Pages must be resolved by Active Resolution.
+Please see the TCK Users guide for more details.
+
