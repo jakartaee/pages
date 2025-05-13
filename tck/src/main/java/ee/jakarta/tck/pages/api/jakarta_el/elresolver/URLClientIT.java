@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -15,15 +16,15 @@
  */
 
 /*
- * @(#)URLClient.java	
+ * @(#)URLClient.java
  */
 
 package ee.jakarta.tck.pages.api.jakarta_el.elresolver;
 
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
-import com.sun.ts.tests.common.el.api.resolver.ResolverTest;
-import com.sun.ts.tests.common.el.api.resolver.BarELResolver;
+import com.sun.ts.tests.el.common.api.resolver.ResolverTest;
+import com.sun.ts.tests.el.common.api.resolver.BarELResolver;
 
 import java.io.IOException;
 
@@ -55,7 +56,7 @@ public class URLClientIT extends AbstractUrlClient {
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_elresolver_web.war");
     archive.addClasses(JspTestUtil.class,
-            ResolverTest.class, 
+            ResolverTest.class,
             BarELResolver.class);
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_elresolver_web.xml"));
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/ELResolverTest.jsp")), "ELResolverTest.jsp");
@@ -65,17 +66,17 @@ public class URLClientIT extends AbstractUrlClient {
   }
 
 
-  
+
   /* Run tests */
 
   // ============================================ Tests ======
 
   /*
    * @testName: elResolverTest
-   * 
+   *
    * @assertion_ids: EL:JAVADOC:50; EL:JAVADOC:51; EL:JAVADOC:52; EL:JAVADOC:53;
    * EL:JAVADOC:54; EL:JAVADOC:55
-   * 
+   *
    * @test_Strategy: Obtain an ELResolver via the PageContext and verify that
    * API calls work as expected: getValue() getType() setValue() isReadOnly()
    * getCommonPropertyType() getFeatureDescriptors()

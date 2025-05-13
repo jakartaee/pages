@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -15,7 +16,7 @@
  */
 
 /*
- * @(#)URLClient.java	
+ * @(#)URLClient.java
  */
 
 package ee.jakarta.tck.pages.api.jakarta_el.compelresolver;
@@ -25,8 +26,8 @@ import java.io.IOException;
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 import ee.jakarta.tck.pages.common.util.InstallCompositeELResolverListener;
-import com.sun.ts.tests.common.el.api.resolver.ResolverTest;
-import com.sun.ts.tests.common.el.api.resolver.BarELResolver;
+import com.sun.ts.tests.el.common.api.resolver.ResolverTest;
+import com.sun.ts.tests.el.common.api.resolver.BarELResolver;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
@@ -54,29 +55,29 @@ public class URLClientIT extends AbstractUrlClient {
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_compelresolver_web.war");
     archive.addClasses(CompositeELResolverTag.class,
-            JspTestUtil.class, 
+            JspTestUtil.class,
             InstallCompositeELResolverListener.class,
-            ResolverTest.class, 
+            ResolverTest.class,
             BarELResolver.class);
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_compelresolver_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/compelresolver.tld", "compelresolver.tld");    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/compelresolver.tld", "compelresolver.tld");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/CompositeELResolverTest.jsp")), "CompositeELResolverTest.jsp");
-    
+
     return archive;
 
   }
 
-  
+
   /* Run tests */
 
   // ============================================ Tests ======
 
   /*
    * @testName: compositeElResolverTest
-   * 
+   *
    * @assertion_ids: EL:JAVADOC:24; EL:JAVADOC:26; EL:JAVADOC:27; EL:JAVADOC:28;
    * EL:JAVADOC:29; EL:JAVADOC:30; EL:JAVADOC:31
-   * 
+   *
    * @test_Strategy: Obtain a CompositeELResolver via the PageContext and verify
    * that API calls work as expected: add() setValue() setValue() throws
    * PropertyNotWritableException getValue() getType() isReadOnly()

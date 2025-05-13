@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -25,7 +26,7 @@ import java.io.IOException;
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 import ee.jakarta.tck.pages.common.tags.tck.SetTag;
-import com.sun.ts.tests.common.el.spec.Book;
+import com.sun.ts.tests.el.common.spec.Book;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
@@ -49,7 +50,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_el_language_web.war");
     archive.addClasses(JspTestUtil.class,
@@ -59,7 +60,7 @@ public class URLClientIT extends AbstractUrlClient {
     archive.addPackages(true, Filters.exclude(URLClientIT.class),
             URLClientIT.class.getPackageName());
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_el_language_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/el_language.tld", "el_language.tld");    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/el_language.tld", "el_language.tld");
 
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/RValueCoercion2.jsp")), "RValueCoercion2.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/RValueCoercion1.jsp")), "RValueCoercion1.jsp");
@@ -86,9 +87,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: poundDollarSameMeaningTest
-   * 
+   *
    * @assertion_ids: EL:SPEC:1
-   * 
+   *
    * @test_Strategy: [PoundDollarSameMeaning] In a jsp page, set an EL variable,
    * then pass it to a tag handler as both ${expr} and #{expr}. Verify that the
    * tag handler's evaluation of both forms is identical.
@@ -103,9 +104,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: parseOnceEvalManyTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: [ExprParsedEvalMany] In a jsp page, verify that once an
    * expression is parsed, it can be evaluated multiple times.
    */
@@ -119,9 +120,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: rValueCoercion1Test
-   * 
+   *
    * @assertion_ids: EL:SPEC:3
-   * 
+   *
    * @test_Strategy: [RValueCoercion] Set the value of a ValueExpression to a
    * String type and verify that the value retrieved when the expression is
    * evaluated is also a String type.
@@ -136,9 +137,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: rValueCoercion2Test
-   * 
+   *
    * @assertion_ids: EL:SPEC:3
-   * 
+   *
    * @test_Strategy: [RValueCoercion] Set the value of a ValueExpression to a
    * complex type and verify that the value retrieved when the expression is
    * evaluated is a String type in accordance with the coercion rules.
@@ -153,9 +154,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: literalExprEval1Test
-   * 
+   *
    * @assertion_ids: EL:SPEC:6
-   * 
+   *
    * @test_Strategy: [LiteralExprEval] Set the value of a ValueExpression to a
    * literal String type. Verify that the value retrieved when the expression is
    * evaluated is a String equal to the value set.
@@ -170,9 +171,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: literalExprEval2Test
-   * 
+   *
    * @assertion_ids: EL:SPEC:6
-   * 
+   *
    * @test_Strategy: [LiteralExprEval] Coerce a String literal to a Boolean in a
    * ValueExpression. Verify that the value retrieved when the expression is
    * evaluated is a Boolean of the expected value.
@@ -187,9 +188,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: eLSyntaxEscapeTest
-   * 
+   *
    * @assertion_ids: EL:SPEC:8
-   * 
+   *
    * @test_Strategy: [ELSyntaxEscape] Verify that the EL special characters '&'
    * and '#' are treated as literals when preceded with '\'.
    */
@@ -203,9 +204,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: literalExprAsMethodExpr1Test
-   * 
+   *
    * @assertion_ids: EL:SPEC:10
-   * 
+   *
    * @test_Strategy: [LiteralExprAsMethodExpr] Verify that a literal-expression
    * can also be used as a method expression that returns a non-void value.
    */
@@ -219,9 +220,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: literalExprAsMethodExpr2Test
-   * 
+   *
    * @assertion_ids: EL:SPEC:10
-   * 
+   *
    * @test_Strategy: [LiteralExprAsMethodExpr] Verify that a literal-expression
    * can also be used as a method expression that returns a non-void value.
    * Verify that the standard coercion rules apply if the return type is not
@@ -237,9 +238,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: compositeExprEval1Test
-   * 
+   *
    * @assertion_ids: EL:SPEC:11
-   * 
+   *
    * @test_Strategy: [CompositeExprEval] Verify that in a composite expression
    * eval-expressions are coerced to Strings according to the EL type conversion
    * rules and concatenated with any intervening literal-expressions.
@@ -254,9 +255,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: compositeExprEval2Test
-   * 
+   *
    * @assertion_ids: EL:SPEC:11
-   * 
+   *
    * @test_Strategy: [CompositeExprEval] Verify that in a composite expression
    * eval-expressions are evaluated left to right, coerced to Strings according
    * to the EL type conversion rules, and concatenated with any intervening
@@ -272,9 +273,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: dotAndIndexOperatorsSameTest
-   * 
+   *
    * @assertion_ids: EL:SPEC:15
-   * 
+   *
    * @test_Strategy: [DotAndIndexOperatorsSame] Verify that the dot and index
    * operators are evaluated in the same way.
    */

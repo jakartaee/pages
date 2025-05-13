@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -29,7 +30,7 @@ import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 import ee.jakarta.tck.pages.common.util.BaseTCKExtraInfo;
 import ee.jakarta.tck.pages.common.tags.tck.SimpleTag;
-import com.sun.ts.tests.common.el.api.expression.ExpressionTest;
+import com.sun.ts.tests.el.common.api.expression.ExpressionTest;
 
 /**
  * Test client for TagInfo. Implementation note, all tests are performed within
@@ -37,8 +38,6 @@ import com.sun.ts.tests.common.el.api.expression.ExpressionTest;
  * generated and a ValidationMessage array will be returned.
  */
 import java.io.IOException;
-import java.io.InputStream;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -46,7 +45,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.jboss.shrinkwrap.api.asset.UrlAsset;
-import org.junit.jupiter.api.Disabled;
 
 
 @ExtendWith(ArquillianExtension.class)
@@ -72,7 +70,7 @@ public class URLClientIT extends AbstractUrlClient {
             SimpleTag.class,
             ExpressionTest.class);
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_taginfo_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/taginfo.tld", "taginfo.tld");    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/taginfo.tld", "taginfo.tld");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/GetAttributesTest.jsp")), "GetAttributesTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/GetBodyContentTest.jsp")), "GetBodyContentTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/GetDisplayNameTest.jsp")), "GetDisplayNameTest.jsp");
@@ -91,16 +89,16 @@ public class URLClientIT extends AbstractUrlClient {
     return archive;
   }
 
-  
+
   /* Run tests */
 
   // ============================================ Tests ======
 
   /*
    * @testName: tagInfoGetTagNameTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:232
-   * 
+   *
    * @test_Strategy: Validate TagInfo.getTagName() returns the expected values
    * based on what is defined in the TLD.
    */
@@ -114,9 +112,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagInfoGetAttributesTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:233
-   * 
+   *
    * @test_Strategy: Validate TagInfo.getAttributes() returns the expected
    * values based on what is defined in the TLD.
    */
@@ -130,9 +128,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagInfoGetTagExtraInfoTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:237;JSP:JAVADOC:238
-   * 
+   *
    * @test_Strategy: Validate TagInfo.getTagExtraInfo() returns the expected
    * values based on what is defined in the TLD. This implicitly tests
    * TagInfo.setTagExtraInfo().
@@ -147,9 +145,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagInfoGetTagClassNameTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:239
-   * 
+   *
    * @test_Strategy: Validate TagInfo.getTagClassName() returns the expected
    * values based on what is defined in the TLD.
    */
@@ -163,9 +161,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagInfoGetBodyContentTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:240
-   * 
+   *
    * @test_Strategy: Validate TagInfo.getBodyContent() returns the expected
    * values based on what is defined in the TLD.
    */
@@ -179,9 +177,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagInfoGetInfoStringTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:241
-   * 
+   *
    * @test_Strategy: Validate TagInfo.getInfoString() returns the expected
    * values based on what is defined in the TLD.
    */
@@ -195,9 +193,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagInfoGetTagLibraryTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:242;JSP:JAVADOC:243
-   * 
+   *
    * @test_Strategy: Validate TagInfo.getAttributes() returns the expected
    * values based on what is defined in the TLD. This implicitly tests
    * TagInfo.setTagLibrary().
@@ -212,9 +210,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagInfoGetDisplayNameTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:244
-   * 
+   *
    * @test_Strategy: Validate TagInfo.getDisplayName() returns the expected
    * values based on what is defined in the TLD.
    */
@@ -228,9 +226,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagInfoGetSmallIconTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:245
-   * 
+   *
    * @test_Strategy: Validate TagInfo.getSmallIconName() returns the expected
    * values based on what is defined in the TLD.
    */
@@ -244,9 +242,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagInfoGetLargeIconTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:246
-   * 
+   *
    * @test_Strategy: Validate TagInfo.getLargeIconName() returns the expected
    * values based on what is defined in the TLD.
    */
@@ -260,9 +258,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagInfoGetTagVariableInfosTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:247
-   * 
+   *
    * @test_Strategy: Validate TagInfo.getTagVariableInfos() returns the expected
    * values based on what is defined in the TLD.
    */
@@ -276,9 +274,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagInfoHasDynamicAttributesTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:248
-   * 
+   *
    * @test_Strategy: Validate TagInfo.hasDynamicAttributes() returns the
    * expected values based on what is defined in the TLD.
    */
@@ -307,9 +305,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagInfoSetTagExtraInfoTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:237
-   * 
+   *
    * @test_Strategy: Set the instance for extra tag information
    */
   @Test
@@ -322,9 +320,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagInfoSetTagLibraryTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:242
-   * 
+   *
    * @test_Strategy: Set the TagLibraryInfo property.
    */
   @Test

@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -15,7 +16,7 @@
  */
 
 /*
- * @(#)URLClient.java	
+ * @(#)URLClient.java
  */
 
 package ee.jakarta.tck.pages.api.jakarta_servlet.jsp.el.scopedattrelresolver;
@@ -24,12 +25,10 @@ package ee.jakarta.tck.pages.api.jakarta_servlet.jsp.el.scopedattrelresolver;
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 import ee.jakarta.tck.pages.common.util.JspResolverTest;
-import com.sun.ts.tests.common.el.api.resolver.BarELResolver;
-import com.sun.ts.tests.common.el.api.resolver.ResolverTest;
+import com.sun.ts.tests.el.common.api.resolver.BarELResolver;
+import com.sun.ts.tests.el.common.api.resolver.ResolverTest;
 
 import java.io.IOException;
-import java.io.InputStream;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -63,24 +62,24 @@ public class URLClientIT extends AbstractUrlClient {
             BarELResolver.class,
             ResolverTest.class);
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_scopedattrelresolver_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/scopedattrelresolver.tld", "scopedattrelresolver.tld");    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/scopedattrelresolver.tld", "scopedattrelresolver.tld");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/ScopedAttrELResolverTest.jsp")), "ScopedAttrELResolverTest.jsp");
 
 
     return archive;
   }
 
-  
+
   /* Run tests */
 
   // ============================================ Tests ======
 
   /*
    * @testName: scopedAttrElResolverTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:427; JSP:JAVADOC:428; JSP:JAVADOC:429;
    * JSP:JAVADOC:430; JSP:JAVADOC:431; JSP:JAVADOC:433
-   * 
+   *
    * @test_Strategy: Obtain an ScopedAttributeELResolver via the PageContext and
    * verify that API calls work as expected: setValue() getValue() getType()
    * isReadOnly() getCommonPropertyType() getFeatureDescriptors()
