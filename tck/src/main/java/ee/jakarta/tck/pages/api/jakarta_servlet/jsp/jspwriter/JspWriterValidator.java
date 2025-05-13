@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007, 2022 Oracle and/or its affiliates and others.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
  * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
@@ -23,12 +23,13 @@ package ee.jakarta.tck.pages.api.jakarta_servlet.jsp.jspwriter;
 
 import java.util.List;
 
-import java.lang.System.Logger;
-import com.sun.ts.tests.common.webclient.WebTestCase;
-import com.sun.ts.tests.common.webclient.http.HttpResponse;
-import com.sun.ts.tests.common.webclient.validation.TokenizedValidator;
+import ee.jakarta.tck.pages.common.client.WebTestCase;
+import ee.jakarta.tck.pages.common.client.http.HttpResponse;
+import ee.jakarta.tck.pages.common.client.validation.WebValidatorBase;
 
-public class JspWriterValidator extends TokenizedValidator {
+import java.lang.System.Logger;
+
+public class JspWriterValidator extends WebValidatorBase {
 
   private static final Logger logger = System.getLogger(JspWriterValidator.class.getName());
 
@@ -42,7 +43,7 @@ public class JspWriterValidator extends TokenizedValidator {
    * This validator preprocesses the search strings of the test case. It will
    * replace all intances of <code>#eol#</code> with the line separator used by
    * the container.
-   * 
+   *
    * @param testCase
    *          - The test case to validate
    * @return true if the test passes, otherwise, false.

@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -15,7 +16,7 @@
  */
 
 /*
- * @(#)URLClient.java	
+ * @(#)URLClient.java
  */
 
 package ee.jakarta.tck.pages.api.jakarta_el.methodinfo;
@@ -23,7 +24,7 @@ package ee.jakarta.tck.pages.api.jakarta_el.methodinfo;
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 import ee.jakarta.tck.pages.common.tags.tck.SetTag;
-import com.sun.ts.tests.common.el.api.expression.ExpressionTest;
+import com.sun.ts.tests.el.common.api.expression.ExpressionTest;
 
 import java.io.IOException;
 
@@ -57,23 +58,23 @@ public class URLClientIT extends AbstractUrlClient {
               SetTag.class,
               ExpressionTest.class);
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_methodinfo_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/methodinfo.tld", "methodinfo.tld");    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/methodinfo.tld", "methodinfo.tld");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/MethodInfoTest.jsp")), "MethodInfoTest.jsp");
 
     return archive;
 
   }
-  
+
   /* Run tests */
 
   // ============================================ Tests ======
 
   /*
    * @testName: methodInfoTest
-   * 
+   *
    * @assertion_ids: EL:JAVADOC:84; EL:JAVADOC:85; EL:JAVADOC:87; EL:JAVADOC:88;
    * EL:JAVADOC:89
-   * 
+   *
    * @test_Strategy: Validate the behavior of MethodExpression and MethodInfo
    * class methods: MethodExpression.getMethodInfo() MethodExpression.invoke()
    * MethodInfo.getName() MethodInfo.getReturnType() MethodInfo.getParamTypes()

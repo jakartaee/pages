@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -15,15 +16,15 @@
  */
 
 /*
- * @(#)URLClient.java	
+ * @(#)URLClient.java
  */
 
 package ee.jakarta.tck.pages.api.jakarta_el.resourcebundleelresolver;
 
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
-import com.sun.ts.tests.common.el.api.resolver.ResolverTest;
-import com.sun.ts.tests.common.el.api.resolver.BarELResolver;
+import com.sun.ts.tests.el.common.api.resolver.ResolverTest;
+import com.sun.ts.tests.el.common.api.resolver.BarELResolver;
 
 import java.io.IOException;
 
@@ -54,27 +55,27 @@ public class URLClientIT extends AbstractUrlClient {
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_resourcebundleelresolver_web.war");
     archive.addClasses(ResourceBundleELResolverTag.class,
               JspTestUtil.class,
-              ResolverTest.class, 
+              ResolverTest.class,
               BarELResolver.class);
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_resourcebundleelresolver_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/resourcebundleelresolver.tld", "resourcebundleelresolver.tld");    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/resourcebundleelresolver.tld", "resourcebundleelresolver.tld");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/ResourceBundleELResolverTest.jsp")), "ResourceBundleELResolverTest.jsp");
 
     return archive;
 
   }
 
-  
+
   /* Run tests */
 
   // ============================================ Tests ======
 
   /*
    * @testName: resourceBundleElResolverTest
-   * 
+   *
    * @assertion_ids: EL:JAVADOC:103; EL:JAVADOC:104; EL:JAVADOC:105;
    * EL:JAVADOC:106; EL:JAVADOC:107; EL:JAVADOC:109
-   * 
+   *
    * @test_Strategy: Obtain an ResourceBundleELResolver via the PageContext and
    * verify that API calls work as expected: setValue() getValue() getType()
    * isReadOnly() getCommonPropertyType() getFeatureDescriptors()

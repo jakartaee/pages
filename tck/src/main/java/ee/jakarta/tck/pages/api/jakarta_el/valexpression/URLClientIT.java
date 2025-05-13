@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -15,7 +16,7 @@
  */
 
 /*
- * @(#)URLClient.java	
+ * @(#)URLClient.java
  */
 
 package ee.jakarta.tck.pages.api.jakarta_el.valexpression;
@@ -23,7 +24,7 @@ package ee.jakarta.tck.pages.api.jakarta_el.valexpression;
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 import ee.jakarta.tck.pages.common.tags.tck.SetTag;
-import com.sun.ts.tests.common.el.api.expression.ExpressionTest;
+import com.sun.ts.tests.el.common.api.expression.ExpressionTest;
 
 import java.io.IOException;
 
@@ -57,24 +58,24 @@ public class URLClientIT extends AbstractUrlClient {
             SetTag.class,
             ExpressionTest.class);
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_valexpr_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/valexpression.tld", "valexpression.tld");    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/valexpression.tld", "valexpression.tld");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/ValueExpressionTest.jsp")), "ValueExpressionTest.jsp");
 
     return archive;
 
   }
 
-  
+
   /* Run tests */
 
   // ============================================ Tests ======
 
   /*
    * @testName: valueExpressionEvaluateTest
-   * 
+   *
    * @assertion_ids: EL:JAVADOC:110; EL:JAVADOC:111; EL:JAVADOC:112;
    * EL:JAVADOC:113; EL:JAVADOC:114; EL:JAVADOC:60
-   * 
+   *
    * @test_Strategy: Validate the behavior of ValueExpression API and
    * Expression.isLiteralText() ValueExpression.getValue()
    * ValueExpression.setValue() ValueExpression.getType()

@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -15,7 +16,7 @@
  */
 
 /*
- * @(#)URLClient.java	
+ * @(#)URLClient.java
  */
 
 package ee.jakarta.tck.pages.api.jakarta_el.beanelresolver;
@@ -25,8 +26,8 @@ import java.io.IOException;
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
-import com.sun.ts.tests.common.el.api.resolver.ResolverTest;
-import com.sun.ts.tests.common.el.api.resolver.BarELResolver;
+import com.sun.ts.tests.el.common.api.resolver.ResolverTest;
+import com.sun.ts.tests.el.common.api.resolver.BarELResolver;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
@@ -47,15 +48,15 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_beanelresolver_web.war");
     archive.addClasses(BeanELResolverTag.class, SimpleBean.class,
-            JspTestUtil.class, 
-            ResolverTest.class, 
+            JspTestUtil.class,
+            ResolverTest.class,
             BarELResolver.class);
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_beanelresolver_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/beanelresolver.tld", "beanelresolver.tld");    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/beanelresolver.tld", "beanelresolver.tld");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/BeanELResolverTest.jsp")), "BeanELResolverTest.jsp");
 
     return archive;
@@ -64,17 +65,17 @@ public class URLClientIT extends AbstractUrlClient {
 
 
 
-  
+
   /* Run tests */
 
   // ============================================ Tests ======
 
   /*
    * @testName: beanElResolverTest
-   * 
+   *
    * @assertion_ids: EL:JAVADOC:11; EL:JAVADOC:12; EL:JAVADOC:13; EL:JAVADOC:14;
    * EL:JAVADOC:15; EL:JAVADOC:16
-   * 
+   *
    * @test_Strategy: Obtain an BeanELResolver via the PageContext and verify
    * that API calls work as expected: setValue() getValue() getType()
    * isReadOnly() getCommonPropertyType() getFeatureDescriptors()

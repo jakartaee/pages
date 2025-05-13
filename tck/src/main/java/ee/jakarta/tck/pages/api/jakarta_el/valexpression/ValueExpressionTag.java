@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -18,7 +19,7 @@ package ee.jakarta.tck.pages.api.jakarta_el.valexpression;
 
 import java.io.IOException;
 
-import com.sun.ts.tests.common.el.api.expression.ExpressionTest;
+import com.sun.ts.tests.el.common.api.expression.ExpressionTest;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 
 import jakarta.el.ELContext;

@@ -38,11 +38,11 @@
     <properties>
         <arquillian.junit>1.7.0.Alpha14</arquillian.junit>
         <jakarta.annotation-api.version>3.0.0</jakarta.annotation-api.version>
-        <jakarta.el-api.version>6.0.0</jakarta.el-api.version>
+        <jakarta.el-api.version>6.1.0-SNAPSHOT</jakarta.el-api.version>
         <jakarta.mail-api.version>2.1.2</jakarta.mail-api.version>
-        <jakarta.servlet-api.version>6.1.0</jakarta.servlet-api.version>
+        <jakarta.servlet-api.version>6.2.0-SNAPSHOT</jakarta.servlet-api.version>
         <jms-api.version>3.1.0</jms-api.version>
-        <jsp-api.version>4.0.0</jsp-api.version>
+        <jsp-api.version>4.1.0-SNAPSHOT</jsp-api.version>
         <jakarta.ee.version>11.0.0-M1</jakarta.ee.version>
         <junit.jupiter.version>5.9.3</junit.jupiter.version>
         <maven.compiler.source>17</maven.compiler.source>
@@ -52,16 +52,6 @@
     <dependencies>
         <dependency>
             <groupId>jakarta.tck</groupId>
-            <artifactId>common</artifactId>
-            <version>${jakarta.ee.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.tck</groupId>
-            <artifactId>runtime</artifactId>
-            <version>${jakarta.ee.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.tck</groupId>
             <artifactId>libutil</artifactId>
             <version>${jakarta.ee.version}</version>
         </dependency>
@@ -69,6 +59,16 @@
             <groupId>jakarta.tck</groupId>
             <artifactId>signaturetest</artifactId>
             <version>${jakarta.ee.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>commons-httpclient</groupId>
+          <artifactId>commons-httpclient</artifactId>
+          <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.tck</groupId>
+            <artifactId>jakarta-expression-language-tck</artifactId>
+            <version>${jakarta.el-api.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.tck</groupId>

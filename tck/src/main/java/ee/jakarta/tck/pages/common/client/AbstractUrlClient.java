@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -16,10 +17,6 @@
 
 package ee.jakarta.tck.pages.common.client;
 
-import com.sun.ts.tests.common.webclient.BaseUrlClient;
-import com.sun.ts.tests.common.webclient.WebTestCase;
-import com.sun.ts.tests.common.webclient.http.HttpRequest;
-
 import java.net.URL;
 
 import java.util.stream.Collectors;
@@ -31,6 +28,9 @@ import java.nio.charset.StandardCharsets;
 
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
+
+import ee.jakarta.tck.pages.common.client.http.HttpRequest;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
@@ -153,7 +153,7 @@ public abstract class AbstractUrlClient extends BaseUrlClient {
 
   /**
    * Sets the request and test name properties.
-   * 
+   *
    * @param testValue
    *          - a logical test identifier
    * @param testCase
@@ -204,7 +204,7 @@ public abstract class AbstractUrlClient extends BaseUrlClient {
 
   /**
    * Consists of a test name, a request, and a goldenfile.
-   * 
+   *
    * @param testValue
    *          - a logical test identifier
    * @param testCase
@@ -243,7 +243,7 @@ public abstract class AbstractUrlClient extends BaseUrlClient {
   /**
    * Returns full request based of provided context root, jsp name, and test
    * name.
-   * 
+   *
    * @param contextRoot
    *          - request context root
    * @param jspName
