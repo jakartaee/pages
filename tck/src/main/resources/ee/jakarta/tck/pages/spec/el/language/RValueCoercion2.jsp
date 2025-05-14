@@ -18,7 +18,7 @@
 --%>
 
 <%@ page import="ee.jakarta.tck.pages.common.util.JspTestUtil,
-             com.sun.ts.tests.el.common.spec.Book,
+             ee.jakarta.tck.pages.common.el.Book,
              jakarta.el.ValueExpression,
              jakarta.el.ELContext"%>
 <%@ page contentType="text/plain" %>

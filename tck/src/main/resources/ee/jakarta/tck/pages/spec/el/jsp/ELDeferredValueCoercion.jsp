@@ -18,7 +18,7 @@
 --%>
 
 <%@ taglib prefix="test" uri="/WEB-INF/el_jsp.tld" %>
-<%@ page language="java" import="com.sun.ts.tests.el.common.spec.Book" %>
+<%@ page language="java" import="ee.jakarta.tck.pages.common.el.Book" %>
 
 begin </br>
 <% 
