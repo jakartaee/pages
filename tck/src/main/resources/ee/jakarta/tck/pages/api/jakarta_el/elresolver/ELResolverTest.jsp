@@ -18,7 +18,7 @@
 --%>
 
 <%@ page import="ee.jakarta.tck.pages.common.util.JspTestUtil,
-             com.sun.ts.tests.el.common.api.resolver.ResolverTest,
+             ee.jakarta.tck.pages.common.el.resolver.ResolverTest,
              jakarta.el.ELResolver,
              jakarta.el.ELContext"%>
 <%@ page contentType="text/plain" %>
