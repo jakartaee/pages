@@ -22,11 +22,9 @@
 package ee.jakarta.tck.pages.api.jakarta_el.listelresolver;
 
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
+import ee.jakarta.tck.pages.common.el.resolver.BarELResolver;
+import ee.jakarta.tck.pages.common.el.resolver.ResolverTest;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
-import com.sun.ts.tests.el.common.api.resolver.ResolverTest;
-import com.sun.ts.tests.el.common.api.resolver.BarELResolver;
-
-import java.io.IOException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
@@ -49,7 +47,7 @@ public class URLClientIT extends AbstractUrlClient {
   }
 
   @Deployment(testable = false)
-  public static WebArchive createDeployment() throws IOException {
+  public static WebArchive createDeployment() {
 
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_listelresolver_web.war");

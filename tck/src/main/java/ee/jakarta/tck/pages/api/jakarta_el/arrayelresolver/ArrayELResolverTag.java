@@ -19,7 +19,7 @@ package ee.jakarta.tck.pages.api.jakarta_el.arrayelresolver;
 
 import java.io.IOException;
 
-import com.sun.ts.tests.el.common.api.resolver.ResolverTest;
+import ee.jakarta.tck.pages.common.el.resolver.ResolverTest;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 
 import jakarta.el.ArrayELResolver;
@@ -30,6 +30,7 @@ import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 
 public class ArrayELResolverTag extends SimpleTagSupport {
 
+  @Override
   public void doTag() throws JspException, IOException {
 
     StringBuffer buf = new StringBuffer();

@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -15,15 +16,13 @@
  */
 
 /*
- * @(#)URLClient.java	
+ * @(#)URLClient.java
  */
 
 package ee.jakarta.tck.pages.api.jakarta_el.createvalexpr;
 
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
-
-import java.io.IOException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
@@ -46,7 +45,7 @@ public class URLClientIT extends AbstractUrlClient {
   }
 
   @Deployment(testable = false)
-  public static WebArchive createDeployment() throws IOException {
+  public static WebArchive createDeployment() {
 
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_createvalexpr_web.war");
@@ -59,16 +58,16 @@ public class URLClientIT extends AbstractUrlClient {
   }
 
 
-  
+
   /* Run tests */
 
   // ============================================ Tests ======
 
   /*
    * @testName: createValueExpressionTest
-   * 
+   *
    * @assertion_ids: EL:JAVADOC:63
-   * 
+   *
    * @test_Strategy: Validate the behavior of
    * ExpressionFactory.createValueExpression().
    */

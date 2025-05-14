@@ -20,7 +20,7 @@ package ee.jakarta.tck.pages.api.jakarta_el.mapelresolver;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.sun.ts.tests.el.common.api.resolver.ResolverTest;
+import ee.jakarta.tck.pages.common.el.resolver.ResolverTest;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 
 import jakarta.el.ELContext;
@@ -31,10 +31,11 @@ import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 
 public class MapELResolverTag extends SimpleTagSupport {
 
+  @Override
   public void doTag() throws JspException, IOException {
 
     StringBuffer buf = new StringBuffer();
-    HashMap sportstars = new HashMap();
+    HashMap<String,String> sportstars = new HashMap<>();
     sportstars.put("baseball", "Barry Bonds");
     sportstars.put("football", "Joe Montana");
     sportstars.put("basketball", "Michael Jordan");

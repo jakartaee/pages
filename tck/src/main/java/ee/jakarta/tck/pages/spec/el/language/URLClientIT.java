@@ -22,11 +22,10 @@
 package ee.jakarta.tck.pages.spec.el.language;
 
 
-import java.io.IOException;
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
+import ee.jakarta.tck.pages.common.el.Book;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 import ee.jakarta.tck.pages.common.tags.tck.SetTag;
-import com.sun.ts.tests.el.common.spec.Book;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
@@ -49,7 +48,7 @@ public class URLClientIT extends AbstractUrlClient {
   }
 
   @Deployment(testable = false)
-  public static WebArchive createDeployment() throws IOException {
+  public static WebArchive createDeployment() {
 
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_el_language_web.war");

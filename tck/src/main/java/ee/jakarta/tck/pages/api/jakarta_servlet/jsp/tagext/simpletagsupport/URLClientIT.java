@@ -27,14 +27,10 @@ package ee.jakarta.tck.pages.api.jakarta_servlet.jsp.tagext.simpletagsupport;
 
 
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
+import ee.jakarta.tck.pages.common.el.expression.ExpressionTest;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 import ee.jakarta.tck.pages.common.tags.tck.SetTag;
-import com.sun.ts.tests.el.common.api.expression.ExpressionTest;
 
-/**
- * Test client for the default behavior of SimpleTagSupport.
- */
-import java.io.IOException;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -58,7 +54,7 @@ public class URLClientIT extends AbstractUrlClient {
   }
 
   @Deployment(testable = false)
-  public static WebArchive createDeployment() throws IOException {
+  public static WebArchive createDeployment() {
 
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_simtagsupport_web.war");

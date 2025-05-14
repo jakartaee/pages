@@ -19,7 +19,7 @@ package ee.jakarta.tck.pages.api.jakarta_el.methodinfo;
 
 import java.io.IOException;
 
-import com.sun.ts.tests.el.common.api.expression.ExpressionTest;
+import ee.jakarta.tck.pages.common.el.expression.ExpressionTest;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 
 import jakarta.el.ELContext;
@@ -37,6 +37,7 @@ public class MethodInfoTag extends SimpleTagSupport {
     this.mexp = mexp;
   }
 
+  @Override
   public void doTag() throws JspException, IOException {
 
     JspWriter out = getJspContext().getOut();
@@ -45,7 +46,7 @@ public class MethodInfoTag extends SimpleTagSupport {
 
     try {
       MethodInfo minfo = mexp.getMethodInfo(elContext);
-      Class[] paramTypes = { Object.class };
+      Class<?>[] paramTypes = { Object.class };
       boolean pass = ExpressionTest.testMethodInfo(minfo, "add", boolean.class,
           1, paramTypes, buf);
 
