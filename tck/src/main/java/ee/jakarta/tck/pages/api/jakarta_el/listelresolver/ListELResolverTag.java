@@ -20,7 +20,7 @@ package ee.jakarta.tck.pages.api.jakarta_el.listelresolver;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.sun.ts.tests.el.common.api.resolver.ResolverTest;
+import ee.jakarta.tck.pages.common.el.resolver.ResolverTest;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 
 import jakarta.el.ELContext;
@@ -31,10 +31,11 @@ import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 
 public class ListELResolverTag extends SimpleTagSupport {
 
+  @Override
   public void doTag() throws JspException, IOException {
 
     StringBuffer buf = new StringBuffer();
-    ArrayList<String> superheroes = new ArrayList<String>();
+    ArrayList<String> superheroes = new ArrayList<>();
     superheroes.add("Batman");
     superheroes.add("Superman");
     superheroes.add("Spiderman");

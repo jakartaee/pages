@@ -22,7 +22,7 @@ import java.util.Enumeration;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
-import com.sun.ts.tests.el.common.api.resolver.ResolverTest;
+import ee.jakarta.tck.pages.common.el.resolver.ResolverTest;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 
 import jakarta.el.ELContext;
@@ -33,6 +33,7 @@ import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 
 public class ResourceBundleELResolverTag extends SimpleTagSupport {
 
+  @Override
   public void doTag() throws JspException, IOException {
 
     StringBuffer buf = new StringBuffer();
@@ -56,6 +57,7 @@ public class ResourceBundleELResolverTag extends SimpleTagSupport {
 
   static class MyResources extends ResourceBundle {
 
+    @Override
     public Object handleGetObject(String key) {
       if (key.equals("okKey"))
         return "Ok";
@@ -64,6 +66,7 @@ public class ResourceBundleELResolverTag extends SimpleTagSupport {
       return null;
     }
 
+    @Override
     public Enumeration getKeys() {
       return new StringTokenizer("okKey cancelKey");
     }

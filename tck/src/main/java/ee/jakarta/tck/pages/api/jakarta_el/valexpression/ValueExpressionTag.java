@@ -19,7 +19,7 @@ package ee.jakarta.tck.pages.api.jakarta_el.valexpression;
 
 import java.io.IOException;
 
-import com.sun.ts.tests.el.common.api.expression.ExpressionTest;
+import ee.jakarta.tck.pages.common.el.expression.ExpressionTest;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 
 import jakarta.el.ELContext;
@@ -42,7 +42,8 @@ public class ValueExpressionTag extends SimpleTagSupport {
     this.vexp = vexp;
   }
 
-  public void doTag() throws JspException, IOException {
+  @Override
+public void doTag() throws JspException, IOException {
 
     ELContext elContext = getJspContext().getELContext();
     StringBuffer buf = new StringBuffer("");

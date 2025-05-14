@@ -23,12 +23,11 @@ package ee.jakarta.tck.pages.api.jakarta_servlet.jsp.el.implicitobjelresolver;
 
 
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
+import ee.jakarta.tck.pages.common.el.resolver.BarELResolver;
+import ee.jakarta.tck.pages.common.el.resolver.ResolverTest;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 import ee.jakarta.tck.pages.common.util.JspResolverTest;
-import com.sun.ts.tests.el.common.api.resolver.BarELResolver;
-import com.sun.ts.tests.el.common.api.resolver.ResolverTest;
 
-import java.io.IOException;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -52,7 +51,7 @@ public class URLClientIT extends AbstractUrlClient {
     }
 
   @Deployment(testable = false)
-  public static WebArchive createDeployment() throws IOException {
+  public static WebArchive createDeployment() {
 
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_implicitobjelresolver_web.war");
