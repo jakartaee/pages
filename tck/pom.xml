@@ -52,11 +52,6 @@
     <dependencies>
         <dependency>
             <groupId>jakarta.tck</groupId>
-            <artifactId>libutil</artifactId>
-            <version>${jakarta.ee.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.tck</groupId>
             <artifactId>signaturetest</artifactId>
             <version>${jakarta.ee.version}</version>
         </dependency>
