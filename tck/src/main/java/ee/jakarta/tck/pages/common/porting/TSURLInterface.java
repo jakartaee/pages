@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -13,24 +14,20 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-
-package ee.jakarta.tck.pages.lib.implementation.sun.common;
+package ee.jakarta.tck.pages.common.porting;
 
 import java.net.*;
-import ee.jakarta.tck.pages.common.porting.TSURLInterface;
 
 /**
- * This is a J2EE Reference specific implementation of the TSURLInterface which
- * is to be used for J2EE-TS testing. TS tests use this interface to obtain the
- * URL String to use to access a given web component. If a given J2EE Server
- * implmentation requires that URLs be created in a different manner, then this
- * implementation can be replaced.
+ * An implementation of the TSURLInterface is to be used for Java EE TCK
+ * testing. TS tests use this interface to obtain the URL String to use to
+ * access a given web component. If a given Java EE Server implmentation
+ * requires that URLs be created in a different manner, then this implementation
+ * can be replaced.
  *
  * @author Kyle Grucci
  */
-public class SunRIURL implements TSURLInterface {
-  private URL url = null;
-
+public interface TSURLInterface {
   /**
    * This method is called by TS tests to get the URL to use to access a given
    * web component.
@@ -45,17 +42,8 @@ public class SunRIURL implements TSURLInterface {
    *          - the host file.
    * @return a valid URL object.
    */
-  @Override
   public URL getURL(String protocol, String host, int port, String file)
-      throws MalformedURLException {
-    try {
-      url = new URL(protocol, host, port, file);
-    } catch (MalformedURLException e) {
-      // TestUtil.logErr("Failed during URL creation", e);
-      throw e;
-    }
-    return url;
-  }
+      throws MalformedURLException;
 
   /**
    * This method is called by TS tests to get the URL to use to access a given
@@ -71,25 +59,16 @@ public class SunRIURL implements TSURLInterface {
    *          - the host file.
    * @return a valid URL as a String.
    */
-  @Override
   public String getURLString(String protocol, String host, int port,
-      String file) {
-    if (file.startsWith("/"))
-      return protocol + "://" + host + ":" + port + file;
-    else
-      return protocol + "://" + host + ":" + port + "/" + file;
-  }
+      String file);
 
   /**
-   * This method is called by TS tests to get the request string to use to
-   * access a given web component.
+   * This method is called by TS tests to get the request to use to access a
+   * given web component.
    *
    * @param request
    *          - the request file.
    * @return a valid String object.
    */
-  @Override
-  public String getRequest(String request) {
-    return request;
-  }
+  public String getRequest(String request);
 }

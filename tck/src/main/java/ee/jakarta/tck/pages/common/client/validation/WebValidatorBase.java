@@ -24,10 +24,9 @@ package ee.jakarta.tck.pages.common.client.validation;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.apache.commons.httpclient.Header;
-
-import com.sun.ts.lib.util.TestUtil;
 
 import ee.jakarta.tck.pages.common.client.WebTestCase;
 import ee.jakarta.tck.pages.common.client.handler.Handler;
@@ -39,6 +38,8 @@ import ee.jakarta.tck.pages.common.client.http.HttpResponse;
  * Base class for WebTestCase validation.
  */
 public class WebValidatorBase implements ValidationStrategy {
+
+  private static final Logger LOGGER = Logger.getLogger(WebValidatorBase.class.getName());
 
   /**
    * Used to detect 4xx class HTTP errors to allow fail fast situations when 4xx
@@ -82,7 +83,8 @@ public class WebValidatorBase implements ValidationStrategy {
    * <li>Check the goldenfile</li>
    * </ul>
    */
-  public boolean validate(WebTestCase testCase) {
+  @Override
+public boolean validate(WebTestCase testCase) {
     _res = testCase.getResponse();
     _req = testCase.getRequest();
     _case = testCase;
@@ -96,8 +98,7 @@ public class WebValidatorBase implements ValidationStrategy {
         return false;
       }
     } catch (IOException ioe) {
-      TestUtil
-          .logErr("[WebValidatorBase] Unexpected Exception: " + ioe.toString());
+      LOGGER.severe("Unexpected Exception: " + ioe.toString());
       return false;
     }
     return true;
@@ -151,8 +152,7 @@ public class WebValidatorBase implements ValidationStrategy {
       return true;
 
     if (sCode == null && resCode.charAt(0) == CLIENT_ERROR) {
-      TestUtil
-          .logErr("[WebValidatorBase] Unexpected " + resCode + " received from "
+      LOGGER.severe("Unexpected " + resCode + " received from "
               + "target server!  Request path: " + _req.getRequestPath());
       return false;
     }
@@ -165,7 +165,7 @@ public class WebValidatorBase implements ValidationStrategy {
       sb.append("Error response recieved from server:\n");
       sb.append("------------------------------------------------\n");
       sb.append(resBody != null ? resBody : "NO RESPONSE");
-      TestUtil.logErr(sb.toString());
+      LOGGER.severe(sb.toString());
       return false;
     }
 
@@ -187,7 +187,7 @@ public class WebValidatorBase implements ValidationStrategy {
     if (exclusions) {
         for (String current : sCodes) {
             if (current.equals(resCode)) {
-                TestUtil.logErr("[WebValidatorBase] Unexpected Status Code "
+                LOGGER.severe("Unexpected Status Code "
                     + "recieved from server.  Expected any value except '" + sCode
                     + "', received '" + resCode + "'");
                 return false;
@@ -197,7 +197,7 @@ public class WebValidatorBase implements ValidationStrategy {
         boolean found = false;
         for (String current : sCodes) {
             if (current.equals(resCode)) {
-                TestUtil.logTrace("[WebValidatorBase] Expected Status Code '" + current
+                LOGGER.finer("Expected Status Code '" + current
                         + "' found in response line!");
                 found = true;
                 break;
@@ -205,7 +205,7 @@ public class WebValidatorBase implements ValidationStrategy {
         }
 
         if (!found) {
-            TestUtil.logTrace("[WebValidatorBase] Status Code '" + sCode
+            LOGGER.finer("Status Code '" + sCode
                       + "' not found in response line!");
 
             return false;
@@ -244,7 +244,7 @@ public class WebValidatorBase implements ValidationStrategy {
    *           if an IO error occurs during validation
    */
   protected boolean checkSearchStrings() throws IOException {
-    List list = _case.getSearchStrings();
+    List<String> list = _case.getSearchStrings();
     boolean found = true;
     if (list != null && !list.isEmpty()) {
       String responseBody = _res.getResponseBodyAsRawString();
@@ -261,11 +261,10 @@ public class WebValidatorBase implements ValidationStrategy {
           startIdx = bodyLength;
         }
 
-        search = (String) list.get(i);
+        search = list.get(i);
         int searchIdx = responseBody.indexOf(search, startIdx);
 
-        TestUtil.logTrace(
-            "[WebValidatorBase] Scanning response for " + "search string: '"
+        LOGGER.finer("Scanning response for " + "search string: '"
                 + search + "' starting at index " + "location: " + startIdx);
         if (searchIdx < 0) {
           found = false;
@@ -278,11 +277,11 @@ public class WebValidatorBase implements ValidationStrategy {
           sb.append("-------------------------------------------\n");
           sb.append(responseBody);
           sb.append("\n-------------------------------------------\n");
-          TestUtil.logErr(sb.toString());
+          LOGGER.severe(sb.toString());
           break;
         }
 
-        TestUtil.logTrace("[WebValidatorBase] Found search string: '" + search
+        LOGGER.finer("Found search string: '" + search
             + "' at index '" + searchIdx + "' in the server's " + "response");
         // the new searchIdx is the old index plus the lenght of the
         // search string.
@@ -322,7 +321,7 @@ public class WebValidatorBase implements ValidationStrategy {
    *           if an IO error occurs during validation
    */
   protected boolean checkSearchStringsNoCase() throws IOException {
-    List list = _case.getSearchStringsNoCase();
+    List<String> list = _case.getSearchStringsNoCase();
     boolean found = true;
     if (list != null && !list.isEmpty()) {
       String responseBody = _res.getResponseBodyAsRawString();
@@ -339,12 +338,11 @@ public class WebValidatorBase implements ValidationStrategy {
           startIdx = bodyLength;
         }
 
-        search = (String) list.get(i);
+        search = list.get(i);
         int searchIdx = responseBody.toLowerCase().indexOf(search.toLowerCase(),
             startIdx);
 
-        TestUtil.logTrace(
-            "[WebValidatorBase] Scanning response for " + "search string: '"
+        LOGGER.finer("Scanning response for " + "search string: '"
                 + search + "' starting at index " + "location: " + startIdx);
         if (searchIdx < 0) {
           found = false;
@@ -357,11 +355,11 @@ public class WebValidatorBase implements ValidationStrategy {
           sb.append("-------------------------------------------\n");
           sb.append(responseBody);
           sb.append("\n-------------------------------------------\n");
-          TestUtil.logErr(sb.toString());
+          LOGGER.severe(sb.toString());
           break;
         }
 
-        TestUtil.logTrace("[WebValidatorBase] Found search string: '" + search
+        LOGGER.severe("[WebValidatorBase] Found search string: '" + search
             + "' at index '" + searchIdx + "' in the server's " + "response");
         // the new searchIdx is the old index plus the lenght of the
         // search string.
@@ -396,7 +394,7 @@ public class WebValidatorBase implements ValidationStrategy {
    *           if an IO error occurs during validation
    */
   protected boolean checkUnorderedSearchStrings() throws IOException {
-    List list = _case.getUnorderedSearchStrings();
+    List<String> list = _case.getUnorderedSearchStrings();
     boolean found = true;
     if (list != null && !list.isEmpty()) {
       String responseBody = _res.getResponseBodyAsRawString();
@@ -405,10 +403,10 @@ public class WebValidatorBase implements ValidationStrategy {
 
       for (int i = 0, n = list.size(); i < n; i++) {
 
-        search = (String) list.get(i);
+        search = list.get(i);
         int searchIdx = responseBody.indexOf(search);
 
-        TestUtil.logTrace("[WebValidatorBase] Scanning response for "
+        LOGGER.severe("Scanning response for "
             + "search string: '" + search + "'...");
         if (searchIdx < 0) {
           found = false;
@@ -420,11 +418,11 @@ public class WebValidatorBase implements ValidationStrategy {
           sb.append("-------------------------------------------\n");
           sb.append(responseBody);
           sb.append("\n-------------------------------------------\n");
-          TestUtil.logErr(sb.toString());
+          LOGGER.severe(sb.toString());
           break;
         }
 
-        TestUtil.logTrace("[WebValidatorBase] Found search string: '" + search
+        LOGGER.severe("Found search string: '" + search
             + "' at index '" + searchIdx + "' in the server's " + "response");
       }
     }
@@ -456,13 +454,13 @@ public class WebValidatorBase implements ValidationStrategy {
    *           if an IO error occurs during validation
    */
   protected boolean checkUnexpectedSearchStrings() throws IOException {
-    List list = _case.getUnexpectedSearchStrings();
+    List<String> list = _case.getUnexpectedSearchStrings();
     if (list != null && !list.isEmpty()) {
       String responseBody = _res.getResponseBodyAsRawString();
-      Iterator iter = list.iterator();
+      Iterator<String> iter = list.iterator();
       while (iter.hasNext()) {
-        String search = (String) iter.next();
-        TestUtil.logTrace("[WebValidatorBase] Scanning response.  The following"
+        String search = iter.next();
+        LOGGER.finer("Scanning response.  The following"
             + " string should not be present in the response: '" + search
             + "'");
         if (responseBody.indexOf(search) > -1) {
@@ -474,7 +472,7 @@ public class WebValidatorBase implements ValidationStrategy {
           sb.append("-------------------------------------------\n");
           sb.append(responseBody);
           sb.append("\n-------------------------------------------\n");
-          TestUtil.logErr(sb.toString());
+          LOGGER.severe(sb.toString());
           return false;
         }
       }
@@ -576,12 +574,11 @@ public class WebValidatorBase implements ValidationStrategy {
           sb.append(resHeaders[i].toExternalForm());
         }
         sb.append("\n");
-        TestUtil.logErr(sb.toString());
+        LOGGER.severe(sb.toString());
 
         return false;
       } else {
-        TestUtil.logTrace("[WebValidatorBase] Found expected header: "
-            + currentHeader.toExternalForm());
+          LOGGER.finer("Found expected header: " + currentHeader.toExternalForm());
         return true;
       }
     }
@@ -636,7 +633,7 @@ public class WebValidatorBase implements ValidationStrategy {
               sb.append(resHeaders[j].toExternalForm());
             }
             sb.append("\n");
-            TestUtil.logErr(sb.toString());
+            LOGGER.severe(sb.toString());
 
             return false;
           }

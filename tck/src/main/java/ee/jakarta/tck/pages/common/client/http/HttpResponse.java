@@ -21,17 +21,17 @@
 
 package ee.jakarta.tck.pages.common.client.http;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpVersion;
-
-import com.sun.ts.tests.common.webclient.Util;
 
 /**
  * This class represents an HTTP response from the server.
@@ -306,9 +306,20 @@ public class HttpResponse {
    */
   private String getEncodedResponse() throws IOException {
     if (_responseBody == null) {
-      _responseBody = Util.getEncodedStringFromStream(
+      _responseBody = getEncodedStringFromStream(
           _method.getResponseBodyAsStream(), getResponseEncoding());
     }
     return _responseBody;
   }
+
+  public static String getEncodedStringFromStream(InputStream in, String enc)
+          throws IOException {
+    BufferedReader bin = new BufferedReader(new InputStreamReader(in, enc));
+    StringBuilder sb = new StringBuilder(128);
+    for (int ch = bin.read(); ch != -1; ch = bin.read()) {
+      sb.append((char) ch);
+    }
+    return sb.toString();
+  }
+
 }

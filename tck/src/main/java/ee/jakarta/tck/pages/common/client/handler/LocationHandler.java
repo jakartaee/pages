@@ -62,10 +62,10 @@ package ee.jakarta.tck.pages.common.client.handler;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.commons.httpclient.Header;
-
-import com.sun.ts.lib.util.TestUtil;
 
 /**
  * <PRE>
@@ -77,6 +77,8 @@ import com.sun.ts.lib.util.TestUtil;
  * </PRE>
  */
 public class LocationHandler implements Handler {
+
+  private static final Logger LOGGER = Logger.getLogger(LocationHandler.class.getName());
 
   private static Handler handler = new LocationHandler();
 
@@ -107,54 +109,48 @@ public class LocationHandler implements Handler {
    *          the response header from the server
    * @return True if the passed match, otherwise false
    */
+  @Override
   public boolean invoke(Header configuredHeader, Header responseHeader) {
 
     boolean pass = true;
 
     try {
-      TestUtil.logTrace("[LocationHandler] LocationHandler invoked.");
+      LOGGER.finer("LocationHandler invoked.");
 
       URL configURL = new URL(configuredHeader.getValue());
       URL responseURL = new URL(responseHeader.getValue());
 
       if (!(configURL.getProtocol().equals(responseURL.getProtocol()))) {
         pass = false;
-        TestUtil.logErr("[LocationHandler] Mismatch between protocols:");
-        TestUtil.logErr(
-            "[LocationHandler] Configured value: " + configURL.getProtocol());
-        TestUtil.logErr(
-            "[LocationHandler] Response value: " + responseURL.getProtocol());
+        LOGGER.severe("Mismatch between protocols:");
+        LOGGER.severe("Configured value: " + configURL.getProtocol());
+        LOGGER.severe("Response value: " + responseURL.getProtocol());
       }
 
       if (!(configURL.getPath().equals(responseURL.getPath()))) {
         pass = false;
-        TestUtil.logErr("[LocationHandler] Mismatch between paths:");
-        TestUtil.logErr(
-            "[LocationHandler] Configured value: " + configURL.getPath());
-        TestUtil.logErr(
-            "[LocationHandler] Response value: " + responseURL.getPath());
+        LOGGER.severe("Mismatch between paths:");
+        LOGGER.severe("Configured value: " + configURL.getPath());
+        LOGGER.severe("Response value: " + responseURL.getPath());
       }
 
       if (configURL.getQuery() == null) {
         if (responseURL.getQuery() != null) {
           pass = false;
-          TestUtil.logErr("[LocationHandler] Mismatch between querys:");
-          TestUtil.logErr("[LocationHandler] Configured value is null");
-          TestUtil.logErr("[LocationHandler] Response value is non-null");
+          LOGGER.severe("Mismatch between querys:");
+          LOGGER.severe("Configured value is null");
+          LOGGER.severe("Response value is non-null");
         }
       } else if (!(configURL.getQuery().equals(responseURL.getQuery()))) {
         pass = false;
-        TestUtil.logErr("[LocationHandler] Mismatch between querys:");
-        TestUtil.logErr(
-            "[LocationHandler] Configured value: " + configURL.getQuery());
-        TestUtil.logErr(
-            "[LocationHandler] Response value: " + responseURL.getQuery());
+        LOGGER.severe("Mismatch between querys:");
+        LOGGER.severe("Configured value: " + configURL.getQuery());
+        LOGGER.severe("Response value: " + responseURL.getQuery());
       }
 
     } catch (MalformedURLException mue) {
       pass = false;
-      TestUtil.logErr("[LocationHandler] MalformedURLException");
-      TestUtil.printStackTrace(mue);
+      LOGGER.log(Level.SEVERE, "MalformedURLException", mue);
     }
 
     return pass;
