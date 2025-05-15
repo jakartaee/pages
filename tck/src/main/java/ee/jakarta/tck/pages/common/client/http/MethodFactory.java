@@ -34,7 +34,7 @@ import org.apache.commons.httpclient.methods.OptionsMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 
-import com.sun.ts.lib.porting.TSURL;
+import ee.jakarta.tck.pages.common.porting.TSURL;
 
 /**
  * Simple factory class which returns HttpMethod implementations based on a

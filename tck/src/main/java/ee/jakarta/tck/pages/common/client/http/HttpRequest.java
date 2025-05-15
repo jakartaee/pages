@@ -22,7 +22,11 @@
 package ee.jakarta.tck.pages.common.client.http;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.Header;
@@ -40,8 +44,6 @@ import org.apache.commons.httpclient.protocol.DefaultProtocolSocketFactory;
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 import org.apache.commons.httpclient.protocol.SSLProtocolSocketFactory;
-import com.sun.ts.lib.util.TestUtil;
-import com.sun.ts.tests.common.webclient.Util;
 
 /**
  * Represents an HTTP client Request
@@ -49,8 +51,10 @@ import com.sun.ts.tests.common.webclient.Util;
 
 public class HttpRequest {
 
+  private static final Logger LOGGER = Logger.getLogger(HttpRequest.class.getName());
+
   static {
-    if (TestUtil.traceflag) {
+    if (LOGGER.isLoggable(Level.FINER)) {
       System.setProperty("org.apache.commons.logging.Log",
           "com.sun.ts.tests.common.webclient.log.WebLog");
       System.setProperty(
@@ -127,11 +131,6 @@ public class HttpRequest {
    * Content length of request body.
    */
   private int _contentLength = 0;
-
-  /**
-   * FollowRedirects
-   */
-  private boolean _redirect = false;
 
   Header[] _headers = null;
 
@@ -257,7 +256,7 @@ public class HttpRequest {
         password);
     AuthScope scope = new AuthScope(_host, _port, realm);
     getState().setCredentials(scope, cred);
-    TestUtil.logTrace("[HttpRequest] Added credentials for '" + username
+    LOGGER.finer("Added credentials for '" + username
         + "' with password '" + password + "' in realm '" + realm + "'");
 
     _authType = authType;
@@ -277,7 +276,7 @@ public class HttpRequest {
    */
   public void addRequestHeader(String headerName, String headerValue) {
     _method.addRequestHeader(headerName, headerValue);
-    TestUtil.logTrace("[HttpRequest] Added request header: "
+    LOGGER.finer("Added request header: "
         + _method.getRequestHeader(headerName).toExternalForm());
   }
 
@@ -307,7 +306,7 @@ public class HttpRequest {
    */
   public void setRequestHeader(String headerName, String headerValue) {
     _method.setRequestHeader(headerName, headerValue);
-    TestUtil.logTrace("[HttpRequest] Set request header: "
+    LOGGER.finer("Set request header: "
         + _method.getRequestHeader(headerName).toExternalForm());
 
   }
@@ -372,14 +371,13 @@ public class HttpRequest {
 
       conn.open();
 
-      TestUtil.logMsg("[HttpRequest] Dispatching request: '" + _requestLine
+      LOGGER.info("Dispatching request: '" + _requestLine
           + "' to target server at '" + _host + ":" + _port + "'");
 
       addSupportHeaders();
       _headers = _method.getRequestHeaders();
 
-      TestUtil.logTrace(
-          "########## The real value set: " + _method.getFollowRedirects());
+      LOGGER.finer("########## The real value set: " + _method.getFollowRedirects());
 
       client.getHostConfiguration().setHost(_host, _port, protocol);
 
@@ -406,14 +404,13 @@ public class HttpRequest {
 
       conn.open();
 
-      TestUtil.logMsg("[HttpRequest] Dispatching request: '" + _requestLine
+      LOGGER.info("Dispatching request: '" + _requestLine
           + "' to target server at '" + _host + ":" + _port + "'");
 
       addSupportHeaders();
       _headers = _method.getRequestHeaders();
 
-      TestUtil.logTrace(
-          "########## The real value set: " + _method.getFollowRedirects());
+      LOGGER.finer("########## The real value set: " + _method.getFollowRedirects());
 
       _method.execute(getState(), conn);
 
@@ -433,6 +430,7 @@ public class HttpRequest {
     return _state;
   }
 
+  @Override
   public String toString() {
     StringBuffer sb = new StringBuffer(255);
     sb.append("[REQUEST LINE] -> ").append(_requestLine).append('\n');
@@ -532,10 +530,10 @@ public class HttpRequest {
         .getCredentials(new AuthScope(_host, _port, null));
     String authString = null;
     if (cred != null) {
-      authString = "Basic " + Util.getBase64EncodedString(
-          cred.getUserName() + ":" + cred.getPassword());
+      authString = "Basic " + Base64.getEncoder().encodeToString(
+          (cred.getUserName() + ":" + cred.getPassword()).getBytes(StandardCharsets.UTF_8));
     } else {
-      TestUtil.logTrace("[HttpRequest] NULL CREDENTIALS");
+        LOGGER.finer("NULL CREDENTIALS");
     }
     _method.setRequestHeader("Authorization", authString);
   }

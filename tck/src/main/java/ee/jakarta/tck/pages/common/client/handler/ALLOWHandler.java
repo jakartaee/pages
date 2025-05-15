@@ -18,16 +18,15 @@
 package ee.jakarta.tck.pages.common.client.handler;
 
 import java.util.StringTokenizer;
+import java.util.logging.Logger;
 
 import org.apache.commons.httpclient.Header;
 
-import com.sun.ts.lib.util.TestUtil;
-
 public class ALLOWHandler implements Handler {
 
-  private static final Handler HANDLER = new ALLOWHandler();
+  private static final Logger LOGGER = Logger.getLogger(ALLOWHandler.class.getName());
 
-  private static final String DELIM = "##";
+  private static final Handler HANDLER = new ALLOWHandler();
 
   private ALLOWHandler() {
   }
@@ -36,12 +35,13 @@ public class ALLOWHandler implements Handler {
     return HANDLER;
   }
 
+  @Override
   public boolean invoke(Header configuredHeader, Header responseHeader) {
     String ALLOWHeader = responseHeader.getValue().toLowerCase();
     String expectedValues = configuredHeader.getValue().toLowerCase()
         .replace(" ", "");
 
-    TestUtil.logTrace("[ALLOWHandler] ALLOW header received: " + ALLOWHeader);
+    LOGGER.finer("ALLOW header received: " + ALLOWHeader);
 
     StringTokenizer conf = new StringTokenizer(expectedValues, ",");
     while (conf.hasMoreTokens()) {
@@ -50,11 +50,11 @@ public class ALLOWHandler implements Handler {
 
       if ((ALLOWHeader.indexOf(token) < 0)
           && (ALLOWHeader.indexOf(token1) < 0)) {
-        TestUtil.logErr("[ALLOWHandler] Unable to find '" + token
+        LOGGER.severe("Unable to find '" + token
             + "' within the ALLOW header returned by the server.");
         return false;
       } else {
-        TestUtil.logTrace("[ALLOWHandler] Found expected value, '" + token
+          LOGGER.finer("Found expected value, '" + token
             + "' in ALLOW header returned by server.");
       }
     }

@@ -60,10 +60,10 @@
 
 package ee.jakarta.tck.pages.common.client.handler;
 
+import java.util.logging.Logger;
+
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HeaderElement;
-
-import com.sun.ts.lib.util.TestUtil;
 
 /**
  * <PRE>
@@ -72,6 +72,8 @@ import com.sun.ts.lib.util.TestUtil;
  * </PRE>
  */
 public class DefaultHandler implements Handler {
+
+  private static final Logger LOGGER = Logger.getLogger(DefaultHandler.class.getName());
 
   private static Handler handler = new DefaultHandler();
 
@@ -102,9 +104,10 @@ public class DefaultHandler implements Handler {
    *          the response header from the server
    * @return True if the passed match, otherwise false
    */
+  @Override
   public boolean invoke(Header configuredHeader, Header responseHeader) {
 
-    TestUtil.logTrace("[DefaulHandler] DefaultHandler invoked.");
+    LOGGER.finer("DefaultHandler invoked.");
 
     return areHeadersEqual(configuredHeader, responseHeader);
   }

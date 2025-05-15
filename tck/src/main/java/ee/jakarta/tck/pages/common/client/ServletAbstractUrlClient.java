@@ -16,13 +16,12 @@
 
 package ee.jakarta.tck.pages.common.client;
 
-import com.sun.ts.tests.common.webclient.BaseUrlClient;
-import com.sun.ts.tests.common.webclient.http.HttpRequest;
-import com.sun.ts.tests.common.webclient.WebTestCase;
-import com.sun.ts.tests.servlet.common.util.Data;
-
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
+
+import ee.jakarta.tck.pages.common.client.http.HttpRequest;
+import ee.jakarta.tck.pages.common.util.Data;
+
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -31,7 +30,6 @@ import java.net.URL;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.lang.System.Logger;
@@ -153,7 +151,7 @@ public abstract class ServletAbstractUrlClient extends BaseUrlClient {
 
   /**
    * Consists of a test name, a request, and a goldenfile.
-   * 
+   *
    * @param testValue
    *          - a logical test identifier
    * @param testCase
@@ -196,7 +194,7 @@ public abstract class ServletAbstractUrlClient extends BaseUrlClient {
   /**
    * Sets the name of the servlet to use when building a request for a single
    * servlet API test.
-   * 
+   *
    * @param servlet
    *          - the name of the servlet
    */

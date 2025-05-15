@@ -22,12 +22,13 @@
 package ee.jakarta.tck.pages.common.client.handler;
 
 import java.util.StringTokenizer;
+import java.util.logging.Logger;
 
 import org.apache.commons.httpclient.Header;
 
-import com.sun.ts.lib.util.TestUtil;
-
 public class SetCookieHandler implements Handler {
+
+  private static final Logger LOGGER = Logger.getLogger(LocationHandler.class.getName());
 
   private static final Handler HANDLER = new SetCookieHandler();
 
@@ -40,12 +41,12 @@ public class SetCookieHandler implements Handler {
     return HANDLER;
   }
 
+  @Override
   public boolean invoke(Header configuredHeader, Header responseHeader) {
     String setCookieHeader = responseHeader.getValue().toLowerCase();
     String expectedValues = configuredHeader.getValue().toLowerCase();
 
-    TestUtil.logTrace(
-        "[SetCookieHandler] Set-Cookie header received: " + setCookieHeader);
+    LOGGER.finer("Set-Cookie header received: " + setCookieHeader);
 
     StringTokenizer conf = new StringTokenizer(expectedValues, DELIM);
     while (conf.hasMoreTokens()) {
@@ -62,7 +63,7 @@ public class SetCookieHandler implements Handler {
         String attr1 = token1.substring(1);
         if ((setCookieHeader.indexOf(attr) > -1)
             || (setCookieHeader.indexOf(attr1) > -1)) {
-          TestUtil.logErr("[SetCookieHandler] Unexpected attribute found "
+          LOGGER.severe("Unexpected attribute found "
               + " Set-Cookie header.  Attribute: " + attr
               + "\nSet-Cookie header: " + setCookieHeader);
           return false;
@@ -70,11 +71,11 @@ public class SetCookieHandler implements Handler {
       } else {
         if ((setCookieHeader.indexOf(token) < 0)
             && (setCookieHeader.indexOf(token1) < 0)) {
-          TestUtil.logErr("[SetCookieHandler] Unable to find '" + token
+          LOGGER.severe("Unable to find '" + token
               + "' within the Set-Cookie header returned by the server.");
           return false;
         } else {
-          TestUtil.logTrace("[SetCookieHandler] Found expected value, '" + token
+          LOGGER.severe("Found expected value, '" + token
               + "' in Set-Cookie header returned by server.");
         }
       }

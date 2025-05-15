@@ -29,8 +29,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import com.sun.ts.lib.util.TestUtil;
-
 import ee.jakarta.tck.pages.common.client.http.HttpRequest;
 import ee.jakarta.tck.pages.common.client.http.HttpResponse;
 import ee.jakarta.tck.pages.common.client.validation.ValidationFactory;
@@ -154,6 +152,7 @@ public class WebTestCase implements TestCase {
    *           if no request was configured or if no Validator is available at
    *           runtime.
    */
+  @Override
   public void execute() throws Exception {
 
     // If no request was created, we can't run.
@@ -255,7 +254,7 @@ public class WebTestCase implements TestCase {
    */
   public void addUnexpectedHeader(String header) {
     if (_unexpected == null) {
-      _unexpected = new HashMap<String, Header>();
+      _unexpected = new HashMap<>();
     }
     addHeader(_unexpected, header);
   }
@@ -282,7 +281,7 @@ public class WebTestCase implements TestCase {
    */
   public void setResponseSearchString(String searchString) {
     if (_searchStrings == null) {
-      _searchStrings = new ArrayList<String>();
+      _searchStrings = new ArrayList<>();
     }
     addSearchStrings(_searchStrings, searchString);
   }
@@ -300,7 +299,7 @@ public class WebTestCase implements TestCase {
    */
   public void setResponseSearchStringIgnoreCase(String searchString) {
     if (_searchStringsNoCase == null) {
-      _searchStringsNoCase = new ArrayList<String>();
+      _searchStringsNoCase = new ArrayList<>();
     }
     addSearchStrings(_searchStringsNoCase, searchString);
   }
@@ -318,7 +317,7 @@ public class WebTestCase implements TestCase {
    */
   public void setUnexpectedResponseSearchString(String searchString) {
     if (_uSearchStrings == null) {
-      _uSearchStrings = new ArrayList<String>();
+      _uSearchStrings = new ArrayList<>();
     }
     addSearchStrings(_uSearchStrings, searchString);
   }
@@ -334,7 +333,7 @@ public class WebTestCase implements TestCase {
    */
   public void setUnorderedSearchString(String searchString) {
     if (_unorderedSearchStrings == null) {
-      _unorderedSearchStrings = new ArrayList<String>();
+      _unorderedSearchStrings = new ArrayList<>();
     }
     addSearchStrings(_unorderedSearchStrings, searchString);
   }
@@ -482,6 +481,7 @@ public class WebTestCase implements TestCase {
    *
    * @return test state
    */
+  @Override
   public Object getState() {
     if (_response != null) {
       return _response.getState();
@@ -497,6 +497,7 @@ public class WebTestCase implements TestCase {
    * @param state
    *          test state
    */
+  @Override
   public void setState(Object state) {
     _request.setState((HttpState) state);
   }
@@ -507,6 +508,7 @@ public class WebTestCase implements TestCase {
    * @param name
    *          the logical name for this test
    */
+  @Override
   public void setName(String name) {
     _name = name;
   }
@@ -516,6 +518,7 @@ public class WebTestCase implements TestCase {
    *
    * @return test name
    */
+  @Override
   public String getName() {
     return _name;
   }
@@ -531,7 +534,7 @@ public class WebTestCase implements TestCase {
     if (strat != null) {
       _strategy = strat;
     } else {
-      TestUtil.logMsg("[WebTestCase][WARNING] An attempt was made to use a "
+      LOGGER.warning("An attempt was made to use a "
               + "non-existing validator (" + validator + ")"
               + ".  Falling back to the TokenizedValidator");
     }

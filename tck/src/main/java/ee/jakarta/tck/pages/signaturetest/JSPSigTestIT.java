@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -14,21 +15,14 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
 
-package ee.jakarta.tck.pages.signaturetest.jsp;
+package ee.jakarta.tck.pages.signaturetest;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import com.sun.ts.tests.signaturetest.SigTest;
-import com.sun.ts.tests.signaturetest.SigTestResult;
 import java.util.Properties;
 import java.lang.System.Logger;
 
@@ -55,10 +49,11 @@ public class JSPSigTestIT extends SigTest {
    * Returns a list of strings where each string represents a package name. Each
    * package name will have it's signature tested by the signature test
    * framework.
-   * 
+   *
    * @return String[] The names of the packages whose signatures should be
    *         verified.
    */
+  @Override
   protected String[] getPackages() {
     return new String[] { "jakarta.servlet.jsp", "jakarta.servlet.jsp.el",
         "jakarta.servlet.jsp.tagext" };
@@ -100,10 +95,10 @@ public class JSPSigTestIT extends SigTest {
 
   /*
    * @testName: signatureTest
-   * 
+   *
    * @assertion: A JSP container must implement the required classes and APIs
    * specified in the JSP Specification.
-   * 
+   *
    * @test_Strategy: Using reflection, gather the implementation specific
    * classes and APIs. Compare these results with the expected (required)
    * classes and APIs.
@@ -115,7 +110,6 @@ public class JSPSigTestIT extends SigTest {
     logger.log(Logger.Level.INFO, "$$$ SigTestIT.signatureTest() called");
     String mapFile = null;
     String packageFile = null;
-    String repositoryDir = null;
     Properties mapFileAsProps = null;
     String[] packages = getPackages();
     String apiPackage = "jakarta.servlet.jsp";
@@ -131,7 +125,7 @@ public class JSPSigTestIT extends SigTest {
     File pFile = writeStreamToTempFile(inStreamPackageFile, "sig-test-pkg-list", ".txt");
     packageFile = pFile.getCanonicalPath();
     logger.log(Logger.Level.INFO, "packageFile location is :"+packageFile);
-  
+
     mapFileAsProps = getSigTestDriver().loadMapFile(mapFile);
     String packageVersion = mapFileAsProps.getProperty(apiPackage);
     logger.log(Logger.Level.INFO, "Package version from mapfile :"+packageVersion);
@@ -139,7 +133,7 @@ public class JSPSigTestIT extends SigTest {
     InputStream inStreamSigFile = JSPSigTestIT.class.getClassLoader().getResourceAsStream("ee/jakarta/tck/pages/signaturetest/jsp/jakarta.servlet.jsp.sig_"+packageVersion);
     File sigFile = writeStreamToSigFile(inStreamSigFile, apiPackage, packageVersion);
     logger.log(Logger.Level.INFO, "signature File location is :"+sigFile.getCanonicalPath());
-    
+
     } catch(IOException ex) {
         logger.log(Logger.Level.ERROR , "Exception while creating temp files :"+ex);
     }

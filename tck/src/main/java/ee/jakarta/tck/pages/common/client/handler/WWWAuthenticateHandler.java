@@ -60,9 +60,9 @@
 
 package ee.jakarta.tck.pages.common.client.handler;
 
-import org.apache.commons.httpclient.Header;
+import java.util.logging.Logger;
 
-import com.sun.ts.lib.util.TestUtil;
+import org.apache.commons.httpclient.Header;
 
 /**
  * <PRE>
@@ -74,6 +74,8 @@ import com.sun.ts.lib.util.TestUtil;
  * </PRE>
  */
 public class WWWAuthenticateHandler implements Handler {
+
+  private static final Logger LOGGER = Logger.getLogger(WWWAuthenticateHandler.class.getName());
 
   private static Handler handler = new WWWAuthenticateHandler();
 
@@ -104,10 +106,9 @@ public class WWWAuthenticateHandler implements Handler {
    *          the response header from the server
    * @return True if the passed match, otherwise false
    */
+  @Override
   public boolean invoke(Header configuredHeader, Header responseHeader) {
-
-    TestUtil
-        .logTrace("[WWWAuthenticateHandler] WWAuthenticateHandler invoked.");
+    LOGGER.finer("WWAuthenticateHandler invoked.");
     return true;
   }
 }

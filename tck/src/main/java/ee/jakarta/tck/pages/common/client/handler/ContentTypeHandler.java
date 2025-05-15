@@ -60,9 +60,9 @@
 
 package ee.jakarta.tck.pages.common.client.handler;
 
-import org.apache.commons.httpclient.Header;
+import java.util.logging.Logger;
 
-import com.sun.ts.lib.util.TestUtil;
+import org.apache.commons.httpclient.Header;
 
 /**
  * <PRE>
@@ -76,6 +76,8 @@ import com.sun.ts.lib.util.TestUtil;
  * </PRE>
  */
 public class ContentTypeHandler implements Handler {
+
+  private static final Logger LOGGER = Logger.getLogger(ContentTypeHandler.class.getName());
 
   private static Handler handler = new ContentTypeHandler();
 
@@ -106,9 +108,10 @@ public class ContentTypeHandler implements Handler {
    *          the response header from the server
    * @return True if the passed match, otherwise false
    */
-  public boolean invoke(Header configuredHeader, Header responseHeader) {
+  @Override
+public boolean invoke(Header configuredHeader, Header responseHeader) {
     boolean ret = false;
-    TestUtil.logTrace("[ContentTypeHandler] ContentTypeHandler invoked.");
+    LOGGER.finer("ContentTypeHandler invoked.");
     String configVal = configuredHeader.getValue().trim();
     String responseVal = responseHeader.getValue().trim();
     int colIdx = configVal.indexOf(';');
