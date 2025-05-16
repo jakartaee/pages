@@ -33,7 +33,7 @@
             <destName>LICENSE.md</destName>
         </file>
         <file>
-            <source>${project.basedir}/src/main/resources/jakarta.servlet.jsp.sig_4.1</source>
+            <source>${project.basedir}/src/main/resources/ee/jakarta/tck/pages/signaturetest/jsp/jakarta.servlet.jsp.sig_4.1</source>
             <destName>jakarta.servlet.jsp.sig_4.1</destName>
         </file>
     </files>
