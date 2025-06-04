@@ -9,7 +9,7 @@
 :sectnums!:
 == Jakarta Server Pages Specification, Version 4.1
 
-Copyright (c) 2013, 2024 Oracle and/or its affiliates and others.
+Copyright (c) 2013, 2025 Oracle and/or its affiliates and others.
 All rights reserved.
 
 Eclipse is a registered trademark of the Eclipse Foundation. Jakarta
@@ -11420,7 +11420,10 @@ Jakarta Server Pages specification. This appendix is non-normative.
 
 === Changes between JSP 4.1 and JSP 4.0
 
-* TBD
+* https://github.com/eclipse-ee4j/jsp-api/issues/245[#245]
+  Utilise the new `ELResolver.StandaloneIdentifierMarker` class to optimise the
+  performance of the `ImportELResolver`. This should significantly improve the
+  resolving of standalong identifiers e.g. `${my-identifier}`. 
 
 === Changes between JSP 4.0 and JSP 3.1
 
