@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Contributors to the Eclipse Foundation.
+ * Copyright (c) 2025 Contributors to the Eclipse Foundation.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -58,14 +58,28 @@ public class ImportELResolver extends ELResolver {
 
         ImportHandler importHandler = context.getImportHandler();
         if (base == null && property instanceof String && importHandler != null) {
+            boolean resolveClass = true;
+            /*
+             * The EL implementation will set this key to Boolean.TRUE if the identifier is a stand-alone identifier
+             * (i.e. identifier) rather than part of a Value (i.e. identifier.something). Imports do not need to be
+             * checked if this is a stand-alone identifier.
+             */
+            Boolean key = (Boolean) context.getContext(ELResolver.StandaloneIdentifierMarker.class);
+            if (key != null && key.booleanValue()) {
+                resolveClass = false;
+            }
+
             String attribute = (String) property;
             Object value = null;
+            Class<?> c;
             // Check to see if the property is an imported class
-            Class<?> c = importHandler.resolveClass(attribute);
-            if (c != null) {
-                value = new ELClass(c);
-                // A possible optimization is to set the ELClass
-                // instance in an attribute map.
+            if (resolveClass) {
+                c = importHandler.resolveClass(attribute);
+                if (c != null) {
+                    value = new ELClass(c);
+                    // A possible optimization is to set the ELClass
+                    // instance in an attribute map.
+                }
             }
             // Check to see if the property is an imported static field
             if (value == null) {
@@ -115,7 +129,7 @@ public class ImportELResolver extends ELResolver {
     /**
      * Always a NO-OP since in normal usage {@link ScopedAttributeELResolver} will handle calls to
      * {@link ELResolver#setValue(ELContext, Object, Object, Object)}.
-     * 
+     *
      * @param context  The context of this evaluation.
      * @param base     Ignored
      * @param property Ignored
@@ -159,7 +173,7 @@ public class ImportELResolver extends ELResolver {
      *
      * @param context Ignored
      * @param base    Ignored
-     * 
+     *
      * @return Always {@code null}
      */
     @Override
