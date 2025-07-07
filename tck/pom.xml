@@ -44,7 +44,7 @@
         <jms-api.version>3.1.0</jms-api.version>
         <jsp-api.version>4.1.0-SNAPSHOT</jsp-api.version>
         <jakarta.ee.version>11.0.0-M1</jakarta.ee.version>
-        <junit.jupiter.version>5.13.2</junit.jupiter.version>
+        <junit.jupiter.version>5.13.3</junit.jupiter.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
