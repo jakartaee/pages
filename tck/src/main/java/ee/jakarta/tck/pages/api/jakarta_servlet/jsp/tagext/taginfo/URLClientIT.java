@@ -283,21 +283,6 @@ public class URLClientIT extends AbstractUrlClient {
   }
 
   /*
-   * testName: tagInfoIsValidTest assertion_ids: JSP:JAVADOC:235 test_Strategy:
-   * Translation-time validation of the attributes. This is a convenience method
-   * on the associated TagExtraInfo class. This method should be exercised with
-   * a jsp 1.1 tld. See tagInfoConstructor11Test.
-   */
-  // @Test
-  // @Disabled("Disabled in legacy")
-  public void tagInfoIsValidTest() throws Exception {
-    TEST_PROPS.setProperty(REQUEST,
-        "GET /jsp_taginfo_web/IsValidTest.jsp HTTP/1.1");
-    TEST_PROPS.setProperty(SEARCH_STRING, "Test PASSED.");
-    invoke();
-  }
-
-  /*
    * @testName: tagInfoSetTagExtraInfoTest
    *
    * @assertion_ids: JSP:JAVADOC:237
