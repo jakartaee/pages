@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -13,11 +14,6 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-
-/*
- * $Id$
- */
-
 package ee.jakarta.tck.pages.api.jakarta_servlet.jsp.pagecontext;
 
 
@@ -25,8 +21,6 @@ import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 
 import java.io.IOException;
-import java.io.InputStream;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -64,7 +58,7 @@ public class URLClientIT extends AbstractUrlClient {
     return archive;
   }
 
-  
+
   /* Run tests */
 
   // ============================================ Tests ======
@@ -186,11 +180,11 @@ public class URLClientIT extends AbstractUrlClient {
   /**
    * -- Removed due to the way we capture the exception. -- testName:
    * pageContextForwardServletExceptionTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:26
    * @test_Strategy: Validate PageContext.forward() throws a ServletException if
    *                 a ServletException occurs during the forward process.
-   * 
+   *
    *                 public void pageContextForwardServletExceptionTest() throws
    *                 Fault { TEST_PROPS.setProperty(APITEST,
    *                 "pageContextForwardServletExceptionTest");
@@ -201,11 +195,11 @@ public class URLClientIT extends AbstractUrlClient {
   /**
    * -- Removed due to the way we capture the exception. -- testName:
    * pageContextForwardIOExceptionTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:27
    * @test_Strategy: Validate PageContext.forward() throws an IOExcpetion if an
    *                 IOException occurs during the forward process.
-   * 
+   *
    *                 public void pageContextForwardIOExceptionTest() throws
    *                 Fault { TEST_PROPS.setProperty(APITEST,
    *                 "pageContextForwardIOExceptionTest");
@@ -635,33 +629,6 @@ public class URLClientIT extends AbstractUrlClient {
   @Test
   public void pageContextGetOutTest() throws Exception {
     TEST_PROPS.setProperty(APITEST, "pageContextGetOutTest");
-    TEST_PROPS.setProperty(UNEXPECTED_RESPONSE_MATCH, "Error page invoked");
-    invoke();
-  }
-
-  /**
-   * @testName: pageContextGetExpressionEvaluatorTest
-   * @assertion_ids: JSP:JAVADOC:150
-   * @test_Strategy: Validate the behavior of
-   *                 PageContext.getExpressionEvaluator. Note: This is inherited
-   *                 from JspContext.
-   */
-  //@Test
-  public void pageContextGetExpressionEvaluatorTest() throws Exception {
-    TEST_PROPS.setProperty(APITEST, "pageContextGetExpressionEvaluatorTest");
-    TEST_PROPS.setProperty(UNEXPECTED_RESPONSE_MATCH, "Error page invoked");
-    invoke();
-  }
-
-  /**
-   * @testName: pageContextGetVariableResolverTest
-   * @assertion_ids: JSP:JAVADOC:151
-   * @test_Strategy: Validate the behavior of PageContext.getVariableResolver().
-   *                 Note: This is inherited from JspContext.
-   */
-  // @Test
-  public void pageContextGetVariableResolverTest() throws Exception {
-    TEST_PROPS.setProperty(APITEST, "pageContextGetVariableResolverTest");
     TEST_PROPS.setProperty(UNEXPECTED_RESPONSE_MATCH, "Error page invoked");
     invoke();
   }

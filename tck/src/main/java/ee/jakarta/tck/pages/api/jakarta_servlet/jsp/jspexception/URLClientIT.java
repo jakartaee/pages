@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2025 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -13,19 +14,12 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-
-/*
- * $Id$
- */
-
 package ee.jakarta.tck.pages.api.jakarta_servlet.jsp.jspexception;
 
 
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 
 import java.io.IOException;
-import java.io.InputStream;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -61,16 +55,16 @@ public class URLClientIT extends AbstractUrlClient {
     return archive;
   }
 
-  
+
   /* Run tests */
 
   // ============================================ Tests ======
 
   /*
    * @testName: jspExceptionDefaultCtorTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:125
-   * 
+   *
    * @test_Strategy: Validate default constructor of JspException
    */
   @Test
@@ -81,9 +75,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspExceptionMessageCtorTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:126
-   * 
+   *
    * @test_Strategy: Validate contructor taking single string argument as the
    * message of the Exception.
    */
@@ -95,9 +89,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspExceptionCauseCtorTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:128
-   * 
+   *
    * @test_Strategy: Validate constructor taking a Throwable signifying the root
    * cause of the this JspException.
    */
@@ -109,28 +103,15 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspExceptionCauseMessageCtorTest
-   * 
+   *
    * @assertion_ids: JSP:JAVADOC:127
-   * 
+   *
    * @test_Strategy: Validate constructor taking both a message and a Throwable
    * signifying the root cause of the JspException.
    */
   @Test
   public void jspExceptionCauseMessageCtorTest() throws Exception {
     TEST_PROPS.setProperty(APITEST, "jspExceptionCauseMessageCtorTest");
-    invoke();
-  }
-
-  /*
-   * @testName: jspExceptionGetRootCauseTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:129
-   * 
-   * @test_Strategy: Validate the behavior of JspException.getRootCause().
-   */
-  // @Test
-  public void jspExceptionGetRootCauseTest() throws Exception {
-    TEST_PROPS.setProperty(APITEST, "jspExceptionGetRootCauseTest");
     invoke();
   }
 }
