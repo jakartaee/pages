@@ -29,7 +29,7 @@
 
     <groupId>jakarta.tck</groupId>
     <artifactId>jakarta-pages-tck</artifactId>
-    <version>4.1.0-SNAPSHOT</version>
+    <version>4.1.0-M1</version>
     <packaging>jar</packaging>
 
     <name>Jakarta Server Pages TCK</name>
