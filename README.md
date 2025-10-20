@@ -36,4 +36,3 @@ Implementations
 
 All test challenges for Jakarta Pages must be resolved by Active Resolution.
 Please see the TCK Users guide for more details.
-
