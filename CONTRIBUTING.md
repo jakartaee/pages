@@ -1,10 +1,10 @@
-# Contributing to Eclipse Project for Jakarta Server Pages
+# Contributing to Eclipse Project for Jakarta Pages
 
 Thanks for your interest in this project.
 
 ## Project description
 
-Jakarta Server Pages is a technology that helps software developers create
+Jakarta Pages is a technology that helps software developers create
 dynamically generated web pages based on HTML, XML, or other document types.
 
 * https://projects.eclipse.org/projects/ee4j.jsp
