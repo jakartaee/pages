@@ -1,7 +1,7 @@
-Jakarta Server Pages Specification
-==================================
+Jakarta Pages Specification
+===========================
 
-This project generates the Jakarta Server Pages Specification.
+This project generates the Jakarta Pages Specification.
 
 Building
 --------
