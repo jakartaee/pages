@@ -18,7 +18,7 @@ more.
 
 The project maintains the following source code repositories
 
-* https://github.com/eclipse-ee4j/jsp-api
+* https://github.com/jakartaee/pages
 
 ## Eclipse Contributor Agreement
 
