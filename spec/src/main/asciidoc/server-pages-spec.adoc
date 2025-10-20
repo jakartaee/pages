@@ -26,4 +26,4 @@ include::license-efsl.adoc[]
 
 // == Body
 :sectnums:
-include::ServerPages.adoc[]
+include::server-pages-spec-body.adoc[]
