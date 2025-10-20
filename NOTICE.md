@@ -1,12 +1,12 @@
-# Notices for Eclipse Project for Jakarta Server Pages
+# Notices for Jakarta Pages
 
-This content is produced and maintained by the Eclipse Project for JSP project.
+This content is produced and maintained by the Jakarta Pages project.
 
 * Project home: https://projects.eclipse.org/projects/ee4j.jsp
 
 ## Trademarks
 
-Eclipse Project for JSP is a trademark of the Eclipse Foundation.
+Jakarta Pages is a trademark of the Eclipse Foundation.
 
 ## Copyright
 
@@ -52,6 +52,6 @@ permitted.
 
 ## Note
 
-References in this document to JSP refer to the Jakarta Server Pages unless otherwise
+References in this document to JSP refer to the Jakarta Pages unless otherwise
 noted.
 
