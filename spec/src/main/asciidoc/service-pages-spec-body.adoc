@@ -11420,7 +11420,7 @@ Jakarta Server Pages specification. This appendix is non-normative.
 
 === Changes between JSP 4.1 and JSP 4.0
 
-* https://github.com/eclipse-ee4j/jsp-api/issues/245[#245]
+* https://github.com/jakartaee/pages/issues/245[#245]
   Utilise the new `ELResolver.StandaloneIdentifierMarker` class to optimise the
   performance of the `ImportELResolver`. This should significantly improve the
   resolving of standalong identifiers e.g. `${my-identifier}`. 
@@ -11442,7 +11442,7 @@ Jakarta Server Pages specification. This appendix is non-normative.
 
 * Remove the deprecated `jsp:plugin` action and related actions.
 
-* https://github.com/eclipse-ee4j/jsp-api/issues/235[#235]
+* https://github.com/jakartaee/pages/issues/235[#235]
   Update `ErrorData` to add support for the new attribute
   `jakarta.servlet.error.query_string`.
 
@@ -11453,13 +11453,13 @@ Jakarta Server Pages specification. This appendix is non-normative.
 
 * Deprecate methods that override `ELResolver.getFeatureDescriptors()` as that
   method has been deprecated as of EL 5.0.
-* https://github.com/eclipse-ee4j/jsp-api/issues/40[#40]
+* https://github.com/jakartaee/pages/issues/40[#40]
   Add an option to raise a `PropertyNotFoundException` when an EL expression
   contains an unknown identifier.
-* https://github.com/eclipse-ee4j/jsp-api/issues/42[#42]
+* https://github.com/jakartaee/pages/issues/42[#42]
   Clarify the meaning of 'scope' in the context of scripting variables
   associated with custom actions.
-* https://github.com/eclipse-ee4j/jsp-api/issues/44[#44]
+* https://github.com/jakartaee/pages/issues/44[#44]
   Clarify that the EL environment within a JSP has a set of default imports
   consistent with the default imports for the scripting environment. Refactor
   the `ScopedAttributeELResolver` to remove the special handling for imports and
@@ -11467,7 +11467,7 @@ Jakarta Server Pages specification. This appendix is non-normative.
 * Deprecate the `isThreadSafe` page directive attribute as the related Servlet
   API interface `SingleThreadModel` has been removed as of the Servlet 6.0
   specification.
-* https://github.com/eclipse-ee4j/jsp-api/issues/226[#226]
+* https://github.com/jakartaee/pages/issues/226[#226]
   Deprecate the `jsp:plugin` action and related actions as the associated HTML
   elements are no longer supported by any major browser.
 
