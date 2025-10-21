@@ -29,8 +29,8 @@
     <files>
         <!-- license -->
         <file>
-            <source>${project.basedir}/src/main/resources/LICENSE_${license}.md</source>
-            <destName>LICENSE.md</destName>
+            <source>${project.basedir}/docs/LICENSE.html</source>
+            <destName>LICENSE.html</destName>
         </file>
         <file>
             <source>${project.basedir}/src/main/resources/ee/jakarta/tck/pages/signaturetest/jsp/jakarta.servlet.jsp.sig_4.1</source>
