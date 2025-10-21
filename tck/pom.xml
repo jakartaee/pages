@@ -278,6 +278,7 @@
                         <configuration>
                             <sigfile>${project.build.directory}/jakarta.servlet.jsp.sig_${api.version}</sigfile>
                             <packages>jakarta.servlet.jsp,jakarta.servlet.jsp.el,jakarta.servlet.jsp.tagext</packages>
+                            <version>${api.version}</version>
                         </configuration>
                         <executions>
                             <execution>
