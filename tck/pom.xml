@@ -100,7 +100,7 @@
         <jms-api.version>3.1.0</jms-api.version>
         <!-- Test harness versiobns -->
         <arquillian.junit>1.10.0.Final</arquillian.junit>
-        <junit.jupiter.version>6.0.0</junit.jupiter.version>
+        <junit.jupiter.version>6.0.1</junit.jupiter.version>
         <bundle-name>jakarta-pages-tck</bundle-name>
     </properties>
 
