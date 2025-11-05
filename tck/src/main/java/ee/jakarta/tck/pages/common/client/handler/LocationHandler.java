@@ -65,7 +65,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.commons.httpclient.Header;
+import org.apache.http.Header;
 
 /**
  * <PRE>

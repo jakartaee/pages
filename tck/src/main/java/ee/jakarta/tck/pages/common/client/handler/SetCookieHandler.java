@@ -24,7 +24,7 @@ package ee.jakarta.tck.pages.common.client.handler;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import org.apache.commons.httpclient.Header;
+import org.apache.http.Header;
 
 public class SetCookieHandler implements Handler {
 

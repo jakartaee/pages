@@ -27,11 +27,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.HttpState;
-import org.apache.commons.httpclient.HttpVersion;
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.util.EntityUtils;
 
 /**
  * This class represents an HTTP response from the server.
@@ -50,14 +50,19 @@ public class HttpResponse {
   private static final String CONTENT_TYPE = "Content-Type";
 
   /**
-   * Wrapped HttpMethod used to pull response info from.
+   * Wrapped HttpUriRequest used to get request info
    */
-  private HttpMethod _method = null;
+  private HttpUriRequest _request = null;
+  
+  /**
+   * Wrapped HttpResponse used to pull response info from.
+   */
+  private HttpResponse _response = null;
 
   /**
-   * HttpState obtained after execution of request
+   * HttpClientContext obtained after execution of request
    */
-  private HttpState _state = null;
+  private HttpClientContext _context = null;
 
   /**
    * Charset encoding returned in the response
@@ -87,13 +92,27 @@ public class HttpResponse {
 
   /** Creates new HttpResponse */
   public HttpResponse(String host, int port, boolean isSecure,
-      HttpMethod method, HttpState state) {
+      HttpUriRequest request, HttpResponse response, HttpClientContext context) {
 
     _host = host;
     _port = port;
     _isSecure = isSecure;
-    _method = method;
-    _state = state;
+    _request = request;
+    _response = response;
+    _context = context;
+  }
+  
+  /**
+   * Legacy constructor for backward compatibility
+   * @deprecated
+   */
+  @Deprecated
+  public HttpResponse(String host, int port, boolean isSecure,
+      Object method, Object state) {
+    _host = host;
+    _port = port;
+    _isSecure = isSecure;
+    // Minimal support for legacy calls
   }
 
   /*
@@ -107,7 +126,7 @@ public class HttpResponse {
    * @return HTTP status code
    */
   public String getStatusCode() {
-    return Integer.toString(_method.getStatusCode());
+    return Integer.toString(_response.getStatusLine().getStatusCode());
   }
 
   /**
@@ -116,7 +135,7 @@ public class HttpResponse {
    * @return HTTP reason-phrase
    */
   public String getReasonPhrase() {
-    return _method.getStatusText();
+    return _response.getStatusLine().getReasonPhrase();
   }
 
   /**
@@ -125,7 +144,7 @@ public class HttpResponse {
    * @return response headers
    */
   public Header[] getResponseHeaders() {
-    return _method.getResponseHeaders();
+    return _response.getAllHeaders();
   }
 
   /**
@@ -134,7 +153,7 @@ public class HttpResponse {
    * @return response headers
    */
   public Header[] getResponseHeaders(String headerName) {
-    return _method.getResponseHeaders(headerName);
+    return _response.getHeaders(headerName);
   }
 
   /**
@@ -144,7 +163,7 @@ public class HttpResponse {
    *         exist.
    */
   public Header getResponseHeader(String headerName) {
-    return _method.getResponseHeader(headerName);
+    return _response.getFirstHeader(headerName);
   }
 
   /**
@@ -165,7 +184,10 @@ public class HttpResponse {
    *           if an error occurs reading from server
    */
   public byte[] getResponseBodyAsRawBytes() throws IOException {
-    return _method.getResponseBody();
+    if (_response.getEntity() != null) {
+      return EntityUtils.toByteArray(_response.getEntity());
+    }
+    return new byte[0];
   }
 
   /**
@@ -187,7 +209,10 @@ public class HttpResponse {
    *           if an error occurs reading from the server
    */
   public String getResponseBodyAsRawString() throws IOException {
-    return _method.getResponseBodyAsString();
+    if (_response.getEntity() != null) {
+      return EntityUtils.toString(_response.getEntity());
+    }
+    return "";
   }
 
   /**
@@ -209,7 +234,10 @@ public class HttpResponse {
    *           if an error occurs reading from the server
    */
   public InputStream getResponseBodyAsRawStream() throws IOException {
-    return _method.getResponseBodyAsStream();
+    if (_response.getEntity() != null) {
+      return _response.getEntity().getContent();
+    }
+    return new ByteArrayInputStream(new byte[0]);
   }
 
   /**
@@ -218,7 +246,7 @@ public class HttpResponse {
    * @return charset encoding
    */
   public String getResponseEncoding() {
-    Header content = _method.getResponseHeader(CONTENT_TYPE);
+    Header content = _response.getFirstHeader(CONTENT_TYPE);
     if (content != null) {
       String headerVal = content.getValue();
       int idx = headerVal.indexOf(";charset=");
@@ -231,12 +259,21 @@ public class HttpResponse {
   }
 
   /**
-   * Returns the post-request state.
+   * Returns the post-request context.
    *
-   * @return an HttpState object
+   * @return an HttpClientContext object
    */
-  public HttpState getState() {
-    return _state;
+  public HttpClientContext getContext() {
+    return _context;
+  }
+  
+  /**
+   * Legacy method for backward compatibility
+   * @deprecated Use getContext() instead
+   */
+  @Deprecated
+  public Object getState() {
+    return _context;
   }
 
   /**
@@ -248,21 +285,20 @@ public class HttpResponse {
     StringBuffer sb = new StringBuffer(255);
 
     sb.append("[RESPONSE STATUS LINE] -> ");
-    sb.append(((HttpMethodBase) _method).getParams().getVersion()
-        .equals(HttpVersion.HTTP_1_1) ? "HTTP/1.1 " : "HTTP/1.0 ");
-    sb.append(_method.getStatusCode()).append(' ');
-    sb.append(_method.getStatusText()).append('\n');
-    Header[] headers = _method.getResponseHeaders();
+    sb.append(_response.getStatusLine().getProtocolVersion()).append(' ');
+    sb.append(_response.getStatusLine().getStatusCode()).append(' ');
+    sb.append(_response.getStatusLine().getReasonPhrase()).append('\n');
+    Header[] headers = _response.getAllHeaders();
     if (headers != null && headers.length != 0) {
       for (int i = 0; i < headers.length; i++) {
         sb.append("       [RESPONSE HEADER] -> ");
-        sb.append(headers[i].toExternalForm()).append('\n');
+        sb.append(headers[i].toString()).append('\n');
       }
     }
 
     String resBody;
     try {
-      resBody = _method.getResponseBodyAsString();
+      resBody = getResponseBodyAsRawString();
     } catch (IOException ioe) {
       resBody = "UNEXECTED EXCEPTION: " + ioe.toString();
     }
@@ -291,7 +327,11 @@ public class HttpResponse {
   }
 
   public String getPath() {
-    return _method.getPath();
+    try {
+      return _request.getURI().getPath();
+    } catch (Exception e) {
+      return "";
+    }
   }
 
   /*
@@ -306,8 +346,12 @@ public class HttpResponse {
    */
   private String getEncodedResponse() throws IOException {
     if (_responseBody == null) {
-      _responseBody = getEncodedStringFromStream(
-          _method.getResponseBodyAsStream(), getResponseEncoding());
+      if (_response.getEntity() != null) {
+        _responseBody = getEncodedStringFromStream(
+            _response.getEntity().getContent(), getResponseEncoding());
+      } else {
+        _responseBody = "";
+      }
     }
     return _responseBody;
   }

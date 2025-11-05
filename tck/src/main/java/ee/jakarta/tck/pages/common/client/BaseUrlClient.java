@@ -26,7 +26,7 @@ import java.util.Properties;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-import org.apache.commons.httpclient.HttpState;
+import org.apache.http.client.protocol.HttpClientContext;
 
 import ee.jakarta.tck.pages.common.client.http.HttpRequest;
 
@@ -314,9 +314,9 @@ public abstract class BaseUrlClient {
   protected int _port = 0;
 
   /**
-   * HttpState that may be used for multiple invocations requiring state.
+   * HttpClientContext that may be used for multiple invocations requiring state.
    */
-  protected HttpState _state = null;
+  protected HttpClientContext _state = null;
 
   /**
    * Test case.

@@ -35,8 +35,8 @@ import ee.jakarta.tck.pages.common.client.validation.ValidationFactory;
 import ee.jakarta.tck.pages.common.client.validation.ValidationStrategy;
 import ee.jakarta.tck.pages.common.client.validation.WebValidatorBase;
 
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpState;
+import org.apache.http.Header;
+import org.apache.http.client.protocol.HttpClientContext;
 
 
 /**
@@ -499,7 +499,7 @@ public class WebTestCase implements TestCase {
    */
   @Override
   public void setState(Object state) {
-    _request.setState((HttpState) state);
+    _request.setState(state);
   }
 
   /**
