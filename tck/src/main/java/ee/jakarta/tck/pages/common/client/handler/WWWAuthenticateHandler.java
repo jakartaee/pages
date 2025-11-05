@@ -62,7 +62,7 @@ package ee.jakarta.tck.pages.common.client.handler;
 
 import java.util.logging.Logger;
 
-import org.apache.commons.httpclient.Header;
+import org.apache.http.Header;
 
 /**
  * <PRE>

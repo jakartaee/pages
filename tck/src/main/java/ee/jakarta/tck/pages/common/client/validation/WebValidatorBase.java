@@ -26,7 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.apache.commons.httpclient.Header;
+import org.apache.http.Header;
 
 import ee.jakarta.tck.pages.common.client.WebTestCase;
 import ee.jakarta.tck.pages.common.client.handler.Handler;

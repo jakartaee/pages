@@ -59,7 +59,7 @@
  */
 package ee.jakarta.tck.pages.common.client.handler;
 
-import org.apache.commons.httpclient.Header;
+import org.apache.http.Header;
 
 /**
  * Handler interface.

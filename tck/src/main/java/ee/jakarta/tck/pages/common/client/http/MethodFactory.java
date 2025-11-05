@@ -24,15 +24,16 @@ package ee.jakarta.tck.pages.common.client.http;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
-import org.apache.commons.httpclient.HttpMethod;
-import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.HttpVersion;
-import org.apache.commons.httpclient.methods.DeleteMethod;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.HeadMethod;
-import org.apache.commons.httpclient.methods.OptionsMethod;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.PutMethod;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpHead;
+import org.apache.http.client.methods.HttpOptions;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.HttpVersion;
+import org.apache.http.ProtocolVersion;
 
 import ee.jakarta.tck.pages.common.porting.TSURL;
 
@@ -99,9 +100,9 @@ public class MethodFactory {
    * The request must be in the format of METHOD URI_PATH HTTP_VERSION, i.e. GET
    * /index.jsp HTTP/1.1.
    *
-   * @return HttpMethod based in request.
+   * @return HttpUriRequest based in request.
    */
-  public static HttpMethod getInstance(String request) {
+  public static HttpUriRequest getInstance(String request) {
     StringTokenizer st = new StringTokenizer(request);
     String method;
     String query = null;
@@ -124,20 +125,20 @@ public class MethodFactory {
       uri = uri.substring(0, queryStart);
     }
 
-    HttpMethodBase req;
+    HttpRequestBase req;
 
     if (method.equals(GET_METHOD)) {
-      req = new GetMethod(uri);
+      req = new HttpGet(uri);
     } else if (method.equals(POST_METHOD)) {
-      req = new PostMethod(uri);
+      req = new HttpPost(uri);
     } else if (method.equals(PUT_METHOD)) {
-      req = new PutMethod(uri);
+      req = new HttpPut(uri);
     } else if (method.equals(DELETE_METHOD)) {
-      req = new DeleteMethod(uri);
+      req = new HttpDelete(uri);
     } else if (method.equals(HEAD_METHOD)) {
-      req = new HeadMethod(uri);
+      req = new HttpHead(uri);
     } else if (method.equals(OPTIONS_METHOD)) {
-      req = new OptionsMethod(uri);
+      req = new HttpOptions(uri);
     } else {
       throw new IllegalArgumentException("Invalid method: " + method);
     }
@@ -145,7 +146,13 @@ public class MethodFactory {
     setHttpVersion(version, req);
 
     if (query != null) {
-      req.setQueryString(query);
+      try {
+        String fullUriString = uri + "?" + query;
+        java.net.URI fullUri = new java.net.URI(fullUriString);
+        req.setURI(fullUri);
+      } catch (java.net.URISyntaxException e) {
+        throw new IllegalArgumentException("Invalid query string: " + query, e);
+      }
     }
 
     return req;
@@ -164,9 +171,9 @@ public class MethodFactory {
    * @param method
    *          method to adjust HTTP version
    */
-  private static void setHttpVersion(String version, HttpMethodBase method) {
+  private static void setHttpVersion(String version, HttpRequestBase method) {
     final String oneOne = "HTTP/1.1";
-    method.getParams().setVersion(
-        (version.equals(oneOne) ? HttpVersion.HTTP_1_1 : HttpVersion.HTTP_1_0));
+    ProtocolVersion protocolVersion = version.equals(oneOne) ? HttpVersion.HTTP_1_1 : HttpVersion.HTTP_1_0;
+    method.setProtocolVersion(protocolVersion);
   }
 }
