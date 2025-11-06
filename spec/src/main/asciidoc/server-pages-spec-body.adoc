@@ -3781,7 +3781,7 @@ Always resolves the requested value, returning `null`
 
 [[_JSP_Resolver_Hierarchy]]
 .*Figure JSP.2-1* JSP Resolver Hierarchy
-image:images/sp-2.svg[image]
+image:sp-2.svg[image]
 
 === Functions
 
@@ -6395,7 +6395,7 @@ produce responses.
 
 [[_Relationship_between_JSP_Pages_and_XML_views_of_JSP_pages]]
 .*Figure JSP.{jsp-chapter}-1* Relationship between JSP Pages and XML views of JSP pages
-image:images/sp-4.svg[image]
+image:sp-4.svg[image]
 
 JSP documents are used by JSP page authors.
 They can be authored directly, using a text editor, through an XML
@@ -10576,7 +10576,7 @@ the `Servlet` class corresponding to the JSP page must implement the
 
 [[Contracts_between_a_JSP_Page_and_a_JSP_Container]]
 .*Figure JSP.{jsp-chapter}-1* Contracts between a JSP Page and a JSP Container
-image:images/sp-11.svg[image]
+image:sp-11.svg[image]
 
 
 The involved contracts are shown in
