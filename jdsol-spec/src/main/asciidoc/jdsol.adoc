@@ -153,7 +153,7 @@ This diagram demonstrates data flow. The particular case shown has two levels of
 translation, with file inclusion on the second level (as is the case in the
 example in <<SMAP Resolution>>).
 
-image:images/data-flow.png[data flow diagram,pdfwidth=75%]
+image:data-flow.png[data flow diagram,pdfwidth=75%]
 
 Where `TS` is <<TermTranslatedSource,translated-source>> and `FS` is
 <<TermFinalSource,final-source>>.
@@ -731,7 +731,7 @@ The following example demonstrates resolution with this algorithm. The
 example. In this example, `Incl.bar` is included by `Hi.bar`, but each is the
 result of a prior translation.
 
-image:images/resolution.png[resolution diagram,pdfwidth=75%]         
+image:resolution.png[resolution diagram,pdfwidth=75%]         
 
 If the unresolved SMAP (in `Hi.java.smap`) is as follows:
 
