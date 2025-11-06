@@ -21,38 +21,38 @@ Constraints:
 [width="100%",cols=".^30%s,70%",options="header"]
 |===
 |Term |Definition
-|[#TermFinalSource]#final-source#
+|[[TermFinalSource]]#final-source#
 |The final form of source. This source will be <<TermCompiler,compiled>> into a
 <<TermClassFile,class file>>. Typically, final-source is Java programming
 language source.
 
-|[#TermTranslatedSource]#translated-source#
+|[[TermTranslatedSource]]#translated-source#
 |Source that will be translated by a
 <<TermLanguageProcessor,language-processor>> into another language or form.
 
-|[#TermLanguageProcessor]#language-processor#
+|[[TermLanguageProcessor]]#language-processor#
 |Converts <<TermTranslatedSource,translated-source>> to
 <<TermFinalSource,final-source>> or to different
 <<TermTranslatedSource,translated-source>>.
 
-|[#TermClassFile]#class file#
+|[[TermClassFile]]#class file#
 |A collection of bytes in Java virtual machine class file format.
 
-|[#TermCompiler]#compiler#
+|[[TermCompiler]]#compiler#
 |Compiler which converts <<TermFinalSource,final-source>> to class files. For
 example, `javac` is a compiler.
 
-|[#TermPostProcessor]#post-processor#
+|[[TermPostProcessor]]#post-processor#
 |Takes a <<TermClassFile,class file>> and a
 <<TermSourceMapFile,Source Map File>> as input; generates a class file as
 output. Inserts a <<TermSourceDebugExtension,SourceDebugExtension attribute>>.
 
-|[#TermSourceMap]#Source Map# +
+|[[TermSourceMap]]#Source Map# +
 SMAP
 |Specifies the mapping of source between one or more sets of input source and
 the output source. See: <<Source Map Format>>.
 
-|[#TermSourceMapFile]#Source Map File# +
+|[[TermSourceMapFile]]#Source Map File# +
 SMAP-file
 |Specifies the mapping created by a
 <<TermLanguageProcessor,language-processor>> between
@@ -60,21 +60,21 @@ SMAP-file
 source. It is a <<TermSourceMap,Source Map>> stored in a file in
 <<Source Map Format>>.
 
-|[#TermStratum]#stratum#
+|[[TermStratum]]#stratum#
 |A view of a class from a particular, named, programming language level.
 
-|[#TermJPDA]#JPDA#
+|[[TermJPDA]]#JPDA#
 |The https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/index.html[Java
 Platform Debugger Architecture].
 
-|[#TermJDI]#JDI#
+|[[TermJDI]]#JDI#
 |The Java Debug Interface, which is the high-level Java programming language
 interface of the
 https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/[Java Platform Debugger
 Architecture]. See:
 https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/[JDI Specification].
 
-|[#TermSourceDebugExtension]#SourceDebugExtension +
+|[[TermSourceDebugExtension]]#SourceDebugExtension +
 attribute#
 |A Java virtual machine class file attribute that holds information about the
 source. In this case, the information is a
@@ -235,7 +235,7 @@ termination is with line-feed, carriage-return or carriage-return followed by
 line-feed. Because SMAPs are included in class files, size of the SMAP was an
 important constraint on the format chosen for them.
 
-[#smap-header]
+[[smap-header]]
 === Header
 
 The first line of an SMAP is the four letters `SMAP` which identifies it as an
@@ -1005,7 +1005,7 @@ https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/[Java Platform Debugger Arc
 |JDI |https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdi/com/sun/jdi/ReferenceType.html#sourceDebugExtension()[`String sourceDebugExtension()`] in the `ReferenceType` interface
 |===
 
-[#attribute]
+[[attribute]]
 === SourceDebugExtension Class File Attribute
 
 Java virtual machine class file attributes are described in
