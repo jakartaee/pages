@@ -38,7 +38,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
@@ -117,11 +116,6 @@ public class HttpRequest {
    * Is the request going over SSL
    */
   private boolean _isSecure = false;
-
-  /**
-   * HTTP context and cookie store
-   */
-  private HttpClientContext _context = null;
 
   /**
    * Cookie store for managing cookies
@@ -356,25 +350,6 @@ public class HttpRequest {
   }
 
   /**
-   * <code>setState</code> will set the HTTP state for the current request (i.e.
-   * session tracking). This has the side affect
-   */
-  public void setState(org.apache.http.client.CookieStore state) {
-    _cookieStore = state;
-    _useCookies = true;
-  }
-
-  /**
-   * Legacy method for compatibility with old HttpState API
-   */
-  @Deprecated
-  public void setState(Object state) {
-    // For backward compatibility, create a new cookie store
-    _cookieStore = new BasicCookieStore();
-    _useCookies = true;
-  }
-
-  /**
    * <code>execute</code> will dispatch the current request to the target
    * server.
    *
@@ -440,31 +415,9 @@ public class HttpRequest {
     }
 
     // Execute the request
-    HttpClientContext context = getContext();
-    _response = client.execute(_method, context);
+    _response = client.execute(_method);
 
-    return new ee.jakarta.tck.pages.common.client.http.HttpResponse(_host, _port, _isSecure, _method, _response, context);
-  }
-
-  /**
-   * Returns the current context for this request.
-   *
-   * @return HttpClientContext current context
-   */
-  public HttpClientContext getContext() {
-    if (_context == null) {
-      _context = HttpClientContext.create();
-      if (_cookieStore != null) {
-        _context.setCookieStore(_cookieStore);
-      } else if (_useCookies) {
-        _cookieStore = new BasicCookieStore();
-        _context.setCookieStore(_cookieStore);
-      }
-      if (_credentialsProvider != null) {
-        _context.setCredentialsProvider(_credentialsProvider);
-      }
-    }
-    return _context;
+    return new ee.jakarta.tck.pages.common.client.http.HttpResponse(_host, _port, _isSecure, _method, _response);
   }
 
   /**

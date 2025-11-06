@@ -26,8 +26,6 @@ import java.util.Properties;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-import org.apache.http.client.protocol.HttpClientContext;
-
 import ee.jakarta.tck.pages.common.client.http.HttpRequest;
 
 /**
@@ -269,16 +267,6 @@ public abstract class BaseUrlClient {
   protected static final String JSP_SUFFIX = ".jsp";
 
   /**
-   * Use any saved state
-   */
-  protected static final String USE_SAVED_STATE = "use_saved_state";
-
-  /**
-   * Save current HTTP state.
-   */
-  protected static final String SAVE_STATE = "save_state";
-
-  /**
    * Ignore HTTP status codes
    */
   protected static final String IGNORE_STATUS_CODE = "ignore_status_code";
@@ -314,24 +302,9 @@ public abstract class BaseUrlClient {
   protected int _port = 0;
 
   /**
-   * HttpClientContext that may be used for multiple invocations requiring state.
-   */
-  protected HttpClientContext _state = null;
-
-  /**
    * Test case.
    */
   protected WebTestCase _testCase = null;
-
-  /**
-   * Use saved state.
-   */
-  protected boolean _useSavedState = false;
-
-  /**
-   * Save state.
-   */
-  protected boolean _saveState = false;
 
   /**
    * Follow redirect.
@@ -445,17 +418,11 @@ public abstract class BaseUrlClient {
       _testCase = new WebTestCase();
       setTestProperties(_testCase);
       LOGGER.fine("[BaseUrlClient] EXECUTING");
-      if (_useSavedState && _state != null) {
-        _testCase.getRequest().setState(_state);
-      }
       if (_redirect != false) {
         LOGGER.fine("##########Call setFollowRedirects");
         _testCase.getRequest().setFollowRedirects(_redirect);
       }
       _testCase.execute();
-      if (_saveState) {
-        _state = _testCase.getResponse().getContext();
-      }
     } catch (Exception tfe) {
       Throwable t = tfe.getCause();
       if (t != null) {
@@ -464,8 +431,6 @@ public abstract class BaseUrlClient {
       throw new Exception("[BaseUrlClient] " + _testName
           + " failed!  Check output for cause of failure.", tfe);
     } finally {
-      _useSavedState = false;
-      _saveState = false;
       _redirect = false;
       clearTestProperties();
     }
@@ -547,10 +512,6 @@ public abstract class BaseUrlClient {
         testCase.setUnexpectedResponseSearchString(value);
       } else if (key.equals(UNORDERED_SEARCH_STRING)) {
         testCase.setUnorderedSearchString(value);
-      } else if (key.equals(USE_SAVED_STATE)) {
-        _useSavedState = true;
-      } else if (key.equals(SAVE_STATE)) {
-        _saveState = true;
       } else if (key.equals(FOLLOW_REDIRECT)) {
         LOGGER.fine("##########Found redirect Property");
         _redirect = true;
