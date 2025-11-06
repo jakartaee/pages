@@ -454,7 +454,7 @@ public abstract class BaseUrlClient {
       }
       _testCase.execute();
       if (_saveState) {
-        _state = _testCase.getResponse().getState();
+        _state = _testCase.getResponse().getContext();
       }
     } catch (Exception tfe) {
       Throwable t = tfe.getCause();

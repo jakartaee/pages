@@ -29,7 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.http.Header;
-import org.apache.http.HttpEntity;
+import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -50,7 +50,6 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.apache.http.protocol.HttpContext;
 
 /**
  * Represents an HTTP client Request
@@ -98,7 +97,7 @@ public class HttpRequest {
    * Method representation of request.
    */
   private HttpUriRequest _method = null;
-  
+
   /**
    * Response from executing the request
    */
@@ -123,12 +122,12 @@ public class HttpRequest {
    * HTTP context and cookie store
    */
   private HttpClientContext _context = null;
-  
+
   /**
    * Cookie store for managing cookies
    */
   private CookieStore _cookieStore = null;
-  
+
   /**
    * Credentials provider for authentication
    */
@@ -153,7 +152,7 @@ public class HttpRequest {
    * Content length of request body.
    */
   private int _contentLength = 0;
-  
+
   /**
    * Flag for redirect following
    */
@@ -245,10 +244,9 @@ public class HttpRequest {
    *          request content
    */
   public void setContent(String content) {
-    if (_method instanceof org.apache.http.HttpEntityEnclosingRequest) {
+    if (_method instanceof HttpEntityEnclosingRequest) {
       try {
-        ((org.apache.http.HttpEntityEnclosingRequest) _method)
-            .setEntity(new StringEntity(content));
+        ((HttpEntityEnclosingRequest) _method).setEntity(new StringEntity(content));
       } catch (Exception e) {
         LOGGER.log(Level.WARNING, "Failed to set entity", e);
       }
@@ -365,7 +363,7 @@ public class HttpRequest {
     _cookieStore = state;
     _useCookies = true;
   }
-  
+
   /**
    * Legacy method for compatibility with old HttpState API
    */
@@ -380,39 +378,40 @@ public class HttpRequest {
    * <code>execute</code> will dispatch the current request to the target
    * server.
    *
-   * @return ee.jakarta.tck.pages.common.client.http.HttpResponse the server's response.
+   * @return The server's response.
+   *
    * @throws IOException
    *           if an I/O error occurs during dispatch.
    */
   public ee.jakarta.tck.pages.common.client.http.HttpResponse execute() throws IOException {
     String scheme = _isSecure ? "https" : "http";
-    
+
     // Configure connection manager
     Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
         .register("http", PlainConnectionSocketFactory.getSocketFactory())
         .register("https", SSLConnectionSocketFactory.getSocketFactory())
         .build();
-    
+
     PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(socketFactoryRegistry);
-    
+
     // Configure request config for redirects
     RequestConfig requestConfig = RequestConfig.custom()
         .setRedirectsEnabled(_followRedirects)
         .setCookieSpec(CookieSpecs.DEFAULT)
         .build();
-    
+
     // Create HTTP client with configuration
     HttpClientBuilder clientBuilder = HttpClientBuilder.create()
         .setConnectionManager(connectionManager)
         .setDefaultRequestConfig(requestConfig);
-    
+
     // Add credentials if set
     if (_credentialsProvider != null) {
       clientBuilder.setDefaultCredentialsProvider(_credentialsProvider);
     }
-    
+
     client = clientBuilder.build();
-    
+
     LOGGER.info("Dispatching request: '" + _requestLine
         + "' to target server at '" + _host + ":" + _port + "'");
 
@@ -439,7 +438,7 @@ public class HttpRequest {
     } catch (java.net.URISyntaxException e) {
       throw new IOException("Failed to build request URI", e);
     }
-    
+
     // Execute the request
     HttpClientContext context = getContext();
     _response = client.execute(_method, context);
@@ -467,7 +466,7 @@ public class HttpRequest {
     }
     return _context;
   }
-  
+
   /**
    * Returns the credentials provider for this request.
    *
@@ -479,7 +478,7 @@ public class HttpRequest {
     }
     return _credentialsProvider;
   }
-  
+
   /**
    * Returns the cookie store for this request.
    *
@@ -490,15 +489,6 @@ public class HttpRequest {
       _cookieStore = new BasicCookieStore();
     }
     return _cookieStore;
-  }
-  
-  /**
-   * Legacy method for backward compatibility with old HttpState API
-   * @deprecated Use getContext(), getCookieStore(), or getCredentialsProvider() instead
-   */
-  @Deprecated
-  public Object getState() {
-    return getContext();
   }
 
   @Override
@@ -558,9 +548,9 @@ public class HttpRequest {
         path = token.substring(eqIndex + 1);
       }
     }
-    
+
     if (name != null) {
-      org.apache.http.impl.cookie.BasicClientCookie cookie = 
+      org.apache.http.impl.cookie.BasicClientCookie cookie =
           new org.apache.http.impl.cookie.BasicClientCookie(name, value != null ? value : "");
       cookie.setVersion(version);
       if (domain != null) {
