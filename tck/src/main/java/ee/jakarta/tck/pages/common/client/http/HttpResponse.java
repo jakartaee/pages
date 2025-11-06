@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import org.apache.http.Header;
 import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.protocol.HttpClientContext;
 
 /**
  * This class represents an HTTP response from the server.
@@ -54,11 +53,6 @@ public class HttpResponse {
    * Wrapped HttpResponse used to pull response info from.
    */
   private org.apache.http.HttpResponse _response = null;
-
-  /**
-   * HttpClientContext obtained after execution of request
-   */
-  private HttpClientContext _context = null;
 
   /**
    * Charset encoding returned in the response
@@ -88,14 +82,13 @@ public class HttpResponse {
 
   /** Creates new HttpResponse */
   public HttpResponse(String host, int port, boolean isSecure,
-      HttpUriRequest request, org.apache.http.HttpResponse response, HttpClientContext context) {
+      HttpUriRequest request, org.apache.http.HttpResponse response) {
 
     _host = host;
     _port = port;
     _isSecure = isSecure;
     _request = request;
     _response = response;
-    _context = context;
   }
 
   /*
@@ -198,15 +191,6 @@ public class HttpResponse {
       }
     }
     return _encoding;
-  }
-
-  /**
-   * Returns the post-request context.
-   *
-   * @return an HttpClientContext object
-   */
-  public HttpClientContext getContext() {
-    return _context;
   }
 
   /**

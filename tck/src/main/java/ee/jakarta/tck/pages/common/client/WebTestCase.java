@@ -477,32 +477,6 @@ public class WebTestCase implements TestCase {
   }
 
   /**
-   * Returns the state for this particular test case.
-   *
-   * @return test state
-   */
-  @Override
-  public Object getState() {
-    if (_response != null) {
-      return _response.getContext();
-    } else {
-      // an initial request for state
-      return _request.getContext();
-    }
-  }
-
-  /**
-   * Sets the state for this test case.
-   *
-   * @param state
-   *          test state
-   */
-  @Override
-  public void setState(Object state) {
-    _request.setState(state);
-  }
-
-  /**
    * Sets a logical name for this test case.
    *
    * @param name
