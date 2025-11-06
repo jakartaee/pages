@@ -36,7 +36,7 @@ import ee.jakarta.tck.pages.common.client.validation.ValidationStrategy;
 import ee.jakarta.tck.pages.common.client.validation.WebValidatorBase;
 
 import org.apache.http.Header;
-import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.message.BasicHeader;
 
 
 /**
@@ -484,10 +484,10 @@ public class WebTestCase implements TestCase {
   @Override
   public Object getState() {
     if (_response != null) {
-      return _response.getState();
+      return _response.getContext();
     } else {
       // an initial request for state
-      return _request.getState();
+      return _request.getContext();
     }
   }
 
@@ -576,7 +576,7 @@ public class WebTestCase implements TestCase {
       if (header != null) {
         map.put(name, createNewHeader(value, header));
       } else {
-        map.put(name, new Header(name, value));
+        map.put(name, new BasicHeader(name, value));
       }
     }
   }
@@ -592,7 +592,7 @@ public class WebTestCase implements TestCase {
    */
   private Header createNewHeader(String newValue, Header header) {
     String oldValue = header.getValue();
-    return new Header(header.getName(), oldValue + ", " + newValue);
+    return new BasicHeader(header.getName(), oldValue + ", " + newValue);
   }
 
   /**

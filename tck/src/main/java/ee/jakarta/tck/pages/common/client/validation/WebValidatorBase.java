@@ -158,7 +158,7 @@ public boolean validate(WebTestCase testCase) {
     }
 
     if (sCode == null && (resCode.charAt(0) == SERVER_ERROR)) {
-      String resBody = _res.getResponseBodyAsRawString();
+      String resBody = _res.getResponseBodyAsString();
       StringBuffer sb = new StringBuffer(75 + resBody.length());
       sb.append("[WebValidatorBase] Unexpected '");
       sb.append(resCode).append("' received from target server!\n");
@@ -247,7 +247,7 @@ public boolean validate(WebTestCase testCase) {
     List<String> list = _case.getSearchStrings();
     boolean found = true;
     if (list != null && !list.isEmpty()) {
-      String responseBody = _res.getResponseBodyAsRawString();
+      String responseBody = _res.getResponseBodyAsString();
 
       String search = null;
 
@@ -324,7 +324,7 @@ public boolean validate(WebTestCase testCase) {
     List<String> list = _case.getSearchStringsNoCase();
     boolean found = true;
     if (list != null && !list.isEmpty()) {
-      String responseBody = _res.getResponseBodyAsRawString();
+      String responseBody = _res.getResponseBodyAsString();
 
       String search = null;
 
@@ -397,7 +397,7 @@ public boolean validate(WebTestCase testCase) {
     List<String> list = _case.getUnorderedSearchStrings();
     boolean found = true;
     if (list != null && !list.isEmpty()) {
-      String responseBody = _res.getResponseBodyAsRawString();
+      String responseBody = _res.getResponseBodyAsString();
 
       String search = null;
 
@@ -456,7 +456,7 @@ public boolean validate(WebTestCase testCase) {
   protected boolean checkUnexpectedSearchStrings() throws IOException {
     List<String> list = _case.getUnexpectedSearchStrings();
     if (list != null && !list.isEmpty()) {
-      String responseBody = _res.getResponseBodyAsRawString();
+      String responseBody = _res.getResponseBodyAsString();
       Iterator<String> iter = list.iterator();
       while (iter.hasNext()) {
         String search = iter.next();
@@ -564,21 +564,21 @@ public boolean validate(WebTestCase testCase) {
         StringBuffer sb = new StringBuffer(255);
         sb.append("[WebValidatorBase] Unable to find the following header");
         sb.append(" in the server's response: ");
-        sb.append(currentHeader.toExternalForm()).append("\n");
+        sb.append(currentHeader.toString()).append("\n");
         sb.append("[WebValidatorBase] Response headers recieved from");
         sb.append(" server:");
 
         Header[] resHeaders = _res.getResponseHeaders();
         for (int i = 0; i < resHeaders.length; i++) {
           sb.append("\n\tResponseHeader -> ");
-          sb.append(resHeaders[i].toExternalForm());
+          sb.append(resHeaders[i].toString());
         }
         sb.append("\n");
         LOGGER.severe(sb.toString());
 
         return false;
       } else {
-          LOGGER.finer("Found expected header: " + currentHeader.toExternalForm());
+          LOGGER.finer("Found expected header: " + currentHeader.toString());
         return true;
       }
     }
@@ -623,14 +623,14 @@ public boolean validate(WebTestCase testCase) {
             StringBuffer sb = new StringBuffer(255);
             sb.append("[WebValidatorBase] Unexpected header found in the ");
             sb.append("server's response: ");
-            sb.append(currentHeader.toExternalForm()).append("\n");
+            sb.append(currentHeader.toString()).append("\n");
             sb.append("[WebValidatorBase] Response headers recieved from");
             sb.append("server:");
 
             Header[] resHeaders = _res.getResponseHeaders();
             for (int j = 0; j < resHeaders.length; j++) {
               sb.append("\n\tResponseHeader -> ");
-              sb.append(resHeaders[j].toExternalForm());
+              sb.append(resHeaders[j].toString());
             }
             sb.append("\n");
             LOGGER.severe(sb.toString());

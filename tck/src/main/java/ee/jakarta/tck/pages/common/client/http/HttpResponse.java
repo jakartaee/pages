@@ -21,17 +21,13 @@
 
 package ee.jakarta.tck.pages.common.client.http;
 
-import java.io.BufferedReader;
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-
 import org.apache.http.Header;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.util.EntityUtils;
 
 /**
  * This class represents an HTTP response from the server.
@@ -53,11 +49,11 @@ public class HttpResponse {
    * Wrapped HttpUriRequest used to get request info
    */
   private HttpUriRequest _request = null;
-  
+
   /**
    * Wrapped HttpResponse used to pull response info from.
    */
-  private HttpResponse _response = null;
+  private org.apache.http.HttpResponse _response = null;
 
   /**
    * HttpClientContext obtained after execution of request
@@ -73,7 +69,7 @@ public class HttpResponse {
    * The response body. Initialized after first call to one of the
    * getResponseBody methods and cached for subsequent calls.
    */
-  private String _responseBody = null;
+  private byte[] _responseBody = null;
 
   /**
    * Host name used for processing request
@@ -92,7 +88,7 @@ public class HttpResponse {
 
   /** Creates new HttpResponse */
   public HttpResponse(String host, int port, boolean isSecure,
-      HttpUriRequest request, HttpResponse response, HttpClientContext context) {
+      HttpUriRequest request, org.apache.http.HttpResponse response, HttpClientContext context) {
 
     _host = host;
     _port = port;
@@ -100,19 +96,6 @@ public class HttpResponse {
     _request = request;
     _response = response;
     _context = context;
-  }
-  
-  /**
-   * Legacy constructor for backward compatibility
-   * @deprecated
-   */
-  @Deprecated
-  public HttpResponse(String host, int port, boolean isSecure,
-      Object method, Object state) {
-    _host = host;
-    _port = port;
-    _isSecure = isSecure;
-    // Minimal support for legacy calls
   }
 
   /*
@@ -167,77 +150,36 @@ public class HttpResponse {
   }
 
   /**
-   * Returns the response body as a byte array using the charset specified in
-   * the server's response.
+   * Returns the response body as a byte array.
    *
    * @return response body as an array of bytes.
+   *
+   * @exception IOException If an error occurs reading the reading the response body
    */
   public byte[] getResponseBodyAsBytes() throws IOException {
-    return getEncodedResponse().getBytes();
+    return getResponseBytes();
   }
 
   /**
-   * Returns the response as bytes (no encoding is performed by client.
-   *
-   * @return the raw response bytes
-   * @throws IOException
-   *           if an error occurs reading from server
-   */
-  public byte[] getResponseBodyAsRawBytes() throws IOException {
-    if (_response.getEntity() != null) {
-      return EntityUtils.toByteArray(_response.getEntity());
-    }
-    return new byte[0];
-  }
-
-  /**
-   * Returns the response body as a string using the charset specified in the
-   * server's response.
+   * Returns the response body as a string using the charset specified in the server's response.
    *
    * @return response body as a String
+   *
+   * @exception IOException If an error occurs reading the reading the response body
    */
   public String getResponseBodyAsString() throws IOException {
-    return getEncodedResponse();
+    return new String(getResponseBytes(), getResponseEncoding());
   }
 
   /**
-   * Returns the response body of the server without being encoding by the
-   * client.
-   *
-   * @return an unecoded String representation of the response
-   * @throws IOException
-   *           if an error occurs reading from the server
-   */
-  public String getResponseBodyAsRawString() throws IOException {
-    if (_response.getEntity() != null) {
-      return EntityUtils.toString(_response.getEntity());
-    }
-    return "";
-  }
-
-  /**
-   * Returns the response body as an InputStream using the encoding specified in
-   * the server's response.
+   * Returns the response body as an InputStream.
    *
    * @return response body as an InputStream
+   *
+   * @exception IOException If an error occurs reading the reading the response body
    */
   public InputStream getResponseBodyAsStream() throws IOException {
-    return new ByteArrayInputStream(getEncodedResponse().getBytes());
-  }
-
-  /**
-   * Returns the response body as an InputStream without any encoding applied by
-   * the client.
-   *
-   * @return an InputStream to read the response
-   * @throws IOException
-   *           if an error occurs reading from the server
-   */
-  public InputStream getResponseBodyAsRawStream() throws IOException {
-    if (_response.getEntity() != null) {
-      return _response.getEntity().getContent();
-    }
-    return new ByteArrayInputStream(new byte[0]);
+    return new ByteArrayInputStream(getResponseBytes());
   }
 
   /**
@@ -266,21 +208,13 @@ public class HttpResponse {
   public HttpClientContext getContext() {
     return _context;
   }
-  
-  /**
-   * Legacy method for backward compatibility
-   * @deprecated Use getContext() instead
-   */
-  @Deprecated
-  public Object getState() {
-    return _context;
-  }
 
   /**
    * Displays a String representation of the response.
    *
    * @return string representation of response
    */
+  @Override
   public String toString() {
     StringBuffer sb = new StringBuffer(255);
 
@@ -298,7 +232,7 @@ public class HttpResponse {
 
     String resBody;
     try {
-      resBody = getResponseBodyAsRawString();
+      resBody = getResponseBodyAsString();
     } catch (IOException ioe) {
       resBody = "UNEXECTED EXCEPTION: " + ioe.toString();
     }
@@ -340,30 +274,20 @@ public class HttpResponse {
    */
 
   /**
-   * Returns the response body using the encoding returned in the response.
+   * If previously read, the cached copy of the response body is returned, otherwise the response body is read, the raw
+   * bytes cached and then returned.
    *
-   * @return encoded response String.
+   * @return the response body as a byte array
    */
-  private String getEncodedResponse() throws IOException {
+  private byte[] getResponseBytes() throws IOException {
     if (_responseBody == null) {
       if (_response.getEntity() != null) {
-        _responseBody = getEncodedStringFromStream(
-            _response.getEntity().getContent(), getResponseEncoding());
+          BufferedInputStream bis = new BufferedInputStream( _response.getEntity().getContent());
+          _responseBody = bis.readAllBytes();
       } else {
-        _responseBody = "";
+        _responseBody = null;
       }
     }
     return _responseBody;
   }
-
-  public static String getEncodedStringFromStream(InputStream in, String enc)
-          throws IOException {
-    BufferedReader bin = new BufferedReader(new InputStreamReader(in, enc));
-    StringBuilder sb = new StringBuilder(128);
-    for (int ch = bin.read(); ch != -1; ch = bin.read()) {
-      sb.append((char) ch);
-    }
-    return sb.toString();
-  }
-
 }

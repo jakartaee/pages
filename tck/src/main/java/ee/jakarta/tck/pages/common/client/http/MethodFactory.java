@@ -96,16 +96,16 @@ public class MethodFactory {
    */
 
   /**
-   * Returns the approriate request method based on the provided request string.
-   * The request must be in the format of METHOD URI_PATH HTTP_VERSION, i.e. GET
-   * /index.jsp HTTP/1.1.
+   * Returns the appropriate request sub-type based on the provided request string. The request must be in the format of
+   * an RFC 9112 request line e.g. {@code GET /index.jsp HTTP/1.1}.
    *
-   * @return HttpUriRequest based in request.
+   * @param requestLine The request line
+   *
+   * @return HttpUriRequest based on the provided request line.
    */
-  public static HttpUriRequest getInstance(String request) {
-    StringTokenizer st = new StringTokenizer(request);
+  public static HttpUriRequest getInstance(String requestLine) {
+    StringTokenizer st = new StringTokenizer(requestLine);
     String method;
-    String query = null;
     String uri;
     String version;
     try {
@@ -114,15 +114,7 @@ public class MethodFactory {
       version = st.nextToken();
     } catch (NoSuchElementException nsee) {
       throw new IllegalArgumentException(
-          "Request provided: " + request + " is malformed.");
-    }
-
-    // check to see if there is a query string appended
-    // to the URI
-    int queryStart = uri.indexOf('?');
-    if (queryStart != -1) {
-      query = uri.substring(queryStart + 1);
-      uri = uri.substring(0, queryStart);
+          "Request provided: " + requestLine + " is malformed.");
     }
 
     HttpRequestBase req;
@@ -144,16 +136,6 @@ public class MethodFactory {
     }
 
     setHttpVersion(version, req);
-
-    if (query != null) {
-      try {
-        String fullUriString = uri + "?" + query;
-        java.net.URI fullUri = new java.net.URI(fullUriString);
-        req.setURI(fullUri);
-      } catch (java.net.URISyntaxException e) {
-        throw new IllegalArgumentException("Invalid query string: " + query, e);
-      }
-    }
 
     return req;
   }
