@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2007, 2023 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2007, 2026 Oracle and/or its affiliates and others.
+ * All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -13,29 +14,12 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-
-/*
- * $Id$
- */
-
-/*
- * @(#)URLClient.java	1.36 02/11/04
- */
-
 package ee.jakarta.tck.pages.spec.configuration.elevaluation;
 
-import java.lang.System.Logger;
-import java.net.URL;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import java.io.IOException;
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
@@ -46,8 +30,6 @@ import org.jboss.shrinkwrap.api.asset.UrlAsset;
 @ExtendWith(ArquillianExtension.class)
 public class URLClientIT extends AbstractUrlClient {
 
-  private static final Logger logger = System.getLogger(URLClientIT.class.getName());
-
   public URLClientIT() throws Exception {
 
     setGeneralURI("/jsp/spec/configuration/elevaluation");
@@ -55,30 +37,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   }
 
-  public void setup2() throws Exception {
-
-    logger.log(Logger.Level.INFO, "setup2 method URLClientIT");
-
-    if (url2 == null){
-      throw new Exception(
-          "[URLClientIT] The url was not injected");
-    }
-
-    String hostname = url2.getHost();
-    String portnum = Integer.toString(url2.getPort()); 
-
-		assertFalse(isNullOrEmpty(hostname), "[URLClientIT] 'webServerHost' was not set in the properties.");
-		_hostname = hostname.trim();
-		assertFalse(isNullOrEmpty(portnum), "[URLClientIT] 'webServerPort' was not set in the properties.");
-		_port = Integer.parseInt(portnum.trim());
-
-    logger.log(Logger.Level.INFO, "[URLClientIT] Test setup2 OK");
-
-  }
-
   @Deployment(testable = false)
-  public static WebArchive createDeployment() throws IOException {
-    
+  public static WebArchive createDeployment() {
+
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_config_eleval_web.war");
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_config_eleval_web.xml"));
@@ -94,25 +55,7 @@ public class URLClientIT extends AbstractUrlClient {
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/elpagetruex/ElEvaluationTest.jspx")), "elpagetruex/ElEvaluationTest.jspx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/elunspec/ElEvaluationTest.jsp")), "elunspec/ElEvaluationTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/elunspecx/ElEvaluationTest.jspx")), "elunspecx/ElEvaluationTest.jspx");
-  
-    return archive;
 
-  }
-
-  @ArquillianResource
-  @OperateOnDeployment("jsp_config_eleval23_web") 
-  public URL url2;
-
-
-  @Deployment(testable = false, name="jsp_config_eleval23_web")
-  public static WebArchive createDeployment23() throws IOException {
-    
-    String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
-    WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_config_eleval23_web.war");
-    archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_config_eleval23_web.xml"));
-
-    archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/compat13/ElCompatTest.jsp")), "ElCompatTest.jsp");
-  
     return archive;
 
   }
@@ -126,9 +69,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: elEvaluationUnspecifiedTest
-   * 
+   *
    * @assertion_ids: JSP:SPEC:254
-   * 
+   *
    * @test_Strategy: Validate that if the web application uses a 2.4 deployment
    * descriptor and the jsp-property-group element nor the JSP identified by the
    * jsp-property-group specifies no EL evaluation information, EL will be
@@ -149,9 +92,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: elEvaluationConfigurationFalseTest
-   * 
+   *
    * @assertion_ids: JSP:SPEC:142
-   * 
+   *
    * @test_Strategy: Validate that if the web application uses a 2.4 deployment
    * descriptor and the jsp-property-group element sets the el-ignored element
    * to false, and the JSP page specifies no special EL handling, that EL
@@ -172,9 +115,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: elEvaluationConfigurationTrueTest
-   * 
+   *
    * @assertion_ids: JSP:SPEC:141
-   * 
+   *
    * @test_Strategy: Validate that if the web application uses a 2.4 deployment
    * descriptor and the jsp-property-group element sets the el-ignored element
    * to true, and the JSP page specifies no special EL handling, that EL
@@ -195,9 +138,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: elEvaluationPageDirectiveOverrideTest
-   * 
+   *
    * @assertion_ids: JSP:SPEC:255
-   * 
+   *
    * @test_Strategy: Validate that if the web application uses a 2.4 deployment
    * descriptor, that the page directive attribute isELIgnored takes precedence
    * over the configuration of the JSP property group.
@@ -219,24 +162,6 @@ public class URLClientIT extends AbstractUrlClient {
     TEST_PROPS.setProperty(REQUEST,
         "GET /jsp_config_eleval_web/elpagefalsex/ElEvaluationTest.jspx HTTP/1.1");
     TEST_PROPS.setProperty(SEARCH_STRING, "Test PASSED");
-    invoke();
-  }
-
-  /*
-   * @testName: elEvaluation23WebApplicationTest
-   * 
-   * @assertion_ids: JSP:SPEC:252
-   * 
-   * @test_Strategy: Validate a JSP 2.0 container when presented with a 2.3
-   * based web application, and it encounters a JSP with an EL-like construct
-   * (i.e. ${expr}), that EL Evaluation is not performed.
-   */
-  @Test
-  public void elEvaluation23WebApplicationTest() throws Exception {
-    setup2();
-    TEST_PROPS.setProperty(REQUEST,
-        "GET /jsp_config_eleval23_web/ElCompatTest.jsp HTTP/1.1");
-    TEST_PROPS.setProperty(SEARCH_STRING, "${testPassed}");
     invoke();
   }
 }
