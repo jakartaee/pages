@@ -9,7 +9,7 @@
 :sectnums!:
 == Jakarta Server Pages Specification, Version 4.1
 
-Copyright (c) 2013, 2025 Oracle and/or its affiliates and others.
+Copyright (c) 2013, 2026 Oracle and/or its affiliates and others.
 All rights reserved.
 
 Eclipse is a registered trademark of the Eclipse Foundation. Jakarta
@@ -2687,7 +2687,7 @@ occurs when the character sequence is used as a String literal. The
 corresponding JSP configuration element is
 `deferred-syntax-allowed-as-literal` (see
 <<Deferred_Syntax>>). See
-<<Backwards Compatibility with JSP 2.0>> for more information.
+<<Backwards Compatibility>> for more information.
 
 |`trimDirective-` +
 `Whitespaces`
@@ -3411,7 +3411,7 @@ expression whose evaluation is deferred is represented with the syntax
 
 The EL can be used directly in template text,
 be it inside the body of a custom or standard actions or in template
-text outside of any action.Exceptions are if the body of the tag is
+text outside of any action. Exceptions are if the body of the tag is
 `tagdependent`, or if EL is turned off (usually for compatibility
 issues) explicitly through a directive or implicitly; see below.
 
@@ -4048,7 +4048,7 @@ The default mode for JSP pages in a Web
 Application delivered using a `web.xml` using the Servlet 2.4 or later format is
 to evaluate EL expressions with the ${} syntax. Expressions using the
 #{} are evaluated starting with JSP 2.1. See
-<<Backwards Compatibility with JSP 2.0>>
+<<Backwards Compatibility>>
 for more details on the evaluation of #{} expressions.
 
 The default mode can be explicitly changed by
@@ -4422,7 +4422,7 @@ configuration.
 Page authors can override the default value
 through the `deferredSyntaxAllowedAsLiteral` attribute of the page
 directive (see <<Directives>>). See also
-<<Backwards Compatibility with JSP 2.0>>
+<<Backwards Compatibility>>
 for more information.
 
 ==== Removing Whitespaces from Template Text
@@ -4511,7 +4511,18 @@ If it is set to `true`, then an error must be
 raised during the translation time, when an undeclared tag is used in a
 JSP page.
 
-=== Backwards Compatibility with JSP 2.0
+=== Backwards Compatibility
+
+==== General
+
+JSP containers are required to support tag library descriptors from version 2.1 onwards.
+JSP containers are required to support web application descriptors from version 4.0 onwards.
+
+JSP contains may, but are not required, to support earlier versions of these descriptors.
+
+==== Backwards Compatibility with JSP 2.0
+
+This section only applies to JSP containers that opt to support descriptors from Java EE 1.4 onwards.
 
 As of JSP 2.1, the character sequence `#{` was reserved for EL expressions.
 
@@ -6420,8 +6431,8 @@ three ways:
 explicitly indicates, through the `<is-xml>` element, whether a given
 file is a JSP document, then that indication overrides any other
 determination. Otherwise,
-* If this web application is using a version
-2.4 web.xml, and if the extension is . `jspx`, then the file is a JSP
+* If this web application is using a version 2.4 or later web application
+descriptor, and if the extension is . `jspx`, then the file is a JSP
 document. Otherwise,
 * If the file is explicitly or implicitly
 identified as a JSP page and the top element is a `jsp:root` element
@@ -11424,6 +11435,10 @@ Jakarta Server Pages specification. This appendix is non-normative.
   Utilise the new `ELResolver.StandaloneIdentifierMarker` class to optimise the
   performance of the `ImportELResolver`. This should significantly improve the
   resolving of standalong identifiers e.g. `${my-identifier}`. 
+
+* https://github.com/jakartaee/pages/issues/363[#363]
+  Align the JSP specification with the Platform specification regarding support
+  for older descriptors.
 
 === Changes between JSP 4.0 and JSP 3.1
 
