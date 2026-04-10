@@ -14,15 +14,9 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-
-/*
- * $Id$
- */
-
 package ee.jakarta.tck.pages.spec.core_syntax.directives.page;
 
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
@@ -54,7 +48,7 @@ public class URLClientIT extends AbstractUrlClient {
   }
 
   @Deployment(testable = false)
-  public static WebArchive createDeployment() throws IOException {
+  public static WebArchive createDeployment() {
 
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_coresyntx_directive_page_web.war");
     archive.addClasses(JspTestUtil.class);
