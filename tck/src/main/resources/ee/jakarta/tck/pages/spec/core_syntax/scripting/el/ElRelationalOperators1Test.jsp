@@ -1,6 +1,7 @@
 <%--
 
-    Copyright (c) 2003, 2018 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2003, 2026 Oracle and/or its affiliates and others.
+    All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0, which is available at
@@ -50,7 +51,7 @@
          <el:checkOperator name="DoubleShort >" control='<%= False %>' object="${double1 > short1}">
           <el:checkOperator name="DoubleInteger lt" control='<%= True %>' object="${double1 lt integer1}">
            <el:checkOperator name="DoubleLong gt" control='<%= True %>' object="${long1 gt double1}">
-            <el:checkOperator name="DoubleFloat <=" control='<%= False %>' object="${float1 <= doubl1}">
+            <el:checkOperator name="DoubleFloat <=" control='<%= True %>' object="${float1 <= double1}">
              <el:checkOperator name="DoubleDouble >=" control='<%= True %>' object="${double1 >= double1}">
               <el:checkOperator name="FloatInt le" control='<%= True %>' object="${float1 le integer1}">
                <el:checkOperator name="DoubleFloat ge" control='<%= False %>' object="${float1 ge double1}">
@@ -138,6 +139,3 @@
   </el:checkOperator>
  </el:checkOperator>
 </el:checkOperator>
-
-
-
