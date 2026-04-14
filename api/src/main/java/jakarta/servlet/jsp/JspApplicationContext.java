@@ -23,10 +23,10 @@ import jakarta.el.ExpressionFactory;
 import jakarta.el.ELContextListener;
 
 /**
- * Stores application-scoped information relevant to JSP containers.
+ * Stores application-scoped information relevant to Jakarta Pages (JSP) containers.
  *
  * <p>
- * The JSP container must create a single instance of <code>JspApplicationContext</code> for each
+ * The Jakarta Pages (JSP) container must create a single instance of <code>JspApplicationContext</code> for each
  * <code>ServletContext</code> instance.
  * </p>
  *
@@ -37,13 +37,13 @@ import jakarta.el.ELContextListener;
  * </p>
  *
  * <p>
- * The <code>JspApplicationContext</code> provides the following services to JSP applications:
+ * The <code>JspApplicationContext</code> provides the following services to Jakarta Pages (JSP) applications:
  * </p>
  * <ul>
  * <li>Allows registration of <code>ELResolver</code>s, which are used to resolve variables in EL expressions contained
- * in JSP pages and tag files.</li>
+ * in Jakarta Pages (JSP) pages and tag files.</li>
  * <li>Provides an instance of <code>ExpressionFactory</code> for those applications or frameworks that need to perform
- * programmatic evaluation of EL expressions instead of allowing the JSP container to do it for them.</li>
+ * programmatic evaluation of EL expressions instead of allowing the Jakarta Pages (JSP) container to do it for them.</li>
  * <li>Allows the attachment of <code>ELContextListener</code> instances for notification whenever a new
  * <code>ELContext</code> is created. This is necessary when an application wishes to make custom context objects
  * available to their pluggable <code>ELResolver</code>s.</li>
@@ -60,7 +60,7 @@ public interface JspApplicationContext {
 
     /**
      * Adds an <code>ELResolver</code> to affect the way EL variables and properties are resolved for EL expressions
-     * appearing in JSP pages and tag files.
+     * appearing in Jakarta Pages (JSP) pages and tag files.
      *
      * <p>
      * For example, in the EL expression ${employee.lastName}, an <code>ELResolver</code> determines what object
@@ -68,7 +68,7 @@ public interface JspApplicationContext {
      * </p>
      *
      * <p>
-     * When evaluating an expression, the JSP container will consult a set of standard resolvers as well as any
+     * When evaluating an expression, the Jakarta Pages (JSP) container will consult a set of standard resolvers as well as any
      * resolvers registered via this method. The set of resolvers are consulted in the following order:
      * </p>
      * <ul>
@@ -87,7 +87,7 @@ public interface JspApplicationContext {
      * <code>IllegalStateException</code> is thrown.
      * </p>
      * <p>
-     * This restriction is in place to allow the JSP container to optimize for the common case where no additional
+     * This restriction is in place to allow the Jakarta Pages (JSP) container to optimize for the common case where no additional
      * <code>ELResolver</code>s are in the chain, aside from the standard ones. It is permissible to add
      * <code>ELResolver</code>s before or after initialization to a <code>CompositeELResolver</code> that is already in
      * the chain.
@@ -118,7 +118,7 @@ public interface JspApplicationContext {
      *
      * <p>
      * At a minimum, the <code>ELContext</code> objects created will contain a reference to the <code>JspContext</code>
-     * for this request, which is added by the JSP container. This is sufficient for all the default
+     * for this request, which is added by the Jakarta Pages (JSP) container. This is sufficient for all the default
      * <code>ELResolver</code>s listed in {@link #addELResolver}. Note that <code>JspContext.class</code> is used as the
      * key to ELContext.putContext() for the <code>JspContext</code> object reference.
      * </p>

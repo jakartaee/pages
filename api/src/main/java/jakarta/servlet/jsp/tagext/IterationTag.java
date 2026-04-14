@@ -57,7 +57,7 @@ import jakarta.servlet.jsp.JspException;
  *
  * <p>
  * Note that which methods are invoked after the doStartTag() depends on both the return value and on if the custom
- * action element is empty or not in the JSP page, not on how it's declared in the TLD.
+ * action element is empty or not in the Jakarta Pages (JSP) page, not on how it's declared in the TLD.
  *
  * <p>
  * If SKIP_BODY is returned the body is not evaluated, and then doEndTag() is invoked.
@@ -74,7 +74,7 @@ public interface IterationTag extends Tag {
     public final static int EVAL_BODY_AGAIN = 2;
 
     /**
-     * Process body (re)evaluation. This method is invoked by the JSP Page implementation object after every evaluation
+     * Process body (re)evaluation. This method is invoked by the Jakarta Pages (JSP) Page implementation object after every evaluation
      * of the body into the BodyEvaluation object. The method is not invoked if there is no body evaluation.
      *
      * <p>
@@ -91,7 +91,7 @@ public interface IterationTag extends Tag {
      * state, or because of external computation.
      *
      * <p>
-     * The JSP container will resynchronize the values of any AT_BEGIN and NESTED variables (defined by the associated
+     * The Jakarta Pages (JSP) container will resynchronize the values of any AT_BEGIN and NESTED variables (defined by the associated
      * TagExtraInfo or TLD) after the invocation of doAfterBody().
      *
      * @return whether additional evaluations of the body are desired

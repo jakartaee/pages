@@ -28,7 +28,7 @@ public class TagFileInfo {
 
     /**
      * Constructor for TagFileInfo from data in the JSP 2.0 format for TLD. This class is to be instantiated only from
-     * the TagLibrary code under request from some JSP code that is parsing a TLD (Tag Library Descriptor).
+     * the TagLibrary code under request from some Jakarta Pages (JSP) code that is parsing a TLD (Tag Library Descriptor).
      *
      * Note that, since TagLibibraryInfo reflects both TLD information and taglib directive information, a TagFileInfo
      * instance is dependent on a taglib directive. This is probably a design error, which may be fixed in the future.

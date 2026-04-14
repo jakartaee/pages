@@ -37,10 +37,10 @@ import jakarta.el.ELContext;
 import jakarta.el.ELResolver;
 
 /**
- * Defines variable resolution behavior for the EL implicit objects defined in the JSP specification.
+ * Defines variable resolution behavior for the EL implicit objects defined in the Jakarta Pages (JSP) specification.
  * 
  * <p>
- * The following variables are resolved by this <code>ELResolver</code>, as per the JSP specification:
+ * The following variables are resolved by this <code>ELResolver</code>, as per the Jakarta Pages (JSP) specification:
  * </p>
  * <ul>
  * <li><code>pageContext</code> - the <code>PageContext</code> object.</li>
@@ -72,7 +72,7 @@ import jakarta.el.ELResolver;
 public class ImplicitObjectELResolver extends ELResolver {
 
     /**
-     * If the base object is <code>null</code>, and the property matches the name of a JSP implicit object, returns the
+     * If the base object is <code>null</code>, and the property matches the name of a Jakarta Pages (JSP) implicit object, returns the
      * implicit object.
      *
      * <p>
@@ -151,7 +151,7 @@ public class ImplicitObjectELResolver extends ELResolver {
     }
 
     /**
-     * If the base object is <code>null</code>, and the property matches the name of a JSP implicit object, returns
+     * If the base object is <code>null</code>, and the property matches the name of a Jakarta Pages (JSP) implicit object, returns
      * <code>null</code> to indicate that no types are ever accepted to <code>setValue()</code>.
      *
      * <p>
@@ -186,7 +186,7 @@ public class ImplicitObjectELResolver extends ELResolver {
     }
 
     /**
-     * If the base object is <code>null</code>, and the property matches the name of a JSP implicit object, throws
+     * If the base object is <code>null</code>, and the property matches the name of a Jakarta Pages (JSP) implicit object, throws
      * <code>PropertyNotWritableException</code> to indicate that implicit objects cannot be overwritten.
      *
      * <p>
@@ -220,7 +220,7 @@ public class ImplicitObjectELResolver extends ELResolver {
     }
 
     /**
-     * If the base object is <code>null</code>, and the property matches the name of a JSP implicit object, returns
+     * If the base object is <code>null</code>, and the property matches the name of a Jakarta Pages (JSP) implicit object, returns
      * <code>true</code> to indicate that implicit objects cannot be overwritten.
      *
      * <p>
@@ -271,7 +271,7 @@ public class ImplicitObjectELResolver extends ELResolver {
     }
 
     // XXX - I moved this class from commons-el to an inner class here
-    // so that we do not have a dependency from the JSP APIs into commons-el.
+    // so that we do not have a dependency from the Jakarta Pages (JSP) APIs into commons-el.
     // There might be a better way to do this.
     /**
      * <p>
@@ -786,7 +786,7 @@ public class ImplicitObjectELResolver extends ELResolver {
     }
 
     // XXX - I moved this class from commons-el to an inner class here
-    // so that we do not have a dependency from the JSP APIs into commons-el.
+    // so that we do not have a dependency from the Jakarta Pages (JSP) APIs into commons-el.
     // There might be a better way to do this.
     /**
      * <p>

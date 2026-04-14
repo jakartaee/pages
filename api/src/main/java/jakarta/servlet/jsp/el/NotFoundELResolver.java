@@ -25,7 +25,7 @@ import jakarta.el.PropertyNotFoundException;
 /**
  * Defines variable resolution when all other resolvers fail.
  *
- * @since JSP 3.1
+ * @since Pages (JSP) 3.1
  */
 public class NotFoundELResolver extends ELResolver {
 

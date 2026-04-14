@@ -24,17 +24,17 @@ import jakarta.servlet.jsp.JspContext;
 import jakarta.servlet.jsp.JspException;
 
 /**
- * Encapsulates a portion of JSP code in an object that can be invoked as many times as needed. JSP Fragments are
- * defined using JSP syntax as the body of a tag for an invocation to a SimpleTag handler, or as the body of a
+ * Encapsulates a portion of Jakarta Pages (JSP) code in an object that can be invoked as many times as needed. Jakarta Pages (JSP) Fragments are
+ * defined using Jakarta Pages (JSP) syntax as the body of a tag for an invocation to a SimpleTag handler, or as the body of a
  * &lt;jsp:attribute&gt; standard action specifying the value of an attribute that is declared as a fragment, or to be
  * of type JspFragment in the TLD.
  * <p>
- * The definition of the JSP fragment must only contain template text and JSP action elements. In other words, it must
+ * The definition of the Jakarta Pages (JSP) fragment must only contain template text and Jakarta Pages (JSP) action elements. In other words, it must
  * not contain scriptlets or scriptlet expressions. At translation time, the container generates an implementation of
  * the JspFragment abstract class capable of executing the defined fragment.
  * <p>
  * A tag handler can invoke the fragment zero or more times, or pass it along to other tags, before returning. To
- * communicate values to/from a JSP fragment, tag handlers store/retrieve values in the JspContext associated with the
+ * communicate values to/from a Jakarta Pages (JSP) fragment, tag handlers store/retrieve values in the JspContext associated with the
  * fragment.
  * <p>
  * Note that tag library developers and page authors should not generate JspFragment implementations manually.

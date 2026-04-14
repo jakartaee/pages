@@ -23,7 +23,7 @@ import jakarta.servlet.jsp.PageContext;
 
 /**
  * The interface of a classic tag handler that does not want to manipulate its body. The Tag interface defines the basic
- * protocol between a Tag handler and JSP page implementation class. It defines the life cycle and the methods to be
+ * protocol between a Tag handler and Jakarta Pages (JSP) page implementation class. It defines the life cycle and the methods to be
  * invoked at start and end tag.
  *
  * <p>
@@ -35,7 +35,7 @@ import jakarta.servlet.jsp.PageContext;
  * </p>
  *
  * <p>
- * The JSP page implementation object invokes setPageContext and setParent, in that order, before invoking doStartTag()
+ * The Jakarta Pages (JSP) page implementation object invokes setPageContext and setParent, in that order, before invoking doStartTag()
  * or doEndTag().
  * </p>
  *
@@ -122,7 +122,7 @@ public interface Tag extends JspTag {
     // Setters for Tag handler data
 
     /**
-     * Set the current page context. This method is invoked by the JSP page implementation object prior to doStartTag().
+     * Set the current page context. This method is invoked by the Jakarta Pages (JSP) page implementation object prior to doStartTag().
      * <p>
      * This value is *not* reset by doEndTag() and must be explicitly reset by a page implementation if it changes
      * between calls to doStartTag().
@@ -132,7 +132,7 @@ public interface Tag extends JspTag {
     void setPageContext(PageContext pc);
 
     /**
-     * Set the parent (closest enclosing tag handler) of this tag handler. Invoked by the JSP page implementation object
+     * Set the parent (closest enclosing tag handler) of this tag handler. Invoked by the Jakarta Pages (JSP) page implementation object
      * prior to doStartTag().
      * <p>
      * This value is *not* reset by doEndTag() and must be explicitly reset by a page implementation.
@@ -155,7 +155,7 @@ public interface Tag extends JspTag {
      * extended in an informal manner by allowing the tag library author to indicate in the description subelement an
      * observable type. The type should be a subtype of the tag handler implementation class or void. This addititional
      * constraint can be exploited by a specialized container that knows about that specific tag library, as in the case
-     * of the JSP standard tag library.
+     * of the Jakarta Standard Tag Library.
      *
      * @return the current parent, or null if none.
      * @see TagSupport#findAncestorWithClass
@@ -165,7 +165,7 @@ public interface Tag extends JspTag {
     // Actions for basic start/end processing.
 
     /**
-     * Process the start tag for this instance. This method is invoked by the JSP page implementation object.
+     * Process the start tag for this instance. This method is invoked by the Jakarta Pages (JSP) page implementation object.
      *
      * <p>
      * The doStartTag method assumes that the properties pageContext and parent have been set. It also assumes that any
@@ -184,7 +184,7 @@ public interface Tag extends JspTag {
      * BodyTag.EVAL_BODY_BUFFERED is only valid if the tag handler implements BodyTag.
      *
      * <p>
-     * The JSP container will resynchronize the values of any AT_BEGIN and NESTED variables (defined by the associated
+     * The Jakarta Pages (JSP) container will resynchronize the values of any AT_BEGIN and NESTED variables (defined by the associated
      * TagExtraInfo or TLD) after the invocation of doStartTag(), except for a tag handler implementing BodyTag whose
      * doStartTag() method returns BodyTag.EVAL_BODY_BUFFERED.
      *
@@ -195,7 +195,7 @@ public interface Tag extends JspTag {
     int doStartTag() throws JspException;
 
     /**
-     * Process the end tag for this instance. This method is invoked by the JSP page implementation object on all Tag
+     * Process the end tag for this instance. This method is invoked by the Jakarta Pages (JSP) page implementation object on all Tag
      * handlers.
      *
      * <p>
@@ -209,16 +209,16 @@ public interface Tag extends JspTag {
      * the current page evaluation is stopped.
      *
      * <p>
-     * The JSP container will resynchronize the values of any AT_BEGIN and AT_END variables (defined by the associated
+     * The Jakarta Pages (JSP) container will resynchronize the values of any AT_BEGIN and AT_END variables (defined by the associated
      * TagExtraInfo or TLD) after the invocation of doEndTag().
      *
-     * @return indication of whether to continue evaluating the JSP page.
+     * @return indication of whether to continue evaluating the Jakarta Pages (JSP) page.
      * @throws JspException if an error occurred while processing this tag
      */
     int doEndTag() throws JspException;
 
     /**
-     * Called on a Tag handler to release state. The page compiler guarantees that JSP page implementation objects will
+     * Called on a Tag handler to release state. The page compiler guarantees that Jakarta Pages (JSP) page implementation objects will
      * invoke this method on all tag handlers, but there may be multiple invocations on doStartTag and doEndTag in
      * between.
      */

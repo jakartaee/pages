@@ -22,23 +22,18 @@
 <head>
 </head>
 <body bgcolor="white">
-Classes and interfaces for the Core JSP 4.0 API.
-
-<p>
-References in this document to JSP refer to the Jakarta Server Pages
- unless otherwise noted.
-</p>
+Classes and interfaces for the Core Jakarta Pages (JSP) 4.0 API.
 
 <p>
 The jakarta.servlet.jsp package contains a number of classes and
-interfaces that describe and define the contracts between a JSP page
+interfaces that describe and define the contracts between a Jakarta Pages (JSP) page
 implementation class and the runtime environment provided for an
-instance of such a class by a conforming JSP container.
+instance of such a class by a conforming Jakarta Pages (JSP) container.
 </p>
 
-<h2>JSP Page Implementation Object Contract</h2>
+<h2>Jakarta Pages (JSP) Page Implementation Object Contract</h2>
 <p>
-This section describes the basic contract between a JSP Page
+This section describes the basic contract between a Jakarta Pages (JSP) Page
 implementation object and its container.
 </p>
 <p>
@@ -48,14 +43,14 @@ and {@link jakarta.servlet.jsp.HttpJspPage}.
 The {@link jakarta.servlet.jsp.JspFactory} class describes the mechanism to
 portably instantiate all needed runtime objects,
 and {@link jakarta.servlet.jsp.JspEngineInfo} provides basic information on
-the current JSP container. Class {@link jakarta.servlet.jsp.JspApplicationContext}
-stores application-scoped information relevant to JSP containers.
+the current Jakarta Pages (JSP) container. Class {@link jakarta.servlet.jsp.JspApplicationContext}
+stores application-scoped information relevant to Jakarta Pages (JSP) containers.
 It was added in JSP 2.1 to support the integration of the unified
 Expression Language.
 </p>
 <p>
 None of these classes are intended to be used
-by JSP page authors; an example of how these classes may be
+by Jakarta Pages (JSP) page authors; an example of how these classes may be
 used is included below.
 </p>
 
@@ -68,12 +63,12 @@ are available by default as implicit objects.
 <h2>Exceptions</h2>
 
 <p>
-The {@link jakarta.servlet.jsp.JspException} class is the base class for all JSP
-exceptions.  The {@link jakarta.servlet.jsp.JspTagException} and 
+The {@link jakarta.servlet.jsp.JspException} class is the base class for all Jakarta Pages (JSP)
+exceptions.  The {@link jakarta.servlet.jsp.JspTagException} and
 {@link jakarta.servlet.jsp.SkipPageException} exceptions are used by the
 tag extension mechanism.</p>
 <p>
-For JSP error pages, the {@link jakarta.servlet.jsp.ErrorData} class encapsulates information 
+For Jakarta Pages (JSP) error pages, the {@link jakarta.servlet.jsp.ErrorData} class encapsulates information
 about the error.
 </p>
 
@@ -81,7 +76,7 @@ about the error.
 
 <p> An instance of an implementation dependent subclass of the
 {@link jakarta.servlet.jsp.PageContext} 
-abstract base class can be created by a JSP implementation class at
+abstract base class can be created by a Jakarta Pages (JSP) implementation class at
 the beginning of it's <code>_jspService()</code> method via an
 implementation default {@link jakarta.servlet.jsp.JspFactory}.
 
@@ -114,7 +109,7 @@ public void _jspService(HttpServletRequest request,
     Object      page    = this;
 
     try {
-        // body of translated JSP here ...
+        // body of translated Jakarta Pages (JSP) page here ...
     } catch (Exception e) {
         out.clear();
         pageContext.handlePageException(e);

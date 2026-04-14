@@ -21,13 +21,13 @@ package jakarta.servlet.jsp.tagext;
 import java.util.Map;
 
 /**
- * Translation-time validator class for a JSP page. A validator operates on the XML view associated with the JSP page.
+ * Translation-time validator class for a Jakarta Pages (JSP) page. A validator operates on the XML view associated with the Jakarta Pages (JSP) page.
  *
  * <p>
  * The TLD file associates a TagLibraryValidator class and some init arguments with a tag library.
  *
  * <p>
- * The JSP container is reponsible for locating an appropriate instance of the appropriate subclass by
+ * The Jakarta Pages (JSP) container is reponsible for locating an appropriate instance of the appropriate subclass by
  *
  * <ul>
  * <li>new a fresh instance, or reuse an available one
@@ -47,12 +47,12 @@ import java.util.Map;
  * validator) and may reuse it for all the pages in a given translation run.
  *
  * <p>
- * The JSP container is not guaranteed to serialize invocations of validate() method, and TagLibraryValidators should
+ * The Jakarta Pages (JSP) container is not guaranteed to serialize invocations of validate() method, and TagLibraryValidators should
  * perform any synchronization they may require.
  *
  * <p>
- * As of JSP 2.0, a JSP container must provide a jsp:id attribute to provide higher quality validation errors. The
- * container will track the JSP pages as passed to the container, and will assign to each element a unique "id", which
+ * As of JSP 2.0, a Jakarta Pages (JSP) container must provide a jsp:id attribute to provide higher quality validation errors. The
+ * container will track the Jakarta Pages (JSP) pages as passed to the container, and will assign to each element a unique "id", which
  * is passed as the value of the jsp:id attribute. Each XML element in the XML view available will be extended with this
  * attribute. The TagLibraryValidator can then use the attribute in one or more ValidationMessage objects. The container
  * then, in turn, can use these values to provide more precise information on the location of an error.
@@ -89,7 +89,7 @@ abstract public class TagLibraryValidator {
     }
 
     /**
-     * Validate a JSP page. This will get invoked once per unique tag library URI in the XML view. This method will
+     * Validate a Jakarta Pages (JSP) page. This will get invoked once per unique tag library URI in the XML view. This method will
      * return null if the page is valid; otherwise the method should return an array of ValidationMessage objects. An
      * array of length zero is also interpreted as no errors.
      *

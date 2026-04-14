@@ -19,7 +19,7 @@
 package jakarta.servlet.jsp;
 
 /**
- * A generic exception known to the JSP engine; uncaught JspExceptions will result in an invocation of the errorpage
+ * A generic exception known to the Jakarta Pages (JSP) engine; uncaught JspExceptions will result in an invocation of the errorpage
  * machinery.
  */
 public class JspException extends Exception {
@@ -33,7 +33,7 @@ public class JspException extends Exception {
     }
 
     /**
-     * Constructs a new JSP exception with the specified message. The message can be written to the server log and/or
+     * Constructs a new Jakarta Pages (JSP) exception with the specified message. The message can be written to the server log and/or
      * displayed for the user.
      *
      * @param msg a <code>String</code> specifying the text of the exception message

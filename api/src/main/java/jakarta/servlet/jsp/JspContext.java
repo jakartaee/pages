@@ -42,11 +42,11 @@ import jakarta.el.ELContext;
  * <code>pushBody()</code> and <code>popBody()</code>
  *
  * <p>
- * <B>Methods Intended for JSP authors</B>
+ * <B>Methods Intended for Jakarta Pages (JSP) authors</B>
  * <p>
  * Some methods provide <B>uniform access</B> to the diverse objects representing scopes. The implementation must use
  * the underlying machinery corresponding to that scope, so information can be passed back and forth between the
- * underlying environment (e.g. Servlets) and JSP pages. The methods are: <code>setAttribute()</code>,
+ * underlying environment (e.g. Servlets) and Jakarta Pages (JSP). The methods are: <code>setAttribute()</code>,
  * <code>getAttribute()</code>, <code>findAttribute()</code>, <code>removeAttribute()</code>,
  * <code>getAttributesScope()</code> and <code>getAttributeNamesInScope()</code>.
  * 
@@ -185,7 +185,7 @@ public abstract class JspContext {
      * </p>
      *
      * <p>
-     * The <code>ELContext</code> must contain the <code>ELResolver</code> described in the JSP specification (and in
+     * The <code>ELContext</code> must contain the <code>ELResolver</code> described in the Jakarta Pages (JSP) specification (and in
      * the javadocs for {@link JspApplicationContext#addELResolver}).
      * </p>
      *

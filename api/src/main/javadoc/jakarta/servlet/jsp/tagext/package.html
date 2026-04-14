@@ -25,13 +25,8 @@
 
 Classes and interfaces for the definition of Jakarta Server Pages Tag Libraries.
 
-<p>
-    References in this document to JSP refer to the Jakarta Server Pages
-    unless otherwise noted.
-</p>
-
-<p> Custom actions can be used by JSP authors and authoring tools to
-simplify writing JSP pages. A custom action can be either an empty
+<p> Custom actions can be used by Jakarta Pages (JSP) authors and authoring tools to
+simplify writing Jakarta Pages (JSP) pages. A custom action can be either an empty
 or a non-empty action.
 
 <p>
@@ -63,7 +58,7 @@ prototypical example is of the form:
 The Jakarta Server Pages specification provides a portable
 mechanism for the description of tag libraries.
 <p>
-A JSP tag library contains
+A Jakarta Pages (JSP) tag library contains
 <ul>
 <li>A Tag Library Descriptor</li>
 <li>A number of Tag Files or Tag handler classes defining 
@@ -81,7 +76,7 @@ A JSP tag library contains
   <li><a href="#thmgmt">Annotated Tag Handler Management Example</a></li>
   <li><a href="#coop">Cooperating Actions</a></li>
   <li><a href="#simple">Simple Tag Handlers</a></li>
-  <li><a href="#fragment">JSP Fragments</a></li>
+  <li><a href="#fragment">Jakarta Pages (JSP) Fragments</a></li>
   <li><a href="#sths">Example Simple Tag Handler Scenario</a></li>
   <li><a href="#translation">Translation-time Classes</a></li>
 </ol>
@@ -90,23 +85,23 @@ A JSP tag library contains
 This section introduces the notion of a tag handler and describes the
 classic types of tag handler.
 
-<p> JSP 2.0 introduces a new type of Tag Handler called a Simple 
+<p> Jakarta Pages (JSP) 2.0 introduced a new type of Tag Handler called a Simple 
 Tag Handler, which is described in a later section.  
 The protocol for Simple Tag handlers is much more straightforward.
 
 <h3>Tag Handler</h3>
 
 <p> A tag handler is a run-time, container-managed object that
-evaluates custom actions during the execution of a JSP page.  A tag
-handler supports a protocol that allows the JSP container to provide
-good integration of the server-side actions within a JSP page.
+evaluates custom actions during the execution of a Jakarta Pages (JSP) page.  A tag
+handler supports a protocol that allows the Jakarta Pages (JSP) container to provide
+good integration of the server-side actions within a Jakarta Pages (JSP) page.
 
 <p> A tag handler is created initially using a zero argument
 constructor on its corresponding class; the method
 <code>java.beans.Beans.instantiate()</code> is not used.
 
 <p> A tag handler has some properties that are exposed to the page as
-attributes on an action; these properties are managed by the JSP
+attributes on an action; these properties are managed by the Jakarta Pages (JSP)
 container (via generated code).  The setter methods used to set
 the properties are discovered using the JavaBeans introspector
 machinery.
@@ -114,15 +109,15 @@ machinery.
 <p> The protocol supported by a tag handler provides for passing of
 parameters, the evaluation and reevaluation of the body of the action,
 and for getting access to objects and other tag handlers in the
-JSP page.
+Jakarta Pages (JSP) page.
 
 <p> A tag handler instance is responsible for processing one request
-at a time.  It is the responsability of the JSP container to enforce
+at a time.  It is the responsability of the Jakarta Pages (JSP) container to enforce
 this.
 
 <p> Additional translation time information associated with the action
 indicates the name of any scripting variables it may introduce, their
-types and their scope. At specific moments, the JSP container will
+types and their scope. At specific moments, the Jakarta Pages (JSP) container will
 automatically synchronize the {@link jakarta.servlet.jsp.PageContext}
  information with variables
 in the scripting language so they can be made available directly
@@ -133,20 +128,20 @@ through the scripting elements.
 
 
 <p> A tag handler has some properties.  All tag handlers have a
-<em>pageContext</em> property for the JSP page where the tag is
+<em>pageContext</em> property for the Jakarta Pages (JSP) page where the tag is
 located, and a <em>parent</em> property for the tag handler to the
 closest enclosing action. Specific tag handler classes may have
 additional properties.
 
 <p> All attributes of a custom action must be JavaBeans component
 properties, although some properties may not be exposed as attributes.
-The attributes that are visible to the JSP translator are exactly
+The attributes that are visible to the Jakarta Pages (JSP) translator are exactly
 those listed in the Tag Library Descriptor (TLD).
 
 <p> All properties of a tag handler instance exposed as attributes
 will be initialized by the container using the appropriate setter
 methods before the instance can be used to perform the action methods.
-It is the responsibility of the JSP container to invoke the
+It is the responsibility of the Jakarta Pages (JSP) container to invoke the
 appropriate setter methods to initialize these properties.  It is the
 responsability of user code, be it scriptlets, JavaBeans code, or code
 inside custom tags, to not invoke these setter methods, as doing
@@ -163,11 +158,11 @@ is that there is only one setter per property.
 setter method).
 
 <p> Once properly set, all properties are expected to be persistent,
-so that if the JSP container ascertains that a property has already
+so that if the Jakarta Pages (JSP) container ascertains that a property has already
 been set on a given tag handler instance, it must not set it
 again.  
 
-<p> The JSP container may reuse classic tag handler instances for multiple
+<p> The Jakarta Pages (JSP) container may reuse classic tag handler instances for multiple
 occurrences of the corresponding custom action, in the same page or in
 different pages, but only if the same set of attributes are used for all
 occurrences.  If a tag handler is used for more than one occurence, the
@@ -194,7 +189,7 @@ action method (doStartTag()) and the end of the last action method
 (doEndTag() or doFinally() for those tags that implement TryCatchFinally).
 
 <p> The restrictions on references to tag handler objects and
-on modifying attribute properties gives the JSP container substantial
+on modifying attribute properties gives the Jakarta Pages (JSP) container substantial
 freedom in effectively managing tag handler objects to achieve different
 goals.  For example, a container may implementing different pooling strategies
 to minimize creation cost, or may hoist setting of properties to reduce
@@ -203,7 +198,7 @@ cost when a tag handler is inside another iterative tag.
 
 <h3>Conversions</h3>
 
-<p>A tag handler implements an action; the JSP container must follow
+<p>A tag handler implements an action; the Jakarta Pages (JSP) container must follow
 the type conversions described in Section 2.13.2 when assigning values
 to the attributes of an action.
 
@@ -291,7 +286,7 @@ the contents into another JspWriter, to get a Reader into its
 contents, and to clear the contents.  Its semantics also assure that
 buffer size will never be exceeded.
 
-<p> The JSP page implementation will create a BodyContent if the
+<p> The Jakarta Pages (JSP) page implementation will create a BodyContent if the
 doStartTag() method returns a EVAL_BODY_BUFFERED.  This object will be
 passed to doInitBody(); then the body of the tag will be evaluated,
 and <em>during that evaluation <b>out</b> will be bound to the
@@ -350,7 +345,7 @@ the value "true", the following requirements apply:</p>
   <li>Note that passing a String literal as a dynamic attribute will never
   be considered as a deferred expression.</li>
 
-  <li>The JSP container must recognize dynamic attributes that are 
+  <li>The Jakarta Pages (JSP) container must recognize dynamic attributes that are
   passed to the tag handler using the &lt;jsp:attribute&gt; standard 
   action.</li>
 
@@ -360,7 +355,7 @@ the value "true", the following requirements apply:</p>
   exception must be treated in the same manner as if it came from 
   a regular attribute setter method.</li>
 
-  <li>For a JSP document in either standard or XML syntax, If a
+  <li>For a Jakarta Pages (JSP) document in either standard or XML syntax, If a
   dynamic attribute has a prefix that doesn't map to a
   namespace, a translation error must occur.  In standard
   syntax, only namespaces defined using taglib directives are
@@ -393,7 +388,7 @@ The attributes are set using the calls:
 
 <h2><a id="thmgmt">4. Annotated Tag Handler Management Example</a></h2>
 
-Below is a somewhat complete example of the way one JSP container
+Below is a somewhat complete example of the way one Jakarta Pages (JSP) container
 could choose to do some tag handler management.  There are many
 other strategies that could be followed, with different pay offs.
 
@@ -560,16 +555,16 @@ in a number of ways.
 <h3>PageContext</h3>
 <p>
 
-Often two actions in a JSP page will want to cooperate,
+Often two actions in a Jakarta Pages (JSP) page will want to cooperate,
 perhaps by one action creating some server-side object that
 needs to be accessed by another.
 One mechanism for doing this is by giving the object a name
-within the JSP page; the first action will create the object
+within the Jakarta Pages (JSP) page; the first action will create the object
 and associate the name to it while the second action
 will use the name to retrieve the object.
 
 <p>
-For example, in the following JSP segment the <code>foo</code>
+For example, in the following Jakarta Pages (JSP) segment the <code>foo</code>
 action might create a server-side object and give it the
 name "myObject". 
 Then the <code>bar</code>
@@ -584,7 +579,7 @@ action might access that server-side object and take some action.
 
 <p>
 
-In a JSP implementation, the mapping "name"-&gt;value is kept by the
+In a Jakarta Pages (JSP) implementation, the mapping "name"-&gt;value is kept by the
 implicit object
 <code>pageContext</code>.
 
@@ -600,7 +595,7 @@ An alternative to explicit communication of information through
 a named object is implicit coordination based on syntactic scoping.
 
 <p>
-For example, in the following JSP segment the <code>foo</code>
+For example, in the following Jakarta Pages (JSP) segment the <code>foo</code>
 action might create a server-side object;
 later the nested <code>bar</code> action might access that server-side object.
 The object is not named within the <code>pageContext</code>:
@@ -681,7 +676,7 @@ section, the semantics default to that of a classic tag handler.</p>
   method is invoked as the setter.
     <ul>
       <li>If the attribute is a scripting expression (e.g. "&lt;%= 1+1 %&gt;"
-      in JSP syntax, or "%= 1+1 %" in XML syntax), the expression is 
+      in Jakarta Pages (JSP) syntax, or "%= 1+1 %" in XML syntax), the expression is
       evaluated, and the result is converted as per the rules in 
       "Type Conversions", and passed to the setter.</li>
 
@@ -728,13 +723,13 @@ section, the semantics default to that of a classic tag handler.</p>
       invocation if no &lt;jsp:body&gt; or &lt;jsp:attribute&gt; 
       elements are present.  In this case, an instance of a
       <code>JspFragment</code> object is created as per the lifecycle
-      described in the JSP Fragments section and it is passed to the
+      described in the Jakarta Pages (JSP) Fragments section and it is passed to the
       setter.  If the tag is declared to have a <code>body-content</code>
       of "<code>tagdependent</code>" the <code>JspFragment</code> must
       echo the body's contents verbatim.  Otherwise, if the tag is
       declared to have a <code>body-content</code> of type
       "<code>scriptless</code>", the <code>JspFragment</code> must
-      evaluate the body's contents as a JSP scriptless body.</li>
+      evaluate the body's contents as a Jakarta Pages (JSP) scriptless body.</li>
     </ul>
   </li>
 
@@ -756,12 +751,12 @@ section, the semantics default to that of a classic tag handler.</p>
   classic tag handlers.</li>
 </ol>
 
-<h2><a id="fragment">7. JSP Fragments</a></h2>
+<h2><a id="fragment">7. Jakarta Pages (JSP) Fragments</a></h2>
 
-<p>JSP Fragments are represented in Java by an instance of the 
+<p>Jakarta Pages (JSP) Fragments are represented in Java by an instance of the
 <code>jakarta.servlet.jsp.tagext.JspFragment abstract class</code>.
-Pieces of JSP code are translated into JSP fragments in the context 
-of a tag invocation. JSP Fragments are created when providing the body of a 
+Pieces of Jakarta Pages (JSP) code are translated into Jakarta Pages (JSP) fragments in the context
+of a tag invocation. Jakarta Pages (JSP) Fragments are created when providing the body of a
 &lt;jsp:attribute&gt; standard action for an attribute that is defined
 as a fragment or of type JspFragment, or when providing the body of a 
 tag invocation handled by a Simple Tag Handler.</p>
@@ -788,13 +783,13 @@ that tag library developers and page authors should not generate
 <code>JspFragment</code> implementations manually.</p>
 
 <p>The following sections specify the creation and invocation 
-lifecycles of a JSP Fragment in detail, from the JSP Container's 
+lifecycles of a Jakarta Pages (JSP) Fragment in detail, from the Jakarta Pages (JSP) Container's
 perspective.</p>
 
 
-<h3>Creation of a JSP Fragment</h3>
+<h3>Creation of a Jakarta Pages (JSP) Fragment</h3>
 
-<p>When a JSP fragment is created, the following steps occur (in order):
+<p>When a Jakarta Pages (JSP) fragment is created, the following steps occur (in order):
 
 <ol>
   <li>An instance of a class implementing the <code>JspFragment</code> 
@@ -829,20 +824,20 @@ perspective.</p>
 </ol>
 
 
-<h3>Invocation of a JSP Fragment</h3>
+<h3>Invocation of a Jakarta Pages (JSP) Fragment</h3>
 
-<p>After a JSP fragment is created, it is passed to a tag handler for 
-later invocation. JSP fragments can be invoked either programmatically 
+<p>After a Jakarta Pages (JSP) fragment is created, it is passed to a tag handler for
+later invocation. Jakarta Pages (JSP) fragments can be invoked either programmatically
 from a tag handler written in Java, or from a tag file using the 
 &lt;jsp:invoke&gt; or &lt;jsp:doBody&gt; standard action.</p>
 
-<p>JSP fragments are passed to tag handlers using a bean property 
+<p>Jakarta Pages (JSP) fragments are passed to tag handlers using a bean property
 of type <code>JspFragment</code>. These fragments can be invoked by 
 calling the <code>invoke()</code> method in the <code>JspFragment</code> 
 abstract class.  Note that it is legal (and possible) for a fragment to 
 recursively invoke itself, indirectly.</p>
 
-<p>The following steps are followed when invoking a JSP fragment:</p>
+<p>The following steps are followed when invoking a Jakarta Pages (JSP) fragment:</p>
 
 <ol>
   <li>The tag handler invoking the fragment is responsible for 
@@ -854,7 +849,7 @@ recursively invoke itself, indirectly.</p>
   In the case of tag files, for each variable declared 
   in scope <code>AT_BEGIN</code> or <code>NESTED</code>, if a page 
   scoped attribute exists with the provided name in the tag file, the
-  JSP container must generate code to create/update the page scoped 
+  Jakarta Pages (JSP) container must generate code to create/update the page scoped
   attribute of the provided name in the calling page/tag.  If a page 
   scoped attribute with the provided name does not exist in the tag
   file, and a page scoped attribute of the provided name is present in 
@@ -916,9 +911,9 @@ recursively invoke itself, indirectly.</p>
 <h2><a id="sths">8. Example Simple Tag Handler Scenario</a></h2>
 
 <p>The following non-normative example is intended to help solidify 
-some of the concepts relating to Tag Files, JSP Fragments and Simple
+some of the concepts relating to Tag Files, Jakarta Pages (JSP) Fragments and Simple
 Tag Handlers.  In the first section, two sample input files are 
-presented, a JSP (my.jsp), and a simple tag handler implemented using 
+presented, a page (my.jsp), and a simple tag handler implemented using
 a tag file (simpletag.tag). One possible output of the translation 
 process is presented in the second section.</p>
 
@@ -933,9 +928,9 @@ follows:</p>
 <ul>
   <li>"Step T.x" = Annotated step x from "Lifecycle of Simple Tag 
   Handlers" earlier in this Chapter.</li>
-  <li>"Step C.x" = Annotated step x from "Creation of a JSP Fragment" 
+  <li>"Step C.x" = Annotated step x from "Creation of a Jakarta Pages (JSP) Fragment"
   earlier in this Chapter.</li>
-  <li>"Step F.x" = Annotated step x from "Invocation of a JSP Fragment"
+  <li>"Step F.x" = Annotated step x from "Invocation of a Jakarta Pages (JSP) Fragment"
   earlier in this Chapter.</li>
 </ul>
 
@@ -945,7 +940,7 @@ follows:</p>
 <p>This section presents the sample source files in this scenario, 
 from which the output files are generated.</p>
 
-<h4>Original JSP (my.jsp)</h4>
+<h4>Original page (my.jsp)</h4>
 <pre>
 &lt;%@ taglib prefix="my" tagdir="/WEB-INF/tags" %&gt;
 
@@ -985,7 +980,7 @@ Invoke the body:
 
 <h3>Sample Generated Files</h3>
 <p>This section presents sample output files that might be generated 
-by a JSP compiler, from the source files presented in the 
+by a Jakarta Pages (JSP) compiler, from the source files presented in the
 previous section.</p>
 
 <h4>Helper class for JspFragment (JspFragmentBase.java)</h4>
@@ -1004,7 +999,7 @@ public abstract class JspFragmentBase
     }
 }
 </pre>
-<h4>Relevant Portion of JSP Service Method</h4>
+<h4>Relevant Portion of Jakarta Pages (JSP) Service Method</h4>
 <pre>
 // Step T.1 - Initial creation
 MySimpleTag _jsp_mySimpleTag = new MySimpleTag();
@@ -1276,9 +1271,9 @@ The following classes are used at translation time.
 prefix to it.  The TLD associated with the library associates Tag
 handler classes (plus other information) with tag names.  This
 information is used to associate a Tag class, a prefix, and a name
-with each custom action element appearing in a JSP page.
+with each custom action element appearing in a Jakarta Pages (JSP) page.
 
-<p> At execution time the implementation of a JSP page will use an
+<p> At execution time the implementation of a Jakarta Pages (JSP) page will use an
 available Tag instance with the appropriate property settings and then
 follow the protocol described by the interfaces Tag, IterationTag,
 BodyTag, SimpleTag, and TryCatchFinally.  The implementation guarantees
@@ -1289,8 +1284,8 @@ by a tag handler, to reduce run-time costs.
 
 <h3>Scripting Variables</h3>
 
-<p> JSP supports scripting variables that can be declared within a
-scriptlet and can be used in another.  JSP actions also can be used to
+<p> Jakarta Pages (JSP) supports scripting variables that can be declared within a
+scriptlet and can be used in another.  Jakarta Pages (JSP) actions also can be used to
 define scripting variables so they can used in scripting elements, or
 in other actions.  This is very useful in some cases; for example, the
 <code>jsp:useBean</code> standard action may define an object which
@@ -1313,17 +1308,17 @@ translation-time attribute values.
 <p> The TLD file contains several pieces of information that is used
 to do syntactic validation at translation-time.  It also contains two
 extensible validation mechanisms: a <code>TagLibraryValidator</code>
-class can be used to validate a complete JSP page, and a
+class can be used to validate a complete Jakarta Pages (JSP) page, and a
 <code>TagExtraInfo</code> class can be used to validate a specific
 action. In some cases, additional request-time validation will be done
 dynamically within the methods in the Tag instance.  If an error is
 discovered, an instance of <code>JspTagException</code> can be thrown.
-If uncaught, this object will invoke the errorpage mechanism of JSP.
+If uncaught, this object will invoke the errorpage mechanism of Jakarta Pages (JSP).
 
 <p> The TagLibraryValidator is an addition to the JSP 1.2
 specification and is very open ended, being strictly more powerful
-than the TagExtraInfo mechanism.  A JSP page is presented via the
-<code>PageData</code> object, which abstracts the XML view of the JSP
+than the TagExtraInfo mechanism.  A Jakarta Pages (JSP) page is presented via the
+<code>PageData</code> object, which abstracts the XML view of the Jakarta Pages (JSP)
 page. 
 
 <p> A PageData instance will provides an InputStream (read-only) on the
@@ -1332,9 +1327,9 @@ JDOM are all candidates), for now these views can be generated from
 the InputStream and perhaps can be cached for improved performance
 (recall the view of the page is just read-only).
 
-<p> As of JSP 2.0, the JSP container must support a jsp:id attribute to
+<p> As of JSP 2.0, the Jakarta Pages (JSP) container must support a jsp:id attribute to
 provide higher quality validation errors.  The
-container will track the JSP pages as passed to the container, and
+container will track the Jakarta Pages (JSP) pages as passed to the container, and
 will assign to each element a unique "id", which is passed as the
 value of the jsp:id attribute.  Each XML element in the XML view
 will be extended with this attribute.  The
@@ -1353,7 +1348,7 @@ alternative prefix must be used by the container.
 
 <p> In detail, validation is done as follows:
 
-<p> <b>First</b>, the JSP page is parsed using the information in the TLD.
+<p> <b>First</b>, the Jakarta Pages (JSP) page is parsed using the information in the TLD.
 At this stage valid mandatory and optional attributes are checked.
 
 <p> <b>Second</b>, for each unique tag library in the page as determined
