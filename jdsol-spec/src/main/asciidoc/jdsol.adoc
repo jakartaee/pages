@@ -1054,11 +1054,11 @@ The items of the `SourceDebugExtension_attribute` structure are as follows:
 == Example
 
 The example below shows how the process described above would apply to a tiny
-JSP program.
+Jakarta Pages (JSP) program.
 
 === Input Source
 
-The input consists of two JSP files, the first is `Hello.jsp`:
+The input consists of two Jakarta Pages (JSP) files, the first is `Hello.jsp`:
 
 [cols="10%,90%",]
 |===
@@ -1072,7 +1072,7 @@ The input consists of two JSP files, the first is `Hello.jsp`:
 |  8   |` </HTML>`
 |===
 
-The second JSP file is the included file `greeting.jsp`:
+The second Jakarta Pages (JSP) file is the included file `greeting.jsp`:
 
 [cols="10%,90%"]
 |===
@@ -1082,7 +1082,7 @@ The second JSP file is the included file `greeting.jsp`:
 
 === Language Processor
 
-When a JSP compiler (the <<TermLanguageProcessor,language-processor>>) compiles
+When a Jakarta Pages (JSP) compiler (the <<TermLanguageProcessor,language-processor>>) compiles
 these files it will produce two outputs - a Java programming language source
 file and a <<TermSourceMapFile,SMAP-file>>. The generated Java programming
 language source file is `HelloServlet.java`:

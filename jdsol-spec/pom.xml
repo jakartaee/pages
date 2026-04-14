@@ -66,7 +66,7 @@
 
     <mailingLists>
         <mailingList>
-            <name>JSP dev mailing list</name>
+            <name>Jakarta Pages (JSP) dev mailing list</name>
             <post>jsp-dev@eclipse.org</post>
             <subscribe>https://accounts.eclipse.org/mailing-list/jsp-dev</subscribe>
             <unsubscribe>https://accounts.eclipse.org/mailing-list/jsp-dev</unsubscribe>
