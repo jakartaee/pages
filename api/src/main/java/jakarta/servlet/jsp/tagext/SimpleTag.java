@@ -47,13 +47,13 @@ import jakarta.servlet.jsp.JspContext;
  * </p>
  *
  * <p>
- * The following is a non-normative, brief overview of the SimpleTag lifecycle. Refer to the JSP Specification for
+ * The following is a non-normative, brief overview of the SimpleTag lifecycle. Refer to the Jakarta Pages (JSP) Specification for
  * details.
  * </p>
  *
  * <ol>
  * <li>A new tag handler instance is created each time by the container by calling the provided zero-args constructor.
- * Unlike classic tag handlers, simple tag handlers are never cached and reused by the JSP container.</li>
+ * Unlike classic tag handlers, simple tag handlers are never cached and reused by the Jakarta Pages (JSP) container.</li>
  * <li>The <code>setJspContext()</code> and <code>setParent()</code> methods are called by the container. The
  * <code>setParent()</code> method is only called if the element is nested within another tag invocation.</li>
  * <li>The setters for each attribute defined for this tag are called by the container.</li>
@@ -74,7 +74,7 @@ public interface SimpleTag extends JspTag {
      * developer, and handles all tag processing, body iteration, etc.
      *
      * <p>
-     * The JSP container will resynchronize any AT_BEGIN and AT_END variables (defined by the associated tag file,
+     * The Jakarta Pages (JSP) container will resynchronize any AT_BEGIN and AT_END variables (defined by the associated tag file,
      * TagExtraInfo, or TLD) after the invocation of doTag().
      * 
      * @throws jakarta.servlet.jsp.JspException If an error occurred while processing this tag.
@@ -114,7 +114,7 @@ public interface SimpleTag extends JspTag {
     /**
      * Provides the body of this tag as a JspFragment object, able to be invoked zero or more times by the tag handler.
      * <p>
-     * This method is invoked by the JSP page implementation object prior to <code>doTag()</code>. If the action element
+     * This method is invoked by the Jakarta Pages (JSP) page implementation object prior to <code>doTag()</code>. If the action element
      * is empty in the page, this method is not called at all.
      * 
      * @param jspBody The fragment encapsulating the body of this tag.

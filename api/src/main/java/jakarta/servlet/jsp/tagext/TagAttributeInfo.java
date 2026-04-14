@@ -27,7 +27,7 @@ package jakarta.servlet.jsp.tagext;
  * <p>
  * Note from the Expert Group:<br>
  * This should have been designed as an interface. Every time we change the TLD, we need to add a new constructor to
- * this class (not good). This class should only be instantiated by container implementations (not by JSP developers).
+ * this class (not good). This class should only be instantiated by container implementations (not by Jakarta Pages (JSP) developers).
  */
 public class TagAttributeInfo {
 
@@ -39,7 +39,7 @@ public class TagAttributeInfo {
 
     /**
      * Constructor for TagAttributeInfo. This class is to be instantiated only from the TagLibrary code under request
-     * from some JSP code that is parsing a TLD (Tag Library Descriptor).
+     * from some Jakarta Pages (JSP) code that is parsing a TLD (Tag Library Descriptor).
      *
      * @param name     The name of the attribute.
      * @param required If this attribute is required in tag instances.
@@ -55,7 +55,7 @@ public class TagAttributeInfo {
 
     /**
      * JSP 2.0 Constructor for TagAttributeInfo. This class is to be instantiated only from the TagLibrary code under
-     * request from some JSP code that is parsing a TLD (Tag Library Descriptor).
+     * request from some Jakarta Pages (JSP) code that is parsing a TLD (Tag Library Descriptor).
      *
      * @param name     The name of the attribute.
      * @param required If this attribute is required in tag instances.
@@ -71,8 +71,8 @@ public class TagAttributeInfo {
     }
 
     /**
-     * JSP 2.1 Constructor for TagAttributeInfo. This class is to be instantiated only from the TagLibrary code under
-     * request from some JSP code that is parsing a TLD (Tag Library Descriptor).
+     * XXX 2.1 Constructor for TagAttributeInfo. This class is to be instantiated only from the TagLibrary code under
+     * request from some Jakarta Pages (JSP) code that is parsing a TLD (Tag Library Descriptor).
      *
      * @param name             The name of the attribute.
      * @param required         If this attribute is required in tag instances.

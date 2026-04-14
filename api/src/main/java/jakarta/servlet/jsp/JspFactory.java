@@ -25,17 +25,17 @@ import jakarta.servlet.ServletContext;
 
 /**
  * <p>
- * The JspFactory is an abstract class that defines a number of factory methods available to a JSP page at runtime for
- * the purposes of creating instances of various interfaces and classes used to support the JSP implementation.
+ * The JspFactory is an abstract class that defines a number of factory methods available to a Jakarta Pages (JSP) page at runtime for
+ * the purposes of creating instances of various interfaces and classes used to support the Jakarta Pages (JSP) implementation.
  * <p>
- * A conformant JSP Engine implementation will, during it's initialization instantiate an implementation dependent
- * subclass of this class, and make it globally available for use by JSP implementation classes by registering the
+ * A conformant Jakarta Pages (JSP) Engine implementation will, during it's initialization instantiate an implementation dependent
+ * subclass of this class, and make it globally available for use by Jakarta Pages (JSP) implementation classes by registering the
  * instance created with this class via the static <code> setDefaultFactory() </code> method.
  * <p>
  * The only implementation-dependent classes that can be created from the factory are: PageContext, JspEngineInfo, and
  * JspApplicationContext.
  * <p>
- * With the exception of JspApplicationContext, JspFactory objects should not be used by JSP application developers.
+ * With the exception of JspApplicationContext, JspFactory objects should not be used by Jakarta Pages (JSP) application developers.
  */
 public abstract class JspFactory {
 
@@ -49,7 +49,7 @@ public abstract class JspFactory {
 
     /**
      * <p>
-     * set the default factory for this implementation. It is illegal for any principal other than the JSP Engine
+     * set the default factory for this implementation. It is illegal for any principal other than the Jakarta Pages (JSP) Engine
      * runtime to call this method.
      * </p>
      *
@@ -75,7 +75,7 @@ public abstract class JspFactory {
      * </p>
      *
      * <p>
-     * This method is typically called early in the processing of the _jspService() method of a JSP implementation class
+     * This method is typically called early in the processing of the _jspService() method of a Jakarta Pages (JSP) implementation class
      * in order to obtain a PageContext object for the request being processed.
      * </p>
      * <p>
@@ -89,8 +89,8 @@ public abstract class JspFactory {
      * @param servlet      the requesting servlet
      * @param request      the current request pending on the servlet
      * @param response     the current response pending on the servlet
-     * @param errorPageURL the URL of the error page for the requesting JSP, or null
-     * @param needsSession true if the JSP participates in a session
+     * @param errorPageURL the URL of the error page for the requesting page, or null
+     * @param needsSession true if page participates in a session
      * @param buffer       size of buffer in bytes, JspWriter.NO_BUFFER if no buffer, JspWriter.DEFAULT_BUFFER if
      *                     implementation default.
      * @param autoflush    should the buffer autoflush to the output stream on buffer overflow, or throw an IOException?
@@ -105,7 +105,7 @@ public abstract class JspFactory {
     /**
      * <p>
      * called to release a previously allocated PageContext object. Results in PageContext.release() being invoked. This
-     * method should be invoked prior to returning from the _jspService() method of a JSP implementation class.
+     * method should be invoked prior to returning from the _jspService() method of a Jakarta Pages (JSP) implementation class.
      * </p>
      *
      * @param pc A PageContext previously obtained by getPageContext()
@@ -114,10 +114,10 @@ public abstract class JspFactory {
 
     /**
      * <p>
-     * called to get implementation-specific information on the current JSP engine.
+     * called to get implementation-specific information on the current Jakarta Pages (JSP) engine.
      * </p>
      *
-     * @return a JspEngineInfo object describing the current JSP engine
+     * @return a JspEngineInfo object describing the current Jakarta Pages (JSP) engine
      */
     public abstract JspEngineInfo getEngineInfo();
 

@@ -20,7 +20,7 @@ package jakarta.servlet.jsp;
 
 /**
  * Contains information about an error, for error pages. The information contained in this instance is meaningless if
- * not used in the context of an error page. To indicate a JSP is an error page, the page author must set the
+ * not used in the context of an error page. To indicate a page is an error page, the page author must set the
  * isErrorPage attribute of the page directive to "true".
  *
  * @see PageContext#getErrorData
@@ -60,7 +60,7 @@ public final class ErrorData {
      * @param servletName The name of the servlet invoked
      * @param queryString The request query string
      * 
-     * @since JSP 4.0
+     * @since Pages (JSP) 4.0
      */
     public ErrorData(Throwable throwable, int statusCode, String method, String uri, String servletName,
             String queryString) {
@@ -95,7 +95,7 @@ public final class ErrorData {
      *
      * @return The request method
      * 
-     * @since JSP 4.0
+     * @since Pages (JSP) 4.0
      */
     public String getMethod() {
         return this.method;
@@ -125,7 +125,7 @@ public final class ErrorData {
      *
      * @return The request query string
      * 
-     * @since JSP 4.0
+     * @since Pages (JSP) 4.0
      */
     public String getQueryString() {
         return this.queryString;

@@ -30,13 +30,13 @@ package jakarta.servlet.jsp.tagext;
  * </ul>
  *
  * <p>
- * It is the responsibility of the JSP translator that the initial value to be returned by calls to getTagInfo()
+ * It is the responsibility of the Jakarta Pages (JSP) translator that the initial value to be returned by calls to getTagInfo()
  * corresponds to a TagInfo object for the tag being translated. If an explicit call to setTagInfo() is done, then the
  * object passed will be returned in subsequent calls to getTagInfo().
- * 
+ *
  * <p>
  * The only way to affect the value returned by getTagInfo() is through a setTagInfo() call, and thus,
- * TagExtraInfo.setTagInfo() is to be called by the JSP translator, with a TagInfo object that corresponds to the tag
+ * TagExtraInfo.setTagInfo() is to be called by the Jakarta Pages (JSP) translator, with a TagInfo object that corresponds to the tag
  * being translated. The call should happen before any invocation on validate() and before any invocation on
  * getVariableInfo().
  *
@@ -82,7 +82,7 @@ public abstract class TagExtraInfo {
      * Translation-time validation of the attributes. Request-time attributes are indicated as such in the TagData
      * parameter. Because of the higher quality validation messages possible, this is the preferred way to do validation
      * (although isValid() still works).
-     * 
+     *
      * <p>
      * JSP 2.0 and higher containers call validate() instead of isValid(). The default implementation of this method is
      * to call isValid(). If isValid() returns false, a generic ValidationMessage[] is returned indicating isValid()

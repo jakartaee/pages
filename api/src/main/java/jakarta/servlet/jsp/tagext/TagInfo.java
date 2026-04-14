@@ -22,12 +22,12 @@ package jakarta.servlet.jsp.tagext;
  * Tag information for a tag in a Tag Library; This class is instantiated from the Tag Library Descriptor file (TLD) and
  * is available only at translation time.
  *
- * 
+ *
  */
 public class TagInfo {
 
     /**
-     * Static constant for getBodyContent() when it is JSP.
+     * Static constant for getBodyContent() when it uses Jakarta Pages (JSP).
      */
     public static final String BODY_CONTENT_JSP = "JSP";
 
@@ -43,14 +43,14 @@ public class TagInfo {
 
     /**
      * Static constant for getBodyContent() when it is scriptless.
-     * 
+     *
      * @since JSP 2.0
      */
     public static final String BODY_CONTENT_SCRIPTLESS = "scriptless";
 
     /**
      * Constructor for TagInfo from data in the JSP 1.1 format for TLD. This class is to be instantiated only from the
-     * TagLibrary code under request from some JSP code that is parsing a TLD (Tag Library Descriptor).
+     * TagLibrary code under request from some Jakarta Pages (JSP) code that is parsing a TLD (Tag Library Descriptor).
      *
      * Note that, since TagLibibraryInfo reflects both TLD information and taglib directive information, a TagInfo
      * instance is dependent on a taglib directive. This is probably a design error, which may be fixed in the future.
@@ -80,7 +80,7 @@ public class TagInfo {
 
     /**
      * Constructor for TagInfo from data in the JSP 1.2 format for TLD. This class is to be instantiated only from the
-     * TagLibrary code under request from some JSP code that is parsing a TLD (Tag Library Descriptor).
+     * TagLibrary code under request from some Jakarta Pages (JSP) code that is parsing a TLD (Tag Library Descriptor).
      *
      * Note that, since TagLibibraryInfo reflects both TLD information and taglib directive information, a TagInfo
      * instance is dependent on a taglib directive. This is probably a design error, which may be fixed in the future.
@@ -118,7 +118,7 @@ public class TagInfo {
 
     /**
      * Constructor for TagInfo from data in the JSP 2.0 format for TLD. This class is to be instantiated only from the
-     * TagLibrary code under request from some JSP code that is parsing a TLD (Tag Library Descriptor).
+     * TagLibrary code under request from some Jakarta Pages (JSP) code that is parsing a TLD (Tag Library Descriptor).
      *
      * Note that, since TagLibibraryInfo reflects both TLD information and taglib directive information, a TagInfo
      * instance is dependent on a taglib directive. This is probably a design error, which may be fixed in the future.
@@ -225,7 +225,7 @@ public class TagInfo {
 
     /**
      * Set the instance for extra tag information.
-     * 
+     *
      * @param tei the TagExtraInfo instance
      */
     public void setTagExtraInfo(TagExtraInfo tei) {
@@ -234,7 +234,7 @@ public class TagInfo {
 
     /**
      * The instance (if any) for extra tag information.
-     * 
+     *
      * @return The TagExtraInfo instance, if any.
      */
     public TagExtraInfo getTagExtraInfo() {
@@ -251,7 +251,7 @@ public class TagInfo {
     }
 
     /**
-     * The bodycontent information for this tag. If the bodycontent is not defined for this tag, the default of JSP will
+     * The bodycontent information for this tag. If the bodycontent is not defined for this tag, the default of Jakarta Pages (JSP) will
      * be returned.
      *
      * @return the body content string.

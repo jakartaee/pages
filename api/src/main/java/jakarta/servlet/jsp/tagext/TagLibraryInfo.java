@@ -89,9 +89,9 @@ abstract public class TagLibraryInfo {
     }
 
     /**
-     * A string describing the required version of the JSP container.
+     * A string describing the required version of the Jakarta Pages (JSP) container.
      * 
-     * @return the (minimal) required version of the JSP container.
+     * @return the (minimal) required version of the Jakarta Pages (JSP) container.
      * @see jakarta.servlet.jsp.JspEngineInfo
      */
     public String getRequiredVersion() {
@@ -249,7 +249,7 @@ abstract public class TagLibraryInfo {
     protected String tlibversion; // required
 
     /**
-     * The version of the JSP specification this tag library is written to.
+     * The version of the Jakarta Pages (JSP) specification this tag library is written to.
      */
     protected String jspversion; // required
 

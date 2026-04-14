@@ -20,7 +20,7 @@ package jakarta.servlet.jsp;
 
 /**
  * Exception to be used by a Tag Handler to indicate some unrecoverable error. This error is to be caught by the top
- * level of the JSP page and will result in an error page.
+ * level of the Jakarta Pages (JSP) page and will result in an error page.
  */
 public class JspTagException extends JspException {
 
@@ -44,14 +44,14 @@ public class JspTagException extends JspException {
     }
 
     /**
-     * Constructs a new JspTagException when the JSP Tag needs to throw an exception and include a message about the
+     * Constructs a new JspTagException when the Jakarta Pages (JSP) Tag needs to throw an exception and include a message about the
      * "root cause" exception that interfered with its normal operation, including a description message.
      *
      *
      * @param message   a <code>String</code> containing the text of the exception message
      *
-     * @param rootCause the <code>Throwable</code> exception that interfered with the JSP Tag's normal operation, making
-     *                  this JSP Tag exception necessary
+     * @param rootCause the <code>Throwable</code> exception that interfered with the Jakarta Pages (JSP) Tag's normal operation, making
+     *                  this Jakarta Pages (JSP) Tag exception necessary
      *
      * @since JSP 2.0
      */
@@ -60,7 +60,7 @@ public class JspTagException extends JspException {
     }
 
     /**
-     * Constructs a new JSP Tag exception when the JSP Tag needs to throw an exception and include a message about the
+     * Constructs a new Jakarta Pages (JSP) Tag exception when the Jakarta Pages (JSP) Tag needs to throw an exception and include a message about the
      * "root cause" exception that interfered with its normal operation. The exception's message is based on the
      * localized message of the underlying exception.
      *
@@ -69,8 +69,8 @@ public class JspTagException extends JspException {
      * localized exception message. When subclassing <code>JspTagException</code>, this method can be overridden to
      * create an exception message designed for a specific locale.
      *
-     * @param rootCause the <code>Throwable</code> exception that interfered with the JSP Tag's normal operation, making
-     *                  the JSP Tag exception necessary
+     * @param rootCause the <code>Throwable</code> exception that interfered with the Jakarta Pages (JSP) Tag's normal operation, making
+     *                  the Jakarta Pages (JSP) Tag exception necessary
      *
      * @since JSP 2.0
      */
