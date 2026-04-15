@@ -37,8 +37,6 @@ import ee.jakarta.tck.pages.common.tags.tck.SimpleTag;
  * generated and a ValidationMessage array will be returned.
  */
 import java.io.IOException;
-import java.io.InputStream;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -72,10 +70,10 @@ public class URLClientIT extends AbstractUrlClient {
             SimpleTag.class);
 
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_taglibinfo_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/taglibinfo.tld", "taglibinfo.tld");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/taglibinfo2.tld", "taglibinfo2.tld");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/taglibinfo/TagFile1.tag", "tags/taglibinfo/TagFile1.tag");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/taglibinfo/TagFile2.tag", "tags/taglibinfo/TagFile2.tag");    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/taglibinfo.tld", "taglibinfo.tld");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/taglibinfo2.tld", "taglibinfo2.tld");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/taglibinfo/TagFile1.tag", "tags/taglibinfo/TagFile1.tag");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/taglibinfo/TagFile2.tag", "tags/taglibinfo/TagFile2.tag");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/GetFunctionsTest.jsp")), "GetFunctionsTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/GetFunctionTest.jsp")), "GetFunctionTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/GetInfoStringTest.jsp")), "GetInfoStringTest.jsp");
@@ -93,18 +91,18 @@ public class URLClientIT extends AbstractUrlClient {
     return archive;
   }
 
-  
+
   /* Run tests */
 
   // ============================================ Tests ======
 
   /*
    * @testName: tagLibraryInfoGetURITest
-   * 
-   * @assertion_ids: JSP:JAVADOC:216
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:216
+   *
    * @test_Strategy: Validate that TagLibaryInfo.getURI() returns the URI as
-   * defined by the taglib directive within a JSP page.
+   * defined by the taglib directive within a Jakarta Pages page.
    */
   @Test
   public void tagLibraryInfoGetURITest() throws Exception {
@@ -116,12 +114,12 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagLibraryInfoGetPrefixStringTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:218
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:218
+   *
    * @testStrategy: Validate that TagLibraryInfo.getPrefixString() returns the
    * prefix as specified by the prefix attribute of the taglib directive within
-   * a JSP page.
+   * a Jakarta Pages page.
    */
   @Test
   public void tagLibraryInfoGetPrefixStringTest() throws Exception {
@@ -133,9 +131,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagLibraryInfoGetShortNameTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:219
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:219
+   *
    * @testStrategy: Validate that TagLibraryInfo.getShortName() returns the
    * short name of the tag library as specified by the &lt;short-name&gt;
    * element in a TLD.
@@ -150,9 +148,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagLibraryInfoGetReliableURNTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:220
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:220
+   *
    * @testStrategy: Validate that TagLibraryInfo.getShortName() returns the uri
    * of the tag library as specified by the &lt;uri&gt; element in a TLD.
    */
@@ -166,9 +164,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagLibraryInfoGetInfoStringTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:221
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:221
+   *
    * @testStrategy: Validate that TagLibraryInfo.getInfoString() returns the
    * description of the tag library as specified by the &lt;description&gt;
    * element in a TLD.
@@ -183,9 +181,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagLibraryInfoGetRequiredVersionTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:222
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:222
+   *
    * @testStrategy: Validate that TagLibraryInfo.getRequiredVersion() returns
    * the require version of the tag library as specified by the
    * &lt;required-version&gt; element in a TLD.
@@ -200,9 +198,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagLibraryInfoGetTagsTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:223
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:223
+   *
    * @testStrategy: Validate that TagLibraryInfo.getTags() returns an array of
    * TagInfo objects based off the tags defined by the &lt;tag&gt; elements in a
    * TLD.
@@ -217,9 +215,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagLibraryInfoGetTagFilesTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:224
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:224
+   *
    * @testStrategy: Validate that TagLibraryInfo.getTagFiles() returns an array
    * of TagFileInfo objects based off the tags files defined by the
    * &lt;tag-file&gt; elements in a TLD.
@@ -234,9 +232,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagLibraryInfoGetTagTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:225
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:225
+   *
    * @testStrategy: Validate that TagLibraryInfo.getTag() returns a TagInfo
    * object based off the provided discriminate.
    */
@@ -250,9 +248,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagLibraryInfoGetTagFileTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:226
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:226
+   *
    * @testStrategy: Validate that TagLibraryInfo.getTagFile() returns a
    * TagFileInfo object based off the provided discriminate.
    */
@@ -266,9 +264,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagLibraryInfoGetFunctionsTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:227
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:227
+   *
    * @testStrategy: Validate that TagLibraryInfo.getFunctions() returns an array
    * of FunctionInfo objects based off the functions defined by the
    * &lt;function&gt; elements in a TLD.
@@ -283,9 +281,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagLibraryInfoGetFunctionTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:228
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:228
+   *
    * @testStrategy: Validate that TagLibraryInfo.getFunction() returns a
    * FunctionInfo object based off the provided discriminate.
    */
@@ -299,11 +297,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tagLibraryInfoGetTagLibraryInfosTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:440
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:440
+   *
    * @testStrategy: Validate TagLibaryInfo.getTagLibraryInfos() returns an array
-   * of TagLibraryInfo objects for all taglibraries declared in the JSP.
+   * of TagLibraryInfo objects for all taglibraries declared in the page.
    */
   @Test
   public void tagLibraryInfoGetTagLibraryInfosTest() throws Exception {

@@ -73,7 +73,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: positiveScriptletTest
    * 
-   * @assertion_ids: JSP:SPEC:76
+   * @assertion_ids: PAGES:SPEC:76
    * 
    * @test_Strategy: Correct syntax is used in the scriptlet
    *

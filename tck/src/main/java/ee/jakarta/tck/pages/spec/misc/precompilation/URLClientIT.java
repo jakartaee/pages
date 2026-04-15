@@ -68,7 +68,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: precompileNoValueTest
    * 
-   * @assertion_ids: JSP:SPEC:244.1.4
+   * @assertion_ids: PAGES:SPEC:244.1.4
    * 
    * @test_Strategy: Validate that no response body is returned when
    * jsp_precompile has no value.
@@ -87,7 +87,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: precompileFalseTest
    * 
-   * @assertion_ids: JSP:SPEC:244.1.2
+   * @assertion_ids: PAGES:SPEC:244.1.2
    * 
    * @test_Strategy: Validate that no response body is returned when
    * jsp_precompile is set to false.
@@ -106,7 +106,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: precompileTrueTest
    * 
-   * @assertion_ids: JSP:SPEC:244.1.1
+   * @assertion_ids: PAGES:SPEC:244.1.1
    * 
    * @test_Strategy: Validate that no response body is returned when
    * jsp_precompile is set to true.
@@ -125,7 +125,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: precompileNegativeTest
    * 
-   * @assertion_ids: JSP:SPEC:244.1.5
+   * @assertion_ids: PAGES:SPEC:244.1.5
    * 
    * @test_Strategy: Set the jsp_precompile request paramter to a non valid
    * value and validate that a 500 error occurs.

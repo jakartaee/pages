@@ -80,7 +80,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterNewLineTest
    * 
-   * @assertion_ids: JSP:JAVADOC:63
+   * @assertion_ids: PAGES:JAVADOC:63
    * 
    * @test_Strategy: Validate the behavior of JspWriter.newLine().
    */
@@ -95,7 +95,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintBooleanTest
    * 
-   * @assertion_ids: JSP:JAVADOC:65
+   * @assertion_ids: PAGES:JAVADOC:65
    * 
    * @test_Strategy: Validate the behavior of JspWriter.print(boolean).
    */
@@ -109,7 +109,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintCharTest
    * 
-   * @assertion_ids: JSP:JAVADOC:67
+   * @assertion_ids: PAGES:JAVADOC:67
    * 
    * @test_Strategy: Validate the behavior of JspWriter.print(char).
    */
@@ -123,7 +123,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintIntTest
    * 
-   * @assertion_ids: JSP:JAVADOC:69
+   * @assertion_ids: PAGES:JAVADOC:69
    * 
    * @test_Strategy: Validate the behavior of JspWriter.print(int).
    */
@@ -139,7 +139,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintLongTest
    * 
-   * @assertion_ids: JSP:JAVADOC:71
+   * @assertion_ids: PAGES:JAVADOC:71
    * 
    * @test_Strategy: Validate the behavior of JspWriter.print(long).
    */
@@ -155,7 +155,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintFloatTest
    * 
-   * @assertion_ids: JSP:JAVADOC:73
+   * @assertion_ids: PAGES:JAVADOC:73
    * 
    * @test_Strategy: Validate the behavior of JspWriter.print(Float).
    */
@@ -171,7 +171,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintDoubleTest
    * 
-   * @assertion_ids: JSP:JAVADOC:75
+   * @assertion_ids: PAGES:JAVADOC:75
    * 
    * @test_Strategy: Validate the behavior of JspWriter.print(double).
    */
@@ -187,7 +187,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintCharArrayTest
    * 
-   * @assertion_ids: JSP:JAVADOC:77
+   * @assertion_ids: PAGES:JAVADOC:77
    * 
    * @test_Strategy: Validate the behavior of JspWriter.print(char[]).
    */
@@ -202,7 +202,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintStringTest
    * 
-   * @assertion_ids: JSP:JAVADOC:80
+   * @assertion_ids: PAGES:JAVADOC:80
    * 
    * @test_Strategy: Validate the behavior of JspWriter.print(String).
    */
@@ -216,7 +216,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintNullStringTest
    * 
-   * @assertion_ids: JSP:JAVADOC:80
+   * @assertion_ids: PAGES:JAVADOC:80
    * 
    * @test_Strategy: Validate the behavior of JspWriter.print(String) where the
    * argument is null.
@@ -231,7 +231,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintObjectTest
    * 
-   * @assertion_ids: JSP:JAVADOC:82
+   * @assertion_ids: PAGES:JAVADOC:82
    * 
    * @test_Strategy: Validate the behavior of JspWriter.print(Object).
    */
@@ -245,7 +245,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintlnTest
    * 
-   * @assertion_ids: JSP:JAVADOC:84
+   * @assertion_ids: PAGES:JAVADOC:84
    * 
    * @test_Strategy: Validate the behavior of JspWriter.println().
    */
@@ -260,7 +260,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintlnBooleanTest
    * 
-   * @assertion_ids: JSP:JAVADOC:86
+   * @assertion_ids: PAGES:JAVADOC:86
    * 
    * @test_Strategy: Validate the behavior of JspWriter.println(boolean).
    */
@@ -275,7 +275,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintlnCharTest
    * 
-   * @assertion_ids: JSP:JAVADOC:88
+   * @assertion_ids: PAGES:JAVADOC:88
    * 
    * @test_Strategy: Validate the behavior of JspWriter.println(char).
    */
@@ -290,7 +290,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintlnIntTest
    * 
-   * @assertion_ids: JSP:JAVADOC:90
+   * @assertion_ids: PAGES:JAVADOC:90
    * 
    * @test_Strategy: Validate the behavior of JspWriter.println(int).
    */
@@ -307,7 +307,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintlnLongTest
    * 
-   * @assertion_ids: JSP:JAVADOC:92
+   * @assertion_ids: PAGES:JAVADOC:92
    * 
    * @test_Strategy: Validate the behavior of JspWriter.println(long).
    */
@@ -324,7 +324,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintlnFloatTest
    * 
-   * @assertion_ids: JSP:JAVADOC:94
+   * @assertion_ids: PAGES:JAVADOC:94
    * 
    * @test_Strategy: Validate the behavior of JspWriter.println(float).
    */
@@ -341,7 +341,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintlnDoubleTest
    * 
-   * @assertion_ids: JSP:JAVADOC:96
+   * @assertion_ids: PAGES:JAVADOC:96
    * 
    * @test_Strategy: Validate the behavior of JspWriter.println(double).
    */
@@ -358,7 +358,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintlnCharArrayTest
    * 
-   * @assertion_ids: JSP:JAVADOC:98
+   * @assertion_ids: PAGES:JAVADOC:98
    * 
    * @test_Strategy: Validate the behavior of JspWriter.println(double).
    */
@@ -375,7 +375,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintlnStringTest
    * 
-   * @assertion_ids: JSP:JAVADOC:100
+   * @assertion_ids: PAGES:JAVADOC:100
    * 
    * @test_Strategy: Validate the behavior of JspWriter.println(String).
    */
@@ -392,7 +392,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintlnNullStringTest
    * 
-   * @assertion_ids: JSP:JAVADOC:100
+   * @assertion_ids: PAGES:JAVADOC:100
    * 
    * @test_Strategy: Validate the behavior of JspWriter.println(String) where
    * the argument is null.
@@ -407,7 +407,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterPrintlnObjectTest
    * 
-   * @assertion_ids: JSP:JAVADOC:102
+   * @assertion_ids: PAGES:JAVADOC:102
    * 
    * @test_Strategy: Validate the behavior of JspWriter.println(Object).
    */
@@ -424,7 +424,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterClearTest
    * 
-   * @assertion_ids: JSP:JAVADOC:104
+   * @assertion_ids: PAGES:JAVADOC:104
    * 
    * @test_Strategy: Validate the behavior of JspWriter.clear().
    */
@@ -437,7 +437,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterClearIOExceptionTest
    * 
-   * @assertion_ids: JSP:JAVADOC:105
+   * @assertion_ids: PAGES:JAVADOC:105
    * 
    * @test_Strategy: Validate the behavior of JspWriter.clear(). An IOException
    * must be thrown if the response has been committed, and JspWriter.clear() is
@@ -452,7 +452,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterClearBufferTest
    * 
-   * @assertion_ids: JSP:JAVADOC:106
+   * @assertion_ids: PAGES:JAVADOC:106
    * 
    * @test_Strategy: Validate the behavior of JspWriter.clearBuffer().
    */
@@ -465,7 +465,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterFlushTest
    * 
-   * @assertion_ids: JSP:JAVADOC:108
+   * @assertion_ids: PAGES:JAVADOC:108
    * 
    * @test_Strategy: Validate the behavior of JspWriter.flush().
    */
@@ -478,7 +478,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterCloseTest
    * 
-   * @assertion_ids: JSP:JAVADOC:110;JSP:JAVADOC:109
+   * @assertion_ids: PAGES:JAVADOC:110;PAGES:JAVADOC:109
    * 
    * @test_Strategy: Validate the behavior of JspWriter.close().
    */
@@ -498,7 +498,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterGetBufferSizeTest
    * 
-   * @assertion_ids: JSP:JAVADOC:112
+   * @assertion_ids: PAGES:JAVADOC:112
    * 
    * @test_Strategy: Validate the behavior of JspWriter.getBufferSize().
    */
@@ -511,7 +511,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterGetRemainingTest
    * 
-   * @assertion_ids: JSP:JAVADOC:113
+   * @assertion_ids: PAGES:JAVADOC:113
    * 
    * @test_Strategy: Validate the behavior of JspWriter.getRemaining().
    */
@@ -524,7 +524,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspWriterIsAutoFlushTest
    * 
-   * @assertion_ids: JSP:JAVADOC:114
+   * @assertion_ids: PAGES:JAVADOC:114
    * 
    * @test_Strategy: Validate the behavior of JspWriter.isAutoFlush().
    */

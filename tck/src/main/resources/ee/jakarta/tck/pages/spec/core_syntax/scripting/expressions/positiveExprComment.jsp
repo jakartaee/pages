@@ -59,7 +59,7 @@
 <title>positiveExprComment </title>
 <body>
 <% /**	Name:positiveExprComment
-		Description: Create a JSP page with a JSP 
+		Description: Create a Jakarta Pages page with a Jakarta Pages 
 			  expression inserted into a HTML comment
 		Result: The HTML should contain the value of the
 			  expression inserted into the comment

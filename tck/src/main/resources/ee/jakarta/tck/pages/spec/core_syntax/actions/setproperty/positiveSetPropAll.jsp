@@ -20,7 +20,7 @@
 <title>positiveSetPropAll</title>
 <body>
 <% /** 	Name : positiveSetPropAll
-	Description : Create a valid useBean action in JSP. Set all properties 
+	Description : Create a valid useBean action in page. Set all properties 
 		          of that bean from the request using a 
 		          <jsp:setProperty property="*"> action. Then access all 
 		          properties of the bean.

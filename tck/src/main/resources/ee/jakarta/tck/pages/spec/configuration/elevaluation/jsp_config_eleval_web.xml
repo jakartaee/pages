@@ -23,18 +23,18 @@
         <session-timeout>5</session-timeout>
     </session-config>
     <jsp-config>
-        <!-- Define 5 jsp-property-groups to validate Table JSP.3-1 in standard syntax -->
+        <!-- Define 5 jsp-property-groups to validate Table Pages.3-1 in standard syntax -->
         <jsp-property-group>
-            <description>Unspecified in configuration and by JSP</description>
+            <description>Unspecified in configuration and by page</description>
             <url-pattern>/elunspec/*</url-pattern>
         </jsp-property-group>
         <jsp-property-group>
-            <description>Set to false in configuration not specified in JSP</description>
+            <description>Set to false in configuration not specified in page</description>
             <url-pattern>/elconffalse/*</url-pattern>
             <el-ignored>false</el-ignored>
         </jsp-property-group>
         <jsp-property-group>
-            <description>Set to true in config not specified in JSP</description>
+            <description>Set to true in config not specified in page</description>
             <url-pattern>/elconftrue/*</url-pattern>
             <el-ignored>true</el-ignored>
         </jsp-property-group>
@@ -48,20 +48,20 @@
             <url-pattern>/elpagetrue/*</url-pattern>
             <el-ignored>false</el-ignored>
         </jsp-property-group>
-        <!-- Define 5 jsp-property-groups to validate Table JSP.3-1 as JSP documents -->
+        <!-- Define 5 jsp-property-groups to validate Table Pages.3-1 as documents -->
         <jsp-property-group>
-            <description>Unspecified in configuration and by JSP</description>
+            <description>Unspecified in configuration and by document</description>
             <url-pattern>/elunspecx/*</url-pattern>
             <is-xml>true</is-xml>
         </jsp-property-group>
         <jsp-property-group>
-            <description>Set to false in configuration not specified in JSP</description>
+            <description>Set to false in configuration not specified in document</description>
             <url-pattern>/elconffalsex/*</url-pattern>
             <el-ignored>false</el-ignored>
             <is-xml>true</is-xml>
         </jsp-property-group>
         <jsp-property-group>
-            <description>Set to true in config not specified in JSP</description>
+            <description>Set to true in config not specified in document</description>
             <url-pattern>/elconftruex/*</url-pattern>
             <el-ignored>true</el-ignored>
             <is-xml>true</is-xml>

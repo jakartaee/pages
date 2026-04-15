@@ -29,10 +29,8 @@ import java.io.IOException;
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 import ee.jakarta.tck.pages.common.tags.tck.SimpleTag;
 
-import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
@@ -51,26 +49,26 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_config_scr_web.war");
     archive.addClasses(SimpleTag.class);
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_config_scr_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tag.tld", "tag.tld");    
-    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tag.tld", "tag.tld");
+
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/scrunspecx/ScriptletTest.jspx")), "scrunspecx/ScriptletTest.jspx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/scrunspecx/ExpressionTest.jspx")), "scrunspecx/ExpressionTest.jspx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/scrunspecx/DeclarationTest.jspx")), "scrunspecx/DeclarationTest.jspx");
-    
+
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/scrunspec/ScriptletTest.jsp")), "scrunspec/ScriptletTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/scrunspec/ExpressionTest.jsp")), "scrunspec/ExpressionTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/scrunspec/DeclarationTest.jsp")), "scrunspec/DeclarationTest.jsp");
-    
+
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/scrtruex/ScriptletTest.jspx")), "scrtruex/ScriptletTest.jspx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/scrtruex/ExpressionTest.jspx")), "scrtruex/ExpressionTest.jspx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/scrtruex/AttributeExpressionTest.jspx")), "scrtruex/AttributeExpressionTest.jspx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/scrtruex/DeclarationTest.jspx")), "scrtruex/DeclarationTest.jspx");
-    
+
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/scrunspecx/ScriptletTest.jspx")), "scrunspecx/ScriptletTest.jspx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/scrunspecx/DeclarationTest.jspx")), "scrunspecx/DeclarationTest.jspx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/scrunspecx/ExpressionTest.jspx")), "scrunspecx/ExpressionTest.jspx");
@@ -100,13 +98,13 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspConfigurationScriptingUnspecifiedTest
-   * 
-   * @assertion_ids: JSP:SPEC:256
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:256
+   *
    * @test_Strategy: Validate that if scripting-invalid is not specified in the
    * target property-group, that a translation error is not generated and the
    * scripting elements are evaluated. This test is performed against standard
-   * syntax JSP pages as well as JSP documents.
+   * syntax pages as well as documents.
    */
   @Test
   public void jspConfigurationScriptingUnspecifiedTest() throws Exception {
@@ -138,13 +136,13 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspConfigurationScriptingFalseTest
-   * 
-   * @assertion_ids: JSP:SPEC:144
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:144
+   *
    * @test_Strategy: Validate that if scripting-invalid is set to false in the
    * target property-group, that a translation error is not generated and the
    * scripting elements are evaluated. This test is performed against standard
-   * syntax JSP pages as well as JSP documents.
+   * syntax pages as well as documents.
    */
   @Test
   public void jspConfigurationScriptingFalseTest() throws Exception {
@@ -180,13 +178,13 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspConfigurationScriptingTrueTest
-   * 
-   * @assertion_ids: JSP:SPEC:143
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:143
+   *
    * @test_Strategy: Validate that if scripting-invalid is set to false in the
    * target property-group, that a translation error is generated (except in the
-   * case of RT expressions). This test is performed against standard syntax JSP
-   * pages as well as JSP documents.
+   * case of RT expressions). This test is performed against standard syntax
+   * pages as well as documents.
    */
   @Test
   public void jspConfigurationScriptingTrueTest() throws Exception {

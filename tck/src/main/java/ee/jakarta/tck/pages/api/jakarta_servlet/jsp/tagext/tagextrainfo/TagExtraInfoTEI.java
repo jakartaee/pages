@@ -46,13 +46,13 @@ public class TagExtraInfoTEI extends TagExtraInfo {
   /**
    * Validates that TagExtraInfo instances are properly handled by the
    * container.
-   * 
+   *
    * @param tagData
    * @return
    */
   public ValidationMessage[] validate(TagData tagData) {
 
-    // Checked within the JSP to make sure the TEI was
+    // Checked within the page to make sure the TEI was
     // called by the container.
     _wasCalled = true;
 
@@ -123,7 +123,7 @@ public class TagExtraInfoTEI extends TagExtraInfo {
 
   /**
    * Used to validate the proper default behavior of TagExtraInfo.validate().
-   * 
+   *
    * @param data
    *          - a TagData instance
    * @return - true of _returnFalse is false, otherwise true.
@@ -139,7 +139,7 @@ public class TagExtraInfoTEI extends TagExtraInfo {
 
   /**
    * Called within the test pages to verify that the TEI was indeed called.
-   * 
+   *
    * @return true if called, otherwise false
    */
   public static boolean teiWasCalled() {
@@ -157,7 +157,7 @@ public class TagExtraInfoTEI extends TagExtraInfo {
   /**
    * Wraps JspTestUtil.debug. This also prepends this TEI's classname to the
    * debug message.
-   * 
+   *
    * @param message
    *          - the debug message
    */

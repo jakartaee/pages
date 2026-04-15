@@ -92,7 +92,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativePageDirectiveTest
    * 
-   * @assertion_ids: JSP:SPEC:223
+   * @assertion_ids: PAGES:SPEC:223
    * 
    * @test_Strategy: If a page directive is used in a tag file, a translation
    * error must result.
@@ -110,7 +110,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeTagDirectiveTest
    * 
-   * @assertion_ids: JSP:SPEC:226
+   * @assertion_ids: PAGES:SPEC:226
    * 
    * @test_Strategy: If a tag directive is used in a jsp page, a translation
    * error must result.
@@ -128,7 +128,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeAttributeDirectiveTest
    * 
-   * @assertion_ids: JSP:SPEC:227
+   * @assertion_ids: PAGES:SPEC:227
    * 
    * @test_Strategy: If a attribute directive is used in a jsp page, a
    * translation error must result.
@@ -146,7 +146,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeVariableDirectiveTest
    * 
-   * @assertion_ids: JSP:SPEC:228
+   * @assertion_ids: PAGES:SPEC:228
    * 
    * @test_Strategy: If a variable directive is used in a jsp page, a
    * translation error must result.
@@ -232,7 +232,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: errorOnELNotFoundFalseTest
    * 
-   * @assertion_ids: JSP:SPEC:320
+   * @assertion_ids: PAGES:SPEC:320
    * 
    * @test_Strategy: [ErrorOnELNotFoundTagDirective] Verify that when the
    * ErrorOnELNotFound tag directive attribute is set to false, a reference
@@ -250,7 +250,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: errorOnELNotFoundTrueTest
    * 
-   * @assertion_ids: JSP:SPEC:320
+   * @assertion_ids: PAGES:SPEC:320
    * 
    * @test_Strategy: [ErrorOnELNotFoundTagDirective] Verify that when the
    * ErrorOnELNotFound tag directive attribute is set to false, a reference

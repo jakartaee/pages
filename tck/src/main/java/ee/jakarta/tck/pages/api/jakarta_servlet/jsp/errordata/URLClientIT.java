@@ -72,7 +72,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: errorDataConstructorTest
    * 
-   * @assertion_ids: JSP:JAVADOC:1
+   * @assertion_ids: PAGES:JAVADOC:1
    * 
    * @test_Strategy: Validate proper construction of ErrorData object directly
    * via API.
@@ -87,7 +87,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: errorDataGetThrowableTest
    * 
-   * @assertion_ids: JSP:JAVADOC:2
+   * @assertion_ids: PAGES:JAVADOC:2
    * 
    * @test_Strategy: Validate behavior of ErrorData.getThrowable().
    */
@@ -100,7 +100,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: errorDataGetStatusCodeTest
    * 
-   * @assertion_ids: JSP:JAVADOC:3
+   * @assertion_ids: PAGES:JAVADOC:3
    * 
    * @test_Strategy: Validate behavior of ErrorData.getStatusCode().
    */
@@ -113,7 +113,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: errorDataGetRequestURITest
    * 
-   * @assertion_ids: JSP:JAVADOC:4
+   * @assertion_ids: PAGES:JAVADOC:4
    * 
    * @test_Strategy: Validate behavior of ErrorData.getRequestURI()
    */
@@ -126,7 +126,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: errorDataGetServletNameTest
    * 
-   * @assertion_ids: JSP:JAVADOC:5
+   * @assertion_ids: PAGES:JAVADOC:5
    * 
    * @test_Strategy: Validate behavior of ErrorData.getServletName().
    */

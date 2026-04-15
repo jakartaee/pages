@@ -73,7 +73,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspFactoryGetDefaultFactoryTest
    * 
-   * @assertion_ids: JSP:JAVADOC:121
+   * @assertion_ids: PAGES:JAVADOC:121
    * 
    * @test_Strategy: Validate the behavior of JspFactory.getDefaultFactory().
    */
@@ -86,7 +86,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspFactoryGetPageContextTest
    * 
-   * @assertion_ids: JSP:JAVADOC:122
+   * @assertion_ids: PAGES:JAVADOC:122
    * 
    * @test_Strategy: Validate the behavior of JspFactory.getPageContext().
    */
@@ -99,7 +99,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspFactoryGetEngineInfoTest
    * 
-   * @assertion_ids: JSP:JAVADOC:124
+   * @assertion_ids: PAGES:JAVADOC:124
    * 
    * @test_Strategy: Validate the behavior of JspFactory.getEngineInfo().
    */

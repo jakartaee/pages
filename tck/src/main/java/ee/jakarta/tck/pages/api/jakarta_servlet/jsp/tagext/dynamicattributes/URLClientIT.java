@@ -80,7 +80,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: dynamicAttributesTest
    * 
-   * @assertion_ids: JSP:JAVADOC:372
+   * @assertion_ids: PAGES:JAVADOC:372
    * 
    * @test_Strategy: Validate undeclared attributes can be set on a tag handler
    * for attributes not specified in the TLD.
@@ -97,7 +97,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: dynamicAttributesExceptionTest
    * 
-   * @assertion_ids: JSP:JAVADOC:372
+   * @assertion_ids: PAGES:JAVADOC:372
    * 
    * @test_Strategy: Validate that if a JspException is thrown by
    * setDynamicAttribute(), that doStartTag() or doTag() is not called on the

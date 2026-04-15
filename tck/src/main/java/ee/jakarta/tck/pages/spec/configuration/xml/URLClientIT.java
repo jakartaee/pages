@@ -50,7 +50,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_config_xml_web.war");
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_config_xml_web.xml"));
@@ -71,13 +71,13 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspConfigurationIsXmlUnspecTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that if is-xml is not specified for a property
-   * group, that the files matched by the url-pattern will not be considered JSP
+   * group, that the files matched by the url-pattern will not be considered
    * documents.
-   * 
+   *
    */
   @Test
   public void jspConfigurationIsXmlUnspecTest() throws Exception {
@@ -89,11 +89,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspConfigurationIsXmlFalseTest
-   * 
-   * @assertion_ids: JSP:SPEC:150.2
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:150.2
+   *
    * @test_Strategy: Validate that if is-xml is set to false for a property
-   * group, that the files matched by the url-pattern will not be considered JSP
+   * group, that the files matched by the url-pattern will not be considered
    * documents.
    */
   @Test
@@ -106,11 +106,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspConfigurationIsXmlTrueTest
-   * 
-   * @assertion_ids: JSP:SPEC:150.1
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:150.1
+   *
    * @test_Strategy: Validate that if is-xml is set to true for a property
-   * group, that the files matched by the url-pattern will be considered JSP
+   * group, that the files matched by the url-pattern will be considered
    * documents.
    */
   @Test

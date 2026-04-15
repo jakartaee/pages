@@ -22,7 +22,7 @@
     // check to make sure the page scope of wrapper context is emtpy.
     Enumeration e = jspContext.getAttributeNamesInScope(PageContext.PAGE_SCOPE);
     if (e.hasMoreElements()) {
-        out.println("Test FAILED.  The JSP Context Wrapper did not have a clean " +
+        out.println("Test FAILED.  The Jakarta Pages Context Wrapper did not have a clean " +
             "page scope.");
         out.println("Attribute names found:");
         for (String name = (String) e.nextElement();

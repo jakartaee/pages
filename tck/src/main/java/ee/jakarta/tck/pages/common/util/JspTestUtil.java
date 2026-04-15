@@ -43,10 +43,10 @@ import jakarta.servlet.jsp.tagext.BodyTag;
 import jakarta.servlet.jsp.tagext.IterationTag;
 import jakarta.servlet.jsp.tagext.Tag;
 import jakarta.servlet.jsp.tagext.ValidationMessage;
-//replacing the removed jakarta.servlet.jsp.el.ELException class from JSP 4.0
+//replacing the removed jakarta.servlet.jsp.el.ELException class from Jakarta Pages 4.0
 import jakarta.el.ELException;
 /**
- * JSP TCK Utility class.
+ * Jakarta Pages TCK Utility class.
  */
 
 public class JspTestUtil {
@@ -75,10 +75,10 @@ public class JspTestUtil {
   }
 
   /**
-   * Utility method to invoke JSP API Tests.
-   * 
+   * Utility method to invoke Jakarta Pages API Tests.
+   *
    * @param testObject
-   *          - the JSP test object
+   *          - the test object
    * @param req
    *          - the incoming client request
    * @param res
@@ -106,7 +106,7 @@ public class JspTestUtil {
 
   /**
    * Utility method to handle exceptions from tests in a generic fashion.
-   * 
+   *
    * @param t
    *          - offending Throwable instance
    * @param out
@@ -139,7 +139,7 @@ public class JspTestUtil {
    * If all values are found, true will be returned.
    *
    * The comparison is performed in a case sensitive manner.
-   * 
+   *
    * @param e
    *          - Enumeration to validate
    * @param values
@@ -184,7 +184,7 @@ public class JspTestUtil {
   /**
    * Returns the provided String array in the following format:
    * <tt>[n1,n2,n...]</tt>
-   * 
+   *
    * @param sArray
    *          - an array of String values
    * @return - a String based off the values in the array
@@ -208,7 +208,7 @@ public class JspTestUtil {
   /**
    * Returns the provided Enumeration as a String in the following format:
    * <tt>[n1,n2,n...]</tt>
-   * 
+   *
    * @param e
    *          - an Enumeration
    * @return - a printable version of the contents of the Enumeration
@@ -219,7 +219,7 @@ public class JspTestUtil {
 
   /**
    * Returnes the provides Enumeration as an Array of String Arguments.
-   * 
+   *
    * @param e
    *          - an Enumeration
    * @return - the elements of the Enumeration as an array of Strings
@@ -255,7 +255,7 @@ public class JspTestUtil {
 
   /**
    * Writes the provided message to System.out when the <tt>debug</tt> is set.
-   * 
+   *
    * @param message
    *          - the message to write to System.out
    */
@@ -267,7 +267,7 @@ public class JspTestUtil {
 
   /**
    * Creates an array of ValidationMessages.
-   * 
+   *
    * @param id
    *          - the jsp:id
    * @param message
@@ -311,7 +311,7 @@ public class JspTestUtil {
   /**
    * Utility class to get a String version of a Tag return value based on the
    * int value, the type, and the method it was returned from.
-   * 
+   *
    * @param method
    *          - the Tag method returning the int status
    * @param type

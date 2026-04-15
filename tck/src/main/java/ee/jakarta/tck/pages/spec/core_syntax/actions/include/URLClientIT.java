@@ -28,7 +28,6 @@ import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
@@ -54,7 +53,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_coresyntx_act_include_web.war");
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_coresyntx_act_include_web.xml"));
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/staticStatic_A.jsp")), "staticStatic_A.jsp");
@@ -95,12 +94,12 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveIncludeCtxRelativeTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
-   * @test_Strategy: Include content, using a context-relative path, from JSP
-   * page into the current JSP page.
-   * 
+   *
+   * @test_Strategy: Include content, using a context-relative path, from a
+   * Jakarta Pages page into the current page.
+   *
    * jsp:include provides for the inclusion of dynamic resources, within the
    * same context, using a context-relative path. JavaServer Pages Specification
    * v1.2, Sec. 4.4
@@ -116,11 +115,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveIncludeCtxRelativeHtmlTest
-   * 
-   * @assertion_ids: JSP:SPEC:164.1
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:164.1
+   *
    * @test_Strategy: Include content, using a context-relative path, from a
-   * static HTML page into the current JSP page. PENDING Merge existing tests
+   * static HTML page into the current page. PENDING Merge existing tests
    * into one test.
    */
 
@@ -134,11 +133,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveIncludePageRelativeTest
-   * 
-   * @assertion_ids: JSP:SPEC:164.1
-   * 
-   * @test_Strategy: Include content, using a page-relative path, from a JSP
-   * page into the current JSP page.
+   *
+   * @assertion_ids: PAGES:SPEC:164.1
+   *
+   * @test_Strategy: Include content, using a page-relative path, from a Jakarta Pages
+   * page into the current page.
    */
   @Test
   public void positiveIncludePageRelativeTest() throws Exception {
@@ -150,9 +149,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveRequestAttrCtxRelativeTest
-   * 
-   * @assertion_ids: JSP:SPEC:164.1;JSP:SPEC:164.9
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:164.1;PAGES:SPEC:164.9
+   *
    * @test_Strategy: Validate the page attribute of jsp:include can correctly
    * accept request-time attribute values which contain context-relative paths.
    */
@@ -167,9 +166,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveRequestAttrPageRelativeTest
-   * 
-   * @assertion_ids: JSP:SPEC:164.1
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:164.1
+   *
    * @test_Strategy: Validate the page attribute of jsp:include can correctly
    * accept request-time attribute values which contain page-relative paths.
    */
@@ -184,11 +183,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveIncludePageRelative2Test
-   * 
-   * @assertion_ids: JSP:SPEC:164.1
-   * 
-   * @test_Strategy: Include content, using a page-relative path, from a JSP
-   * page in a different dir into the current JSP page, with a jsp-config
+   *
+   * @assertion_ids: PAGES:SPEC:164.1
+   *
+   * @test_Strategy: Include content, using a page-relative path, from a Jakarta Pages
+   * page in a different dir into the current Jakarta Pages page, with a jsp-config
    * url-pattern in web.xml
    */
   @Test
@@ -201,14 +200,14 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveIncludeForwardTest
-   * 
-   * @assertion_ids: JSP:SPEC:164.1
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:164.1
+   *
    * @test_Strategy: Include a jsp, which forwards to a html file Only the
    * output from the forwarded target should be sent to client, because the test
-   * jsp and included jsp shared the same out (JSP 5.4), and a forwarding clears
+   * jsp and included jsp shared the same out (Pages 5.4), and a forwarding clears
    * the response buffer (SVR 8.4).
-   * 
+   *
    */
   @Test
   public void positiveIncludeForwardTest() throws Exception {
@@ -220,9 +219,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: includeMappedServletTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: set page attribute to a mapped servlet.
    */
 
@@ -238,10 +237,10 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: staticStaticTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
-   * @test_Strategy:complex set of inclusions in JSP.5.4
+   *
+   * @test_Strategy:complex set of inclusions in Pages.5.4
    */
 
   @Test
@@ -254,10 +253,10 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: dynamicDynamicTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
-   * @test_Strategy: complex set of inclusions in JSP.5.4
+   *
+   * @test_Strategy: complex set of inclusions in Pages.5.4
    */
 
   @Test
@@ -270,10 +269,10 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: dynamicStaticTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
-   * @test_Strategy: complex set of inclusions in JSP.5.4
+   *
+   * @test_Strategy: complex set of inclusions in Pages.5.4
    */
 
   @Test
@@ -286,10 +285,10 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: staticDynamicTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
-   * @test_Strategy: complex set of inclusions in JSP.5.4
+   *
+   * @test_Strategy: complex set of inclusions in Pages.5.4
    */
 
   @Test

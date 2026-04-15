@@ -74,7 +74,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeJspRootTest
    * 
-   * @assertion_ids: JSP:SPEC:177; JSP:SPEC:173.1
+   * @assertion_ids: PAGES:SPEC:177; PAGES:SPEC:173.1
    * 
    * @test_Strategy: use jsp:root not as the top element of a jsp document.
    * jsp-property-group config overrides other determiniations.
@@ -96,7 +96,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspRootPrefixTest
    * 
-   * @assertion_ids: JSP:SPEC:175
+   * @assertion_ids: PAGES:SPEC:175
    * 
    * @test_Strategy: use a different prefix abc
    */
@@ -113,7 +113,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: directiveIncludeLocationTest
    * 
-   * @assertion_ids: JSP:SPEC:179.1; JSP:SPEC:179; JSP:SPEC:179.3
+   * @assertion_ids: PAGES:SPEC:179.1; PAGES:SPEC:179; PAGES:SPEC:179.3
    * 
    * @test_Strategy: use jsp:directive.include anywhere within a jsp document.
    */
@@ -131,7 +131,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: directiveIncludeInJspPageTest
    * 
-   * @assertion_ids: JSP:SPEC:179.5
+   * @assertion_ids: PAGES:SPEC:179.5
    * 
    * @test_Strategy: use jsp:directive.include in a jsp page
    */
@@ -149,7 +149,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: directivePageInJspPageTest
    * 
-   * @assertion_ids: JSP:SPEC:178.39
+   * @assertion_ids: PAGES:SPEC:178.39
    * 
    * @test_Strategy: use jsp:directive.page in a jsp page
    */
@@ -167,7 +167,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: scriptingTest
    * 
-   * @assertion_ids: JSP:SPEC:180; JSP:SPEC:181; JSP:SPEC:182
+   * @assertion_ids: PAGES:SPEC:180; PAGES:SPEC:181; PAGES:SPEC:182
    * 
    * @test_Strategy: use jsp:declaration, jsp:scriptlet, and jsp:expression in a
    * jsp document.
@@ -186,7 +186,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: scriptingInJspPageTest
    * 
-   * @assertion_ids: JSP:SPEC:180.4; JSP:SPEC:181.2; JSP:SPEC:182.5
+   * @assertion_ids: PAGES:SPEC:180.4; PAGES:SPEC:181.2; PAGES:SPEC:182.5
    * 
    * @test_Strategy: use jsp:declaration, jsp:scriptlet, and jsp:expression in a
    * jsp page.

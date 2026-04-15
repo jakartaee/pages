@@ -31,7 +31,6 @@ import ee.jakarta.tck.pages.common.util.JspTestUtil;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
@@ -52,16 +51,16 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_core_act_root_web.war");
     archive.addClasses(JspTestUtil.class);
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_core_act_root_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspRootJspBodyTag.tagx", "tags/JspRootJspBodyTag.tagx");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspRootUsageContextTag1.tagx", "tags/JspRootUsageContextTag1.tagx");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspRootUsageContextTag2.tag", "tags/JspRootUsageContextTag2.tag");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspRootVersionInvalidValueTag.tagx", "tags/JspRootVersionInvalidValueTag.tagx");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspRootVersionReqAttrTag.tagx", "tags/JspRootVersionReqAttrTag.tagx");    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspRootJspBodyTag.tagx", "tags/JspRootJspBodyTag.tagx");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspRootUsageContextTag1.tagx", "tags/JspRootUsageContextTag1.tagx");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspRootUsageContextTag2.tag", "tags/JspRootUsageContextTag2.tag");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspRootVersionInvalidValueTag.tagx", "tags/JspRootVersionInvalidValueTag.tagx");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspRootVersionReqAttrTag.tagx", "tags/JspRootVersionReqAttrTag.tagx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/JspRootVersionReqAttrTest2.jsp")), "JspRootVersionReqAttrTest2.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/JspRootVersionReqAttrTest1.jspx")), "JspRootVersionReqAttrTest1.jspx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/JspRootVersionAttrInvalidValueTest2.jsp")), "JspRootVersionAttrInvalidValueTest2.jsp");
@@ -88,11 +87,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspRootUsageContextTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that a translation time error is raised when
-   * jsp:root is used in JSP or Tag files in standard syntax but not in JSP
+   * jsp:root is used in pages or Tag files in standard syntax but not in
    * Documents, or Tag files in XML syntax.
    */
   @Test
@@ -119,9 +118,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspRootVersionAttrAllowableValuesTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate the container accepts both "1.2" and "2.0" as
    * allowable values for the version attribute of the jsp:root element.
    */
@@ -141,9 +140,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspRootVersionAttrInvalidValueTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate the container generates a translation-time error
    * when the version attribute of jsp:root is provided a value other than "1.2"
    * or "2.0"
@@ -162,9 +161,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspRootVersionReqAttrTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that the version attribute of jsp:root is indeed
    * required by looking for a translation error from the container when the
    * attribute is not present.
@@ -183,9 +182,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspRootJspBodyTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that jsp:body can be used to specify the body of
    * the jsp:root action.
    */

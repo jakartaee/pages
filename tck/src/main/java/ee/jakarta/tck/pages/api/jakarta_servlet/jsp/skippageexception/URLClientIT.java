@@ -70,7 +70,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: skipPageExceptionDefaultCtorTest
    * 
-   * @assertion_ids: JSP:JAVADOC:6
+   * @assertion_ids: PAGES:JAVADOC:6
    * 
    * @test_Strategy: Validate default constructor of SkipPageException
    */
@@ -83,7 +83,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: skipPageExceptionMessageCtorTest
    * 
-   * @assertion_ids: JSP:JAVADOC:7
+   * @assertion_ids: PAGES:JAVADOC:7
    * 
    * @test_Strategy: Validate contructor taking single string argument as the
    * message of the Exception.
@@ -97,7 +97,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: skipPageExceptionCauseCtorTest
    * 
-   * @assertion_ids: JSP:JAVADOC:8
+   * @assertion_ids: PAGES:JAVADOC:8
    * 
    * @test_Strategy: Validate constructor taking a Throwable signifying the root
    * cause of the this SkipPageException.
@@ -111,7 +111,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: skipPageExceptionCauseMessageCtorTest
    * 
-   * @assertion_ids: JSP:JAVADOC:9
+   * @assertion_ids: PAGES:JAVADOC:9
    * 
    * @test_Strategy: Validate constructor taking both a message and a Throwable
    * signifying the root cause of the SkipPageException.

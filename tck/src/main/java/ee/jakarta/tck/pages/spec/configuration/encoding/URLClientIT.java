@@ -73,9 +73,9 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspConfigurationEncodingTest
    * 
-   * @assertion_ids: JSP:SPEC:253
+   * @assertion_ids: PAGES:SPEC:253
    * 
-   * @test_Strategy: Validate that if a JSP configuration element specifies an
+   * @test_Strategy: Validate that if a Jakarta Pages configuration element specifies an
    * encoding for a group of pages, the encoding is properly set for those pages
    * when no encoding is set by the page(s) themselves.
    */
@@ -91,9 +91,9 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspConfigurationSameEncodingTest
    * 
-   * @assertion_ids: JSP:SPEC:146
+   * @assertion_ids: PAGES:SPEC:146
    * 
-   * @test_Strategy: Validate that if a JSP configuration element specifies an
+   * @test_Strategy: Validate that if a Jakarta Pages configuration element specifies an
    * encoding for a group of pages, and the target page specifies the same
    * encoding as that of the property group, no translation error occurs and the
    * encoding is properly set.
@@ -110,9 +110,9 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspConfigurationDifferentEncodingTest
    * 
-   * @assertion_ids: JSP:SPEC:145
+   * @assertion_ids: PAGES:SPEC:145
    * 
-   * @test_Strategy: Validate that if a JSP configuration element specifies an
+   * @test_Strategy: Validate that if a Jakarta Pages configuration element specifies an
    * encoding for a group of pages, and the target page specifies a different
    * encoding as that of the property group, a translation error occurs.
    */

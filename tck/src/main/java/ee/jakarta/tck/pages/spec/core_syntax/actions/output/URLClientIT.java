@@ -31,7 +31,6 @@ import ee.jakarta.tck.pages.common.util.JspTestUtil;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
@@ -54,7 +53,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_core_act_output_web.war");
     archive.addClasses(JspTestUtil.class);
@@ -85,15 +84,15 @@ public class URLClientIT extends AbstractUrlClient {
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/doctypeSystemTest.jspx")), "doctypeSystemTest.jspx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/doctypeSystemPublicTest.jspx")), "doctypeSystemPublicTest.jspx");
 
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputUsageXMLTag.tagx", "tags/JspOutputUsageXMLTag.tagx");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputUsageTag.tag", "tags/JspOutputUsageTag.tag");  
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputOmitDeclYesTag.tagx", "tags/JspOutputOmitDeclYesTag.tagx");  
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputOmitDeclTrueTag.tagx", "tags/JspOutputOmitDeclTrueTag.tagx");  
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputOmitDeclNoTag.tagx", "tags/JspOutputOmitDeclNoTag.tagx");  
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputOmitDeclFalseTag.tagx", "tags/JspOutputOmitDeclFalseTag.tagx");  
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputDefaultTag.tagx", "tags/JspOutputDefaultTag.tagx");  
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputBodyTag.tagx", "tags/JspOutputBodyTag.tagx");  
-    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputUsageXMLTag.tagx", "tags/JspOutputUsageXMLTag.tagx");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputUsageTag.tag", "tags/JspOutputUsageTag.tag");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputOmitDeclYesTag.tagx", "tags/JspOutputOmitDeclYesTag.tagx");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputOmitDeclTrueTag.tagx", "tags/JspOutputOmitDeclTrueTag.tagx");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputOmitDeclNoTag.tagx", "tags/JspOutputOmitDeclNoTag.tagx");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputOmitDeclFalseTag.tagx", "tags/JspOutputOmitDeclFalseTag.tagx");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputDefaultTag.tagx", "tags/JspOutputDefaultTag.tagx");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspOutputBodyTag.tagx", "tags/JspOutputBodyTag.tagx");
+
     return archive;
 
   }
@@ -107,12 +106,12 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspOutputUsageContextTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
-   * @test_Strategy: Validate that jsp:output can be used within JSP documents
+   *
+   * @test_Strategy: Validate that jsp:output can be used within Jakarta Pages documents
    * and Tag files in XML syntax and that a translation-time error is raised if
-   * used within the context of a standard syntax JSP or Tag file.
+   * used within the context of a standard syntax page or Tag file.
    */
   @Test
   public void jspOutputUsageContextTest() throws Exception {
@@ -138,9 +137,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspOutputOmitDeclValidValuesTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate the valid values for the omit-xml-declaration are
    * 'true', 'false', 'yes', and 'no'. If the attribute values are 'false' or
    * 'no', then the xml declaration will be generated. If 'true' or 'yes' no
@@ -188,10 +187,10 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspOutputJspRootOmitDeclDefaultTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
-   * @test_Strategy: Validate that if a JSP document contains jsp:root, and a
+   *
+   * @test_Strategy: Validate that if a Jakarta Pages document contains jsp:root, and a
    * jsp:output action is present without the omit-xml-declaration attribute,
    * the xml declaration will not be generated.
    */
@@ -205,10 +204,10 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspOutputOmitDeclDefaultTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
-   * @test_Strategy: Validate that if jsp:output is present in a JSP document
+   *
+   * @test_Strategy: Validate that if jsp:output is present in a Jakarta Pages document
    * without a jsp:root element, and the omit-xml-declaration attribute is not
    * present, the default behavior is that an xml declaration is generated.
    */
@@ -223,9 +222,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspOutputOmitDeclDefaultTagTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that if jsp:output is present in a Tag file in XML
    * syntax, and the omit-xml-declaration attribute is not present, the default
    * behavior will be the generation of an XML declaration.
@@ -241,9 +240,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspOutputBodyTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that a translation error occurs if the body of
    * jsp:output is not empty.
    */
@@ -261,9 +260,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: simpleDefaultTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: use a jsp document without jsp:output. response encoding is
    * not set so use default for jsp document
    */
@@ -280,9 +279,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: doctypeSystemTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: A DOCTYPE must be automatically output if and only if the
    * doctype-system element appears in the translation unit as part of a
    * <jsp:output> action. The format of the DOCTYPE: <!DOCTYPE nameOfRootElement
@@ -301,9 +300,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: doctypeSystemPublicTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: A DOCTYPE must be automatically output if and only if the
    * doctype-system element appears in the translation unit as part of a
    * <jsp:output> action. The format of the DOCTYPE: <!DOCTYPE nameOfRootElement
@@ -322,9 +321,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: negativeDoctypeRootTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: The doctype- root-element must appear and must only appear
    * if the doctype-system property appears, or a translation error must occur.
    */
@@ -343,9 +342,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: negativeDoctypePublicNoSystemTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: The doctype-public property is optional, but must not
    * appear unless the doctype-system property appears, or a translation error
    * must occur.
@@ -361,9 +360,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: negativeMultipleDoctypeTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Multiple occurrences of the doctype-root-element,
    * doctype-system or doctype-public properties will cause a translation error
    * if the values for the properties differ from the previous occurrence.

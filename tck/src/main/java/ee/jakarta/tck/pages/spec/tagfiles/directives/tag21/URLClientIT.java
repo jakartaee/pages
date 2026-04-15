@@ -82,7 +82,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: deferredSyntaxAllowedAsLiteralFalseTemplateTextTest
    * 
-   * @assertion_ids: JSP:SPEC:229.26
+   * @assertion_ids: PAGES:SPEC:229.26
    * 
    * @test_Strategy: [DeferredSyntaxAllowedAsLiteralTagDirectiveAttribute]
    * Verify that when the DeferredSyntaxAllowedAsLiteral tag directive attribute
@@ -102,7 +102,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: deferredSyntaxAllowedAsLiteralTrueTemplateTextTest
    * 
-   * @assertion_ids: JSP:SPEC:229.26
+   * @assertion_ids: PAGES:SPEC:229.26
    * 
    * @test_Strategy: [DeferredSyntaxAllowedAsLiteralTagDirectiveAttribute]
    * Verify that when the DeferredSyntaxAllowedAsLiteral tag directive attribute
@@ -122,7 +122,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: deferredSyntaxAllowedAsLiteralFalseActionTest
    * 
-   * @assertion_ids: JSP:SPEC:229.26
+   * @assertion_ids: PAGES:SPEC:229.26
    * 
    * @test_Strategy: [DeferredSyntaxAllowedAsLiteralTagDirectiveAttribute]
    * Verify that when the DeferredSyntaxAllowedAsLiteral tag directive attribute
@@ -141,7 +141,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: deferredSyntaxAllowedAsLiteralTrueActionTest
    * 
-   * @assertion_ids: JSP:SPEC:229.26
+   * @assertion_ids: PAGES:SPEC:229.26
    * 
    * @test_Strategy: [DeferredSyntaxAllowedAsLiteralTagDirectiveAttribute]
    * Verify that when the DeferredSyntaxAllowedAsLiteral tag directive attribute

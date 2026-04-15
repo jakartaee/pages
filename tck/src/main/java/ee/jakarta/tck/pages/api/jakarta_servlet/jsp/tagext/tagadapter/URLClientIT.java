@@ -85,7 +85,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAdapterCtorTest
    * 
-   * @assertion_ids: JSP:JAVADOC:285
+   * @assertion_ids: PAGES:JAVADOC:285
    * 
    * @test_Strategy: Validates the constructor of the TagAdapter class.
    */
@@ -98,7 +98,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAdapterSetPageContextTest
    * 
-   * @assertion_ids: JSP:JAVADOC:287
+   * @assertion_ids: PAGES:JAVADOC:287
    * 
    * @test_Strategy: Validates that an UnsupportedOperationException is thrown
    * if a call to TagAdapter.setPageContext() is made.
@@ -112,7 +112,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAdapterSetParentTest
    * 
-   * @assertion_ids: JSP:JAVADOC:289
+   * @assertion_ids: PAGES:JAVADOC:289
    * 
    * @test_Strategy: Validates that an UnsupportedOperationException is thrown
    * if a call to TagAdapter.setParent() is made.
@@ -126,7 +126,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAdapterGetParentTest
    * 
-   * @assertion_ids: JSP:JAVADOC:290
+   * @assertion_ids: PAGES:JAVADOC:290
    * 
    * @test_Strategy: Validates that getParent always returns
    * getAdaptee().getParent()
@@ -140,7 +140,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAdapterDoStartTagTest
    * 
-   * @assertion_ids: JSP:JAVADOC:293;JSP:JAVADOC:294
+   * @assertion_ids: PAGES:JAVADOC:293;PAGES:JAVADOC:294
    * 
    * @test_Strategy: Validates that an UnsupportedOperationException is thrown
    * if a call to TagAdapter.doStartTag() is made.
@@ -154,7 +154,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAdapterDoEndTagTest
    * 
-   * @assertion_ids: JSP:JAVADOC:296;JSP:JAVADOC:297
+   * @assertion_ids: PAGES:JAVADOC:296;PAGES:JAVADOC:297
    * 
    * @test_Strategy: Validates that an UnsupportedOperationException is thrown
    * if a call to TagAdapter.doEndTag() is made.
@@ -168,7 +168,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAdapterReleaseTest
    * 
-   * @assertion_ids: JSP:JAVADOC:299
+   * @assertion_ids: PAGES:JAVADOC:299
    * 
    * @test_Strategy: Validates that an UnsupportedOperationException is thrown
    * if a call to TagAdapter.release() is made.
@@ -182,12 +182,12 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAdapterValidationTest
    * 
-   * @assertion_ids: JSP:JAVADOC:286;JSP:JAVADOC:288;JSP:JAVADOC:291;
-   * JSP:JAVADOC:292;JSP:JAVADOC:295;JSP:JAVADOC:298; JSP:JAVADOC:290
+   * @assertion_ids: PAGES:JAVADOC:286;PAGES:JAVADOC:288;PAGES:JAVADOC:291;
+   * PAGES:JAVADOC:292;PAGES:JAVADOC:295;PAGES:JAVADOC:298; PAGES:JAVADOC:290
    * 
    * @test_Strategy: This validates that the container properly wraps a
    * SimpleTag instance with a TagAdapter when a Classic tag handler is a child
-   * of the SimpleTag handler within the JSP Page. This also makes the
+   * of the SimpleTag handler within the Jakarta Pages Page. This also makes the
    * assumption, that all of the previous tests passed as it expects an
    * UnsupportedOperationException to be thrown if an illegal method call is
    * made on the TagAdapter.

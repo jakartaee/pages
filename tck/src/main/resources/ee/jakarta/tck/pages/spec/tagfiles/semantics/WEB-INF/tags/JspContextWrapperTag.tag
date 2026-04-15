@@ -34,13 +34,13 @@
                             "by getJspContext()");
                     }
                 } else {
-                    out.println("Test FAILED.  The JSP Context Wrapper is the " +
-                        "same object as the invoking JSP Context.");
+                    out.println("Test FAILED.  The Jakarta Pages Context Wrapper is the " +
+                        "same object as the invoking Jakarta Pages Context.");
                 }
             } else {
-                out.println("Test FAILED.  The JSP Context Wrapper returned by" +
+                out.println("Test FAILED.  The Jakarta Pages Context Wrapper returned by" +
                     " getJspContext() should have been an instance of PageContext\n" +
-                    " as the invoking JSP Context is Servlet-based.");
+                    " as the invoking Jakarta Pages Context is Servlet-based.");
             }
         } else {
             out.println("Test FAILED.  The invocation of getJspContext() " +

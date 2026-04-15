@@ -20,7 +20,7 @@
 <title>positiveIncludeCtxRelativeDirective</title>
 <body>
 <% /** 	Name : positiveIncludeCtxRelativeDirective
-	Description : Create a JSP page with the include directive using 
+	Description : Create a page with the include directive using 
 	              a context-relative path. The included 
 	              page should exist in the desired location
 	Result :Send out the HTML of the first page with the output of the 

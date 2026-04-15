@@ -30,7 +30,6 @@ import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
@@ -51,12 +50,12 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_core_act_scr_web.war");
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_core_act_scr_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspScriptletTag1.tag", "tags/JspScriptletTag1.tag");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspScriptletTag2.tagx", "tags/JspScriptletTag2.tagx");    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspScriptletTag1.tag", "tags/JspScriptletTag1.tag");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/JspScriptletTag2.tagx", "tags/JspScriptletTag2.tagx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/JspScriptletUsageContextTest1.jsp")), "JspScriptletUsageContextTest1.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/JspScriptletUsageContextTest2.jspx")), "JspScriptletUsageContextTest2.jspx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/JspScriptletUsageContextTest3.jsp")), "JspScriptletUsageContextTest3.jsp");
@@ -74,11 +73,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspScriptletUsageContextTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate the container's acceptance of the use of
-   * jsp:scriptlet in standard JSP pages, JSP documents and Tag files in both
+   * jsp:scriptlet in standard pages, documents and Tag files in both
    * standard and XML syntax.
    */
   @Test

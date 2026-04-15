@@ -87,7 +87,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: onlyOneOfDeferredValueOrDeferredMethodTest
    * 
-   * @assertion_ids: JSP:SPEC:230.8.1
+   * @assertion_ids: PAGES:SPEC:230.8.1
    * 
    * @test_Strategy: [OnlyOneOfDeferredValueOrMethod] A translation error must
    * result when both deferredValue and deferredMethod appear in the same tag.
@@ -105,7 +105,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: defaultDeferredValue1Test
    * 
-   * @assertion_ids: JSP:SPEC:230.8.2
+   * @assertion_ids: PAGES:SPEC:230.8.2
    * 
    * @test_Strategy: [DefaultDeferredValue] Specify an attribute tag with no
    * deferredValue attribute and a deferredValueType attribute. Verify that the
@@ -123,7 +123,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: defaultDeferredValue2Test
    * 
-   * @assertion_ids: JSP:SPEC:230.8.2
+   * @assertion_ids: PAGES:SPEC:230.8.2
    * 
    * @test_Strategy: [DefaultDeferredValue] Specify an attribute tag with no
    * deferredValue attribute and no deferredValueType attribute. Verify that the
@@ -142,7 +142,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: deferredValueTypeNotSpecifiedTest
    * 
-   * @assertion_ids: JSP:SPEC:230.9.1
+   * @assertion_ids: PAGES:SPEC:230.9.1
    * 
    * @test_Strategy: [DeferredValueTypeNotSpecified] Specify an attribute tag
    * with a deferredValue attribute and no deferredValueType attribute. Verify
@@ -161,7 +161,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bothDeferredValueTypeAndDeferredValueTest
    * 
-   * @assertion_ids: JSP:SPEC:230.9.2
+   * @assertion_ids: PAGES:SPEC:230.9.2
    * 
    * @test_Strategy: [BothDeferredValueTypeAndDeferredValue] A translation error
    * must result when both deferredValueType and and deferredValue appear in the
@@ -179,7 +179,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: defaultDeferredMethod1Test
    * 
-   * @assertion_ids: JSP:SPEC:230.10.1
+   * @assertion_ids: PAGES:SPEC:230.10.1
    * 
    * @test_Strategy: [DefaultDeferredMethod] Specify an attribute tag with no
    * deferredMethod attribute and a deferredMethodSignature attribute. Verify
@@ -197,7 +197,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: defaultDeferredMethod2Test
    * 
-   * @assertion_ids: JSP:SPEC:230.10.1
+   * @assertion_ids: PAGES:SPEC:230.10.1
    * 
    * @test_Strategy: [DefaultDeferredMethod] Specify an attribute tag with no
    * deferredMethod attribute and no deferredMethodSignature attribute. Verify
@@ -216,7 +216,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bothDeferredMethodAndSignatureTest
    * 
-   * @assertion_ids: JSP:SPEC:230.11.1
+   * @assertion_ids: PAGES:SPEC:230.11.1
    * 
    * @test_Strategy: [BothDeferredMethodAndSignature] A translation error must
    * result when both deferredMethodSignature and and deferredMethod appear in
@@ -234,7 +234,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: defaultDeferredMethodSignatureTest
    * 
-   * @assertion_ids: JSP:SPEC:230.11.2
+   * @assertion_ids: PAGES:SPEC:230.11.2
    * 
    * @test_Strategy: [DefaultDeferredMethodSignature] Specify an attribute tag
    * with a deferredMethod attribute set to true and no

@@ -70,13 +70,13 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: elEvaluationUnspecifiedTest
    *
-   * @assertion_ids: JSP:SPEC:254
+   * @assertion_ids: PAGES:SPEC:254
    *
    * @test_Strategy: Validate that if the web application uses a 2.4 deployment
-   * descriptor and the jsp-property-group element nor the JSP identified by the
+   * descriptor and the jsp-property-group element nor the page identified by the
    * jsp-property-group specifies no EL evaluation information, EL will be
-   * evaluated by the container. This validates both JSPs in standard syntax and
-   * JSP documents.
+   * evaluated by the container. This validates both pages in standard syntax and
+   * document syntax.
    */
   @Test
   public void elEvaluationUnspecifiedTest() throws Exception {
@@ -93,13 +93,13 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: elEvaluationConfigurationFalseTest
    *
-   * @assertion_ids: JSP:SPEC:142
+   * @assertion_ids: PAGES:SPEC:142
    *
    * @test_Strategy: Validate that if the web application uses a 2.4 deployment
    * descriptor and the jsp-property-group element sets the el-ignored element
-   * to false, and the JSP page specifies no special EL handling, that EL
-   * expressions will be evaluated. This validates both JSPs in standard syntax
-   * and JSP documents.
+   * to false, and the page specifies no special EL handling, that EL
+   * expressions will be evaluated. This validates both pages in standard syntax
+   * and document syntax.
    */
   @Test
   public void elEvaluationConfigurationFalseTest() throws Exception {
@@ -116,13 +116,13 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: elEvaluationConfigurationTrueTest
    *
-   * @assertion_ids: JSP:SPEC:141
+   * @assertion_ids: PAGES:SPEC:141
    *
    * @test_Strategy: Validate that if the web application uses a 2.4 deployment
    * descriptor and the jsp-property-group element sets the el-ignored element
-   * to true, and the JSP page specifies no special EL handling, that EL
-   * expressions will not be evaluated. This validates both JSPs in standard
-   * syntax and JSP documents.
+   * to true, and the page specifies no special EL handling, that EL
+   * expressions will not be evaluated. This validates both pages in standard
+   * syntax and document syntax.
    */
   @Test
   public void elEvaluationConfigurationTrueTest() throws Exception {
@@ -139,11 +139,11 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: elEvaluationPageDirectiveOverrideTest
    *
-   * @assertion_ids: JSP:SPEC:255
+   * @assertion_ids: PAGES:SPEC:255
    *
    * @test_Strategy: Validate that if the web application uses a 2.4 deployment
    * descriptor, that the page directive attribute isELIgnored takes precedence
-   * over the configuration of the JSP property group.
+   * over the configuration of the Jakarta Pages property group.
    */
   @Test
   public void elEvaluationPageDirectiveOverrideTest() throws Exception {

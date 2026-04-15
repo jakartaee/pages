@@ -25,8 +25,6 @@ import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 import ee.jakarta.tck.pages.common.util.JspTestUtil;
 
 import java.io.IOException;
-import java.io.InputStream;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -56,7 +54,7 @@ public class URLClientIT extends AbstractUrlClient {
 
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_jspapplicationcontext_web.war");
     archive.addClasses(FooELResolver.class, InstallFooListener.class,
-            JspTestUtil.class);    
+            JspTestUtil.class);
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_jspapplicationcontext_web.xml"));
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/AddELResolverTest.jsp")), "AddELResolverTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/IllegalStateExceptionTest.jsp")), "IllegalStateExceptionTest.jsp");
@@ -64,19 +62,19 @@ public class URLClientIT extends AbstractUrlClient {
     return archive;
   }
 
-  
+
   /* Run tests */
 
   // ============================================ Tests ======
 
   /*
    * @testName: addELResolverTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:410
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:410
+   *
    * @test_Strategy: Validate the behavior of
    * JspApplicationContext.addELResolver() Verify that once an ELResolver has
-   * been registered with the JSP container it performs as expected.
+   * been registered with the Jakarta Pages container it performs as expected.
    */
   @Test
   public void addELResolverTest() throws Exception {
@@ -88,9 +86,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: invokeIllegalStateExceptionTest
-   * 
-   * @assertion_ids: JSP:JAVADOC:410
-   * 
+   *
+   * @assertion_ids: PAGES:JAVADOC:410
+   *
    * @test_Strategy: Validate the behavior of
    * JspApplicationContext.addELResolver() throws IllegalStateException Verify
    * that once an application has received a request from the clienT, A call to

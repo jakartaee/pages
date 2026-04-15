@@ -72,7 +72,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: positiveIncludeCtxRelativeDirectiveTest
    * 
-   * @assertion_ids: JSP:SPEC:69
+   * @assertion_ids: PAGES:SPEC:69
    * 
    * @test_Strategy: Using an include directive, include content referenced by a
    * context-relative path. PENDING Merge with test below
@@ -89,7 +89,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: positiveIncludePageRelativeDirectiveTest
    * 
-   * @assertion_ids: JSP:SPEC:69
+   * @assertion_ids: PAGES:SPEC:69
    * 
    * @test_Strategy: Using an include directive, include content referenced by a
    * page-relative path.

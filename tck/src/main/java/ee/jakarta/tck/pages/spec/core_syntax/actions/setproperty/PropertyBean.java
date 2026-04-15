@@ -23,7 +23,7 @@ package ee.jakarta.tck.pages.spec.core_syntax.actions.setproperty;
 import java.io.Serializable;
 
 /**
- * PropertyBean.java Simple Java Bean to verify that a JSP Container will make
+ * PropertyBean.java Simple Java Bean to verify that a Jakarta Pages Container will make
  * use of a Bean's PropertyEditory class if one is available.
  */
 

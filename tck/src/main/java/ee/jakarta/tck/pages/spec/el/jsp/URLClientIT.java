@@ -91,7 +91,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: positiveELDeferredValueValueTest
    *
-   * @assertion_ids: JSP:SPEC:282
+   * @assertion_ids: PAGES:SPEC:282
    *
    * @test_Strategy: [ELDeferredValueValue] In a jsp page, pass a String literal
    * expression and an expression using the #{} syntax to a tag handler via a
@@ -110,7 +110,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeELDeferredValueValueTest
    *
-   * @assertion_ids: JSP:SPEC:282
+   * @assertion_ids: PAGES:SPEC:282
    *
    * @test_Strategy: [ELDeferredValueValue] In a jsp page, pass an expression
    * using the ${} syntax to a tag handler via a deferred-value element in the
@@ -127,7 +127,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: eLDeferredValueCoercionTest
    *
-   * @assertion_ids: JSP:SPEC:284
+   * @assertion_ids: PAGES:SPEC:284
    *
    * @test_Strategy: [ELDeferredValueCoercion] In a jsp page, pass a String
    * literal expression and an expression using the #{} syntax to a tag handler
@@ -146,7 +146,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: positiveELDeferredMethodValueTest
    *
-   * @assertion_ids: JSP:SPEC:287
+   * @assertion_ids: PAGES:SPEC:287
    *
    * @test_Strategy: [ELDeferredMethodValue] In a jsp page, pass a String
    * literal expression and an expression using the #{} syntax to a tag handler
@@ -165,7 +165,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeELDeferredMethodValueTest
    *
-   * @assertion_ids: JSP:SPEC:287
+   * @assertion_ids: PAGES:SPEC:287
    *
    * @test_Strategy: [ELDeferredMethodValue] In a jsp page, pass an expression
    * using the ${} syntax to a tag handler via a deferred-method element in the
@@ -182,7 +182,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: eLDeferredMethodStringLiteralTest
    *
-   * @assertion_ids: JSP:SPEC:288
+   * @assertion_ids: PAGES:SPEC:288
    *
    * @test_Strategy: [ELDeferredMethodStringLiteral] In a jsp page, pass a
    * literal expression representing a String and a literal expression
@@ -201,7 +201,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: eLDeferredMethodStringLiteralErrorTest1
    *
-   * @assertion_ids: JSP:SPEC:289
+   * @assertion_ids: PAGES:SPEC:289
    *
    * @test_Strategy: [ELDeferredMethodStringLiteralError] In a jsp page, pass a
    * string literal to a tag handler via a deferred-method element in the tld
@@ -219,7 +219,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: eLDeferredMethodStringLiteralErrorTest2
    *
-   * @assertion_ids: JSP:SPEC:289
+   * @assertion_ids: PAGES:SPEC:289
    *
    * @test_Strategy: [ELDeferredMethodStringLiteralError] In a jsp page, pass a
    * string literal to a tag handler via a deferred-method element in the tld
@@ -237,7 +237,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: templateTextPoundTranslationErrorTest
    *
-   * @assertion_ids: JSP:SPEC:272
+   * @assertion_ids: PAGES:SPEC:272
    *
    * @test_Strategy: [TemplateTextPoundTranslationError] Verify that the #{
    * character sequence, when embedded in template text, triggers a translation
@@ -254,7 +254,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagLibraryPoundTranslationErrorTest
    *
-   * @assertion_ids: JSP:SPEC:273
+   * @assertion_ids: PAGES:SPEC:273
    *
    * @test_Strategy: [TagLibraryPoundTranslationError] Verify that the #{
    * character sequence triggers a translation error if used for a tag attribute
@@ -272,7 +272,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: allowedDynamicAttributeValueTypesTest
    *
-   * @assertion_ids: JSP:SPEC:290
+   * @assertion_ids: PAGES:SPEC:290
    *
    * @test_Strategy: [AllowedDynamicAttributeValueTypes] In a jsp page, pass a
    * literal expression, a scriptlet expression, an expression using the ${}
@@ -291,7 +291,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: dynamicAttributeSetterMethodTest
    *
-   * @assertion_ids: JSP:SPEC:291
+   * @assertion_ids: PAGES:SPEC:291
    *
    * @test_Strategy: [DynamicAttributeSetterMethod] Verify that an argument to
    * the setter method of a dynamic attribute must be of type java.lang.Object.
@@ -310,7 +310,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: implicitImportTest
    *
-   * @assertion_ids: JSP:SPEC:35
+   * @assertion_ids: PAGES:SPEC:35
    *
    * @test_Strategy: [ImplicitELImport] Verify that each of the implicit package
    * is available to the EL environment.

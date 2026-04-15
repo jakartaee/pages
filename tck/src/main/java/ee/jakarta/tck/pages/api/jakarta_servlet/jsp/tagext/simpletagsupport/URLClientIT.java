@@ -108,7 +108,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: simpleTagSupportDoTagDefaultTest
    *
-   * @assertion_ids: JSP:JAVADOC:301;JSP:JAVADOC:356
+   * @assertion_ids: PAGES:JAVADOC:301;PAGES:JAVADOC:356
    *
    * @test_Strategy: This validates that the default behavior of
    * SimpleTagSupport.doTag() does nothing. If this is indeed the case, no
@@ -126,7 +126,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: simpleTagSupportSkipPageExceptionTest
    *
-   * @assertion_ids: JSP:JAVADOC:304;JSP:JAVADOC:359
+   * @assertion_ids: PAGES:JAVADOC:304;PAGES:JAVADOC:359
    *
    * @test_Strategy: Validate the containers behavior with regards to: - Simple
    * Tag Handler generated from a tag file throws a SkipPageException if an
@@ -149,7 +149,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: simpleTagSupportGetSetJspContextTest
    *
-   * @assertion_ids: JSP:JAVADOC:307;JSP:JAVADOC:308;JSP:JAVADOC:362
+   * @assertion_ids: PAGES:JAVADOC:307;PAGES:JAVADOC:308;PAGES:JAVADOC:362
    *
    * @test_Strategy: Validate that getJspContext() returnes a non-null value as
    * the container called setJspContext() prior to invoking doGet().
@@ -165,7 +165,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: simpleTagSupportGetSetJspBodyTest
    *
-   * @assertion_ids: JSP:JAVADOC:309;JSP:JAVADOC:310;JSP:JAVADOC:363
+   * @assertion_ids: PAGES:JAVADOC:309;PAGES:JAVADOC:310;PAGES:JAVADOC:363
    *
    * @test_Strategy: Validate that getJspBody() returnes a non-null value as the
    * container called setJspBody() prior to invoking doGet().
@@ -181,8 +181,8 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: simpleTagSupportGetSetParentTest
    *
-   * @assertion_ids: JSP:JAVADOC:305;JSP:JAVADOC:306;JSP:JAVADOC:360;
-   * JSP:JAVADOC:361
+   * @assertion_ids: PAGES:JAVADOC:305;PAGES:JAVADOC:306;PAGES:JAVADOC:360;
+   * PAGES:JAVADOC:361
    *
    * @test_Strategy: Validate that getParent() returnes a non-null value as the
    * container called setParent() prior to invoking doGet().
@@ -198,7 +198,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: simpleTagSupportFindAncestorTest
    *
-   * @assertion_ids: JSP:JAVADOC:311
+   * @assertion_ids: PAGES:JAVADOC:311
    *
    * @test_Strategy: Validate that findAncestorWithClass() where the validation
    * is preformed nested within a SimpleTag handler as well as a Classic Tag
@@ -215,7 +215,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: simpleTagSupportVariableSynchronizationTest
    *
-   * @assertion_ids: JSP:JAVADOC:400
+   * @assertion_ids: PAGES:JAVADOC:400
    *
    * @testStrategy: Validate variable synchronization for AT_END and and
    * AT_BEGIN variables occurs after doTag() has been called. This should occur
@@ -233,7 +233,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagHandlerCacheTest
    *
-   * @assertion_ids: JSP:JAVADOC:300
+   * @assertion_ids: PAGES:JAVADOC:300
    *
    * @test_Strategy: compare instances of a simple tag handler class across
    * different invocations.
@@ -250,7 +250,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: emptySetJspBodyTest
    *
-   * @assertion_ids: JSP:JAVADOC:300
+   * @assertion_ids: PAGES:JAVADOC:300
    *
    * @test_Strategy: If the action element is empty in the page, setJpsBody
    * method is not called at all.
@@ -267,7 +267,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: noParentTest
    *
-   * @assertion_ids: JSP:JAVADOC:300
+   * @assertion_ids: PAGES:JAVADOC:300
    *
    * @test_Strategy: The container invokes setParent() method only if this tag
    * invocation is nested within another tag invocation.
@@ -284,7 +284,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspFragmentGetJspContextTest
    *
-   * @assertion_ids: JSP:JAVADOC:300
+   * @assertion_ids: PAGES:JAVADOC:300
    *
    * @test_Strategy: jspFragment.getJspContext() returns the JspContext that is
    * bound to this JspFragment.

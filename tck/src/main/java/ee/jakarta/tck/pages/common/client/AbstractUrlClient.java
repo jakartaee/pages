@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.lang.System.Logger;
 
 /**
- * Base client for JSP tests.
+ * Base client for Jakarta Pages tests.
  */
 public abstract class AbstractUrlClient extends BaseUrlClient {
 
@@ -80,7 +80,7 @@ public abstract class AbstractUrlClient extends BaseUrlClient {
   private static final String FAILED = "Test FAILED";
 
   /**
-   * The test JSP.
+   * The test page.
    */
   private String _jspName = null;
 
@@ -142,10 +142,10 @@ public abstract class AbstractUrlClient extends BaseUrlClient {
   }
 
   /**
-   * Sets the name of the JSP when building the request.
+   * Sets the name of the page when building the request.
    *
    * @param jsp
-   *          - JSP name
+   *          - page name
    */
   public void setTestJsp(String jsp) {
     _jspName = jsp;
@@ -217,7 +217,7 @@ public abstract class AbstractUrlClient extends BaseUrlClient {
     }
     // A standard test sets consists of a testname
     // a request, and a goldenfile. The URI is not used
-    // in this case since the JSP's are assumed to be located
+    // in this case since the pages are assumed to be located
     // at the top of the contextRoot
     StringBuffer sb = new StringBuffer(50);
 
@@ -241,13 +241,13 @@ public abstract class AbstractUrlClient extends BaseUrlClient {
   }
 
   /**
-   * Returns full request based of provided context root, jsp name, and test
+   * Returns full request based of provided context root, page name, and test
    * name.
    *
    * @param contextRoot
    *          - request context root
    * @param jspName
-   *          - JSP name
+   *          - page name
    * @param testName
    *          - test name to execute.
    * @return - Absolution URL to invoke the specified test.

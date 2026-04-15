@@ -30,7 +30,6 @@ import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -52,18 +51,18 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_tldres_web.war");
     archive.addClasses(HSListenerWebInf.class, HSListenerWebInfSub.class,
               UriTag.class, WebXmlTag.class);
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_tldres_web.xml"));
 
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/sub/webinfsub.tld", "sub/webinfsub.tld"); 
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tlds/uri.tld", "tlds/uri.tld"); 
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/webinfpres.tld", "webinfpres.tld"); 
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/webxml.tld", "webxml.tld"); 
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/a12.tld", "a12.tld"); 
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/sub/webinfsub.tld", "sub/webinfsub.tld");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tlds/uri.tld", "tlds/uri.tld");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/webinfpres.tld", "webinfpres.tld");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/webxml.tld", "webxml.tld");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/a12.tld", "a12.tld");
 
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/listenerTldTest.jsp")), "listenerTldTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/negativeJSPPrefix.jsp")), "negativeJSPPrefix.jsp");
@@ -77,7 +76,7 @@ public class URLClientIT extends AbstractUrlClient {
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/TldResPathExplicitWebXmlTest.jsp")), "TldResPathExplicitWebXmlTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/TldResPathMultiTldTest.jsp")), "TldResPathMultiTldTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/TldResPathWebInfUriTest.jsp")), "TldResPathWebInfUriTest.jsp");
-    
+
     JavaArchive jsp11taglibJar = ShrinkWrap.create(JavaArchive.class, "jsp11taglib.jar");
     jsp11taglibJar.addAsResource(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/taglib.tld")), "META-INF/taglib.tld");
     jsp11taglibJar.addClass(Tld11Tag.class);
@@ -91,7 +90,7 @@ public class URLClientIT extends AbstractUrlClient {
     multitaglibJar.addAsResource(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/multi2.tld")), "META-INF/tlds/multi2.tld");
 
     multitaglibJar.addClasses(HSListenerMetaInf.class, HSListenerMetaInfSub.class, Multi1Tag.class, Multi2Tag.class);
-  
+
     archive.addAsLibrary(multitaglibJar);
 
     return archive;
@@ -107,9 +106,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tldResourcePathJsp11Test
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that a taglibrary packaged as specified by the JSP
    * 1.1 specification will be properly added to the containers taglib map and
    * that the defined tag within can be used.
@@ -124,9 +123,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tldResourcePathMultiTldJarTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate the container can properly process a JAR
    * containing multiple TLDs and adds the TLDs that are found containing a
    * <uri> element to the taglib map.
@@ -142,9 +141,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tldResourcePathWebInfUriTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that if a TLD exists in the WEB-INF directory or
    * some subdirectory thereof, and that TLD contains a <uri> element, the
    * container will add that taglibrary to the taglibrary map.
@@ -159,9 +158,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tldResourcePathWebXmlTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Valdiate that the container adds any explicit taglibrary
    * entries found in the deployment descriptor to the taglib map and that the
    * tag or tags within can be properly used.
@@ -176,9 +175,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tldResourcePathDirectTldReference
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate the TLD can be directly referenced in the taglib
    * directive and that the tag(s) declared in this TLD can be properly used.
    */
@@ -192,9 +191,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tldExplicitWebXmlPrecedenceTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that tag library entries explicity defined in the
    * web deployment descriptor (web.xml) have precedence over other tag
    * libraries defined with the same URI.
@@ -209,9 +208,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tldResPathRelativeUriTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate a tag library can be resolved when referenced
    * though a relative path (no leading '/'). No translation error should occur
    * and the tag should be usable within the translation unit.
@@ -226,9 +225,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tldResPathAbsUriNotFoundTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that if the uri attribute of the taglib directive
    * is an absolute URI that is not present in the container's tag library map,
    * that a translation time error is raised.
@@ -243,11 +242,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: tld12DefaultBodyContentTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: omit body-content in a 1.2 style tld and a container is
-   * required to apply default JSP.
+   * required to apply the default of "JSP".
    */
 
   @Test
@@ -261,9 +260,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: negativeJSPPrefixTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: use jsp prefix for an element that is not a standard action
    * and expect a translation error.
    */
@@ -280,9 +279,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: listenerTldTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: A container is required to read listener element in all TLD
    * files and treat them as extension to web.xml.
    */
@@ -299,9 +298,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: negativeTaglibAfterActionTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: It is a fatal translation error for the taglib directive to
    * appear after actions or functions using the prefix.
    */

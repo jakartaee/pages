@@ -21,7 +21,7 @@
 
 <%--
     For each attribute declared and specified, a page-scoped variable
-    must be created in the page scope of the JSP Context Wrapper.
+    must be created in the page scope of the Jakarta Pages Context Wrapper.
     The name of the variable must be the same as the declared attribute name.
     The value of the variable must be the value of the attribute passed in
     during invocation.

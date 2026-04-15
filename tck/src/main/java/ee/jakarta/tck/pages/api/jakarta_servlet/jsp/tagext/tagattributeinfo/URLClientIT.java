@@ -88,7 +88,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAttributeInfoGetNameTest
    * 
-   * @assertion_ids: JSP:JAVADOC:278
+   * @assertion_ids: PAGES:JAVADOC:278
    * 
    * @test_Strategy: Validate the behavior of TagAttributeInfo.getName().
    */
@@ -103,7 +103,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAttributeInfoGetTypeNameTest
    * 
-   * @assertion_ids: JSP:JAVADOC:279
+   * @assertion_ids: PAGES:JAVADOC:279
    * 
    * @test_Strategy: Validate the behavior of TagAttributeInfo.getTypeName().
    */
@@ -118,7 +118,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAttributeInfoCanBeRequestTimeTest
    * 
-   * @assertion_ids: JSP:JAVADOC:280
+   * @assertion_ids: PAGES:JAVADOC:280
    * 
    * @test_Strategy: Validate the behavior of
    * TagAttributeInfo.catBeRequestTime().
@@ -134,7 +134,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAttributeInfoIsRequiredTest
    * 
-   * @assertion_ids: JSP:JAVADOC:281
+   * @assertion_ids: PAGES:JAVADOC:281
    * 
    * @test_Strategy: Validate the behavior of TagAttributeInfo.isRequired().
    */
@@ -149,7 +149,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAttributeInfoIsFragmentTest
    * 
-   * @assertion_ids: JSP:JAVADOC:283
+   * @assertion_ids: PAGES:JAVADOC:283
    * 
    * @test_Strategy: Validate the behavior of TagAttributeInfo.siFragment().
    */
@@ -164,7 +164,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAttributeInfoToStringTest
    * 
-   * @assertion_ids: JSP:JAVADOC:284
+   * @assertion_ids: PAGES:JAVADOC:284
    * 
    * @test_Strategy: Validate the behavior of TagAttributeInfo.toString().
    */
@@ -179,7 +179,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagAttributeInfoGetIdAttribute
    * 
-   * @assertion_ids: JSP:JAVADOC:282
+   * @assertion_ids: PAGES:JAVADOC:282
    * 
    * @test_Strategy: Convenience static method that goes through an array of
    * TagAttributeInfo objects and looks for "id".

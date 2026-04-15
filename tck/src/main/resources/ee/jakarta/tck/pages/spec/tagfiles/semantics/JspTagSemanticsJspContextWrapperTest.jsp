@@ -20,13 +20,13 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="tags" %>
 <%--
     The tag file implementation must create and maintain a second
-    instance of JspContext called a JSP ontext Wrapper.  If the
-    invoking JSP Context is an instance of PageContext, the JSP Context Wrapper
+    instance of JspContext called a Jakarta Pages Context Wrapper.  If the
+    invoking Jakarta Pages Context is an instance of PageContext, the Jakarta Pages Context Wrapper
     must also be an instance of PageContext.  This wrapper must be returned
     when getJspContext() is called.
 --%>
 
-<%-- Store the invoking JSP context in the current request --%>
+<%-- Store the invoking Jakarta Pages context in the current request --%>
 <% request.setAttribute("INVOKING_CONTEXT", pageContext); %>
 
 <%-- invoke the tag --%>

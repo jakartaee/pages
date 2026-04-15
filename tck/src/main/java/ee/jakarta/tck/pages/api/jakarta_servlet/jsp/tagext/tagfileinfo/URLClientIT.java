@@ -87,7 +87,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagFileInfoGetNameTest
    * 
-   * @assertion_ids: JSP:JAVADOC:259
+   * @assertion_ids: PAGES:JAVADOC:259
    * 
    * @test_Strategy: Validate TagFileInfo.getName returns the expected values
    * based on what is defined in the TLD.
@@ -103,7 +103,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagFileInfoGetPathTest
    * 
-   * @assertion_ids: JSP:JAVADOC:260
+   * @assertion_ids: PAGES:JAVADOC:260
    * 
    * @test_Strategy: Validate TagFileInfo.getPath() returns the expected values
    * based on what is defined in the TLD.
@@ -119,7 +119,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagFileInfoGetTagInfoTest
    * 
-   * @assertion_ids: JSP:JAVADOC:261
+   * @assertion_ids: PAGES:JAVADOC:261
    * 
    * @test_Strategy: Validate TagFileInfo.getTagInfo() returns the expected
    * values based on what is defined in the tag file.

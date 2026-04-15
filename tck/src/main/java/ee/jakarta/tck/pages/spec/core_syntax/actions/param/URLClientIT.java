@@ -83,7 +83,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspParamUsageContextTest
    * 
-   * @assertion_ids: JSP:SPEC:166.3
+   * @assertion_ids: PAGES:SPEC:166.3
    * 
    * @test_Strategy: Validate a translation-time error is raised if the
    * jsp:param element is not a child of jsp:forward, jsp:include, or
@@ -112,8 +112,8 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspParamAttributesTest
    * 
-   * @assertion_ids: JSP:SPEC:166.1;JSP:SPEC:166.2;JSP:SPEC:166.6;
-   * JSP:SPEC:166.7;JSP:SPEC:166.8;JSP:SPEC:166.9
+   * @assertion_ids: PAGES:SPEC:166.1;PAGES:SPEC:166.2;PAGES:SPEC:166.6;
+   * PAGES:SPEC:166.7;PAGES:SPEC:166.8;PAGES:SPEC:166.9
    * 
    * @test_Strategy: Validate the following: - Confirm name and values
    * attributes are required by checking for a translation-time error if they
@@ -150,7 +150,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspParamForwardTest
    * 
-   * @assertion_ids: JSP:SPEC:166.4
+   * @assertion_ids: PAGES:SPEC:166.4
    * 
    * @test_Strategy: Validate that params added to a jsp:forward are properly
    * aggregated and available to the target resource.
@@ -167,7 +167,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspParamIncludeTest
    * 
-   * @assertion_ids: JSP:SPEC:166.5;JSP:SPEC:166.10
+   * @assertion_ids: PAGES:SPEC:166.5;PAGES:SPEC:166.10
    * 
    * @test_Strategy: Validate that params added to a jsp:included are properly
    * aggregated and available to the target resource, and are not available to

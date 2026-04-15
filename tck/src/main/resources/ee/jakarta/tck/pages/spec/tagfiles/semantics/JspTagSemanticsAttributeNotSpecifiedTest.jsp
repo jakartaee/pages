@@ -21,7 +21,7 @@
 
 <%--
     Validate that if an attribute is declared, but not specified,
-    that no page scoped variable is created in the JSP Context Wrapper.
+    that no page scoped variable is created in the Jakarta Pages Context Wrapper.
 --%>
 
 <tags:AttributeNotSpecifiedTag />

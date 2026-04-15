@@ -76,8 +76,8 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: scopedAttrElResolverTest
    *
-   * @assertion_ids: JSP:JAVADOC:427; JSP:JAVADOC:428; JSP:JAVADOC:429;
-   * JSP:JAVADOC:430; JSP:JAVADOC:431; JSP:JAVADOC:433
+   * @assertion_ids: PAGES:JAVADOC:427; PAGES:JAVADOC:428; PAGES:JAVADOC:429;
+   * PAGES:JAVADOC:430; PAGES:JAVADOC:431; PAGES:JAVADOC:433
    *
    * @test_Strategy: Obtain an ScopedAttributeELResolver via the PageContext and
    * verify that API calls work as expected: setValue() getValue() getType()

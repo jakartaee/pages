@@ -20,7 +20,7 @@
 <title>positiveSetPropParam</title>
 <body>
 <% /** 	Name : positiveSetPropParam
-	Description : Create a valid useBean action in JSP. Set a specific 
+	Description : Create a valid useBean action in page. Set a specific 
 		      property of that bean from the request using a 
 		      <jsp:setPropertyparam="paramname> action. 
 		      Then access that property.

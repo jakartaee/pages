@@ -88,7 +88,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyTagSupportCtorTest
    * 
-   * @assertion_ids: JSP:JAVADOC:318
+   * @assertion_ids: PAGES:JAVADOC:318
    * 
    * @test_Strategy: Validate the constructor of BodyTagSupport
    */
@@ -101,7 +101,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyTagSupportDoStartTagTest
    * 
-   * @assertion_ids: JSP:JAVADOC:319
+   * @assertion_ids: PAGES:JAVADOC:319
    * 
    * @test_Strategy: Validate the default return value of
    * BodyTagSupport.doStartTag() is EVAL_BODY_BUFFERED.
@@ -115,7 +115,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyTagSupportDoEndTagTest
    * 
-   * @assertion_ids: JSP:JAVADOC:321
+   * @assertion_ids: PAGES:JAVADOC:321
    * 
    * @test_Strategy: Validate the default return value of
    * BodyTagSupport.doEndTag() is EVAL_PAGE.
@@ -129,7 +129,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyTagSupportDoAfterBodyTest
    * 
-   * @assertion_ids: JSP:JAVADOC:326
+   * @assertion_ids: PAGES:JAVADOC:326
    * 
    * @test_Strategy: Validate the default return value of
    * BodyTagSupport.doAfterBody() is SKIP_BODY.
@@ -143,7 +143,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyTagSupportGetBodyContentTest
    * 
-   * @assertion_ids: JSP:JAVADOC:323;JSP:JAVADOC:329
+   * @assertion_ids: PAGES:JAVADOC:323;PAGES:JAVADOC:329
    * 
    * @test_Strategy: Validate the behavior of getBodyContent(). This indirectly
    * ensures that the container properly called setBodyContent().
@@ -159,7 +159,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyTagSupportGetPreviousOutTest
    * 
-   * @assertion_ids: JSP:JAVADOC:330
+   * @assertion_ids: PAGES:JAVADOC:330
    * 
    * @test_Strategy: Validate the behavior of getPreviousOut.
    */
@@ -176,7 +176,7 @@ public class URLClientIT extends AbstractUrlClient {
    * @testName: bodyTagSupportEvalBodyBufferedTest
    * 
    * @assertion_ids:
-   * JSP:JAVADOC:346;JSP:JAVADOC:374;JSP:JAVADOC:375;JSP:JAVADOC:324
+   * PAGES:JAVADOC:346;PAGES:JAVADOC:374;PAGES:JAVADOC:375;PAGES:JAVADOC:324
    * 
    * @test_Strategy: Validate that the container properly calls setInitBody()
    * then doInitBody() after doStartTag() is called, prior to evaluating the
@@ -193,7 +193,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyTagSupportEvalBodyIncludeTest
    * 
-   * @assertion_ids: JSP:JAVADOC:376
+   * @assertion_ids: PAGES:JAVADOC:376
    * 
    * @test_Strategy: Validate that the container doesn't call setBodyContent()
    * and doInitBody() if doStartTag() returns EVAL_BODY_INCLUDE.
@@ -209,7 +209,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyTagSupportSkipBodyTest
    * 
-   * @assertion_ids: JSP:JAVADOC:402
+   * @assertion_ids: PAGES:JAVADOC:402
    * 
    * @test_Strategy: Validate that the container doesn't call setInitBody() and
    * doInitBody() after doStartTag() returns SKIP_BODY.
@@ -225,7 +225,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyTagSupportEmptyTagTest
    *
-   * @assertion_ids: JSP:JAVADOC:376;
+   * @assertion_ids: PAGES:JAVADOC:376;
    *
    * @test_Strategy: Validate that the container only calls setInitBody() and
    * doInitBody() if the tag is empty. 1. Empty Tag1: <foo></foo> 2. Empty Tag2:
@@ -243,7 +243,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyTagSupportVariableSynchronizationTest
    * 
-   * @assertion_ids: JSP:JAVADOC:377
+   * @assertion_ids: PAGES:JAVADOC:377
    * 
    * @test_Strategy: Validate scripting variables are properly synchornized.
    */
