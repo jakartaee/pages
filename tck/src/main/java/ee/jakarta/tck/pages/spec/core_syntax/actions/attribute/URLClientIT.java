@@ -99,7 +99,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspAttributeFragmentTest
    * 
-   * @assertion_ids: JSP:SPEC:168.3;JSP:SPEC:168.4
+   * @assertion_ids: PAGES:SPEC:168.3;PAGES:SPEC:168.4
    * 
    * @test_Strategy: Validate that container passes an instance of JspFragment
    * when the target attribute is being set by jsp:attribute. This test will
@@ -117,7 +117,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspAttributeUsageContextTest
    * 
-   * @assertion_ids: JSP:SPEC:168.2;JSP:SPEC:168.11
+   * @assertion_ids: PAGES:SPEC:168.2;PAGES:SPEC:168.11
    * 
    * @test_Strategy: Validate a translation-time error occurs for the following
    * use cases: - jsp:attribute is not a child of a standard or custom action. -
@@ -144,7 +144,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspAttributeFragmentNonScriptingBodyTest
    * 
-   * @assertion_ids: JSP:SPEC:168.5
+   * @assertion_ids: PAGES:SPEC:168.5
    * 
    * @test_Strategy: Validate a translation error occurs if providing an
    * attribute value using jsp:attribute to an attribute accepting JspFragment
@@ -182,7 +182,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspAttributeDynamicAttributesTest
    * 
-   * @assertion_ids: JSP:SPEC:168.6
+   * @assertion_ids: PAGES:SPEC:168.6
    * 
    * @test_Strategy: Validate that dynamic attribute values provided via
    * jsp:attribute are provided to the tag handler as java.lang.String objects.
@@ -204,7 +204,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspAttributeRtExprTest
    * 
-   * @assertion_ids: JSP:SPEC:168.7
+   * @assertion_ids: PAGES:SPEC:168.7
    * 
    * @test_Strategy: Validate that if a tag handler (either Classic or Simple)
    * accepts RT expressions and the attribute values are provided via
@@ -224,10 +224,10 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspAttributeElementInteractionTest
    * 
-   * @assertion_ids: JSP:SPEC:168.9
+   * @assertion_ids: PAGES:SPEC:168.9
    * 
    * @test_Strategy: Validate that when a jsp:attribute element is nexted within
-   * a jsp:element element within a JSP document, that the element is
+   * a jsp:element element within a Jakarta Pages document, that the element is
    * constructed with element name being the value of the name attribute of
    * jsp:attribute and the body of the element being the body of the
    * jsp:attribute element.
@@ -245,7 +245,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspAttributeTrimTest
    * 
-   * @assertion_ids: JSP:SPEC:168.13;JSP:SPEC:168.14;JSP:SPEC:168.15
+   * @assertion_ids: PAGES:SPEC:168.13;PAGES:SPEC:168.14;PAGES:SPEC:168.15
    * 
    * @test_Strategy: Validate the behavior of the trim attribute when set to
    * true or false, or when not specified when handling static values at
@@ -263,7 +263,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspAttributeDuplicatedAttributeTest
    * 
-   * @assertion_ids: JSP:SPEC:168.1.2
+   * @assertion_ids: PAGES:SPEC:168.1.2
    * 
    * @test_Strategy: Validate that if an attribute is already specified for an
    * action (using the xml style) and a jsp:attribute action is used to define
@@ -280,7 +280,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspAttributeQNameTest
    * 
-   * @assertion_ids: JSP:SPEC:168.1.4;JSP:SPEC:168.12
+   * @assertion_ids: PAGES:SPEC:168.1.4;PAGES:SPEC:168.12
    * 
    * @test_Strategy: Validate the following: - qname attribute names can be
    * provided to the name attribute of jsp:attribute an work the same as a
@@ -312,7 +312,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspAttributeEmptyBodyTest
    * 
-   * @assertion_ids: JSP:SPEC:168.10
+   * @assertion_ids: PAGES:SPEC:168.10
    * 
    * @test_Strategy: Validate that if the body of jsp:attribute is empty, it
    * sets the value of the attribute to "".
@@ -328,7 +328,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspAttributeNoAttributeFoundTest
    * 
-   * @assertion_ids: JSP:SPEC:168.1.1
+   * @assertion_ids: PAGES:SPEC:168.1.1
    * 
    * @test_Strategy: Validate that if jsp:attribute specifies an attribute of an
    * action that does not exist, and that action does not accept dynamic
@@ -345,7 +345,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspAttributeNameRequiredAttributeTest
    * 
-   * @assertion_ids: JSP:SPEC:168.1.3
+   * @assertion_ids: PAGES:SPEC:168.1.3
    * 
    * @test_Strategy: Validate the name attribute is indeed a required attribute
    * of the jsp:attribute standard action by omitting it and checking for a

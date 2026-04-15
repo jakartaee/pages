@@ -86,7 +86,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: functionInfoGetNameTest
    * 
-   * @assertion_ids: JSP:JAVADOC:315
+   * @assertion_ids: PAGES:JAVADOC:315
    * 
    * @test_Strategy: Validate the container properly parses the function
    * information in the provided TLD and the method calls, in this case,
@@ -103,7 +103,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: functionInfoGetFunctionClassTest
    * 
-   * @assertion_ids: JSP:JAVADOC:316
+   * @assertion_ids: PAGES:JAVADOC:316
    * 
    * @test_Strategy: Validate the container properly parses the function
    * information in the provided TLD and the method calls, in this case,
@@ -120,7 +120,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: functionInfoGetFunctionSignatureTest
    * 
-   * @assertion_ids: JSP:JAVADOC:317
+   * @assertion_ids: PAGES:JAVADOC:317
    * 
    * @test_Strategy: Validate the container properly parses the function
    * information in the provided TLD and the method calls, in this case,

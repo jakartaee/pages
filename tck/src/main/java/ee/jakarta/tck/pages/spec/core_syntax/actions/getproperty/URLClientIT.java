@@ -76,7 +76,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: positiveGetPropsTest
    * 
-   * @assertion_ids: JSP:SPEC:163.1;JSP:SPEC:163.2;JSP:SPEC:163.4
+   * @assertion_ids: PAGES:SPEC:163.1;PAGES:SPEC:163.2;PAGES:SPEC:163.4
    * 
    * @test_Strategy: Create a bean using jsp:useBean tag, use jsp:getProperty to
    * access and validate the property.

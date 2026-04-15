@@ -88,9 +88,9 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagVariableInfoGetClassNameTest
    * 
-   * @assertion_ids: JSP:JAVADOC:189
+   * @assertion_ids: PAGES:JAVADOC:189
    * 
-   * @test_Strategy: Validate the JSP container properly parses the specified
+   * @test_Strategy: Validate the Jakarta Pages container properly parses the specified
    * TLD as refereneced by the taglib directive and that the TagVariableInfo
    * objects created at translation time return the expected values when calling
    * getClassName(). A translation error will occur if the test fails.
@@ -108,9 +108,9 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagVariableInfoGetNameGivenTest
    * 
-   * @assertion_ids: JSP:JAVADOC:187
+   * @assertion_ids: PAGES:JAVADOC:187
    * 
-   * @test_Strategy: Validate the JSP container properly parses the specified
+   * @test_Strategy: Validate the Jakarta Pages container properly parses the specified
    * TLD as refereneced by the taglib directive and that the TagVariableInfo
    * objects created at translation time return the expected values when calling
    * getNameGiven(). A translation error will occur if the test fails.
@@ -128,9 +128,9 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagVariableInfoGetNameFromAttributeTest
    * 
-   * @assertion_ids: JSP:JAVADOC:188
+   * @assertion_ids: PAGES:JAVADOC:188
    * 
-   * @test_Strategy: Validate the JSP container properly parses the specified
+   * @test_Strategy: Validate the Jakarta Pages container properly parses the specified
    * TLD as refereneced by the taglib directive and that the TagVariableInfo
    * objects created at translation time return the expected values when calling
    * getNameFromAttribute(). A translation error will occur if the test fails.
@@ -148,9 +148,9 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagVariableInfoGetDeclareTest
    * 
-   * @assertion_ids: JSP:JAVADOC:190
+   * @assertion_ids: PAGES:JAVADOC:190
    * 
-   * @test_Strategy: Validate the JSP container properly parses the specified
+   * @test_Strategy: Validate the Jakarta Pages container properly parses the specified
    * TLD as refereneced by the taglib directive and that the TagVariableInfo
    * objects created at translation time return the expected values when calling
    * getDeclare(). A translation error will occur if the test fails.
@@ -168,9 +168,9 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagVariableInfoGetScopeTest
    * 
-   * @assertion_ids: JSP:JAVADOC:191
+   * @assertion_ids: PAGES:JAVADOC:191
    * 
-   * @test_Strategy: Validate the JSP container properly parses the specified
+   * @test_Strategy: Validate the Jakarta Pages container properly parses the specified
    * TLD as refereneced by the taglib directive and that the TagVariableInfo
    * objects created at translation time return the expected values when calling
    * getScope(). A translation error will occur if the test fails.

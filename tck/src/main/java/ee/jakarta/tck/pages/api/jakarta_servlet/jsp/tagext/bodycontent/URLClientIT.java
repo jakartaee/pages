@@ -77,7 +77,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyContentFlushTest
    * 
-   * @assertion_ids: JSP:JAVADOC:332
+   * @assertion_ids: PAGES:JAVADOC:332
    * 
    * @test_Strategy: Validates that an IOException is thrown when
    * BodyContent.flush() is called.
@@ -93,7 +93,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyContentClearBodyTest
    * 
-   * @assertion_ids: JSP:JAVADOC:333
+   * @assertion_ids: PAGES:JAVADOC:333
    * 
    * @test_Strategy: Validate that clearBuffer() works as expected.
    */
@@ -108,7 +108,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyContentReadWriteTest
    * 
-   * @assertion_ids: JSP:JAVADOC:334;JSP:JAVADOC:338
+   * @assertion_ids: PAGES:JAVADOC:334;PAGES:JAVADOC:338
    * 
    * @test_Strategy: Validate that a reader can be obtained containing the
    * bodycontent of the tag. Using the content that is read in, obtain a writer
@@ -125,7 +125,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyContentWriteOutTest
    * 
-   * @assertion_ids: JSP:JAVADOC:336
+   * @assertion_ids: PAGES:JAVADOC:336
    * 
    * @test_Strategy: Validate the behavior of BodyContent.writeOut().
    */
@@ -140,7 +140,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: bodyContentGetStringTest
    * 
-   * @assertion_ids: JSP:JAVADOC:335
+   * @assertion_ids: PAGES:JAVADOC:335
    * 
    * @test_Strategy: Validate the behavior of BodyContent.getString().
    */

@@ -31,7 +31,6 @@ import ee.jakarta.tck.pages.common.util.JspTestUtil;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
@@ -52,7 +51,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_core_act_invoke_web.war");
     archive.addClasses(JspTestUtil.class);
@@ -107,11 +106,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspInvokeUsageContextTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate the following usage contexts of jsp:invoke: -
-   * jsp:invoke present in a JSP or JSP document is a translation error. -
+   * jsp:invoke present in a page or a document is a translation error. -
    * jsp:invoke is valid within a tag file.
    */
   @Test
@@ -132,9 +131,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspInvokeVarTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate the behavior of jsp:invoke when the var attribute
    * is specified. The tag file should export the result of the invocation to a
    * request-scoped variable. The type and value of the exported variable will
@@ -151,9 +150,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspInvokeVarReaderTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate the behavior of jsp:invoke when the varReader
    * attribute is specified. The tag file should export the result of the
    * invocation to a request-scoped variable. The type and value of the exported
@@ -171,9 +170,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspInvokeScopeTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate the behavior of jsp:invoke when the scope
    * attribute is and is not specified. If not specified, the result of the
    * invocation should be in the page scope of the tag file. If the scope is
@@ -194,9 +193,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspInvokeVarVarReaderTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that if both var and varReader are specified
    * within one particular jsp:invoke action, a translation- time error is
    * raised.
@@ -211,9 +210,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspInvokeNoVarVarReaderTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that if the scope attribute of jsp:invoke is
    * specified but neither the var nor varReader are specified, a
    * translation-time error is raised.
@@ -228,9 +227,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspInvokeNotInSessionTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that jsp:invoke will cause an
    * IllegalStateException to be raised if the jsp:invoke action tries to export
    * a result into the session scope where the calling page does not participate
@@ -247,9 +246,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspInvokeJspAttributeTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate the attributes of jspInvoke can all be specified
    * using the jsp:attribute action.
    */
@@ -264,9 +263,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspInvokeInvalidScopeTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that a translation-time error is generated if the
    * scope attribute of jsp:invoke is provided an invalid value (i.e. not
    * 'page', 'request', 'session', or 'application').
@@ -297,9 +296,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspInvokeFragmentReqAttributeTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate that the 'fragment' attribute of jsp:invoke is
    * indeed required by the container. Validate by calling jsp:invoke without
    * the attribute and look for a translation- time error.
@@ -314,9 +313,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspInvokeNonEmptyBodyTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: Validate a translation-time error is raised if the
    * jsp:invoke action has a non-empty body.
    */
@@ -330,9 +329,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspFragmentNullTest
-   * 
+   *
    * @assertion_ids: PENDING
-   * 
+   *
    * @test_Strategy: If the fragment identified by the given name is null, will
    * behave as though a fragment was passed in that produces no output.
    */

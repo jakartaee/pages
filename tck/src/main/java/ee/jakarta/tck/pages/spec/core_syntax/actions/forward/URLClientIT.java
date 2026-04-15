@@ -22,8 +22,6 @@ package ee.jakarta.tck.pages.spec.core_syntax.actions.forward;
 
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -31,7 +29,6 @@ import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
@@ -56,7 +53,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_coresyntx_act_forward_web.war");
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_coresyntx_act_forward_web.xml"));
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/unbufferedWriteForwardTest.jsp")), "unbufferedWriteForwardTest.jsp");
@@ -72,7 +69,7 @@ public class URLClientIT extends AbstractUrlClient {
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/flushedBufferForwardTest1.jsp")), "flushedBufferForwardTest1.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/flushedBufferForwardTest.jsp")), "flushedBufferForwardTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/flushedBufferForwardTest_error.jsp")), "flushedBufferForwardTest_error.jsp");
-  
+
     return archive;
 
   }
@@ -86,10 +83,10 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveForwardCtxRelativeTest
-   * 
-   * @assertion_ids: JSP:SPEC:165.1
-   * 
-   * @test_Strategy: Validate that jsp:forward can forward a request to a JSP
+   *
+   * @assertion_ids: PAGES:SPEC:165.1
+   *
+   * @test_Strategy: Validate that jsp:forward can forward a request to a
    * page within the same context using a page relative-path. PENDING Merege
    * existing forward tests
    */
@@ -104,9 +101,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveForwardCtxRelativeHtmlTest
-   * 
-   * @assertion_ids: JSP:SPEC:165.1
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:165.1
+   *
    * @test_Strategy: Validate that jsp:forward can forward a request to a static
    * resource within the same context using a page-relative path.
    */
@@ -121,10 +118,10 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveForwardPageRelativeTest
-   * 
-   * @assertion_ids: JSP:SPEC:165.1
-   * 
-   * @test_Strategy: Validate that jsp:forward can forward a request to a JSP
+   *
+   * @assertion_ids: PAGES:SPEC:165.1
+   *
+   * @test_Strategy: Validate that jsp:forward can forward a request to a
    * page within the same context using a page-relative path.
    */
 
@@ -138,9 +135,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveForwardPageRelativeHtmlTest
-   * 
-   * @assertion_ids: JSP:SPEC:165.1
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:165.1
+   *
    * @test_Strategy: Validate that jsp:forward can forward a request to a static
    * resource within the same context using a page-relative path.
    */
@@ -155,9 +152,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveRequestAttrCtxRelativeTest
-   * 
-   * @assertion_ids: JSP:SPEC:165.8
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:165.8
+   *
    * @test_Strategy: Validate that jsp:forward can properly accept a
    * request-time attribute containing a context-relative path value.
    */
@@ -172,9 +169,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveRequestAttrPageRelativeTest
-   * 
-   * @assertion_ids: JSP:SPEC:165.8
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:165.8
+   *
    * @test_Strategy: Validate that jsp:forward can properly accept a
    * request-time attribute containing a page-relative path value.
    */
@@ -189,9 +186,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: unbufferedWriteForwardTest
-   * 
-   * @assertion_ids: JSP:SPEC:165.5
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:165.5
+   *
    * @test_Strategy:If the page output was unbuffered and anything has been
    * written to it, an attempt to forward the request will result in an
    * IllegalStateException.

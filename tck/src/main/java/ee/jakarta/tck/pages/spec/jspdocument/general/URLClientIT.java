@@ -72,7 +72,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeWellFormednessTest
    * 
-   * @assertion_ids: JSP:SPEC:173.4
+   * @assertion_ids: PAGES:SPEC:173.4
    * 
    * @test_Strategy: access a jsp document that is not well-formed.
    */
@@ -89,7 +89,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: identifyByJspRootTest
    * 
-   * @assertion_ids: JSP:SPEC:173; JSP:SPEC:173.3
+   * @assertion_ids: PAGES:SPEC:173; PAGES:SPEC:173.3
    * 
    * @test_Strategy: access a jsp page that has a jsp:root as top element
    */
@@ -106,7 +106,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: identifyByExtensionTest
    * 
-   * @assertion_ids: JSP:SPEC:173; JSP:SPEC:173.2; JSP:SPEC:176
+   * @assertion_ids: PAGES:SPEC:173; PAGES:SPEC:173.2; PAGES:SPEC:176
    * 
    * @test_Strategy: identify a jsp document by .jspx extension a jsp document
    * does not need to have jsp:root
@@ -124,7 +124,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: identifyByConfigTest
    * 
-   * @assertion_ids: JSP:SPEC:173; JSP:SPEC:173.1; JSP:SPEC:176
+   * @assertion_ids: PAGES:SPEC:173; PAGES:SPEC:173.1; PAGES:SPEC:176
    * 
    * @test_Strategy: identify a jsp document by jsp-property-group via is-xml a
    * jsp document does not need to have jsp:root
@@ -142,7 +142,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeDTDValidationTest
    * 
-   * @assertion_ids: JSP:SPEC:260
+   * @assertion_ids: PAGES:SPEC:260
    * 
    * @test_Strategy: access an invalid jsp document and expect translation
    * error.

@@ -71,7 +71,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: positiveTagLibTest
    * 
-   * @assertion_ids: JSP:SPEC:59; JSP:SPEC:64
+   * @assertion_ids: PAGES:SPEC:59; PAGES:SPEC:64
    * 
    * @test_Strategy: Validate that the taglib directive is recognized by the
    * container by declaring a new tag and calling an action against that tag.

@@ -73,7 +73,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: positiveExprTest
    * 
-   * @assertion_ids: JSP:SPEC:77
+   * @assertion_ids: PAGES:SPEC:77
    * 
    * @test_Strategy: Validate that the container can correctly support a basic
    * expression by validating the output returned.
@@ -90,7 +90,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: positiveExprCommentTest
    * 
-   * @assertion_ids: JSP:SPEC:5
+   * @assertion_ids: PAGES:SPEC:5
    * 
    * @test_Strategy: Validate that an HTML stye comment with an embedded
    * expression returns the value of the expression within the comment and that

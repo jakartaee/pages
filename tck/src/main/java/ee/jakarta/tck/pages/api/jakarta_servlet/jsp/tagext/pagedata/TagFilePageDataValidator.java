@@ -68,8 +68,8 @@ public class TagFilePageDataValidator extends TagLibraryValidator {
   }
 
   /**
-   * Validates the XML view of the JSP page using the provided PageData object.
-   * 
+   * Validates the XML view of the Jakarta Pages page using the provided PageData object.
+   *
    * @param prefix
    *          - the tag library prefix
    * @param uri
@@ -118,7 +118,7 @@ public class TagFilePageDataValidator extends TagLibraryValidator {
 
   /**
    * Returns the TVL invocation status.
-   * 
+   *
    * @return true if the TLV has been called, otherwise false
    */
   public static boolean wasCalled() {
@@ -156,8 +156,8 @@ public class TagFilePageDataValidator extends TagLibraryValidator {
   }
 
   /**
-   * Displays the XML view of a JSP page as seen by the container.
-   * 
+   * Displays the XML view of a Jakarta Pages page as seen by the container.
+   *
    * @param in
    *          - the InputStream from PageData
    */
@@ -193,7 +193,7 @@ public class TagFilePageDataValidator extends TagLibraryValidator {
   /**
    * Utility method to wrap JspTestUtil.debug(). This method will add this
    * class' name to the provide message and then delegate to JspTestUtil.
-   * 
+   *
    * @param message
    *          - a debug message
    */
@@ -318,7 +318,7 @@ public class TagFilePageDataValidator extends TagLibraryValidator {
     /**
      * Counter indicating that the RT expression present in the
      * <tt>pagedatatagfile.test</tt> element was properly converted from
-     * standard JSP syntax to syntax supported by XML.
+     * standard Jakarta Pages syntax to syntax supported by XML.
      */
     private short _rtExprFound = 0;
 
@@ -347,7 +347,7 @@ public class TagFilePageDataValidator extends TagLibraryValidator {
 
     /**
      * Handles the start elements found in the XML stream by the parser.
-     * 
+     *
      * @param uri
      *          - the uri of the namespace
      * @param localName
@@ -405,7 +405,7 @@ public class TagFilePageDataValidator extends TagLibraryValidator {
             debug("pagedatatagfile:test attribute '" + name + "' value: "
                 + value);
             if (value.startsWith("%=") && (value.endsWith("%"))) {
-              debug("Converted JSP RT attribute expression was found!");
+              debug("Converted Jakarta Pages RT attribute expression was found!");
               _rtExprFound++;
             }
           }
@@ -447,7 +447,7 @@ public class TagFilePageDataValidator extends TagLibraryValidator {
     /**
      * Checks the instance variables used to count the elements processed and
      * based on the values, will return failure messages.
-     * 
+     *
      * @return null of no errors occurred, othersise an array of
      *         ValidationMessages noting the failures.
      */
@@ -538,12 +538,12 @@ public class TagFilePageDataValidator extends TagLibraryValidator {
       }
       if (_jspNameSpaceFound == 0) {
         messageList.add(
-            "Unable to find JSP namespace xmlns:jsp with URI of 'http://java.sun.com/JSP/Page'"
+            "Unable to find Jakarta Pages namespace xmlns:jsp with URI of 'http://java.sun.com/JSP/Page'"
                 + " in the XML view of the tag file.\n");
       }
       if (_jspNameSpaceFound > 1) {
         messageList.add("Found " + _jspNameSpaceFound
-            + " JSP namespace attributes within the jsp:root element in the XML view of the processed tag file when 1 was expected.\n");
+            + " Jakarta Pages namespace attributes within the jsp:root element in the XML view of the processed tag file when 1 was expected.\n");
       }
       if (_rtExprFound == 0) {
         messageList.add(
@@ -582,7 +582,7 @@ public class TagFilePageDataValidator extends TagLibraryValidator {
      * Checks that the jsp:id attribute exists in the attribute list of the
      * specified element. If it doesn't it adds this element name to a list of
      * elements that have a similar issue.
-     * 
+     *
      * @param elementName
      *          - name of the element
      * @param attributes
@@ -605,7 +605,7 @@ public class TagFilePageDataValidator extends TagLibraryValidator {
     /**
      * Scans the provided attribute object for the specified attribute name and
      * value. If value is null, then only the attribute name is checked.
-     * 
+     *
      * @param attrName
      *          - name of the attribute to check for
      * @param attrValue
@@ -641,7 +641,7 @@ public class TagFilePageDataValidator extends TagLibraryValidator {
     /**
      * Returns a string representation of the Map containing elements and the
      * occurence count.
-     * 
+     *
      * @param map
      *          - element map
      * @return String representation of the map

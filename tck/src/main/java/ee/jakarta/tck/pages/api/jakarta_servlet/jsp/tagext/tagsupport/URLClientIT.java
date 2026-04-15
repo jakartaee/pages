@@ -93,9 +93,9 @@ public class URLClientIT extends AbstractUrlClient {
    * @testName: tagSupportTagInitializationTest
    * 
    * @assertion_ids:
-   * JSP:JAVADOC:342;JSP:JAVADOC:343;JSP:JAVADOC:344;JSP:JAVADOC:345;
-   * JSP:JAVADOC:202;JSP:JAVADOC:203;JSP:JAVADOC:204;JSP:JAVADOC:205;
-   * JSP:JAVADOC:206
+   * PAGES:JAVADOC:342;PAGES:JAVADOC:343;PAGES:JAVADOC:344;PAGES:JAVADOC:345;
+   * PAGES:JAVADOC:202;PAGES:JAVADOC:203;PAGES:JAVADOC:204;PAGES:JAVADOC:205;
+   * PAGES:JAVADOC:206
    * 
    * @test_Strategy: Validates that the container performs the proper
    * initialization steps for a new tag handler instance. The PageContext,
@@ -113,7 +113,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportDoStartEvalBodyIncludeTest
    * 
-   * @assertion_ids: JSP:JAVADOC:345
+   * @assertion_ids: PAGES:JAVADOC:345
    * 
    * @test_Strategy: Validate the when doStartTag returns EVAL_BODY_INCLUDE will
    * include the evaluation of the body in the current out. This will be
@@ -133,7 +133,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportDoStartSkipBodyTest
    * 
-   * @assertion_ids: JSP:JAVADOC:402
+   * @assertion_ids: PAGES:JAVADOC:402
    * 
    * @test_Strategy: Validate the when doStartTag returns SKIP_BODY, the body of
    * the tag is not included in the current out as the body related methods are
@@ -151,7 +151,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportDoAfterBodySkipBodyTest
    * 
-   * @assertion_ids: JSP:JAVADOC:368
+   * @assertion_ids: PAGES:JAVADOC:368
    * 
    * @test_Strategy: Validate the doAfterBody() is called exactly once when
    * doStartTag() returns EVAL_BODY_INCLUDE and doAfterBody() returns SKIP_BODY.
@@ -169,7 +169,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportDoAfterBodyEvalBodyAgainTest
    * 
-   * @assertion_ids: JSP:JAVADOC:369
+   * @assertion_ids: PAGES:JAVADOC:369
    * 
    * @test_Strategy: Validate the doAfterBody() is called subsequent of
    * doAfterBody() being called and returning EVAL_BODY_AGAIN.
@@ -188,7 +188,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportDoEndTagSkipPageTest
    * 
-   * @assertion_ids: JSP:JAVADOC:351;JSP:JAVADOC:347
+   * @assertion_ids: PAGES:JAVADOC:351;PAGES:JAVADOC:347
    * 
    * @test_Strategy: Validate that page evaluation ceases when doEndTagReturns
    * SKIP_PAGE. This also ensures that doEndTag will not be called in any parent
@@ -213,7 +213,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportDoEndTagEvalPageTest
    * 
-   * @assertion_ids: JSP:JAVADOC:350
+   * @assertion_ids: PAGES:JAVADOC:350
    * 
    * @test_Strategy: Validate that if doEndTag() returns EVAL_PAGE, the page
    * continues to evaluate.
@@ -230,7 +230,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportFindAncestorWithClassTest
    * 
-   * @assertion_ids: JSP:JAVADOC:194
+   * @assertion_ids: PAGES:JAVADOC:194
    * 
    * @test_Strategy: Validate the behavior of findAncestorWithClass when test
    * tag is nested with multiple tag instances of the same type.
@@ -246,7 +246,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportDoStartTagDefaultValueTest
    * 
-   * @assertion_ids: JSP:JAVADOC:195
+   * @assertion_ids: PAGES:JAVADOC:195
    * 
    * @test_Strategy: Validate the default return value of
    * TagSupport.doStartTag().
@@ -260,7 +260,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportDoEndTagDefaultValueTest
    * 
-   * @assertion_ids: JSP:JAVADOC:197
+   * @assertion_ids: PAGES:JAVADOC:197
    * 
    * @test_Strategy: Validate the default return value of TagSupport.doEndTag().
    */
@@ -273,7 +273,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportDoAfterBodyDefaultValueTest
    * 
-   * @assertion_ids: JSP:JAVADOC:199
+   * @assertion_ids: PAGES:JAVADOC:199
    * 
    * @test_Strategy: Validate the default return value of
    * TagSupport.doAfterBody().
@@ -287,7 +287,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportGetSetValueTest
    * 
-   * @assertion_ids: JSP:JAVADOC:207;JSP:JAVADOC:208
+   * @assertion_ids: PAGES:JAVADOC:207;PAGES:JAVADOC:208
    * 
    * @test_Strategy: Validate the behavior of TagSupport.setValue() and
    * TagSupport.getValue().
@@ -301,7 +301,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportGetValuesTest
    * 
-   * @assertion_ids: JSP:JAVADOC:210
+   * @assertion_ids: PAGES:JAVADOC:210
    * 
    * @test_Strategy: Validate the behavior of TagSupport.getValues().
    */
@@ -314,7 +314,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportRemoveValueTest
    * 
-   * @assertion_ids: JSP:JAVADOC:209
+   * @assertion_ids: PAGES:JAVADOC:209
    * 
    * @test_Strategy: Validate the behavior of TagSupport.removeValue().
    */
@@ -327,7 +327,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagSupportVariableSynchronizationTest
    * 
-   * @assertion_ids: JSP:JAVADOC:348;JSP:JAVADOC:353;JSP:JAVADOC:371
+   * @assertion_ids: PAGES:JAVADOC:348;PAGES:JAVADOC:353;PAGES:JAVADOC:371
    * 
    * @test_Strategy: Validate scripting variables are synchronized at the proper
    * locations by the container.

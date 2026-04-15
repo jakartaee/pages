@@ -76,7 +76,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagLibraryValidatorAPITest
    * 
-   * @assertion_ids: JSP:JAVADOC:212;JSP:JAVADOC:213;JSP:JAVADOC:214
+   * @assertion_ids: PAGES:JAVADOC:212;PAGES:JAVADOC:213;PAGES:JAVADOC:214
    * 
    * @test_Strategy: Validate the setInitParameters(), getInitParameters(), and
    * validate() methods of the TagLibraryValidator class. This will verify that
@@ -99,8 +99,8 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagLibraryValidatorTranslationFailureTest
    * 
-   * @assertion_ids: JSP:JAVADOC:182;JSP:JAVADOC:183;
-   * JSP:JAVADOC:184;JSP:JAVADOC:386
+   * @assertion_ids: PAGES:JAVADOC:182;PAGES:JAVADOC:183;
+   * PAGES:JAVADOC:184;PAGES:JAVADOC:386
    * 
    * @test_Strategy: Validate that a translation error will occur if a non-null
    * or non-empty array of ValidationMessages is returned when the validation()

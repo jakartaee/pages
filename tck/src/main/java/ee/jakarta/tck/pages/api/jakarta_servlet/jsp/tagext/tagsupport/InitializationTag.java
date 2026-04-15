@@ -29,7 +29,7 @@ import jakarta.servlet.jsp.tagext.Tag;
 import jakarta.servlet.jsp.tagext.TagSupport;
 
 /**
- * Tag to verify that the JSP implementation object properly initialized any
+ * Tag to verify that the Jakarta Pages page implementation object properly initialized any
  * attributes present with the in tag as well as setting the pageContext and
  * parent
  */
@@ -68,7 +68,7 @@ public class InitializationTag extends TagSupport {
 
   /**
    * Returns the value of _attribute1.
-   * 
+   *
    * @return _attribute1
    */
   public String getAttribute1() {
@@ -77,7 +77,7 @@ public class InitializationTag extends TagSupport {
 
   /**
    * Sets the value for _attribute1.
-   * 
+   *
    * @param attribute1
    *          - the value for _attribute1
    */
@@ -87,7 +87,7 @@ public class InitializationTag extends TagSupport {
 
   /**
    * Returns the value of _attribute2.
-   * 
+   *
    * @return _attribute2
    */
   public String getAttribute2() {
@@ -96,7 +96,7 @@ public class InitializationTag extends TagSupport {
 
   /**
    * Sets the value for _attribute2.
-   * 
+   *
    * @param attribute2
    *          - the value for _attribute2
    */
@@ -106,7 +106,7 @@ public class InitializationTag extends TagSupport {
 
   /**
    * Returns the value for _attribute3.
-   * 
+   *
    * @return the value for _attribute3
    */
   public String getAttribute3() {
@@ -115,7 +115,7 @@ public class InitializationTag extends TagSupport {
 
   /**
    * Sets the value for _attribute3.
-   * 
+   *
    * @param attribute3
    *          - the value for _attribute3
    */
@@ -124,7 +124,7 @@ public class InitializationTag extends TagSupport {
   }
 
   /**
-   * Set the current page context. This method is invoked by the JSP page
+   * Set the current page context. This method is invoked by the Jakarta Pages page
    * implementation object prior to doStartTag().
    * <p>
    * This value is *not* reset by doEndTag() and must be explicitly reset by a
@@ -139,7 +139,7 @@ public class InitializationTag extends TagSupport {
 
   /**
    * Set the parent (closest enclosing tag handler) of this tag handler. Invoked
-   * by the JSP page implementation object prior to doStartTag().
+   * by the Jakarta Pages page implementation object prior to doStartTag().
    * <p>
    * This value is *not* reset by doEndTag() and must be explicitly reset by a
    * page implementation.
@@ -153,7 +153,7 @@ public class InitializationTag extends TagSupport {
 
   /**
    * Get the parent (closest enclosing tag handler) for this tag handler.
-   * 
+   *
    * @return the current parent, or null if none.
    * @see jakarta.servlet.jsp.tagext.TagSupport#findAncestorWithClass
    */
@@ -163,7 +163,7 @@ public class InitializationTag extends TagSupport {
 
   /**
    * Validates that the tag initialization occurs before calling doStartTag().
-   * 
+   *
    * @return Tag.SKIP_BODY
    * @throws JspException
    *           if an error occurred while processing this tag

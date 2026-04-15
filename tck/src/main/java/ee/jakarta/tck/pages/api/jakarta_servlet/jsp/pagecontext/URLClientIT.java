@@ -65,7 +65,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetSessionTest
-   * @assertion_ids: JSP:JAVADOC:16
+   * @assertion_ids: PAGES:JAVADOC:16
    * @test_Strategy: Validate PageContext.getSession().
    */
   @Test
@@ -77,7 +77,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetPageTest
-   * @assertion_ids: JSP:JAVADOC:17
+   * @assertion_ids: PAGES:JAVADOC:17
    * @test_Strategy: Validate PageContext.getPage().
    */
   @Test
@@ -89,7 +89,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetRequestTest
-   * @assertion_ids: JSP:JAVADOC:18
+   * @assertion_ids: PAGES:JAVADOC:18
    * @test_Strategy: Validate PageContext.getRequest().
    */
   @Test
@@ -101,7 +101,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetResponseTest
-   * @assertion_ids: JSP:JAVADOC:19
+   * @assertion_ids: PAGES:JAVADOC:19
    * @test_Strategy: Validate PageContext.getResponse().
    */
   @Test
@@ -113,7 +113,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetExceptionTest
-   * @assertion_ids: JSP:JAVADOC:20
+   * @assertion_ids: PAGES:JAVADOC:20
    * @test_Strategy: Validate PageContext.getException().
    */
   @Test
@@ -129,7 +129,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetServletConfigTest
-   * @assertion_ids: JSP:JAVADOC:21
+   * @assertion_ids: PAGES:JAVADOC:21
    * @test_Strategy: Validate PageContext.getServletConfig().
    */
   @Test
@@ -141,7 +141,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetServletContextTest
-   * @assertion_ids: JSP:JAVADOC:22
+   * @assertion_ids: PAGES:JAVADOC:22
    * @test_Strategy: Validate PageContext.getServletContext().
    */
   @Test
@@ -153,7 +153,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextForwardContextPathTest
-   * @assertion_ids: JSP:JAVADOC:23
+   * @assertion_ids: PAGES:JAVADOC:23
    * @test_Strategy: Validate PageContext.forward() passing in a resource
    *                 identified by a context-relative path.
    */
@@ -166,7 +166,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextForwardPagePathTest
-   * @assertion_ids: JSP:JAVADOC:24
+   * @assertion_ids: PAGES:JAVADOC:24
    * @test_Strategy: Validate PageContext.forward() passing in a resource
    *                 identified by a page-relative path.
    */
@@ -181,7 +181,7 @@ public class URLClientIT extends AbstractUrlClient {
    * -- Removed due to the way we capture the exception. -- testName:
    * pageContextForwardServletExceptionTest
    *
-   * @assertion_ids: JSP:JAVADOC:26
+   * @assertion_ids: PAGES:JAVADOC:26
    * @test_Strategy: Validate PageContext.forward() throws a ServletException if
    *                 a ServletException occurs during the forward process.
    *
@@ -196,7 +196,7 @@ public class URLClientIT extends AbstractUrlClient {
    * -- Removed due to the way we capture the exception. -- testName:
    * pageContextForwardIOExceptionTest
    *
-   * @assertion_ids: JSP:JAVADOC:27
+   * @assertion_ids: PAGES:JAVADOC:27
    * @test_Strategy: Validate PageContext.forward() throws an IOExcpetion if an
    *                 IOException occurs during the forward process.
    *
@@ -209,7 +209,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextForwardIllegalStateExceptionTest
-   * @assertion_ids: JSP:JAVADOC:29
+   * @assertion_ids: PAGES:JAVADOC:29
    * @test_Strategy: Valdiate PageContext.forward() throws an
    *                 IllegalStateException if ServletResponse is not in the
    *                 proper state to perform a forward.
@@ -225,7 +225,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextIncludeContextPathTest
-   * @assertion_ids: JSP:JAVADOC:31
+   * @assertion_ids: PAGES:JAVADOC:31
    * @test_Strategy: Validate PageContext.include() where the inclusion resource
    *                 is identified by a context-relative path.
    */
@@ -238,7 +238,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextIncludePagePathTest
-   * @assertion_ids: JSP:JAVADOC:32
+   * @assertion_ids: PAGES:JAVADOC:32
    * @test_Strategy: Validate PageContext.include() where the inclusion resource
    *                 is identified by a page-relative path.
    */
@@ -251,7 +251,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextIncludeFlushTrueTest
-   * @assertion_ids: JSP:JAVADOC:40;JSP:JAVADOC:39
+   * @assertion_ids: PAGES:JAVADOC:40;PAGES:JAVADOC:39
    * @test_Strategy: Validate PageContext.include() with flush argument provided
    *                 and set to true. Response should be commited after the
    *                 flush. Test validates this by perfoming an action against
@@ -269,7 +269,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextIncludeFlushFalseTest
-   * @assertion_ids: JSP:JAVADOC:385;JSP:JAVADOC:38
+   * @assertion_ids: PAGES:JAVADOC:385;PAGES:JAVADOC:38
    * @test_Strategy: Validate PageContext.include() with flush argument provided
    *                 and set to false. Response should not have been flushed.
    *                 Verify by preforming an action against the response that
@@ -288,7 +288,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextHandlePageExceptionExcTest
-   * @assertion_ids: JSP:JAVADOC:46
+   * @assertion_ids: PAGES:JAVADOC:46
    * @test_Strategy: Validate PageContext.handlePageException(Exception) invokes
    *                 the defined error page.
    */
@@ -302,7 +302,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextHandlePageExceptionThrTest
-   * @assertion_ids: JSP:JAVADOC:53
+   * @assertion_ids: PAGES:JAVADOC:53
    * @test_Strategy: Validate PageContext.handlePageException(Throwable) invokes
    *                 the defined error page.
    */
@@ -316,7 +316,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextHandlePageExceptionExcNPETest
-   * @assertion_ids: JSP:JAVADOC:51
+   * @assertion_ids: PAGES:JAVADOC:51
    * @test_Strategy: Validate PageContext.handlePageException(Exception) throws
    *                 a NullPointerException if an null argument is provided.
    */
@@ -329,7 +329,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextHandlePageExceptionThrNPETest
-   * @assertion_ids: JSP:JAVADOC:58
+   * @assertion_ids: PAGES:JAVADOC:58
    * @test_Strategy: Validate PageContext.handlePageException(Throwable) throws
    *                 a NullPointerException if an null argument is provided.
    */
@@ -342,7 +342,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextPushPopBodyTest
-   * @assertion_ids: JSP:JAVADOC:60;JSP:JAVADOC:61;JSP:JAVADOC:380;JSP:JAVADOC:
+   * @assertion_ids: PAGES:JAVADOC:60;PAGES:JAVADOC:61;PAGES:JAVADOC:380;PAGES:JAVADOC:
    *                 381
    * @test_Strategy: Validate behavior of PageContext.pushBody() and
    *                 PageContext.popBody().
@@ -356,7 +356,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetErrorDataTest
-   * @assertion_ids: JSP:JAVADOC:62
+   * @assertion_ids: PAGES:JAVADOC:62
    * @test_Strategy: Validate behavior of PageContext.getErrorData().
    */
   @Test
@@ -369,7 +369,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextIncludeIOExceptionTest
-   * @assertion_ids: JSP:JAVADOC:35
+   * @assertion_ids: PAGES:JAVADOC:35
    * @test_Strategy: Validate PageContext.include() throws an IOException if
    *                 included resource throws an IOException.
    */
@@ -382,7 +382,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextIncludeServletExceptionTest
-   * @assertion_ids: JSP:JAVADOC:34
+   * @assertion_ids: PAGES:JAVADOC:34
    * @test_Strategy: Validate PageContext.include() throws a ServletException if
    *                 target resource throws a ServletException.
    */
@@ -395,7 +395,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextIncludeFlushIOExceptionTest
-   * @assertion_ids: JSP:JAVADOC:43
+   * @assertion_ids: PAGES:JAVADOC:43
    * @test_Strategy: Validate PageContext.include() with flush argument
    *                 provided, throws an IOException if the target resource
    *                 cannot be accessed by the caller.
@@ -409,7 +409,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextIncludeFlushServletExceptionTest
-   * @assertion_ids: JSP:JAVADOC:42
+   * @assertion_ids: PAGES:JAVADOC:42
    * @test_Strategy: Validate PageContext.include() with flush argument
    *                 provided, throws a ServletException if the target resource
    *                 cannot be accessed by the caller.
@@ -424,7 +424,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetSetAttributeTest
-   * @assertion_ids: JSP:JAVADOC:133;JSP:JAVADOC:138
+   * @assertion_ids: PAGES:JAVADOC:133;PAGES:JAVADOC:138
    * @test_Strategy: Validate PageContext.getAttribute(String),
    *                 PageContext.setAttribute(String). Note: These are inherited
    *                 from JspContext.
@@ -438,7 +438,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextSetAttributeNPETest
-   * @assertion_ids: JSP:JAVADOC:134;JSP:JAVADOC:396
+   * @assertion_ids: PAGES:JAVADOC:134;PAGES:JAVADOC:396
    * @test_Strategy: Validate a NullPointerException is thrown if the attribute
    *                 name provided is null, but not when the provided value is
    *                 null. Note: This is inherited from JspContext.
@@ -452,7 +452,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetSetAttributeInScopeTest
-   * @assertion_ids: JSP:JAVADOC:135;JSP:JAVADOC:141
+   * @assertion_ids: PAGES:JAVADOC:135;PAGES:JAVADOC:141
    * @test_Strategy: Validate PageContext.getAttribute() and
    *                 PageContext.setAttribute() when provided with scope
    *                 arguments. Note: These are inherited from JspContext.
@@ -466,7 +466,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextSetAttributeInScopeNPETest
-   * @assertion_ids: JSP:JAVADOC:136;JSP:JAVADOC:397
+   * @assertion_ids: PAGES:JAVADOC:136;PAGES:JAVADOC:397
    * @test_Strategy: Validate a NullPointerException is thrown if the attribute
    *                 name provided is null, but not when the provided value is
    *                 null. Note: This is inherited from JspContext.
@@ -480,7 +480,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextSetAttributeInScopeIllegalArgumentExceptionTest
-   * @assertion_ids: JSP:JAVADOC:137;JSP:JAVADOC:398
+   * @assertion_ids: PAGES:JAVADOC:137;PAGES:JAVADOC:398
    * @test_Strategy: Validate an IllegalArgumentException is thrown if
    *                 PageContext.setAttribute() is provided an invalid scope.
    *                 Note: This is inherited from JspContext.
@@ -496,7 +496,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetAttributeNPETest
-   * @assertion_ids: JSP:JAVADOC:139;JSP:JAVADOC:142
+   * @assertion_ids: PAGES:JAVADOC:139;PAGES:JAVADOC:142
    * @test_Strategy: Validate a NullPointerException is thrown if
    *                 PageContext.getAttriubte() is provided a null argument.
    *                 Note: This is inherited from JspContext.
@@ -510,7 +510,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetAttributeInScopeIllegalArgumentExceptionTest
-   * @assertion_ids: JSP:JAVADOC:143
+   * @assertion_ids: PAGES:JAVADOC:143
    * @test_Strategy: Validate an IllegalArgumentException is thrown if
    *                 PageContext.getAttribute() is provided an invalid value for
    *                 scope. Note: This is inherited from JspContext.
@@ -526,7 +526,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextFindAttributeTest
-   * @assertion_ids: JSP:JAVADOC:144
+   * @assertion_ids: PAGES:JAVADOC:144
    * @test_Strategy: Validate behavior of PageContext.findAttribute(). Note:
    *                 This is inherited from JspContext.
    */
@@ -539,7 +539,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextRemoveAttributeTest
-   * @assertion_ids: JSP:JAVADOC:145
+   * @assertion_ids: PAGES:JAVADOC:145
    * @test_Strategy: Validate the behavior of PageContext.removeAttribute().
    *                 Note: This is inhertied from JspContext
    */
@@ -552,7 +552,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextRemoveAttributeFromScopeTest
-   * @assertion_ids: JSP:JAVADOC:146
+   * @assertion_ids: PAGES:JAVADOC:146
    * @test_Strategy: Validate the behavior of PageContext.remoteAttribute() when
    *                 provided a scope. Note: This is inherited from JspContext.
    */
@@ -565,7 +565,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextRemoveAttributeFromScopeIllegalScopeTest
-   * @assertion_ids: JSP:JAVADOC:392
+   * @assertion_ids: PAGES:JAVADOC:392
    * @test_Strategy: Validate an IllegalArgumentException is thrown if the scope
    *                 argument is provided an illegal scope.
    */
@@ -580,7 +580,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetAttributeScopeTest
-   * @assertion_ids: JSP:JAVADOC:147
+   * @assertion_ids: PAGES:JAVADOC:147
    * @test_Strategy: Validate the behavior of PageContext.getAttributeScope().
    *                 Note: This is inherited from JspContext.
    */
@@ -593,7 +593,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetAttributeNamesInScopeTest
-   * @assertion_ids: JSP:JAVADOC:148
+   * @assertion_ids: PAGES:JAVADOC:148
    * @test_Strategy: Validate the behavior of
    *                 PageContext.getAttributeNamesInScope(). Note: This is
    *                 inherited from JspContext
@@ -607,7 +607,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetAttributeNamesInScopeIllegalScopeTest
-   * @assertion_ids: JSP:JAVADOC:401
+   * @assertion_ids: PAGES:JAVADOC:401
    * @test_Strategy: Validate an IllegalArgumentException is thrown if the scope
    *                 argument is provided an illegal scope.
    */
@@ -622,7 +622,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetOutTest
-   * @assertion_ids: JSP:JAVADOC:149
+   * @assertion_ids: PAGES:JAVADOC:149
    * @test_Strategy: Validate the behavior of PageContext.getOut. Note: This is
    *                 inherited from JspContext.
    */
@@ -635,7 +635,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextFindAttributeNullNameTest
-   * @assertion_ids: JSP:JAVADOC:387
+   * @assertion_ids: PAGES:JAVADOC:387
    * @test_Strategy: Validate a NullPointerException is thrown if a null value
    *                 is provided for the name parameter.
    */
@@ -648,7 +648,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextGetAttributesScopeNullNameTest
-   * @assertion_ids: JSP:JAVADOC:389
+   * @assertion_ids: PAGES:JAVADOC:389
    * @test_Strategy: Validate a NullPointerException is thrown if a null value
    *                 is provided to the name argument.
    */
@@ -662,7 +662,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextRemoveAttributeNullNameTest
-   * @assertion_ids: JSP:JAVADOC:393;JSP:JAVADOC:391
+   * @assertion_ids: PAGES:JAVADOC:393;PAGES:JAVADOC:391
    * @test_Strategy: Validate a NullPointerException is thrown if the name
    *                 argument is provided a null value.
    */
@@ -675,7 +675,7 @@ public class URLClientIT extends AbstractUrlClient {
 
   /**
    * @testName: pageContextSetAttributeNullValueTest
-   * @assertion_ids: JSP:JAVADOC:396;JSP:JAVADOC:397
+   * @assertion_ids: PAGES:JAVADOC:396;PAGES:JAVADOC:397
    * @test_Strategy: Validate that if a null value is provided to either
    *                 setAttribute(String, Object) or setAttribute(String,
    *                 Object, int) it has the same affect as calling

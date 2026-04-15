@@ -85,7 +85,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagDataGetAttributeTest
    * 
-   * @assertion_ids: JSP:JAVADOC:271
+   * @assertion_ids: PAGES:JAVADOC:271
    * 
    * @test_Strategy: Validate the behavior of TagData.getAttribute().
    */
@@ -100,7 +100,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagDataSetAttributeTest
    * 
-   * @assertion_ids: JSP:JAVADOC:272
+   * @assertion_ids: PAGES:JAVADOC:272
    * 
    * @test_Strategy: Validate the behavior of TagData.setAttribute().
    */
@@ -115,7 +115,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagDataGetAttributeStringTest
    * 
-   * @assertion_ids: JSP:JAVADOC:273;JSP:JAVADOC:274
+   * @assertion_ids: PAGES:JAVADOC:273;PAGES:JAVADOC:274
    * 
    * @test_Strategy: Validate the behavior of TagData.getAttributeString().
    */
@@ -130,7 +130,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagDataGetAttributesTest
    * 
-   * @assertion_ids: JSP:JAVADOC:275
+   * @assertion_ids: PAGES:JAVADOC:275
    * 
    * @test_Strategy: Validate the behavior of TagData.getAttributes().
    */
@@ -145,7 +145,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tagDataConstructorTest
    * 
-   * @assertion_ids: JSP:JAVADOC:268
+   * @assertion_ids: PAGES:JAVADOC:268
    * 
    * @test_Strategy: validate the constructor TagData(Object[][]).
    */

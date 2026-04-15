@@ -70,7 +70,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspTagExceptionDefaultCtorTest
    * 
-   * @assertion_ids: JSP:JAVADOC:116
+   * @assertion_ids: PAGES:JAVADOC:116
    * 
    * @test_Strategy: Validate default constructor of JspTagException
    */
@@ -83,7 +83,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspTagExceptionMessageCtorTest
    * 
-   * @assertion_ids: JSP:JAVADOC:115
+   * @assertion_ids: PAGES:JAVADOC:115
    * 
    * @test_Strategy: Validate contructor taking single string argument as the
    * message of the Exception.
@@ -97,7 +97,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspTagExceptionCauseCtorTest
    * 
-   * @assertion_ids: JSP:JAVADOC:118
+   * @assertion_ids: PAGES:JAVADOC:118
    * 
    * @test_Strategy: Validate constructor taking a Throwable signifying the root
    * cause of the this JspTagException.
@@ -111,7 +111,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspTagExceptionCauseMessageCtorTest
    * 
-   * @assertion_ids: JSP:JAVADOC:117
+   * @assertion_ids: PAGES:JAVADOC:117
    * 
    * @test_Strategy: Validate constructor taking both a message and a Throwable
    * signifying the root cause of the JspTagException.

@@ -104,7 +104,7 @@ public abstract class SuperPage extends HttpServlet implements HttpJspPage {
   public void jspDestroy() {
   }
 
-  // to be provided by JSP processor
+  // to be provided by Jakarta Pages processor
 
   abstract public void _jspService(HttpServletRequest request,
       HttpServletResponse response) throws ServletException, IOException;

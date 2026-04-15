@@ -76,8 +76,8 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: implicitObjElResolverTest
    *
-   * @assertion_ids: JSP:JAVADOC:420; JSP:JAVADOC:421; JSP:JAVADOC:422;
-   * JSP:JAVADOC:423; JSP:JAVADOC:425; JSP:JAVADOC:426
+   * @assertion_ids: PAGES:JAVADOC:420; PAGES:JAVADOC:421; PAGES:JAVADOC:422;
+   * PAGES:JAVADOC:423; PAGES:JAVADOC:425; PAGES:JAVADOC:426
    *
    * @test_Strategy: Obtain an ImplicitObjectELResolver via the PageContext and
    * verify that API calls work as expected: setValue() setValue() throws

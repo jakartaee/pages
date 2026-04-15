@@ -50,16 +50,16 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_config_includes_web.war");
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_config_includes_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/jspf/prelude3.jspf", "jspf/prelude3.jspf");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/jspf/prelude2.jspf", "jspf/prelude2.jspf");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/jspf/prelude1.jspf", "jspf/prelude1.jspf");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/jspf/coda3.jspf", "jspf/coda3.jspf");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/jspf/coda2.jspf", "jspf/coda2.jspf");    
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/jspf/coda1.jspf", "jspf/coda1.jspf");    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/jspf/prelude3.jspf", "jspf/prelude3.jspf");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/jspf/prelude2.jspf", "jspf/prelude2.jspf");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/jspf/prelude1.jspf", "jspf/prelude1.jspf");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/jspf/coda3.jspf", "jspf/coda3.jspf");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/jspf/coda2.jspf", "jspf/coda2.jspf");
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/jspf/coda1.jspf", "jspf/coda1.jspf");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/IncludesTest.jsp")), "IncludesTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/two/Includes2Test.jsp")), "two/Includes2Test.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/three/Includes3Test.jspx")), "three/Includes3Test.jspx");
@@ -77,16 +77,16 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspConfigurationIncludesTest
-   * 
-   * @assertion_ids: JSP:SPEC:147;JSP:SPEC:148;JSP:SPEC:149
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:147;PAGES:SPEC:148;PAGES:SPEC:149
+   *
    * @test_Strategy: Validate the following: - The container properly recognizes
    * prelude and coda configuration elements. - Prelude includes are includes at
-   * the beginning of the target JSP(s) identified by the url-pattern, and are
+   * the beginning of the target page(s) identified by the url-pattern, and are
    * included in the order they appear in the deployment descriptor. - Coda
-   * includes are inserted at the end of the target JSP(s) identified by the
+   * includes are inserted at the end of the target page(s) identified by the
    * url-pattern, and are included in the order they appear in the deployment
-   * descriptor. - Validate with both standard syntax JSPs and JSP documents.
+   * descriptor. - Validate with both standard and document syntax pages.
    */
   @Test
   public void jspConfigurationIncludesTest() throws Exception {
@@ -98,9 +98,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspConfigurationIncludes2Test
-   * 
-   * @assertion_ids: JSP:SPEC:147;JSP:SPEC:148;JSP:SPEC:149
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:147;PAGES:SPEC:148;PAGES:SPEC:149
+   *
    * @test_Strategy: Validate the same as above test.
    */
   @Test
@@ -114,10 +114,10 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: jspConfigurationIncludes3Test
-   * 
-   * @assertion_ids: JSP:SPEC:147;JSP:SPEC:148;JSP:SPEC:149
-   * 
-   * @test_Strategy: Validate the same as above test. JSP.1.10.4 states that
+   *
+   * @assertion_ids: PAGES:SPEC:147;PAGES:SPEC:148;PAGES:SPEC:149
+   *
+   * @test_Strategy: Validate the same as above test. Pages.1.10.4 states that
    * implicit includes can use either the same syntax as the including page, or
    * a different syntax.
    */

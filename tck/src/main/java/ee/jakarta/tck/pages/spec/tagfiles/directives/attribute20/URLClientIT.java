@@ -105,7 +105,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeName1Test
    * 
-   * @assertion_ids: JSP:SPEC:230.2
+   * @assertion_ids: PAGES:SPEC:230.2
    * 
    * @test_Strategy: A translation error must result if more than one attribute
    * directive appears in the same translation unit with the same name
@@ -123,7 +123,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeName1IncludeTest
    * 
-   * @assertion_ids: JSP:SPEC:230.2
+   * @assertion_ids: PAGES:SPEC:230.2
    * 
    * @test_Strategy: A translation error must result if more than one attribute
    * directive appears in the same translation unit with the same name
@@ -141,7 +141,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeName2Test
    * 
-   * @assertion_ids: JSP:SPEC:230.1.2
+   * @assertion_ids: PAGES:SPEC:230.1.2
    * 
    * @test_Strategy: A translation error must result if the attribute name
    * equals to the name-given of a variable.
@@ -159,7 +159,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeName2IncludeTest
    * 
-   * @assertion_ids: JSP:SPEC:230.1.2
+   * @assertion_ids: PAGES:SPEC:230.1.2
    * 
    * @test_Strategy: A translation error must result if the attribute name
    * equals to the name-given of a variable.
@@ -177,7 +177,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeName3Test
    * 
-   * @assertion_ids: JSP:SPEC:230.1.2
+   * @assertion_ids: PAGES:SPEC:230.1.2
    * 
    * @test_Strategy: A translation error must result if the attribute name
    * equals to dynamic-attributes of a tag directive.
@@ -195,7 +195,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeName3IncludeTest
    * 
-   * @assertion_ids: JSP:SPEC:230.1.2
+   * @assertion_ids: PAGES:SPEC:230.1.2
    * 
    * @test_Strategy: A translation error must result if the attribute name
    * equals to dynamic-attributes of a tag directive.
@@ -213,7 +213,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: defaultRequiredTest
    * 
-   * @assertion_ids: JSP:SPEC:230.3.3
+   * @assertion_ids: PAGES:SPEC:230.3.3
    * 
    * @test_Strategy: required default is false
    */
@@ -230,7 +230,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: defaultTypeTest
    * 
-   * @assertion_ids: JSP:SPEC:230.6.1
+   * @assertion_ids: PAGES:SPEC:230.6.1
    * 
    * @test_Strategy: type defaults to java.lang.String, and also verify an Float
    * type attribute.
@@ -248,7 +248,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeTypeTest
    * 
-   * @assertion_ids: JSP:SPEC:230.6.2
+   * @assertion_ids: PAGES:SPEC:230.6.2
    * 
    * @test_Strategy: A translation error must result if the type is a primitive
    */
@@ -265,7 +265,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeFragmentTypeTest
    * 
-   * @assertion_ids: JSP:SPEC:230.4.5
+   * @assertion_ids: PAGES:SPEC:230.4.5
    * 
    * @test_Strategy: A translation error must result if fragment is true and
    * type is specified
@@ -283,7 +283,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: negativeFragmentRtexprvalueTest
    * 
-   * @assertion_ids: JSP:SPEC:230.4.2.1
+   * @assertion_ids: PAGES:SPEC:230.4.2.1
    * 
    * @test_Strategy: A translation error must result if fragment is true and
    * rtexprvalue is specified
@@ -301,7 +301,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: defaultFragmentTest
    * 
-   * @assertion_ids: JSP:SPEC:230
+   * @assertion_ids: PAGES:SPEC:230
    * 
    * @test_Strategy: fragment defaults to false. Also verifies the default attr
    * type is String.
@@ -319,7 +319,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: defaultRtexprvalueTest
    * 
-   * @assertion_ids: JSP:SPEC:230
+   * @assertion_ids: PAGES:SPEC:230
    * 
    * @test_Strategy: rtexprvalue defaults to true.
    */
@@ -336,10 +336,10 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: deferredValueMinimumJspVersionTest
    * 
-   * @assertion_ids: JSP:SPEC:230.8.3
+   * @assertion_ids: PAGES:SPEC:230.8.3
    * 
    * @test_Strategy: [deferredValueMinimumJspVersion] The deferredValue
-   * attribute causes a translation error if specified in a tag file with a JSP
+   * attribute causes a translation error if specified in a tag file with a Jakarta Pages
    * version less than 2.1.
    */
 
@@ -355,10 +355,10 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: deferredValueTypeMinimumJspVersionTest
    * 
-   * @assertion_ids: JSP:SPEC:230.9.4
+   * @assertion_ids: PAGES:SPEC:230.9.4
    * 
    * @test_Strategy: [deferredValueTypeMinimumJspVersion] The deferredValueType
-   * attribute causes a translation error if specified in a tag file with a JSP
+   * attribute causes a translation error if specified in a tag file with a Jakarta Pages
    * version less than 2.1.
    */
 
@@ -374,10 +374,10 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: deferredMethodMinimumJspVersionTest
    * 
-   * @assertion_ids: JSP:SPEC:230.10.2
+   * @assertion_ids: PAGES:SPEC:230.10.2
    * 
    * @test_Strategy: [deferredMethodMinimumJspVersion] The deferredMethod
-   * attribute causes a translation error if specified in a tag file with a JSP
+   * attribute causes a translation error if specified in a tag file with a Jakarta Pages
    * version less than 2.1.
    */
 
@@ -393,11 +393,11 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: deferredMethodSignatureMinimumJspVersionTest
    * 
-   * @assertion_ids: JSP:SPEC:230.11.3
+   * @assertion_ids: PAGES:SPEC:230.11.3
    * 
    * @test_Strategy: [deferredMethodSignatureMinimumJspVersion] The
    * deferredMethodSignature attribute causes a translation error if specified
-   * in a tag file with a JSP version less than 2.1.
+   * in a tag file with a Jakarta Pages version less than 2.1.
    */
 
   @Test

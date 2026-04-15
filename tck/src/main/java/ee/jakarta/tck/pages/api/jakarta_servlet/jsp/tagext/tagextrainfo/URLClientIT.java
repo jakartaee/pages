@@ -84,7 +84,7 @@ public class URLClientIT extends AbstractUrlClient {
    * @testName: tagExtraInfoTest
    * 
    * @assertion_ids:
-   * JSP:JAVADOC:264;JSP:JAVADOC:265;JSP:JAVADOC:266;JSP:JAVADOC:267
+   * PAGES:JAVADOC:264;PAGES:JAVADOC:265;PAGES:JAVADOC:266;PAGES:JAVADOC:267
    * 
    * @test_Strategy: Validate the following: - TagExtraInfo.getTagInfo() returns
    * a non-null value as the container called TagExtraInfo.setTagInfo() prior to

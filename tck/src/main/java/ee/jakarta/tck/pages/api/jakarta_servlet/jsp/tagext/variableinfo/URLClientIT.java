@@ -70,7 +70,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: variableInfoCtorTest
    * 
-   * @assertion_ids: JSP:JAVADOC:177
+   * @assertion_ids: PAGES:JAVADOC:177
    * 
    * @test_Strategy: Validate the construction of the VariableInfo object.
    */
@@ -83,7 +83,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: variableInfoGetVarNameTest
    * 
-   * @assertion_ids: JSP:JAVADOC:178
+   * @assertion_ids: PAGES:JAVADOC:178
    * 
    * @test_Strategy: Validate the behavior of VariableInfo.getVarName().
    */
@@ -96,7 +96,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: variableInfoGetClassNameTest
    * 
-   * @assertion_ids: JSP:JAVADOC:179
+   * @assertion_ids: PAGES:JAVADOC:179
    * 
    * @test_Strategy: Validate the behavior of VariableInfo.getClassName().
    */
@@ -109,7 +109,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: variableInfoGetDeclareTest
    * 
-   * @assertion_ids: JSP:JAVADOC:180
+   * @assertion_ids: PAGES:JAVADOC:180
    * 
    * @test_Strategy: Validate the behavior of VariableInfo.getDeclare().
    */
@@ -122,7 +122,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: variableInfoGetScopeTest
    * 
-   * @assertion_ids: JSP:JAVADOC:181
+   * @assertion_ids: PAGES:JAVADOC:181
    * 
    * @test_Strategy: Validate the behavior of VariableInfo.getScopeTest();
    */

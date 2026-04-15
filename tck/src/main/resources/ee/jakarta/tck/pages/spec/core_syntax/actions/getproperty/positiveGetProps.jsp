@@ -20,7 +20,7 @@
 <title>positiveGetProps</title>
 <body>
 <% /** 	Name : positiveGetProps
-	Description : Create a valid useBean tag in the JSP. Access one of its
+	Description : Create a valid useBean tag in the page. Access one of its
                       properties through a getProperty tag.
 	Result : Should return the value of the property as part of the returned 
 	HTML 

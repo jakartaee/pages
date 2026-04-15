@@ -30,7 +30,6 @@ import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
@@ -51,11 +50,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     String packagePath = URLClientIT.class.getPackageName().replace(".", "/");
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_i18n_web.war");
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_i18n_web.xml"));
-    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/BadTagPageEncoding.tag", "tags/BadTagPageEncoding.tag");    
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/BadTagPageEncoding.tag", "tags/BadTagPageEncoding.tag");
 
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/inclusion_utf-16LE.jspx")), "inclusion_utf-16LE.jspx");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/inclusion_iso.txt")), "inclusion_iso.txt");
@@ -98,11 +97,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: i18nStandardPageResponseEncodingTest
-   * 
-   * @assertion_ids: JSP:SPEC:249.4;JSP:SPEC:250.3;JSP:SPEC:250.6.2;
-   * JSP:SPEC:250.2;JSP:SPEC:249.2;JSP:SPEC:250.6.1;
-   * JSP:SPEC:249.3;JSP:SPEC:250.1;JSP:SPEC:250.4
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:249.4;PAGES:SPEC:250.3;PAGES:SPEC:250.6.2;
+   * PAGES:SPEC:250.2;PAGES:SPEC:249.2;PAGES:SPEC:250.6.1;
+   * PAGES:SPEC:249.3;PAGES:SPEC:250.1;PAGES:SPEC:250.4
+   *
    * @test_Strategy: Request 1: Using a page encoded in ISO-8859-1, with no page
    * directive including verify the page is is properly loaded and the resulting
    * output content type is the default of text/html with the charset parameter
@@ -133,7 +132,7 @@ public class URLClientIT extends AbstractUrlClient {
    * consideration. If there's no such specification, no initial response
    * character encoding is passed to ServletResponse.setContentType() - the
    * ServletResponse object's default, ISO-8859-1, is used."
-   * 
+   *
    * However, this section omits the fact that if the default encoding is used,
    * it will be added to the response content type as soon as
    * ServletResponse.getWriter() is called. See the javadoc for
@@ -176,11 +175,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: i18nXmlPageResponseEncodingTest
-   * 
-   * @assertion_ids: JSP:SPEC:249.5;JSP:SPEC:249.6;JSP:SPEC:250.5;
-   * JSP:SPEC:250.3;JSP:SPEC:250.1;JSP:SPEC:250.4
-   * 
-   * @test_Strategy: This test will exercise JSP documents with and without a
+   *
+   * @assertion_ids: PAGES:SPEC:249.5;PAGES:SPEC:249.6;PAGES:SPEC:250.5;
+   * PAGES:SPEC:250.3;PAGES:SPEC:250.1;PAGES:SPEC:250.4
+   *
+   * @test_Strategy: This test will exercise documents with and without a
    * prolog with an encoding attribute. This will be performed over several
    * requests. This test will also validate that items such as charset
    * parameters present in a contentType attribute don't cause problems with the
@@ -199,29 +198,29 @@ public class URLClientIT extends AbstractUrlClient {
    * pageEncoding attribute of the page directive. Since the contentType
    * attribute is also present the resulting output should have a content type
    * of text/plain with a charset of ISO-8859-1. Request 5: Validate that if the
-   * JSP document (encoding in UTF-16) has a prolog with no encoding attribute,
+   * document (encoding in UTF-16) has a prolog with no encoding attribute,
    * that the container is able to properly load the document using the encoding
    * detection semantics specified by the XML 1.0 specification. In this case
-   * the JSP document has no pageEncoding or contentType attributes and is
+   * the document has no pageEncoding or contentType attributes and is
    * encoded in UTF-16. The container should be able to load and parse the page
    * without issue. The response content type should be text/xml with a charset
-   * of UTF-8. Request 6: Validate that a JSP document (encoding in UTF-16BE)
+   * of UTF-8. Request 6: Validate that a document (encoding in UTF-16BE)
    * has a prolog with no encoding attribute, that the container is able to
    * properly load the document using the encoding detection semantics specified
-   * by the XML 1.0 specification. In this case the JSP document has only a
+   * by the XML 1.0 specification. In this case the document has only a
    * pageEncoding attribute defined. The container should be able to load and
    * parse the page without issue. The response content type should be text/xml
-   * with a charset of UTF-8. Request 7: Validate that a JSP document (encoded
+   * with a charset of UTF-8. Request 7: Validate that a document (encoded
    * in UTF-16LE) has a prolog with no encoding attribute, that the container is
    * able to properly load the document using the encoding detection semantics
-   * specified by the XML 1.0 specification. In this case the JSP document has
+   * specified by the XML 1.0 specification. In this case the document has
    * only a contentType attribute defined. The container should be able to load
    * and parse the page without issue. The response content type should be based
    * off the contentType attribute: text/plain with a charset of ISO-8859-1.
-   * Request 8: Validate that a JSP document (encoded in UTF-16) has a prolog
+   * Request 8: Validate that a document (encoded in UTF-16) has a prolog
    * with no encoding attribute, that the container is able to properly load the
    * document using the encoding detection semantics specified by the XML 1.0
-   * specification. In this case the JSP document has both contentType and
+   * specification. In this case the document has both contentType and
    * pageEncoding attributes defined. The container should be able to load and
    * parse the page without issue. The response content type should be based off
    * the contentType attribute: text/plain with a charset of ISO-8859-1.
@@ -287,11 +286,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: i18nEncodingMismatchTest
-   * 
-   * @assertion_ids: JSP:SPEC:249.7
-   * 
-   * @test_Strategy: Validate that if a JSP Document specifies an encoding in
-   * the XML prolog and a JSP page directive specifies a different encoding, a
+   *
+   * @assertion_ids: PAGES:SPEC:249.7
+   *
+   * @test_Strategy: Validate that if a Jakarta Pages Document specifies an encoding in
+   * the XML prolog and a Jakarta Pages page directive specifies a different encoding, a
    * translation error occurs. <em>NOTE: </em> The similiar translation-time
    * error with a mismatched encoding between property groups and pages in
    * standard syntax are covered in the spec/configuration test area.
@@ -311,11 +310,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: i18nUnsupportedEncodingTest
-   * 
-   * @assertion_ids: JSP:SPEC:249.8
-   * 
-   * @test_Strategy: Validate a translation error occurs if a standard JSP
-   * specifies an invalid encoding in the page directive, or if a JSP document
+   *
+   * @assertion_ids: PAGES:SPEC:249.8
+   *
+   * @test_Strategy: Validate a translation error occurs if a standard page
+   * specifies an invalid encoding in the page directive, or if a document
    * has an invalid encoding in the prolog.
    */
   @Test
@@ -332,13 +331,13 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: i18nIncludedContentTest
-   * 
-   * @assertion_ids: JSP:SPEC:249.5
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:249.5
+   *
    * @test_Strategy: Validate that units that make up a single translation unit
-   * all have their file encoding detected individually. In this case a JSP
+   * all have their file encoding detected individually. In this case a Jakarta Pages
    * Document encoded in UTF-16BE using the include directive includes another
-   * JSP Document encoded in UTF-16LE.
+   * Jakarta Pages Document encoded in UTF-16LE.
    */
   @Test
   public void i18nIncludedContentTest() throws Exception {
@@ -354,9 +353,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: i18nBomByteSequencesUTF8Test
-   * 
-   * @assertion_ids: JSP:SPEC:299
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:299
+   *
    * @test_Strategy: [BOMCharacterEncodingDescription] Verify that the character
    * encoding of pages in standard syntax is determined by a BOM, and that the
    * byte sequences reserved to identify a BOM at the beginning of a page do not
@@ -375,9 +374,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: i18nBomByteSequencesUTF16BETest
-   * 
-   * @assertion_ids: JSP:SPEC:299
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:299
+   *
    * @test_Strategy: [BOMCharacterEncodingDescription] Verify that the character
    * encoding of pages in standard syntax is determined by a BOM, and that the
    * byte sequences reserved to identify a BOM at the beginning of a page do not
@@ -397,9 +396,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: i18nBomByteSequencesUTF16LETest
-   * 
-   * @assertion_ids: JSP:SPEC:299
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:299
+   *
    * @test_Strategy: [BOMCharacterEncodingDescription] Verify that the character
    * encoding of pages in standard syntax is determined by a BOM, and that the
    * byte sequences reserved to identify a BOM at the beginning of a page do not
@@ -419,11 +418,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: i18nBomLegalCharacterEncodingTest1
-   * 
-   * @assertion_ids: JSP:SPEC:300
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:300
+   *
    * @test_Strategy: [BOMLegalCharacterEncoding] Verify that when using a BOM,
-   * it is legal to describe the character encoding in a JSP page-encoding
+   * it is legal to describe the character encoding in a Jakarta Pages page-encoding
    * configuration element.
    */
   @Test
@@ -440,9 +439,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: i18nBomLegalCharacterEncodingTest2
-   * 
-   * @assertion_ids: JSP:SPEC:300
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:300
+   *
    * @test_Strategy: [BOMLegalCharacterEncoding] Verify that when using a BOM,
    * it is legal to describe the character encoding in the pageEncoding
    * attribute of a page directive.
@@ -461,9 +460,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: i18nBomErrorReportingTest1
-   * 
-   * @assertion_ids: JSP:SPEC:318
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:318
+   *
    * @test_Strategy: [BOMErrorReporting] Verify that when using a BOM, an error
    * results when the encoding specified by page-encoding configuration element
    * whose URL matches the page does not match the encoding indicated by the
@@ -480,9 +479,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: i18nBomErrorReportingTest2
-   * 
-   * @assertion_ids: JSP:SPEC:318
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:318
+   *
    * @test_Strategy: [BOMErrorReporting] Verify that when using a BOM, an error
    * results when the encoding specified by the pageEncoding attribute of a page
    * directive does not match the encoding indicated by the BOM.
@@ -498,9 +497,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: i18nBomErrorReportingTest3
-   * 
-   * @assertion_ids: JSP:SPEC:318
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:318
+   *
    * @test_Strategy: [BOMErrorReporting] Verify that when using a BOM, an error
    * results when the encoding specified by the pageEncoding attribute of a tag
    * directive does not match the encoding indicated by the BOM.

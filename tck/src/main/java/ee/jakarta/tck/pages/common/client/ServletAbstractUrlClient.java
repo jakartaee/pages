@@ -164,7 +164,7 @@ public abstract class ServletAbstractUrlClient extends BaseUrlClient {
     }
     // A standard test sets consists of a testname
     // a request, and a goldenfile. The URI is not used
-    // in this case since the JSP's are assumed to be located
+    // in this case since the pages are assumed to be located
     // at the top of the contextRoot
     StringBuffer sb = new StringBuffer(50);
 
