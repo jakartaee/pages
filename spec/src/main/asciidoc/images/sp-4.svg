@@ -63,11 +63,11 @@
 		</g>
 		<g id="shape2-13" v:mID="2" v:groupContext="shape" transform="translate(9.22394,-176.468)">
 			<title>Foglio.2</title>
-			<desc>JSP Syntax</desc>
+			<desc>Jakarta Pages (JSP) Syntax</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="21.2598" cy="235.298" width="42.52" height="28.3465"/>
 			<rect x="0" y="221.125" width="42.5197" height="28.3465" class="st6"/>
-			<text x="11.81" y="232.3" class="st7" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>JSP<v:newlineChar/><tspan
+			<text x="11.81" y="232.3" class="st7" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>Jakarta Pages (JSP)<v:newlineChar/><tspan
 						x="4.86" dy="1.2em" class="st8">Syntax</tspan></text>		</g>
 		<g id="shape3-17" v:mID="3" v:groupContext="shape" transform="translate(9.22394,-85.7594)">
 			<title>Foglio.3</title>
@@ -103,11 +103,11 @@
 		</g>
 		<g id="shape11-36" v:mID="11" v:groupContext="shape" transform="translate(6.38929,-224.402)">
 			<title>Foglio.11</title>
-			<desc>JSP Pages</desc>
+			<desc>Jakarta Pages (JSP) Pages</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="31.3087" cy="240.84" width="62.62" height="17.263"/>
 			<rect x="0" y="232.209" width="62.6173" height="17.263" class="st6"/>
-			<text x="5.74" y="243.84" class="st7" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>JSP Pages</text>		</g>
+			<text x="5.74" y="243.84" class="st7" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>Jakarta Pages (JSP) Pages</text>		</g>
 		<g id="shape12-39" v:mID="12" v:groupContext="shape" transform="translate(99.9326,-210.356)">
 			<title>Foglio.12</title>
 			<desc>TRANSLATION PHASE</desc>
@@ -147,11 +147,11 @@
 		</g>
 		<g id="shape143-63" v:mID="143" v:groupContext="shape" transform="translate(153.791,-54.5783)">
 			<title>Foglio.143</title>
-			<desc>JSP Implementation Class</desc>
+			<desc>Jakarta Pages (JSP) Implementation Class</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="42.5197" cy="232.464" width="85.04" height="34.0157"/>
 			<rect x="0" y="215.456" width="85.0394" height="34.0157" class="st6"/>
-			<text x="4" y="223.46" class="st7" v:langID="1040"><v:paragraph/><v:tabList/>JSP <tspan x="4" dy="1.2em" class="st8">Implementation </tspan><tspan
+			<text x="4" y="223.46" class="st7" v:langID="1040"><v:paragraph/><v:tabList/>Jakarta Pages (JSP) <tspan x="4" dy="1.2em" class="st8">Implementation </tspan><tspan
 						x="4" dy="1.2em" class="st8">Class</tspan></text>		</g>
 		<g id="shape144-68" v:mID="144" v:groupContext="shape" transform="translate(197.728,-9.22394)">
 			<title>Foglio.144</title>
