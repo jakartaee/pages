@@ -1,9 +1,9 @@
 //
-// Copyright (c) 2017, 2023 Contributors to the Eclipse Foundation
+// Copyright (c) 2017, 2026 Contributors to the Eclipse Foundation
 //
 
-= Jakarta Server Pages
-:authors: Jakarta Server Pages Team, https://projects.eclipse.org/projects/ee4j.jsp
+= Jakarta Pages
+:authors: Jakarta Pages Team, https://projects.eclipse.org/projects/ee4j.jsp
 :email: https://dev.eclipse.org/mailman/listinfo/jsp-dev
 :version-label!:
 :doctype: book
