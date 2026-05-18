@@ -87,7 +87,7 @@
 
     <properties>
         <!-- Timestamp for repeatable builds (more recent than parent -->
-        <project.build.outputTimestamp>2026-05-18T17:59:02Z</project.build.outputTimestamp>
+        <project.build.outputTimestamp>2026-05-18T17:59:19Z</project.build.outputTimestamp>
         <!-- API version for signature test-->
         <api.version>4.1</api.version>
         <!-- Jakarta API versions -->
