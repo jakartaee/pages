@@ -30,7 +30,7 @@
 
     <groupId>jakarta.servlet.jsp</groupId>
     <artifactId>jakarta.servlet.jsp-api</artifactId>
-    <version>4.1.0-M0</version>
+    <version>4.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Jakarta Pages API</name>
@@ -79,7 +79,7 @@
 
     <properties>
         <!-- Timestamp for repeatable builds (more recent than parent) -->
-        <project.build.outputTimestamp>2026-05-19T09:26:13Z</project.build.outputTimestamp>
+        <project.build.outputTimestamp>2026-05-19T09:26:33Z</project.build.outputTimestamp>
         <!-- OSGi properties -->
         <!-- Make sure the two versions are in sync with the maven version -->
         <spec.version>4.1</spec.version>
