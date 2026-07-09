@@ -80,16 +80,16 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: pageDataTest
    * 
-   * @assertion_ids: JSP:JAVADOC:313
+   * @assertion_ids: PAGES:JAVADOC:313
    * 
    * @test_Strategy: Validate the following: - We can get an inputstream from
    * the PageData object provided to the validation method of the
-   * TagLibraryValidator. - Validate the XML view of a JSP page: - page
+   * TagLibraryValidator. - Validate the XML view of a Jakarta Pages page: - page
    * directives are jsp:directive.page elements - taglib directives are includes
    * in the namespace declaration in the jsp:root element - include directives
    * are not present in the XML view - template text is wrapped by jsp:text
    * elements - scriptlets are wrapped by jsp:scriptlet elements - declarations
-   * are wrapped by jsp:declaration elements - JSP expressions are wrapped by
+   * are wrapped by jsp:declaration elements - Jakarta Pages expressions are wrapped by
    * jsp:expression elements - rt expressions are converted from '<%=' '%>' to
    * '%=' '%' - Custom taglib usages are passed through - the jsp:root element
    * is present - the jsp namespace is present in the jsp:root element.
@@ -107,7 +107,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: pageDataTagFileTest
    * 
-   * @assertion_ids: JSP:JAVADOC:313
+   * @assertion_ids: PAGES:JAVADOC:313
    * 
    * @test_Strategy: same as above.
    */

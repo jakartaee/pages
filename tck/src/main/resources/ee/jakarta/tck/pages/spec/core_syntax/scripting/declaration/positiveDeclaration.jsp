@@ -59,7 +59,7 @@
 <title>positiveDeclaration</title>
 <body>
 <% /**	Name : positiveDeclaration
-		Description: Create a JSP page with a valid Java 
+		Description: Create a page with a valid Java 
 			declaration element. Use the declared variable 
 			in the page in a scriptlet.   
 		Result: No error  

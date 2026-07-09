@@ -59,8 +59,8 @@
 <title>positiveExpr</title>
 <body>
 <% /** Name: positiveExpr
-	   Description:Create a valid JSP expression.
-	   Result: The JSP page output with the evaluated
+	   Description:Create a valid Jakarta Pages expression.
+	   Result: The Jakarta Pages page output with the evaluated
 	   		 value of expression duly inserted in the
 	   		 page.
 **/ %>

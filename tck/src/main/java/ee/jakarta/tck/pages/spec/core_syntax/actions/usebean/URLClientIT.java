@@ -28,7 +28,6 @@ import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
@@ -52,10 +51,10 @@ public class URLClientIT extends AbstractUrlClient {
 
   @Deployment(testable = false)
   public static WebArchive createDeployment() throws IOException {
-    
+
     WebArchive archive = ShrinkWrap.create(WebArchive.class, "jsp_coresyntx_act_usebean_web.war");
     archive.addClasses(Counter.class, NewCounter.class, String_IntBean.class);
-    
+
     archive.setWebXML(URLClientIT.class.getClassLoader().getResource(packagePath+"/jsp_coresyntx_act_usebean_web.xml"));
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/date.ser")), "WEB-INF/classes/date.ser");
 
@@ -80,7 +79,7 @@ public class URLClientIT extends AbstractUrlClient {
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/negativeClassCastException.jsp")), "negativeClassCastException.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/errorPage.jsp")), "errorPage.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/defaultScope.jsp")), "defaultScope.jsp");
-    
+
     return archive;
   }
 
@@ -93,9 +92,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveBeanNameTypeTest
-   * 
-   * @assertion_ids: JSP:SPEC:155.1;JSP:SPEC:156;JSP:SPEC:162.2;JSP:SPEC:168.8
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:155.1;PAGES:SPEC:156;PAGES:SPEC:162.2;PAGES:SPEC:168.8
+   *
    * @test_Strategy: Use jsp:useBean to create a bean where the beanName and
    * type attributes have the same values. Verify that the bean can be used by
    * invoking a method on the bean inside a scriplet.
@@ -111,9 +110,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveBeanNameTypeCastTest
-   * 
-   * @assertion_ids: JSP:SPEC:162.1
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:162.1
+   *
    * @test_Strategy: Use jsp:useBean to create a bean where the beanName
    * specifies one particular type, and type specifies a superclass of the value
    * specified by beanName. Verify that the bean can be used by invoking a
@@ -130,9 +129,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveBodyNewTest
-   * 
-   * @assertion_ids: JSP:SPEC:161.7.1
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:161.7.1
+   *
    * @test_Strategy: Using jsp:useBean, create a new instance. Within the body
    * of the jsp:useBean action, use jsp:setProperty to initialize a Bean
    * property. After closing the jsp:useBean action, use jsp:getProperty to
@@ -149,13 +148,13 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positivePageScopedObjectTest
-   * 
-   * @assertion_ids: JSP:SPEC:158; JSP:SPEC:158.2;JSP:SPEC:8
-   * 
-   * @test_Strategy: In one JSP page, create a new bean object using jsp:useBean
+   *
+   * @assertion_ids: PAGES:SPEC:158; PAGES:SPEC:158.2;PAGES:SPEC:8
+   *
+   * @test_Strategy: In one page, create a new bean object using jsp:useBean
    * with the scope set to "page". After the object has been created, forward
-   * the request to a second JSP page to validate that an object associated with
-   * the same ID used in the first JSP page is not available in the current
+   * the request to a second page to validate that an object associated with
+   * the same ID used in the first page is not available in the current
    * PageContext.
    */
 
@@ -171,13 +170,13 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveRequestScopedObjectTest
-   * 
-   * @assertion_ids: JSP:SPEC:158; JSP:SPEC:158.3;JSP:SPEC:9
-   * 
-   * @test_Strategy: In one JSP page, create a new bean object using jsp:useBean
+   *
+   * @assertion_ids: PAGES:SPEC:158; PAGES:SPEC:158.3;PAGES:SPEC:9
+   *
+   * @test_Strategy: In one page, create a new bean object using jsp:useBean
    * with the scope set to "request". After the object has been created, forward
-   * the request to a second JSP page to validate that an object associated with
-   * the same ID used in the first JSP page is available in the current
+   * the request to a second page to validate that an object associated with
+   * the same ID used in the first page is available in the current
    * HttpServletRequest.
    */
 
@@ -193,13 +192,13 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveSessionScopedObjectTest
-   * 
-   * @assertion_ids: JSP:SPEC:158; JSP:SPEC:158.4;JSP:SPEC:10
-   * 
-   * @test_Strategy: In one JSP page, create a new bean object using jsp:useBean
+   *
+   * @assertion_ids: PAGES:SPEC:158; PAGES:SPEC:158.4;PAGES:SPEC:10
+   *
+   * @test_Strategy: In one page, create a new bean object using jsp:useBean
    * with the scope set to "session". After the object has been created, forward
-   * the request to a second JSP page to validate that an object associated with
-   * the same ID used in the first JSP page is available in the current
+   * the request to a second page to validate that an object associated with
+   * the same ID used in the first page is available in the current
    * HttpSession.
    */
 
@@ -215,13 +214,13 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveApplicationScopedObjectTest
-   * 
-   * @assertion_ids: JSP:SPEC:158; JSP:SPEC:158.5;JSP:SPEC:11
-   * 
-   * @test_Strategy: In one JSP page, create a new bean object using jsp:useBean
+   *
+   * @assertion_ids: PAGES:SPEC:158; PAGES:SPEC:158.5;PAGES:SPEC:11
+   *
+   * @test_Strategy: In one page, create a new bean object using jsp:useBean
    * with the scope set to "application". After the object has been created,
-   * forward the request to a second JSP page to validate that an object
-   * associated with the same ID used in the first JSP page is available in the
+   * forward the request to a second page to validate that an object
+   * associated with the same ID used in the first page is available in the
    * current ServletContext.
    */
 
@@ -237,9 +236,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveNoBodyTest
-   * 
-   * @assertion_ids: JSP:SPEC:161.5
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:161.5
+   *
    * @test_Strategy: Explicit test to ensure that the jsp:useBean action can be
    * used without a body.
    */
@@ -254,9 +253,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: positiveClassTypeCastTest
-   * 
-   * @assertion_ids: JSP:SPEC:161.8
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:161.8
+   *
    * @test_Strategy: Create a new bean instance with a particular class set for
    * the class attribute, and a parent class for the type attribute. Validate
    * That the instance is cast without an Exception.
@@ -272,9 +271,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: negativeDuplicateIDFatalTranslationErrorTest
-   * 
-   * @assertion_ids: JSP:SPEC:157
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:157
+   *
    * @test_Strategy: Create two beans with the same id attribute. Validate that
    * a Fatal Translation error occurs.
    */
@@ -291,9 +290,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: negativeSessionScopeFatalTranslationErrorTest
-   * 
-   * @assertion_ids: JSP:SPEC:10;JSP:SPEC:159
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:10;PAGES:SPEC:159
+   *
    * @test_Strategy: Use the page directive to set the session attribute to
    * false and then declare a bean with session scope. Validate that a Fatal
    * Translation error occurs.
@@ -311,11 +310,11 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: negativeClassCastExceptionTest
-   * 
-   * @assertion_ids: JSP:SPEC:161.4
-   * 
-   * @test_Strategy: In one JSP page, declare a bean of a particular type with
-   * session scope. Once declared, this page will forward to a second JSP page
+   *
+   * @assertion_ids: PAGES:SPEC:161.4
+   *
+   * @test_Strategy: In one page, declare a bean of a particular type with
+   * session scope. Once declared, this page will forward to a second page
    * which will try to reference the previously declared bean in the session
    * scope, but will define the type attribute with an incompatible type.
    */
@@ -334,9 +333,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: negativeTypeAssignableTest
-   * 
-   * @assertion_ids: JSP:SPEC:152
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:152
+   *
    * @test_Strategy: both type and class attributes are present and class is not
    * assignable to type
    */
@@ -353,9 +352,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: negativeInvalidScopeTest
-   * 
-   * @assertion_ids: JSP:SPEC:158.6
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:158.6
+   *
    * @test_Strategy: both type and class attributes are present and class is not
    * assignable to type
    */
@@ -372,9 +371,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: defaultScopeTest
-   * 
-   * @assertion_ids: JSP:SPEC:158.1
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:158.1
+   *
    * @test_Strategy: check if the default scope is page
    */
 
@@ -389,9 +388,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: requestTimeBeanNameTest
-   * 
-   * @assertion_ids: JSP:SPEC:154; JSP:SPEC:155
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:154; PAGES:SPEC:155
+   *
    * @test_Strategy: use a request-time attribute expression for beanName
    */
 
@@ -407,9 +406,9 @@ public class URLClientIT extends AbstractUrlClient {
 
   /*
    * @testName: serBeanNameTest
-   * 
-   * @assertion_ids: JSP:SPEC:155; JSP:SPEC:152
-   * 
+   *
+   * @assertion_ids: PAGES:SPEC:155; PAGES:SPEC:152
+   *
    * @test_Strategy: use beanName of the form a.b.c.ser
    */
 

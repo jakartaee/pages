@@ -68,8 +68,8 @@ public class PageDataValidator extends TagLibraryValidator {
   }
 
   /**
-   * Validates the XML view of the JSP page using the provided PageData object.
-   * 
+   * Validates the XML view of the Jakarta Pages page using the provided PageData object.
+   *
    * @param prefix
    *          - the tag library prefix
    * @param uri
@@ -118,7 +118,7 @@ public class PageDataValidator extends TagLibraryValidator {
 
   /**
    * Returns the TVL invocation status.
-   * 
+   *
    * @return true if the TLV has been called, otherwise false
    */
   public static boolean wasCalled() {
@@ -156,8 +156,8 @@ public class PageDataValidator extends TagLibraryValidator {
   }
 
   /**
-   * Displays the XML view of a JSP page as seen by the container.
-   * 
+   * Displays the XML view of a Jakarta Pages page as seen by the container.
+   *
    * @param in
    *          - the InputStream from PageData
    */
@@ -173,12 +173,12 @@ public class PageDataValidator extends TagLibraryValidator {
           out.write(i);
         }
 
-        debug("*************** XML View of JSP Page ***************");
+        debug("********** XML View of Jakarta Pages Page **********");
         debug(out.toString());
         debug("****************************************************");
       } catch (Throwable t) {
         debug("[INFO] Unexpected exception while trying to display XML view "
-            + "of the JSP page.");
+            + "of the Jakarta Pages page.");
       } finally {
         try {
           bin.close();
@@ -193,7 +193,7 @@ public class PageDataValidator extends TagLibraryValidator {
   /**
    * Utility method to wrap JspTestUtil.debug(). This method will add this
    * class' name to the provide message and then delegate to JspTestUtil.
-   * 
+   *
    * @param message
    *          - a debug message
    */
@@ -203,7 +203,7 @@ public class PageDataValidator extends TagLibraryValidator {
 
   /**
    * An extension to the DefaultHandler to process the elements within the XML
-   * view of a JSP page.
+   * view of a Jakarta Pages page.
    */
   private static class PageHandler extends DefaultHandler {
 
@@ -244,7 +244,7 @@ public class PageDataValidator extends TagLibraryValidator {
 
     /**
      * The <tt>jsp:directive.include</tt> element. <tt>NOTE:</tt> this should
-     * <tt>not</tt> appear in the XML view of a JSP page.
+     * <tt>not</tt> appear in the XML view of a Jakarta Pages page.
      */
     private static final String JSP_INCL_QN = "jsp:directive.include";
 
@@ -303,7 +303,7 @@ public class PageDataValidator extends TagLibraryValidator {
 
     /**
      * Counter indicating that the RT expression present in the
-     * <tt>pagedata.test</tt> element was properly converted from standard JSP
+     * <tt>pagedata.test</tt> element was properly converted from standard Jakarta Pages
      * syntax to syntax supported by XML.
      */
     private short _rtExprFound = 0;
@@ -333,7 +333,7 @@ public class PageDataValidator extends TagLibraryValidator {
 
     /**
      * Handles the start elements found in the XML stream by the parser.
-     * 
+     *
      * @param uri
      *          - the uri of the namespace
      * @param localName
@@ -390,7 +390,7 @@ public class PageDataValidator extends TagLibraryValidator {
             String value = attributes.getValue(i).trim();
             debug("pagedata:test attribute '" + name + "' value: " + value);
             if (value.startsWith("%=") && (value.endsWith("%"))) {
-              debug("Converted JSP RT attribute expression was found!");
+              debug("Converted Jakarta Pages RT attribute expression was found!");
               _rtExprFound++;
             }
           }
@@ -424,7 +424,7 @@ public class PageDataValidator extends TagLibraryValidator {
     /**
      * Checks the instance variables used to count the elements processed and
      * based on the values, will return failure messages.
-     * 
+     *
      * @return null of no errors occurred, othersise an array of
      *         ValidationMessages noting the failures.
      */
@@ -434,77 +434,77 @@ public class PageDataValidator extends TagLibraryValidator {
       List messageList = new ArrayList();
       if (_scrWasFound == 0) {
         messageList.add(
-            "Unable to find the jsp:scriptlet element in theXML view of the processed JSP page.\n");
+            "Unable to find the jsp:scriptlet element in the XML view of the processed Jakarta Pages page.\n");
       }
       if (_scrWasFound > 1) {
         messageList.add("Found " + _scrWasFound
-            + " jsp:scriplet elements in the XML view of the processed JSP page when 1 was expected.\n");
+            + " jsp:scriplet elements in the XML view of the processed Jakarta Pages page when 1 was expected.\n");
       }
       if (_declWasFound == 0) {
         messageList.add(
-            "Unable to find the jsp:declaration element in the XML view of the processed JSP page.\n");
+            "Unable to find the jsp:declaration element in the XML view of the processed Jakarta Pages page.\n");
       }
       if (_declWasFound > 1) {
         messageList.add("Found " + _declWasFound
-            + " jsp:declaration elements in the XML view of the processed JSP page when 1 was expected.\n");
+            + " jsp:declaration elements in the XML view of the processed Jakarta Pages page when 1 was expected.\n");
       }
       if (_exprWasFound == 0) {
         messageList.add(
-            "Unable to find the jsp:expression element in the XML view of the JSP page.\n");
+            "Unable to find the jsp:expression element in the XML view of the Jakarta Pages page.\n");
       }
       if (_exprWasFound > 1) {
         messageList.add("Found " + _exprWasFound
-            + " jsp:scriplet elements in the XML view of the processed JSP page when 1 was expected.\n");
+            + " jsp:scriplet elements in the XML view of the processed Jakarta Pages page when 1 was expected.\n");
       }
       if (_tagLibWasFound == 0) {
         messageList.add(
-            "Unable to find the taglib call pagedata:test element in the XML view of the JSP page.\n");
+            "Unable to find the taglib call pagedata:test element in the XML view of the Jakarta Pages page.\n");
       }
       if (_tagLibWasFound > 1) {
         messageList.add("Found " + _tagLibWasFound
-            + " pagedata:test elements in the XML view of the processed JSP page when 1 was expected.\n");
+            + " pagedata:test elements in the XML view of the processed Jakarta Pages page when 1 was expected.\n");
       }
       if (_tagDeclWasFound == 0) {
         messageList.add(
             "Unable to find the taglib declaration for uri 'http://java.sun.com/tck/jsp/pagedata' in "
-                + "the XML view of the JSP page.\n");
+                + "the XML view of the Jakarta Pages page.\n");
       }
       if (_tagDeclWasFound > 1) {
         messageList.add("Found " + _tagDeclWasFound
-            + " xmlns:pagedata attributes of the jsp:root element  in the XML view of the processed JSP page when 1 was expected.\n");
+            + " xmlns:pagedata attributes of the jsp:root element in the XML view of the processed Jakarta Pages page when 1 was expected.\n");
       }
       if (_jspRootWasFound == 0) {
         messageList.add(
-            "Unable to find the jsp:root element in the XML view of the JSP page.\n");
+            "Unable to find the jsp:root element in the XML view of the Jakarta Pages page.\n");
       }
       if (_jspRootWasFound > 1) {
         messageList.add("Found " + _jspRootWasFound
-            + " jsp:root elements in the XML view of the processed JSP page when 1 was expected.\n");
+            + " jsp:root elements in the XML view of the processed Jakarta Pages page when 1 was expected.\n");
       }
       if (_textWasFound == 0) {
         messageList.add(
-            "Unable to find the jsp:text element in the XML view of the JSP page.\n");
+            "Unable to find the jsp:text element in the XML view of the Jakarta Pages page.\n");
       }
       if (_pageDirectiveFound == 0) {
         messageList.add(
-            "Unable to find the jsp:page.directive element in the XML view of the JSP page.\n");
+            "Unable to find the jsp:page.directive element in the XML view of the Jakarta Pages page.\n");
       }
       if (_pageDirectiveFound > 1) {
         messageList.add("Found " + _pageDirectiveFound
-            + " jsp:directive.page elements in the XML view of the processed JSP page when 1 was expected.\n");
+            + " jsp:directive.page elements in the XML view of the processed Jakarta Pages page when 1 was expected.\n");
       }
       if (_includeDirectiveFound != 0) {
         messageList.add(
-            "Unexpectedly found a jsp:directive.include element in the XML view of the JSP page.\n");
+            "Unexpectedly found a jsp:directive.include element in the XML view of the Jakarta Pages page.\n");
       }
       if (_jspNameSpaceFound == 0) {
         messageList.add(
-            "Unable to find JSP namespace xmlns:jsp with URI of 'http://java.sun.com/JSP/Page'"
-                + " in the XML view of the JSP page.\n");
+            "Unable to find Jakarta Pages namespace xmlns:jsp with URI of 'http://java.sun.com/JSP/Page'"
+                + " in the XML view of the Jakarta Pages page.\n");
       }
       if (_jspNameSpaceFound > 1) {
         messageList.add("Found " + _jspNameSpaceFound
-            + " JSP namespace attributes within the jsp:root element in the XML view of the processed JSP page when 1 was expected.\n");
+            + " Jakarta Pages namespace attributes within the jsp:root element in the XML view of the processed Jakarta Pages page when 1 was expected.\n");
       }
       if (_rtExprFound == 0) {
         messageList.add(
@@ -512,7 +512,7 @@ public class PageDataValidator extends TagLibraryValidator {
       }
       if (_rtExprFound > 1) {
         messageList.add("Found " + _rtExprFound
-            + " rt expressions in the XML view of the JSP page, expected only 1.\n");
+            + " rt expressions in the XML view of the Jakarta Pages page, expected only 1.\n");
       }
       if (_jspRootVersionFound == 0) {
         messageList.add(
@@ -542,7 +542,7 @@ public class PageDataValidator extends TagLibraryValidator {
      * Checks that the jsp:id attribute exists in the attribute list of the
      * specified element. If it doesn't it adds this element name to a list of
      * elements that have a similar issue.
-     * 
+     *
      * @param elementName
      *          - name of the element
      * @param attributes
@@ -565,7 +565,7 @@ public class PageDataValidator extends TagLibraryValidator {
     /**
      * Scans the provided attribute object for the specified attribute name and
      * value. If value is null, then only the attribute name is checked.
-     * 
+     *
      * @param attrName
      *          - name of the attribute to check for
      * @param attrValue
@@ -601,7 +601,7 @@ public class PageDataValidator extends TagLibraryValidator {
     /**
      * Returns a string representation of the Map containing elements and the
      * occurrence count.
-     * 
+     *
      * @param map
      *          - element map
      * @return String representation of the map

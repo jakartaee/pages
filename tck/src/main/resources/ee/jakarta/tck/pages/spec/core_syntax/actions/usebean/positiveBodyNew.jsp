@@ -20,7 +20,7 @@
 <title>positiveBodyNew</title>
 <body>
 <% /** 	Name : positiveBodyNew
-	Description : Try to create a valid useBean tag in the JSP page with a
+	Description : Try to create a valid useBean tag in the page with a
                       non-empty body. Ensure that the classname specified
                       does not exist.
 	Result :Should return the contents of the HTML page along with what

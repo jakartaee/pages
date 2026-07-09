@@ -30,7 +30,7 @@ import jakarta.servlet.jsp.PageContext;
 public class ResultVerifierBean {
 
   /**
-   * JSP PageContext.
+   * Jakarta Pages PageContext.
    */
   private PageContext _context = null;
 

@@ -24,7 +24,7 @@ import jakarta.el.ELException;
 /**
  * Defines variable resolution behavior for Class imports and static imports.
  *
- * @since JSP 3.1
+ * @since Pages (JSP) 3.1
  */
 public class ImportELResolver extends ELResolver {
 

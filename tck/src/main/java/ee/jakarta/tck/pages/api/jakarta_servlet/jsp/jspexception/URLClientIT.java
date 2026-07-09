@@ -63,7 +63,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspExceptionDefaultCtorTest
    *
-   * @assertion_ids: JSP:JAVADOC:125
+   * @assertion_ids: PAGES:JAVADOC:125
    *
    * @test_Strategy: Validate default constructor of JspException
    */
@@ -76,7 +76,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspExceptionMessageCtorTest
    *
-   * @assertion_ids: JSP:JAVADOC:126
+   * @assertion_ids: PAGES:JAVADOC:126
    *
    * @test_Strategy: Validate contructor taking single string argument as the
    * message of the Exception.
@@ -90,7 +90,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspExceptionCauseCtorTest
    *
-   * @assertion_ids: JSP:JAVADOC:128
+   * @assertion_ids: PAGES:JAVADOC:128
    *
    * @test_Strategy: Validate constructor taking a Throwable signifying the root
    * cause of the this JspException.
@@ -104,7 +104,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspExceptionCauseMessageCtorTest
    *
-   * @assertion_ids: JSP:JAVADOC:127
+   * @assertion_ids: PAGES:JAVADOC:127
    *
    * @test_Strategy: Validate constructor taking both a message and a Throwable
    * signifying the root cause of the JspException.

@@ -109,7 +109,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspTagFilePackagedJarTest
    * 
-   * @assertion_ids: JSP:SPEC:220.1
+   * @assertion_ids: PAGES:SPEC:220.1
    * 
    * @test_Strategy: Validate that tag files packaged in a JAR file and
    * referenced in a TLD, can be recognized by the container and invoked within
@@ -126,7 +126,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspTagFilePackagedJarIgnoredTagTest
    * 
-   * @assertion_ids: JSP:SPEC:220.2
+   * @assertion_ids: PAGES:SPEC:220.2
    * 
    * @test_Strategy: Validate that if a Tag file is packaged in a JAR but not
    * referenced by a TLD, the container ignores the tag file. Since the Page
@@ -143,7 +143,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspTagFilePackagedWarTest
    * 
-   * @assertion_ids: JSP:SPEC:221
+   * @assertion_ids: PAGES:SPEC:221
    * 
    * @test_Strategy: Validate that tag files can be properly detected by the
    * container and that they can be used in a Page.
@@ -175,9 +175,9 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: implicitTldMinimumJspVersionTest
    * 
-   * @assertion_ids: JSP:SPEC:311
+   * @assertion_ids: PAGES:SPEC:311
    * 
-   * @test_Strategy: [ImplicitTldMinimumJspVersion] Show that if the JSP version
+   * @test_Strategy: [ImplicitTldMinimumJspVersion] Show that if the Jakarta Pages version
    * specified in an implicit.tld file is less than 2.0 a translation error will
    * result.
    */
@@ -192,9 +192,9 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: implicitTldAdditionalElementsTest
    * 
-   * @assertion_ids: JSP:SPEC:310
+   * @assertion_ids: PAGES:SPEC:310
    * 
-   * @test_Strategy: [ImplicitTldAdditionalElements] Show that if the JSP
+   * @test_Strategy: [ImplicitTldAdditionalElements] Show that if the Jakarta Pages
    * version specified in an implicit.tld file is less than 2.0 a translation
    * error will result.
    */
@@ -209,10 +209,10 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tldImplicitTldJspVersionNotMatchTest
    * 
-   * @assertion_ids: JSP:SPEC:313
+   * @assertion_ids: PAGES:SPEC:313
    * 
    * @test_Strategy: [TldImplicitTldJspVersionNotMatch] Show that if a tag file
-   * is referenced by both a TLD and an implicit TLD, the JSP versions of the
+   * is referenced by both a TLD and an implicit TLD, the Jakarta Pages versions of the
    * TLD and implicit TLD do not need to match.
    */
   @Test
@@ -226,9 +226,9 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: implicitTldReservedName20Test
    * 
-   * @assertion_ids: JSP:SPEC:308
+   * @assertion_ids: PAGES:SPEC:308
    * 
-   * @test_Strategy: [ImplicitTldReservedName] The JSP version of an implicit
+   * @test_Strategy: [ImplicitTldReservedName] The Jakarta Pages version of an implicit
    * tag library may be configured by placing a TLD with the reserved name
    * "implicit.tld" in the same directory as the implicit tag library's
    * constituent tag files. Verify this for version 2.0 by embedding '{#' in an
@@ -245,9 +245,9 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: implicitTldReservedName21Test
    * 
-   * @assertion_ids: JSP:SPEC:308
+   * @assertion_ids: PAGES:SPEC:308
    * 
-   * @test_Strategy: [ImplicitTldReservedName] The JSP version of an implicit
+   * @test_Strategy: [ImplicitTldReservedName] The Jakarta Pages version of an implicit
    * tag library may be configured by placing a TLD with the reserved name
    * "implicit.tld" in the same directory as the implicit tag library's
    * constituent tag files. Verify this for version 2.1 by embedding '{#' in an
@@ -264,7 +264,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: implicitTldDefaultJspVersionTest
    * 
-   * @assertion_ids: JSP:SPEC:307
+   * @assertion_ids: PAGES:SPEC:307
    * 
    * @test_Strategy: [ImplicitTldDefaultJspVersion] Show that the jsp version of
    * an implicit tag library defaults to 2.0 by embedding an unescaped '#{"

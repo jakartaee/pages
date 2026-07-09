@@ -80,7 +80,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: tryCatchFinallyTest
    * 
-   * @assertion_ids: JSP:JAVADOC:339;JSP:JAVADOC:341
+   * @assertion_ids: PAGES:JAVADOC:339;PAGES:JAVADOC:341
    * 
    * @test_Strategy: Validate the behavior of the container when a tag
    * implements the TryCatchFinally interface.

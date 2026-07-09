@@ -46,11 +46,11 @@
 		</g>
 		<g id="shape11-3" v:mID="11" v:groupContext="shape" transform="translate(318.073,-252.876)">
 			<title>Foglio.11</title>
-			<desc>JSP Page</desc>
+			<desc>Jakarta Pages (JSP) Page</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="31.3087" cy="267.769" width="62.62" height="17.263"/>
 			<rect x="0" y="259.138" width="62.6173" height="17.263" class="st2"/>
-			<text x="8.52" y="270.77" class="st3" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>JSP Page</text>		</g>
+			<text x="8.52" y="270.77" class="st3" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>Jakarta Pages (JSP) Page</text>		</g>
 		<g id="shape12-6" v:mID="12" v:groupContext="shape" transform="translate(258.418,-10.6094)">
 			<title>Foglio.12</title>
 			<desc>TRANSLATION PHASE</desc>
@@ -72,11 +72,11 @@
 		</g>
 		<g id="shape2-16" v:mID="2" v:groupContext="shape" transform="translate(3.55465,-253.003)">
 			<title>Foglio.2</title>
-			<desc>JSP Container</desc>
+			<desc>Jakarta Pages (JSP) Container</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="54.1134" cy="267.769" width="108.23" height="17.263"/>
 			<rect x="0" y="259.138" width="108.227" height="17.263" class="st2"/>
-			<text x="19.94" y="270.77" class="st3" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>JSP Container</text>		</g>
+			<text x="19.94" y="270.77" class="st3" v:langID="1040"><v:paragraph v:horizAlign="1"/><v:tabList/>Jakarta Pages (JSP) Container</text>		</g>
 		<g id="shape3-19" v:mID="3" v:groupContext="shape" transform="translate(571.924,235.996) rotate(90) scale(-1,1)">
 			<title>Foglio.3</title>
 			<path d="M0 276.4 L209.76 276.4" class="st6"/>

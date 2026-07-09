@@ -72,7 +72,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: positiveDeclarationTest
    * 
-   * @assertion_ids: JSP:SPEC:74;PENDING
+   * @assertion_ids: PAGES:SPEC:74;PENDING
    * 
    * @test_Strategy: Validate the scripting declarations are properly
    * recognized, by declaring and assigning a value to an int variable, and

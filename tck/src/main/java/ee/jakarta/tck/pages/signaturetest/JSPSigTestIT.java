@@ -96,8 +96,8 @@ public class JSPSigTestIT extends SigTest {
   /*
    * @testName: signatureTest
    *
-   * @assertion: A JSP container must implement the required classes and APIs
-   * specified in the JSP Specification.
+   * @assertion: A Jakarta Pages container must implement the required classes and APIs
+   * specified in the Jakarta Pages Specification.
    *
    * @test_Strategy: Using reflection, gather the implementation specific
    * classes and APIs. Compare these results with the expected (required)

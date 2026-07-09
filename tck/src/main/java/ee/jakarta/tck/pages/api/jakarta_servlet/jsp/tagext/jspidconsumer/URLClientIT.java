@@ -74,7 +74,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: setJspIdTest
    * 
-   * @assertion_ids: JSP:JAVADOC:434
+   * @assertion_ids: PAGES:JAVADOC:434
    * 
    * @test_Strategy: Validate the behavior of JspIdConsumer.setJspId() Implement
    * the setJspId() method in a tag handler. Verify that the ID generated
@@ -91,7 +91,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: multipleJspIdTest
    * 
-   * @assertion_ids: JSP:JAVADOC:434
+   * @assertion_ids: PAGES:JAVADOC:434
    * 
    * @test_Strategy: Validate the behavior of JspIdConsumer.setJspId() Implement
    * the setJspId() method in multiple tag handlers. Verify that each tag has a
@@ -108,7 +108,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: sameJspIdTest
    * 
-   * @assertion_ids: JSP:JAVADOC:434
+   * @assertion_ids: PAGES:JAVADOC:434
    * 
    * @test_Strategy: Validate the behavior of JspIdConsumer.setJspId() Implement
    * the setJspId() method in a single tag handler. Verify that when the jsp

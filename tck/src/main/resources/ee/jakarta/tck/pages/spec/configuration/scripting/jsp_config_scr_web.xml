@@ -27,7 +27,7 @@
             <taglib-uri>http://java.sun.com/tck/jsp/scr</taglib-uri>
             <taglib-location>/WEB-INF/tag.tld</taglib-location>
         </taglib>
-        <!-- Define 3 jsp-property-groups to validate Table JSP.3-3 using standard syntax -->
+        <!-- Define 3 jsp-property-groups to validate Table Pages.3-3 using standard syntax -->
         <jsp-property-group>
             <description>Unspecified in property-group</description>
             <url-pattern>/scrunspec/*</url-pattern>
@@ -42,7 +42,7 @@
             <url-pattern>/scrtrue/*</url-pattern>
             <scripting-invalid>true</scripting-invalid>
         </jsp-property-group>
-        <!-- Define 3 jsp-property-groups to validate Table JSP.3-3 using JSP documents -->
+        <!-- Define 3 jsp-property-groups to validate Table Pages.3-3 using documents -->
         <jsp-property-group>
             <description>Unspecified in property-group</description>
             <url-pattern>/scrunspecx/*</url-pattern>

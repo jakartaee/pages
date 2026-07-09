@@ -70,7 +70,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: positiveEscapingTest
    * 
-   * @assertion_ids: JSP:SPEC:7
+   * @assertion_ids: PAGES:SPEC:7
    * 
    * @testStrategy: Validate handling of escaped entities.
    */

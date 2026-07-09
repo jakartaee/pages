@@ -35,7 +35,7 @@ public class SimpleTagSupport implements SimpleTag {
     /** Reference to the enclosing tag. */
     private JspTag parentTag;
 
-    /** The JSP context for the upcoming tag invocation. */
+    /** The Jakarta Pages (JSP) context for the upcoming tag invocation. */
     private JspContext jspContext;
 
     /** The body of the tag. */
@@ -85,7 +85,7 @@ public class SimpleTagSupport implements SimpleTag {
     }
 
     /**
-     * Stores the provided JSP context in the private jspContext field. Subclasses can access the
+     * Stores the provided Jakarta Pages (JSP) context in the private jspContext field. Subclasses can access the
      * <code>JspContext</code> via <code>getJspContext()</code>.
      * 
      * @param pc the page context for this invocation
@@ -141,7 +141,7 @@ public class SimpleTagSupport implements SimpleTag {
      * extended in an informal manner by allowing the tag library author to indicate in the description subelement an
      * observable type. The type should be a subtype of the tag handler implementation class or void. This addititional
      * constraint can be exploited by a specialized container that knows about that specific tag library, as in the case
-     * of the JSP standard tag library.
+     * of the Jakarta Standard Tag Library.
      *
      * <p>
      * When a tag library author provides information on the observable type of a tag handler, client programmatic code

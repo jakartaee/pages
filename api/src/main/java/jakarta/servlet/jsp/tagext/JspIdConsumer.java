@@ -24,7 +24,7 @@ package jakarta.servlet.jsp.tagext;
  * </p>
  * <p>
  * The container sets the <code>jspId</code> attribute of the tag handler with an identification string, as part of tag
- * property initialization. Each tag in a JSP page has a unique <code>jspId</code>, and a given tag in a JSP page always
+ * property initialization. Each tag in a Jakarta Pages (JSP) page has a unique <code>jspId</code>, and a given tag in a Jakarta Pages (JSP) page always
  * has the same <code>jspId</code>, even for multiple requests to the page.
  * </p>
  * <p>
@@ -32,11 +32,11 @@ package jakarta.servlet.jsp.tagext;
  * </p>
  * <p>
  * Even though the <code>jspId</code> attribute is similar in concept to the <code>jsp:id</code> attribute of an XML
- * view (see Section JSP.10.1.13 of the spec), they are not related. The <code>jsp:id</code> attribute is available only
- * at translation time, and the <code>jspId</code> attribute is available only at request time.
+ * view (see Section 10.1.13 of the Jakarta Pages spec), they are not related. The <code>jsp:id</code> attribute is
+ * available only at translation time, and the <code>jspId</code> attribute is available only at request time.
  * </p>
  * <p>
- * The JSP container must provide a value for <code>jspId</code> that conforms to the following rules:
+ * The Jakarta Pages (JSP) container must provide a value for <code>jspId</code> that conforms to the following rules:
  * </p>
  * <ul>
  * <li>It must start with a letter (as defined by the <code>Character.isLetter()</code> method) or underscore ('_').
@@ -55,7 +55,7 @@ public interface JspIdConsumer {
     /**
      * Called by the container generated code to set a value for the jspId attribute. An unique identification string,
      * relative to this page, is generated at translation time.
-     * 
+     *
      * @param id The value to use for the jspId attribute
      */
     public void setJspId(String id);

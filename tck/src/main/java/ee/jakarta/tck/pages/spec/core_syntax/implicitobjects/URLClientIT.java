@@ -79,7 +79,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: checkSessionTest
    * 
-   * @assertion_ids: JSP:SPEC:15
+   * @assertion_ids: PAGES:SPEC:15
    * 
    * @test_Strategy: Validate that the object associated with the session
    * scripting variable is of type jakarta.servlet.http.HttpSession and that a
@@ -119,7 +119,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: checkExceptionTest
    * 
-   * @assertion_ids: JSP:SPEC:17
+   * @assertion_ids: PAGES:SPEC:17
    * 
    * @test_Strategy: Validate that the object associated with the exception
    * scripting variable is of an instance of the exception type thrown (a
@@ -172,7 +172,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: checkPageContextTest
    * 
-   * @assertion_ids: JSP:SPEC:14
+   * @assertion_ids: PAGES:SPEC:14
    * 
    * @test_Strategy: Validate that the object associated with the pageContext
    * scripting variable is of type jakarta.servlet.jsp.PageContext and that a
@@ -190,7 +190,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: checkRequestTest
    * 
-   * @assertion_ids: JSP:SPEC:12
+   * @assertion_ids: PAGES:SPEC:12
    * 
    * @test_Strategy: Validate that the object associated with the request
    * scripting variable is of type jakarta.servlet.Request (parent class of
@@ -212,7 +212,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: checkResponseTest
    * 
-   * @assertion_ids: JSP:SPEC:13
+   * @assertion_ids: PAGES:SPEC:13
    * 
    * @test_Strategy: Validate that the object associated with the response
    * scripting variable is of type jakarta.servlet.Response (parent class of
@@ -231,7 +231,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: checkApplicationTest
    * 
-   * @assertion_ids: JSP:SPEC:16
+   * @assertion_ids: PAGES:SPEC:16
    * 
    * @test_Strategy: Validate that the object associated with the application
    * scripting variable is of type jakarta.servlet.ServletContext that a method

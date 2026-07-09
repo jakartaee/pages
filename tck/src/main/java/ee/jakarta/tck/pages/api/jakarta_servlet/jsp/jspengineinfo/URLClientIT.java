@@ -70,7 +70,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspEngineInfoGetSpecificationVersionTest
    * 
-   * @assertion_ids: JSP:JAVADOC:131
+   * @assertion_ids: PAGES:JAVADOC:131
    * 
    * @test_Strategy: Validate the behavior of
    * JspEngineInfo.getSpecificationVersion().

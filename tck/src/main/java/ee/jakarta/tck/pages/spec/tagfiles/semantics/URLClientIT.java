@@ -91,7 +91,7 @@ public class URLClientIT extends AbstractUrlClient {
    * 
    * @assertion_ids: PENDING
    * 
-   * @test_Strategy: Validate that the container properly creates a JSP Context
+   * @test_Strategy: Validate that the container properly creates a Jakarta Pages Context
    * wrapper, an instance of PageContext, for the tag file. Validate that this
    * wrapper is not the same JspContext as that of the invoking page (this
    * includes validate of the jspContext scripting variable).

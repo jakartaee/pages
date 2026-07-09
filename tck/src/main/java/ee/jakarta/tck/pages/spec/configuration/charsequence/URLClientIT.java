@@ -78,7 +78,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: deferredSyntaxAllowedAsLiteralTrueTemplateTextTest
    * 
-   * @assertion_ids: JSP:SPEC:296
+   * @assertion_ids: PAGES:SPEC:296
    * 
    * @test_Strategy: Invoke a jsp that is a member of a jsp-property-group in
    * which the deferred-syntax-allowed-as-literal element is set to true. Verify
@@ -99,7 +99,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: deferredSyntaxAllowedAsLiteralFalseTemplateTextTest
    * 
-   * @assertion_ids: JSP:SPEC:295
+   * @assertion_ids: PAGES:SPEC:295
    * 
    * @test_Strategy: Invoke a jsp that is a member of a jsp-property-group in
    * which the deferred-syntax-allowed-as-literal element is set to false.
@@ -118,7 +118,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: deferredSyntaxAllowedAsLiteralTrueActionTest
    * 
-   * @assertion_ids: JSP:SPEC:296
+   * @assertion_ids: PAGES:SPEC:296
    * 
    * @test_Strategy: Invoke a jsp that is a member of a jsp-property-group in
    * which the deferred-syntax-allowed-as-literal element is set to true. Verify
@@ -138,7 +138,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: deferredSyntaxAllowedAsLiteralFalseActionTest
    * 
-   * @assertion_ids: JSP:SPEC:295
+   * @assertion_ids: PAGES:SPEC:295
    * 
    * @test_Strategy: Invoke a jsp that is a member of a jsp-property-group in
    * which the deferred-syntax-allowed-as-literal element is set to false.
@@ -159,7 +159,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: noDeferredSyntaxAllowedAsLiteralTemplateTextTest
    * 
-   * @assertion_ids: JSP:SPEC:295
+   * @assertion_ids: PAGES:SPEC:295
    * 
    * @test_Strategy: Invoke a jsp that is a member of a jsp-property-group in
    * which there is no deferred-syntax-allowed-as-literal element. Verify that
@@ -177,7 +177,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: noDeferredSyntaxAllowedAsLiteralActionTest
    * 
-   * @assertion_ids: JSP:SPEC:295
+   * @assertion_ids: PAGES:SPEC:295
    * 
    * @test_Strategy: Invoke a jsp that is a member of a jsp-property-group in
    * which there is no deferred-syntax-allowed-as-literal element. Verify that

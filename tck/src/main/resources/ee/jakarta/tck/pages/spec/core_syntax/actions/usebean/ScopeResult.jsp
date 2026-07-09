@@ -18,7 +18,7 @@
 
 <%@ page contentType="text/plain;charset=ISO-8859-1" %>
 <%--
-    Simple JSP to valid scoped objects created with jsp:useBean
+    Simple page to valid scoped objects created with jsp:useBean
 --%>
 
 <%! 

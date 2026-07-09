@@ -125,12 +125,12 @@
 %>
 
 <%--
-    For each invocation to the tag, the JSP Context Wrapper must
+    For each invocation to the tag, the Jakarta Pages Context Wrapper must
     present a clean page scope containing no initial elements.
     All scopes other than the page scope must be identical to those
-    in the Invoking JSP Context and must be modified accordingly when updates
-    are made to those scopes in the JSP Context Wrapper.  Any modifications
-    to the page scope, however, must not affect the Invoking JSP Context.
+    in the Invoking Jakarta Pages Context and must be modified accordingly when updates
+    are made to those scopes in the Jakarta Pages Context Wrapper.  Any modifications
+    to the page scope, however, must not affect the Invoking Jakarta Pages Context.
 --%>
 
 <%-- Init the PageContext scopes --%>

@@ -82,7 +82,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspBodyTest
    * 
-   * @assertion_ids: JSP:SPEC:248
+   * @assertion_ids: PAGES:SPEC:248
    * 
    * @test_Strategy: Validate that the body of an action is properly delivered
    * to a custom action when provided through jsp:body.
@@ -99,7 +99,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspBodyUsageContextTest
    * 
-   * @assertion_ids: JSP:SPEC:248.2;JSP:SPEC:248.3
+   * @assertion_ids: PAGES:SPEC:248.2;PAGES:SPEC:248.3
    * 
    * @test_Strategy: Validate that translation-time errors will occur when
    * jsp:body is used in an incorrected context. - Not nested within a standard
@@ -121,7 +121,7 @@ public class URLClientIT extends AbstractUrlClient {
   /*
    * @testName: jspBodyEmptyBodyTest
    * 
-   * @assertion_ids: JSP:SPEC:248.1
+   * @assertion_ids: PAGES:SPEC:248.1
    * 
    * @test_Strategy: Verify that following empty body semantics involving
    * jsp:body: - If an action has one or more jsp:attribute elements and no

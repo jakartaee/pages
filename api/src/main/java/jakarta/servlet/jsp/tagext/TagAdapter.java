@@ -104,8 +104,8 @@ public class TagAdapter implements Tag {
     }
 
     /**
-     * Gets the tag that is being adapted to the Tag interface. This should be an instance of SimpleTag in JSP 2.0, but
-     * room is left for other kinds of tags in future spec versions.
+     * Gets the tag that is being adapted to the Tag interface. This should be an instance of SimpleTag, but other
+     * other implementations may be defined in future spec versions.
      *
      * @return the tag that is being adapted
      */

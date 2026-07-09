@@ -16,7 +16,7 @@
 
 --%>
 
-<%-- Validate recoginition and handling of JSP escape sequences --%>
+<%-- Validate recoginition and handling of Jakarta Pages escape sequences --%>
 
 <html>
 <head><title>positiveEscapingTest</title></head>

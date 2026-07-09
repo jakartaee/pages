@@ -21,7 +21,7 @@ package jakarta.servlet.jsp;
 import jakarta.servlet.Servlet;
 
 /**
- * The JspPage interface describes the generic interaction that a JSP Page Implementation class must satisfy; pages that
+ * The JspPage interface describes the generic interaction that a Jakarta Pages (JSP) Page Implementation class must satisfy; pages that
  * use the HTTP protocol are described by the HttpJspPage interface.
  *
  * <p>
@@ -34,20 +34,20 @@ import jakarta.servlet.Servlet;
  * A class implementing this interface is responsible for invoking the above methods at the appropriate time based on
  * the corresponding Servlet-based method invocations.
  * <p>
- * The jspInit() and jspDestroy() methods can be defined by a JSP author, but the _jspService() method is defined
- * automatically by the JSP processor based on the contents of the JSP page.
+ * The jspInit() and jspDestroy() methods can be defined by a page author, but the _jspService() method is defined
+ * automatically by the Jakarta Pages (JSP) processor based on the contents of the page.
  *
  * <p>
  * <B>_jspService()</B>
  * <p>
- * The _jspService()method corresponds to the body of the JSP page. This method is defined automatically by the JSP
- * container and should never be defined by the JSP page author.
+ * The _jspService() method corresponds to the body of the Jakarta Pages (JSP) page. This method is defined automatically by the Jakarta Pages (JSP)
+ * container and should never be defined by page author.
  * <p>
  * If a superclass is specified using the extends attribute, that superclass may choose to perform some actions in its
- * service() method before or after calling the _jspService() method. See using the extends attribute in the JSP_Engine
- * chapter of the JSP specification.
+ * service() method before or after calling the _jspService() method. See using the extends attribute in the Jakarta Pages (JSP) Engine
+ * chapter of the Jakarta Pages (JSP) specification.
  * <p>
- * The specific signature depends on the protocol supported by the JSP page.
+ * The specific signature depends on the protocol supported by the Jakarta Pages (JSP) page.
  *
  * <pre>
  * public void _jspService(<em>ServletRequestSubtype</em> request,
@@ -58,22 +58,22 @@ import jakarta.servlet.Servlet;
 public interface JspPage extends Servlet {
 
     /**
-     * The jspInit() method is invoked when the JSP page is initialized. It is the responsibility of the JSP
+     * The jspInit() method is invoked when the page is initialized. It is the responsibility of the Jakarta Pages (JSP)
      * implementation (and of the class mentioned by the extends attribute, if present) that at this point invocations
      * to the getServletConfig() method will return the desired value.
      *
-     * A JSP page can override this method by including a definition for it in a declaration element.
+     * A page can override this method by including a definition for it in a declaration element.
      *
-     * A JSP page should redefine the init() method from Servlet.
+     * A page should redefine the init() method from Servlet.
      */
     public void jspInit();
 
     /**
-     * The jspDestroy() method is invoked when the JSP page is about to be destroyed.
+     * The jspDestroy() method is invoked when the page is about to be destroyed.
      * 
-     * A JSP page can override this method by including a definition for it in a declaration element.
+     * A page can override this method by including a definition for it in a declaration element.
      *
-     * A JSP page should redefine the destroy() method from Servlet.
+     * A page should redefine the destroy() method from Servlet.
      */
     public void jspDestroy();
 
