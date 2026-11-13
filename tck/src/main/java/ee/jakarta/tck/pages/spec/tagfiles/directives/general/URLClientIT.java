@@ -24,6 +24,7 @@ package ee.jakarta.tck.pages.spec.tagfiles.directives.general;
 
 import java.io.IOException;
 import ee.jakarta.tck.pages.common.client.AbstractUrlClient;
+import ee.jakarta.tck.pages.spec.core_syntax.directives.page.PageImportElBean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit5.ArquillianExtension;
@@ -77,7 +78,10 @@ public class URLClientIT extends AbstractUrlClient {
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/ErrorOnELNotFoundTrue.jsp")), "ErrorOnELNotFoundTrue.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/ErrorOnELNotFoundFalse.jsp")), "ErrorOnELNotFoundFalse.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/include/positiveIncludeContextRelative.tagf")), "include/positiveIncludeContextRelative.tagf");
-    
+    archive.addClasses(TagImportElBean.class, PageImportElBean.class);
+    archive.addAsWebInfResource(URLClientIT.class.getPackage(), "WEB-INF/tags/positiveTagImportEl.tag", "tags/positiveTagImportEl.tag");
+    archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/positiveTagImportEl.jsp")), "positiveTagImportEl.jsp");
+
     return archive;
 
   }
@@ -263,6 +267,27 @@ public class URLClientIT extends AbstractUrlClient {
     TEST_PROPS.setProperty(REQUEST,
         "GET " + CONTEXT_ROOT + "/" + testName + ".jsp HTTP/1.0");
     TEST_PROPS.setProperty(STATUS_CODE, INTERNAL_SERVER_ERROR);
+    invoke();
+  }
+
+  /*
+   * @testName: positiveTagImportElTest
+   *
+   * @assertion_ids: PENDING
+   *
+   * @test_Strategy: Validate that classes and packages imported via the tag
+   * directive import attribute are available to the EL environment for
+   * resolving static fields and static methods, and that imports do not leak
+   * between the calling page and the tag file.
+   */
+  @Test
+  public void positiveTagImportElTest() throws Exception {
+    String testName = "positiveTagImportEl";
+    TEST_PROPS.setProperty(REQUEST,
+        "GET " + CONTEXT_ROOT + "/" + testName + ".jsp HTTP/1.1");
+    TEST_PROPS.setProperty(SEARCH_STRING,
+        "TAG_STATIC_CONSTANT_VALUE|TAG_STATIC_METHOD:ok|2026-11-13|[PARENT_LEAK:]|[TAG_LEAK:]");
+    TEST_PROPS.setProperty(STATUS_CODE, OK);
     invoke();
   }
 }

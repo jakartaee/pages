@@ -133,6 +133,7 @@ public class URLClientIT extends AbstractUrlClient {
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/DeferredSyntaxAllowedAsLiteralTrueActionTest.jsp")), "DeferredSyntaxAllowedAsLiteralTrueActionTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/DeferredSyntaxAllowedAsLiteralFalseTemplateTextTest.jsp")), "DeferredSyntaxAllowedAsLiteralFalseTemplateTextTest.jsp");
     archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/DeferredSyntaxAllowedAsLiteralFalseActionTest.jsp")), "DeferredSyntaxAllowedAsLiteralFalseActionTest.jsp");
+    archive.add(new UrlAsset(URLClientIT.class.getClassLoader().getResource(packagePath+"/positiveImportElTest.jsp")), "positiveImportElTest.jsp");
 
     return archive;
   }
@@ -1432,6 +1433,27 @@ public class URLClientIT extends AbstractUrlClient {
     TEST_PROPS.setProperty(REQUEST,
         "GET /jsp_coresyntx_directive_page_web/" + testName + ".jsp HTTP/1.0");
     TEST_PROPS.setProperty(STATUS_CODE, INTERNAL_SERVER_ERROR);
+    invoke();
+  }
+
+  /*
+   * @testName: positiveImportElTest
+   *
+   * @assertion_ids: PAGES:SPEC:34
+   *
+   * @test_Strategy: Validate that classes and packages imported via the page
+   * directive import attribute are available to the EL environment for
+   * resolving static fields and static methods.
+   */
+  @Test
+  public void positiveImportElTest() throws Exception {
+    String testName = "positiveImportElTest";
+    TEST_PROPS.setProperty(TEST_NAME, testName);
+    TEST_PROPS.setProperty(REQUEST,
+        "GET /jsp_coresyntx_directive_page_web/" + testName + ".jsp HTTP/1.0");
+    TEST_PROPS.setProperty(SEARCH_STRING,
+        "PAGE_STATIC_CONSTANT_VALUE|PAGE_STATIC_METHOD:ok|2026-11-13");
+    TEST_PROPS.setProperty(STATUS_CODE, OK);
     invoke();
   }
 }
