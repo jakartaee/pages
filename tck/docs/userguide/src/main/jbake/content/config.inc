@@ -64,7 +64,7 @@ slashes as a path separator instead.
   By default, the property settings point to the {TechnologyShortName} TCK CI-specific
   classes.
 +
-3. 3. Set the below jars to the classpath 
+3.  Set the below jars to the classpath
   a. JAR file for the {TechnologyShortName} {TechnologyVersion} API. +
   eg.  `${webServerHost}/modules/jakarta.servlet.jsp-api.jar`.
 +
@@ -87,11 +87,11 @@ slashes as a path separator instead.
 +
 [source,oac_no_warn]
 ----
-      <dependency>
-            <groupId>jakarta.tck</groupId>
-            <artifactId>sigtest-maven-plugin</artifactId>
-            <version>2.2</version>
-        </dependency>
+       <dependency>
+          <groupId>jakarta.tck</groupId>
+          <artifactId>sigtest-maven-plugin</artifactId>
+          <version>2.2</version>
+       </dependency>
 ----
 +
   d.  {TechnologyRI} CI jars +
